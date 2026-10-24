@@ -34,7 +34,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 .grab:hover .grabbar{opacity:1}
 </style>
 </helmet>
-<div style="width: 100%; height: 100vh; min-height: 560px; box-sizing: border-box; padding: {{rootPad}}; background: radial-gradient(ellipse at 50% 0%, #3B4644 0%, #252D2C 70%); font-family: {{TK.fBody}}; color: #2B2722; display: flex; flex-direction: column; gap: 10px">
+<div style="width: 100%; height: 100vh; height: 100dvh; min-height: 560px; box-sizing: border-box; padding: {{rootPad}}; padding-top: calc({{rootPadTop}} + env(safe-area-inset-top, 0px)); padding-bottom: calc({{rootPadTop}} + env(safe-area-inset-bottom, 0px)); background: radial-gradient(ellipse at 50% 0%, #3B4644 0%, #252D2C 70%); font-family: {{TK.fBody}}; color: #2B2722; display: flex; flex-direction: column; gap: 10px">
 <sc-if value="{{showPageToggle}}" hint-placeholder-val="{{ false }}">
 <div role="tablist" aria-label="Which page" style="flex: none; align-self: center; display: flex; gap: 4px; background: #1F4E4A; border-radius: 14px; padding: 4px; width: 100%; max-width: 520px; box-sizing: border-box">
 <button role="tab" aria-selected="{{mLeftSel}}" onClick="{{mShowLeft}}" style="flex: 1; height: 44px; border: 0; border-radius: 10px; background: {{mLeftBg}}; color: {{mLeftFg}}; font-size: calc(15px * {{fsK}}); font-weight: 700">{{mLeftLabel}}</button>
@@ -277,7 +277,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div role="group" aria-label="Quick add" style="display: flex; align-items: center; gap: 8px; margin: 10px 0 0; padding: 0 2px 6px; border-bottom: 1px solid #E6DCC8">
 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8174" stroke-width="2.2" stroke-linecap="round" style="flex: none"><path d="M12 5v14M5 12h14"></path></svg>
 <label for="deskQuick" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Quick add a task</label>
-<input id="deskQuick" value="{{draft}}" onChange="{{onDraft}}" onInput="{{onDraft}}" onKeyDown="{{quickKey}}" placeholder="Quick add a task and press Enter" autocomplete="off" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 36px; border: 0; background: transparent; font: inherit; font-size: calc(15px * {{fsK}}); color: #2B2722; padding: 0 8px; border-radius: 6px">
+<input id="deskQuick" value="{{draft}}" onChange="{{onDraft}}" onInput="{{onDraft}}" onKeyDown="{{quickKey}}" placeholder="Quick add a task and press Enter" autocomplete="off" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tIn}}px; border: 0; background: transparent; font: inherit; font-size: calc({{tFs}}px * {{fsK}}); color: #2B2722; padding: 0 8px; border-radius: 6px">
 <sc-if value="{{hasDraft}}" hint-placeholder-val="{{ false }}">
 <button type="button" onClick="{{quickAdd}}" style="height: 30px; flex: none; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12px * {{fsK}}); font-weight: 700">Add</button>
 </sc-if>
@@ -364,7 +364,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; align-items: center; gap: 6px; min-height: 34px">
 <span aria-hidden="true" style="width: 20px; flex: none; text-align: center; color: #B9AF9C; font-size: calc(16px * {{fsK}})">+</span>
 <label for="{{t.clAddId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Add checklist items</label>
-<textarea id="{{t.clAddId}}" rows="1" value="{{t.clDraft}}" onChange="{{t.clOnDraft}}" onInput="{{t.clOnDraft}}" onKeyDown="{{t.clKey}}" placeholder="Add an item, or paste a whole list" style="flex: 1; min-width: 0; height: 30px; box-sizing: border-box; border: 0; border-bottom: 1px dashed #E2D8C4; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; resize: none; overflow: hidden; outline-color: {{TK.tA0526A}}"></textarea>
+<textarea id="{{t.clAddId}}" rows="1" value="{{t.clDraft}}" onChange="{{t.clOnDraft}}" onInput="{{t.clOnDraft}}" onKeyDown="{{t.clKey}}" placeholder="Add an item, or paste a whole list" style="flex: 1; min-width: 0; height: {{tAddH}}px; box-sizing: border-box; border: 0; border-bottom: 1px dashed #E2D8C4; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: calc({{tAddH}}px - 12px); color: #2B2722; resize: none; overflow: hidden; outline-color: {{TK.tA0526A}}"></textarea>
 </div>
 <sc-if value="{{t.clAsk}}" hint-placeholder-val="{{ false }}">
 <div role="status" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #E2F1E7; border-radius: 10px; padding: 8px 10px; margin-top: 4px">
@@ -378,7 +378,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{t.editInline}}" hint-placeholder-val="{{ false }}">
 <div style="margin: 2px 0 10px 32px; padding: 10px 12px 6px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-top: 4px solid {{TK.tE2B9C4}}; border-radius: 12px; box-shadow: 0 6px 18px rgba(60,40,20,0.10); display: flex; flex-direction: column; gap: 10px">
 <label for="{{t.editId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
-<input id="{{t.editId}}" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: 36px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
+<input id="{{t.editId}}" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px">
 <sc-if value="{{t.showDayPri}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
@@ -454,7 +454,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 <div style="display: flex; flex-direction: column; gap: 4px">
 <label for="{{t.noteId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Notes</label>
-<textarea id="{{t.noteId}}" value="{{t.noteVal}}" onChange="{{t.onNote}}" rows="2" placeholder="Details, links, addresses, confirmation numbers…" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E8DFCC; border-radius: 8px; padding: 6px 9px; font: inherit; font-size: calc(13.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFDF8; resize: vertical; min-height: 40px"></textarea>
+<textarea id="{{t.noteId}}" value="{{t.noteVal}}" onChange="{{t.onNote}}" rows="2" placeholder="Details, links, addresses, confirmation numbers…" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E8DFCC; border-radius: 8px; padding: 6px 9px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFDF8; resize: vertical; min-height: 40px"></textarea>
 </div>
 <div style="display: flex; flex-direction: column; gap: 2px">
 <div style="display: flex; align-items: baseline; gap: 8px">
@@ -478,7 +478,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; align-items: center; gap: 6px; min-height: 34px">
 <span aria-hidden="true" style="width: 20px; flex: none; text-align: center; color: #B9AF9C; font-size: calc(16px * {{fsK}})">+</span>
 <label for="{{t.clAddId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Add checklist items</label>
-<textarea id="{{t.clAddId}}" rows="1" value="{{t.clDraft}}" onChange="{{t.clOnDraft}}" onInput="{{t.clOnDraft}}" onKeyDown="{{t.clKey}}" placeholder="Add an item, or paste a whole list" style="flex: 1; min-width: 0; height: 30px; box-sizing: border-box; border: 0; border-bottom: 1px dashed #E2D8C4; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; resize: none; overflow: hidden; outline-color: {{TK.tA0526A}}"></textarea>
+<textarea id="{{t.clAddId}}" rows="1" value="{{t.clDraft}}" onChange="{{t.clOnDraft}}" onInput="{{t.clOnDraft}}" onKeyDown="{{t.clKey}}" placeholder="Add an item, or paste a whole list" style="flex: 1; min-width: 0; height: {{tAddH}}px; box-sizing: border-box; border: 0; border-bottom: 1px dashed #E2D8C4; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: calc({{tAddH}}px - 12px); color: #2B2722; resize: none; overflow: hidden; outline-color: {{TK.tA0526A}}"></textarea>
 </div>
 <sc-if value="{{t.clAsk}}" hint-placeholder-val="{{ false }}">
 <div role="status" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #E2F1E7; border-radius: 10px; padding: 8px 10px; margin-top: 4px">
@@ -1453,7 +1453,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{evOpen}}" hint-placeholder-val="{{ false }}">
 <div role="dialog" aria-label="{{evHeading}}" style="position: absolute; left: 96px; top: {{evPopTop}}px; width: 330px; box-sizing: border-box; padding: 10px 12px 6px; background: #FFFFFF; border: 1px solid #E6DCC8; border-radius: 12px; box-shadow: 0 10px 26px rgba(60,40,20,0.16); display: flex; flex-direction: column; gap: 10px; z-index: 5">
 <label for="evname" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Event name</label>
-<input id="evname" autoFocus="{{ true }}" value="{{evTitle}}" onChange="{{evOnTitle}}" onKeyDown="{{evKey}}" placeholder="Event name" style="height: 36px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
+<input id="evname" autoFocus="{{ true }}" value="{{evTitle}}" onChange="{{evOnTitle}}" onKeyDown="{{evKey}}" placeholder="Event name" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <label for="evdate" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{evDateLabel}}</label>
@@ -2819,7 +2819,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; align-items: center; gap: 6px">
 <span aria-hidden="true" style="width: 20px; flex: none; text-align: center; color: #B9AF9C">+</span>
 <label for="{{a.cId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Add a step</label>
-<textarea id="{{a.cId}}" rows="1" value="{{a.clDraft}}" onChange="{{a.clOnDraft}}" onInput="{{a.clOnDraft}}" onKeyDown="{{a.clKey}}" placeholder="Outline, draft, cite sources, submit…" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 30px; box-sizing: border-box; border: 0; border-bottom: 1px dashed #E2D8C4; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; resize: none; overflow: hidden"></textarea>
+<textarea id="{{a.cId}}" rows="1" value="{{a.clDraft}}" onChange="{{a.clOnDraft}}" onInput="{{a.clOnDraft}}" onKeyDown="{{a.clKey}}" placeholder="Outline, draft, cite sources, submit…" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tAddH}}px; box-sizing: border-box; border: 0; border-bottom: 1px dashed #E2D8C4; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: calc({{tAddH}}px - 12px); color: #2B2722; resize: none; overflow: hidden"></textarea>
 </div>
 </div>
 <div style="display: flex; justify-content: flex-end"><button onClick="{{a.remove}}" style="height: 28px; border: 0; background: transparent; padding: 0 6px; color: #9A4A3A; font-size: calc(12px * {{fsK}}); font-weight: 600">Remove assignment</button></div>
@@ -3028,7 +3028,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; padding: 12px 14px 8px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-top: 4px solid {{TK.tE2B9C4}}; border-radius: 12px; display: flex; flex-direction: column; gap: 12px">
 
 <label for="{{t.editId}}-r" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
-<input id="{{t.editId}}-r" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: 36px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
+<input id="{{t.editId}}-r" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 12px">
 <sc-if value="{{t.showDayPri}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
@@ -3104,7 +3104,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 <div style="display: flex; flex-direction: column; gap: 4px">
 <label for="{{t.noteId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Notes</label>
-<textarea id="{{t.noteId}}" value="{{t.noteVal}}" onChange="{{t.onNote}}" rows="3" placeholder="Details, links, addresses, confirmation numbers…" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E8DFCC; border-radius: 8px; padding: 6px 9px; font: inherit; font-size: calc(13.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFDF8; resize: vertical; min-height: 40px"></textarea>
+<textarea id="{{t.noteId}}" value="{{t.noteVal}}" onChange="{{t.onNote}}" rows="3" placeholder="Details, links, addresses, confirmation numbers…" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E8DFCC; border-radius: 8px; padding: 6px 9px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFDF8; resize: vertical; min-height: 40px"></textarea>
 </div>
 <div style="display: flex; flex-direction: column; gap: 2px">
 <div style="display: flex; align-items: baseline; gap: 8px">
@@ -3128,7 +3128,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; align-items: center; gap: 6px; min-height: 34px">
 <span aria-hidden="true" style="width: 20px; flex: none; text-align: center; color: #B9AF9C; font-size: calc(16px * {{fsK}})">+</span>
 <label for="{{t.clAddId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Add checklist items</label>
-<textarea id="{{t.clAddId}}" rows="1" value="{{t.clDraft}}" onChange="{{t.clOnDraft}}" onInput="{{t.clOnDraft}}" onKeyDown="{{t.clKey}}" placeholder="Add an item, or paste a whole list" style="flex: 1; min-width: 0; height: 30px; box-sizing: border-box; border: 0; border-bottom: 1px dashed #E2D8C4; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; resize: none; overflow: hidden; outline-color: {{TK.tA0526A}}"></textarea>
+<textarea id="{{t.clAddId}}" rows="1" value="{{t.clDraft}}" onChange="{{t.clOnDraft}}" onInput="{{t.clOnDraft}}" onKeyDown="{{t.clKey}}" placeholder="Add an item, or paste a whole list" style="flex: 1; min-width: 0; height: {{tAddH}}px; box-sizing: border-box; border: 0; border-bottom: 1px dashed #E2D8C4; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: calc({{tAddH}}px - 12px); color: #2B2722; resize: none; overflow: hidden; outline-color: {{TK.tA0526A}}"></textarea>
 </div>
 <sc-if value="{{t.clAsk}}" hint-placeholder-val="{{ false }}">
 <div role="status" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #E2F1E7; border-radius: 10px; padding: 8px 10px; margin-top: 4px">
@@ -4021,7 +4021,8 @@ class Component extends DCLogic {
     this.clock = setInterval(() => this.forceUpdate(), 60000);
     this.onResize = () => {
       const vw = window.innerWidth, vh = window.innerHeight;
-      if (vw !== this.state.vw || vh !== this.state.vh) this.setState({ vw: vw, vh: vh });
+      let touch = false; try { touch = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches) || (navigator.maxTouchPoints || 0) > 1; } catch (err) {}
+      if (vw !== this.state.vw || vh !== this.state.vh || touch !== !!this.state.touch) this.setState({ vw: vw, vh: vh, touch: touch });
     };
     try { window.addEventListener('resize', this.onResize); } catch (err) {}
     this.onResize();
@@ -9303,6 +9304,8 @@ class Component extends DCLogic {
       big3: big3,
       narrow: narrow,
       rootPad: narrow ? '10px' : '18px',
+      rootPadTop: narrow ? '10px' : '18px',
+      tIn: s.touch ? 48 : 36, tFs: s.touch ? 17 : 15, tAreaFs: s.touch ? 16 : 13.5, tAddH: s.touch ? 44 : 30,
       leftW: narrow ? 'auto' : 'clamp(460px, 44%, 680px)',
       leftFlex: narrow ? '1 1 auto' : 'none',
       leftDisp: isMonth ? 'none' : (!narrow || s.mobilePage === 'left' ? 'block' : 'none'),
@@ -9544,7 +9547,7 @@ class Component extends DCLogic {
       ],
       rowK: s.settings.dense ? 0.82 : 1,
       fsK: ({ small: 0.92, normal: 1, large: 1.1, xl: 1.2 })[s.settings.textSize] || 1,
-      navW: s.settings.tabIcons ? 52 : 50,
+      navW: s.settings.tabIcons ? 52 : ((!!s.touch || (s.vw || 1194) < 900) ? 58 : 50),
       navTabs: [
         ['day', 'Day', '#E3DCCB', 84, () => this.setState({ view: 'day', showSetup: false, sel: null, cleanup: false })],
         ['week', 'Week', '#E8D9B5', 78, () => this.setState({ view: 'week', weekAnchor: s.view === 'day' ? s.day : (s.weekAnchor || 0), showSetup: false, sel: null, menuFor: null, missFor: null, evEdit: null, sheet: null, editing: null })],
@@ -9589,18 +9592,19 @@ class Component extends DCLogic {
           };
         }
         const textTabs = arr.filter(x => x[0] !== 'settings');
-        const natural = textTabs.reduce((sum, x) => sum + x[3] + 6, 16);
+        const natural = textTabs.reduce((sum, x) => sum + x[3] * ((!!s.touch || (s.vw || 1194) < 900) ? 1.15 : 1) + 6, 16);
         const budget = Math.max(360, (s.vh || 834) - 200);
         const squeeze = natural > budget ? Math.max(0.6, budget / natural) : 1;
         const SHORT2 = { desk: 'Desk' };
+        const big = !!s.touch || (s.vw || 1194) < 900;
         return {
           isPict: false,
           label: squeeze < 1 && SHORT2[t[0]] ? SHORT2[t[0]] : t[1], open: t[4], active: on, current: on ? 'page' : 'false',
           isIcon: icon, isText: !icon, showDot: on && !icon && squeeze > 0.8, fw: 700,
-          h: icon ? (on ? 54 : 46) : Math.round((on ? t[3] + 16 : t[3]) * squeeze),
-          w: icon ? (on ? 42 : 32) : (on ? 50 : 38), ml: on ? -8 : 0, z: on ? 2 : 1,
+          h: icon ? (on ? 54 : 46) : Math.round((on ? t[3] + 16 : t[3]) * squeeze * (big ? 1.15 : 1)),
+          w: icon ? (on ? (big ? 50 : 42) : (big ? 40 : 32)) : (on ? (big ? 58 : 50) : (big ? 46 : 38)), ml: on ? -8 : 0, z: on ? 2 : 1,
           bg: icon ? (on ? tc[1] : '#FFFFFF') : (on ? tc[1] : tc[0]), fg: icon ? (on ? '#FFFFFF' : tc[1]) : (on ? '#FFFFFF' : tc[1]), dot: this.THEME.tab.dot,
-          fs: squeeze < 0.8 ? (on ? 12 : 11) : (on ? 14 : 12),
+          fs: big ? (on ? 16 : 14) : (squeeze < 0.8 ? (on ? 12 : 11) : (on ? 14 : 12)),
           shadow: on ? '4px 3px 10px rgba(0,0,0,0.38)' : 'inset 2px 0 3px rgba(0,0,0,0.12)'
         };
       }),
