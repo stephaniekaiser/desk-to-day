@@ -18,7 +18,7 @@
 <body>
 <x-dc>
 <helmet>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito:wght@400;600;700&family=DM+Serif+Display&family=Dancing+Script:wght@500;600;700&family=Lexend:wght@400;600;700&family=Lora:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=Instrument+Serif&family=Inter:wght@400;600;700&family=Caveat:wght@500;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Nunito:wght@400;600;700&amp;family=DM+Serif+Display&amp;family=Dancing+Script:wght@500;600;700&amp;family=Lexend:wght@400;600;700&amp;family=Lora:wght@500;600&amp;family=Cormorant+Garamond:wght@500;600;700&amp;family=Instrument+Serif&amp;family=Inter:wght@400;600;700&amp;family=Caveat:wght@500;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&amp;display=swap" rel="stylesheet">
 <style>
 body{margin:0}
 a{color:#1E3A5F}a:hover{color:#122640}
@@ -994,13 +994,13 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </button>
 </div>
 </sc-for>
-</span>
-</sc-if>
+
+
 <sc-if value="{{ic.hasBar}}" hint-placeholder-val="{{ false }}">
 <span aria-hidden="true" style="height: 6px; border-radius: 3px; background: #E8DFCC; overflow: hidden; display: flex; width: 100%"><span style="width: {{ic.pct}}%; background: {{ic.color}}"></span></span>
 </sc-if>
-</button>
-</sc-for>
+
+
 </div>
 </sc-for>
 </div>
@@ -2390,7 +2390,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button onClick="{{scTemplate}}" style="height: 30px; border: 0; background: transparent; padding: 0; color: {{TK.tA0526A}}; font-size: calc(12.5px * {{fsK}}); font-weight: 600; display: flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Download template</button>
 </div>
 <label for="scn-import" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Or paste rows</label>
-<textarea id="scn-import" value="{{scImportText}}" onChange="{{scOnImportText}}" rows="6" placeholder="Lesson,Part,Hours&#10;Lesson 1: Getting started,1.1 Welcome,0.5" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font-family: ui-monospace, Menlo, monospace; font-size: calc(12px * {{fsK}}); line-height: 1.5; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
+<textarea id="scn-import" value="{{scImportText}}" onChange="{{scOnImportText}}" rows="6" placeholder="Lesson,Part,Hours
+Lesson 1: Getting started,1.1 Welcome,0.5" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font-family: ui-monospace, Menlo, monospace; font-size: calc(12px * {{fsK}}); line-height: 1.5; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
 <span style="font-size: calc(12px * {{fsK}}); color: #8A8174">Optional first rows: Course, Book, Author, ISBN, URL (name, then value). Then the table: Lesson, Part, Hours. Comma or tab separated, up to 500 rows. Rows with the same Lesson in a row form one lesson. Part and Hours can be blank. Typed fields above win over the file.</span>
 <sc-if value="{{scImportPreview.has}}" hint-placeholder-val="{{ false }}">
 <div style="background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px">
@@ -2433,7 +2434,10 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{scPaste}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <label for="scn-paste" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Lessons, one per line</label>
-<textarea id="scn-paste" value="{{scNPaste}}" onChange="{{scOnNPaste}}" rows="8" placeholder="Lesson 1: Arrays 4h&#10;  1.1 Intro&#10;  1.2 Practice&#10;Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font: inherit; font-size: calc(13px * {{fsK}}); line-height: 1.5; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
+<textarea id="scn-paste" value="{{scNPaste}}" onChange="{{scOnNPaste}}" rows="8" placeholder="Lesson 1: Arrays 4h
+  1.1 Intro
+  1.2 Practice
+Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font: inherit; font-size: calc(13px * {{fsK}}); line-height: 1.5; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
 <span style="font-size: calc(12px * {{fsK}}); color: #8A8174">Indent a line (or start it with -) to make it a part of the lesson above. Add hours at the end, like 4h or 90m.</span>
 </div>
 </sc-if>
@@ -2965,7 +2969,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <input id="{{m.linkId}}" type="url" value="{{m.link}}" onChange="{{m.onLink}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"></div>
 </div>
 <label for="{{m.ingId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Ingredients, one per line</label>
-<textarea id="{{m.ingId}}" value="{{m.ing}}" onChange="{{m.onIng}}" rows="4" placeholder="Tortillas&#10;Ground turkey&#10;Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font: inherit; font-size: calc(13px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
+<textarea id="{{m.ingId}}" value="{{m.ing}}" onChange="{{m.onIng}}" rows="4" placeholder="Tortillas
+Ground turkey
+Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font: inherit; font-size: calc(13px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
 <div style="display: flex; justify-content: flex-end"><button onClick="{{m.remove}}" style="height: 28px; border: 0; background: transparent; padding: 0 6px; color: #9A4A3A; font-size: calc(12px * {{fsK}}); font-weight: 600">Remove meal</button></div>
 </div>
 </sc-if>
@@ -3642,7 +3648,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 <span style="font-size: calc(13px * {{fsK}}); color: #6B6358">{{fileBoxName}}</span>
 <label for="filebox-text" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">File contents</label>
-<textarea id="filebox-text" readonly value="{{fileBoxText}}" rows="6" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font-family: ui-monospace, Menlo, monospace; font-size: calc(11.5px * {{fsK}}); line-height: 1.45; color: #4A443B; background: #FBF7EE; resize: none"></textarea>
+<textarea id="filebox-text" readonly="" value="{{fileBoxText}}" rows="6" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font-family: ui-monospace, Menlo, monospace; font-size: calc(11.5px * {{fsK}}); line-height: 1.45; color: #4A443B; background: #FBF7EE; resize: none"></textarea>
 <sc-if value="{{fileBoxHasNote}}" hint-placeholder-val="{{ false }}">
 <span role="status" style="font-size: calc(12.5px * {{fsK}}); color: {{TK.tA0526A}}">{{fileBoxNote}}</span>
 </sc-if>
@@ -3680,7 +3686,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="font-family: {{TK.fHead}}; font-size: calc(22px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">Paste a backup</span>
 <span style="font-size: calc(13px * {{fsK}}); color: #6B6358">Paste the whole backup text. This replaces what is in your planner now.</span>
 <label for="paste-text" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Backup text</label>
-<textarea id="paste-text" value="{{pasteText}}" onChange="{{onPasteText}}" rows="7" placeholder='{"app":"adhd-planner", …}' style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font-family: ui-monospace, Menlo, monospace; font-size: calc(11.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
+<textarea id="paste-text" value="{{pasteText}}" onChange="{{onPasteText}}" rows="7" placeholder="{&quot;app&quot;:&quot;adhd-planner&quot;, …}" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font-family: ui-monospace, Menlo, monospace; font-size: calc(11.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
 <div style="display: flex; gap: 8px; justify-content: flex-end">
 <button onClick="{{pasteClose}}" style="height: 38px; padding: 0 14px; border: 0; background: transparent; color: #6B6358; font-size: calc(14px * {{fsK}}); font-weight: 600">Cancel</button>
 <button onClick="{{pasteRestore}}" style="height: 38px; padding: 0 16px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">Restore</button>
