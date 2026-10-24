@@ -7,13 +7,13 @@
 <meta name="description" content="An ADHD-friendly planner: drop it on your desk, sort it, slot it into your day.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="Desk to Day">
 <meta name="theme-color" content="#252D2C">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 24, 2:14 PM';</script>
+<script>window.__plannerBuild = 'Oct 24, 2:22 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3755,8 +3755,8 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <sc-if value="{{tb.isText}}" hint-placeholder-val="{{ true }}">{{tb.label}}</sc-if>
 <sc-if value="{{tb.isPict}}" hint-placeholder-val="{{ false }}">
 <span aria-hidden="true" style="writing-mode: horizontal-tb; display: flex; flex-direction: column; align-items: center; gap: 4px; padding-left: {{tb.padL}}px">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{tb.d}}"></path></svg>
-<span style="font-size: calc(9px * {{fsK}}); font-weight: 700; line-height: 1; letter-spacing: 0.01em; white-space: nowrap">{{tb.short}}</span>
+<svg width="{{tb.isz}}" height="{{tb.isz}}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{tb.d}}"></path></svg>
+<sc-if value="{{tb.showShort}}" hint-placeholder-val="{{ true }}"><span style="font-size: 9px; font-weight: 700; line-height: 1; letter-spacing: 0.01em; white-space: nowrap">{{tb.short}}</span></sc-if>
 </span>
 </sc-if></button>
 </sc-for>
@@ -9601,6 +9601,8 @@ class Component extends DCLogic {
             label: t[1], open: t[4], active: on, current: on ? 'page' : 'false',
             isIcon: false, isText: false, isPict: true, showDot: false, fw: 700,
             d: TAB_ICONS[t[0]], short: SHORT[t[0]],
+            showShort: !(s.settings.textSize === 'large' || s.settings.textSize === 'xl' || s.settings.textSize === 'xxl'),
+            isz: (s.settings.textSize === 'large' || s.settings.textSize === 'xl' || s.settings.textSize === 'xxl') ? 28 : 20,
             h: 58, w: on ? 58 : 50, ml: on ? -8 : 0, z: on ? 2 : 1, padL: on ? 4 : 0,
             bg: util ? (on ? tc[1] : '#FFFFFF') : (on ? tc[1] : tc[0]), fg: util ? (on ? '#FFFFFF' : tc[1]) : (on ? '#FFFFFF' : tc[1]), dot: this.THEME.tab.dot,
             fs: 12,
