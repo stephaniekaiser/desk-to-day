@@ -13,6 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
+<script>window.__plannerBuild = 'Oct 24, 2:14 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3615,6 +3616,12 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </header>
 <p style="margin: 0; font-size: calc(13px * {{fsK}}); color: #6B6358">{{dataStatus}}</p>
 <p style="margin: 0 0 4px; font-size: calc(12px * {{fsK}}); color: #8A8174">{{dataSaved}} {{dataCounts}}</p>
+<sc-if value="{{appBuildOn}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 6px">
+<span style="font-size: calc(12px * {{fsK}}); color: #8A8174">{{appBuildTxt}}</span>
+<button onClick="{{appReload}}" style="height: 30px; padding: 0 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Check for updates</button>
+</div>
+</sc-if>
 <div style="flex: none; display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 8px 12px; min-height: 56px; box-sizing: border-box">
 <span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 14px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg></span>
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Download a backup</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">A file of everything you have entered.</span></span>
@@ -8191,7 +8198,7 @@ class Component extends DCLogic {
     };
     const setSections = {
       look: [G('', [
-        seg('Text size', 'textSize', [['small', 'Small'], ['normal', 'Normal'], ['large', 'Large'], ['xl', 'Larger']], ''),
+        seg('Text size', 'textSize', [['normal', 'Normal'], ['large', 'Large'], ['xl', 'Larger'], ['xxl', 'Largest']], 'Larger sizes help on a small iPad. You can also pinch to zoom.'),
         tog('Denser lists', 'dense', 'Tighter rows in every list, so more fits on a page. The calendar has its own zoom.'),
         tog('Icon tabs', 'tabIcons', 'Try it: every tab the same size, with an icon and a short label. Switch back anytime.', true)
       ])],
@@ -9552,13 +9559,16 @@ class Component extends DCLogic {
         { title: 'Keep your why close', icon: 'M12 21v-9M12 12c0-4-3-6-7-6 0 4 3 6 7 6zM12 12c0-3 2.5-5 6-5 0 3-2.5 5-6 5z', text: 'Grow keeps your intentions, and the reasons behind them, right next to your day.' }
       ],
       rowK: s.settings.dense ? 0.82 : 1,
-      fsK: ({ small: 0.92, normal: 1, large: 1.1, xl: 1.2 })[s.settings.textSize] || 1,
-      navW: s.settings.tabIcons ? 52 : ((!!s.touch || (s.vw || 1194) < 900) ? 58 : 50),
+      appBuildOn: typeof window !== 'undefined' && !!window.__plannerBuild,
+      appBuildTxt: typeof window !== 'undefined' && window.__plannerBuild ? 'Planner version: ' + window.__plannerBuild : '',
+      appReload: () => { try { window.location.reload(); } catch (e) {} },
+      fsK: ({ small: 0.92, normal: 1, large: 1.15, xl: 1.3, xxl: 1.45 })[s.settings.textSize] || 1,
+      navW: s.settings.tabIcons ? 52 : ((!!s.touch || (s.vw || 1194) < 900) ? 58 : 50) + Math.round((Math.min(1.3, ({ small: 1, normal: 1, large: 1.1, xl: 1.2, xxl: 1.3 })[s.settings.textSize] || 1) - 1) * 22),
       navTabs: [
         ['day', 'Day', '#E3DCCB', 84, () => this.setState({ view: 'day', showSetup: false, sel: null, cleanup: false })],
         ['week', 'Week', '#E8D9B5', 78, () => this.setState({ view: 'week', weekAnchor: s.view === 'day' ? s.day : (s.weekAnchor || 0), showSetup: false, sel: null, menuFor: null, missFor: null, evEdit: null, sheet: null, editing: null })],
         ['month', 'Month', '#D3E2D9', 84, () => this.setState({ view: 'month', showSetup: false, sel: null, menuFor: null, missFor: null, evEdit: null, sheet: null, editing: null })],
-        ['desk', 'My Desk', '#F1E3A8', 92, () => this.setState({ view: 'desk', showSetup: false, sel: null, menuFor: null, missFor: null, editing: null, sheet: null })],
+        ['desk', 'Desk', '#F1E3A8', 84, () => this.setState({ view: 'desk', showSetup: false, sel: null, menuFor: null, missFor: null, editing: null, sheet: null })],
         ['goals', 'Grow', '#EBD3C7', 84, () => this.setState({ view: 'goals', selGoal: '__glance', showSetup: false, sel: null, menuFor: null, missFor: null, evEdit: null, sheet: null, editing: null })],
         ['school', 'School', '#E3DCCB', 84, () => this.setState({ view: 'school', showSetup: false, sel: null, menuFor: null, missFor: null, evEdit: null, sheet: null, editing: null })],
         ['meals', 'Meals', '#E3DCCB', 84, () => this.setState({ view: 'meals', showSetup: false, sel: null, menuFor: null, missFor: null, evEdit: null, sheet: null, editing: null })],
@@ -9603,14 +9613,15 @@ class Component extends DCLogic {
         const squeeze = natural > budget ? Math.max(0.6, budget / natural) : 1;
         const SHORT2 = { desk: 'Desk' };
         const big = !!s.touch || (s.vw || 1194) < 900;
+        const tk = Math.min(1.3, ({ small: 1, normal: 1, large: 1.1, xl: 1.2, xxl: 1.3 })[s.settings.textSize] || 1), grow = Math.round((tk - 1) * 22);
         return {
           isPict: false,
           label: squeeze < 1 && SHORT2[t[0]] ? SHORT2[t[0]] : t[1], open: t[4], active: on, current: on ? 'page' : 'false',
           isIcon: icon, isText: !icon, showDot: on && !icon && squeeze > 0.8, fw: 700,
           h: icon ? (on ? 54 : 46) : Math.round((on ? t[3] + 16 : t[3]) * squeeze * (big ? 1.15 : 1)),
-          w: icon ? (on ? (big ? 50 : 42) : (big ? 40 : 32)) : (on ? (big ? 58 : 50) : (big ? 46 : 38)), ml: on ? -8 : 0, z: on ? 2 : 1,
+          w: icon ? (on ? (big ? 50 : 42) : (big ? 40 : 32)) : (on ? (big ? 58 : 50) : (big ? 46 : 38)) + grow, ml: on ? -8 : 0, z: on ? 2 : 1,
           bg: icon ? (on ? tc[1] : '#FFFFFF') : (on ? tc[1] : tc[0]), fg: icon ? (on ? '#FFFFFF' : tc[1]) : (on ? '#FFFFFF' : tc[1]), dot: this.THEME.tab.dot,
-          fs: big ? (on ? 16 : 14) : (squeeze < 0.8 ? (on ? 12 : 11) : (on ? 14 : 12)),
+          fs: Math.round((big ? (on ? 16 : 14) : (squeeze < 0.8 ? (on ? 12 : 11) : (on ? 14 : 12))) * tk),
           shadow: on ? '4px 3px 10px rgba(0,0,0,0.38)' : 'inset 2px 0 3px rgba(0,0,0,0.12)'
         };
       }),
