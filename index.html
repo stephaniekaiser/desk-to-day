@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 24, 2:22 PM';</script>
+<script>window.__plannerBuild = 'Oct 24, 3:37 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -347,7 +347,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </button>
 </sc-if>
 <sc-if value="{{t.showPromote}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{t.promote}}" aria-label="Move {{t.title}} to this week" title="Move to this week" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0">
+<button onClick="{{t.promote}}" aria-label="{{t.promoteLabel}}: {{t.title}}" title="{{t.promoteLabel}}" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
 </button>
 </sc-if>
@@ -1642,7 +1642,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 <div style="display: flex; align-items: center; gap: 6px">
 <sc-if value="{{weekNotCurrent}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{weekThis}}" style="height: 32px; padding: 0 10px; border-radius: 16px; border: 1.5px solid {{TK.t6E2F43}}; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700">This week</button>
+<button onClick="{{weekThis}}" style="white-space: nowrap; flex: none; height: 32px; padding: 0 10px; border-radius: 16px; border: 1.5px solid {{TK.t6E2F43}}; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700">This week</button>
 </sc-if>
 <button onClick="{{weekPrev}}" aria-label="Previous week" style="width: 44px; height: 44px; border-radius: 22px; border: 1.5px solid #D8CDB6; background: #FFFFFF; color: #2B2722; display: flex; align-items: center; justify-content: center">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
@@ -1729,7 +1729,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 <div style="display: flex; align-items: center; gap: 6px">
 <sc-if value="{{deskNotCurrent}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{deskThis}}" style="height: 30px; padding: 0 10px; border-radius: 15px; border: 1px solid #D8CDB6; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700">This week</button>
+<button onClick="{{deskThis}}" style="white-space: nowrap; flex: none; height: 30px; padding: 0 10px; border-radius: 15px; border: 1px solid #D8CDB6; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700">This week</button>
 </sc-if>
 <button onClick="{{deskPrev}}" aria-label="Previous week" disabled="{{deskAtStart}}" style="width: 44px; height: 44px; border-radius: 22px; border: 1.5px solid #D8CDB6; background: #FFFFFF; color: #2B2722; display: flex; align-items: center; justify-content: center; opacity: {{deskPrevOp}}">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
@@ -6029,8 +6029,9 @@ class Component extends DCLogic {
       dropShadow: s.dropKey === key ? 'inset 0 3px 0 #F2B705' : 'none',
       badgeBg: p.bg, badgeFg: p.fg, badgeBorder: p.border,
       showPromote: t.bucket === 'desk' && s.view === 'desk',
+      promoteLabel: (() => { const cw = this.weekStartOff(0), dw = typeof s.deskWs === 'number' && s.deskWs >= cw ? s.deskWs : cw; return 'Move to ' + this.weekName(dw).toLowerCase(); })(),
       toggleDone: () => this.setTaskDone(t.id, true, s.view === 'day' ? s.day : 0),
-      promote: () => { this.moveTask(t.id, { bucket: 'week', weekOf: this.weekStartOff(0) }); this.setToast('Moved to this week.'); },
+      promote: () => { const cw = this.weekStartOff(0), dw = typeof this.state.deskWs === 'number' && this.state.deskWs >= cw ? this.state.deskWs : cw; this.moveTask(t.id, { bucket: 'week', weekOf: dw }); },
       back: () => this.moveTask(t.id, { bucket: 'desk' }),
       pick: () => {
         if (s.view !== 'day' && s.view !== 'week') return;
@@ -6194,7 +6195,7 @@ class Component extends DCLogic {
         const key = 'sec:' + k;
         const hot = s.dropKey === key;
         return {
-          letter: k, name: this.PRI[k].name, color: this.THEME.sec[k].ink, line: this.THEME.sec[k].line, metaFg: this.THEME.sec[k].meta,
+          letter: k, name: this.PRI[k].name + (s.day === 0 ? ' today' : s.day === 1 ? ' tomorrow' : ' on ' + this.DAYS[this.dowFor(s.day)]), color: this.THEME.sec[k].ink, line: this.THEME.sec[k].line, metaFg: this.THEME.sec[k].meta,
           meta: metaFor(list), rows: buildRows(list), isEmpty: !list.length, emptyText: 'Drag tasks here',
           headBg: hot ? '#FCE9A6' : 'transparent', zoneBg: hot ? '#FCE9A6' : 'transparent',
           over: (e) => { e.preventDefault(); this.hover(key); },
@@ -6226,7 +6227,7 @@ class Component extends DCLogic {
           add: () => { this.moveTask(t.id, { bucket: 'week', weekOf: listWs }); this.setToast(t.title + ' added to ' + this.weekName(listWs).toLowerCase().replace('week of', 'the week of') + '.'); },
           dragStart: (e) => { this.drag = { kind: 'task', id: t.id }; try { e.dataTransfer.setData('text/plain', t.id); e.dataTransfer.effectAllowed = 'move'; } catch (err) {} }
         };
-      }) : isDay ? s.tasks.filter(t => !t.done && t.bucket === 'week' && this.effWeek(t) === trayWs && dayOf(t) !== s.day && !sm[t.id])
+      }) : isDay ? s.tasks.filter(t => { if (t.done || t.bucket !== 'week' || this.effWeek(t) !== trayWs || sm[t.id]) return false; const d0 = dayOf(t); return d0 !== s.day && (d0 === null || d0 === undefined || d0 < 0); })
       .map((t, i) => ({ t: t, i: i, d: dayOf(t) }))
       .sort((a, b) => ((a.d === null ? -1 : a.d) - (b.d === null ? -1 : b.d)) || a.i - b.i)
       .map(x => {
