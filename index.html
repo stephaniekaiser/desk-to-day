@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 24, 3:50 PM';</script>
+<script>window.__plannerBuild = 'Oct 24, 3:57 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -295,7 +295,15 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 4px; background: {{sec.line}}"></span>
 <span style="font-size: calc(12px * {{fsK}}); font-weight: 600; color: {{sec.color}}; text-transform: uppercase; letter-spacing: 0.12em">{{sec.name}}</span>
 <span style="margin-left: auto; font-size: calc(12px * {{fsK}}); color: {{sec.metaFg}}">{{sec.meta}}</span>
+<sc-if value="{{sec.canAdd}}" hint-placeholder-val="{{ false }}"><button onClick="{{sec.toggleAdd}}" aria-expanded="{{sec.addOpenA}}" aria-label="{{sec.addLabel}}" title="{{sec.addLabel}}" style="width: 28px; height: 28px; flex: none; margin: -4px -2px -4px 0; border: 0; border-radius: 14px; background: transparent; color: {{sec.color}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button></sc-if>
 </div>
+<sc-if value="{{sec.addOpen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 6px; padding: 6px 0 4px">
+<label for="{{sec.addId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">{{sec.addLabel}}</label>
+<input id="{{sec.addId}}" autoFocus="{{ true }}" value="{{sec.addDraft}}" onChange="{{sec.onAdd}}" onInput="{{sec.onAdd}}" onKeyDown="{{sec.addKey}}" autocomplete="off" placeholder="New task, then press Enter" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tIn}}px; box-sizing: border-box; border: 1.5px solid {{sec.line}}; border-radius: 9px; padding: 0 10px; font: inherit; font-size: calc({{tFs}}px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+<button onClick="{{sec.toggleAdd}}" style="height: 32px; flex: none; padding: 0 8px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Done</button>
+</div>
+</sc-if>
 <sc-for list="{{sec.rows}}" as="t" hint-placeholder-count="2">
 <sc-if value="{{t.isHeader}}" hint-placeholder-val="{{ false }}">
 <div onDragOver="{{t.over}}" onDrop="{{t.drop}}" style="display: flex; align-items: center; gap: 8px; min-height: calc(54px * {{rowK}}); box-sizing: border-box; padding: 6px 2px 6px 24px; border-bottom: 1px solid #E8DFCC; box-shadow: {{t.dropShadow}}">
@@ -3659,6 +3667,13 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <button onClick="{{dataPaste}}" style="height: 32px; flex: none; padding: 0 10px; border: 0; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Paste</button>
 <label style="position: relative; height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; display: flex; align-items: center; background: transparent; color: {{TK.t6E2F43}}; cursor: pointer">Choose file<input type="file" accept=".json,application/json" onChange="{{dataRestore}}" style="outline-color: {{TK.tA0526A}}; position: absolute; width: 1px; height: 1px; opacity: 0"></label>
 </div>
+<div style="flex: none; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 8px 12px; min-height: 56px; box-sizing: border-box">
+<span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 14px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM4 10h16M10 4v16"></path></svg></span>
+<span style="flex: 1; min-width: 180px; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Import tasks</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Add many tasks at once from a spreadsheet saved as CSV. Start from the template.</span></span>
+<button onClick="{{tiTemplate}}" style="height: 32px; flex: none; padding: 0 10px; border: 0; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Template</button>
+<button onClick="{{tiPaste}}" style="height: 32px; flex: none; padding: 0 10px; border: 0; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Paste</button>
+<label style="position: relative; height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; display: flex; align-items: center; background: transparent; color: {{TK.t6E2F43}}; cursor: pointer">Choose file<input type="file" accept=".csv,.tsv,.txt,text/csv,text/plain" onChange="{{tiFile}}" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; opacity: 0; width: 100%; cursor: pointer"></label>
+</div>
 <div style="flex: none; display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 8px 12px; min-height: 56px; box-sizing: border-box">
 <span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 14px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></span>
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Start fresh</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Clears your tasks, events, intentions and special days. Settings stay.</span></span>
@@ -3693,6 +3708,44 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <button onClick="{{fileCopy}}" style="height: 38px; padding: 0 16px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 10px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(14px * {{fsK}}); font-weight: 700">Copy</button>
 </div>
 <span style="font-size: calc(12px * {{fsK}}); color: #8A8174">On iPad, Share… lets you choose Save to Files.</span>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{tiPasteOn}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 60; background: rgba(20,30,28,0.35); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 16px">
+<div role="dialog" aria-label="Paste tasks" style="width: min(560px, 100%); box-sizing: border-box; background: #FFFFFF; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 18px 40px rgba(0,0,0,0.3)">
+<span style="font-family: {{TK.fHead}}; font-size: calc(22px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">Paste tasks</span>
+<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">Paste rows from a spreadsheet, including the heading row from the template. You will see what will be added before anything changes.</span>
+<label for="ti-paste" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task rows</label>
+<textarea id="ti-paste" value="{{tiPasteText}}" onChange="{{tiOnPaste}}" rows="8" placeholder="Task,Date,Section,Flag,Hours,Minutes,Category,Notes,Checklist" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font-family: ui-monospace, Menlo, monospace; font-size: calc(12px * {{fsK}}); line-height: 1.5; color: #2B2722; background: #FFFDF8; resize: vertical"></textarea>
+<div style="display: flex; gap: 8px; justify-content: flex-end">
+<button onClick="{{tiPasteClose}}" style="height: 38px; padding: 0 14px; border: 0; background: transparent; color: #6B6358; font-size: calc(14px * {{fsK}}); font-weight: 600">Cancel</button>
+<button onClick="{{tiPasteGo}}" style="height: 38px; padding: 0 16px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">Check these tasks</button>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{tiOn}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 61; background: rgba(20,30,28,0.4); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 16px">
+<div role="dialog" aria-label="Import tasks" style="width: min(520px, 100%); max-height: 100%; overflow-y: auto; box-sizing: border-box; background: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 18px 40px rgba(0,0,0,0.3)">
+<span style="font-family: {{TK.fHead}}; font-size: calc(24px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">Import tasks</span>
+<span style="font-size: calc(14px * {{fsK}}); color: #2B2722; line-height: 1.45">{{tiSummary}}</span>
+<sc-if value="{{tiHasCats}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">{{tiCats}}</span></sc-if>
+<div style="display: flex; flex-direction: column; background: #FBF7EE; border-radius: 10px; padding: 4px 12px">
+<sc-for list="{{tiPreview}}" as="tp" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; padding: 6px 0; border-bottom: 1px solid #EFE7D6"><span style="font-size: calc(14px * {{fsK}}); color: #2B2722">{{tp.title}}</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{tp.meta}}</span></div>
+</sc-for>
+<sc-if value="{{tiHasMore}}" hint-placeholder-val="{{ false }}"><span style="padding: 6px 0; font-size: calc(12.5px * {{fsK}}); color: #7A7064">{{tiMore}}</span></sc-if>
+</div>
+<sc-if value="{{tiHasErrors}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="display: flex; flex-direction: column; gap: 2px; background: #FBEFEA; border-radius: 8px; padding: 8px 10px">
+<sc-for list="{{tiErrors}}" as="te" hint-placeholder-count="1"><span style="font-size: calc(12.5px * {{fsK}}); color: #7A3208">{{te.text}}</span></sc-for>
+</div>
+</sc-if>
+<div style="display: flex; gap: 8px; justify-content: flex-end">
+<button onClick="{{tiCancel}}" style="height: 40px; padding: 0 16px; border: 1px solid #E2D8C4; border-radius: 10px; background: #FFFFFF; color: #2B2722; font-size: calc(14px * {{fsK}}); font-weight: 700">Cancel</button>
+<sc-if value="{{tiCanGo}}" hint-placeholder-val="{{ true }}"><button onClick="{{tiGo}}" style="height: 40px; padding: 0 16px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">Add {{tiCount}} tasks</button></sc-if>
+</div>
 </div>
 </div>
 </sc-if>
@@ -4601,6 +4654,106 @@ class Component extends DCLogic {
   downloadText(name, text, mime) { this.offerFile('Lesson plan template', name, text, mime || 'text/csv'); }
   // Saving files from inside the planner can be blocked, so every export opens a small box with
   // three ways out: save as a file, share (the iPad share sheet can save to Files), or copy.
+  // Full CSV reader: quoted fields may hold commas, quotes and line breaks.
+  csvRead(text) {
+    const src = String(text || '').replace(/^﻿/, '');
+    const first = src.split(/\r?\n/)[0] || '';
+    const delim = first.indexOf('\t') >= 0 && first.indexOf(',') < 0 ? '\t' : ',';
+    const rows = []; let row = [], cur = '', q = false;
+    for (let i = 0; i < src.length; i++) {
+      const ch = src[i];
+      if (q) { if (ch === '"') { if (src[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; continue; }
+      if (ch === '"') q = true;
+      else if (ch === delim) { row.push(cur); cur = ''; }
+      else if (ch === '\n' || ch === '\r') { if (ch === '\r' && src[i + 1] === '\n') i++; row.push(cur); rows.push(row); row = []; cur = ''; }
+      else cur += ch;
+    }
+    if (cur !== '' || row.length) { row.push(cur); rows.push(row); }
+    return rows.filter(r => r.some(c => String(c).trim() !== ''));
+  }
+  taskTemplate() {
+    return [
+      'Task,Date,Section,Flag,Hours,Minutes,Category,Notes,Checklist',
+      'Pack for the conference,2026-11-04,Must,Important,1,30,Work,"Badge, chargers, business cards",Suit | Travel wallet | Passport | Chargers',
+      'Call the dentist,today,Should,,0,15,Health,Ask about the January opening,',
+      'Plan meals for next week,next week,Could,,0,45,Home,,',
+      'Read chapter 4,11/6/2026,Should,,2,0,School,"Pages 88-120, take notes",Skim headings | Read | Write summary',
+      'Renew passport,,,,0,30,,Leave it on the desk until I sort it,',
+    ].join('\n') + '\n';
+  }
+  // Turns template rows into tasks. Nothing is saved here.
+  parseTaskImport(text) {
+    const rows = this.csvRead(text);
+    const out = { tasks: [], newCats: [], errors: [], counts: { desk: 0, day: 0, week: 0, month: 0 } };
+    if (!rows.length) { out.errors.push('The file is empty.'); return out; }
+    const norm = (x) => String(x || '').trim().toLowerCase().replace(/[^a-z]/g, '');
+    const head = rows[0].map(norm);
+    const col = (names) => { for (const n of names) { const i = head.indexOf(n); if (i >= 0) return i; } return -1; };
+    const C = { task: col(['task', 'title', 'name']), date: col(['date', 'day', 'when']), sec: col(['section', 'type', 'priority']), flag: col(['flag']), h: col(['hours', 'hrs', 'hour', 'lengthhr', 'lengthhours']), m: col(['minutes', 'mins', 'min', 'lengthmin', 'lengthminutes']), cat: col(['category', 'categ', 'cat']), notes: col(['notes', 'note']), cl: col(['checklist', 'steps', 'checklistitems']) };
+    if (C.task < 0) { out.errors.push('No "Task" column found. The first row should be the headings from the template.'); return out; }
+    const MON = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+    const toOff = (y, mo, d) => Math.round((Date.UTC(y, mo, d) - Date.UTC(this.Y0, this.M0, this.D0)) / 86400000);
+    const cats = (this.state.cats || []).slice();
+    const catByName = {}; cats.forEach(c => { catByName[(c.name || '').trim().toLowerCase()] = c.id; });
+    const sid = this.schoolCatOf(cats); if (sid) catByName.school = catByName.school || sid;
+    let n = this.state.nextId;
+    const taken = cats.map(c => c.color);
+    const cw = this.weekStartOff(0);
+    rows.slice(1).forEach((r, ri) => {
+      const g = (i) => i >= 0 && i < r.length ? String(r[i]).trim() : '';
+      const title = g(C.task);
+      if (!title) { out.errors.push('Row ' + (ri + 2) + ' has no task name, so it was skipped.'); return; }
+      const t = { id: 'n' + (n++), title: title, pri: this.state.settings.defaultPri || 'B', flag: null, mins: 0, bucket: 'desk' };
+      // where it lands
+      const dv = g(C.date), low = dv.toLowerCase();
+      let m;
+      if (!dv || low === 'desk' || low === 'my desk') { t.bucket = 'desk'; out.counts.desk++; }
+      else if (low === 'this week') { t.bucket = 'week'; t.weekOf = cw; out.counts.week++; }
+      else if (low === 'next week') { t.bucket = 'week'; t.weekOf = cw + 7; out.counts.week++; }
+      else if (low === 'this month' || low === 'month') { t.bucket = 'month'; out.counts.month++; }
+      else {
+        let off = null;
+        if (low === 'today') off = 0; else if (low === 'tomorrow') off = 1;
+        else if ((m = low.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/))) off = toOff(+m[1], +m[2] - 1, +m[3]);
+        else if ((m = low.match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?$/))) { let y = m[3] ? +m[3] : this.Y0; if (y < 100) y += 2000; off = toOff(y, +m[1] - 1, +m[2]); }
+        else if ((m = low.match(/^([a-z]{3,9})\.?\s+(\d{1,2})(?:,?\s*(\d{4}))?$/)) && MON.indexOf(m[1].slice(0, 3)) >= 0) off = toOff(m[3] ? +m[3] : this.Y0, MON.indexOf(m[1].slice(0, 3)), +m[2]);
+        if (off === null || isNaN(off)) { out.errors.push('Row ' + (ri + 2) + ': could not read the date "' + dv + '", so it went to your Desk.'); t.bucket = 'desk'; out.counts.desk++; }
+        else { t.bucket = 'week'; t.weekOf = this.weekStartOff(off); t.dayAssign = off; out.counts.day++; }
+      }
+      const sv = norm(g(C.sec));
+      if (sv) t.pri = /^(a|must)/.test(sv) ? 'A' : /^(c|could)/.test(sv) ? 'C' : 'B';
+      const fv = norm(g(C.flag));
+      if (fv) t.flag = /^urg/.test(fv) ? 'urgent' : /^imp/.test(fv) ? 'important' : null;
+      const hh = parseFloat(g(C.h)) || 0, mm = parseFloat(g(C.m)) || 0;
+      t.mins = Math.max(0, Math.round(hh * 60 + mm)) || (this.state.settings.defaultMins || 30);
+      const cv = g(C.cat);
+      if (cv) {
+        let id = catByName[cv.toLowerCase()];
+        if (!id) {
+          id = 'cat' + (n++);
+          const color = Object.keys(this.CAT_COLORS).find(k => taken.indexOf(k) < 0) || 'slate'; taken.push(color);
+          const nc = { id: id, name: cv, color: color, icon: 'tag' };
+          cats.push(nc); out.newCats.push(nc); catByName[cv.toLowerCase()] = id;
+        }
+        t.cat = id;
+      }
+      const nv = g(C.notes); if (nv) t.note = nv;
+      const cl = g(C.cl);
+      if (cl) t.checklist = cl.split(/\s*[|;\n]\s*/).map(x => x.trim()).filter(Boolean).map(x => ({ id: 'ck' + (n++), text: x, done: false, mins: 0 }));
+      out.tasks.push(t);
+    });
+    out.nextId = n; out.cats = cats;
+    return out;
+  }
+  readTaskFile(e) {
+    const f = e && e.target && e.target.files && e.target.files[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => { this.setState({ taskImport: this.parseTaskImport(r.result), taskPaste: null }); };
+    r.onerror = () => this.setError('Could not read that file.');
+    r.readAsText(f);
+    try { e.target.value = ''; } catch (err) {}
+  }
   offerFile(title, name, text, mime) { this.setState({ fileBox: { title: title, name: name, text: text, mime: mime || 'text/plain', note: '' } }); }
   fileSave() {
     const fb = this.state.fileBox;
@@ -6222,7 +6375,20 @@ class Component extends DCLogic {
         const hot = s.dropKey === key;
         return {
           letter: k, name: this.PRI[k].name + (s.day === 0 ? ' today' : s.day === 1 ? ' tomorrow' : ' on ' + this.DAYS[this.dowFor(s.day)]), color: this.THEME.sec[k].ink, line: this.THEME.sec[k].line, metaFg: this.THEME.sec[k].meta,
-          meta: metaFor(list), rows: buildRows(list), isEmpty: !list.length, emptyText: 'Drag tasks here',
+          meta: metaFor(list), rows: buildRows(list), isEmpty: !list.length, emptyText: s.secAdd === k ? 'Type above and press Enter' : 'Drag tasks here, or tap +',
+          canAdd: true, addOpen: s.secAdd === k, addOpenA: s.secAdd === k ? 'true' : 'false', addId: 'sa-' + k,
+          addLabel: 'Add to ' + this.PRI[k].name, addDraft: s.secAdd === k ? (s.secDraft || '') : '',
+          toggleAdd: () => this.setState({ secAdd: this.state.secAdd === k ? null : k, secDraft: '' }),
+          onAdd: (e) => this.setState({ secDraft: e.target.value }),
+          addKey: (e) => {
+            if (e.key === 'Escape') { this.setState({ secAdd: null, secDraft: '' }); return; }
+            if (e.key !== 'Enter') return;
+            e.preventDefault();
+            const title = (((e.target && e.target.value) || this.state.secDraft || '')).trim(); if (!title) return;
+            const n5 = this.state.nextId, d0 = this.state.day;
+            const t = { id: 'n' + n5, title: title, pri: k, flag: null, mins: this.state.settings.defaultMins || 30, bucket: 'week', weekOf: this.weekStartOff(d0), dayAssign: d0 };
+            this.setState({ tasks: this.state.tasks.concat([t]), nextId: n5 + 1, secDraft: '' });
+          },
           headBg: hot ? '#FCE9A6' : 'transparent', zoneBg: hot ? '#FCE9A6' : 'transparent',
           over: (e) => { e.preventDefault(); this.hover(key); },
           drop: (e) => this.dropTask(e, { bucket: 'week', pri: k, dayAssign: s.day, weekOf: this.weekStartOff(s.day) })
@@ -8942,6 +9108,24 @@ class Component extends DCLogic {
       dataBackup: () => this.downloadBackup(),
       dataRestore: (e) => this.restoreBackup(e),
       dataPaste: () => this.setState({ pasteBox: { text: '' } }),
+      tiTemplate: () => this.offerFile('Task import template', 'task-import-template.csv', this.taskTemplate(), 'text/csv'),
+      tiFile: (e) => this.readTaskFile(e),
+      tiPaste: () => this.setState({ taskPaste: { text: '' } }),
+      tiPasteOn: !!s.taskPaste, tiPasteText: s.taskPaste ? s.taskPaste.text : '',
+      tiOnPaste: (e) => this.setState({ taskPaste: { text: e.target.value } }),
+      tiPasteGo: () => { const tx = this.state.taskPaste ? this.state.taskPaste.text : ''; this.setState({ taskImport: this.parseTaskImport(tx), taskPaste: null }); },
+      tiPasteClose: () => this.setState({ taskPaste: null }),
+      tiOn: !!s.taskImport,
+      tiCount: s.taskImport ? s.taskImport.tasks.length : 0,
+      tiCanGo: !!(s.taskImport && s.taskImport.tasks.length),
+      tiSummary: (() => { const ti = s.taskImport; if (!ti) return ''; const c = ti.counts, parts = []; if (c.desk) parts.push(c.desk + ' to your Desk'); if (c.day) parts.push(c.day + ' on specific days'); if (c.week) parts.push(c.week + ' into a week'); if (c.month) parts.push(c.month + ' to this month'); return ti.tasks.length ? ti.tasks.length + (ti.tasks.length === 1 ? ' task' : ' tasks') + ': ' + parts.join(', ') + '.' : 'No tasks found.'; })(),
+      tiCats: s.taskImport && s.taskImport.newCats.length ? 'New categories: ' + s.taskImport.newCats.map(c => c.name).join(', ') + '.' : '',
+      tiHasCats: !!(s.taskImport && s.taskImport.newCats.length),
+      tiPreview: s.taskImport ? s.taskImport.tasks.slice(0, 6).map(t => ({ title: t.title, meta: [this.PRI[t.pri].name, this.fmtDur(t.mins), typeof t.dayAssign === 'number' ? this.DSHORT[this.dowFor(t.dayAssign)] + ' ' + this.MONTHS[this.dateFor(t.dayAssign).getMonth()] + ' ' + this.dateFor(t.dayAssign).getDate() : ({ desk: 'Desk', week: 'Week', month: 'Month' })[t.bucket], t.checklist ? t.checklist.length + ' steps' : ''].filter(Boolean).join(' · ') })) : [],
+      tiMore: s.taskImport && s.taskImport.tasks.length > 6 ? '+ ' + (s.taskImport.tasks.length - 6) + ' more' : '', tiHasMore: !!(s.taskImport && s.taskImport.tasks.length > 6),
+      tiErrors: s.taskImport ? s.taskImport.errors.slice(0, 5).map(x => ({ text: x })) : [], tiHasErrors: !!(s.taskImport && s.taskImport.errors.length),
+      tiCancel: () => this.setState({ taskImport: null }),
+      tiGo: () => { const ti = this.state.taskImport; if (!ti || !ti.tasks.length) return; this.setState({ tasks: this.state.tasks.concat(ti.tasks), cats: ti.cats, nextId: Math.max(this.state.nextId, ti.nextId), taskImport: null }); },
       fileBoxOn: !!s.fileBox, fileBoxTitle: s.fileBox ? s.fileBox.title : '', fileBoxName: s.fileBox ? s.fileBox.name : '', fileBoxText: s.fileBox ? s.fileBox.text : '',
       fileBoxNote: s.fileBox ? s.fileBox.note : '', fileBoxHasNote: !!(s.fileBox && s.fileBox.note), fileBoxCanShare: (() => { try { return !!navigator.share; } catch (e) { return false; } })(),
       fileSave: () => this.fileSave(), fileShare: () => this.fileShare(), fileCopy: () => this.fileCopy(), fileClose: () => this.setState({ fileBox: null }),
