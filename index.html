@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 24, 3:37 PM';</script>
+<script>window.__plannerBuild = 'Oct 24, 3:43 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -338,9 +338,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="overflow: hidden; text-overflow: ellipsis">{{t.schedText}}</span>
 </span>
 </sc-if>
-<sc-if value="{{t.hasNote}}" hint-placeholder-val="{{ false }}"><span role="img" aria-label="Has a note" title="{{t.noteTip}}" style="flex: none; color: #9A8F7C; display: flex"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8zM14 3v5h5M8.5 13h7M8.5 17h5"></path></svg></span></sc-if>
+<sc-if value="{{t.hasNote}}" hint-placeholder-val="{{ false }}"><span role="img" aria-label="Has a note" title="{{t.noteTip}}" onClick="{{t.openEdit}}" style="flex: none; color: #9A8F7C; display: flex; align-self: stretch; align-items: center; cursor: pointer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8zM14 3v5h5M8.5 13h7M8.5 17h5"></path></svg></span></sc-if>
 <sc-if value="{{t.hasCl}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.clToggleOpen}}" aria-expanded="{{t.clOpenA}}" aria-label="Checklist, {{t.clCount}} done" style="height: 24px; flex: none; padding: 0 7px; border: 0; border-radius: 12px; background: {{t.clChipBg}}; color: {{t.clChipFg}}; font-size: calc(11.5px * {{fsK}}); font-weight: 700; display: flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l1.5 1.5L8 5M4 12l1.5 1.5L8 11M4 18l1.5 1.5L8 17M11 6h9M11 12h9M11 18h9"></path></svg>{{t.clCount}}</button></sc-if>
-<span style="flex: none; min-width: 36px; text-align: right; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">{{t.dur}}</span>
+<button onClick="{{t.openEdit}}" tabindex="-1" aria-hidden="true" style="flex: none; min-width: 36px; align-self: stretch; border: 0; background: transparent; padding: 0 4px; text-align: right; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">{{t.dur}}</button>
 <sc-if value="{{t.isBig}}" hint-placeholder-val="{{ false }}">
 <button onClick="{{t.split}}" aria-label="Break {{t.title}} into smaller pieces" title="Break it up" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #8A6D0B; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1.5"></rect><rect x="3" y="11" width="8" height="4" rx="1.5"></rect><rect x="13" y="11" width="8" height="4" rx="1.5"></rect><rect x="3" y="18" width="5" height="3" rx="1"></rect><rect x="10" y="18" width="5" height="3" rx="1"></rect><rect x="17" y="18" width="4" height="3" rx="1"></rect></svg>
