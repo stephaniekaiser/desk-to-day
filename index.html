@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 24, 3:43 PM';</script>
+<script>window.__plannerBuild = 'Oct 24, 3:50 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -151,6 +151,10 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <h1 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Plan the week</h1>
 <p style="margin: 0; font-size: calc(14px * {{fsK}}); color: #6B6358">Drop tasks on a day now. Pick the exact time later, on the day page.</p>
 </header>
+<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: calc(13px * {{fsK}}); color: {{statFg}}; padding: 2px 2px 0">
+<span><strong style="color: {{statInk}}">{{statANum}}</strong> {{statAText}}</span>
+<span><strong style="color: {{statInk}}">{{statBNum}}</strong> {{statBText}}</span>
+</div>
 <div style="background: {{b3Bg}}; border: 1px solid {{b3Line}}; border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px">
 <div style="display: flex; align-items: baseline; gap: 8px">
 <span style="font-size: calc(12px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{b3Ink}}">Week Makers</span>
@@ -1739,7 +1743,28 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </button>
 </div>
 </header>
-<p style="margin: 0; padding-left: 16px; font-size: calc(13px * {{fsK}}); color: #6B6358">Drag tasks from your list into this week. Use the arrows to plan weeks ahead.</p>
+<p style="margin: 0; padding-left: 16px; font-size: calc(13px * {{fsK}}); color: #6B6358">Drag tasks from your list into a week. Use the arrows to plan weeks ahead.</p>
+<div style="flex: none; background: {{b3Bg}}; border: 1px solid {{b3Line}}; border-radius: 12px; padding: 8px 10px; display: flex; flex-direction: column; gap: 5px">
+<div style="display: flex; align-items: baseline; gap: 8px">
+<span style="font-size: calc(12px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{b3Ink}}">Week Makers</span>
+<span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: {{b3Muted}}">{{dkB3Prompt}}</span>
+<span style="flex: none; font-size: calc(12px * {{fsK}}); font-weight: 600; color: {{b3Ink}}; white-space: nowrap">{{dkB3Head}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{dkB3}}" as="kb" hint-placeholder-count="3">
+<sc-if value="{{kb.filled}}" hint-placeholder-val="{{ false }}">
+<div onDragOver="{{kb.over}}" onDrop="{{kb.drop}}" style="min-width: 0; min-height: 40px; display: flex; align-items: center; gap: 4px; background: {{kb.bg}}; border-radius: 8px; padding: 4px 2px 4px 8px">
+<span style="flex: none; font-family: {{TK.fHead}}; font-size: calc(16px * {{fsK}}); font-weight: 600; color: {{b3Accent}}">{{kb.num}}</span>
+<span style="flex: 1; min-width: 0; font-size: calc(12.5px * {{fsK}}); line-height: 1.25; color: #2B2722; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-decoration: {{kb.strike}}">{{kb.title}}</span>
+<button onClick="{{kb.remove}}" aria-label="Remove {{kb.title}} from Week Makers" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #8A8174; padding: 0">×</button>
+</div>
+</sc-if>
+<sc-if value="{{kb.empty}}" hint-placeholder-val="{{ true }}">
+<div onDragOver="{{kb.over}}" onDrop="{{kb.drop}}" style="min-width: 0; min-height: 40px; display: flex; align-items: center; justify-content: center; border: 1.5px dashed {{b3Line}}; border-radius: 8px; background: {{kb.bg}}; font-size: calc(12px * {{fsK}}); color: {{b3Muted}}">{{kb.num}}. Drop here</div>
+</sc-if>
+</sc-for>
+</div>
+</div>
 
 <sc-for list="{{deskZones}}" as="dz" hint-placeholder-count="4">
 <div onDragOver="{{dz.over}}" onDrop="{{dz.drop}}" style="flex: {{dz.flex}}; min-height: 0; display: flex; flex-direction: column; gap: 4px; background: {{dz.bg}}; border: 1px solid {{dz.border}}; border-radius: 12px; padding: 10px 12px">
@@ -1754,6 +1779,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span aria-hidden="true" style="width: 14px; flex: none; display: flex; align-items: center; justify-content: center; color: #B9AF9C; cursor: grab"><svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg></span>
 <span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{z.title}}</span>
 <span style="flex: none; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">{{z.dur}}</span>
+<button onClick="{{z.dStar}}" aria-pressed="{{z.dStarOn}}" aria-label="{{z.dStarLabel}}: {{z.title}}" title="{{z.dStarLabel}}" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #8A6D0B; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" style="fill: {{z.dStarFill}}"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg></button>
 <button onClick="{{z.back}}" aria-label="Send {{z.title}} back to My Desk" title="Back to the desk" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #8A8174; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M11 6l-6 6 6 6"></path></svg>
 </button>
@@ -6727,7 +6753,39 @@ class Component extends DCLogic {
       deskNotCurrent: deskWs !== curWs0, deskAtStart: deskWs === curWs0, deskPrevOp: deskWs === curWs0 ? 0.35 : 1,
       deskPrev: () => { if (deskWs > curWs0) this.setState({ deskWs: deskWs - 7 }); },
       deskNext: () => this.setState({ deskWs: deskWs + 7 }),
-      deskThis: () => this.setState({ deskWs: curWs0 })
+      deskThis: () => this.setState({ deskWs: curWs0 }),
+      ...(() => {
+        const ids = (s.big3ByWeek[deskWs] || []).slice(0, 3);
+        const byId = {}; s.tasks.forEach(t => { byId[t.id] = t; });
+        const live = ids.map(id => id && byId[id] ? byId[id] : null);
+        const n = live.filter(Boolean).length;
+        const when = deskWs === curWs0 ? 'this week' : (deskWs === curWs0 + 7 ? 'next week' : 'that week');
+        const putIn = (k, id) => {
+          const t = byId[id]; if (!t) return;
+          if (t.bucket !== 'week' || this.effWeek(t) !== deskWs) this.moveTask(id, { bucket: 'week', weekOf: deskWs, dayAssign: null });
+          this.setBig3(deskWs, k, id);
+        };
+        const starFor = (id) => {
+          const arr = (this.state.big3ByWeek[deskWs] || []).slice(0, 3); while (arr.length < 3) arr.push(null);
+          const at = arr.indexOf(id);
+          if (at >= 0) { this.setBig3(deskWs, at, null); return; }
+          const free = arr.findIndex(x => !x || !this.state.tasks.find(y => y.id === x));
+          if (free < 0) { this.setError('You already have three Week Makers for ' + when + '. Remove one first.'); return; }
+          putIn(free, id);
+        };
+        (deskZone.rows || []).forEach(r => { const on = ids.indexOf(r.id) >= 0; r.dStar = () => starFor(r.id); r.dStarFill = on ? '#E9C44A' : 'none'; r.dStarOn = on ? 'true' : 'false'; r.dStarLabel = on ? 'Week Maker (tap to remove)' : 'Make it a Week Maker'; });
+        return {
+          dkB3Head: n ? n + ' of 3 picked' : '',
+          dkB3Prompt: n === 0 ? 'If only three things get done ' + when + ', what should they be? Drag them here, or tap a star.' : (n < 3 ? 'Room for ' + (3 - n) + ' more.' : 'All three picked. Nice.'),
+          dkB3: [0, 1, 2].map(k => {
+            const t = live[k];
+            const drop = (e) => { e.preventDefault(); e.stopPropagation(); const d = this.drag; this.drag = null; if (d && d.kind === 'task') putIn(k, d.id); else this.setState({ dropKey: null }); };
+            const key = 'dkb3:' + k, hot = s.dropKey === key;
+            return t ? { filled: true, empty: false, num: k + 1, title: t.title, strike: t.done ? 'line-through' : 'none', drop: drop, over: (e) => { e.preventDefault(); this.hover(key); }, bg: hot ? '#FCE9A6' : '#FFFFFF', remove: () => this.setBig3(deskWs, k, null) }
+              : { filled: false, empty: true, num: k + 1, drop: drop, over: (e) => { e.preventDefault(); this.hover(key); }, bg: hot ? '#FCE9A6' : 'transparent' };
+          })
+        };
+      })()
     };
     deskZones.forEach(z => { z.noPicker = !z.hasPicker; });
 
@@ -9406,7 +9464,7 @@ class Component extends DCLogic {
       monthTabShadow: s.listTab === 'month' ? '0 1px 3px rgba(0,0,0,0.15)' : 'none',
       showWeek: () => this.setState({ listTab: 'week', sel: null }),
       showMonth: () => this.setState({ listTab: 'month', sel: null }),
-      statShow: !isDay || dayTab === 'list' || dayTab === 'done',
+      statShow: (!isDay && !isWeek) || (isDay && (dayTab === 'list' || dayTab === 'done')),
       statANum: this.fmtDur(leftMins),
       statAText: isDesk ? 'on the desk' : (isWeek ? 'left to plan' : 'still to do'),
       statBNum: isDesk ? String(leftTasks.length) : ((isWeek ? weekOpenSum : today.open) > 0 ? this.fmtDur(isWeek ? weekOpenSum : today.open) : '0h'),
