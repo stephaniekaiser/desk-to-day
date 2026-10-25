@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 24, 6:25 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 10:10 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3737,6 +3737,12 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </sc-for>
 <sc-if value="{{tiHasMore}}" hint-placeholder-val="{{ false }}"><span style="padding: 6px 0; font-size: calc(12.5px * {{fsK}}); color: #7A7064">{{tiMore}}</span></sc-if>
 </div>
+<sc-if value="{{tiHasDups}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 6px; background: #FBF7EE; border: 1px solid #EDE5D4; border-radius: 8px; padding: 8px 10px">
+<span style="font-size: calc(13px * {{fsK}}); color: #4A443B">{{tiDupText}} They will be skipped.</span>
+<button role="checkbox" aria-checked="{{tiKeepDups}}" onClick="{{tiToggleDups}}" style="align-self: flex-start; min-height: 30px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 8px; font-size: calc(13px * {{fsK}}); color: #2B2722"><span aria-hidden="true" style="width: 18px; height: 18px; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{tiDupBox}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Add them anyway</button>
+</div>
+</sc-if>
 <sc-if value="{{tiHasErrors}}" hint-placeholder-val="{{ false }}">
 <div role="alert" style="display: flex; flex-direction: column; gap: 2px; background: #FBEFEA; border-radius: 8px; padding: 8px 10px">
 <sc-for list="{{tiErrors}}" as="te" hint-placeholder-count="1"><span style="font-size: calc(12.5px * {{fsK}}); color: #7A3208">{{te.text}}</span></sc-for>
@@ -3744,7 +3750,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </sc-if>
 <div style="display: flex; gap: 8px; justify-content: flex-end">
 <button onClick="{{tiCancel}}" style="height: 40px; padding: 0 16px; border: 1px solid #E2D8C4; border-radius: 10px; background: #FFFFFF; color: #2B2722; font-size: calc(14px * {{fsK}}); font-weight: 700">Cancel</button>
-<sc-if value="{{tiCanGo}}" hint-placeholder-val="{{ true }}"><button onClick="{{tiGo}}" style="height: 40px; padding: 0 16px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">Add {{tiCount}} tasks</button></sc-if>
+<sc-if value="{{tiCanGo}}" hint-placeholder-val="{{ true }}"><button onClick="{{tiGo}}" style="height: 40px; padding: 0 16px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">Add {{tiCount}} items</button></sc-if>
 </div>
 </div>
 </div>
@@ -4673,66 +4679,137 @@ class Component extends DCLogic {
   }
   taskTemplate() {
     return [
-      'Task,Date,Section,Flag,Hours,Minutes,Category,Notes,Checklist',
-      'Prepare for the conference,2026-11-04,Must,Important,2,0,Work,"Badge, chargers, business cards",',
-      '- Pack pant suit,,,,0,15,,,',
-      '- Book hotel,,,,0,30,,,',
-      '- Confirm registration,,,,0,10,,,',
-      '- Set up travel wallet,,,,,,,,',
-      'Call the dentist,today,Should,,0,15,Health,Ask about the January opening,',
-      'Plan meals for next week,next week,Could,,0,45,Home,,',
-      'Read chapter 4,11/6/2026,Should,,2,0,School,"Pages 88-120, take notes",Skim headings | Read | Write summary',
-      'Renew passport,,,,0,30,,Leave it on the desk until I sort it,',
+      'Type,Name,Date,End Date,Start,End,Section,Flag,Hours,Minutes,Category,Notes,Repeat',
+      'Task,Prepare for the conference,2026-11-04,,,,Must,Important,2,0,Work,"Badge, chargers, business cards",',
+      'Task,- Pack pant suit,,,,,,,0,15,,,',
+      'Task,- Book hotel,,,,,,,0,30,,,',
+      'Task,- Confirm registration,,,,,,,0,10,,,',
+      'Task,Call the dentist,today,,,,Should,,0,15,Health,Ask about the January opening,',
+      'Task,Renew passport,,,,,,,0,30,,Leave it on the desk until I sort it,',
+      'Event,Dentist appointment,2026-11-06,,9:00 AM,9:45 AM,,,,,Health,Bring insurance card,',
+      'Event,Tech conference,2026-11-05,2026-11-07,,,,,,,Work,All three days,',
+      'Event,Workshop,2026-11-09,2026-11-11,9:00 AM,5:00 PM,,,,,Work,Same hours each day,',
+      'Event,Team standup,2026-10-26,2026-12-18,9:30 AM,,,,0,15,Work,,weekdays',
     ].join('\n') + '\n';
   }
-  // Turns template rows into tasks. Nothing is saved here.
+  // Turns template rows into tasks and events. Nothing is saved here.
   parseTaskImport(text) {
     const rows = this.csvRead(text);
-    const out = { tasks: [], newCats: [], errors: [], counts: { desk: 0, day: 0, week: 0, month: 0 } };
+    const out = { tasks: [], allDay: [], series: [], blocks: [], dupTasks: [], dupEvents: [], dupNames: [], newCats: [], errors: [], counts: { desk: 0, day: 0, week: 0, month: 0 }, evCount: 0 };
     if (!rows.length) { out.errors.push('The file is empty.'); return out; }
     const norm = (x) => String(x || '').trim().toLowerCase().replace(/[^a-z]/g, '');
     const head = rows[0].map(norm);
-    const col = (names) => { for (const n of names) { const i = head.indexOf(n); if (i >= 0) return i; } return -1; };
-    const C = { task: col(['task', 'title', 'name']), date: col(['date', 'day', 'when']), sec: col(['section', 'type', 'priority']), flag: col(['flag']), h: col(['hours', 'hrs', 'hour', 'lengthhr', 'lengthhours']), m: col(['minutes', 'mins', 'min', 'lengthmin', 'lengthminutes']), cat: col(['category', 'categ', 'cat']), notes: col(['notes', 'note']), cl: col(['checklist', 'steps', 'checklistitems']) };
-    if (C.task < 0) { out.errors.push('No "Task" column found. The first row should be the headings from the template.'); return out; }
+    const col = (names) => { for (const nm of names) { const i = head.indexOf(nm); if (i >= 0) return i; } return -1; };
+    const C = { type: col(['type', 'kind']), task: col(['name', 'task', 'title']), date: col(['date', 'day', 'when', 'startdate']), edate: col(['enddate', 'lastday', 'until']), start: col(['start', 'starttime', 'time']), end: col(['end', 'endtime']), sec: col(['section', 'priority']), flag: col(['flag']), h: col(['hours', 'hrs', 'hour', 'lengthhr', 'lengthhours']), m: col(['minutes', 'mins', 'min', 'lengthmin', 'lengthminutes']), cat: col(['category', 'categ', 'cat']), notes: col(['notes', 'note']), cl: col(['checklist', 'steps', 'checklistitems']), rep: col(['repeat', 'repeats']) };
+    if (C.task < 0) { out.errors.push('No "Name" column found. The first row should be the headings from the template.'); return out; }
     const MON = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
     const toOff = (y, mo, d) => Math.round((Date.UTC(y, mo, d) - Date.UTC(this.Y0, this.M0, this.D0)) / 86400000);
+    const dateOff = (dv) => {
+      const low = String(dv || '').trim().toLowerCase(); let m;
+      if (low === 'today') return 0; if (low === 'tomorrow') return 1;
+      if ((m = low.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/))) return toOff(+m[1], +m[2] - 1, +m[3]);
+      if ((m = low.match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?$/))) { let y = m[3] ? +m[3] : this.Y0; if (y < 100) y += 2000; return toOff(y, +m[1] - 1, +m[2]); }
+      if ((m = low.match(/^([a-z]{3,9})\.?\s+(\d{1,2})(?:,?\s*(\d{4}))?$/)) && MON.indexOf(m[1].slice(0, 3)) >= 0) return toOff(m[3] ? +m[3] : this.Y0, MON.indexOf(m[1].slice(0, 3)), +m[2]);
+      return null;
+    };
+    const timeMin = (v) => {
+      const low = String(v || '').trim().toLowerCase().replace(/\s+/g, '').replace(/\./g, ''); if (!low) return null;
+      const m = low.match(/^(\d{1,2})(?::(\d{2}))?(am|pm|a|p)?$/); if (!m) return undefined;
+      let h = +m[1]; const mi = m[2] ? +m[2] : 0; const ap = m[3];
+      if (mi > 59 || h > 24) return undefined;
+      if (ap) { if (h > 12 || h === 0) return undefined; h = h % 12 + (ap[0] === 'p' ? 12 : 0); }
+      return h * 60 + mi;
+    };
+    const fmtD = (o) => this.MONTHS[this.dateFor(o).getMonth()] + ' ' + this.dateFor(o).getDate();
     const cats = (this.state.cats || []).slice();
     const catByName = {}; cats.forEach(c => { catByName[(c.name || '').trim().toLowerCase()] = c.id; });
     const sid = this.schoolCatOf(cats); if (sid) catByName.school = catByName.school || sid;
     let n = this.state.nextId;
     const taken = cats.map(c => c.color);
+    const catFor = (cv) => {
+      if (!cv) return null;
+      let id = catByName[cv.toLowerCase()];
+      if (!id) {
+        id = 'cat' + (n++);
+        const color = Object.keys(this.CAT_COLORS).find(k => taken.indexOf(k) < 0) || 'slate'; taken.push(color);
+        const nc = { id: id, name: cv, color: color, icon: 'tag' };
+        cats.push(nc); out.newCats.push(nc); catByName[cv.toLowerCase()] = id;
+      }
+      return id;
+    };
     const cw = this.weekStartOff(0);
+    const RULES = { daily: 'daily', everyday: 'daily', weekdays: 'weekdays', everyweekday: 'weekdays', weekly: 'weekly', everyweek: 'weekly', biweekly: 'biweekly', everyweeks: 'biweekly', everyotherweek: 'biweekly', fortnightly: 'biweekly', monthly: 'monthly', everymonth: 'monthly', yearly: 'yearly', everyyear: 'yearly', annually: 'yearly' };
+    // what is already in the planner, for spotting duplicates
+    const key = (x) => String(x || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    const haveTask = {}; (this.state.tasks || []).forEach(t => { if (!t.done) haveTask[key(t.title) + '|' + (typeof t.dayAssign === 'number' ? t.dayAssign : t.bucket)] = true; });
+    const haveEv = {};
+    (this.state.allDay || []).forEach(a2 => { haveEv[key(a2.title) + '|ad|' + a2.start] = true; });
+    (this.state.series || []).forEach(x => { haveEv[key(x.title) + '|tm|' + x.anchor + '|' + x.start] = true; });
+    Object.keys(this.state.placedByDay || {}).forEach(k => (this.state.placedByDay[k] || []).forEach(bk => { if (bk.event || (bk.fixed && !bk.taskId)) haveEv[key(bk.title) + '|tm|' + k + '|' + bk.start] = true; }));
+    let lastTask = null;
     rows.slice(1).forEach((r, ri) => {
+      const row = ri + 2;
       const g = (i) => i >= 0 && i < r.length ? String(r[i]).trim() : '';
       const title = g(C.task);
-      if (!title) { out.errors.push('Row ' + (ri + 2) + ' has no task name, so it was skipped.'); return; }
+      if (!title) { out.errors.push('Row ' + row + ' has no name, so it was skipped.'); return; }
       const sub = title.match(/^[-–—•*]\s*(.*)$/);
       if (sub) {
-        const parent = out.tasks[out.tasks.length - 1];
         const txt = sub[1].trim();
-        if (!parent) { out.errors.push('Row ' + (ri + 2) + ' starts with a dash but has no task above it, so it was skipped.'); return; }
+        if (!lastTask) { out.errors.push('Row ' + row + ' starts with a dash but has no task above it, so it was skipped.'); return; }
         if (!txt) return;
         const sh = parseFloat(g(C.h)) || 0, sm2 = parseFloat(g(C.m)) || 0;
-        parent.checklist = (parent.checklist || []).concat([{ id: 'ck' + (n++), text: txt, done: false, mins: Math.max(0, Math.round(sh * 60 + sm2)) }]);
+        lastTask.checklist = (lastTask.checklist || []).concat([{ id: 'ck' + (n++), text: txt, done: false, mins: Math.max(0, Math.round(sh * 60 + sm2)) }]);
+        return;
+      }
+      const typ = norm(g(C.type));
+      if (/^ev/.test(typ) || /^appt|^meeting/.test(typ)) {
+        lastTask = null;
+        const dv = g(C.date);
+        if (!dv) { out.errors.push('Row ' + row + ': "' + title + '" is an event but has no Date, so it was skipped.'); return; }
+        const day = dateOff(dv);
+        if (day === null || isNaN(day)) { out.errors.push('Row ' + row + ': could not read the date "' + dv + '" for "' + title + '", so it was skipped.'); return; }
+        const edv = g(C.edate); let last = day;
+        if (edv) { const e2 = dateOff(edv); if (e2 === null || isNaN(e2)) { out.errors.push('Row ' + row + ': could not read the End Date "' + edv + '" for "' + title + '", so it was skipped.'); return; } if (e2 < day) { out.errors.push('Row ' + row + ': "' + title + '" ends before it starts, so it was skipped.'); return; } last = e2; }
+        const cat = catFor(g(C.cat));
+        const st = timeMin(g(C.start)), et = timeMin(g(C.end));
+        if (st === undefined || et === undefined) { out.errors.push('Row ' + row + ': could not read the time for "' + title + '". Use times like 9:00 AM or 14:30.'); return; }
+        const rv = norm(g(C.rep)), rule = rv ? RULES[rv] : null;
+        if (rv && !rule) { out.errors.push('Row ' + row + ': "' + g(C.rep) + '" is not a repeat option for "' + title + '", so it was skipped.'); return; }
+        if (st === null) {
+          if (rule) { out.errors.push('Row ' + row + ': "' + title + '" repeats, so it needs a Start time.'); return; }
+          const rec = { id: 'ad' + (n++), title: title, start: day, end: last, cat: cat };
+          const k2 = key(title) + '|ad|' + day;
+          if (haveEv[k2]) { out.dupEvents.push({ kind: 'ad', rec: rec }); out.dupNames.push(title + ' (' + fmtD(day) + ')'); return; }
+          haveEv[k2] = true; out.allDay.push(rec); out.evCount++; return;
+        }
+        const hh = parseFloat(g(C.h)) || 0, mm = parseFloat(g(C.m)) || 0;
+        let mins = et !== null ? et - st : Math.round(hh * 60 + mm) || 60;
+        if (mins <= 0) { out.errors.push('Row ' + row + ': "' + title + '" ends before it starts. Events past midnight are not supported yet.'); return; }
+        if (st + mins > 1440) { out.errors.push('Row ' + row + ': "' + title + '" runs past midnight, which is not supported yet.'); return; }
+        const k3 = key(title) + '|tm|' + day + '|' + st;
+        if (rule) {
+          let count = null;
+          if (edv) { count = 0; for (let o = day; o <= last; o++) if (this.matchRule({ rule: rule, anchor: day }, o)) count++; }
+          const ser = { id: 's' + (n++), title: title, cat: cat, start: st, mins: mins, rule: rule, anchor: day, count: count, exceptions: {} };
+          if (haveEv[k3]) { out.dupEvents.push({ kind: 'ser', rec: ser }); out.dupNames.push(title + ' (' + fmtD(day) + ')'); return; }
+          haveEv[k3] = true; out.series.push(ser); out.evCount++; return;
+        }
+        if (haveEv[k3]) { const recs = []; for (let d = day; d <= Math.min(last, day + 30); d++) recs.push({ day: d, blk: { id: 'e' + (n++), title: title, start: st, mins: mins, fixed: true, event: true, cat: cat } }); out.dupEvents.push({ kind: 'blk', recs: recs }); out.dupNames.push(title + ' (' + fmtD(day) + ')'); return; }
+        haveEv[k3] = true;
+        for (let d = day; d <= Math.min(last, day + 30); d++) out.blocks.push({ day: d, blk: { id: 'e' + (n++), title: title, start: st, mins: mins, fixed: true, event: true, cat: cat } });
+        out.evCount++;
         return;
       }
       const t = { id: 'n' + (n++), title: title, pri: this.state.settings.defaultPri || 'B', flag: null, mins: 0, bucket: 'desk' };
-      // where it lands
       const dv = g(C.date), low = dv.toLowerCase();
-      let m;
-      if (!dv || low === 'desk' || low === 'my desk') { t.bucket = 'desk'; out.counts.desk++; }
-      else if (low === 'this week') { t.bucket = 'week'; t.weekOf = cw; out.counts.week++; }
-      else if (low === 'next week') { t.bucket = 'week'; t.weekOf = cw + 7; out.counts.week++; }
-      else if (low === 'this month' || low === 'month') { t.bucket = 'month'; out.counts.month++; }
+      if (!dv || low === 'desk' || low === 'my desk') t.bucket = 'desk';
+      else if (low === 'this week') { t.bucket = 'week'; t.weekOf = cw; }
+      else if (low === 'next week') { t.bucket = 'week'; t.weekOf = cw + 7; }
+      else if (low === 'this month' || low === 'month') t.bucket = 'month';
       else {
-        let off = null;
-        if (low === 'today') off = 0; else if (low === 'tomorrow') off = 1;
-        else if ((m = low.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/))) off = toOff(+m[1], +m[2] - 1, +m[3]);
-        else if ((m = low.match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?$/))) { let y = m[3] ? +m[3] : this.Y0; if (y < 100) y += 2000; off = toOff(y, +m[1] - 1, +m[2]); }
-        else if ((m = low.match(/^([a-z]{3,9})\.?\s+(\d{1,2})(?:,?\s*(\d{4}))?$/)) && MON.indexOf(m[1].slice(0, 3)) >= 0) off = toOff(m[3] ? +m[3] : this.Y0, MON.indexOf(m[1].slice(0, 3)), +m[2]);
-        if (off === null || isNaN(off)) { out.errors.push('Row ' + (ri + 2) + ': could not read the date "' + dv + '", so it went to your Desk.'); t.bucket = 'desk'; out.counts.desk++; }
-        else { t.bucket = 'week'; t.weekOf = this.weekStartOff(off); t.dayAssign = off; out.counts.day++; }
+        const off = dateOff(dv);
+        if (off === null || isNaN(off)) { out.errors.push('Row ' + row + ': could not read the date "' + dv + '", so "' + title + '" went to your Desk.'); t.bucket = 'desk'; }
+        else { t.bucket = 'week'; t.weekOf = this.weekStartOff(off); t.dayAssign = off; }
       }
       const sv = norm(g(C.sec));
       if (sv) t.pri = /^(a|must)/.test(sv) ? 'A' : /^(c|could)/.test(sv) ? 'C' : 'B';
@@ -4740,21 +4817,16 @@ class Component extends DCLogic {
       if (fv) t.flag = /^urg/.test(fv) ? 'urgent' : /^imp/.test(fv) ? 'important' : null;
       const hh = parseFloat(g(C.h)) || 0, mm = parseFloat(g(C.m)) || 0;
       t.mins = Math.max(0, Math.round(hh * 60 + mm)) || (this.state.settings.defaultMins || 30);
-      const cv = g(C.cat);
-      if (cv) {
-        let id = catByName[cv.toLowerCase()];
-        if (!id) {
-          id = 'cat' + (n++);
-          const color = Object.keys(this.CAT_COLORS).find(k => taken.indexOf(k) < 0) || 'slate'; taken.push(color);
-          const nc = { id: id, name: cv, color: color, icon: 'tag' };
-          cats.push(nc); out.newCats.push(nc); catByName[cv.toLowerCase()] = id;
-        }
-        t.cat = id;
-      }
+      const cat = catFor(g(C.cat)); if (cat) t.cat = cat;
       const nv = g(C.notes); if (nv) t.note = nv;
       const cl = g(C.cl);
       if (cl) t.checklist = cl.split(/\s*[|;\n]\s*/).map(x => x.trim()).filter(Boolean).map(x => ({ id: 'ck' + (n++), text: x, done: false, mins: 0 }));
+      lastTask = t;
+      const k1 = key(title) + '|' + (typeof t.dayAssign === 'number' ? t.dayAssign : t.bucket);
+      if (haveTask[k1]) { out.dupTasks.push(t); out.dupNames.push(title); return; }
+      haveTask[k1] = true;
       out.tasks.push(t);
+      if (t.bucket === 'desk') out.counts.desk++; else if (t.bucket === 'month') out.counts.month++; else if (typeof t.dayAssign === 'number') out.counts.day++; else out.counts.week++;
     });
     out.nextId = n; out.cats = cats;
     return out;
@@ -9159,16 +9231,38 @@ class Component extends DCLogic {
       tiPasteGo: () => { const tx = this.state.taskPaste ? this.state.taskPaste.text : ''; this.setState({ taskImport: this.parseTaskImport(tx), taskPaste: null }); },
       tiPasteClose: () => this.setState({ taskPaste: null }),
       tiOn: !!s.taskImport,
-      tiCount: s.taskImport ? s.taskImport.tasks.length : 0,
-      tiCanGo: !!(s.taskImport && s.taskImport.tasks.length),
-      tiSummary: (() => { const ti = s.taskImport; if (!ti) return ''; const c = ti.counts, parts = []; if (c.desk) parts.push(c.desk + ' to your Desk'); if (c.day) parts.push(c.day + ' on specific days'); if (c.week) parts.push(c.week + ' into a week'); if (c.month) parts.push(c.month + ' to this month'); return ti.tasks.length ? ti.tasks.length + (ti.tasks.length === 1 ? ' task' : ' tasks') + ': ' + parts.join(', ') + '.' : 'No tasks found.'; })(),
+      tiCount: s.taskImport ? (s.taskImport.tasks.length + (s.taskImport.evCount || 0) + (s.taskImport.keepDups ? s.taskImport.dupTasks.length + s.taskImport.dupEvents.length : 0)) : 0,
+      tiCanGo: !!(s.taskImport && (s.taskImport.tasks.length || s.taskImport.evCount || (s.taskImport.keepDups && s.taskImport.dupNames.length))),
+      tiHasDups: !!(s.taskImport && s.taskImport.dupNames && s.taskImport.dupNames.length),
+      tiDupText: s.taskImport && s.taskImport.dupNames && s.taskImport.dupNames.length ? s.taskImport.dupNames.length + (s.taskImport.dupNames.length === 1 ? ' is' : ' are') + ' already in your planner: ' + s.taskImport.dupNames.slice(0, 5).join(', ') + (s.taskImport.dupNames.length > 5 ? ', and ' + (s.taskImport.dupNames.length - 5) + ' more' : '') + '.' : '',
+      tiKeepDups: s.taskImport && s.taskImport.keepDups ? 'true' : 'false',
+      tiDupBox: s.taskImport && s.taskImport.keepDups ? this.TK.t6E2F43 : '#FFFFFF',
+      tiToggleDups: () => this.setState({ taskImport: Object.assign({}, this.state.taskImport, { keepDups: !this.state.taskImport.keepDups }) }),
+      tiSummary: (() => { const ti = s.taskImport; if (!ti) return ''; const c = ti.counts, parts = []; if (c.desk) parts.push(c.desk + ' to your Desk'); if (c.day) parts.push(c.day + ' on specific days'); if (c.week) parts.push(c.week + ' into a week'); if (c.month) parts.push(c.month + ' to this month');
+        const tl = ti.tasks.length ? ti.tasks.length + (ti.tasks.length === 1 ? ' task' : ' tasks') + ' (' + parts.join(', ') + ')' : '';
+        const el = ti.evCount ? ti.evCount + (ti.evCount === 1 ? ' event' : ' events') : '';
+        return tl || el ? 'Ready to add ' + [tl, el].filter(Boolean).join(' and ') + '.' : 'Nothing new to add.'; })(),
       tiCats: s.taskImport && s.taskImport.newCats.length ? 'New categories: ' + s.taskImport.newCats.map(c => c.name).join(', ') + '.' : '',
       tiHasCats: !!(s.taskImport && s.taskImport.newCats.length),
-      tiPreview: s.taskImport ? s.taskImport.tasks.slice(0, 6).map(t => ({ title: t.title, meta: [this.PRI[t.pri].name, this.fmtDur(t.mins), typeof t.dayAssign === 'number' ? this.DSHORT[this.dowFor(t.dayAssign)] + ' ' + this.MONTHS[this.dateFor(t.dayAssign).getMonth()] + ' ' + this.dateFor(t.dayAssign).getDate() : ({ desk: 'Desk', week: 'Week', month: 'Month' })[t.bucket], t.checklist ? t.checklist.length + ' steps' : ''].filter(Boolean).join(' · ') })) : [],
-      tiMore: s.taskImport && s.taskImport.tasks.length > 6 ? '+ ' + (s.taskImport.tasks.length - 6) + ' more' : '', tiHasMore: !!(s.taskImport && s.taskImport.tasks.length > 6),
+      tiPreview: s.taskImport ? s.taskImport.allDay.map(a2 => ({ title: a2.title, meta: 'Event · all day · ' + this.MONTHS[this.dateFor(a2.start).getMonth()] + ' ' + this.dateFor(a2.start).getDate() + (a2.end > a2.start ? ' to ' + this.MONTHS[this.dateFor(a2.end).getMonth()] + ' ' + this.dateFor(a2.end).getDate() : '') }))
+        .concat(s.taskImport.series.map(x => ({ title: x.title, meta: 'Event · ' + this.fmtClock(x.start, true) + ' · ' + this.ruleLabel(x.rule, x.anchor) + (x.count ? ' · ' + x.count + ' times' : '') })))
+        .concat((() => { const seen = {}; return s.taskImport.blocks.filter(b => { const k = b.blk.title + b.blk.start; if (seen[k]) return false; seen[k] = true; return true; }).map(b => { const ds = s.taskImport.blocks.filter(x => x.blk.title === b.blk.title && x.blk.start === b.blk.start); return { title: b.blk.title, meta: 'Event · ' + this.fmtClock(b.blk.start, true) + '–' + this.fmtClock(b.blk.start + b.blk.mins, true) + ' · ' + this.MONTHS[this.dateFor(b.day).getMonth()] + ' ' + this.dateFor(b.day).getDate() + (ds.length > 1 ? ' + ' + (ds.length - 1) + ' more days' : '') }; }); })())
+        .concat(s.taskImport.tasks.map(t => ({ title: t.title, meta: [this.PRI[t.pri].name, this.fmtDur(t.mins), typeof t.dayAssign === 'number' ? this.DSHORT[this.dowFor(t.dayAssign)] + ' ' + this.MONTHS[this.dateFor(t.dayAssign).getMonth()] + ' ' + this.dateFor(t.dayAssign).getDate() : ({ desk: 'Desk', week: 'Week', month: 'Month' })[t.bucket], t.checklist ? t.checklist.length + ' steps' : ''].filter(Boolean).join(' · ') }))).slice(0, 8) : [],
+      tiMore: (() => { const ti = s.taskImport; if (!ti) return ''; const seen = {}; ti.blocks.forEach(b => { seen[b.blk.title + b.blk.start] = 1; }); const total = ti.allDay.length + ti.series.length + Object.keys(seen).length + ti.tasks.length; return total > 8 ? '+ ' + (total - 8) + ' more' : ''; })(),
+      tiHasMore: (() => { const ti = s.taskImport; if (!ti) return false; return ti.allDay.length + ti.series.length + ti.blocks.length + ti.tasks.length > 8; })(),
       tiErrors: s.taskImport ? s.taskImport.errors.slice(0, 5).map(x => ({ text: x })) : [], tiHasErrors: !!(s.taskImport && s.taskImport.errors.length),
       tiCancel: () => this.setState({ taskImport: null }),
-      tiGo: () => { const ti = this.state.taskImport; if (!ti || !ti.tasks.length) return; this.setState({ tasks: this.state.tasks.concat(ti.tasks), cats: ti.cats, nextId: Math.max(this.state.nextId, ti.nextId), taskImport: null }); },
+      tiGo: () => {
+        const ti = this.state.taskImport; if (!ti) return;
+        const keep = !!ti.keepDups;
+        const tasks = ti.tasks.concat(keep ? ti.dupTasks : []);
+        let allDay = ti.allDay.slice(), series = ti.series.slice(), blocks = ti.blocks.slice();
+        if (keep) ti.dupEvents.forEach(d => { if (d.kind === 'ad') allDay.push(d.rec); else if (d.kind === 'ser') series.push(d.rec); else blocks = blocks.concat(d.recs); });
+        if (!tasks.length && !allDay.length && !series.length && !blocks.length) return;
+        const m = Object.assign({}, this.state.placedByDay);
+        blocks.forEach(b => { m[String(b.day)] = (m[String(b.day)] || []).concat([b.blk]); });
+        this.setState({ tasks: this.state.tasks.concat(tasks), allDay: (this.state.allDay || []).concat(allDay), series: (this.state.series || []).concat(series), placedByDay: m, cats: ti.cats, nextId: Math.max(this.state.nextId, ti.nextId), taskImport: null });
+      },
       fileBoxOn: !!s.fileBox, fileBoxTitle: s.fileBox ? s.fileBox.title : '', fileBoxName: s.fileBox ? s.fileBox.name : '', fileBoxText: s.fileBox ? s.fileBox.text : '',
       fileBoxNote: s.fileBox ? s.fileBox.note : '', fileBoxHasNote: !!(s.fileBox && s.fileBox.note), fileBoxCanShare: (() => { try { return !!navigator.share; } catch (e) { return false; } })(),
       fileSave: () => this.fileSave(), fileShare: () => this.fileShare(), fileCopy: () => this.fileCopy(), fileClose: () => this.setState({ fileBox: null }),
