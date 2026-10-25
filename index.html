@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 11:50 AM';</script>
+<script>window.__plannerBuild = 'Oct 25, 12:02 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -290,8 +290,13 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 <sc-if value="{{isDesk}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px">
+<div role="radiogroup" aria-label="Show" style="display: flex; flex: none; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
+<sc-for list="{{deskShowBtns}}" as="ds" hint-placeholder-count="2">
+<button role="radio" aria-checked="{{ds.checked}}" onClick="{{ds.set}}" style="height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: {{ds.bg}}; color: {{ds.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; box-shadow: {{ds.shadow}}; white-space: nowrap">{{ds.label}}</button>
+</sc-for>
+</div>
 <label for="desk-group" style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Group by</label>
-<select id="desk-group" value="{{deskGroupVal}}" onChange="{{onDeskGroup}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><option value="category">Category</option><option value="size">Size</option><option value="age">Age</option><option value="flag">Flag</option><option value="none">None (my order)</option></select>
+<sc-if value="{{deskWhenOpt}}" hint-placeholder-val="{{ false }}"><select id="desk-group" value="{{deskGroupVal}}" onChange="{{onDeskGroup}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><option value="when">When</option><option value="category">Category</option><option value="size">Size</option><option value="age">Age</option><option value="flag">Flag</option><option value="none">None (my order)</option></select></sc-if><sc-if value="{{deskNoWhen}}" hint-placeholder-val="{{ true }}"><select id="desk-group" value="{{deskGroupVal}}" onChange="{{onDeskGroup}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><option value="category">Category</option><option value="size">Size</option><option value="age">Age</option><option value="flag">Flag</option><option value="none">None (my order)</option></select></sc-if>
 <div style="flex: 1 1 160px; min-width: 140px; position: relative; display: flex; align-items: center">
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A8174" stroke-width="2.2" stroke-linecap="round" style="position: absolute; left: 9px; pointer-events: none"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
 <label for="desk-q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search tasks</label>
@@ -409,6 +414,12 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 <sc-if value="{{t.editInline}}" hint-placeholder-val="{{ false }}">
 <div style="margin: 2px 0 10px 32px; padding: 10px 12px 6px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-top: 4px solid {{TK.tE2B9C4}}; border-radius: 12px; box-shadow: 0 6px 18px rgba(60,40,20,0.10); display: flex; flex-direction: column; gap: 10px">
+<sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 6px; margin-bottom: -4px">
+<span style="height: 22px; display: inline-flex; align-items: center; gap: 5px; padding: 0 8px; border-radius: 11px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M11 4a8 8 0 1 0 9 9h-9z"></path><path d="M14 2.5v7.5h7.5A7.5 7.5 0 0 0 14 2.5z" fill="currentColor"></path></svg>Slice</span>
+<span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Changes here only affect this piece of {{t.groupName}}.</span>
+</div>
+</sc-if>
 <label for="{{t.editId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
 <input id="{{t.editId}}" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 <sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
@@ -418,7 +429,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{TK.tA0526A}}">Part of</span>
 <span style="font-family: {{TK.fHead}}; font-size: calc(16px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.groupName}} <span style="font-family: {{TK.fBody}}; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #7A7064">· {{t.grpSum}}</span></span>
 </span>
-<button onClick="{{t.editGroup}}" style="height: 28px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">Edit {{t.groupName}}</button>
+<button onClick="{{t.editGroup}}" style="height: 28px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">Edit whole task</button>
 </div>
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{t.grpPieces}}" as="gp" hint-placeholder-count="3">
@@ -881,10 +892,29 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{sheetOpen}}" hint-placeholder-val="{{ false }}">
 <div role="dialog" aria-label="Break it up" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 20; box-sizing: border-box; background: #FBF7EE; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 14px">
 <header style="display: flex; flex-direction: column; gap: 4px">
-<div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">Break it up</div>
+<div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">{{sheetKicker}}</div>
+<sc-if value="{{sheetNotGroup}}" hint-placeholder-val="{{ true }}">
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.15; color: {{TK.t6E2F43}}">{{sheetTitle}}</h2>
+</sc-if>
+<sc-if value="{{sheetIsGroup}}" hint-placeholder-val="{{ false }}">
+<label for="sheet-name" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
+<input id="sheet-name" value="{{sheetTitle}}" onChange="{{onSheetName}}" onInput="{{onSheetName}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(26px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
+</sc-if>
 <p style="margin: 0; font-size: calc(14px * {{fsK}}); color: #6B6358">{{sheetSub}}</p>
 </header>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<label for="sheet-h" style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722; margin-right: 4px">Total time</label>
+<input id="sheet-h" type="number" inputmode="numeric" min="0" max="99" value="{{totH}}" onChange="{{onTotH}}" style="outline-color: {{TK.tA0526A}}; width: 56px; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF">
+<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span>
+<label for="sheet-m" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Minutes</label>
+<select id="sheet-m" value="{{totM}}" onChange="{{onTotM}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 4px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF"><option value="0">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
+<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">m</span>
+</div>
+<sc-if value="{{hasLocked}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{lockedNote}}</span>
+</sc-if>
+</div>
 <div role="tablist" aria-label="How to break it up" style="align-self: flex-start; display: flex; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
 <button role="tab" aria-selected="{{eqSel}}" onClick="{{modeEqual}}" style="height: 30px; padding: 0 14px; border: 0; border-radius: 6px; background: {{eqBg}}; color: {{eqFg}}; font-size: calc(13px * {{fsK}}); font-weight: 700; box-shadow: {{eqShadow}}">Equal slices</button>
 <button role="tab" aria-selected="{{stSel}}" onClick="{{modeSteps}}" style="height: 30px; padding: 0 14px; border: 0; border-radius: 6px; background: {{stBg}}; color: {{stFg}}; font-size: calc(13px * {{fsK}}); font-weight: 700; box-shadow: {{stShadow}}">Name the steps</button>
@@ -913,7 +943,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="height: 24px; padding: 0 8px; border-radius: 6px; background: {{TK.tFBEDEE}}; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; display: flex; align-items: center">{{pp.label}}</span>
 </sc-for>
 </div>
-<span style="font-size: calc(12px * {{fsK}}); color: #6B6358">You can rename any slice later with Edit pieces.</span>
+<span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{sliceHint}}</span>
 </div>
 </div>
 </sc-if>
@@ -936,7 +966,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-for>
 <button onClick="{{addStep}}" style="flex: none; align-self: flex-start; height: 32px; border: 0; background: transparent; padding: 0 4px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">+ Add a step</button>
 </div>
-<div style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{stepsTotalColor}}; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 8px 12px">{{stepsTotalText}}</div>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{stepsTotalColor}}; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 6px 8px 6px 12px"><span style="flex: 1; min-width: 0">{{stepsTotalText}}</span>
+<sc-if value="{{hasStepsFix}}" hint-placeholder-val="{{ false }}"><button onClick="{{stepsFix}}" style="height: 28px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: {{TK.tFBEDEE}}; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">{{stepsFixLabel}}</button></sc-if>
+</div>
 </div>
 </sc-if>
 
@@ -3122,12 +3154,18 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 9; box-sizing: border-box; background: #FBF7EE; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
 <sc-for list="{{edRows}}" as="t" hint-placeholder-count="1">
 <header style="display: flex; align-items: center; gap: 8px">
-<div style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">Task details</div>
+<div style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">{{t.edHead}}</div>
 <button onClick="{{t.cancel}}" style="height: 34px; padding: 0 12px; border: 0; background: transparent; color: #6B6358; font-size: calc(13.5px * {{fsK}}); font-weight: 600">Cancel</button>
 <button onClick="{{t.save}}" style="height: 34px; padding: 0 16px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13.5px * {{fsK}}); font-weight: 700">Save</button>
 </header>
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; padding: 12px 14px 8px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-top: 4px solid {{TK.tE2B9C4}}; border-radius: 12px; display: flex; flex-direction: column; gap: 12px">
 
+<sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 6px; margin-bottom: -4px">
+<span style="height: 22px; display: inline-flex; align-items: center; gap: 5px; padding: 0 8px; border-radius: 11px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M11 4a8 8 0 1 0 9 9h-9z"></path><path d="M14 2.5v7.5h7.5A7.5 7.5 0 0 0 14 2.5z" fill="currentColor"></path></svg>Slice</span>
+<span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Changes here only affect this piece of {{t.groupName}}.</span>
+</div>
+</sc-if>
 <label for="{{t.editId}}-r" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
 <input id="{{t.editId}}-r" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 <sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
@@ -3137,7 +3175,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <span style="font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{TK.tA0526A}}">Part of</span>
 <span style="font-family: {{TK.fHead}}; font-size: calc(16px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.groupName}} <span style="font-family: {{TK.fBody}}; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #7A7064">· {{t.grpSum}}</span></span>
 </span>
-<button onClick="{{t.editGroup}}" style="height: 28px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">Edit {{t.groupName}}</button>
+<button onClick="{{t.editGroup}}" style="height: 28px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">Edit whole task</button>
 </div>
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{t.grpPieces}}" as="gp" hint-placeholder-count="3">
@@ -6016,10 +6054,13 @@ class Component extends DCLogic {
     const g = s.groups[gid];
     const pieces = this.openPieces(gid);
     const est = pieces.reduce((a, t) => a + t.mins, 0) || 30;
+    const openIds = pieces.map(p => p.id);
+    const lockedL = s.tasks.filter(t => t.groupId === gid && openIds.indexOf(t.id) < 0);
     this.setState({
       sheet: {
         taskId: null, groupId: gid, title: g.title, est: est, mode: 'steps', slice: 30,
-        steps: pieces.length ? pieces.map((p, i) => ({ id: 'e' + i, title: p.title, mins: p.mins })) : [{ id: 'e0', title: '', mins: 30 }]
+        locked: lockedL.reduce((a, t) => a + (t.mins || 0), 0), lockedN: lockedL.length,
+        steps: pieces.length ? pieces.map((p, i) => ({ id: 'e' + i, srcId: p.id, title: p.title, mins: p.mins })) : [{ id: 'e0', title: '', mins: 30 }]
       },
       editing: null, sel: null
     });
@@ -6032,7 +6073,8 @@ class Component extends DCLogic {
       for (let i = 0; i < n; i++) out.push({ title: 'Slice ' + (i + 1) + ' of ' + n, mins: Math.min(sh.slice, sh.est - i * sh.slice) });
       return out;
     }
-    return sh.steps.map((st, i) => ({ title: (st.title || '').trim() || 'Step ' + (i + 1), mins: st.mins }));
+    const slicey = sh.steps.some(x => /^Slice \d+ of \d+$/.test((x.title || '').trim()));
+    return sh.steps.map((st, i) => ({ title: (st.title || '').trim() || (slicey ? 'Slice ' + (i + 1) + ' of ' + sh.steps.length : 'Step ' + (i + 1)), mins: st.mins, srcId: st.srcId || null }));
   }
   applySheet() {
     const s = this.state;
@@ -6048,7 +6090,7 @@ class Component extends DCLogic {
       if (idx < 0) { this.setState({ sheet: null }); return; }
       const t = tasks[idx];
       const gid = 'g' + n;
-      groups[gid] = { id: gid, title: t.title, mins: t.mins };
+      groups[gid] = { id: gid, title: (sh.title || '').trim() || t.title, mins: sh.est };
       const made = pieces.map((p, i) => ({ id: gid + '-' + i, title: p.title, mins: p.mins, pri: t.pri, bucket: t.bucket, groupId: gid }));
       tasks.splice(idx, 1, ...made);
     } else {
@@ -6059,11 +6101,31 @@ class Component extends DCLogic {
       if (first < 0) { let last = -1; tasks.forEach((t, i) => { if (t.groupId === gid) last = i; }); first = last + 1; }
       const before = tasks.slice(0, first).filter(t => open.indexOf(t.id) < 0);
       const after = tasks.slice(first).filter(t => open.indexOf(t.id) < 0);
-      const made = pieces.map((p, i) => ({ id: gid + '-' + n + '-' + i, title: p.title, mins: p.mins, pri: anyPiece.pri, bucket: anyPiece.bucket, groupId: gid }));
+      const byIdS = {}; tasks.forEach(t => { byIdS[t.id] = t; });
+      const used = {};
+      const KEEP = ['bucket', 'weekOf', 'dayAssign', 'cat', 'flag', 'note', 'checklist', 'pri', 'added'];
+      const made = pieces.map((p, i) => {
+        const srcId = sh.mode === 'steps' ? p.srcId : open[i];
+        const src = srcId && byIdS[srcId] && !used[srcId] ? byIdS[srcId] : null;
+        const nt = { id: src ? src.id : gid + '-' + n + '-' + i, title: p.title, mins: p.mins, pri: anyPiece.pri, bucket: anyPiece.bucket, weekOf: anyPiece.weekOf, groupId: gid };
+        if (src) { used[src.id] = true; KEEP.forEach(k => { if (src[k] !== undefined) nt[k] = src[k]; }); }
+        return nt;
+      });
       tasks = before.concat(made, after);
+      const nm = (sh.title || '').trim();
+      groups[gid] = Object.assign({}, groups[gid], nm ? { title: nm } : {}, { mins: tasks.filter(t => t.groupId === gid).reduce((a, t) => a + (t.mins || 0), 0) });
+    }
+    {
+      const gidR = sh.taskId ? 'g' + n : sh.groupId;
+      const re = /^Slice \d+ of \d+$/;
+      const sl = tasks.filter(t => t.groupId === gidR && re.test(t.title || ''));
+      const tot = sl.length;
+      let k = 0; const ren = {};
+      sl.forEach(t => { k++; ren[t.id] = 'Slice ' + k + ' of ' + tot; });
+      tasks = tasks.map(t => ren[t.id] && ren[t.id] !== t.title ? Object.assign({}, t, { title: ren[t.id] }) : t);
     }
     this.setState({ tasks: tasks, groups: groups, sheet: null, nextId: n + 1 });
-    this.setToast(pieces.length + ' pieces ready. Start with the first one.');
+    this.setToast(sh.groupId ? 'Saved "' + ((sh.title || '').trim() || 'task') + '".' : pieces.length + ' pieces ready. Start with the first one.');
   }
   mergeBack(gid) {
     const s = this.state;
@@ -6404,6 +6466,7 @@ class Component extends DCLogic {
       placeLabel: s.view === 'week' ? 'Pick a day' : (sc ? 'Move on calendar' : 'Put on calendar'),
       place: () => thenDo(() => this.setState({ sel: { kind: 'task', id: t.id }, editing: null, catMenu: null })),
       canSplit: t.mins > 30 && !t.groupId && !sc,
+      edHead: t.groupId && s.groups[t.groupId] ? 'Slice details' : 'Task details',
       inGroup: !!(t.groupId && s.groups[t.groupId]), groupName: t.groupId && s.groups[t.groupId] ? s.groups[t.groupId].title : '',
       editGroup: () => { const gid = t.groupId; thenDo(() => { this.setState({ editing: null, editDraft: null }); setTimeout(() => this.openGroupEdit(gid), 0); }); },
       grpSum: (() => { if (!t.groupId) return ''; const ps = s.tasks.filter(x => x.groupId === t.groupId); const dn = ps.filter(x => x.done).length; return this.fmtDur(ps.reduce((a, x) => a + (x.mins || 0), 0)) + ' · ' + dn + ' of ' + ps.length + ' done'; })(),
@@ -6569,13 +6632,43 @@ class Component extends DCLogic {
     const dayOf = (t) => s.day < 0 ? (sm[t.id] ? sm[t.id].day : t.dayAssign) : this.effDay(t, sm);
     const deskQ = isDesk ? String(s.deskQ || '').trim().toLowerCase() : '';
     const qWhy = (t) => { if (!deskQ) return ''; const low = (x) => String(x || '').toLowerCase(); if (low(t.title).indexOf(deskQ) >= 0) return 'title'; const st = (t.checklist || []).find(c2 => low(c2.text).indexOf(deskQ) >= 0); if (st) return 'In a step: ' + st.text; if (low(t.note).indexOf(deskQ) >= 0) return 'In the notes'; if (t.cat && this.CATS[t.cat] && low(this.CATS[t.cat].name).indexOf(deskQ) >= 0) return 'Category: ' + this.CATS[t.cat].name; return ''; };
-    const leftTasks0 = isDay ? s.tasks.filter(t => !t.done && dayOf(t) === s.day) : (isWeek ? s.tasks.filter(t => !t.done && this.effWeek(t) === listWs && !sm[t.id] && this.effDay(t, sm) === null) : s.tasks.filter(t => t.bucket === leftBucket && !t.done));
+    const allMode = isDesk && s.settings.deskShow === 'all';
+    const curWsA = this.weekStartOff(0);
+    const rawDay = (t) => sm[t.id] ? sm[t.id].day : (typeof t.dayAssign === 'number' ? t.dayAssign : null);
+    const whenKey = (t) => {
+      const rd = rawDay(t);
+      if (rd !== null && rd < 0 && !t.done) return 'over';
+      if (t.bucket === 'desk') return 'desk';
+      if (t.bucket === 'week') { const w = this.effWeek(t); if (w === curWsA) { const d = this.effDay(t, sm); return d === null ? 'wk' : 'd' + d; } return w === curWsA + 7 ? 'next' : 'later'; }
+      if (t.bucket === 'month') return 'month';
+      return 'later';
+    };
+    const whereAll = (t) => {
+      const k = whenKey(t), rd = rawDay(t);
+      const dl = (d) => d === 0 ? 'Today' : d === 1 ? 'Tomorrow' : this.DSHORT[this.dowFor(d)] + ' ' + this.MONTHS[this.dateFor(d).getMonth()] + ' ' + this.dateFor(d).getDate();
+      if (k === 'over') return 'Was due ' + dl(rd);
+      if (k === 'desk') return 'On my desk';
+      if (k === 'wk') return 'This week · no day yet';
+      if (k.charAt(0) === 'd') return dl(+k.slice(1)) + (sm[t.id] ? ' · ' + this.fmtTime(sm[t.id].start, false) : '');
+      if (k === 'next') return 'Next week' + (rd !== null ? ' · ' + dl(rd) : '');
+      if (k === 'month') return 'This month';
+      if (t.bucket === 'week') return 'Week of ' + this.weekName(this.effWeek(t)) + (rd !== null ? ' · ' + dl(rd) : '');
+      return 'Later';
+    };
+    const leftTasks0 = isDay ? s.tasks.filter(t => !t.done && dayOf(t) === s.day) : (isWeek ? s.tasks.filter(t => !t.done && this.effWeek(t) === listWs && !sm[t.id] && this.effDay(t, sm) === null) : (allMode ? s.tasks.filter(t => !t.done) : s.tasks.filter(t => t.bucket === leftBucket && !t.done)));
     const leftTasks = deskQ ? leftTasks0.filter(t => qWhy(t)) : leftTasks0;
+    let flatGroups = false;
     const buildRows = (list) => {
       const rows = [];
       const seen = {};
       list.forEach(t => {
-        if (t.groupId) {
+        if (t.groupId && flatGroups && s.groups[t.groupId]) {
+          const r = this.rowFor(t, false, false, sm);
+          const gt = s.groups[t.groupId].title + ' · ';
+          r.title = gt + t.title;
+          r.tParts = [{ text: gt, bg: 'transparent' }].concat(r.tParts || []);
+          rows.push(r);
+        } else if (t.groupId) {
           if (seen[t.groupId]) return;
           seen[t.groupId] = true;
           rows.push(this.headerFor(t.groupId, t, sm));
@@ -6619,11 +6712,22 @@ class Component extends DCLogic {
       const key = 'sec:list';
       const hot = s.dropKey === key;
       this._deskGroupIds = [];
-      const gby = isDesk ? (s.settings.deskGroup || 'category') : 'none';
+      const gby = isDesk ? (allMode ? (s.settings.deskGroupAll || 'when') : (s.settings.deskGroup || 'category')) : 'none';
+      this._deskGby = gby;
+      flatGroups = allMode && gby === 'when';
       if (isDesk && gby !== 'none' && leftTasks.length) {
         const groups = [];
         const add = (id, name, color, list, patch) => { if (list.length) groups.push({ id: id, name: name, color: color, list: list, patch: patch }); };
-        if (gby === 'category') {
+        if (gby === 'when') {
+          const wk = (k) => leftTasks.filter(t => whenKey(t) === k);
+          add('w:over', 'Overdue', '#9A4A3A', wk('over'), null);
+          add('w:desk', 'On my desk', N.ink, wk('desk'), null);
+          for (let d = 0; d < curWsA + 7; d++) add('w:d' + d, d === 0 ? 'Today' : d === 1 ? 'Tomorrow' : this.DAYS[this.dowFor(d)] + ' ' + this.dateFor(d).getDate(), this.TK.t6E2F43, wk('d' + d), null);
+          add('w:wk', 'This week · no day yet', this.TK.t6E2F43, wk('wk'), null);
+          add('w:next', 'Next week', N.ink, wk('next'), null);
+          add('w:month', 'This month', N.ink, wk('month'), null);
+          add('w:later', 'Later', N.ink, wk('later'), null);
+        } else if (gby === 'category') {
           this.CAT_ORDER.forEach(k => add('c:' + k, this.CATS[k].name, this.CATS[k].color, leftTasks.filter(t => t.cat === k), { cat: k }));
           add('c:none', 'No category', '#A39882', leftTasks.filter(t => !t.cat || !this.CATS[t.cat]), { cat: null });
         } else if (gby === 'size') {
@@ -6660,7 +6764,7 @@ class Component extends DCLogic {
         this._deskGroupIds = groups.map(g => g.id);
       } else
       sections = [{
-        letter: '', name: isDesk ? 'On my desk' : 'Still to plan · ' + this.weekName(listWs).replace(/^(This|Next) week$/, (m) => m.toLowerCase()), color: N.ink, line: N.line, metaFg: N.meta,
+        letter: '', name: isDesk ? (allMode ? 'Everything' : 'On my desk') : 'Still to plan · ' + this.weekName(listWs).replace(/^(This|Next) week$/, (m) => m.toLowerCase()), color: N.ink, line: N.line, metaFg: N.meta,
         meta: metaFor(leftTasks) + (leftTasks.length ? ' · drag to reorder' : ''), rows: buildRows(leftTasks), isEmpty: !leftTasks.length, emptyText: isWeek ? 'Every task this week has a day. Nice work.' : 'Drag tasks here',
         headBg: hot ? '#FCE9A6' : 'transparent', zoneBg: hot ? '#FCE9A6' : 'transparent',
         over: (e) => { e.preventDefault(); this.hover(key); },
@@ -6668,12 +6772,19 @@ class Component extends DCLogic {
       }];
     }
     (sections || []).forEach(x => { x.notCollapsible = !x.collapsible; });
-    if (deskQ) {
+    if (allMode) {
+      const byIdA = {}; s.tasks.forEach(t => { byIdA[t.id] = t; });
+      const noDrop = (e) => { if (e && e.preventDefault) e.preventDefault(); this.drag = null; this.setState({ dropKey: null }); };
+      (sections || []).forEach(x => { x.drop = noDrop; (x.rows || []).forEach(r => { if (r.drop) r.drop = noDrop; const t = byIdA[r.id]; if (r.isTask && t) { const w = deskQ ? qWhy(t) : ''; r.why = whereAll(t) + (w && w !== 'title' ? ' · ' + w : ''); r.hasWhy = true; } }); });
+    }
+    if (deskQ && !allMode) {
       const byId = {}; s.tasks.forEach(t => { byId[t.id] = t; });
       (sections || []).forEach(x => (x.rows || []).forEach(r => { const t = byId[r.id]; const w = t ? qWhy(t) : ''; r.hasWhy = !!w && w !== 'title'; r.why = w === 'title' ? '' : w; }));
-      if (!leftTasks.length) sections = [{ letter: '', name: 'On my desk', color: this.THEME.sec.N.ink, line: this.THEME.sec.N.line, metaFg: this.THEME.sec.N.meta, meta: '', rows: [], isEmpty: true, emptyText: 'Nothing on your desk matches "' + String(s.deskQ).trim() + '".', headBg: 'transparent', zoneBg: 'transparent', over: (e) => e.preventDefault(), drop: (e) => this.dropTask(e, { bucket: 'desk' }), notCollapsible: true }];
     }
-    const deskElsewhere = deskQ ? s.tasks.filter(t => t.bucket !== 'desk' && qWhy(t)).sort((a2, b2) => (a2.done - b2.done)).slice(0, 10).map(t => {
+    if (deskQ) {
+      if (!leftTasks.length) sections = [{ letter: '', name: allMode ? 'Everything' : 'On my desk', color: this.THEME.sec.N.ink, line: this.THEME.sec.N.line, metaFg: this.THEME.sec.N.meta, meta: '', rows: [], isEmpty: true, emptyText: 'Nothing ' + (allMode ? 'anywhere' : 'on your desk') + ' matches "' + String(s.deskQ).trim() + '".', headBg: 'transparent', zoneBg: 'transparent', over: (e) => e.preventDefault(), drop: (e) => this.dropTask(e, { bucket: 'desk' }), notCollapsible: true }];
+    }
+    const deskElsewhere = deskQ ? s.tasks.filter(t => (allMode ? t.done : t.bucket !== 'desk') && qWhy(t)).sort((a2, b2) => (a2.done - b2.done)).slice(0, 10).map(t => {
       const scd = sm[t.id];
       const where = t.done ? 'Done' + (typeof t.doneDay === 'number' ? ' ' + this.MONTHS[this.dateFor(t.doneDay).getMonth()] + ' ' + this.dateFor(t.doneDay).getDate() : '')
         : scd ? this.DSHORT[this.dowFor(scd.day)] + ' ' + this.MONTHS[this.dateFor(scd.day).getMonth()] + ' ' + this.dateFor(scd.day).getDate() + ' · ' + this.fmtTime(scd.start, false)
@@ -6719,7 +6830,7 @@ class Component extends DCLogic {
       }) : [];
     const leftMins = leftTasks0.reduce((a, t) => a + t.mins, 0);
     const unschedMins = leftTasks.filter(t => !sm[t.id]).reduce((a, t) => a + t.mins, 0);
-    const doneTasks = isDay ? s.tasks.filter(t => t.done && t.doneDay === s.day) : (isWeek ? s.tasks.filter(t => t.done && typeof t.doneDay === 'number' && t.doneDay >= listWs && t.doneDay < listWs + 7) : s.tasks.filter(t => t.bucket === leftBucket && t.done && (s.settings.showDoneFor === 'week' || t.doneDay === 0)));
+    const doneTasks = isDay ? s.tasks.filter(t => t.done && t.doneDay === s.day) : (isWeek ? s.tasks.filter(t => t.done && typeof t.doneDay === 'number' && t.doneDay >= listWs && t.doneDay < listWs + 7) : s.tasks.filter(t => (allMode || t.bucket === leftBucket) && t.done && (s.settings.showDoneFor === 'week' ? (!allMode || (typeof t.doneDay === 'number' && t.doneDay >= -6)) : t.doneDay === 0)));
     const dws = this.weekStartOff(s.day);
     const doneDayAll = s.tasks.filter(t => t.done && t.doneDay === s.day);
     const doneWeekAll = s.tasks.filter(t => t.done && typeof t.doneDay === 'number' && t.doneDay >= dws && t.doneDay < dws + 7).sort((a, b) => b.doneDay - a.doneDay);
@@ -7239,7 +7350,7 @@ class Component extends DCLogic {
       const pieces = this.piecesFromSheet(sh);
       const stepTotal = sh.steps.reduce((a, x) => a + x.mins, 0);
       const diff = stepTotal - sh.est;
-      let totalText = this.fmtDur(stepTotal) + ' of your ' + this.fmtDur(sh.est) + ' estimate';
+      let totalText = this.fmtDur(stepTotal) + ' of ' + this.fmtDur(sh.est) + (sh.locked ? ' still open' : ' total');
       if (diff < 0) totalText += ' · ' + this.fmtDur(-diff) + ' not assigned yet';
       else if (diff > 0) totalText += ' · ' + this.fmtDur(diff) + ' more than you guessed. That is useful to know.';
       else totalText += ' · right on target';
@@ -7253,7 +7364,20 @@ class Component extends DCLogic {
       sheetVals = {
         sheetOpen: true,
         sheetTitle: sh.title,
-        sheetSub: sh.groupId ? 'Rename, resize or add the pieces that are not scheduled or done yet. Anything on the calendar stays put.' : this.fmtDur(sh.est) + ' estimated. Smaller pieces are easier to start.',
+        sheetIsGroup: !!sh.groupId, sheetNotGroup: !sh.groupId,
+        sheetKicker: sh.groupId ? 'Edit the whole task' : 'Break it up',
+        onSheetName: (e) => this.patchSheet({ title: e.target.value }),
+        totH: String(Math.floor((sh.est + (sh.locked || 0)) / 60)),
+        totMOpts: [0, 15, 30, 45].map(m => ({ v: String(m), label: m ? String(m) : '00', sel: ((sh.est + (sh.locked || 0)) % 60) - (((sh.est + (sh.locked || 0)) % 60) % 15) === m })),
+        totM: String(((sh.est + (sh.locked || 0)) % 60) - (((sh.est + (sh.locked || 0)) % 60) % 15)),
+        onTotH: (e) => { const c = this.state.sheet; const tot = c.est + (c.locked || 0); const h = Math.max(0, Math.min(99, parseInt(e.target.value, 10) || 0)); this.patchSheet({ est: Math.max(15, h * 60 + (tot % 60) - (c.locked || 0)) }); },
+        onTotM: (e) => { const c = this.state.sheet; const tot = c.est + (c.locked || 0); const m = parseInt(e.target.value, 10) || 0; this.patchSheet({ est: Math.max(15, Math.floor(tot / 60) * 60 + m - (c.locked || 0)) }); },
+        hasLocked: !!sh.locked,
+        lockedNote: sh.locked ? 'Includes ' + this.fmtDur(sh.locked) + ' in ' + sh.lockedN + (sh.lockedN === 1 ? ' piece' : ' pieces') + ' that are done or on the calendar. Those stay as they are.' : '',
+        hasStepsFix: sh.mode === 'steps' && diff !== 0,
+        stepsFixLabel: diff < 0 ? '+ Add ' + this.fmtDur(-diff) + ' as a step' : 'Set the total to ' + this.fmtDur(stepTotal + (sh.locked || 0)),
+        stepsFix: () => { if (diff < 0) this.patchSheet({ steps: sh.steps.concat([{ id: 'n' + Date.now(), title: '', mins: -diff }]) }); else this.patchSheet({ est: stepTotal }); },
+        sheetSub: sh.groupId ? 'Rename the task, change its total time, or rework the pieces. Days you already picked stay with each piece.' : this.fmtDur(sh.est) + ' estimated. Smaller pieces are easier to start.',
         sheetEqual: sh.mode === 'equal', sheetSteps: sh.mode === 'steps',
         eqSel: sh.mode === 'equal' ? 'true' : 'false', stSel: sh.mode === 'steps' ? 'true' : 'false',
         eqBg: sh.mode === 'equal' ? '#FFFFFF' : 'transparent', stBg: sh.mode === 'steps' ? '#FFFFFF' : 'transparent',
@@ -7274,6 +7398,7 @@ class Component extends DCLogic {
         sliceLabel: this.fmtDur(sh.slice),
         sliceMinus: () => this.patchSheet({ slice: Math.max(15, sh.slice - 15) }),
         slicePlus: () => this.patchSheet({ slice: Math.min(Math.max(15, sh.est), sh.slice + 15) }),
+        sliceHint: sh.groupId ? 'Equal slices replaces the open pieces. Days stay in order.' : 'You can rename any slice later with Edit pieces.',
         previewText: preview,
         previewPieces: pieces.slice(0, 12).map(p => ({ label: this.fmtDur(p.mins) })),
         stepRows: sh.steps.map((st, i) => ({
@@ -7290,7 +7415,7 @@ class Component extends DCLogic {
         addStep: () => this.patchSheet({ steps: sh.steps.concat([{ id: 'n' + Date.now(), title: '', mins: 30 }]) }),
         stepsTotalText: totalText,
         stepsTotalColor: diff > 0 ? '#7A3208' : '#2B2722',
-        applyLabel: 'Make ' + pieces.length + (pieces.length === 1 ? ' piece' : ' pieces'),
+        applyLabel: sh.groupId ? 'Save' : 'Make ' + pieces.length + (pieces.length === 1 ? ' piece' : ' pieces'),
         closeSheet: () => this.setState({ sheet: null }),
         applySheet: () => this.applySheet()
       };
@@ -9925,11 +10050,13 @@ class Component extends DCLogic {
       deskQClear: () => this.setState({ deskQ: '' }),
       deskQKey: (e) => { if (e.key === 'Escape') this.setState({ deskQ: '' }); },
       deskElse: deskElsewhere, deskHasElse: deskElsewhere.length > 0,
-      deskGroupVal: s.settings.deskGroup || 'category',
-      onDeskGroup: (e) => this.setSetting({ deskGroup: e.target.value || 'category' }),
-      deskCanFold: isDesk && (s.settings.deskGroup || 'category') !== 'none' && (this._deskGroupIds || []).length > 1,
-      deskFoldLabel: (() => { const g = s.settings.deskGroup || 'category', c = (s.settings.deskClosed || {})[g] || {}; const ids = this._deskGroupIds || []; return ids.length && ids.every(id => c[id]) ? 'Expand all' : 'Collapse all'; })(),
-      deskFoldAll: () => { const g = this.state.settings.deskGroup || 'category', all = Object.assign({}, this.state.settings.deskClosed || {}), c = all[g] || {}, ids = this._deskGroupIds || []; const allClosed = ids.length && ids.every(id => c[id]); const next = {}; if (!allClosed) ids.forEach(id => { next[id] = true; }); all[g] = next; this.setSetting({ deskClosed: all }); },
+      deskGroupVal: this._deskGby || 'category',
+      onDeskGroup: (e) => { const v = e.target.value; if (this.state.settings.deskShow === 'all') this.setSetting({ deskGroupAll: v || 'when' }); else this.setSetting({ deskGroup: v || 'category' }); },
+      deskShowBtns: [['desk', 'On my desk'], ['all', 'Everything']].map(o => { const on = (s.settings.deskShow === 'all' ? 'all' : 'desk') === o[0]; return { label: o[1], checked: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? this.TK.t6E2F43 : '#6B6358', shadow: on ? '0 1px 2px rgba(0,0,0,0.15)' : 'none', set: () => this.setSetting({ deskShow: o[0] }) }; }),
+      deskWhenOpt: s.settings.deskShow === 'all', deskNoWhen: s.settings.deskShow !== 'all',
+      deskCanFold: isDesk && (this._deskGby || 'category') !== 'none' && (this._deskGroupIds || []).length > 1,
+      deskFoldLabel: (() => { const g = this._deskGby || 'category', c = (s.settings.deskClosed || {})[g] || {}; const ids = this._deskGroupIds || []; return ids.length && ids.every(id => c[id]) ? 'Expand all' : 'Collapse all'; })(),
+      deskFoldAll: () => { const g = this._deskGby || 'category', all = Object.assign({}, this.state.settings.deskClosed || {}), c = all[g] || {}, ids = this._deskGroupIds || []; const allClosed = ids.length && ids.every(id => c[id]); const next = {}; if (!allClosed) ids.forEach(id => { next[id] = true; }); all[g] = next; this.setSetting({ deskClosed: all }); },
       edRows: edRowsV, edOn: edRowsV.length > 0,
       habitRows: habitRows,
       hasDone: isDesk && doneRows.length > 0,
@@ -9972,9 +10099,9 @@ class Component extends DCLogic {
       showMonth: () => this.setState({ listTab: 'month', sel: null }),
       statShow: (!isDay && !isWeek) || (isDay && (dayTab === 'list' || dayTab === 'done')),
       statANum: this.fmtDur(leftMins),
-      statAText: isDesk ? 'on the desk' : (isWeek ? 'left to plan' : 'still to do'),
+      statAText: isDesk ? (allMode ? 'in all' : 'on the desk') : (isWeek ? 'left to plan' : 'still to do'),
       statBNum: isDesk ? String(leftTasks0.length) : ((isWeek ? weekOpenSum : today.open) > 0 ? this.fmtDur(isWeek ? weekOpenSum : today.open) : '0h'),
-      statBText: isDesk ? (leftTasks0.length === 1 ? 'task waiting' : 'tasks waiting') : (isWeek ? 'open the rest of this week' : 'open ' + dayWord),
+      statBText: isDesk ? (leftTasks0.length === 1 ? (allMode ? 'task not done yet' : 'task waiting') : (allMode ? 'tasks not done yet' : 'tasks waiting')) : (isWeek ? 'open the rest of this week' : 'open ' + dayWord),
       overbooked: isDay && s.settings.overbook && unschedMins > Math.round(today.open * s.settings.buffer / 100),
       hasToast: !!toast, toastMsg: toast ? toast.msg : '',
       toastHasAction: !!(toast && toast.action), toastActionLabel: toast ? toast.label : '',
