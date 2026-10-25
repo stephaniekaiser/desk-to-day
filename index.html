@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 3:22 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 3:24 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -6308,7 +6308,8 @@ class Component extends DCLogic {
     for (let m = w.vs; m < w.ve; m++) if (cov[m] === 1) fixed++;
     placed.forEach(b => { if (!b.fixed) for (let m = b.start; m < Math.min(this.DL, b.start + b.mins); m++) if (cov[m] === 0) cov[m] = 2; });
     let taskOnly = 0, open = 0;
-    for (let m = w.vs; m < w.ve; m++) { if (cov[m] === 2) taskOnly++; if (cov[m] === 0) open++; }
+    const from = off < 0 ? w.ve : (off === 0 ? Math.max(w.vs, Math.min(w.ve, Math.ceil(this.nowFor(0)))) : w.vs);
+    for (let m = w.vs; m < w.ve; m++) { if (cov[m] === 2) taskOnly++; if (cov[m] === 0 && m >= from) open++; }
     return { fixed: fixed, taskOnly: taskOnly, open: open, planned: placed.filter(b => !b.fixed).reduce((a, b) => a + b.mins, 0) };
   }
   schedLabel(sc) {
