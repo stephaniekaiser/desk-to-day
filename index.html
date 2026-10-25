@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 11:00 AM';</script>
+<script>window.__plannerBuild = 'Oct 25, 11:08 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -331,14 +331,14 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 <sc-if value="{{t.isTask}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; padding-left: {{t.indent}}">
-<div draggable="true" onDragStart="{{t.dragStart}}" onDragEnd="{{dragEnd}}" onDragOver="{{t.over}}" onDrop="{{t.drop}}" style="display: flex; align-items: center; gap: 4px; min-height: {{t.rowH}}px; box-sizing: border-box; padding: 2px 0; border-bottom: 1px solid #E8DFCC; background: {{t.rowBg}}; box-shadow: {{t.dropShadow}}">
+<div draggable="true" onDragStart="{{t.dragStart}}" onDragEnd="{{dragEnd}}" onDragOver="{{t.over}}" onDrop="{{t.drop}}" style="display: flex; align-items: center; gap: 4px; min-height: {{t.rowH}}px; box-sizing: border-box; padding: calc(2px * {{rowK}}) 0; border-bottom: 1px solid #E8DFCC; background: {{t.rowBg}}; box-shadow: {{t.dropShadow}}">
 <span aria-hidden="true" title="Drag to reorder" style="width: 14px; flex: none; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #B9AF9C; cursor: grab">
 <svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg>
 </span>
-<button onClick="{{t.toggleDone}}" aria-label="Mark {{t.title}} done" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #3F7A5A; display: flex; align-items: center; justify-content: center; padding: 0">
+<button onClick="{{t.toggleDone}}" aria-label="Mark {{t.title}} done" style="width: calc(32px * {{rowK}}); height: calc(32px * {{rowK}}); flex: none; border: 0; border-radius: 16px; background: transparent; color: #3F7A5A; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle></svg>
 </button>
-<button onClick="{{t.openEdit}}" aria-expanded="{{t.editExpanded}}" aria-label="{{t.title}}, {{t.dur}}. Tap to edit" style="flex: 1; min-width: 0; min-height: 38px; border: 0; background: transparent; text-align: left; color: #2B2722; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 4px; gap: 1px">
+<button onClick="{{t.openEdit}}" aria-expanded="{{t.editExpanded}}" aria-label="{{t.title}}, {{t.dur}}. Tap to edit" style="flex: 1; min-width: 0; min-height: calc(38px * {{rowK}} * {{rowK}}); border: 0; background: transparent; text-align: left; color: #2B2722; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 4px; gap: 1px">
 <span style="display: flex; align-items: center; gap: 4px; max-width: 100%">
 <sc-if value="{{t.hasGoal}}" hint-placeholder-val="{{ false }}">
 <span role="img" aria-label="Goal: {{t.goalTitle}}" title="{{t.goalTitle}}" style="width: 8px; height: 8px; flex: none; border-radius: 4px; background: {{t.goalColor}}"></span>
@@ -367,12 +367,12 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{t.hasCl}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.clToggleOpen}}" aria-expanded="{{t.clOpenA}}" aria-label="Checklist, {{t.clCount}} done" style="height: 24px; flex: none; padding: 0 7px; border: 0; border-radius: 12px; background: {{t.clChipBg}}; color: {{t.clChipFg}}; font-size: calc(11.5px * {{fsK}}); font-weight: 700; display: flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l1.5 1.5L8 5M4 12l1.5 1.5L8 11M4 18l1.5 1.5L8 17M11 6h9M11 12h9M11 18h9"></path></svg>{{t.clCount}}</button></sc-if>
 <button onClick="{{t.openEdit}}" tabindex="-1" aria-hidden="true" style="flex: none; min-width: 36px; align-self: stretch; border: 0; background: transparent; padding: 0 4px; text-align: right; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">{{t.dur}}</button>
 <sc-if value="{{t.isBig}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{t.split}}" aria-label="Break {{t.title}} into smaller pieces" title="Break it up" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #8A6D0B; display: flex; align-items: center; justify-content: center; padding: 0">
+<button onClick="{{t.split}}" aria-label="Break {{t.title}} into smaller pieces" title="Break it up" style="width: calc(32px * {{rowK}}); height: calc(32px * {{rowK}}); flex: none; border: 0; border-radius: 16px; background: transparent; color: #8A6D0B; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1.5"></rect><rect x="3" y="11" width="8" height="4" rx="1.5"></rect><rect x="13" y="11" width="8" height="4" rx="1.5"></rect><rect x="3" y="18" width="5" height="3" rx="1"></rect><rect x="10" y="18" width="5" height="3" rx="1"></rect><rect x="17" y="18" width="4" height="3" rx="1"></rect></svg>
 </button>
 </sc-if>
 <sc-if value="{{t.showPromote}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{t.promote}}" aria-label="{{t.promoteLabel}}: {{t.title}}" title="{{t.promoteLabel}}" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0">
+<button onClick="{{t.promote}}" aria-label="{{t.promoteLabel}}: {{t.title}}" title="{{t.promoteLabel}}" style="width: calc(32px * {{rowK}}); height: calc(32px * {{rowK}}); flex: none; border: 0; border-radius: 16px; background: transparent; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
 </button>
 </sc-if>
@@ -6292,7 +6292,7 @@ class Component extends DCLogic {
       schedRoll: rolled || (!sc && hasDay && t.dayAssign < 0 && !t.done),
       schedColor: (rolled || (!sc && hasDay && t.dayAssign < 0 && !t.done)) ? this.TK.tA0526A : (sc && schedColor === '#8A3B0A' ? '#8A3B0A' : '#6B6358'),
       indent: piece ? '28px' : '0px',
-      rowH: s.settings.dense ? (piece ? 36 : 38) : (piece ? 42 : 46),
+      rowH: s.settings.dense ? (piece ? 28 : 30) : (piece ? 42 : 46),
       editExpanded: s.editing === t.id ? 'true' : 'false',
       editId: 'edit-' + t.id, moveId: 'move-' + t.id,
       openEdit: () => this.setState({ editing: s.editing === t.id ? null : t.id, editDraft: s.editing === t.id ? null : { id: t.id, title: t.title, pri: t.pri, flag: t.flag || null, cat: t.cat || null, mins: t.mins, day: hasDay ? t.dayAssign : null, bucket: bKey }, catMenu: null, sel: null, menuFor: null, missFor: null }),
@@ -8607,7 +8607,7 @@ class Component extends DCLogic {
     };
     const setSections = {
       look: [G('', [
-        seg('Text size', 'textSize', [['normal', 'Normal'], ['large', 'Large'], ['xl', 'Larger'], ['xxl', 'Largest']], 'Larger sizes help on a small iPad. You can also pinch to zoom.'),
+        seg('Text size', 'textSize', [['xs', 'Smallest'], ['small', 'Small'], ['normal', 'Normal'], ['large', 'Large'], ['xl', 'Larger'], ['xxl', 'Largest']], 'Smaller sizes suit a computer screen. Larger ones help on a small iPad.'),
         tog('Denser lists', 'dense', 'Tighter rows in every list, so more fits on a page. The calendar has its own zoom.'),
         tog('Icon tabs', 'tabIcons', 'Try it: every tab the same size, with an icon and a short label. Switch back anytime.', true)
       ])],
@@ -10018,11 +10018,11 @@ class Component extends DCLogic {
         { title: 'You say yes first', icon: 'M5 12.5l4.5 4.5L19 7.5', text: 'Suggested plans and days stay previews until you approve them. Nothing moves on its own.' },
         { title: 'Keep your why close', icon: 'M12 21v-9M12 12c0-4-3-6-7-6 0 4 3 6 7 6zM12 12c0-3 2.5-5 6-5 0 3-2.5 5-6 5z', text: 'Grow keeps your intentions, and the reasons behind them, right next to your day.' }
       ],
-      rowK: s.settings.dense ? 0.82 : 1,
+      rowK: s.settings.dense ? 0.78 : 1,
       appBuildOn: typeof window !== 'undefined' && !!window.__plannerBuild,
       appBuildTxt: typeof window !== 'undefined' && window.__plannerBuild ? 'Planner version: ' + window.__plannerBuild : '',
       appReload: () => { try { window.location.reload(); } catch (e) {} },
-      fsK: ({ small: 0.92, normal: 1, large: 1.15, xl: 1.3, xxl: 1.45 })[s.settings.textSize] || 1,
+      fsK: ({ xs: 0.8, small: 0.9, normal: 1, large: 1.15, xl: 1.3, xxl: 1.45 })[s.settings.textSize] || 1,
       navW: s.settings.tabIcons ? 52 : ((!!s.touch || (s.vw || 1194) < 900) ? 58 : 50) + Math.round((Math.min(1.3, ({ small: 1, normal: 1, large: 1.1, xl: 1.2, xxl: 1.3 })[s.settings.textSize] || 1) - 1) * 22),
       navTabs: [
         ['day', 'Day', '#E3DCCB', 84, () => this.setState({ view: 'day', showSetup: false, sel: null, cleanup: false })],
