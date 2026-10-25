@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 3:24 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 3:27 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -497,15 +497,10 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Length</span>
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
-<div role="group" aria-label="Quick lengths" style="display: flex; gap: 4px">
-<sc-for list="{{t.durChips}}" as="dc2" hint-placeholder-count="5">
-<button aria-pressed="{{dc2.on}}" onClick="{{dc2.set}}" style="height: 30px; min-width: 38px; padding: 0 8px; border: 1px solid {{dc2.bd}}; border-radius: 15px; background: {{dc2.bg}}; color: {{dc2.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{dc2.label}}</button>
-</sc-for>
-</div>
-<span aria-hidden="true" style="color: #C9C0AE">or</span>
 <div style="display: flex; align-items: center; gap: 4px">
 <label for="{{t.durHId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Hours</label>
 <input id="{{t.durHId}}" type="number" inputmode="numeric" min="0" max="99" value="{{t.durH}}" onChange="{{t.onDurH}}" style="height: 30px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 600; color: #2B2722; text-align: center; outline-color: {{TK.tA0526A}}; width: 48px; padding: 0 4px">
+<span style="display: flex; flex-direction: column; gap: 0px; flex: none"><button onClick="{{t.durUp}}" aria-label="One hour more" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{t.durDown}}" aria-label="One hour less" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span>
 <span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span>
 <label for="{{t.durMId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Minutes</label>
 <select id="{{t.durMId}}" value="{{t.durM}}" onChange="{{t.onDurM}}" style="height: 30px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 600; color: #2B2722; text-align: center; outline-color: {{TK.tA0526A}}; padding: 0 4px"><sc-for list="{{t.durMOpts}}" as="dmo" hint-placeholder-count="12"><option value="{{dmo.v}}">{{dmo.l}}</option></sc-for></select>
@@ -906,6 +901,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
 <label for="sheet-h" style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722; margin-right: 4px">Total time</label>
 <input id="sheet-h" type="number" inputmode="numeric" min="0" max="99" value="{{totH}}" onChange="{{onTotH}}" style="outline-color: {{TK.tA0526A}}; width: 56px; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF">
+<span style="display: flex; flex-direction: column; gap: 0px; flex: none"><button onClick="{{totUp}}" aria-label="One hour more total" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{totDown}}" aria-label="One hour less total" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span>
 <span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span>
 <label for="sheet-m" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Minutes</label>
 <select id="sheet-m" value="{{totM}}" onChange="{{onTotM}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 4px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF"><option value="0">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
@@ -933,8 +929,13 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{sheetEqual}}" hint-placeholder-val="{{ true }}">
 <div style="flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px">
 <div style="display: flex; align-items: center; gap: 10px">
-<label for="sheet-slice" style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">Slice size</label>
-<select id="sheet-slice" value="{{sliceVal}}" onChange="{{onSlice}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; background: #FFFFFF"><sc-for list="{{sliceOpts}}" as="so" hint-placeholder-count="8"><option value="{{so.v}}">{{so.l}}</option></sc-for></select>
+<label for="sheet-slice" style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722; margin-right: 4px">Slice size</label>
+<input id="sheet-slice" type="number" inputmode="numeric" min="0" max="12" value="{{sliceH}}" onChange="{{onSliceH}}" style="outline-color: {{TK.tA0526A}}; width: 56px; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF">
+<span style="display: flex; flex-direction: column; gap: 0px; flex: none"><button onClick="{{sliceUp}}" aria-label="One hour more per slice" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{sliceDown}}" aria-label="One hour less per slice" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span>
+<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span>
+<label for="sheet-slice-m" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Slice minutes</label>
+<select id="sheet-slice-m" value="{{sliceM}}" onChange="{{onSliceM}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 4px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF"><option value="0">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
+<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">m</span>
 </div>
 <div style="background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
 <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
@@ -3254,15 +3255,10 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Length</span>
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
-<div role="group" aria-label="Quick lengths" style="display: flex; gap: 4px">
-<sc-for list="{{t.durChips}}" as="dc2" hint-placeholder-count="5">
-<button aria-pressed="{{dc2.on}}" onClick="{{dc2.set}}" style="height: 30px; min-width: 38px; padding: 0 8px; border: 1px solid {{dc2.bd}}; border-radius: 15px; background: {{dc2.bg}}; color: {{dc2.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{dc2.label}}</button>
-</sc-for>
-</div>
-<span aria-hidden="true" style="color: #C9C0AE">or</span>
 <div style="display: flex; align-items: center; gap: 4px">
 <label for="{{t.durHId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Hours</label>
 <input id="{{t.durHId}}" type="number" inputmode="numeric" min="0" max="99" value="{{t.durH}}" onChange="{{t.onDurH}}" style="height: 30px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 600; color: #2B2722; text-align: center; outline-color: {{TK.tA0526A}}; width: 48px; padding: 0 4px">
+<span style="display: flex; flex-direction: column; gap: 0px; flex: none"><button onClick="{{t.durUp}}" aria-label="One hour more" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{t.durDown}}" aria-label="One hour less" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span>
 <span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span>
 <label for="{{t.durMId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Minutes</label>
 <select id="{{t.durMId}}" value="{{t.durM}}" onChange="{{t.onDurM}}" style="height: 30px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 600; color: #2B2722; text-align: center; outline-color: {{TK.tA0526A}}; padding: 0 4px"><sc-for list="{{t.durMOpts}}" as="dmo" hint-placeholder-count="12"><option value="{{dmo.v}}">{{dmo.l}}</option></sc-for></select>
@@ -6577,6 +6573,8 @@ class Component extends DCLogic {
       durMOpts: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55].map(x => ({ v: String(x), l: String(x).padStart(2, '0') })),
       onDurH: (e) => { const h = Math.max(0, Math.min(99, parseInt(e.target.value, 10) || 0)); patchDraft({ mins: h * 60 + ((dv.mins || 0) % 60) }); },
       onDurM: (e) => { const m = parseInt(e.target.value, 10) || 0; patchDraft({ mins: Math.floor((dv.mins || 0) / 60) * 60 + m }); },
+      durUp: () => patchDraft({ mins: Math.min(99 * 60 + 55, (dv.mins || 0) + 60) }),
+      durDown: () => patchDraft({ mins: Math.max((dv.mins || 0) % 60 || 15, (dv.mins || 0) - 60) }),
       durChips: [[15, '15m'], [30, '30m'], [60, '1h'], [120, '2h'], [240, '4h']].map(o => { const on = (dv.mins || 0) === o[0]; return { label: o[1], on: on ? 'true' : 'false', bg: on ? this.TK.t6E2F43 : '#FFFFFF', fg: on ? '#FFFFFF' : '#4A443B', bd: on ? this.TK.t6E2F43 : '#E2D8C4', set: () => patchDraft({ mins: o[0] }) }; }),
       catNewId: 'cn-' + t.id, catNewText: s.catNew || '',
       onCatNew: (e) => this.setState({ catNew: e.target.value }),
@@ -7391,6 +7389,13 @@ class Component extends DCLogic {
         bdSub: pieces.length === 1 ? 'One piece of ' + this.fmtDur(sh.est) : full + (full === 1 ? ' slice of ' : ' slices of ') + this.fmtDur(sh.slice) + (odd.length ? ', plus a shorter ' + this.fmtDur(odd[0].mins) + ' one' : '') + ' · ' + this.fmtDur(sh.est) + ' in all',
         sliceVal: String(sh.slice),
         sliceOpts: (() => { const o = []; [15, 30, 45, 60, 90, 120, 150, 180, 240].forEach(m => o.push({ v: String(m), l: this.fmtDur(m) })); if (o.every(x => +x.v !== sh.slice)) o.push({ v: String(sh.slice), l: this.fmtDur(sh.slice) }); return o.sort((a, b) => +a.v - +b.v); })(),
+        sliceH: String(Math.floor(sh.slice / 60)), sliceM: String(sh.slice % 60 - (sh.slice % 60) % 15),
+        onSliceH: (e) => { const c = this.state.sheet; const h = Math.max(0, Math.min(12, parseInt(e.target.value, 10) || 0)); this.patchSheet({ slice: Math.max(15, h * 60 + c.slice % 60) }); },
+        onSliceM: (e) => { const c = this.state.sheet; const m = parseInt(e.target.value, 10) || 0; this.patchSheet({ slice: Math.max(15, Math.floor(c.slice / 60) * 60 + m) }); },
+        sliceUp: () => { const c = this.state.sheet; this.patchSheet({ slice: Math.min(12 * 60, c.slice + 60) }); },
+        sliceDown: () => { const c = this.state.sheet; this.patchSheet({ slice: Math.max(c.slice % 60 || 15, c.slice - 60) }); },
+        totUp: () => { const c = this.state.sheet; this.patchSheet({ est: c.est + 60 }); },
+        totDown: () => { const c = this.state.sheet; this.patchSheet({ est: Math.max(15, c.est - 60) }); },
         onSlice: (e) => this.patchSheet({ slice: Math.max(15, parseInt(e.target.value, 10) || 60) }),
         bdAccent: diff === 0 ? okC : (diff < 0 ? warnC : overC),
         bdIcon: diff === 0 ? 'M5 12.5l4.5 4.5L19 7.5' : (diff < 0 ? 'M12 7v6M12 17h.01' : 'M12 7v6M12 17h.01'),
