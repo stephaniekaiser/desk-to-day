@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 11:08 AM';</script>
+<script>window.__plannerBuild = 'Oct 25, 11:10 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3268,8 +3268,8 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <div style="font-size: calc(13px * {{fsK}}); color: {{TK.t6E2F43}}; background: {{TK.tFBEDEE}}; border-radius: 8px; padding: 8px 10px; margin-top: 8px">{{ss.help}}</div>
 </sc-if>
 <sc-for list="{{ss.rows}}" as="r" hint-placeholder-count="3">
-<div style="display: flex; align-items: center; gap: 10px; min-height: calc(52px * {{rowK}}); padding: 6px 0; border-bottom: 1px solid #E8DFCC">
-<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; min-height: calc(52px * {{rowK}}); padding: 8px 0; border-bottom: 1px solid #E8DFCC">
+<div style="flex: 1 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
 <span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">{{r.label}}</span>
 <sc-if value="{{r.hasHelp}}" hint-placeholder-val="{{ false }}">
 <span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{r.help}}</span>
@@ -3284,7 +3284,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </button>
 </sc-if>
 <sc-if value="{{r.isSeg}}" hint-placeholder-val="{{ false }}">
-<div role="group" aria-label="{{r.label}}" style="display: flex; flex: none; gap: 2px; background: #EFE7D6; border-radius: 10px; padding: 3px">
+<div role="group" aria-label="{{r.label}}" style="display: flex; flex: 0 1 auto; max-width: 100%; overflow-x: auto; gap: 2px; background: #EFE7D6; border-radius: 10px; padding: 3px">
 <sc-for list="{{r.opts}}" as="o" hint-placeholder-count="3">
 <button onClick="{{o.set}}" aria-pressed="{{o.pressed}}" style="height: 34px; padding: 0 10px; border: 0; border-radius: 8px; background: {{o.bg}}; color: {{o.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; box-shadow: {{o.shadow}}; white-space: nowrap">{{o.label}}</button>
 </sc-for>
