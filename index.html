@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 24, 6:17 PM';</script>
+<script>window.__plannerBuild = 'Oct 24, 6:19 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1471,7 +1471,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <label for="evdate" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{evDateLabel}}</label>
 <input id="evdate" type="date" value="{{evDateVal}}" onChange="{{evOnDate}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF; min-width: 0">
 </div>
-<sc-if value="{{evAllDay}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{evShowEnd}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <label for="evenddate" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Last day</label>
 <input id="evenddate" type="date" value="{{evEndDateVal}}" onChange="{{evOnEndDate}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF; min-width: 0">
@@ -5664,8 +5664,11 @@ class Component extends DCLogic {
       m[String(origDay)] = (m[String(origDay)] || []).filter(b => b.id !== ev.id);
       m[String(day)] = (m[String(day)] || []).concat([Object.assign({}, old || { id: ev.id, fixed: true, event: true }, blk)]);
     } else {
-      m[String(day)] = (m[String(day)] || []).concat([Object.assign({ id: 'e' + n, fixed: true, event: true }, blk)]);
-      extra = { nextId: n + 1 };
+      // A new timed event with a later last day gets the same block on each day.
+      const last = Math.min(day + 30, Math.max(day, typeof ev.endDay === 'number' ? ev.endDay : day));
+      let k = n;
+      for (let d = day; d <= last; d++) m[String(d)] = (m[String(d)] || []).concat([Object.assign({ id: 'e' + (k++), fixed: true, event: true }, blk)]);
+      extra = { nextId: k };
     }
     this.setState(Object.assign({ placedByDay: m }, extra, adPatch, done, go));
   }
@@ -7109,6 +7112,7 @@ class Component extends DCLogic {
         evEndDateVal: this.isoFor(Math.max(evDay, typeof ev.endDay === 'number' ? ev.endDay : evDay)),
         evOnEndDate: (e) => { const v = e.target.value; if (!v) return; const o = this.offFromISO(v); patchEv({ endDay: Math.max(typeof this.state.evEdit.day === 'number' ? this.state.evEdit.day : s.day, o) }); },
         evAllDay: !!ev.allDay, evTimed: !ev.allDay, evCanAllDay: !ev.seriesId,
+        evShowEnd: !!ev.allDay || (!ev.id && !ev.seriesId && (!ev.repeat || ev.repeat === 'none')),
         evToggleAllDay: () => patchEv({ allDay: !this.state.evEdit.allDay, endDay: typeof this.state.evEdit.endDay === 'number' ? this.state.evEdit.endDay : evDay }),
         evStickers: this.STICKERS.map(k => { const on = (ev.sticker || 'calendar') === k.id; return { name: k.name, icon: k.icon, bg: k.bg, fg: k.fg, checked: on ? 'true' : 'false', ring: on ? ('0 0 0 2px #FFFFFF, 0 0 0 4px ' + this.TK.t6E2F43) : 'none', pick: () => patchEv({ sticker: k.id }) }; }),
         evOpen: true, evGhost: !ev.id,
