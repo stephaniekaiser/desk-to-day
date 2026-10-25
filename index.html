@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 11:17 AM';</script>
+<script>window.__plannerBuild = 'Oct 25, 11:32 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -532,6 +532,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button onClick="{{t.split}}" aria-label="Break it up" title="Break it up" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; color: #6B5A1E">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1.5"></rect><rect x="3" y="11" width="8" height="4" rx="1.5"></rect><rect x="13" y="11" width="8" height="4" rx="1.5"></rect><rect x="3" y="18" width="5" height="3" rx="1"></rect><rect x="10" y="18" width="5" height="3" rx="1"></rect><rect x="17" y="18" width="4" height="3" rx="1"></rect></svg>
 </button>
+</sc-if>
+<sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{t.editGroup}}" style="height: 30px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 15px; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">All pieces of {{t.groupName}}</button>
 </sc-if>
 <sc-if value="{{t.showDayPri}}" hint-placeholder-val="{{ true }}">
 <button onClick="{{t.offDay}}" aria-label="Not today, back to this week's list" title="Not today, back to this week" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; color: #5E5546">
@@ -1703,7 +1706,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </header>
 <sc-if value="{{weekPlacing}}" hint-placeholder-val="{{ false }}">
 <div style="height: 44px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; background: #FCE9A6; border-radius: 10px; padding: 0 4px 0 14px">
-<span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: #3B3010; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><strong>{{weekSelTitle}}</strong>. Tap "Put here" on a day.</span>
+<span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: #3B3010; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Pick a day for <strong>{{weekSelTitle}}</strong></span>
+<button onClick="{{weekSelEdit}}" style="height: 36px; flex: none; padding: 0 12px; border-radius: 8px; border: 0; background: #3B3010; font-weight: 700; color: #FCE9A6">Edit</button>
 <sc-if value="{{weekSelAssigned}}" hint-placeholder-val="{{ false }}">
 <button onClick="{{weekClearDay}}" style="height: 36px; flex: none; padding: 0 12px; border-radius: 8px; border: 1.5px solid #3B3010; background: transparent; font-weight: 700; color: #3B3010">Clear day</button>
 </sc-if>
@@ -1714,7 +1718,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="min-height: 44px; flex: none; display: flex; align-items: center; gap: 10px">
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
 <span style="font-family: {{TK.fHead}}; font-style: italic; font-size: calc(17px * {{fsK}}); color: {{TK.t6E2F43}}; line-height: 1.2">Which days have room for my tasks?</span>
-<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064; line-height: 1.35">Drag a task onto a day. Gray is fixed time, color is tasks, and the number is what's still open.</span>
+<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064; line-height: 1.35">Drag a task onto a day. Tap one on a day to move or edit it. Gray is fixed time, color is tasks, and the number is what's still open.</span>
 </span>
 <div role="radiogroup" aria-label="Days to show" style="display: flex; flex: none; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
 <sc-for list="{{weekShowBtns}}" as="wb" hint-placeholder-count="3">
@@ -1756,7 +1760,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button draggable="true" onDragStart="{{ch.dragStart}}" onDragEnd="{{dragEnd}}" onClick="{{ch.pick}}" aria-label="{{ch.full}}" title="{{ch.full}}" style="max-width: 100%; min-height: 26px; border: {{ch.border}}; border-left: 3px solid {{ch.stripe}}; border-radius: 6px; background: {{ch.bg}}; color: {{ch.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 600; text-align: left; padding: 3px 8px 3px 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; box-shadow: {{ch.ring}}; text-decoration: {{ch.strike}}; opacity: {{ch.op}}">{{ch.label}}</button>
 </sc-for>
 <sc-if value="{{wc.placingOn}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{wc.assign}}" style="min-height: 26px; border: 1.5px dashed #C99A06; border-radius: 6px; background: #FCE9A6; color: #3B3010; font-size: calc(11px * {{fsK}}); font-weight: 700; padding: 0 10px">Put here</button>
+<button onClick="{{wc.assign}}" style="min-height: 26px; border: 1.5px dashed #C99A06; border-radius: 6px; background: #FCE9A6; color: #3B3010; font-size: calc(11px * {{fsK}}); font-weight: 700; padding: 0 10px">This day</button>
 </sc-if>
 <sc-if value="{{wc.noChips}}" hint-placeholder-val="{{ false }}">
 <span style="font-size: calc(11.5px * {{fsK}}); font-style: italic; color: #A39882">No tasks yet</span>
@@ -1822,8 +1826,10 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-for list="{{dz.rows}}" as="z" hint-placeholder-count="2">
 <div draggable="true" onDragStart="{{z.dragStart}}" onDragEnd="{{dragEnd}}" onDragOver="{{z.over}}" onDrop="{{z.drop}}" style="display: flex; align-items: center; gap: 8px; min-height: calc(40px * {{rowK}}); border-bottom: 1px solid #EFE7D6; box-shadow: {{z.dropShadow}}">
 <span aria-hidden="true" style="width: 14px; flex: none; display: flex; align-items: center; justify-content: center; color: #B9AF9C; cursor: grab"><svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg></span>
+<button onClick="{{z.edit}}" aria-label="{{z.title}}, {{z.dur}}. Tap to edit" style="flex: 1; min-width: 0; align-self: stretch; display: flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 0; text-align: left; color: #2B2722">
 <span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{z.title}}</span>
 <span style="flex: none; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">{{z.dur}}</span>
+</button>
 <button onClick="{{z.dStar}}" aria-pressed="{{z.dStarOn}}" aria-label="{{z.dStarLabel}}: {{z.title}}" title="{{z.dStarLabel}}" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #8A6D0B; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" style="fill: {{z.dStarFill}}"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg></button>
 <button onClick="{{z.back}}" aria-label="Send {{z.title}} back to My Desk" title="Back to the desk" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #8A8174; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M11 6l-6 6 6 6"></path></svg>
@@ -3228,6 +3234,9 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <button onClick="{{t.split}}" aria-label="Break it up" title="Break it up" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; color: #6B5A1E">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1.5"></rect><rect x="3" y="11" width="8" height="4" rx="1.5"></rect><rect x="13" y="11" width="8" height="4" rx="1.5"></rect><rect x="3" y="18" width="5" height="3" rx="1"></rect><rect x="10" y="18" width="5" height="3" rx="1"></rect><rect x="17" y="18" width="4" height="3" rx="1"></rect></svg>
 </button>
+</sc-if>
+<sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{t.editGroup}}" style="height: 30px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 15px; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">All pieces of {{t.groupName}}</button>
 </sc-if>
 <sc-if value="{{t.showDayPri}}" hint-placeholder-val="{{ true }}">
 <button onClick="{{t.offDay}}" aria-label="Not today, back to this week's list" title="Not today, back to this week" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; color: #5E5546">
@@ -6242,15 +6251,25 @@ class Component extends DCLogic {
         else { extra.bucket = d.bucket; extra.dayAssign = null; }
       }
       const dropCal = onCal && (dayChanged || (bucketChanged && d.bucket !== 'week'));
+      const cut = t.groupId && !t.done && d.mins < t.mins ? t.mins - d.mins : 0;
+      let restTo = null, restAdd = null;
+      if (cut > 0) {
+        const smap = this.schedMap();
+        const ex = this.state.tasks.find(x => x.groupId === t.groupId && x.id !== t.id && !x.done && x.title === 'The rest' && !smap[x.id]);
+        if (ex) restTo = ex.id;
+        else restAdd = { id: t.groupId + '-r' + this.state.nextId, title: 'The rest', mins: cut, pri: t.pri, bucket: t.bucket, weekOf: t.weekOf, cat: t.cat || null, groupId: t.groupId };
+      }
       this.setState({
         placedByDay: dropCal ? this.removeTaskBlocks(this.state.placedByDay, t.id) : this.state.placedByDay,
         tasks: this.state.tasks.map(x => {
           if (x.id === t.id) return Object.assign({}, x, { title: (d.title || '').trim() || x.title, pri: d.pri, flag: d.flag, cat: d.cat, mins: d.mins, note: d.note !== undefined ? d.note : (x.note || '') }, extra);
           if (t.groupId && x.groupId === t.groupId && d.pri !== t.pri) return Object.assign({}, x, { pri: d.pri });
           return x;
-        }),
-        editDraft: null
+        }).concat(restAdd ? [restAdd] : []).map(x => restTo && x.id === restTo ? Object.assign({}, x, { mins: x.mins + cut }) : x),
+        editDraft: null,
+        nextId: restAdd ? this.state.nextId + 1 : this.state.nextId
       });
+      if (cut > 0) this.setToast(this.fmtDur(cut) + ' left over went to "The rest" so it does not get lost.');
     };
     const thenDo = (fn) => { commitDraft(); setTimeout(fn, 0); };
     const dfl = this.flagInfo(dv.flag);
@@ -6351,6 +6370,8 @@ class Component extends DCLogic {
       placeLabel: s.view === 'week' ? 'Pick a day' : (sc ? 'Move on calendar' : 'Put on calendar'),
       place: () => thenDo(() => this.setState({ sel: { kind: 'task', id: t.id }, editing: null, catMenu: null })),
       canSplit: t.mins > 30 && !t.groupId && !sc,
+      inGroup: !!(t.groupId && s.groups[t.groupId]), groupName: t.groupId && s.groups[t.groupId] ? s.groups[t.groupId].title : '',
+      editGroup: () => { const gid = t.groupId; this.setState({ editing: null, editDraft: null }); setTimeout(() => this.openGroupEdit(gid), 0); },
       remove: () => {
         this.setState({ tasks: this.state.tasks.filter(x => x.id !== t.id), placedByDay: this.removeTaskBlocks(this.state.placedByDay, t.id), editing: null });
         this.setToast('Deleted "' + t.title + '".');
@@ -7152,7 +7173,7 @@ class Component extends DCLogic {
           if (free < 0) { this.setError('You already have three Week Makers for ' + when + '. Remove one first.'); return; }
           putIn(free, id);
         };
-        (deskZone.rows || []).forEach(r => { const on = ids.indexOf(r.id) >= 0; r.dStar = () => starFor(r.id); r.dStarFill = on ? '#E9C44A' : 'none'; r.dStarOn = on ? 'true' : 'false'; r.dStarLabel = on ? 'Week Maker (tap to remove)' : 'Make it a Week Maker'; });
+        (deskZone.rows || []).forEach(r => { const on = ids.indexOf(r.id) >= 0; r.dStar = () => starFor(r.id); r.edit = () => this.setState({ editing: r.id, editDraft: null, sel: null, catMenu: null, menuFor: null }); r.dStarFill = on ? '#E9C44A' : 'none'; r.dStarOn = on ? 'true' : 'false'; r.dStarLabel = on ? 'Week Maker (tap to remove)' : 'Make it a Week Maker'; });
         return {
           dkB3Head: n ? n + ' of 3 picked' : '',
           dkB3Prompt: n === 0 ? 'If only three things get done ' + when + ', what should they be? Drag them here, or tap a star.' : (n < 3 ? 'Room for ' + (3 - n) + ' more.' : 'All three picked. Nice.'),
@@ -9804,6 +9825,7 @@ class Component extends DCLogic {
       weekPlacing: isWeek && !!wSel, weekNotPlacing: !(isWeek && wSel),
       weekSelTitle: wSel ? wSel.title : '',
       weekSelAssigned: !!(wSel && wSel.dayAssign !== undefined && wSel.dayAssign !== null),
+      weekSelEdit: () => { if (wSel) this.setState({ editing: wSel.id, editDraft: null, sel: null }); },
       weekClearDay: () => { if (wSel) { this.assignDay(wSel.id, null); this.setToast('Back to any day this week.'); } },
       big3: big3,
       narrow: narrow,
