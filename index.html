@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 24, 3:57 PM';</script>
+<script>window.__plannerBuild = 'Oct 24, 5:45 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -4674,7 +4674,11 @@ class Component extends DCLogic {
   taskTemplate() {
     return [
       'Task,Date,Section,Flag,Hours,Minutes,Category,Notes,Checklist',
-      'Pack for the conference,2026-11-04,Must,Important,1,30,Work,"Badge, chargers, business cards",Suit | Travel wallet | Passport | Chargers',
+      'Prepare for the conference,2026-11-04,Must,Important,2,0,Work,"Badge, chargers, business cards",',
+      '- Pack pant suit,,,,0,15,,,',
+      '- Book hotel,,,,0,30,,,',
+      '- Confirm registration,,,,0,10,,,',
+      '- Set up travel wallet,,,,,,,,',
       'Call the dentist,today,Should,,0,15,Health,Ask about the January opening,',
       'Plan meals for next week,next week,Could,,0,45,Home,,',
       'Read chapter 4,11/6/2026,Should,,2,0,School,"Pages 88-120, take notes",Skim headings | Read | Write summary',
@@ -4703,6 +4707,16 @@ class Component extends DCLogic {
       const g = (i) => i >= 0 && i < r.length ? String(r[i]).trim() : '';
       const title = g(C.task);
       if (!title) { out.errors.push('Row ' + (ri + 2) + ' has no task name, so it was skipped.'); return; }
+      const sub = title.match(/^[-–—•*]\s*(.*)$/);
+      if (sub) {
+        const parent = out.tasks[out.tasks.length - 1];
+        const txt = sub[1].trim();
+        if (!parent) { out.errors.push('Row ' + (ri + 2) + ' starts with a dash but has no task above it, so it was skipped.'); return; }
+        if (!txt) return;
+        const sh = parseFloat(g(C.h)) || 0, sm2 = parseFloat(g(C.m)) || 0;
+        parent.checklist = (parent.checklist || []).concat([{ id: 'ck' + (n++), text: txt, done: false, mins: Math.max(0, Math.round(sh * 60 + sm2)) }]);
+        return;
+      }
       const t = { id: 'n' + (n++), title: title, pri: this.state.settings.defaultPri || 'B', flag: null, mins: 0, bucket: 'desk' };
       // where it lands
       const dv = g(C.date), low = dv.toLowerCase();
