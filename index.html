@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 11:32 AM';</script>
+<script>window.__plannerBuild = 'Oct 25, 11:50 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -411,6 +411,26 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="margin: 2px 0 10px 32px; padding: 10px 12px 6px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-top: 4px solid {{TK.tE2B9C4}}; border-radius: 12px; box-shadow: 0 6px 18px rgba(60,40,20,0.10); display: flex; flex-direction: column; gap: 10px">
 <label for="{{t.editId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
 <input id="{{t.editId}}" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
+<sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid {{TK.tEBC3CD}}; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 8px">
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+<span style="font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{TK.tA0526A}}">Part of</span>
+<span style="font-family: {{TK.fHead}}; font-size: calc(16px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.groupName}} <span style="font-family: {{TK.fBody}}; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #7A7064">· {{t.grpSum}}</span></span>
+</span>
+<button onClick="{{t.editGroup}}" style="height: 28px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">Edit {{t.groupName}}</button>
+</div>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{t.grpPieces}}" as="gp" hint-placeholder-count="3">
+<button onClick="{{gp.go}}" aria-current="{{gp.curAria}}" style="display: flex; align-items: center; gap: 8px; min-height: calc(28px * {{rowK}}); border: 0; border-radius: 6px; background: {{gp.bg}}; padding: 0 6px; text-align: left; color: {{gp.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: {{gp.fw}}; text-decoration: {{gp.strike}}">
+<span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gp.label}}</span>
+<span style="flex: none; font-size: calc(11.5px * {{fsK}}); color: #7A7064; font-weight: 600">{{gp.when}}</span>
+<span style="flex: none; min-width: 34px; text-align: right; font-weight: 700">{{gp.dur}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px">
 <sc-if value="{{t.showDayPri}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
@@ -532,9 +552,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button onClick="{{t.split}}" aria-label="Break it up" title="Break it up" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; color: #6B5A1E">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1.5"></rect><rect x="3" y="11" width="8" height="4" rx="1.5"></rect><rect x="13" y="11" width="8" height="4" rx="1.5"></rect><rect x="3" y="18" width="5" height="3" rx="1"></rect><rect x="10" y="18" width="5" height="3" rx="1"></rect><rect x="17" y="18" width="4" height="3" rx="1"></rect></svg>
 </button>
-</sc-if>
-<sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{t.editGroup}}" style="height: 30px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 15px; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">All pieces of {{t.groupName}}</button>
 </sc-if>
 <sc-if value="{{t.showDayPri}}" hint-placeholder-val="{{ true }}">
 <button onClick="{{t.offDay}}" aria-label="Not today, back to this week's list" title="Not today, back to this week" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; color: #5E5546">
@@ -1718,7 +1735,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="min-height: 44px; flex: none; display: flex; align-items: center; gap: 10px">
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
 <span style="font-family: {{TK.fHead}}; font-style: italic; font-size: calc(17px * {{fsK}}); color: {{TK.t6E2F43}}; line-height: 1.2">Which days have room for my tasks?</span>
-<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064; line-height: 1.35">Drag a task onto a day. Tap one on a day to move or edit it. Gray is fixed time, color is tasks, and the number is what's still open.</span>
+<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064; line-height: 1.35">Drag a task onto a day, or between days. Tap one to edit it. Gray is fixed time, color is tasks, and the number is what's still open.</span>
 </span>
 <div role="radiogroup" aria-label="Days to show" style="display: flex; flex: none; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
 <sc-for list="{{weekShowBtns}}" as="wb" hint-placeholder-count="3">
@@ -3113,6 +3130,26 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 
 <label for="{{t.editId}}-r" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
 <input id="{{t.editId}}-r" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
+<sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid {{TK.tEBC3CD}}; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 8px">
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+<span style="font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{TK.tA0526A}}">Part of</span>
+<span style="font-family: {{TK.fHead}}; font-size: calc(16px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.groupName}} <span style="font-family: {{TK.fBody}}; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #7A7064">· {{t.grpSum}}</span></span>
+</span>
+<button onClick="{{t.editGroup}}" style="height: 28px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">Edit {{t.groupName}}</button>
+</div>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{t.grpPieces}}" as="gp" hint-placeholder-count="3">
+<button onClick="{{gp.go}}" aria-current="{{gp.curAria}}" style="display: flex; align-items: center; gap: 8px; min-height: calc(28px * {{rowK}}); border: 0; border-radius: 6px; background: {{gp.bg}}; padding: 0 6px; text-align: left; color: {{gp.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: {{gp.fw}}; text-decoration: {{gp.strike}}">
+<span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gp.label}}</span>
+<span style="flex: none; font-size: calc(11.5px * {{fsK}}); color: #7A7064; font-weight: 600">{{gp.when}}</span>
+<span style="flex: none; min-width: 34px; text-align: right; font-weight: 700">{{gp.dur}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 12px">
 <sc-if value="{{t.showDayPri}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
@@ -3234,9 +3271,6 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <button onClick="{{t.split}}" aria-label="Break it up" title="Break it up" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; color: #6B5A1E">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1.5"></rect><rect x="3" y="11" width="8" height="4" rx="1.5"></rect><rect x="13" y="11" width="8" height="4" rx="1.5"></rect><rect x="3" y="18" width="5" height="3" rx="1"></rect><rect x="10" y="18" width="5" height="3" rx="1"></rect><rect x="17" y="18" width="4" height="3" rx="1"></rect></svg>
 </button>
-</sc-if>
-<sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{t.editGroup}}" style="height: 30px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 15px; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">All pieces of {{t.groupName}}</button>
 </sc-if>
 <sc-if value="{{t.showDayPri}}" hint-placeholder-val="{{ true }}">
 <button onClick="{{t.offDay}}" aria-label="Not today, back to this week's list" title="Not today, back to this week" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; color: #5E5546">
@@ -6371,7 +6405,16 @@ class Component extends DCLogic {
       place: () => thenDo(() => this.setState({ sel: { kind: 'task', id: t.id }, editing: null, catMenu: null })),
       canSplit: t.mins > 30 && !t.groupId && !sc,
       inGroup: !!(t.groupId && s.groups[t.groupId]), groupName: t.groupId && s.groups[t.groupId] ? s.groups[t.groupId].title : '',
-      editGroup: () => { const gid = t.groupId; this.setState({ editing: null, editDraft: null }); setTimeout(() => this.openGroupEdit(gid), 0); },
+      editGroup: () => { const gid = t.groupId; thenDo(() => { this.setState({ editing: null, editDraft: null }); setTimeout(() => this.openGroupEdit(gid), 0); }); },
+      grpSum: (() => { if (!t.groupId) return ''; const ps = s.tasks.filter(x => x.groupId === t.groupId); const dn = ps.filter(x => x.done).length; return this.fmtDur(ps.reduce((a, x) => a + (x.mins || 0), 0)) + ' · ' + dn + ' of ' + ps.length + ' done'; })(),
+      grpPieces: !t.groupId ? [] : (() => { const smp = this.schedMap(); return s.tasks.filter(x => x.groupId === t.groupId).map(x => {
+        const cur = x.id === t.id, scx = smp[x.id];
+        const dOff = scx ? scx.day : (x.dayAssign !== undefined && x.dayAssign !== null ? x.dayAssign : null);
+        const when = x.done ? 'Done' : (dOff !== null ? this.DAYS[this.dateFor(dOff).getDay()].slice(0, 3) + ' ' + this.dateFor(dOff).getDate() + (scx ? ' · on calendar' : '') : 'No day yet');
+        return { label: x.title, dur: this.fmtDur(cur ? dv.mins : x.mins), when: when, curAria: cur ? 'true' : 'false',
+          bg: cur ? '#FFFFFF' : 'transparent', fg: cur ? this.TK.t6E2F43 : '#2B2722', fw: cur ? 700 : 500, strike: x.done ? 'line-through' : 'none',
+          go: () => { if (cur) return; thenDo(() => this.setState({ editing: x.id, editDraft: null })); } };
+      }); })(),
       remove: () => {
         this.setState({ tasks: this.state.tasks.filter(x => x.id !== t.id), placedByDay: this.removeTaskBlocks(this.state.placedByDay, t.id), editing: null });
         this.setToast('Deleted "' + t.title + '".');
@@ -7469,14 +7512,14 @@ class Component extends DCLogic {
         });
         return {
           label: t.title,
-          full: t.title + (t.cat ? ', ' + cc.name : '') + (t.mins ? ', ' + this.fmtDur(t.mins) : '') + (t.done ? ', done' : '') + '. Tap to move it to another day.',
+          full: t.title + (t.cat ? ', ' + cc.name : '') + (t.mins ? ', ' + this.fmtDur(t.mins) : '') + (t.done ? ', done' : '') + '. Tap to edit, drag to move.',
           bg: '#FFFDF8', fg: '#2B2722', border: '1px solid ' + (t.cat ? cc.edge : '#E3D9C5'), strike: t.done ? 'line-through' : 'none', op: t.done ? 0.55 : 1,
           ring: isS ? '0 0 0 2px #F2B705' : 'none', stripe: cc.color,
           enter: (e) => { if (!e || e.pointerType !== 'touch') show(); },
           press: () => { clearTimeout(this.tipT); this.chipLp = false; this.tipT = setTimeout(() => { this.chipLp = true; show(); }, 350); },
           pick: () => {
             if (this.chipLp) { this.chipLp = false; return; }
-            this.setState({ sel: isS ? null : { kind: 'task', id: t.id }, weekTip: null });
+            this.setState({ editing: t.id, editDraft: null, sel: null, weekTip: null });
           },
           dragStart: (e) => {
             this.drag = { kind: 'task', id: t.id };
