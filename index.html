@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 10:10 AM';</script>
+<script>window.__plannerBuild = 'Oct 25, 10:37 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3669,7 +3669,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 <div style="flex: none; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 8px 12px; min-height: 56px; box-sizing: border-box">
 <span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 14px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM4 10h16M10 4v16"></path></svg></span>
-<span style="flex: 1; min-width: 180px; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Import tasks</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Add many tasks at once from a spreadsheet saved as CSV. Start from the template.</span></span>
+<span style="flex: 1; min-width: 180px; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Import stuff</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Add tasks, checklist steps and events at once from a spreadsheet saved as CSV. Start from the template.</span></span>
 <button onClick="{{tiTemplate}}" style="height: 32px; flex: none; padding: 0 10px; border: 0; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Template</button>
 <button onClick="{{tiPaste}}" style="height: 32px; flex: none; padding: 0 10px; border: 0; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Paste</button>
 <label style="position: relative; height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; display: flex; align-items: center; background: transparent; color: {{TK.t6E2F43}}; cursor: pointer">Choose file<input type="file" accept=".csv,.tsv,.txt,text/csv,text/plain" onChange="{{tiFile}}" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; opacity: 0; width: 100%; cursor: pointer"></label>
@@ -3727,8 +3727,8 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </sc-if>
 <sc-if value="{{tiOn}}" hint-placeholder-val="{{ false }}">
 <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 61; background: rgba(20,30,28,0.4); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 16px">
-<div role="dialog" aria-label="Import tasks" style="width: min(520px, 100%); max-height: 100%; overflow-y: auto; box-sizing: border-box; background: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 18px 40px rgba(0,0,0,0.3)">
-<span style="font-family: {{TK.fHead}}; font-size: calc(24px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">Import tasks</span>
+<div role="dialog" aria-label="Import stuff" style="width: min(520px, 100%); max-height: 100%; overflow-y: auto; box-sizing: border-box; background: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 18px 40px rgba(0,0,0,0.3)">
+<span style="font-family: {{TK.fHead}}; font-size: calc(24px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">Import stuff</span>
 <span style="font-size: calc(14px * {{fsK}}); color: #2B2722; line-height: 1.45">{{tiSummary}}</span>
 <sc-if value="{{tiHasCats}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">{{tiCats}}</span></sc-if>
 <div style="display: flex; flex-direction: column; background: #FBF7EE; border-radius: 10px; padding: 4px 12px">
