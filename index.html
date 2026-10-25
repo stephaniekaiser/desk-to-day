@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 10:48 AM';</script>
+<script>window.__plannerBuild = 'Oct 25, 10:57 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -288,12 +288,25 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 </div>
 </sc-if>
-<div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; padding-right: 4px; margin-top: 14px">
+<sc-if value="{{isDesk}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px">
+<label for="desk-group" style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Group by</label>
+<select id="desk-group" value="{{deskGroupVal}}" onChange="{{onDeskGroup}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><option value="category">Category</option><option value="size">Size</option><option value="age">Age</option><option value="flag">Flag</option><option value="none">None (my order)</option></select>
+<span style="flex: 1"></span>
+<sc-if value="{{deskCanFold}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{deskFoldAll}}" style="height: 30px; border: 0; background: transparent; padding: 0 4px; color: {{TK.tA0526A}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{deskFoldLabel}}</button>
+</sc-if>
+</div>
+</sc-if>
+<div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; padding-right: 4px; margin-top: 8px">
 <sc-for list="{{sections}}" as="sec" hint-placeholder-count="3">
 <div style="display: flex; flex-direction: column; margin-bottom: calc(20px * {{rowK}})">
 <div onDragOver="{{sec.over}}" onDrop="{{sec.drop}}" style="display: flex; align-items: center; gap: 8px; min-height: 30px; box-sizing: border-box; padding: 4px 2px; border-bottom: 1px solid {{sec.line}}; background: {{sec.headBg}}; border-radius: 4px 4px 0 0">
+<sc-if value="{{sec.collapsible}}" hint-placeholder-val="{{ false }}"><button onClick="{{sec.toggleClosed}}" aria-expanded="{{sec.closedA}}" aria-label="Show or hide {{sec.name}}" style="flex: 1; min-width: 0; align-self: stretch; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 8px; text-align: left; color: {{sec.color}}"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transform: {{sec.chev}}"><path d="M6 9l6 6 6-6"></path></svg><span style="min-width: 0; font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{sec.name}}</span></button></sc-if>
+<sc-if value="{{sec.notCollapsible}}" hint-placeholder-val="{{ true }}">
 <span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 4px; background: {{sec.line}}"></span>
 <span style="font-size: calc(12px * {{fsK}}); font-weight: 600; color: {{sec.color}}; text-transform: uppercase; letter-spacing: 0.12em">{{sec.name}}</span>
+</sc-if>
 <span style="margin-left: auto; font-size: calc(12px * {{fsK}}); color: {{sec.metaFg}}">{{sec.meta}}</span>
 <sc-if value="{{sec.canAdd}}" hint-placeholder-val="{{ false }}"><button onClick="{{sec.toggleAdd}}" aria-expanded="{{sec.addOpenA}}" aria-label="{{sec.addLabel}}" title="{{sec.addLabel}}" style="width: 28px; height: 28px; flex: none; margin: -4px -2px -4px 0; border: 0; border-radius: 14px; background: transparent; color: {{sec.color}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button></sc-if>
 </div>
@@ -4150,6 +4163,9 @@ class Component extends DCLogic {
       const old = this.lastRefs;
       if (!old || refs.some((r, i) => r !== old[i])) { this.lastRefs = refs; if (old) this.scheduleSave(); }
     }
+    if (this.ready && (s.tasks || []).some(t => typeof t.added !== 'number')) {
+      this.setState(st => ({ tasks: st.tasks.map(t => typeof t.added === 'number' ? t : Object.assign({}, t, { added: 0 })) }));
+    }
     if (s.vw < 900 && s.view === 'day' && s.sel && !(prevState && prevState.sel) && s.mobilePage === 'left') {
       this.setState({ mobilePage: 'right' });
     }
@@ -5173,7 +5189,7 @@ class Component extends DCLogic {
     const fix = (o, fs) => { const r = Object.assign({}, o); fs.forEach(f => { if (typeof r[f] === 'number') r[f] = r[f] - k; }); return r; };
     const keys = (o, f) => { const r = {}; Object.keys(o || {}).forEach(x => { r[f ? f(x) : (x !== '' && !isNaN(+x) ? String(+x - k) : x)] = o[x]; }); return r; };
     const out = Object.assign({}, d);
-    if (d.tasks) out.tasks = d.tasks.map(t => fix(t, ['dayAssign', 'weekOf', 'doneDay']));
+    if (d.tasks) out.tasks = d.tasks.map(t => fix(t, ['dayAssign', 'weekOf', 'doneDay', 'added']));
     if (d.placedByDay) out.placedByDay = keys(d.placedByDay);
     if (d.big3ByWeek) out.big3ByWeek = keys(d.big3ByWeek);
     if (d.bandView) out.bandView = keys(d.bandView, x => { const i = x.lastIndexOf(':'); const v = +x.slice(i + 1); return i < 0 || isNaN(v) ? x : x.slice(0, i + 1) + (v - k); });
@@ -5201,6 +5217,7 @@ class Component extends DCLogic {
     if (!r.catsKnown && !(r.cats && r.cats.length)) patch.cats = this.defaultCats();
     patch.courses = (patch.courses || []).map(c => this.migrateCourse(c));
     this.foldCourseCats(patch);
+    patch.tasks = (patch.tasks || []).map(t => typeof t.added === 'number' ? t : Object.assign({}, t, { added: -1000 }));
     return patch;
   }
   docId(k) { const v = String(k).replace(/[^A-Za-z0-9_\-.~:@+]/g, '_').slice(0, 180); return v === '.' || v === '..' || !v ? 'x' + v : v; }
@@ -6514,6 +6531,47 @@ class Component extends DCLogic {
       const N = this.THEME.sec.N;
       const key = 'sec:list';
       const hot = s.dropKey === key;
+      this._deskGroupIds = [];
+      const gby = isDesk ? (s.settings.deskGroup || 'category') : 'none';
+      if (isDesk && gby !== 'none' && leftTasks.length) {
+        const groups = [];
+        const add = (id, name, color, list, patch) => { if (list.length) groups.push({ id: id, name: name, color: color, list: list, patch: patch }); };
+        if (gby === 'category') {
+          this.CAT_ORDER.forEach(k => add('c:' + k, this.CATS[k].name, this.CATS[k].color, leftTasks.filter(t => t.cat === k), { cat: k }));
+          add('c:none', 'No category', '#A39882', leftTasks.filter(t => !t.cat || !this.CATS[t.cat]), { cat: null });
+        } else if (gby === 'size') {
+          add('z:q', 'Quick · under 30m', N.ink, leftTasks.filter(t => (t.mins || 0) < 30), null);
+          add('z:m', 'Medium · 30m to 2h', N.ink, leftTasks.filter(t => (t.mins || 0) >= 30 && (t.mins || 0) <= 120), null);
+          add('z:b', 'Big · over 2h', N.ink, leftTasks.filter(t => (t.mins || 0) > 120), null);
+        } else if (gby === 'age') {
+          const ws0 = this.weekStartOff(0);
+          const ag = (t) => typeof t.added === 'number' ? t.added : -1000;
+          add('a:w', 'Added this week', N.ink, leftTasks.filter(t => ag(t) >= ws0), null);
+          add('a:2', 'Added 1 to 2 weeks ago', N.ink, leftTasks.filter(t => ag(t) < ws0 && ag(t) >= ws0 - 14), null);
+          add('a:o', 'Older', '#9A4A3A', leftTasks.filter(t => ag(t) < ws0 - 14), null);
+        } else if (gby === 'flag') {
+          add('f:u', 'Urgent', '#A3322A', leftTasks.filter(t => t.flag === 'urgent'), { flag: 'urgent' });
+          add('f:i', 'Important', '#9A7414', leftTasks.filter(t => t.flag === 'important'), { flag: 'important' });
+          add('f:n', 'Everything else', N.ink, leftTasks.filter(t => !t.flag), { flag: null });
+        }
+        const closed = (s.settings.deskClosed || {})[gby] || {};
+        const setClosed = (fn) => { const all = Object.assign({}, this.state.settings.deskClosed || {}); all[gby] = fn(Object.assign({}, all[gby] || {})); this.setSetting({ deskClosed: all }); };
+        const withPatch = (patch, fn) => (e) => { const d = this.drag; fn(e); if (patch && d && d.kind === 'task') { const id = d.id; this.setState(st => ({ tasks: st.tasks.map(x => x.id === id ? Object.assign({}, x, patch) : x) })); } };
+        sections = groups.map(g => {
+          const key = 'grp:' + g.id, hot = s.dropKey === key, isClosed = !!closed[g.id];
+          const rows = isClosed ? [] : buildRows(g.list);
+          if (!isClosed) rows.forEach(r => { if (r.isTask && r.drop) r.drop = withPatch(g.patch, r.drop); });
+          return {
+            letter: '', name: g.name, color: g.color, line: N.line, metaFg: N.meta,
+            meta: metaFor(g.list), rows: rows, isEmpty: false, emptyText: '',
+            collapsible: true, closedA: isClosed ? 'false' : 'true', chev: isClosed ? 'rotate(-90deg)' : 'none', toggleClosed: () => setClosed(c => { if (c[g.id]) delete c[g.id]; else c[g.id] = true; return c; }),
+            headBg: hot ? '#FCE9A6' : 'transparent', zoneBg: 'transparent',
+            over: (e) => { e.preventDefault(); this.hover(key); },
+            drop: withPatch(g.patch, (e) => this.dropTask(e, { bucket: leftBucket }))
+          };
+        });
+        this._deskGroupIds = groups.map(g => g.id);
+      } else
       sections = [{
         letter: '', name: isDesk ? 'On my desk' : 'Still to plan · ' + this.weekName(listWs).replace(/^(This|Next) week$/, (m) => m.toLowerCase()), color: N.ink, line: N.line, metaFg: N.meta,
         meta: metaFor(leftTasks) + (leftTasks.length ? ' · drag to reorder' : ''), rows: buildRows(leftTasks), isEmpty: !leftTasks.length, emptyText: isWeek ? 'Every task this week has a day. Nice work.' : 'Drag tasks here',
@@ -6522,6 +6580,7 @@ class Component extends DCLogic {
         drop: (e) => this.dropTask(e, isWeek ? { bucket: 'week', weekOf: listWs, dayAssign: null } : { bucket: leftBucket })
       }];
     }
+    (sections || []).forEach(x => { x.notCollapsible = !x.collapsible; });
     const dayTab = isDay ? ((s.dayTab === 'done' || s.dayTab === 'grow' || (s.dayTab === 'school' && s.settings.schoolOn) || (s.dayTab === 'meals' && s.settings.mealsOn) || (s.dayTab === 'journal' && s.settings.journalOn)) ? s.dayTab : 'list') : 'list';
     if (dayTab !== 'list') sections = [];
     // ----- "This week" tray on the day page -----
@@ -9759,6 +9818,11 @@ class Component extends DCLogic {
       weekNavBg: isWeek ? '#FBF7EE' : '#E8D9B5',
       weekTabCurrent: isWeek ? 'page' : 'false',
       sections: sections,
+      deskGroupVal: s.settings.deskGroup || 'category',
+      onDeskGroup: (e) => this.setSetting({ deskGroup: e.target.value || 'category' }),
+      deskCanFold: isDesk && (s.settings.deskGroup || 'category') !== 'none' && (this._deskGroupIds || []).length > 1,
+      deskFoldLabel: (() => { const g = s.settings.deskGroup || 'category', c = (s.settings.deskClosed || {})[g] || {}; const ids = this._deskGroupIds || []; return ids.length && ids.every(id => c[id]) ? 'Expand all' : 'Collapse all'; })(),
+      deskFoldAll: () => { const g = this.state.settings.deskGroup || 'category', all = Object.assign({}, this.state.settings.deskClosed || {}), c = all[g] || {}, ids = this._deskGroupIds || []; const allClosed = ids.length && ids.every(id => c[id]); const next = {}; if (!allClosed) ids.forEach(id => { next[id] = true; }); all[g] = next; this.setSetting({ deskClosed: all }); },
       edRows: edRowsV, edOn: edRowsV.length > 0,
       habitRows: habitRows,
       hasDone: isDesk && doneRows.length > 0,
