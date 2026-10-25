@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 3:27 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 3:31 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -5323,6 +5323,7 @@ class Component extends DCLogic {
     patch.nextId = Math.max(typeof r.nextId === 'number' ? r.nextId : 100, 100);
     if (!r.catsKnown && !(r.cats && r.cats.length)) patch.cats = this.defaultCats();
     patch.courses = (patch.courses || []).map(c => this.migrateCourse(c));
+    if (patch.tasks && patch.groups) patch.tasks = patch.tasks.map(t => { const g = t.groupId && patch.groups[t.groupId]; return g && g.title && /^Slice \d+ of \d+$/.test(t.title || '') ? Object.assign({}, t, { title: g.title + ' ' + t.title }) : t; });
     this.foldCourseCats(patch);
     patch.tasks = (patch.tasks || []).map(t => typeof t.added === 'number' ? t : Object.assign({}, t, { added: -1000 }));
     return patch;
@@ -6080,11 +6081,12 @@ class Component extends DCLogic {
     if (sh.mode === 'equal') {
       const n = Math.max(1, Math.ceil(sh.est / sh.slice));
       const out = [];
-      for (let i = 0; i < n; i++) out.push({ title: 'Slice ' + (i + 1) + ' of ' + n, mins: Math.min(sh.slice, sh.est - i * sh.slice) });
+      const nmS = (sh.title || '').trim();
+      for (let i = 0; i < n; i++) out.push({ title: (nmS ? nmS + ' ' : '') + 'Slice ' + (i + 1) + ' of ' + n, mins: Math.min(sh.slice, sh.est - i * sh.slice) });
       return out;
     }
-    const slicey = sh.steps.some(x => /^Slice \d+ of \d+$/.test((x.title || '').trim()));
-    return sh.steps.map((st, i) => ({ title: (st.title || '').trim() || (slicey ? 'Slice ' + (i + 1) + ' of ' + sh.steps.length : 'Step ' + (i + 1)), mins: st.mins, srcId: st.srcId || null }));
+    const slicey = sh.steps.some(x => /Slice \d+ of \d+$/.test((x.title || '').trim()));
+    return sh.steps.map((st, i) => ({ title: (st.title || '').trim() || (slicey ? ((sh.title || '').trim() ? (sh.title || '').trim() + ' ' : '') + 'Slice ' + (i + 1) + ' of ' + sh.steps.length : 'Step ' + (i + 1)), mins: st.mins, srcId: st.srcId || null }));
   }
   applySheet() {
     const s = this.state;
@@ -6127,11 +6129,12 @@ class Component extends DCLogic {
     }
     {
       const gidR = sh.taskId ? 'g' + n : sh.groupId;
-      const re = /^Slice \d+ of \d+$/;
+      const re = /Slice \d+ of \d+$/;
+      const gName = groups[gidR] ? String(groups[gidR].title || '').trim() : '';
       const sl = tasks.filter(t => t.groupId === gidR && re.test(t.title || ''));
       const tot = sl.length;
       let k = 0; const ren = {};
-      sl.forEach(t => { k++; ren[t.id] = 'Slice ' + k + ' of ' + tot; });
+      sl.forEach(t => { k++; ren[t.id] = (gName ? gName + ' ' : '') + 'Slice ' + k + ' of ' + tot; });
       tasks = tasks.map(t => ren[t.id] && ren[t.id] !== t.title ? Object.assign({}, t, { title: ren[t.id] }) : t);
     }
     this.setState({ tasks: tasks, groups: groups, sheet: null, nextId: n + 1 });
@@ -6425,7 +6428,7 @@ class Component extends DCLogic {
       goalTitle: t.goalId && (s.goals || []).find(x => x.id === t.goalId) ? s.goals.find(x => x.id === t.goalId).title : '',
       goalColor: t.goalId && (s.goals || []).find(x => x.id === t.goalId) ? (this.COLORS[s.goals.find(x => x.id === t.goalId).color] || this.COLORS.gray).swatch : 'transparent',
       id: t.id,
-      title: zone && g ? g.title + ' · ' + t.title : t.title,
+      title: zone && g && String(t.title || '').indexOf(g.title) !== 0 ? g.title + ' · ' + t.title : t.title,
       label: t.pri, dur: this.fmtDur(t.mins),
       sub: sub, hasSub: !!sub, isBig: isBig,
       tParts: (() => { const q = s.view === 'desk' ? String(s.deskQ || '').trim() : ''; const ti = t.title || ''; if (!q) return [{ text: ti, bg: 'transparent' }]; const i = ti.toLowerCase().indexOf(q.toLowerCase()); if (i < 0) return [{ text: ti, bg: 'transparent' }]; return [{ text: ti.slice(0, i), bg: 'transparent' }, { text: ti.slice(i, i + q.length), bg: '#FCE9A6' }, { text: ti.slice(i + q.length), bg: 'transparent' }].filter(x => x.text); })(),
@@ -6678,9 +6681,9 @@ class Component extends DCLogic {
       list.forEach(t => {
         if (t.groupId && flatGroups && s.groups[t.groupId]) {
           const r = this.rowFor(t, false, false, sm);
-          const gt = s.groups[t.groupId].title + ' · ';
+          const gt = String(t.title || '').indexOf(s.groups[t.groupId].title) === 0 ? '' : s.groups[t.groupId].title + ' · ';
           r.title = gt + t.title;
-          r.tParts = [{ text: gt, bg: 'transparent' }].concat(r.tParts || []);
+          if (gt) r.tParts = [{ text: gt, bg: 'transparent' }].concat(r.tParts || []);
           rows.push(r);
         } else if (t.groupId) {
           if (seen[t.groupId]) return;
@@ -6857,7 +6860,7 @@ class Component extends DCLogic {
       else if (t.doneDay === -1) when = 'yesterday';
       else if (typeof t.doneDay === 'number') when = this.DSHORT[this.dowFor(t.doneDay)];
       return {
-        title: g ? g.title + ' · ' + t.title : t.title,
+        title: g && String(t.title || '').indexOf(g.title) !== 0 ? g.title + ' · ' + t.title : t.title,
         label: t.pri, when: when,
         undo: () => this.setTaskDone(t.id, false, null)
       };
