@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 12:02 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 3:22 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -915,35 +915,36 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{lockedNote}}</span>
 </sc-if>
 </div>
+<sc-if value="{{sheetIsGroup}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 8px 10px">
+<label for="sheet-flag" style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">Flag</label>
+<select id="sheet-flag" value="{{shFlag}}" onChange="{{onShFlag}}" style="outline-color: {{TK.tA0526A}}; min-width: 0; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF"><option value="">No flag</option><option value="important">Important</option><option value="urgent">Urgent</option></select>
+<label for="sheet-cat" style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">Category</label>
+<select id="sheet-cat" value="{{shCat}}" onChange="{{onShCat}}" style="outline-color: {{TK.tA0526A}}; min-width: 0; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF"><sc-for list="{{shCatOpts}}" as="sco" hint-placeholder-count="6"><option value="{{sco.v}}">{{sco.l}}</option></sc-for></select>
+</div>
+<label for="sheet-note" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Notes for the whole task</label>
+<textarea id="sheet-note" rows="2" value="{{shNote}}" onChange="{{onShNote}}" onInput="{{onShNote}}" placeholder="Notes for the whole task…" style="outline-color: {{TK.tA0526A}}; flex: none; box-sizing: border-box; width: 100%; resize: vertical; border: 1px solid #E6DCC8; border-radius: 10px; padding: 8px 10px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFDF7"></textarea>
+</sc-if>
 <div role="tablist" aria-label="How to break it up" style="align-self: flex-start; display: flex; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
 <button role="tab" aria-selected="{{eqSel}}" onClick="{{modeEqual}}" style="height: 30px; padding: 0 14px; border: 0; border-radius: 6px; background: {{eqBg}}; color: {{eqFg}}; font-size: calc(13px * {{fsK}}); font-weight: 700; box-shadow: {{eqShadow}}">Equal slices</button>
 <button role="tab" aria-selected="{{stSel}}" onClick="{{modeSteps}}" style="height: 30px; padding: 0 14px; border: 0; border-radius: 6px; background: {{stBg}}; color: {{stFg}}; font-size: calc(13px * {{fsK}}); font-weight: 700; box-shadow: {{stShadow}}">Name the steps</button>
 </div>
 
 <sc-if value="{{sheetEqual}}" hint-placeholder-val="{{ true }}">
-<div style="flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 14px">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<span style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">Slice size</span>
-<div style="display: flex; gap: 6px; flex-wrap: wrap">
-<sc-for list="{{sliceChips}}" as="sc" hint-placeholder-count="6">
-<button onClick="{{sc.set}}" aria-pressed="{{sc.pressed}}" style="height: 30px; min-width: 42px; padding: 0 10px; border-radius: 15px; border: {{sc.border}}; background: {{sc.bg}}; color: {{sc.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{sc.label}}</button>
-</sc-for>
-</div>
+<div style="flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px">
 <div style="display: flex; align-items: center; gap: 10px">
-<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">Or your own:</span>
-<button onClick="{{sliceMinus}}" aria-label="Slice 15 minutes shorter" style="width: 30px; height: 30px; border-radius: 15px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; font-size: calc(15px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; padding: 0">−</button>
-<span style="min-width: 52px; text-align: center; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722">{{sliceLabel}}</span>
-<button onClick="{{slicePlus}}" aria-label="Slice 15 minutes longer" style="width: 30px; height: 30px; border-radius: 15px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; font-size: calc(15px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; padding: 0">+</button>
+<label for="sheet-slice" style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">Slice size</label>
+<select id="sheet-slice" value="{{sliceVal}}" onChange="{{onSlice}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; background: #FFFFFF"><sc-for list="{{sliceOpts}}" as="so" hint-placeholder-count="8"><option value="{{so.v}}">{{so.l}}</option></sc-for></select>
 </div>
+<div style="background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+<span style="font-family: {{TK.fHead}}; font-size: calc(22px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">{{bdHead}}</span>
+<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">{{bdSub}}</span>
 </div>
-<div style="background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px">
-<span style="font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">{{previewText}}</span>
-<div style="display: flex; gap: 6px; flex-wrap: wrap">
-<sc-for list="{{previewPieces}}" as="pp" hint-placeholder-count="4">
-<span style="height: 24px; padding: 0 8px; border-radius: 6px; background: {{TK.tFBEDEE}}; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; display: flex; align-items: center">{{pp.label}}</span>
-</sc-for>
+<div aria-hidden="true" style="display: flex; gap: 2px; height: 12px">
+<sc-for list="{{bdSegs}}" as="sg" hint-placeholder-count="6"><span style="flex: {{sg.flex}} 1 0px; min-width: 2px; background: {{sg.bg}}; border: {{sg.border}}; box-sizing: border-box; border-radius: 3px"></span></sc-for>
 </div>
-<span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{sliceHint}}</span>
+<span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{sliceHint}}</span>
 </div>
 </div>
 </sc-if>
@@ -956,23 +957,33 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="width: 22px; flex: none; text-align: right; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #6B6358">{{st.num}}</span>
 <label for="{{st.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Step {{st.num}} name</label>
 <input id="{{st.inputId}}" value="{{st.title}}" onChange="{{st.onTitle}}" placeholder="{{st.placeholder}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tIn}}px; max-height: 40px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(14px * {{fsK}}); color: #2B2722; background: #FFFFFF">
-<button onClick="{{st.minus}}" aria-label="Step {{st.num}} 15 minutes shorter" style="width: 28px; height: 28px; flex: none; border-radius: 14px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; padding: 0">−</button>
-<span style="width: 52px; flex: none; text-align: center; font-size: calc(14px * {{fsK}}); font-weight: 700">{{st.dur}}</span>
-<button onClick="{{st.plus}}" aria-label="Step {{st.num}} 15 minutes longer" style="width: 28px; height: 28px; flex: none; border-radius: 14px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; padding: 0">+</button>
-<button onClick="{{st.remove}}" aria-label="Remove step {{st.num}}" style="width: 36px; height: 36px; flex: none; border-radius: 18px; border: 0; background: transparent; color: #7A3208; display: flex; align-items: center; justify-content: center">
+<span aria-hidden="true" style="width: 4px; height: 26px; flex: none; border-radius: 2px; background: {{st.color}}"></span>
+<label for="{{st.inputId}}-d" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Step {{st.num}} length</label>
+<select id="{{st.inputId}}-d" value="{{st.minsVal}}" onChange="{{st.onMins}}" style="outline-color: {{TK.tA0526A}}; width: 84px; flex: none; height: 34px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; padding: 0 4px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF"><sc-for list="{{st.opts}}" as="sdo" hint-placeholder-count="8"><option value="{{sdo.v}}">{{sdo.l}}</option></sc-for></select>
+<button onClick="{{st.remove}}" aria-label="Remove step {{st.num}}" style="width: 32px; height: 32px; flex: none; border-radius: 18px; border: 0; background: transparent; color: #7A3208; display: flex; align-items: center; justify-content: center">
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
 </button>
 </div>
 </sc-for>
 <button onClick="{{addStep}}" style="flex: none; align-self: flex-start; height: 32px; border: 0; background: transparent; padding: 0 4px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">+ Add a step</button>
 </div>
-<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{stepsTotalColor}}; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 6px 8px 6px 12px"><span style="flex: 1; min-width: 0">{{stepsTotalText}}</span>
-<sc-if value="{{hasStepsFix}}" hint-placeholder-val="{{ false }}"><button onClick="{{stepsFix}}" style="height: 28px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: {{TK.tFBEDEE}}; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">{{stepsFixLabel}}</button></sc-if>
+<div style="flex: none; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-left: 4px solid {{bdAccent}}; border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
+<div aria-hidden="true" style="display: flex; gap: 2px; height: 10px">
+<sc-for list="{{bdSegs}}" as="sg" hint-placeholder-count="6"><span style="flex: {{sg.flex}} 1 0px; min-width: 2px; background: {{sg.bg}}; border: {{sg.border}}; box-sizing: border-box; border-radius: 3px"></span></sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<span aria-hidden="true" style="width: 20px; height: 20px; flex: none; border-radius: 10px; background: {{bdAccent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="{{bdIcon}}"></path></svg></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(13.5px * {{fsK}}); font-weight: 700; color: #2B2722">{{stepsTotalText}}</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{stepsTotalSub}}</span></span>
+<sc-if value="{{hasStepsFix}}" hint-placeholder-val="{{ false }}"><button onClick="{{stepsFix}}" style="height: 30px; flex: none; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.tFBEDEE}}; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; white-space: nowrap">{{stepsFixLabel}}</button></sc-if>
+</div>
 </div>
 </div>
 </sc-if>
 
-<div style="display: flex; gap: 8px; justify-content: flex-end">
+<div style="display: flex; gap: 8px; justify-content: flex-end; align-items: center">
+<sc-if value="{{sheetCanMerge}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{sheetMerge}}" style="height: 38px; margin-right: auto; padding: 0 12px; border-radius: 10px; border: 1px dashed {{TK.tC9849A}}; background: transparent; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Merge back into one task</button>
+</sc-if>
 <button onClick="{{closeSheet}}" style="height: 38px; padding: 0 14px; border-radius: 10px; border: 0; background: transparent; font-size: calc(14px * {{fsK}}); font-weight: 600; color: #6B6358">Cancel</button>
 <button onClick="{{applySheet}}" style="height: 38px; padding: 0 18px; border-radius: 10px; border: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(15px * {{fsK}}); font-weight: 700">{{applyLabel}}</button>
 </div>
@@ -6060,6 +6071,9 @@ class Component extends DCLogic {
       sheet: {
         taskId: null, groupId: gid, title: g.title, est: est, mode: 'steps', slice: 30,
         locked: lockedL.reduce((a, t) => a + (t.mins || 0), 0), lockedN: lockedL.length,
+        flag: (s.tasks.find(t => t.groupId === gid && t.flag) || {}).flag || null,
+        cat: (s.tasks.find(t => t.groupId === gid && t.cat) || {}).cat || null,
+        note: g.note || '',
         steps: pieces.length ? pieces.map((p, i) => ({ id: 'e' + i, srcId: p.id, title: p.title, mins: p.mins })) : [{ id: 'e0', title: '', mins: 30 }]
       },
       editing: null, sel: null
@@ -6111,9 +6125,9 @@ class Component extends DCLogic {
         if (src) { used[src.id] = true; KEEP.forEach(k => { if (src[k] !== undefined) nt[k] = src[k]; }); }
         return nt;
       });
-      tasks = before.concat(made, after);
+      tasks = before.concat(made, after).map(t => t.groupId === gid ? Object.assign({}, t, { flag: sh.flag || null, cat: sh.cat || null }) : t);
       const nm = (sh.title || '').trim();
-      groups[gid] = Object.assign({}, groups[gid], nm ? { title: nm } : {}, { mins: tasks.filter(t => t.groupId === gid).reduce((a, t) => a + (t.mins || 0), 0) });
+      groups[gid] = Object.assign({}, groups[gid], nm ? { title: nm } : {}, { note: sh.note || '' }, { mins: tasks.filter(t => t.groupId === gid).reduce((a, t) => a + (t.mins || 0), 0) });
     }
     {
       const gidR = sh.taskId ? 'g' + n : sh.groupId;
@@ -6127,7 +6141,7 @@ class Component extends DCLogic {
     this.setState({ tasks: tasks, groups: groups, sheet: null, nextId: n + 1 });
     this.setToast(sh.groupId ? 'Saved "' + ((sh.title || '').trim() || 'task') + '".' : pieces.length + ' pieces ready. Start with the first one.');
   }
-  mergeBack(gid) {
+  mergeBack(gid, extra) {
     const s = this.state;
     const g = s.groups[gid];
     const open = this.openPieces(gid);
@@ -6140,7 +6154,8 @@ class Component extends DCLogic {
     const groups = Object.assign({}, s.groups);
     let merged;
     if (!others.length) {
-      merged = { id: 'm' + s.nextId, title: g.title, mins: sum, pri: open[0].pri, bucket: open[0].bucket };
+      merged = { id: 'm' + s.nextId, title: g.title, mins: sum, pri: open[0].pri, bucket: open[0].bucket, weekOf: open[0].weekOf, cat: open[0].cat || null, flag: open[0].flag || null, note: g.note || '' };
+      if (extra) Object.keys(extra).forEach(k => { if (extra[k] !== undefined) merged[k] = extra[k]; });
       delete groups[gid];
     } else {
       merged = { id: 'm' + s.nextId, title: 'The rest', mins: sum, pri: open[0].pri, bucket: open[0].bucket, groupId: gid };
@@ -7350,10 +7365,14 @@ class Component extends DCLogic {
       const pieces = this.piecesFromSheet(sh);
       const stepTotal = sh.steps.reduce((a, x) => a + x.mins, 0);
       const diff = stepTotal - sh.est;
-      let totalText = this.fmtDur(stepTotal) + ' of ' + this.fmtDur(sh.est) + (sh.locked ? ' still open' : ' total');
-      if (diff < 0) totalText += ' · ' + this.fmtDur(-diff) + ' not assigned yet';
-      else if (diff > 0) totalText += ' · ' + this.fmtDur(diff) + ' more than you guessed. That is useful to know.';
-      else totalText += ' · right on target';
+      let totalText, totalSub;
+      if (diff === 0) { totalText = 'Adds up to ' + this.fmtDur(sh.est) + (sh.locked ? ' still open' : ''); totalSub = 'Right on target.'; }
+      else if (diff < 0) { totalText = this.fmtDur(-diff) + ' still to place'; totalSub = this.fmtDur(stepTotal) + ' of ' + this.fmtDur(sh.est) + ' is in steps so far.'; }
+      else { totalText = this.fmtDur(diff) + ' over the total'; totalSub = 'The steps add up to ' + this.fmtDur(stepTotal) + '. That is useful to know.'; }
+      const SEGC = [this.TK.t6E2F43, this.TK.tC9849A, this.TK.tA0526A, this.TK.tE2B9C4];
+      const segList = sh.mode === 'equal' ? pieces.map((pc, i) => ({ flex: pc.mins, bg: SEGC[i % 2], border: '0' }))
+        : sh.steps.map((st, i) => ({ flex: st.mins, bg: SEGC[i % 4], border: '0' })).concat(diff < 0 ? [{ flex: -diff, bg: 'transparent', border: '1.5px dashed ' + this.TK.tC9849A }] : []);
+      const durOpts = (cur) => { const o = []; for (let m = 15; m <= 480; m += 15) o.push({ v: String(m), l: this.fmtDur(m) }); if (cur > 480) o.push({ v: String(cur), l: this.fmtDur(cur) }); return o; };
       let preview = '';
       if (sh.mode === 'equal') {
         const full = pieces.filter(p => p.mins === sh.slice).length;
@@ -7361,8 +7380,26 @@ class Component extends DCLogic {
         preview = this.fmtDur(sh.est) + ' → ' + full + ' × ' + this.fmtDur(sh.slice);
         if (last && last.mins !== sh.slice) preview += ' + 1 × ' + this.fmtDur(last.mins);
       }
+      const full = pieces.filter(pc => pc.mins === sh.slice).length;
+      const odd = pieces.filter(pc => pc.mins !== sh.slice);
+      const okC = '#3F7A5A', warnC = '#B07A10', overC = '#9A4A3A';
       sheetVals = {
         sheetOpen: true,
+        bdSegs: segList,
+        bdHead: pieces.length + (pieces.length === 1 ? ' slice' : ' slices'),
+        bdSub: pieces.length === 1 ? 'One piece of ' + this.fmtDur(sh.est) : full + (full === 1 ? ' slice of ' : ' slices of ') + this.fmtDur(sh.slice) + (odd.length ? ', plus a shorter ' + this.fmtDur(odd[0].mins) + ' one' : '') + ' · ' + this.fmtDur(sh.est) + ' in all',
+        sliceVal: String(sh.slice),
+        sliceOpts: (() => { const o = []; [15, 30, 45, 60, 90, 120, 150, 180, 240].forEach(m => o.push({ v: String(m), l: this.fmtDur(m) })); if (o.every(x => +x.v !== sh.slice)) o.push({ v: String(sh.slice), l: this.fmtDur(sh.slice) }); return o.sort((a, b) => +a.v - +b.v); })(),
+        onSlice: (e) => this.patchSheet({ slice: Math.max(15, parseInt(e.target.value, 10) || 60) }),
+        bdAccent: diff === 0 ? okC : (diff < 0 ? warnC : overC),
+        bdIcon: diff === 0 ? 'M5 12.5l4.5 4.5L19 7.5' : (diff < 0 ? 'M12 7v6M12 17h.01' : 'M12 7v6M12 17h.01'),
+        stepsTotalSub: totalSub,
+        shFlag: sh.flag || '', onShFlag: (e) => this.patchSheet({ flag: e.target.value || null }),
+        shCat: sh.cat || '', onShCat: (e) => this.patchSheet({ cat: e.target.value || null }),
+        shCatOpts: [{ v: '', l: 'No category' }].concat(this.CAT_ORDER.map(k => ({ v: k, l: this.CATS[k].name }))),
+        shNote: sh.note || '', onShNote: (e) => this.patchSheet({ note: e.target.value }),
+        sheetCanMerge: !!sh.groupId && this.openPieces(sh.groupId).length > 0,
+        sheetMerge: () => { const c = this.state.sheet; if (!c || !c.groupId) return; this.mergeBack(c.groupId, { title: (c.title || '').trim() || undefined, mins: c.est + 0, flag: c.flag || null, cat: c.cat || null, note: c.note || '' }); this.setState({ sheet: null }); },
         sheetTitle: sh.title,
         sheetIsGroup: !!sh.groupId, sheetNotGroup: !sh.groupId,
         sheetKicker: sh.groupId ? 'Edit the whole task' : 'Break it up',
@@ -7407,6 +7444,8 @@ class Component extends DCLogic {
           title: st.title,
           placeholder: i === 0 ? 'First step, e.g. Watch the lecture' : 'Step ' + (i + 1),
           dur: this.fmtDur(st.mins),
+          color: SEGC[i % 4], minsVal: String(st.mins), opts: durOpts(st.mins),
+          onMins: (e) => { const v = parseInt(e.target.value, 10) || 30; this.patchSheet({ steps: this.state.sheet.steps.map(x => x.id === st.id ? Object.assign({}, x, { mins: v }) : x) }); },
           onTitle: (e) => { const v = e.target.value; this.patchSheet({ steps: this.state.sheet.steps.map(x => x.id === st.id ? Object.assign({}, x, { title: v }) : x) }); },
           minus: () => this.patchSheet({ steps: sh.steps.map(x => x.id === st.id ? Object.assign({}, x, { mins: Math.max(15, x.mins - 15) }) : x) }),
           plus: () => this.patchSheet({ steps: sh.steps.map(x => x.id === st.id ? Object.assign({}, x, { mins: Math.min(480, x.mins + 15) }) : x) }),
@@ -7414,7 +7453,7 @@ class Component extends DCLogic {
         })),
         addStep: () => this.patchSheet({ steps: sh.steps.concat([{ id: 'n' + Date.now(), title: '', mins: 30 }]) }),
         stepsTotalText: totalText,
-        stepsTotalColor: diff > 0 ? '#7A3208' : '#2B2722',
+        stepsTotalColor: '#2B2722',
         applyLabel: sh.groupId ? 'Save' : 'Make ' + pieces.length + (pieces.length === 1 ? ' piece' : ' pieces'),
         closeSheet: () => this.setState({ sheet: null }),
         applySheet: () => this.applySheet()
