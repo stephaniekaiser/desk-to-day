@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 11:13 AM';</script>
+<script>window.__plannerBuild = 'Oct 25, 11:17 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -865,9 +865,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.15; color: {{TK.t6E2F43}}">{{sheetTitle}}</h2>
 <p style="margin: 0; font-size: calc(14px * {{fsK}}); color: #6B6358">{{sheetSub}}</p>
 </header>
-<div role="tablist" aria-label="How to break it up" style="display: flex; gap: 4px; background: #EFE7D6; border-radius: 12px; padding: 4px">
-<button role="tab" aria-selected="{{eqSel}}" onClick="{{modeEqual}}" style="flex: 1; height: 44px; border: 0; border-radius: 9px; background: {{eqBg}}; color: #1F2A33; font-size: calc(15px * {{fsK}}); font-weight: 700; box-shadow: {{eqShadow}}">Equal slices</button>
-<button role="tab" aria-selected="{{stSel}}" onClick="{{modeSteps}}" style="flex: 1; height: 44px; border: 0; border-radius: 9px; background: {{stBg}}; color: #1F2A33; font-size: calc(15px * {{fsK}}); font-weight: 700; box-shadow: {{stShadow}}">Name the steps</button>
+<div role="tablist" aria-label="How to break it up" style="align-self: flex-start; display: flex; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
+<button role="tab" aria-selected="{{eqSel}}" onClick="{{modeEqual}}" style="height: 30px; padding: 0 14px; border: 0; border-radius: 6px; background: {{eqBg}}; color: {{eqFg}}; font-size: calc(13px * {{fsK}}); font-weight: 700; box-shadow: {{eqShadow}}">Equal slices</button>
+<button role="tab" aria-selected="{{stSel}}" onClick="{{modeSteps}}" style="height: 30px; padding: 0 14px; border: 0; border-radius: 6px; background: {{stBg}}; color: {{stFg}}; font-size: calc(13px * {{fsK}}); font-weight: 700; box-shadow: {{stShadow}}">Name the steps</button>
 </div>
 
 <sc-if value="{{sheetEqual}}" hint-placeholder-val="{{ true }}">
@@ -876,21 +876,21 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">Slice size</span>
 <div style="display: flex; gap: 6px; flex-wrap: wrap">
 <sc-for list="{{sliceChips}}" as="sc" hint-placeholder-count="6">
-<button onClick="{{sc.set}}" aria-pressed="{{sc.pressed}}" style="height: 40px; padding: 0 14px; border-radius: 20px; border: {{sc.border}}; background: {{sc.bg}}; color: {{sc.fg}}; font-size: calc(14px * {{fsK}}); font-weight: 700">{{sc.label}}</button>
+<button onClick="{{sc.set}}" aria-pressed="{{sc.pressed}}" style="height: 30px; min-width: 42px; padding: 0 10px; border-radius: 15px; border: {{sc.border}}; background: {{sc.bg}}; color: {{sc.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{sc.label}}</button>
 </sc-for>
 </div>
 <div style="display: flex; align-items: center; gap: 10px">
 <span style="font-size: calc(13px * {{fsK}}); color: #6B6358">Or your own:</span>
-<button onClick="{{sliceMinus}}" aria-label="Slice 15 minutes shorter" style="width: 40px; height: 40px; border-radius: 20px; border: 1.5px solid #2B2722; background: #FFFFFF; font-size: calc(18px * {{fsK}}); font-weight: 700; color: #2B2722">−</button>
-<span style="min-width: 64px; text-align: center; font-size: calc(16px * {{fsK}}); font-weight: 700">{{sliceLabel}}</span>
-<button onClick="{{slicePlus}}" aria-label="Slice 15 minutes longer" style="width: 40px; height: 40px; border-radius: 20px; border: 1.5px solid #2B2722; background: #FFFFFF; font-size: calc(18px * {{fsK}}); font-weight: 700; color: #2B2722">+</button>
+<button onClick="{{sliceMinus}}" aria-label="Slice 15 minutes shorter" style="width: 30px; height: 30px; border-radius: 15px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; font-size: calc(15px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; padding: 0">−</button>
+<span style="min-width: 52px; text-align: center; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722">{{sliceLabel}}</span>
+<button onClick="{{slicePlus}}" aria-label="Slice 15 minutes longer" style="width: 30px; height: 30px; border-radius: 15px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; font-size: calc(15px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; padding: 0">+</button>
 </div>
 </div>
-<div style="background: #FFFFFF; border: 1.5px solid #D8CDB6; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px">
-<span style="font-family: {{TK.fHead}}; font-size: calc(22px * {{fsK}}); font-weight: 600; color: #1F2A33">{{previewText}}</span>
+<div style="background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">{{previewText}}</span>
 <div style="display: flex; gap: 6px; flex-wrap: wrap">
 <sc-for list="{{previewPieces}}" as="pp" hint-placeholder-count="4">
-<span style="height: 30px; padding: 0 10px; border-radius: 8px; background: #E6EEF5; color: #1F3B5C; font-size: calc(13px * {{fsK}}); font-weight: 700; display: flex; align-items: center">{{pp.label}}</span>
+<span style="height: 24px; padding: 0 8px; border-radius: 6px; background: {{TK.tFBEDEE}}; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; display: flex; align-items: center">{{pp.label}}</span>
 </sc-for>
 </div>
 <span style="font-size: calc(12px * {{fsK}}); color: #6B6358">You can rename any slice later with Edit pieces.</span>
@@ -905,24 +905,24 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; align-items: center; gap: 6px; flex: none">
 <span style="width: 22px; flex: none; text-align: right; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #6B6358">{{st.num}}</span>
 <label for="{{st.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Step {{st.num}} name</label>
-<input id="{{st.inputId}}" value="{{st.title}}" onChange="{{st.onTitle}}" placeholder="{{st.placeholder}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 44px; box-sizing: border-box; border: 1.5px solid #D8CDB6; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(15px * {{fsK}}); color: #2B2722; background: #FFFFFF">
-<button onClick="{{st.minus}}" aria-label="Step {{st.num}} 15 minutes shorter" style="width: 36px; height: 36px; flex: none; border-radius: 18px; border: 1.5px solid #2B2722; background: #FFFFFF; font-size: calc(16px * {{fsK}}); font-weight: 700; color: #2B2722">−</button>
+<input id="{{st.inputId}}" value="{{st.title}}" onChange="{{st.onTitle}}" placeholder="{{st.placeholder}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tIn}}px; max-height: 40px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(14px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+<button onClick="{{st.minus}}" aria-label="Step {{st.num}} 15 minutes shorter" style="width: 28px; height: 28px; flex: none; border-radius: 14px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; padding: 0">−</button>
 <span style="width: 52px; flex: none; text-align: center; font-size: calc(14px * {{fsK}}); font-weight: 700">{{st.dur}}</span>
-<button onClick="{{st.plus}}" aria-label="Step {{st.num}} 15 minutes longer" style="width: 36px; height: 36px; flex: none; border-radius: 18px; border: 1.5px solid #2B2722; background: #FFFFFF; font-size: calc(16px * {{fsK}}); font-weight: 700; color: #2B2722">+</button>
+<button onClick="{{st.plus}}" aria-label="Step {{st.num}} 15 minutes longer" style="width: 28px; height: 28px; flex: none; border-radius: 14px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; padding: 0">+</button>
 <button onClick="{{st.remove}}" aria-label="Remove step {{st.num}}" style="width: 36px; height: 36px; flex: none; border-radius: 18px; border: 0; background: transparent; color: #7A3208; display: flex; align-items: center; justify-content: center">
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
 </button>
 </div>
 </sc-for>
-<button onClick="{{addStep}}" style="flex: none; height: 44px; border: 1.5px dashed #6B6358; border-radius: 10px; background: transparent; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722">+ Add a step</button>
+<button onClick="{{addStep}}" style="flex: none; align-self: flex-start; height: 32px; border: 0; background: transparent; padding: 0 4px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">+ Add a step</button>
 </div>
-<div style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{stepsTotalColor}}; background: #FFFFFF; border: 1.5px solid #D8CDB6; border-radius: 10px; padding: 10px 12px">{{stepsTotalText}}</div>
+<div style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{stepsTotalColor}}; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 8px 12px">{{stepsTotalText}}</div>
 </div>
 </sc-if>
 
 <div style="display: flex; gap: 8px; justify-content: flex-end">
-<button onClick="{{closeSheet}}" style="height: 48px; padding: 0 18px; border-radius: 12px; border: 1.5px solid #D8CDB6; background: transparent; font-size: calc(15px * {{fsK}}); font-weight: 700; color: #2B2722">Cancel</button>
-<button onClick="{{applySheet}}" style="height: 48px; padding: 0 20px; border-radius: 12px; border: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(15px * {{fsK}}); font-weight: 700">{{applyLabel}}</button>
+<button onClick="{{closeSheet}}" style="height: 38px; padding: 0 14px; border-radius: 10px; border: 0; background: transparent; font-size: calc(14px * {{fsK}}); font-weight: 600; color: #6B6358">Cancel</button>
+<button onClick="{{applySheet}}" style="height: 38px; padding: 0 18px; border-radius: 10px; border: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(15px * {{fsK}}); font-weight: 700">{{applyLabel}}</button>
 </div>
 </div>
 </sc-if>
@@ -7193,6 +7193,7 @@ class Component extends DCLogic {
         sheetEqual: sh.mode === 'equal', sheetSteps: sh.mode === 'steps',
         eqSel: sh.mode === 'equal' ? 'true' : 'false', stSel: sh.mode === 'steps' ? 'true' : 'false',
         eqBg: sh.mode === 'equal' ? '#FFFFFF' : 'transparent', stBg: sh.mode === 'steps' ? '#FFFFFF' : 'transparent',
+        eqFg: sh.mode === 'equal' ? this.TK.t6E2F43 : '#6B6358', stFg: sh.mode === 'steps' ? this.TK.t6E2F43 : '#6B6358',
         eqShadow: sh.mode === 'equal' ? '0 1px 3px rgba(0,0,0,0.15)' : 'none',
         stShadow: sh.mode === 'steps' ? '0 1px 3px rgba(0,0,0,0.15)' : 'none',
         modeEqual: () => this.patchSheet({ mode: 'equal' }),
@@ -7201,8 +7202,8 @@ class Component extends DCLogic {
           const on = sh.slice === m;
           return {
             label: this.fmtDur(m), pressed: on ? 'true' : 'false',
-            bg: on ? '#1E3A5F' : '#FFFFFF', fg: on ? '#FFFFFF' : '#2B2722',
-            border: on ? '0' : '1.5px solid #D8CDB6',
+            bg: on ? this.TK.t6E2F43 : '#FFFFFF', fg: on ? '#FFFFFF' : '#4A443B',
+            border: on ? '1px solid transparent' : '1px solid #E2D8C4',
             set: () => this.patchSheet({ slice: m })
           };
         }),
