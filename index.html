@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 10:37 AM';</script>
+<script>window.__plannerBuild = 'Oct 25, 10:48 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1265,14 +1265,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 <sc-if value="{{notPlacing}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; align-items: center; gap: 8px; min-height: 26px">
-<div style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 4px; overflow: hidden">
-<sc-for list="{{daySpecials}}" as="sp" hint-placeholder-count="1">
-<button onClick="{{sp.open}}" aria-label="{{sp.full}}" title="{{sp.full}}" style="flex: 0 1 auto; min-width: 0; height: 24px; box-sizing: border-box; display: flex; align-items: center; gap: 5px; border: {{sp.border}}; border-radius: 6px; background: {{sp.bg}}; color: {{sp.fg}}; padding: 0 8px; font-size: calc(12px * {{fsK}}); font-weight: 600">
-<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="{{sp.icon}}"></path></svg>
-<span style="min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{sp.label}}</span>
-</button>
-</sc-for>
-</div>
+<span style="flex: 1"></span>
 <div role="group" aria-label="Calendar zoom" style="display: flex; flex: none; gap: 1px; background: #EFE7D6; border-radius: 7px; padding: 2px">
 <sc-for list="{{zoomBtns}}" as="zb" hint-placeholder-count="3">
 <button onClick="{{zb.set}}" aria-pressed="{{zb.pressed}}" style="height: 22px; padding: 0 7px; border: 0; border-radius: 5px; background: {{zb.bg}}; color: {{zb.fg}}; font-size: calc(10.5px * {{fsK}}); font-weight: 700; box-shadow: {{zb.shadow}}">{{zb.label}}</button>
@@ -1281,7 +1274,21 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-if>
 
-<div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; border-top: 1.5px solid #2B2722; padding-top: 10px">
+<sc-if value="{{dsHasStrip}}" hint-placeholder-val="{{ false }}">
+<div role="list" aria-label="All day" style="display: flex; align-items: flex-start; gap: 8px; border-top: 1.5px solid #2B2722; padding: 6px 0 6px">
+<span style="width: 50px; flex: none; padding-top: 5px; text-align: right; font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #6B6358">All day</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<sc-for list="{{daySpecials}}" as="sp" hint-placeholder-count="1">
+<button role="listitem" onClick="{{sp.open}}" aria-label="{{sp.full}}" title="{{sp.full}}" style="width: 100%; min-width: 0; height: 26px; box-sizing: border-box; display: flex; align-items: center; gap: 6px; border: {{sp.border}}; border-left: 4px solid {{sp.fg}}; border-radius: 6px; background: {{sp.bg}}; color: {{sp.fg}}; padding: 0 8px; text-align: left; font-size: calc(12.5px * {{fsK}}); font-weight: 700">
+<svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="{{sp.icon}}"></path></svg>
+<span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{sp.label}}</span>
+<sc-if value="{{sp.hasSpan}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: calc(11px * {{fsK}}); font-weight: 600; opacity: 0.85">{{sp.span}}</span></sc-if>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; border-top: {{calTopLine}}; padding-top: 10px">
 <sc-if value="{{hasEarly}}" hint-placeholder-val="{{ false }}">
 <button onClick="{{toggleEarly}}" style="width: 100%; min-height: 30px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; border: 1px dashed #D6CCB8; border-radius: 8px; background: #F6F1E6; padding: 4px 10px; font-size: calc(12px * {{fsK}}); color: #5E5546; text-align: left">
 <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transform: {{earlyChev}}"><path d="M6 9l6 6 6-6"></path></svg>
@@ -6632,7 +6639,8 @@ class Component extends DCLogic {
     const vs = W.vs, ve = W.ve, WL = ve - vs;
     const vhNow = Math.max(560, s.vh || 834);
     const narrow = (s.vw || 1194) < 900;
-    const PH = s.zoom === 'whole' ? Math.max(20, Math.floor((vhNow - 364 - (narrow ? 54 : 0)) / (WL / 60))) : ({ comfy: 64, compact: 44 }[s.zoom] || 64);
+    const stripH = s.view === 'day' ? (() => { const k = this.specialsFor(s.day).length; return k ? 14 + k * 29 : 0; })() : 0;
+    const PH = s.zoom === 'whole' ? Math.max(20, Math.floor((vhNow - 364 - stripH - (narrow ? 54 : 0)) / (WL / 60))) : ({ comfy: 64, compact: 44 }[s.zoom] || 64);
     const kpm = PH / 60;
     this.kpm = kpm;
     const CH = 44;
@@ -8662,9 +8670,14 @@ class Component extends DCLogic {
         sdToggleUs: () => this.setState({ settings: Object.assign({}, this.state.settings, { usHolidays: this.state.settings.usHolidays === false }) }),
         sdAdd: () => { const n = this.state.nextId; this.setState({ specials: (this.state.specials || []).concat([{ id: 'sp' + n, title: '', sticker: 'cake', m: this.M0, d: this.D0, year: null, remind: 0 }]), sdOpen: 'sp' + n, nextId: n + 1 }); },
         sdAddOnce: () => { const n = this.state.nextId; this.setState({ allDay: (this.state.allDay || []).concat([{ id: 'ad' + n, title: '', start: 0, end: 0, sticker: 'calendar' }]), sdOpen: 'ad' + n, nextId: n + 1 }); },
+        dsHasStrip: this.specialsFor(s.day).length > 0,
+        calTopLine: this.specialsFor(s.day).length > 0 ? '1px solid #E0D6C2' : '1.5px solid #2B2722',
         daySpecials: this.specialsFor(s.day).map(x => {
           const st = this.spStyle(x);
+          const ad = x.kind === 'once' ? (s.allDay || []).find(a2 => a2.id === x.id) : null;
+          const len = ad && typeof ad.end === 'number' ? ad.end - ad.start + 1 : 1;
           return {
+            hasSpan: len > 1, span: len > 1 ? 'day ' + (s.day - ad.start + 1) + ' of ' + len : '',
             label: x.label, icon: st.icon, bg: st.bg, fg: st.fg, border: st.border,
             full: (x.kind === 'heads' ? 'Coming up: ' : '') + x.label + (x.kind === 'once' ? ', all day. Tap to edit.' : x.kind === 'due' ? '. Tap to open the course.' : '. Tap to edit special days.'),
             open: () => { if (x.kind === 'once') { this.openAllDay(x.id); return; } if (x.kind === 'due') { this.setState({ view: 'school', selCourse: x.cid, schoolNew: null, courseTab: 'as', asOpen: x.aid, sel: null }); return; } this.setState({ view: 'settings', setSec: 'always', alwaysTab: 'special', sdOpen: x.id || null, showSetup: false, sel: null, menuFor: null, missFor: null }); }
