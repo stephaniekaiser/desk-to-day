@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 10:57 AM';</script>
+<script>window.__plannerBuild = 'Oct 25, 11:00 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -4704,9 +4704,9 @@ class Component extends DCLogic {
     return [
       'Type,Name,Date,End Date,Start,End,Section,Flag,Hours,Minutes,Category,Notes,Repeat',
       'Task,Prepare for the conference,2026-11-04,,,,Must,Important,2,0,Work,"Badge, chargers, business cards",',
-      'Task,- Pack pant suit,,,,,,,0,15,,,',
-      'Task,- Book hotel,,,,,,,0,30,,,',
-      'Task,- Confirm registration,,,,,,,0,10,,,',
+      'Step,Pack pant suit,,,,,,,0,15,,,',
+      'Step,Book hotel,,,,,,,0,30,,,',
+      'Step,Confirm registration,,,,,,,0,10,,,',
       'Task,Call the dentist,today,,,,Should,,0,15,Health,Ask about the January opening,',
       'Task,Renew passport,,,,,,,0,30,,Leave it on the desk until I sort it,',
       'Event,Dentist appointment,2026-11-06,,9:00 AM,9:45 AM,,,,,Health,Bring insurance card,',
@@ -4775,10 +4775,12 @@ class Component extends DCLogic {
       const g = (i) => i >= 0 && i < r.length ? String(r[i]).trim() : '';
       const title = g(C.task);
       if (!title) { out.errors.push('Row ' + row + ' has no name, so it was skipped.'); return; }
-      const sub = title.match(/^[-–—•*]\s*(.*)$/);
+      const typ0 = norm(g(C.type));
+      const dash = title.match(/^[-–—•*>]\s*(.*)$/);
+      const sub = /^(step|sub|subtask|checklist)/.test(typ0) ? [title, title.replace(/^[-–—•*>]\s*/, '')] : dash;
       if (sub) {
         const txt = sub[1].trim();
-        if (!lastTask) { out.errors.push('Row ' + row + ' starts with a dash but has no task above it, so it was skipped.'); return; }
+        if (!lastTask) { out.errors.push('Row ' + row + ': the step "' + txt + '" has no task above it, so it was skipped.'); return; }
         if (!txt) return;
         const sh = parseFloat(g(C.h)) || 0, sm2 = parseFloat(g(C.m)) || 0;
         lastTask.checklist = (lastTask.checklist || []).concat([{ id: 'ck' + (n++), text: txt, done: false, mins: Math.max(0, Math.round(sh * 60 + sm2)) }]);
