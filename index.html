@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 7:54 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 7:55 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -335,8 +335,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="font-size: calc(15px * {{fsK}}); font-weight: 700; color: #1F2A33; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.title}}</span>
 <span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{t.progress}}</span>
 </div>
-<button onClick="{{t.edit}}" style="height: 34px; flex: none; padding: 0 10px; border-radius: 17px; border: 1.5px solid #D8CDB6; background: #FFFFFF; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">Edit pieces</button>
-<button onClick="{{t.merge}}" style="height: 34px; flex: none; padding: 0 10px; border-radius: 17px; border: 1.5px dashed #6B6358; background: transparent; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #4A443B">Merge back</button>
+<button onClick="{{t.edit}}" aria-label="Edit the whole task" title="Edit the whole task" style="width: calc(32px * {{rowK}}); height: calc(32px * {{rowK}}); flex: none; border: 0; border-radius: 16px; background: transparent; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4zM13.5 6.5l4 4"></path></svg></button>
+<button onClick="{{t.merge}}" aria-label="Merge back into one task" title="Merge back into one task" style="width: calc(32px * {{rowK}}); height: calc(32px * {{rowK}}); flex: none; border: 0; border-radius: 16px; background: transparent; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v5a6 6 0 0 0 6 6M18 3v5a6 6 0 0 1-6 6v7M9 18l3 3 3-3"></path></svg></button>
 </div>
 </sc-if>
 <sc-if value="{{t.isTask}}" hint-placeholder-val="{{ true }}">
