@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 8:52 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 8:56 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1055,6 +1055,17 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{sheetSteps}}" hint-placeholder-val="{{ false }}">
 <div style="flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 10px">
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 4px">
+<sc-if value="{{hasLocked2}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{lockedRows}}" as="lr2" hint-placeholder-count="1">
+<div title="Done or on the calendar, so it stays as it is" style="display: flex; align-items: center; gap: 6px; flex: none; min-height: 34px; padding: 0 2px">
+<span aria-hidden="true" style="width: 22px; flex: none; display: flex; justify-content: flex-end; color: {{TK.tA0526A}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{lr2.icon}}"></path></svg></span>
+<span style="flex: 1; min-width: 0; padding: 0 10px; font-size: calc(14px * {{fsK}}); color: #7A7064; text-decoration: {{lr2.strike}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{lr2.title}}</span>
+<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #7A7064">{{lr2.status}}</span>
+<span style="width: 84px; flex: none; text-align: center; font-size: calc(13.5px * {{fsK}}); font-weight: 700; color: #7A7064">{{lr2.dur}}</span>
+<span style="width: 32px; flex: none"></span>
+</div>
+</sc-for>
+</sc-if>
 <sc-for list="{{stepRows}}" as="st" hint-placeholder-count="3">
 <div style="display: flex; align-items: center; gap: 6px; flex: none">
 <span style="width: 22px; flex: none; text-align: right; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #6B6358">{{st.num}}</span>
@@ -1070,9 +1081,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button onClick="{{addStep}}" style="flex: none; align-self: flex-start; height: 32px; border: 0; background: transparent; padding: 0 4px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">+ Add a step</button>
 </div>
 <div style="flex: none; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-left: 4px solid {{bdAccent}}; border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
-<div aria-hidden="true" style="display: flex; gap: 2px; height: 10px">
+<sc-if value="{{bdShowBar}}" hint-placeholder-val="{{ true }}"><div aria-hidden="true" style="display: flex; gap: 2px; height: 10px">
 <sc-for list="{{bdSegs}}" as="sg" hint-placeholder-count="6"><span style="flex: {{sg.flex}} 1 0px; min-width: 2px; background: {{sg.bg}}; border: {{sg.border}}; box-sizing: border-box; border-radius: 3px"></span></sc-for>
-</div>
+</div></sc-if>
 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
 <span aria-hidden="true" style="width: 20px; height: 20px; flex: none; border-radius: 10px; background: {{bdAccent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="{{bdIcon}}"></path></svg></span>
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(13.5px * {{fsK}}); font-weight: 700; color: #2B2722">{{stepsTotalText}}</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{stepsTotalSub}}</span></span>
@@ -7673,7 +7684,7 @@ class Component extends DCLogic {
       totalSub = (sh.locked ? this.fmtDur(sh.locked) + ' done or on the calendar · ' : '') + this.fmtDur(stepTotal) + ' in the steps' + (diff < 0 ? ' · ' + this.fmtDur(-diff) + ' open' : '') + ' · ' + this.fmtDur(totAll) + ' total';
       const SEGC = [this.TK.t6E2F43, this.TK.tC9849A, this.TK.tA0526A, this.TK.tE2B9C4];
       const segList = sh.mode === 'equal' ? pieces.map((pc, i) => ({ flex: pc.mins, bg: SEGC[i % 2], border: '0' }))
-        : [].concat((sh.locked || 0) + Math.min(stepTotal, sh.est) ? [{ flex: (sh.locked || 0) + Math.min(stepTotal, sh.est), bg: diff === 0 ? '#3F7A5A' : this.TK.t6E2F43, border: '0' }] : [], diff < 0 ? [{ flex: -diff, bg: 'transparent', border: '1.5px dashed ' + this.TK.tC9849A }] : [], diff > 0 ? [{ flex: diff, bg: '#C4483A', border: '0' }] : []);
+        : [].concat((sh.locked || 0) + Math.min(stepTotal, sh.est) ? [{ flex: (sh.locked || 0) + Math.min(stepTotal, sh.est), bg: this.TK.t6E2F43, border: '0' }] : [], diff < 0 ? [{ flex: -diff, bg: 'transparent', border: '1.5px dashed ' + this.TK.tC9849A }] : [], diff > 0 ? [{ flex: diff, bg: '#C4483A', border: '0' }] : []);
       const durOpts = (cur) => { const o = []; for (let m = 15; m <= 480; m += 15) o.push({ v: String(m), l: this.fmtDur(m) }); if (cur > 480) o.push({ v: String(cur), l: this.fmtDur(cur) }); return o; };
       let preview = '';
       if (sh.mode === 'equal') {
@@ -7684,7 +7695,7 @@ class Component extends DCLogic {
       }
       const full = pieces.filter(pc => pc.mins === sh.slice).length;
       const odd = pieces.filter(pc => pc.mins !== sh.slice);
-      const okC = '#3F7A5A', warnC = '#B07A10', overC = '#9A4A3A';
+      const okC = this.TK.t6E2F43, warnC = this.TK.tC9849A, overC = '#9A4A3A';
       sheetVals = {
         sheetOpen: true,
         bdSegs: segList,
@@ -7701,6 +7712,9 @@ class Component extends DCLogic {
         totDown: () => { const c = this.state.sheet; this.patchSheet({ est: Math.max(15, c.est - 60) }); },
         onSlice: (e) => this.patchSheet({ slice: Math.max(15, parseInt(e.target.value, 10) || 60) }),
         bdAccent: diff === 0 ? okC : (diff < 0 ? warnC : overC),
+        bdShowBar: diff !== 0,
+        lockedRows: sh.groupId ? (() => { const sm4 = this.schedMap(); const openIds = this.openPieces(sh.groupId).map(t => t.id); return this.state.tasks.filter(t => t.groupId === sh.groupId && openIds.indexOf(t.id) < 0).map(t => { const sc = sm4[t.id]; return { title: t.title, dur: this.fmtDur(t.mins || 0), status: t.done ? 'Done' : (sc ? (sc.day === 0 ? 'Today' : sc.day === 1 ? 'Tomorrow' : this.DSHORT[this.dowFor(sc.day)] + ' ' + this.dateFor(sc.day).getDate()) + ' ' + this.fmtTime(sc.start, false) : 'Planned'), strike: t.done ? 'line-through' : 'none', icon: t.done ? 'M5 12.5l4.5 4.5L19 7.5' : 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 7v5l3 2' }; }); })() : [],
+        hasLocked2: !!sh.groupId && (sh.lockedN || 0) > 0,
         bdIcon: diff === 0 ? 'M5 12.5l4.5 4.5L19 7.5' : (diff < 0 ? 'M12 7v6M12 17h.01' : 'M12 7v6M12 17h.01'),
         stepsTotalSub: totalSub,
         shFlag: sh.flag || '', onShFlag: (e) => this.patchSheet({ flag: e.target.value || null }),
