@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 5:37 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 5:58 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2761,11 +2761,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <sc-if value="{{rs.open}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 6px; padding: 0 12px 10px; border-top: 1px solid #F1EBDD">
 <div style="display: flex; align-items: center; gap: 10px; padding-top: 6px">
-<button onClick="{{rs.detToggle}}" aria-expanded="{{rs.detOpenA}}" style="flex: 1; min-width: 0; height: 30px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 6px; color: #6B6358; text-align: left">
-<svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transform: {{rs.detChev}}"><path d="M9 5l7 7-7 7"></path></svg>
-<span style="flex: none; font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Details</span>
-<span style="min-width: 0; font-size: calc(12px * {{fsK}}); color: #8A8174; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{rs.detSummary}}</span>
-</button>
+<span style="flex: 1; min-width: 0"></span>
 <button role="switch" aria-checked="{{rs.inPlan}}" onClick="{{rs.togglePlan}}" style="flex: none; height: 30px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 6px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #4A443B">In plan<span aria-hidden="true" style="position: relative; width: 34px; height: 20px; border-radius: 10px; background: {{rs.planTrack}}"><span style="position: absolute; top: 3px; left: {{rs.planKnob}}px; width: 14px; height: 14px; border-radius: 7px; background: #FFFFFF"></span></span></button>
 </div>
 <sc-if value="{{rs.detOpen}}" hint-placeholder-val="{{ false }}">
@@ -9521,7 +9517,7 @@ class Component extends DCLogic {
             toggle: () => this.setState({ resOpen: this.state.resOpen === r.id ? null : r.id }),
             hasUrl: /^\s*(https?:\/\/)?[^\s.]+\.[^\s]+/i.test(u) && !/^\s*javascript:/i.test(u),
             urlHref: /^https?:\/\//i.test(u) ? u : (u ? 'https://' + u : ''),
-            detOpen: det, detOpenA: det ? 'true' : 'false', detChev: det ? 'rotate(90deg)' : 'none',
+            detOpen: true, detOpenA: det ? 'true' : 'false', detChev: det ? 'rotate(90deg)' : 'none',
             detToggle: () => this.setState({ resDetails: this.state.resDetails === r.id ? null : r.id }),
             detSummary: [r.author, r.isbn ? 'ISBN ' + r.isbn : ''].filter(x => (x || '').trim()).join(' · ') || 'Author, ISBN, link',
             author: r.author || '', isbn: r.isbn || '', url: r.url || '',
