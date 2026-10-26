@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:03 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:07 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2900,14 +2900,10 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </sc-if>
 <sc-if value="{{scTabAs}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; align-items: center; gap: 8px">
-<label for="as-quick" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Quick add an assignment</label>
-<input id="as-quick" value="{{asQuick}}" onChange="{{asOnQuick}}" onInput="{{asOnQuick}}" onKeyDown="{{asQuickKey}}" autocomplete="off" placeholder="Like: Essay 2, due Nov 14, about 6h" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1; height: 38px; font-size: calc(14px * {{fsK}})">
-<button onClick="{{scAddAssign}}" style="height: 38px; flex: none; padding: 0 12px; border: 1.5px solid {{TK.tE2B9C4}}; border-radius: 10px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(13px * {{fsK}}); font-weight: 700">+ Blank</button>
-</div>
-<sc-if value="{{asNone}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Essays, practice tests, projects and exams go here. Type one above and press Enter. Due dates show up on your Week and Month pages.</p></sc-if>
+<button onClick="{{scAddAssign}}" style="align-self: flex-start; height: 36px; flex: none; padding: 0 14px 0 10px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; gap: 6px; font-size: calc(13.5px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add assignment</button>
+<sc-if value="{{asNone}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Essays, practice tests, projects and exams go here. Tap Add assignment to start one. Due dates show up on your Week and Month pages.</p></sc-if>
 <sc-for list="{{asList}}" as="a" hint-placeholder-count="2">
-<div style="flex: none; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; display: flex; flex-direction: column; opacity: {{a.op}}">
+<div style="flex: none; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; display: flex; flex-direction: column; opacity: {{a.op}}">
 <div style="display: flex; align-items: center; gap: 8px; min-height: calc(52px * {{rowK}}); padding: 4px 8px 4px 4px">
 <button onClick="{{a.toggle}}" aria-expanded="{{a.openA}}" aria-label="Details for {{a.title}}" style="width: 30px; height: 30px; flex: none; border: 0; background: transparent; padding: 0; display: flex; align-items: center; justify-content: center; color: #8A8174"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="transform: {{a.chev}}"><path d="M9 5l7 7-7 7"></path></svg></button>
 <button role="checkbox" aria-checked="{{a.done}}" onClick="{{a.toggleDone}}" aria-label="{{a.title}} done" style="width: 22px; height: 22px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 6px; background: {{a.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button>
@@ -2915,30 +2911,30 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; text-decoration: {{a.strike}}">{{a.title}}</span>
 <span style="font-size: calc(12px * {{fsK}}); color: {{a.dueFg}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%">{{a.kind}} · {{a.due}}</span>
 </button>
-<sc-if value="{{a.hasCl}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: calc(11.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; background: {{TK.tFBEDEE}}; border-radius: 10px; padding: 2px 7px">{{a.clCount}}</span></sc-if>
+<sc-if value="{{a.hasCl}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: calc(11.5px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">{{a.clCount}} steps</span></sc-if>
 <sc-if value="{{a.hasMins}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">{{a.mins}}</span></sc-if>
 <sc-if value="{{a.hasUrl}}" hint-placeholder-val="{{ false }}"><a href="{{a.urlHref}}" target="_blank" rel="noopener" aria-label="Open the link for {{a.title}}" title="Open link" style="width: 30px; height: 30px; flex: none; border-radius: 15px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a></sc-if>
 </div>
 <sc-if value="{{a.open}}" hint-placeholder-val="{{ false }}">
-<div style="padding: 8px 12px 12px; border-top: 1px solid #F1EBDD; display: flex; flex-direction: column; gap: 10px">
+<div style="padding: 8px 12px 12px; border-top: 1px solid {{TK.tF6EDEF}}; display: flex; flex-direction: column; gap: 10px">
 <div style="display: flex; flex-direction: column; gap: 4px"><label for="{{a.tId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Name</label>
-<input id="{{a.tId}}" value="{{a.titleRaw}}" onChange="{{a.onTitle}}" placeholder="Like Essay 2: Ethics in IT" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"></div>
+<input id="{{a.tId}}" value="{{a.titleRaw}}" onChange="{{a.onTitle}}" placeholder="Like Essay 2: Ethics in IT" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"></div>
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 10px">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.kId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Type</label>
-<select id="{{a.kId}}" value="{{a.kindVal}}" onChange="{{a.onKind}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"><sc-for list="{{a.kindOpts}}" as="ko" hint-placeholder-count="5"><option value="{{ko.v}}">{{ko.l}}</option></sc-for></select></div>
+<select id="{{a.kId}}" value="{{a.kindVal}}" onChange="{{a.onKind}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"><sc-for list="{{a.kindOpts}}" as="ko" hint-placeholder-count="5"><option value="{{ko.v}}">{{ko.l}}</option></sc-for></select></div>
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.dId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Due</label>
-<input id="{{a.dId}}" type="date" value="{{a.dueVal}}" onChange="{{a.onDue}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"></div>
+<input id="{{a.dId}}" type="date" value="{{a.dueVal}}" onChange="{{a.onDue}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"></div>
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.hId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{a.timeLabel}}</label>
-<div style="display: flex; align-items: center; gap: 4px"><input id="{{a.hId}}" type="number" min="0" step="0.25" inputmode="decimal" value="{{a.hVal}}" onChange="{{a.onH}}" placeholder="0" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; width: 64px; text-align: center"><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span></div></div>
+<div style="display: flex; align-items: center; gap: 4px"><input id="{{a.hId}}" type="number" min="0" step="0.25" inputmode="decimal" value="{{a.hVal}}" onChange="{{a.onH}}" placeholder="0" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; width: 64px; text-align: center"><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span></div></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 6px; background: #FBF7EE; border-radius: 10px; padding: 8px 10px">
+<div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
 <span style="flex: 1; min-width: 120px; font-size: calc(13px * {{fsK}}); color: #4A443B">{{a.planLine}}</span>
 <sc-if value="{{a.canPlan}}" hint-placeholder-val="{{ false }}"><button onClick="{{a.planIt}}" style="height: 32px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Plan it before the due date</button></sc-if>
 </div>
 <sc-if value="{{a.pvOn}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-wrap: wrap; gap: 6px">
-<sc-for list="{{a.pvRows}}" as="pr" hint-placeholder-count="3"><span style="font-size: calc(12.5px * {{fsK}}); background: #FFFFFF; border: 1px solid {{TK.tE2B9C4}}; border-radius: 12px; padding: 3px 9px; color: #2B2722"><strong>{{pr.label}}</strong> · {{pr.mins}}</span></sc-for>
+<div style="display: flex; flex-direction: column; gap: 2px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 8px; padding: 4px 10px">
+<sc-for list="{{a.pvRows}}" as="pr" hint-placeholder-count="3"><div style="display: flex; align-items: center; gap: 8px; min-height: 26px; font-size: calc(13px * {{fsK}}); color: #2B2722"><span aria-hidden="true" style="width: 6px; height: 6px; flex: none; border-radius: 3px; background: {{TK.tC9849A}}"></span><span style="flex: 1; font-weight: 600">{{pr.label}}</span><span style="font-weight: 700; color: {{TK.t6E2F43}}">{{pr.mins}}</span></div></sc-for>
 </div>
 <div style="display: flex; gap: 8px; justify-content: flex-end">
 <button onClick="{{a.pvCancel}}" style="height: 30px; padding: 0 10px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Cancel</button>
@@ -2947,10 +2943,10 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </sc-if>
 </div>
 <div style="display: flex; flex-direction: column; gap: 4px"><label for="{{a.lId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Link</label>
-<div style="display: flex; gap: 6px; align-items: center"><input id="{{a.lId}}" type="url" value="{{a.link}}" onChange="{{a.onLink}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1">
+<div style="display: flex; gap: 6px; align-items: center"><input id="{{a.lId}}" type="url" value="{{a.link}}" onChange="{{a.onLink}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1">
 <sc-if value="{{a.hasUrl}}" hint-placeholder-val="{{ false }}"><a href="{{a.urlHref}}" target="_blank" rel="noopener" style="flex: none; height: 32px; padding: 0 10px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; display: flex; align-items: center; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; text-decoration: none">Open</a></sc-if></div></div>
 <div style="display: flex; flex-direction: column; gap: 4px"><label for="{{a.nId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Notes</label>
-<textarea id="{{a.nId}}" value="{{a.notes}}" onChange="{{a.onNotes}}" rows="2" placeholder="Topic, word count, requirements" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 6px 9px; font: inherit; font-size: calc(13.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea></div>
+<textarea id="{{a.nId}}" value="{{a.notes}}" onChange="{{a.onNotes}}" rows="2" placeholder="Topic, word count, requirements" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 6px 9px; font: inherit; font-size: calc(13.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea></div>
 <div style="display: flex; flex-direction: column; gap: 2px">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Steps</span>
 <sc-for list="{{a.cl}}" as="ac" hint-placeholder-count="2">
@@ -2963,7 +2959,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <div style="display: flex; align-items: center; gap: 6px">
 <span aria-hidden="true" style="width: 20px; flex: none; text-align: center; color: #B9AF9C">+</span>
 <label for="{{a.cId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Add a step</label>
-<textarea id="{{a.cId}}" rows="1" value="{{a.clDraft}}" onChange="{{a.clOnDraft}}" onInput="{{a.clOnDraft}}" onKeyDown="{{a.clKey}}" placeholder="Outline, draft, cite sources, submit…" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tAddH}}px; box-sizing: border-box; border: 0; border-bottom: 1px dashed #E2D8C4; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: calc({{tAddH}}px - 12px); color: #2B2722; resize: none; overflow: hidden"></textarea>
+<textarea id="{{a.cId}}" rows="1" value="{{a.clDraft}}" onChange="{{a.clOnDraft}}" onInput="{{a.clOnDraft}}" onKeyDown="{{a.clKey}}" placeholder="Outline, draft, cite sources, submit…" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tAddH}}px; box-sizing: border-box; border: 0; border-bottom: 1px dashed {{TK.tE2B9C4}}; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: calc({{tAddH}}px - 12px); color: #2B2722; resize: none; overflow: hidden"></textarea>
 </div>
 </div>
 <div style="display: flex; justify-content: flex-end"><button onClick="{{a.remove}}" style="height: 28px; border: 0; background: transparent; padding: 0 6px; color: #9A4A3A; font-size: calc(12px * {{fsK}}); font-weight: 600">Remove assignment</button></div>
@@ -9343,7 +9339,7 @@ class Component extends DCLogic {
             scTabs: [['ov', 'Overview', ''], ['res', 'Resources', String((sel.resources || []).length)], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : '']].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
             scTabOv: tabOn('ov'), scTabRes: tabOn('res'), scTabAs: tabOn('as'),
             scDesc: sel.desc || '', scOnDesc: (e) => { const v = e.target.value; updC(sel.id, () => ({ desc: v })); },
-            scAddAssign: () => { const n = this.state.nextId; updC(sel.id, c => ({ assignments: (c.assignments || []).concat([{ id: 'as' + n, title: '', kind: 'other', due: null, mins: 0, link: '', notes: '', checklist: [], done: false }]) })); this.setState({ nextId: n + 1, courseTab: 'as', asOpen: 'as' + n }); },
+            scAddAssign: () => { const n = this.state.nextId; updC(sel.id, c => ({ assignments: (c.assignments || []).concat([{ id: 'as' + n, title: '', kind: 'other', due: null, mins: 0, link: '', notes: '', checklist: [], done: false }]) })); this.setState({ nextId: n + 1, courseTab: 'as', asOpen: 'as' + n }); setTimeout(() => { try { const el = document.getElementById('ast-as' + n); if (el) { el.focus(); el.scrollIntoView({ block: 'nearest' }); } } catch (e) {} }, 60); },
             asQuick: s.asQuick || '', asOnQuick: (e) => this.setState({ asQuick: e.target.value }),
             asQuickKey: (e) => {
               if (e.key !== 'Enter') return; e.preventDefault();
