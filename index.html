@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:21 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:22 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2952,6 +2952,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.hId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{a.timeLabel}}</label>
 <div style="display: flex; align-items: center; gap: 4px"><input id="{{a.hId}}" type="number" min="0" step="0.25" inputmode="decimal" value="{{a.hVal}}" onChange="{{a.onH}}" placeholder="0" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; width: 64px; text-align: center"><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span></div></div>
 </div>
+<sc-if value="{{a.showPlan}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
 <span style="flex: 1; min-width: 120px; font-size: calc(13px * {{fsK}}); color: #4A443B">{{a.planLine}}</span>
@@ -2967,6 +2968,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 </sc-if>
 </div>
+</sc-if>
 <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Links</span>
 <sc-for list="{{a.links}}" as="al" hint-placeholder-count="2">
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
@@ -9443,6 +9445,7 @@ class Component extends DCLogic {
                 clOnDraft: (e) => { const v = e.target.value; if (/\n/.test(v)) { const lines = v.split(/\r?\n/).map(x => x.replace(/^\s*(?:[-*•]|\d+[.)]|\[[ xX]?\])\s*/, '').trim()).filter(Boolean); let n = this.state.nextId; const items = lines.map(x => ({ id: 'ck' + (n++), text: x, done: false })); updA(a.id, x => ({ checklist: (x.checklist || []).concat(items) })); this.setState({ nextId: n, asCl: '', asClFor: a.id }); return; } this.setState({ asCl: v, asClFor: a.id }); },
                 clKey: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = ((e.target && e.target.value) || '').trim(); if (!v) return; const n = this.state.nextId; updA(a.id, x => ({ checklist: (x.checklist || []).concat([{ id: 'ck' + n, text: v, done: false }]) })); this.setState({ nextId: n + 1, asCl: '', asClFor: a.id }); } },
                 planLine: planned ? this.fmtDur(planned) + ' planned' + (doneM ? ' · ' + this.fmtDur(doneM) + ' done' : '') + (a.mins ? ' of ' + this.fmtDur(a.mins) : '') : (a.mins ? 'Not planned yet' : 'Add the time needed to plan it'),
+                showPlan: !!a.mins || !!planned || prop.length > 0,
                 canPlan: !a.done && !!a.mins && typeof a.due === 'number' && a.due >= 0 && planned < a.mins,
                 planIt: () => this.setState({ asPreview: { cid: sel.id, aid: a.id } }),
                 pvOn: prop.length > 0,
