@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 26, 1:59 PM';</script>
+<script>window.__plannerBuild = 'Oct 26, 3:47 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -624,60 +624,56 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A8174" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transform: {{gb.chev}}"><path d="M6 9l6 6 6-6"></path></svg>
 </button>
 <sc-if value="{{gb.open}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 2px 10px 2px">
-<span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.line}}</span>
-<sc-if value="{{gb.hasHint}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.hint}}</span></sc-if>
-<sc-if value="{{gb.hasBlocks}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 0 2px 10px 2px">
+<span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.sumLine}}</span>
+<sc-if value="{{gb.hasItems}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{gb.blocks}}" as="bk" hint-placeholder-count="2">
 <div style="display: flex; align-items: center; gap: 8px; min-height: calc(32px * {{rowK}})">
 <sc-if value="{{bk.canDone}}" hint-placeholder-val="{{ true }}"><button role="checkbox" aria-checked="{{bk.done}}" onClick="{{bk.toggle}}" aria-label="Done" style="width: 20px; height: 20px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 10px; background: {{bk.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button></sc-if>
-<span style="flex: none; min-width: 58px; font-size: calc(13px * {{fsK}}); color: #2B2722; text-decoration: {{bk.strike}}">{{bk.timeTxt}}</span>
+<span style="flex: none; min-width: 58px; font-size: calc(13px * {{fsK}}); color: {{bk.fg}}; text-decoration: {{bk.strike}}">{{bk.timeTxt}}</span>
+<sc-if value="{{bk.isDone}}" hint-placeholder-val="{{ false }}"><span style="flex: 0 1 auto; min-width: 0; font-size: calc(13px * {{fsK}}); color: #8A8174; text-decoration: line-through">{{bk.lenTxt}}</span></sc-if>
+<sc-if value="{{bk.notDone}}" hint-placeholder-val="{{ true }}">
 <label for="{{bk.lenSelId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">How long</label>
 <select id="{{bk.lenSelId}}" value="{{bk.lenVal}}" onChange="{{bk.onLen}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722; flex: 0 1 auto; min-width: 0"><sc-for list="{{bk.lenOpts}}" as="blo" hint-placeholder-count="8"><option value="{{blo.v}}">{{blo.l}}</option></sc-for></select>
+</sc-if>
 <sc-if value="{{bk.rep}}" hint-placeholder-val="{{ false }}"><span title="Repeats" aria-label="Repeats" style="flex: none; color: {{TK.tA0526A}}; display: flex"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"></path></svg></span></sc-if>
 <span style="flex: 1"></span>
-<button onClick="{{bk.remove}}" aria-label="Remove this block" title="Remove from this day" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<button onClick="{{bk.remove}}" aria-label="Remove this block" title="Remove this block" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </div>
 </sc-for>
+<sc-if value="{{gb.hasLogged}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 8px; min-height: calc(32px * {{rowK}})">
+<span aria-hidden="true" style="width: 20px; flex: none; display: flex; justify-content: center; color: {{TK.t6E2F43}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"></path></svg></span>
+<span style="flex: 1; min-width: 0; font-size: calc(13px * {{fsK}}); color: #2B2722">Logged by hand · {{gb.loggedTxt}}</span>
+<button onClick="{{gb.logClear}}" aria-label="Remove what you logged by hand" title="Remove what you logged by hand" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </div>
 </sc-if>
-<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
-<span style="font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9A8F7C; width: 48px">Plan</span>
-<label for="{{gb.lenId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Block length</label>
+</div>
+</sc-if>
+<sc-if value="{{gb.noPanel}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; gap: 8px; padding-top: 4px">
+<button onClick="{{gb.openPlan}}" style="height: 28px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 10px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>{{gb.planLabel}}</button>
+<sc-if value="{{gb.canLog}}" hint-placeholder-val="{{ true }}"><button onClick="{{gb.openLog}}" style="height: 28px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 10px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Log {{gb.unitWord}}</button></sc-if>
+</div>
+</sc-if>
+<sc-if value="{{gb.panelPlan}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 6px 8px; margin-top: 4px">
+<label for="{{gb.lenId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">{{gb.planLabel}}</label>
 <select id="{{gb.lenId}}" value="{{gb.lenVal}}" onChange="{{gb.onLen}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{gb.lenOpts}}" as="lo" hint-placeholder-count="5"><option value="{{lo.v}}">{{lo.l}}</option></sc-for></select>
 <button onClick="{{gb.plan}}" style="height: 28px; flex: none; border: 0; background: transparent; padding: 0 2px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10h16M8 4v4M16 4v4M12 13v4M10 15h4"></path></svg>Pick a time</button>
-</div>
-<sc-if value="{{gb.canLog}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
-<label for="{{gb.logId}}" style="font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9A8F7C; width: 48px">Log</label>
-<input id="{{gb.logId}}" type="number" onFocus="{{selAll}}" inputmode="numeric" min="0" value="{{gb.logDraft}}" onChange="{{gb.onLogDraft}}" onInput="{{gb.onLogDraft}}" onKeyDown="{{gb.logKey}}" placeholder="{{gb.logPh}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722; width: 92px; padding: 0 8px">
-<button onClick="{{gb.logAdd}}" style="height: 28px; flex: none; border: 0; background: transparent; padding: 0 2px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px">Add {{gb.unitWord}}</button>
-<sc-if value="{{gb.hasLogged}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 2px; white-space: nowrap"><span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.logLabel}}</span><button onClick="{{gb.logClear}}" style="height: 26px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear</button></span></sc-if>
+<span style="flex: 1"></span>
+<button onClick="{{gb.closePanel}}" aria-label="Close" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #6B6358; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </div>
 </sc-if>
-<div style="display: flex; align-items: center; gap: 6px">
-<span style="font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9A8F7C; width: 48px">Repeat</span>
-<span style="flex: 1; min-width: 0; font-size: calc(12.5px * {{fsK}}); color: #4A443B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gb.repShort}}</span>
-<sc-if value="{{gb.repClosed}}" hint-placeholder-val="{{ true }}"><button onClick="{{gb.repEdit}}" style="height: 28px; flex: none; border: 0; background: transparent; padding: 0 2px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px">{{gb.repBtn}}</button></sc-if>
-</div>
-<sc-if value="{{gb.repEditing}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; gap: 8px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
-<div role="group" aria-label="Days" style="display: flex; gap: 4px">
-<sc-for list="{{gb.repDays}}" as="rd" hint-placeholder-count="7"><button aria-pressed="{{rd.on}}" onClick="{{rd.toggle}}" aria-label="{{rd.full}}" title="{{rd.full}}" style="width: 30px; height: 30px; flex: none; border: 1px solid {{rd.bd}}; border-radius: 7px; background: {{rd.bg}}; color: {{rd.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; padding: 0">{{rd.label}}</button></sc-for>
-</div>
-<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
-<label for="{{gb.repTimeId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">At</label>
-<input id="{{gb.repTimeId}}" type="time" value="{{gb.repTime}}" onChange="{{gb.onRepTime}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722; padding: 0 6px">
-<label for="{{gb.repLenId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">for</label>
-<select id="{{gb.repLenId}}" value="{{gb.repLen}}" onChange="{{gb.onRepLen}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{gb.lenOpts}}" as="lo2" hint-placeholder-count="5"><option value="{{lo2.v}}">{{lo2.l}}</option></sc-for></select>
-</div>
-<div style="display: flex; align-items: center; gap: 8px">
-<sc-if value="{{gb.repOn}}" hint-placeholder-val="{{ false }}"><button onClick="{{gb.repStop}}" style="height: 28px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #9A4A3A">Stop repeating</button></sc-if>
+<sc-if value="{{gb.panelLog}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 6px 8px; margin-top: 4px">
+<label for="{{gb.logId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">Log</label>
+<input id="{{gb.logId}}" type="number" onFocus="{{selAll}}" inputmode="numeric" min="0" value="{{gb.logDraft}}" onChange="{{gb.onLogDraft}}" onInput="{{gb.onLogDraft}}" onKeyDown="{{gb.logKey}}" placeholder="{{gb.logPh}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722; width: 96px; padding: 0 8px">
+<span style="font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{gb.unitWord}}</span>
+<button onClick="{{gb.logAdd}}" style="height: 28px; flex: none; padding: 0 12px; border: 0; border-radius: 7px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Add</button>
 <span style="flex: 1"></span>
-<button onClick="{{gb.repCancel}}" style="height: 28px; border: 0; background: transparent; padding: 0 8px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #6B6358">Cancel</button>
-<button onClick="{{gb.repSave}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 7px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Save</button>
-</div>
+<button onClick="{{gb.closePanel}}" aria-label="Close" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #6B6358; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </div>
 </sc-if>
 </div>
@@ -2561,6 +2557,24 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-for>
 </div>
+<sc-if value="{{iRepOn}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 8px; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 10px 12px; background: #FFFFFF">
+<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Repeat on my calendar</span>
+<span style="font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{iRepText}}</span>
+<div role="group" aria-label="Days" style="display: flex; gap: 4px">
+<sc-for list="{{iRepDays}}" as="ird" hint-placeholder-count="7"><button aria-pressed="{{ird.on}}" onClick="{{ird.toggle}}" aria-label="{{ird.full}}" title="{{ird.full}}" style="width: 30px; height: 30px; flex: none; border: 1px solid {{ird.bd}}; border-radius: 7px; background: {{ird.bg}}; color: {{ird.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; padding: 0">{{ird.label}}</button></sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<label for="irep-time" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">At</label>
+<input id="irep-time" type="time" value="{{iRepTime}}" onChange="{{iOnRepTime}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722">
+<label for="irep-len" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">for</label>
+<select id="irep-len" value="{{iRepLen}}" onChange="{{iOnRepLen}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{iRepLenOpts}}" as="irl" hint-placeholder-count="5"><option value="{{irl.v}}">{{irl.l}}</option></sc-for></select>
+<span style="flex: 1"></span>
+<sc-if value="{{iRepIsOn}}" hint-placeholder-val="{{ false }}"><button onClick="{{iRepStop}}" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #9A4A3A">Stop</button></sc-if>
+<button onClick="{{iRepSave}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Save</button>
+</div>
+</div>
+</sc-if>
 <sc-if value="{{iHasHelperChips}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 6px">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Habits helping this</span>
@@ -8846,7 +8860,7 @@ class Component extends DCLogic {
       iGroups: iGroups, iNewOpen: !!s.iNew, iNewOpenA: s.iNew ? 'true' : 'false',
       iToggleNew: () => this.setState({ iNew: !this.state.iNew }),
       iNewKinds: ['build', 'break', 'reach'].map(k => ({ label: KIND[k].label, hint: KIND[k].hint, icon: KIND[k].icon, add: () => newI(k) })),
-      iIsBuild: false, iIsBreak: false, iIsNumber: false, iIsTasks: false, iShowHelpers: false, iShowSteps: false, iShowWins: false, iShowNotes: false, iHelpingEmpty: false, iTabHelping: false, iHasHelpers: false, iHasHelperChips: false, iHelperChips: [], iHasPhoto: false
+      iRepOn: false, iIsBuild: false, iIsBreak: false, iIsNumber: false, iIsTasks: false, iShowHelpers: false, iShowSteps: false, iShowWins: false, iShowNotes: false, iHelpingEmpty: false, iTabHelping: false, iHasHelpers: false, iHasHelperChips: false, iHelperChips: [], iHasPhoto: false
     };
     if (selI) {
       const g = selI;
@@ -8945,7 +8959,26 @@ class Component extends DCLogic {
             num('min', 'Still counts as showing up', g.minimum, (v) => upd({ minimum: Math.max(0, +v || 0) })),
             num('unit', 'Measured in', g.unit, (v) => { upd({ unit: v }); const isMin = /^min/i.test(v || '') || !v; updHabit(Object.assign({ unit: v }, isMin ? { perMin: 1 } : (/^steps?$/i.test(v) && hb && (hb.perMin || 1) === 1 ? { perMin: 100 } : {}))); }, 'text'),
             num('quick', 'Quick-add amount', g.quick, (v) => upd({ quick: Math.max(1, +v || 1) }))
-          ].concat(hb && !/^min/i.test(g.unit || 'minutes') ? [num('permin', 'About how many ' + (g.unit || 'units') + ' per minute', hb.perMin || 1, (v) => updHabit({ perMin: Math.max(0.1, +v || 1) }))] : [])
+          ].concat(hb && !/^min/i.test(g.unit || 'minutes') ? [num('permin', 'About how many ' + (g.unit || 'units') + ' per minute', hb.perMin || 1, (v) => updHabit({ perMin: Math.max(0.1, +v || 1) }))] : []),
+          iRepOn: !!hb,
+          ...(() => {
+            if (!hb) return {};
+            const rp = hb.repeat, on = !!(rp && rp.dows && rp.dows.length);
+            const dr = (s.iRepDraft && s.iRepDraft.id === g.id) ? s.iRepDraft : { id: g.id, dows: on ? rp.dows.slice() : [1, 2, 3, 4, 5], time: on ? this.toHHMM(rp.start) : '07:00', mins: on ? (rp.mins || hb.chunk) : (hb.chunk || 30) };
+            const setD = (p) => this.setState({ iRepDraft: Object.assign({}, dr, p) });
+            const dt = (dw) => { const a = (dw || []).slice().sort(); if (a.length === 7) return 'every day'; if (a.join() === '1,2,3,4,5') return 'weekdays'; if (a.join() === '0,6') return 'weekends'; return a.map(x => this.DSHORT[x]).join(', '); };
+            const perR = /^min/i.test(g.unit || 'minutes') ? 0 : (/^steps?$/i.test(g.unit || '') && (hb.perMin || 1) <= 1 ? 100 : (hb.perMin || 1));
+            return {
+              iRepText: on ? 'Repeats ' + dt(rp.dows) + ' at ' + this.fmtTime(rp.start, false) + ' for ' + this.fmtDur(rp.mins || hb.chunk) + '. It shows up on your calendar 4 weeks ahead.' : 'Put a ' + String(hb.title || 'block').toLowerCase() + ' on your calendar on the same days each week.',
+              iRepIsOn: on,
+              iRepDays: [1, 2, 3, 4, 5, 6, 0].map(dw => { const sel = dr.dows.indexOf(dw) >= 0; return { label: this.DSHORT[dw].charAt(0), full: this.DAYS[dw], on: sel ? 'true' : 'false', bg: sel ? this.TK.t6E2F43 : '#FFFFFF', fg: sel ? '#FFFFFF' : '#4A443B', bd: sel ? this.TK.t6E2F43 : this.TK.tE2B9C4, toggle: () => setD({ dows: sel ? dr.dows.filter(x => x !== dw) : dr.dows.concat([dw]) }) }; }),
+              iRepTime: dr.time, iOnRepTime: (e) => setD({ time: e.target.value }),
+              iRepLen: String(dr.mins), iOnRepLen: (e) => setD({ mins: parseInt(e.target.value, 10) || 30 }),
+              iRepLenOpts: [15, 20, 30, 45, 60, 90, 120].map(m => ({ v: String(m), l: this.fmtDur(m) + (perR ? ' ≈ ' + Math.round(m * perR).toLocaleString('en-US') : '') })),
+              iRepSave: () => { if (!dr.dows.length) { this.setError('Pick at least one day.'); return; } const tm = String(dr.time || '07:00').split(':'); this.setHabitRepeat(hb.id, { dows: dr.dows.slice().sort(), start: (+tm[0] || 0) * 60 + (+tm[1] || 0), mins: dr.mins || 30 }); this.setState({ iRepDraft: null }); this.setToast('Saved. It is on your calendar for the next 4 weeks and keeps going.'); },
+              iRepStop: () => { this.setHabitRepeat(hb.id, null); this.setState({ iRepDraft: null }); this.setToast('Stopped repeating. Ones already done stay.'); }
+            };
+          })()
         });
       } else if (k === 'break') {
         const b = brkStats(g);
@@ -10362,6 +10395,7 @@ class Component extends DCLogic {
           hasHint: !!needMin || !!planned,
           blocks: blocks.map(b => ({ label: this.fmtTime(b.start, false) + ' · ' + this.fmtDur(b.mins) + (showPer ? ' ≈ ' + fmtN(b.mins * per) + ' ' + unit : ''), rep: !!b.rep, done: b.done ? 'true' : 'false',
             timeTxt: this.fmtTime(b.start, false), lenSelId: 'gbl-' + b.id, lenVal: String(b.mins),
+            isDone: !!b.done, notDone: !b.done, fg: b.done ? '#8A8174' : '#2B2722', lenTxt: this.fmtDur(b.mins) + (showPer ? ' ≈ ' + fmtN(b.mins * per) + ' ' + unit : ''),
             lenOpts: (() => { const o = []; for (let m = 5; m <= Math.max(b.mins + 60, 120); m += 5) o.push({ v: String(m), l: this.fmtDur(m) + (showPer ? ' ≈ ' + fmtN(m * per) : '') }); if (o.every(x => +x.v !== b.mins)) o.push({ v: String(b.mins), l: this.fmtDur(b.mins) }); return o.sort((x, y) => +x.v - +y.v); })(),
             onLen: (e) => { const v = parseInt(e.target.value, 10) || b.mins; this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { mins: v }) : x)); },
             boxBg: b.done ? this.TK.t6E2F43 : '#FFFFFF', strike: b.done ? 'line-through' : 'none', canDone: D <= 0,
@@ -10371,7 +10405,14 @@ class Component extends DCLogic {
           lenId: 'grl-' + g.id, lenVal: String(hb.chunk || 30),
           lenOpts: [15, 20, 30, 45, 60, 90, 120].concat([15, 20, 30, 45, 60, 90, 120].indexOf(hb.chunk) < 0 && hb.chunk ? [hb.chunk] : []).sort((a, b) => a - b).map(m => ({ v: String(m), l: this.fmtDur(m) + (showPer ? ' ≈ ' + fmtN(m * per) : '') })),
           onLen: (e) => { const v = parseInt(e.target.value, 10) || 30; this.setState({ habits: this.state.habits.map(h => h.id === hb.id ? Object.assign({}, h, { chunk: v }) : h) }); },
-          plan: () => this.setState({ sel: { kind: 'habit', id: hb.id }, editing: null, mobilePage: narrowG ? 'right' : s.mobilePage }),
+          plan: () => this.setState({ sel: { kind: 'habit', id: hb.id }, editing: null, growPanel: null, mobilePage: narrowG ? 'right' : s.mobilePage }),
+          sumLine: (D > 0 ? fmtN(planned + logged) + ' of ' + fmtN(tgt) + ' ' + unit + ' planned' : fmtN(done) + ' of ' + fmtN(tgt) + ' ' + unit + ' done' + (planned + logged > done ? ' · ' + fmtN(planned + logged) + ' planned' : '')) + (needMin ? ' · plan about ' + this.fmtDur(needMin) + ' more' : ''),
+          hasItems: blocks.length > 0 || logged > 0, loggedTxt: fmtN(logged) + ' ' + unit,
+          planLabel: 'Plan ' + (/^[aeiou]/i.test(hb.title || 'a') ? 'an ' : 'a ') + String(hb.title || 'session').toLowerCase(),
+          noPanel: !(s.growPanel && s.growPanel.id === g.id), panelPlan: !!(s.growPanel && s.growPanel.id === g.id && s.growPanel.mode === 'plan'), panelLog: !!(s.growPanel && s.growPanel.id === g.id && s.growPanel.mode === 'log'),
+          openPlan: () => this.setState({ growPanel: { id: g.id, mode: 'plan' } }),
+          openLog: () => { this.setState({ growPanel: { id: g.id, mode: 'log' } }); setTimeout(() => { try { const el = document.getElementById('glg-' + g.id); if (el) el.focus(); } catch (e) {} }, 60); },
+          closePanel: () => this.setState({ growPanel: null }),
           open: !!(s.growOpen || {})[g.id], openA: (s.growOpen || {})[g.id] ? 'true' : 'false', chev: (s.growOpen || {})[g.id] ? 'none' : 'rotate(-90deg)',
           toggle: () => this.setState({ growOpen: Object.assign({}, this.state.growOpen || {}, { [g.id]: !(this.state.growOpen || {})[g.id] }) }),
           shortLine: (D > 0 ? fmtN(planned + logged) : fmtN(done)) + ' / ' + fmtN(tgt) + ' ' + unit + (D > 0 ? ' planned' : ''),
@@ -10381,8 +10422,8 @@ class Component extends DCLogic {
           hasLogged: logged > 0, unitWord: unit, logId: 'glg-' + g.id, logPh: /steps?/i.test(unit) ? 'e.g. 2500' : 'amount',
           logDraft: (s.growLogDraft || {})[g.id] || '',
           onLogDraft: (e) => { const v = e.target.value; this.setState({ growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: v }) }); },
-          logAdd: () => { const v = parseFloat(String(((this.state.growLogDraft || {})[g.id]) || '').replace(/,/g, '')); if (!(v > 0)) return; setLog(g, logged + v); this.setState({ growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: '' }) }); this.setToast('Logged ' + fmtN(v) + ' ' + unit + '.'); },
-          logKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); const v = parseFloat(String(e.target.value || '').replace(/,/g, '')); if (!(v > 0)) return; setLog(g, logged + v); this.setState({ growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: '' }) }); } },
+          logAdd: () => { const v = parseFloat(String(((this.state.growLogDraft || {})[g.id]) || '').replace(/,/g, '')); if (!(v > 0)) return; setLog(g, logged + v); this.setState({ growPanel: null, growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: '' }) }); this.setToast('Logged ' + fmtN(v) + ' ' + unit + '.'); },
+          logKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); const v = parseFloat(String(e.target.value || '').replace(/,/g, '')); if (!(v > 0)) return; setLog(g, logged + v); this.setState({ growPanel: null, growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: '' }) }); } },
           logClear: () => setLog(g, 0),
           repText: rp && rp.dows && rp.dows.length ? 'Repeats ' + dowsText(rp.dows) + ' at ' + this.fmtTime(rp.start, false) + ' · ' + this.fmtDur(rp.mins || hb.chunk) : 'Does not repeat',
           repOn: !!(rp && rp.dows && rp.dows.length), repEditing: editing, repClosed: !editing,
