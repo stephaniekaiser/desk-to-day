@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 26, 11:59 AM';</script>
+<script>window.__plannerBuild = 'Oct 26, 1:34 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -4022,7 +4022,8 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <div style="display: flex; gap: 8px; align-items: flex-start">
 <span style="width: 22px; height: 22px; flex: none; border-radius: 11px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">2</span>
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px"><label for="sync-token" style="font-size: calc(13px * {{fsK}}); color: #2B2722; line-height: 1.45">Copy the key (it starts with <strong>ghp_</strong>) and paste it here. Do the same on each device you want in sync.</label>
-<span style="display: flex; gap: 6px; flex-wrap: wrap"><input id="sync-token" type="password" autocomplete="off" value="{{syncToken}}" onChange="{{onSyncToken}}" onInput="{{onSyncToken}}" placeholder="ghp_…" style="outline-color: {{TK.tA0526A}}; flex: 1 1 200px; min-width: 0; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(13.5px * {{fsK}}); background: #FFFFFF; color: #2B2722">
+<span style="display: flex; gap: 6px; flex-wrap: wrap"><input id="sync-token" type="{{syncTokenType}}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" value="{{syncToken}}" onChange="{{onSyncToken}}" onInput="{{onSyncToken}}" placeholder="ghp_…" style="outline-color: {{TK.tA0526A}}; flex: 1 1 200px; min-width: 0; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(13.5px * {{fsK}}); background: #FFFFFF; color: #2B2722">
+<button onClick="{{syncToggleShow}}" aria-pressed="{{syncShowA}}" aria-label="{{syncShowLabel}}" title="{{syncShowLabel}}" style="width: 32px; height: 32px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{syncEyeIcon}}"></path></svg></button>
 <button onClick="{{syncConnectGo}}" disabled="{{syncBusy}}" style="height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{syncConnectLabel}}</button></span></span>
 </div>
 <sc-if value="{{hasSyncErr}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #9A4A3A">{{syncErr}}</span></sc-if>
@@ -10158,8 +10159,11 @@ class Component extends DCLogic {
           syncLine: on ? (cfg.err ? 'Not synced: ' + cfg.err : (cfg.dirty ? 'Changes waiting to sync…' : (cfg.lastSyncAt ? 'Synced ' + ago(cfg.lastSyncAt) : 'Connected'))) + (cfg.login ? ' · GitHub: ' + cfg.login : '') : 'Keep this planner the same on your iPad and your computer.',
           syncLineColor: on && cfg.err ? '#9A4A3A' : '#7A7064',
           syncSetupOpen: !on && !!ui.open, syncSetupClosed: !ui.open,
-          syncOpen: () => this.setState({ syncUi: { open: true } }), syncCloseSetup: () => this.setState({ syncUi: null }),
+          syncOpen: () => this.setState({ syncUi: { open: true, show: true } }), syncCloseSetup: () => this.setState({ syncUi: null }),
           syncTokenUrl: 'https://github.com/settings/tokens/new?scopes=gist&description=Desk-to-Day%20planner%20sync',
+          syncTokenType: ui.show ? 'text' : 'password', syncShowA: ui.show ? 'true' : 'false', syncShowLabel: ui.show ? 'Hide the key' : 'Show the key',
+          syncEyeIcon: ui.show ? 'M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A9.8 9.8 0 0 1 12 5c5 0 9 5 9 7a10.6 10.6 0 0 1-2.7 3.4M6.2 6.2C3.9 7.8 3 10.6 3 12c0 2 4 7 9 7a9.7 9.7 0 0 0 4.4-1' : 'M3 12c0-2 4-7 9-7s9 5 9 7-4 7-9 7-9-5-9-7zM12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6',
+          syncToggleShow: () => this.setState({ syncUi: Object.assign({}, this.state.syncUi, { show: !(this.state.syncUi || {}).show }) }),
           syncToken: ui.token || '', onSyncToken: (e) => this.setState({ syncUi: Object.assign({}, this.state.syncUi, { token: e.target.value, err: '' }) }),
           syncBusy: !!ui.busy, syncConnectLabel: ui.busy ? 'Connecting…' : 'Connect',
           syncConnectGo: () => this.syncConnect((this.state.syncUi || {}).token),
