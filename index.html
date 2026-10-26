@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 26, 1:34 PM';</script>
+<script>window.__plannerBuild = 'Oct 26, 1:49 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -625,8 +625,11 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{gb.blocks}}" as="bk" hint-placeholder-count="2">
 <div style="display: flex; align-items: center; gap: 8px; min-height: calc(34px * {{rowK}}); border-bottom: 1px solid {{TK.tF6EDEF}}">
-<sc-if value="{{bk.canDone}}" hint-placeholder-val="{{ true }}"><button role="checkbox" aria-checked="{{bk.done}}" onClick="{{bk.toggle}}" aria-label="Done" style="width: 22px; height: 22px; flex: none; border: 1.5px solid #3F7A5A; border-radius: 11px; background: {{bk.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button></sc-if>
-<span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: #2B2722; text-decoration: {{bk.strike}}">{{bk.label}}</span>
+<sc-if value="{{bk.canDone}}" hint-placeholder-val="{{ true }}"><button role="checkbox" aria-checked="{{bk.done}}" onClick="{{bk.toggle}}" aria-label="Done" style="width: 22px; height: 22px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 11px; background: {{bk.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button></sc-if>
+<span style="flex: none; min-width: 58px; font-size: calc(13.5px * {{fsK}}); color: #2B2722; text-decoration: {{bk.strike}}">{{bk.timeTxt}}</span>
+<label for="{{bk.lenSelId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">How long</label>
+<select id="{{bk.lenSelId}}" value="{{bk.lenVal}}" onChange="{{bk.onLen}}" style="outline-color: {{TK.tA0526A}}; flex: 0 1 auto; min-width: 0; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{bk.lenOpts}}" as="blo" hint-placeholder-count="8"><option value="{{blo.v}}">{{blo.l}}</option></sc-for></select>
+<span style="flex: 1"></span>
 <sc-if value="{{bk.rep}}" hint-placeholder-val="{{ false }}"><span title="Repeats" aria-label="Repeats" style="flex: none; color: {{TK.tA0526A}}; display: flex"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"></path></svg></span></sc-if>
 <button onClick="{{bk.remove}}" aria-label="Remove this block" title="Remove from this day" style="width: 28px; height: 28px; flex: none; border: 0; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </div>
@@ -1667,7 +1670,15 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
 </button>
 </div>
-<button onClick="{{missDone}}" style="height: 44px; border: 0; border-radius: 10px; background: #2F5A3E; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">{{missDoneLabel}}</button>
+<button onClick="{{missDone}}" style="height: 44px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">{{missDoneLabel}}</button>
+<sc-if value="{{missCanLen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
+<label for="miss-len" style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">I did</label>
+<select id="miss-len" value="{{missLenVal}}" onChange="{{missOnLen}}" style="outline-color: {{TK.tA0526A}}; height: 34px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722"><sc-for list="{{missLenOpts}}" as="ml" hint-placeholder-count="8"><option value="{{ml.v}}">{{ml.l}}</option></sc-for></select>
+<span style="flex: 1; min-width: 60px; font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{missLenNote}}</span>
+<button onClick="{{missLenSave}}" style="height: 34px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13px * {{fsK}}); font-weight: 700">Save</button>
+</div>
+</sc-if>
 <button onClick="{{missNewTime}}" style="height: 44px; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 10px; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(14px * {{fsK}}); font-weight: 700">Find a new time</button>
 <button onClick="{{missNotToday}}" style="height: 44px; border: 1.5px solid #D8CDB6; border-radius: 10px; background: transparent; color: #2B2722; font-size: calc(14px * {{fsK}}); font-weight: 700">{{missNotLabel}}</button>
 <sc-if value="{{missCanEdit}}" hint-placeholder-val="{{ true }}">
@@ -7556,6 +7567,11 @@ class Component extends DCLogic {
         });
       };
       if (s.missFor === b.id && !b.fixed) {
+        const lenNow = s.missLen && s.missLen.id === b.id ? s.missLen.mins : b.mins;
+        const hbB = b.habitId ? s.habits.find(x => x.id === b.habitId) : null;
+        const gB = hbB ? (s.goals || []).find(g => g.habitId === hbB.id) : null;
+        const unitB = gB ? (gB.unit || hbB.unit || '') : (hbB ? hbB.unit || '' : '');
+        const perB = hbB && !/^min/i.test(unitB || 'minutes') ? (/^steps?$/i.test(unitB) && (hbB.perMin || 1) <= 1 ? 100 : (hbB.perMin || 1)) : 0;
         miss = {
           top: Math.max(0, Math.min(top + Math.min(h, 40), tlH - 290)),
           title: title0,
@@ -7565,6 +7581,17 @@ class Component extends DCLogic {
           notLabel: b.taskId ? 'Not today, keep it on my list' : 'Not today',
           canEdit: !!b.taskId,
           edit: editDetails,
+          canLen: !b.seriesId && !String(b.id).startsWith('S:'),
+          lenVal: String(lenNow),
+          lenOpts: (() => { const o = []; for (let m = 5; m <= Math.max(b.mins + 60, 60); m += 5) o.push({ v: String(m), l: this.fmtDur(m) + (perB ? ' ≈ ' + Math.round(m * perB).toLocaleString('en-US') + ' ' + unitB : '') }); if (o.every(x => +x.v !== lenNow)) o.push({ v: String(lenNow), l: this.fmtDur(lenNow) }); return o.sort((x, y) => +x.v - +y.v); })(),
+          lenNote: lenNow === b.mins ? 'Planned ' + this.fmtDur(b.mins) : 'Planned ' + this.fmtDur(b.mins) + ', marks it done',
+          onLen: (e) => this.setState({ missLen: { id: b.id, mins: parseInt(e.target.value, 10) || b.mins } }),
+          lenSave: () => {
+            const m = lenNow;
+            if (b.taskId) { this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { mins: m }) : x), { missFor: null, missLen: null }); const t = this.state.tasks.find(x => x.id === b.taskId); if (t && !t.done) setTimeout(() => this.setTaskDone(t.id, true, this.state.day), 0); }
+            else this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { mins: m, done: true }) : x), { missFor: null, missLen: null });
+            this.setToast('Logged ' + this.fmtDur(m) + (perB ? ' (about ' + Math.round(m * perB).toLocaleString('en-US') + ' ' + unitB + ')' : '') + '. Every bit counts.');
+          },
           done: () => { this.toggleBlockDone(b); this.setState({ missFor: null }); },
           newTime: () => {
             if (b.taskId) this.unschedule(b.id, { sel: { kind: 'task', id: b.taskId } });
@@ -10323,7 +10350,10 @@ class Component extends DCLogic {
           hint: needMin ? 'Plan about ' + this.fmtDur(needMin) + ' more to reach ' + fmtN(tgt) + '.' : (planned ? 'Enough planned to reach your goal.' : ''),
           hasHint: !!needMin || !!planned,
           blocks: blocks.map(b => ({ label: this.fmtTime(b.start, false) + ' · ' + this.fmtDur(b.mins) + (showPer ? ' ≈ ' + fmtN(b.mins * per) + ' ' + unit : ''), rep: !!b.rep, done: b.done ? 'true' : 'false',
-            boxBg: b.done ? '#3F7A5A' : '#FFFFFF', strike: b.done ? 'line-through' : 'none', canDone: D <= 0,
+            timeTxt: this.fmtTime(b.start, false), lenSelId: 'gbl-' + b.id, lenVal: String(b.mins),
+            lenOpts: (() => { const o = []; for (let m = 5; m <= Math.max(b.mins + 60, 120); m += 5) o.push({ v: String(m), l: this.fmtDur(m) + (showPer ? ' ≈ ' + fmtN(m * per) : '') }); if (o.every(x => +x.v !== b.mins)) o.push({ v: String(b.mins), l: this.fmtDur(b.mins) }); return o.sort((x, y) => +x.v - +y.v); })(),
+            onLen: (e) => { const v = parseInt(e.target.value, 10) || b.mins; this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { mins: v }) : x)); },
+            boxBg: b.done ? this.TK.t6E2F43 : '#FFFFFF', strike: b.done ? 'line-through' : 'none', canDone: D <= 0,
             toggle: () => this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { done: !x.done }) : x)),
             remove: () => this.unschedule(b.id) })),
           hasBlocks: blocks.length > 0, noBlocks: !blocks.length,
@@ -10907,6 +10937,8 @@ class Component extends DCLogic {
       missCanEdit: miss ? miss.canEdit : false,
       missEdit: miss ? miss.edit : () => {},
       missNewTime: miss ? miss.newTime : () => {},
+      missCanLen: miss ? miss.canLen : false, missLenVal: miss ? miss.lenVal : '', missLenOpts: miss ? miss.lenOpts : [], missLenNote: miss ? miss.lenNote : '',
+      missOnLen: miss ? miss.onLen : () => {}, missLenSave: miss ? miss.lenSave : () => {},
       missNotToday: miss ? miss.notToday : () => {},
       closeMiss: () => this.setState({ missFor: null }),
       showSetup: setupOn, setupShowDone: isDay && s.showSetup,
