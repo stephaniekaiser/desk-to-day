@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:43 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:45 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2735,7 +2735,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <sc-if value="{{scTabRes}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; align-items: center; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px">
-<span style="flex: none; font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Resources</span>
+<span style="flex: none; font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Study materials</span>
 <span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: #8A8174; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{scResSummary}}</span>
 </div>
 <sc-for list="{{scResources}}" as="rs" hint-placeholder-count="2">
@@ -2748,7 +2748,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transform: {{rs.chev}}"><path d="M9 5l7 7-7 7"></path></svg>
 </button>
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
-<label for="{{rs.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Resource title</label>
+<label for="{{rs.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Study material title</label>
 <input id="{{rs.inputId}}" value="{{rs.title}}" onChange="{{rs.onTitle}}" placeholder="{{rs.titlePh}}" style="outline-color: {{TK.tA0526A}}; height: 24px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0; width: 100%; border-radius: 6px">
 <span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{rs.meta}}</span>
 </div>
@@ -2764,7 +2764,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <label for="{{rs.typeId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Type</label>
 <select id="{{rs.typeId}}" value="{{rs.typeVal}}" onChange="{{rs.onType}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><option value="book">Book</option><option value="video">Video</option><option value="article">Article</option><option value="website">Website</option><option value="general">General</option></select>
 <span style="flex: 1; min-width: 0"></span>
-<button role="switch" aria-checked="{{rs.inPlan}}" onClick="{{rs.togglePlan}}" style="flex: none; height: 30px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 6px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #4A443B">In plan<span aria-hidden="true" style="position: relative; width: 34px; height: 20px; border-radius: 10px; background: {{rs.planTrack}}"><span style="position: absolute; top: 3px; left: {{rs.planKnob}}px; width: 14px; height: 14px; border-radius: 7px; background: #FFFFFF"></span></span></button>
+<button role="switch" aria-checked="{{rs.inPlan}}" onClick="{{rs.togglePlan}}" title="On: its lessons get study time in your course plan. Off: it is kept here for reference only." style="flex: none; height: 30px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 6px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #4A443B">Plan study time<span aria-hidden="true" style="position: relative; width: 34px; height: 20px; border-radius: 10px; background: {{rs.planTrack}}"><span style="position: absolute; top: 3px; left: {{rs.planKnob}}px; width: 14px; height: 14px; border-radius: 7px; background: #FFFFFF"></span></span></button>
 </div>
 <sc-if value="{{rs.detOpen}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; gap: 8px; flex-wrap: wrap">
@@ -2904,8 +2904,8 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 </sc-for>
 <div style="display: flex; gap: 14px; flex-wrap: wrap">
-<button onClick="{{scAddResource}}" style="height: 34px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add a resource</button>
-<button onClick="{{scImportInto}}" style="height: 34px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 600; color: {{TK.tA0526A}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V7M7 12l5-5 5 5M5 4h14"></path></svg>Import a resource from a file</button>
+<button onClick="{{scAddResource}}" style="height: 34px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add study material</button>
+<button onClick="{{scImportInto}}" style="height: 34px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 600; color: {{TK.tA0526A}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V7M7 12l5-5 5 5M5 4h14"></path></svg>Import study material from a file</button>
 </div>
 </div>
 </sc-if>
@@ -9233,10 +9233,10 @@ class Component extends DCLogic {
         scCancelNew: () => this.setState({ schoolNew: null }),
         scModes: [['quick', 'Quick setup'], ['import', 'Import'], ['paste', 'Paste a list'], ['copy', 'From a Finish line']].map(m => { const on2 = nw.mode === m[0]; return { label: m[1], checked: on2 ? 'true' : 'false', bg: on2 ? '#FFFFFF' : 'transparent', fg: on2 ? this.TK.t6E2F43 : '#6B6358', shadow: on2 ? '0 1px 2px rgba(0,0,0,0.12)' : 'none', set: () => patchNew({ mode: m[0] }) }; }),
         scQuick: nw.mode === 'quick', scPaste: nw.mode === 'paste', scCopy: nw.mode === 'copy', scImport: nw.mode === 'import',
-        scCreateLabel: nw.mode === 'import' ? (nw.target ? 'Add this resource' : 'Import course') : 'Add course',
+        scCreateLabel: nw.mode === 'import' ? (nw.target ? 'Add this study material' : 'Import course') : 'Add course',
         scShowCourseFields: !(nw.mode === 'import' && nw.target),
         scTargetVal: nw.target || '',
-        scTargetOpts: [{ v: '', l: 'A new course' }].concat(courses.map(c => ({ v: c.id, l: 'A new resource in ' + (c.title || 'course') }))),
+        scTargetOpts: [{ v: '', l: 'A new course' }].concat(courses.map(c => ({ v: c.id, l: 'New study material in ' + (c.title || 'course') }))),
         scOnTarget: (e) => patchNew({ target: e.target.value }),
         scImportText: nw.importText || '', scImportName: nw.importName || '',
         scOnImportText: (e) => patchNew({ importText: e.target.value, importName: '' }),
@@ -9433,7 +9433,7 @@ class Component extends DCLogic {
           const ordered = As.slice().sort((x, y) => (x.done - y.done) || ((typeof x.due === 'number' ? x.due : 9e9) - (typeof y.due === 'number' ? y.due : 9e9)));
           const pv = s.asPreview && s.asPreview.cid === sel.id ? s.asPreview : null;
           return {
-            scTabs: [['ov', 'Overview', ''], ['res', 'Resources', String((sel.resources || []).length)], ['links', 'Links', (sel.links || []).length ? String((sel.links || []).length) : ''], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : '']].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
+            scTabs: [['ov', 'Overview', ''], ['res', 'Study materials', String((sel.resources || []).length)], ['links', 'Links', (sel.links || []).length ? String((sel.links || []).length) : ''], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : '']].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
             scTabOv: tabOn('ov'), scTabRes: tabOn('res'), scTabAs: tabOn('as'), scTabLinks: tabOn('links'),
             scLinks: linkVals('c' + sel.id, sel.links || [], (fn) => updC(sel.id, c => ({ links: fn(c.links || []) }))),
             scLinksNone: !(sel.links || []).length,
@@ -9635,7 +9635,7 @@ class Component extends DCLogic {
             },
             up: () => moveTo(ri - 1), down: () => moveTo(ri + 1), upOp: ri === 0 ? 0.35 : 1, downOp: ri === allR.length - 1 ? 0.35 : 1,
             orderNote: allR.length > 1 ? 'Study ' + (ri + 1) + ' of ' + allR.length + '. Plans follow this order.' : 'Plans follow this order.',
-            title: r.title, name: r.title || 'Untitled resource', inputId: 'scr-' + r.id,
+            title: r.title, name: r.title || 'Untitled study material', inputId: 'scr-' + r.id,
             onTitle: (e) => { const v = e.target.value; updR(() => ({ title: v })); },
             meta: ls.length + (ls.length === 1 ? ' lesson' : ' lessons') + ' · ' + (this.fmtDur(mins) || '0h') + (r.skip ? ' · not in plan' : ''),
             open: s.resOpen === r.id, openA: s.resOpen === r.id ? 'true' : 'false', chev: s.resOpen === r.id ? 'rotate(90deg)' : 'none',
@@ -9680,7 +9680,7 @@ class Component extends DCLogic {
               this.setToast(made.length + (made.length === 1 ? ' lesson' : ' lessons') + ' added.');
             },
             addLesson: () => { const k2 = ls.length + 1, lid = nid(); updC(sel.id, c => ({ lessons: (c.lessons || []).concat([{ id: lid, resId: r.id, title: 'Lesson ' + k2, items: [{ id: nid(), title: k2 + '.1', mins: 60, done: false }] }]), openL: lid })); },
-            removeLabel: asking ? (() => { const t2 = this.impactText(this.sessionImpact(sel.id, [].concat(...ls.map(l => l.items.map(it => it.id))))); return 'Tap again: removes its lessons' + (t2 ? ', ' + t2.replace(/^removes /, '') : ''); })() : 'Remove resource',
+            removeLabel: asking ? (() => { const t2 = this.impactText(this.sessionImpact(sel.id, [].concat(...ls.map(l => l.items.map(it => it.id))))); return 'Tap again: removes its lessons' + (t2 ? ', ' + t2.replace(/^removes /, '') : ''); })() : 'Remove',
             removeBg: asking ? '#9A4A3A' : 'transparent', removeFg: asking ? '#FFFFFF' : '#9A4A3A',
             remove: () => {
               if (this.state.resDel !== r.id) { this.setState({ resDel: r.id }); clearTimeout(this.resDelT); this.resDelT = setTimeout(() => this.setState({ resDel: null }), 5000); return; }
@@ -9692,8 +9692,8 @@ class Component extends DCLogic {
             }
           };
         }),
-        scAddResource: () => { const rid = 'r' + Date.now().toString(36); updC(sel.id, c => ({ resources: (c.resources || []).map(x => Object.assign({}, x, { open: false })).concat([{ id: rid, title: '', type: 'general', author: '', isbn: '', url: '', open: true, skip: false }]) })); this.setState({ resDetails: rid, resOpen: rid }); setTimeout(() => { try { const el = document.getElementById('scr-' + rid); if (el) { el.focus(); el.scrollIntoView({ block: 'nearest' }); } } catch (e) {} }, 60); },
-        scResSummary: (sel.resources || []).length + ((sel.resources || []).length === 1 ? ' resource' : ' resources') + ' · ' + (this.fmtDur(st.total) || '0h') + ' in plan',
+        scAddResource: () => { const rid = 'r' + Date.now().toString(36); updC(sel.id, c => ({ resources: (c.resources || []).map(x => Object.assign({}, x, { open: false })).concat([{ id: rid, title: '', type: 'general', author: '', isbn: '', url: '', open: true, skip: true }]) })); this.setState({ resDetails: rid, resOpen: rid }); setTimeout(() => { try { const el = document.getElementById('scr-' + rid); if (el) { el.focus(); el.scrollIntoView({ block: 'nearest' }); } } catch (e) {} }, 60); },
+        scResSummary: (sel.resources || []).length + ((sel.resources || []).length === 1 ? ' study material' : ' study materials') + ' · ' + (this.fmtDur(st.total) || '0h') + ' in plan',
         scDelLabel: s.schoolDel ? (() => { const sm2 = this.schedMap(); const open = s.tasks.filter(t => t.courseId === sel.id && !t.done); const cal = open.filter(t => sm2[t.id]).length; return 'Tap again to remove this course' + (open.length ? ' and ' + open.length + (open.length === 1 ? ' planned session' : ' planned sessions') + (cal ? ' (' + cal + ' on your calendar)' : '') : ''); })() : 'Remove course',
         scDelBg: s.schoolDel ? '#9A4A3A' : 'transparent', scDelFg: s.schoolDel ? '#FFFFFF' : '#9A4A3A',
         scDel: () => {
