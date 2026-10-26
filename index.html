@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:22 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:27 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2950,21 +2950,21 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.dId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Due</label>
 <input id="{{a.dId}}" type="date" value="{{a.dueVal}}" onChange="{{a.onDue}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"></div>
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.hId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{a.timeLabel}}</label>
-<div style="display: flex; align-items: center; gap: 4px"><input id="{{a.hId}}" type="number" min="0" step="0.25" inputmode="decimal" value="{{a.hVal}}" onChange="{{a.onH}}" placeholder="0" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; width: 64px; text-align: center"><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span></div></div>
+<div style="display: flex; align-items: center; gap: 4px"><input id="{{a.hId}}" type="number" min="0" step="0.25" inputmode="decimal" value="{{a.hVal}}" onChange="{{a.onH}}" readOnly="{{a.timeRO}}" placeholder="0" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; width: 64px; text-align: center"><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span></div></div>
 </div>
 <sc-if value="{{a.showPlan}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
 <span style="flex: 1; min-width: 120px; font-size: calc(13px * {{fsK}}); color: #4A443B">{{a.planLine}}</span>
-<sc-if value="{{a.canPlan}}" hint-placeholder-val="{{ false }}"><button onClick="{{a.planIt}}" style="height: 32px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Plan it before the due date</button></sc-if>
+<sc-if value="{{a.canPlan}}" hint-placeholder-val="{{ false }}"><button onClick="{{a.planIt}}" style="height: 32px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{a.planBtn}}</button></sc-if>
 </div>
 <sc-if value="{{a.pvOn}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 2px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 8px; padding: 4px 10px">
-<sc-for list="{{a.pvRows}}" as="pr" hint-placeholder-count="3"><div style="display: flex; align-items: center; gap: 8px; min-height: 26px; font-size: calc(13px * {{fsK}}); color: #2B2722"><span aria-hidden="true" style="width: 6px; height: 6px; flex: none; border-radius: 3px; background: {{TK.tC9849A}}"></span><span style="flex: 1; font-weight: 600">{{pr.label}}</span><span style="font-weight: 700; color: {{TK.t6E2F43}}">{{pr.mins}}</span></div></sc-for>
+<sc-for list="{{a.pvRows}}" as="pr" hint-placeholder-count="3"><div style="display: flex; align-items: center; gap: 8px; min-height: 26px; font-size: calc(13px * {{fsK}}); color: #2B2722"><span aria-hidden="true" style="width: 6px; height: 6px; flex: none; border-radius: 3px; background: {{TK.tC9849A}}"></span><span style="flex: none; width: 56px; font-weight: 600">{{pr.label}}</span><span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #4A443B">{{pr.name}}</span><span style="font-weight: 700; color: {{TK.t6E2F43}}">{{pr.mins}}</span></div></sc-for>
 </div>
 <div style="display: flex; gap: 8px; justify-content: flex-end">
 <button onClick="{{a.pvCancel}}" style="height: 30px; padding: 0 10px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Cancel</button>
-<button onClick="{{a.pvApprove}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Add these sessions</button>
+<button onClick="{{a.pvApprove}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{a.pvLabel}}</button>
 </div>
 </sc-if>
 </div>
@@ -2994,8 +2994,18 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <button role="checkbox" aria-checked="{{ac.checked}}" onClick="{{ac.toggle}}" aria-label="{{ac.text}}" style="width: 20px; height: 20px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 6px; background: {{ac.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button>
 <label for="{{ac.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Step</label>
 <input id="{{ac.inputId}}" value="{{ac.text}}" onChange="{{ac.onText}}" onInput="{{ac.onText}}" onKeyDown="{{ac.key}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 28px; box-sizing: border-box; border: 0; border-bottom: 1px solid transparent; border-radius: 6px; padding: 0 6px; background: transparent; font: inherit; font-size: calc(13.5px * {{fsK}}); color: {{ac.fg}}; text-decoration: {{ac.strike}}">
+<label for="{{ac.minsId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Time for this step</label>
+<select id="{{ac.minsId}}" value="{{ac.minsVal}}" onChange="{{ac.onMins}}" title="Time for this step" style="outline-color: {{TK.tA0526A}}; flex: none; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 2px; font: inherit; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #4A443B"><sc-for list="{{ac.minsOpts}}" as="amo" hint-placeholder-count="6"><option value="{{amo.v}}">{{amo.l}}</option></sc-for></select>
+<sc-if value="{{ac.hasTask}}" hint-placeholder-val="{{ false }}"><button onClick="{{ac.openTask}}" title="Open the task for this step" style="flex: none; height: 28px; padding: 0 6px; border: 0; background: transparent; display: flex; align-items: center; gap: 4px; color: {{TK.t6E2F43}}; font-size: calc(11.5px * {{fsK}}); font-weight: 700; white-space: nowrap"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10h16M8 4v4M16 4v4"></path></svg>{{ac.taskWhen}}</button></sc-if>
+<sc-if value="{{ac.noTask}}" hint-placeholder-val="{{ true }}"><button onClick="{{ac.qs}}" aria-label="Put {{ac.text}} on a day" title="Put it on a day" style="width: 28px; height: 28px; flex: none; border: 0; border-radius: 14px; background: {{ac.qsBg}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10h16M8 4v4M16 4v4M12 13v4M10 15h4"></path></svg></button></sc-if>
 <button onClick="{{ac.remove}}" aria-label="Remove {{ac.text}}" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #B9AF9C; padding: 0">×</button>
 </div>
+<sc-if value="{{ac.qsOpen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 8px; margin: 2px 0 6px 48px">
+<label for="{{ac.qsSelId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Put it on</label>
+<select id="{{ac.qsSelId}}" value="" onChange="{{ac.onQs}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{ac.qsOpts}}" as="aqo" hint-placeholder-count="6"><option value="{{aqo.v}}">{{aqo.l}}</option></sc-for></select>
+</div>
+</sc-if>
 </sc-for>
 <div style="display: flex; align-items: center; gap: 6px">
 <span aria-hidden="true" style="width: 20px; flex: none; text-align: center; color: #B9AF9C">+</span>
@@ -4474,7 +4484,22 @@ class Component extends DCLogic {
   }
   asSessions(c, a) { return (this.state.tasks || []).filter(t => t.courseId === c.id && t.assignmentId === a.id); }
   // Spreads the work left on an assignment over the days before it is due. Nothing is saved here.
+  asOpenSteps(c, a) {
+    const has = {}; this.asSessions(c, a).forEach(t => { if (t.stepId) has[t.stepId] = true; });
+    return (a.checklist || []).filter(it => !this.clItemDone(it) && !has[it.id]);
+  }
+  asStepTask(c, a, it, day, id) {
+    return { id: id, title: (a.title || 'Assignment') + ' · ' + (it.text || 'Step'), pri: 'B', mins: it.mins || 30, bucket: 'week', weekOf: this.weekStartOff(day), dayAssign: day, cat: this.schoolCatOf(this.state.cats) || null, courseId: c.id, assignmentId: a.id, stepId: it.id, planned: true };
+  }
   asProposal(c, a) {
+    const stepsLeft = this.asOpenSteps(c, a);
+    if (stepsLeft.length) {
+      if (typeof a.due !== 'number' || a.due < 0) return [];
+      const lastS = Math.max(0, a.due - 1), daysS = [];
+      for (let d = 0; d <= lastS; d++) daysS.push(d);
+      return stepsLeft.map((it, i) => ({ day: daysS[Math.min(daysS.length - 1, Math.floor(i * daysS.length / stepsLeft.length))], mins: it.mins || 30, stepId: it.id, name: it.text || 'Step' }));
+    }
+    if ((a.checklist || []).length) return [];
     const done = this.asSessions(c, a).reduce((x, t) => x + (t.mins || 0), 0);
     let left = Math.max(0, (a.mins || 0) - done);
     if (!left || typeof a.due !== 'number') return [];
@@ -4498,6 +4523,13 @@ class Component extends DCLogic {
     const a = (c.assignments || []).find(x => x.id === aid); if (!a) return;
     const rows = this.asProposal(c, a); if (!rows.length) { this.setState({ asPreview: null }); return; }
     let n = s.nextId;
+    if (rows[0].stepId) {
+      const byStep = {}; (a.checklist || []).forEach(it => { byStep[it.id] = it; });
+      const madeS = rows.filter(r => byStep[r.stepId]).map(r => this.asStepTask(c, a, byStep[r.stepId], r.day, 't' + (n++)));
+      this.setState({ tasks: s.tasks.concat(madeS), nextId: n, asPreview: null });
+      this.setToast(madeS.length + (madeS.length === 1 ? ' step' : ' steps') + ' added to your week. Drag them onto times on the day page.');
+      return;
+    }
     const verb = a.kind === 'exam' ? 'Study for ' : '';
     const made = rows.map(r => ({ id: 't' + (n++), title: (c.title || 'Course') + ': ' + verb + (a.title || 'Assignment'), pri: 'B', mins: r.mins, bucket: 'week', weekOf: this.weekStartOff(r.day), dayAssign: r.day, cat: this.schoolCatOf(s.cats) || null, courseId: c.id, assignmentId: a.id, planned: true }));
     this.setState({ tasks: s.tasks.concat(made), nextId: n, asPreview: null });
@@ -5812,7 +5844,8 @@ class Component extends DCLogic {
     if (done && !sure && (t.checklist || []).some(it => !this.clItemDone(it))) { this.setState({ clConfirm: { id: id, day: typeof day === 'number' ? day : 0 } }); return; }
     if (done && !sure && t.courseId && t.parts && t.parts.length) { this.setState({ partAsk: { id: id, day: typeof day === 'number' ? day : 0 } }); return; }
     const tasks = s.tasks.map(x => x.id === id ? Object.assign({}, x, { done: done, doneDay: done ? day : null }) : x);
-    this.setState({ tasks: tasks, missFor: null, sel: null });
+    const stepSync = t.stepId && t.courseId && t.assignmentId ? { courses: (s.courses || []).map(c => c.id !== t.courseId ? c : Object.assign({}, c, { assignments: (c.assignments || []).map(a => a.id !== t.assignmentId ? a : Object.assign({}, a, { checklist: (a.checklist || []).map(it => it.id === t.stepId ? Object.assign({}, it, { done: done }) : it) })) })) } : {};
+    this.setState(Object.assign({ tasks: tasks, missFor: null, sel: null }, stepSync));
     const b3ws = this.weekStartOff(typeof day === 'number' ? day : 0);
     const b3 = (s.big3ByWeek[b3ws] || []).filter(Boolean);
     if (done && b3.indexOf(id) >= 0) {
@@ -9410,6 +9443,9 @@ class Component extends DCLogic {
               const planned = sessions.reduce((x, t) => x + (t.mins || 0), 0), doneM = sessions.filter(t => t.done).reduce((x, t) => x + (t.mins || 0), 0);
               const soon = !a.done && typeof a.due === 'number' && a.due <= 2;
               const prop = pv && pv.aid === a.id ? this.asProposal(sel, a) : [];
+              const stepsLeftA = this.asOpenSteps(sel, a);
+              const stepsTimedA = (a.checklist || []).some(it => it.mins > 0);
+              const stepTaskOf = {}; sessions.forEach(t => { if (t.stepId) stepTaskOf[t.stepId] = t; });
               const cl = a.checklist || [];
               return {
                 title: a.title || 'Untitled assignment', titleRaw: a.title || '', kind: kindName(a.kind), due: dueTxt(a), dueFg: soon ? '#9A3B2E' : '#7A7064',
@@ -9425,12 +9461,22 @@ class Component extends DCLogic {
                 kindVal: a.kind || 'other', kindOpts: kinds.map(k => ({ v: k[0], l: k[1] })), onKind: (e) => { const v = e.target.value; updA(a.id, () => ({ kind: v })); },
                 dueVal: typeof a.due === 'number' ? this.isoFor(a.due) : '', onDue: (e) => { const v = e.target.value; updA(a.id, () => ({ due: v ? this.offFromISO(v) : null })); },
                 hVal: a.mins ? String(Math.round(a.mins / 60 * 100) / 100) : '', onH: (e) => { const h = parseFloat(e.target.value); updA(a.id, () => ({ mins: h > 0 ? Math.max(15, Math.round(h * 60 / 15) * 15) : 0 })); },
-                timeLabel: a.kind === 'exam' ? 'Study time' : 'Time needed',
+                timeLabel: stepsTimedA ? 'Time (from steps)' : (a.kind === 'exam' ? 'Study time' : 'Time needed'),
                 links: linkVals('al' + a.id, this.linksOf(a), (fn) => updA(a.id, x => ({ links: fn(this.linksOf(x)), link: '' }))),
                 addLink: () => { const lid = 'lk' + Date.now().toString(36); updA(a.id, x => ({ links: this.linksOf(x).concat([{ id: lid, label: '', url: '' }]), link: '' })); setTimeout(() => { try { const el = document.getElementById('lku-al' + a.id + '-' + lid); if (el) el.focus(); } catch (e) {} }, 60); },
                 hasUrl: !!firstUrl(this.linksOf(a)), urlHref: firstUrl(this.linksOf(a)),
                 notes: a.notes || '', onNotes: (e) => { const v = e.target.value; updA(a.id, () => ({ notes: v })); },
                 cl: cl.map((it, ii) => ({ text: it.text, inputId: 'acs-' + a.id + '-' + it.id,
+                  minsId: 'acm-' + a.id + '-' + it.id, minsVal: it.mins ? String(it.mins) : '',
+                  minsOpts: [['', '—'], [15, '15m'], [30, '30m'], [45, '45m'], [60, '1h'], [90, '1h 30m'], [120, '2h'], [180, '3h'], [240, '4h']].concat(it.mins && [15, 30, 45, 60, 90, 120, 180, 240].indexOf(it.mins) < 0 ? [[it.mins, this.fmtDur(it.mins)]] : []).map(o => ({ v: String(o[0]), l: o[1] })),
+                  onMins: (e) => { const v = parseInt(e.target.value, 10) || 0; updA(a.id, x => { const arr = (x.checklist || []).map(c2 => c2.id === it.id ? Object.assign({}, c2, { mins: v || undefined }) : c2); const tot = arr.reduce((q, c2) => q + (c2.mins || 0), 0); return tot ? { checklist: arr, mins: tot } : { checklist: arr }; }); const tk = stepTaskOf[it.id]; if (tk && !tk.done && v) this.setState(st => ({ tasks: st.tasks.map(t2 => t2.id === tk.id ? Object.assign({}, t2, { mins: v }) : t2) })); },
+                  hasTask: !!stepTaskOf[it.id], noTask: !stepTaskOf[it.id],
+                  taskWhen: (() => { const tk = stepTaskOf[it.id]; if (!tk) return ''; if (tk.done) return 'Done'; const sm3 = this.schedMap(); const d = sm3[tk.id] ? sm3[tk.id].day : tk.dayAssign; if (typeof d !== 'number') return 'This week'; return d === 0 ? 'Today' : d === 1 ? 'Tomorrow' : this.DSHORT[this.dowFor(d)] + ' ' + this.dateFor(d).getDate(); })(),
+                  openTask: () => { const tk = stepTaskOf[it.id]; if (tk) this.openTaskEdit(tk.id); },
+                  qs: () => this.setState({ asStepQs: this.state.asStepQs === it.id ? null : it.id }),
+                  qsOpen: s.asStepQs === it.id, qsBg: s.asStepQs === it.id ? this.TK.tF6EDEF : 'transparent', qsSelId: 'acq-' + a.id + '-' + it.id,
+                  qsOpts: (() => { const last = typeof a.due === 'number' && a.due > 0 ? Math.max(a.due, 6) : 13; const o = [{ v: '', l: 'Pick a day…' }]; for (let d = 0; d <= last; d++) o.push({ v: String(d), l: (d === 0 ? 'Today' : d === 1 ? 'Tomorrow' : this.DAYS[this.dowFor(d)]) + ', ' + this.MONTHS[this.dateFor(d).getMonth()] + ' ' + this.dateFor(d).getDate() + (d === a.due ? ' (due)' : '') }); return o; })(),
+                  onQs: (e) => { const v = e.target.value; if (v === '') return; const d = parseInt(v, 10); const n9 = this.state.nextId; const cNow = (this.state.courses || []).find(x => x.id === sel.id) || sel; const aNow = (cNow.assignments || []).find(x => x.id === a.id) || a; const itNow = (aNow.checklist || []).find(x => x.id === it.id) || it; this.setState({ tasks: this.state.tasks.concat([this.asStepTask(cNow, aNow, itNow, d, 't' + n9)]), nextId: n9 + 1, asStepQs: null }); this.setToast('"' + (itNow.text || 'Step') + '" is on ' + (d === 0 ? 'today' : d === 1 ? 'tomorrow' : this.DAYS[this.dowFor(d)]) + '.'); },
                   onText: (e) => { const v = e.target.value; updA(a.id, x => ({ checklist: (x.checklist || []).map(c2 => c2.id === it.id ? Object.assign({}, c2, { text: v }) : c2) })); },
                   key: (e) => { if (e.key === 'Enter') { e.preventDefault(); try { e.target.blur(); } catch (er) {} } if (e.key === 'Backspace' && !e.target.value) { e.preventDefault(); updA(a.id, x => ({ checklist: (x.checklist || []).filter(c2 => c2.id !== it.id) })); } },
                   dropShadow: s.dropKey === 'acs:' + it.id ? 'inset 0 3px 0 ' + this.TK.tC9849A : 'none',
@@ -9438,18 +9484,21 @@ class Component extends DCLogic {
                   dragEnd: () => { this.acDrag = null; if (this.state.dropKey) this.setState({ dropKey: null }); },
                   over: (e) => { const d = this.acDrag; if (!d || d.aid !== a.id) return; e.preventDefault(); if (this.state.dropKey !== 'acs:' + it.id) this.setState({ dropKey: 'acs:' + it.id }); },
                   drop: (e) => { const d = this.acDrag; this.acDrag = null; if (!d || d.aid !== a.id) return; e.preventDefault(); this.setState({ dropKey: null }); if (d.id === it.id) return; updA(a.id, x => { const arr = (x.checklist || []).slice(); const from = arr.findIndex(c2 => c2.id === d.id); const orig = arr.findIndex(c2 => c2.id === it.id); if (from < 0) return {}; const mv = arr.splice(from, 1)[0]; const to = arr.findIndex(c2 => c2.id === it.id); arr.splice(to < 0 ? arr.length : (from < orig ? to + 1 : to), 0, mv); return { checklist: arr }; }); }, checked: it.done ? 'true' : 'false', strike: it.done ? 'line-through' : 'none', fg: it.done ? '#8A8174' : '#2B2722', boxBg: it.done ? this.TK.t6E2F43 : '#FFFFFF',
-                  toggle: () => updA(a.id, x => ({ checklist: (x.checklist || []).map(c2 => c2.id === it.id ? Object.assign({}, c2, { done: !c2.done }) : c2) })),
+                  toggle: () => { const nv = !it.done; updA(a.id, x => ({ checklist: (x.checklist || []).map(c2 => c2.id === it.id ? Object.assign({}, c2, { done: nv }) : c2) })); const tk = stepTaskOf[it.id]; if (tk) this.setState(st => ({ tasks: st.tasks.map(t2 => t2.id === tk.id ? Object.assign({}, t2, { done: nv, doneDay: nv ? 0 : null }) : t2) })); },
                   remove: () => updA(a.id, x => ({ checklist: (x.checklist || []).filter(c2 => c2.id !== it.id) })) })),
                 clCount: cl.length ? cl.filter(x => x.done).length + '/' + cl.length : '', hasCl: cl.length > 0,
                 clDraft: s.asClFor === a.id ? (s.asCl || '') : '',
                 clOnDraft: (e) => { const v = e.target.value; if (/\n/.test(v)) { const lines = v.split(/\r?\n/).map(x => x.replace(/^\s*(?:[-*•]|\d+[.)]|\[[ xX]?\])\s*/, '').trim()).filter(Boolean); let n = this.state.nextId; const items = lines.map(x => ({ id: 'ck' + (n++), text: x, done: false })); updA(a.id, x => ({ checklist: (x.checklist || []).concat(items) })); this.setState({ nextId: n, asCl: '', asClFor: a.id }); return; } this.setState({ asCl: v, asClFor: a.id }); },
                 clKey: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = ((e.target && e.target.value) || '').trim(); if (!v) return; const n = this.state.nextId; updA(a.id, x => ({ checklist: (x.checklist || []).concat([{ id: 'ck' + n, text: v, done: false }]) })); this.setState({ nextId: n + 1, asCl: '', asClFor: a.id }); } },
                 planLine: planned ? this.fmtDur(planned) + ' planned' + (doneM ? ' · ' + this.fmtDur(doneM) + ' done' : '') + (a.mins ? ' of ' + this.fmtDur(a.mins) : '') : (a.mins ? 'Not planned yet' : 'Add the time needed to plan it'),
-                showPlan: !!a.mins || !!planned || prop.length > 0,
-                canPlan: !a.done && !!a.mins && typeof a.due === 'number' && a.due >= 0 && planned < a.mins,
+                showPlan: !!a.mins || !!planned || prop.length > 0 || (stepsLeftA.length > 0 && typeof a.due === 'number'),
+                pvLabel: stepsLeftA.length ? 'Add them to my week' : 'Add these sessions',
+                planBtn: stepsLeftA.length ? 'Plan the steps before the due date' : 'Plan it before the due date',
+                stepsTimed: stepsTimedA, timeRO: stepsTimedA,
+                canPlan: stepsLeftA.length ? (!a.done && typeof a.due === 'number' && a.due >= 0) : !(a.checklist || []).length && !a.done && !!a.mins && typeof a.due === 'number' && a.due >= 0 && planned < a.mins,
                 planIt: () => this.setState({ asPreview: { cid: sel.id, aid: a.id } }),
                 pvOn: prop.length > 0,
-                pvRows: prop.map(r => ({ label: this.DSHORT[this.dowFor(r.day)] + ' ' + this.dateFor(r.day).getDate(), mins: this.fmtDur(r.mins) })),
+                pvRows: prop.map(r => ({ label: this.DSHORT[this.dowFor(r.day)] + ' ' + this.dateFor(r.day).getDate(), mins: this.fmtDur(r.mins), name: r.name || '', hasName: !!r.name })),
                 pvApprove: () => this.asApprove(sel.id, a.id), pvCancel: () => this.setState({ asPreview: null }),
                 remove: () => { const gone = {}; this.asSessions(sel, a).filter(t => !t.done).forEach(t => { gone[t.id] = true; }); const m = {}; Object.keys(this.state.placedByDay).forEach(k => { m[k] = (this.state.placedByDay[k] || []).filter(b => !gone[b.taskId]); }); this.setState({ tasks: this.state.tasks.filter(t => !gone[t.id]), placedByDay: m, asOpen: null, courses: this.state.courses.map(c => c.id === sel.id ? Object.assign({}, c, { assignments: (c.assignments || []).filter(x => x.id !== a.id) }) : c) }); }
               };
