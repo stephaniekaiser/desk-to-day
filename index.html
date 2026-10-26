@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:45 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:49 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2889,12 +2889,34 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 <sc-if value="{{rs.addLOpen}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px; margin-top: 4px">
-<label for="{{rs.addLId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Add lessons, one per line</label>
+<div role="tablist" aria-label="How to add lessons" style="align-self: flex-start; display: flex; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
+<button role="tab" aria-selected="{{rs.genSel}}" onClick="{{rs.modeGen}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: {{rs.genBg}}; color: {{rs.genFg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Make a set</button>
+<button role="tab" aria-selected="{{rs.pasteSel}}" onClick="{{rs.modePaste}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: {{rs.pasteBg}}; color: {{rs.pasteFg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Paste a list</button>
+</div>
+<sc-if value="{{rs.isGen}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap">
+<label for="{{rs.genNId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">How many</label>
+<span style="display: flex; align-items: center; gap: 4px"><input id="{{rs.genNId}}" type="number" inputmode="numeric" min="1" max="200" value="{{rs.genN}}" onChange="{{rs.onGenN}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; width: 58px; text-align: center"><span style="display: flex; flex-direction: column; flex: none"><button onClick="{{rs.genNUp}}" aria-label="How many up" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{rs.genNDown}}" aria-label="How many down" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span></span>
+<label for="{{rs.genKId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722; margin-left: 6px">Called</label>
+<select id="{{rs.genKId}}" value="{{rs.genKind}}" onChange="{{rs.onGenKind}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; padding: 0 4px"><option value="Lesson">Lesson</option><option value="Chapter">Chapter</option><option value="Section">Section</option><option value="Unit">Unit</option><option value="Module">Module</option><option value="Week">Week</option><option value="Part">Part</option><option value="Video">Video</option></select>
+</div>
+<div style="display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap">
+<label for="{{rs.genHId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">Time each</label>
+<span style="display: flex; align-items: center; gap: 4px"><input id="{{rs.genHId}}" type="number" inputmode="numeric" min="0" max="12" value="{{rs.genH}}" onChange="{{rs.onGenH}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; width: 52px; text-align: center"><span style="display: flex; flex-direction: column; flex: none"><button onClick="{{rs.genHUp}}" aria-label="Hours each up" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{rs.genHDown}}" aria-label="Hours each down" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span></span>
+<label for="{{rs.genMId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Minutes each</label>
+<select id="{{rs.genMId}}" value="{{rs.genM}}" onChange="{{rs.onGenM}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; padding: 0 4px"><option value="0">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
+<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">m</span>
+</div>
+<span style="font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{rs.genPreview}}</span>
+</sc-if>
+<sc-if value="{{rs.isPaste}}" hint-placeholder-val="{{ false }}">
+<label for="{{rs.addLId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">One lesson per line</label>
 <textarea id="{{rs.addLId}}" rows="4" value="{{rs.addLText}}" onChange="{{rs.onAddL}}" onInput="{{rs.onAddL}}" placeholder="Chapter 1: Intro, 45m&#10;Chapter 2: Networks, 1h&#10;Chapter 3" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; width: 100%; resize: vertical; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 8px 10px; font: inherit; font-size: calc(13.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF"></textarea>
+</sc-if>
 <div style="display: flex; align-items: center; gap: 8px">
 <span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: #7A7064">{{rs.addLHint}}</span>
 <button onClick="{{rs.toggleAddL}}" style="height: 30px; padding: 0 10px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Cancel</button>
-<button onClick="{{rs.addLessons}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{rs.addLBtn}}</button>
+<button onClick="{{rs.addLGo}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{rs.addLBtn}}</button>
 </div>
 </div>
 </sc-if>
@@ -9624,6 +9646,9 @@ class Component extends DCLogic {
           const allR = sel.resources || [];
           const moveTo = (to) => { if (to < 0 || to >= allR.length || to === ri) return; updC(sel.id, c => { const a = c.resources.slice(); const x = a.splice(ri, 1)[0]; a.splice(to, 0, x); return { resources: a }; }); };
           const rType = r.type || (r.isbn || r.author ? 'book' : 'general');
+          const genN = s.addLN || 10, genKind = s.addLKind || 'Lesson', genMins = s.addLMins || 60;
+          const genStart = (() => { let mx = 0; (sel.lessons || []).filter(l => l.resId === r.id).forEach(l => { const m = String(l.title || '').match(new RegExp('^' + genKind + '\\s+(\\d+)', 'i')); if (m) mx = Math.max(mx, +m[1]); }); return mx + 1; })();
+          let pasteGo = () => {};
           return {
             border: '#EDE5D4',
             dragStart: (e) => { this.drag = { kind: 'res', cid: sel.id, rid: r.id }; try { e.dataTransfer.setData('text/plain', r.id); } catch (err) {} },
@@ -9661,9 +9686,30 @@ class Component extends DCLogic {
             addLOpen: s.addLFor === r.id, addLId: 'sral-' + r.id, addLText: s.addLFor === r.id ? (s.addLText || '') : '',
             onAddL: (e) => this.setState({ addLText: e.target.value }),
             toggleAddL: () => { const on = this.state.addLFor === r.id; this.setState({ addLFor: on ? null : r.id, addLText: '' }); if (!on) setTimeout(() => { try { const el = document.getElementById('sral-' + r.id); if (el) el.focus(); } catch (e) {} }, 60); },
-            addLHint: (() => { const n = String(s.addLFor === r.id ? (s.addLText || '') : '').split(/\r?\n/).filter(x => x.trim()).length; return n ? n + (n === 1 ? ' lesson' : ' lessons') + '. No time given means 1h.' : 'Paste a table of contents. Add a time at the end if you know it.'; })(),
-            addLBtn: (() => { const n = String(s.addLFor === r.id ? (s.addLText || '') : '').split(/\r?\n/).filter(x => x.trim()).length; return n > 1 ? 'Add ' + n + ' lessons' : 'Add'; })(),
-            addLessons: () => {
+            addLHint: (s.addLMode || 'gen') === 'gen' ? '' : (() => { const n = String(s.addLFor === r.id ? (s.addLText || '') : '').split(/\r?\n/).filter(x => x.trim()).length; return n ? n + (n === 1 ? ' lesson' : ' lessons') + '. No time given means 1h.' : 'Paste a table of contents. Add a time at the end if you know it.'; })(),
+            addLBtn: (s.addLMode || 'gen') === 'gen' ? 'Add ' + genN + ' ' + genKind.toLowerCase() + (genN === 1 ? '' : 's') : (() => { const n = String(s.addLFor === r.id ? (s.addLText || '') : '').split(/\r?\n/).filter(x => x.trim()).length; return n > 1 ? 'Add ' + n + ' lessons' : 'Add'; })(),
+            isGen: (s.addLMode || 'gen') === 'gen', isPaste: s.addLMode === 'paste',
+            genSel: (s.addLMode || 'gen') === 'gen' ? 'true' : 'false', pasteSel: s.addLMode === 'paste' ? 'true' : 'false',
+            genBg: (s.addLMode || 'gen') === 'gen' ? '#FFFFFF' : 'transparent', pasteBg: s.addLMode === 'paste' ? '#FFFFFF' : 'transparent',
+            genFg: (s.addLMode || 'gen') === 'gen' ? this.TK.t6E2F43 : '#6B6358', pasteFg: s.addLMode === 'paste' ? this.TK.t6E2F43 : '#6B6358',
+            modeGen: () => this.setState({ addLMode: 'gen' }), modePaste: () => { this.setState({ addLMode: 'paste' }); setTimeout(() => { try { const el = document.getElementById('sral-' + r.id); if (el) el.focus(); } catch (e) {} }, 60); },
+            genNId: 'sgn-' + r.id, genKId: 'sgk-' + r.id, genHId: 'sgh-' + r.id, genMId: 'sgm-' + r.id,
+            genN: String(genN), genKind: genKind, genH: String(Math.floor(genMins / 60)), genM: String(genMins % 60 - (genMins % 60) % 15),
+            onGenN: (e) => this.setState({ addLN: Math.max(1, Math.min(200, parseInt(e.target.value, 10) || 1)) }),
+            genNUp: () => this.setState({ addLN: Math.min(200, genN + 1) }), genNDown: () => this.setState({ addLN: Math.max(1, genN - 1) }),
+            onGenKind: (e) => this.setState({ addLKind: e.target.value }),
+            onGenH: (e) => { const h = Math.max(0, Math.min(12, parseInt(e.target.value, 10) || 0)); this.setState({ addLMins: Math.max(15, h * 60 + genMins % 60) }); },
+            onGenM: (e) => { const m = parseInt(e.target.value, 10) || 0; this.setState({ addLMins: Math.max(15, Math.floor(genMins / 60) * 60 + m) }); },
+            genHUp: () => this.setState({ addLMins: Math.min(720, genMins + 60) }), genHDown: () => this.setState({ addLMins: Math.max(genMins % 60 || 15, genMins - 60) }),
+            genPreview: genKind + ' ' + genStart + (genN > 1 ? ' to ' + genKind + ' ' + (genStart + genN - 1) : '') + ' · ' + genN + ' × ' + this.fmtDur(genMins) + ' = ' + this.fmtDur(genN * genMins),
+            addLGo: () => {
+              if ((this.state.addLMode || 'gen') !== 'gen') return pasteGo();
+              const made = []; for (let q = 0; q < genN; q++) { const k3 = ls.length + q + 1; made.push({ id: nid(), resId: r.id, title: genKind + ' ' + (genStart + q), items: [{ id: nid(), title: k3 + '.1', mins: genMins, done: false }] }); }
+              updC(sel.id, c => ({ lessons: (c.lessons || []).concat(made) }));
+              this.setState({ addLFor: null, addLText: '' });
+              this.setToast(made.length + ' ' + genKind.toLowerCase() + (made.length === 1 ? '' : 's') + ' added. Tap any one to rename it or change its time.');
+            },
+            addLessons: (pasteGo = () => {
               const lines = String(this.state.addLText || '').split(/\r?\n/).map(x => x.replace(/^\s*(?:[-*•]|\d+[.)]\s)\s*/, '').trim()).filter(Boolean);
               if (!lines.length) return;
               const start = ls.length;
@@ -9678,7 +9724,7 @@ class Component extends DCLogic {
               updC(sel.id, c => ({ lessons: (c.lessons || []).concat(made) }));
               this.setState({ addLFor: null, addLText: '' });
               this.setToast(made.length + (made.length === 1 ? ' lesson' : ' lessons') + ' added.');
-            },
+            }),
             addLesson: () => { const k2 = ls.length + 1, lid = nid(); updC(sel.id, c => ({ lessons: (c.lessons || []).concat([{ id: lid, resId: r.id, title: 'Lesson ' + k2, items: [{ id: nid(), title: k2 + '.1', mins: 60, done: false }] }]), openL: lid })); },
             removeLabel: asking ? (() => { const t2 = this.impactText(this.sessionImpact(sel.id, [].concat(...ls.map(l => l.items.map(it => it.id))))); return 'Tap again: removes its lessons' + (t2 ? ', ' + t2.replace(/^removes /, '') : ''); })() : 'Remove',
             removeBg: asking ? '#9A4A3A' : 'transparent', removeFg: asking ? '#FFFFFF' : '#9A4A3A',
