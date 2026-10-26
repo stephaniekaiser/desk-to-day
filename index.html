@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 5:58 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:03 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2917,6 +2917,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </button>
 <sc-if value="{{a.hasCl}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: calc(11.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; background: {{TK.tFBEDEE}}; border-radius: 10px; padding: 2px 7px">{{a.clCount}}</span></sc-if>
 <sc-if value="{{a.hasMins}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">{{a.mins}}</span></sc-if>
+<sc-if value="{{a.hasUrl}}" hint-placeholder-val="{{ false }}"><a href="{{a.urlHref}}" target="_blank" rel="noopener" aria-label="Open the link for {{a.title}}" title="Open link" style="width: 30px; height: 30px; flex: none; border-radius: 15px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a></sc-if>
 </div>
 <sc-if value="{{a.open}}" hint-placeholder-val="{{ false }}">
 <div style="padding: 8px 12px 12px; border-top: 1px solid #F1EBDD; display: flex; flex-direction: column; gap: 10px">
@@ -2945,7 +2946,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 </sc-if>
 </div>
-<div style="display: flex; flex-direction: column; gap: 4px"><label for="{{a.lId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Instructions or rubric link</label>
+<div style="display: flex; flex-direction: column; gap: 4px"><label for="{{a.lId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Link</label>
 <div style="display: flex; gap: 6px; align-items: center"><input id="{{a.lId}}" type="url" value="{{a.link}}" onChange="{{a.onLink}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1">
 <sc-if value="{{a.hasUrl}}" hint-placeholder-val="{{ false }}"><a href="{{a.urlHref}}" target="_blank" rel="noopener" style="flex: none; height: 32px; padding: 0 10px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; display: flex; align-items: center; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; text-decoration: none">Open</a></sc-if></div></div>
 <div style="display: flex; flex-direction: column; gap: 4px"><label for="{{a.nId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Notes</label>
