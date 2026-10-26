@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 8:56 PM';</script>
+<script>window.__plannerBuild = 'Oct 26, 11:52 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -4000,6 +4000,38 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <button onClick="{{appReload}}" style="height: 30px; padding: 0 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Check for updates</button>
 </div>
 </sc-if>
+<sc-if value="{{syncIsGh}}" hint-placeholder-val="{{ false }}">
+<div style="flex: none; display: flex; flex-direction: column; gap: 10px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 10px 12px; box-sizing: border-box">
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+<span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 14px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 0-14-5.3L4 9M4 4v5h5M4 12a8 8 0 0 0 14 5.3L20 15M20 20v-5h-5"></path></svg></span>
+<span style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Sync between devices</span><span style="font-size: calc(12px * {{fsK}}); color: {{syncLineColor}}">{{syncLine}}</span></span>
+<sc-if value="{{syncOff}}" hint-placeholder-val="{{ true }}"><sc-if value="{{syncSetupClosed}}" hint-placeholder-val="{{ true }}"><button onClick="{{syncOpen}}" style="height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Set up</button></sc-if></sc-if>
+<sc-if value="{{syncOn}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{syncNow}}" style="height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Sync now</button>
+<button onClick="{{syncDisconnect}}" style="height: 32px; flex: none; padding: 0 6px; border: 0; background: transparent; color: #9A4A3A; font-size: calc(12.5px * {{fsK}}); font-weight: 600">{{syncDiscLabel}}</button>
+</sc-if>
+</div>
+<sc-if value="{{syncSetupOpen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 10px 12px">
+<span style="font-size: calc(13px * {{fsK}}); color: #2B2722; line-height: 1.45">Your planner is saved to a private file (a gist) in your own GitHub account. Every device you connect reads and writes that file, so they stay the same. Nobody else can see it.</span>
+<div style="display: flex; gap: 8px; align-items: flex-start">
+<span style="width: 22px; height: 22px; flex: none; border-radius: 11px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">1</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px"><span style="font-size: calc(13px * {{fsK}}); color: #2B2722; line-height: 1.45">Make a key on GitHub. The link opens the right page with the <strong>gist</strong> box already ticked. Pick an expiration (No expiration is easiest), scroll down and tap <strong>Generate token</strong>.</span>
+<a href="{{syncTokenUrl}}" target="_blank" rel="noopener" style="align-self: flex-start; height: 32px; display: flex; align-items: center; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; text-decoration: none">Open GitHub to make a key</a></span>
+</div>
+<div style="display: flex; gap: 8px; align-items: flex-start">
+<span style="width: 22px; height: 22px; flex: none; border-radius: 11px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center">2</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px"><label for="sync-token" style="font-size: calc(13px * {{fsK}}); color: #2B2722; line-height: 1.45">Copy the key (it starts with <strong>ghp_</strong>) and paste it here. Do the same on each device you want in sync.</label>
+<span style="display: flex; gap: 6px; flex-wrap: wrap"><input id="sync-token" type="password" autocomplete="off" value="{{syncToken}}" onChange="{{onSyncToken}}" onInput="{{onSyncToken}}" placeholder="ghp_…" style="outline-color: {{TK.tA0526A}}; flex: 1 1 200px; min-width: 0; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(13.5px * {{fsK}}); background: #FFFFFF; color: #2B2722">
+<button onClick="{{syncConnectGo}}" disabled="{{syncBusy}}" style="height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{syncConnectLabel}}</button></span></span>
+</div>
+<sc-if value="{{hasSyncErr}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #9A4A3A">{{syncErr}}</span></sc-if>
+<span style="font-size: calc(12px * {{fsK}}); color: #7A7064">The key stays on this device only. It is never put in backups. To stop syncing, tap Disconnect, and you can delete the key on GitHub anytime.</span>
+<button onClick="{{syncCloseSetup}}" style="align-self: flex-end; height: 30px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Not now</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
 <div style="flex: none; display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 8px 12px; min-height: 56px; box-sizing: border-box">
 <span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 14px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg></span>
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Download a backup</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">A file of everything you have entered.</span></span>
@@ -4096,6 +4128,19 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <button onClick="{{tiCancel}}" style="height: 40px; padding: 0 16px; border: 1px solid #E2D8C4; border-radius: 10px; background: #FFFFFF; color: #2B2722; font-size: calc(14px * {{fsK}}); font-weight: 700">Cancel</button>
 <sc-if value="{{tiCanGo}}" hint-placeholder-val="{{ true }}"><button onClick="{{tiGo}}" style="height: 40px; padding: 0 16px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">Add {{tiCount}} items</button></sc-if>
 </div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{syncAskOn}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 59; background: rgba(20,30,28,0.4); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 16px">
+<div role="alertdialog" aria-modal="true" aria-labelledby="sync-h" style="width: min(460px, 100%); box-sizing: border-box; background: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+<span id="sync-h" style="font-family: {{TK.fHead}}; font-size: calc(24px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">{{syncAskTitle}}</span>
+<span style="font-size: calc(14px * {{fsK}}); color: #4A443B; line-height: 1.45">{{syncAskText}}</span>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<button onClick="{{syncUseRemote}}" style="min-height: 44px; padding: 6px 14px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; text-align: left; display: flex; flex-direction: column; gap: 1px"><span style="font-size: calc(14px * {{fsK}}); font-weight: 700">Use the one on GitHub</span><span style="font-size: calc(12px * {{fsK}}); opacity: 0.85">{{syncAskRemoteLine}}</span></button>
+<button onClick="{{syncKeepLocal}}" style="min-height: 44px; padding: 6px 14px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 10px; background: #FFFFFF; color: {{TK.t6E2F43}}; text-align: left; display: flex; flex-direction: column; gap: 1px"><span style="font-size: calc(14px * {{fsK}}); font-weight: 700">Keep this {{syncDeviceName}}'s planner</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">It replaces the copy on GitHub, and your other devices pick it up.</span></button>
+</div>
+<span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Not sure? Download a backup first in Settings → Your data.</span>
 </div>
 </div>
 </sc-if>
@@ -4360,6 +4405,7 @@ class Component extends DCLogic {
       resizePrev: null,
       nextId: 100
     };
+    this.SYNC_FILE = 'desk-to-day-planner.json';
     this.DK = ['cats', 'courses', 'journal', 'meals', 'mealPlan', 'mealGroc', 'tasks', 'groups', 'habits', 'placedByDay', 'specials', 'allDay', 'commitments', 'series', 'goals', 'notes', 'big3ByWeek', 'bandView', 'nudgeOff', 'bellOff'];
     Object.assign(this.state, this.blankData(), { selNote: null, storeMode: 'local', dataConfirm: false });
     this.ready = false;
@@ -4468,13 +4514,13 @@ class Component extends DCLogic {
     };
     try { window.addEventListener('resize', this.onResize); } catch (err) {}
     this.onResize();
-    this.onVis = () => { try { if (document.visibilityState === 'visible' && this.db && !this.saveT) this.pullRemote(); } catch (err) {} };
+    this.onVis = () => { try { if (document.visibilityState === 'visible' && this.db && !this.saveT) this.pullRemote(); if (document.visibilityState === 'visible' && !this.db && this.syncStarted) this.syncPull(false); if (document.visibilityState === 'hidden' && this.syncT) { clearTimeout(this.syncT); this.syncT = null; this.syncPush(false); } } catch (err) {} };
     try { document.addEventListener('visibilitychange', this.onVis); } catch (err) {}
     this.initStore();
     this.installTouchDrag();
   }
   componentWillUnmount() {
-    clearInterval(this.clock);
+    clearInterval(this.clock); clearInterval(this.syncIv);
     try { window.removeEventListener('resize', this.onResize); } catch (err) {}
     try { document.removeEventListener('visibilitychange', this.onVis); } catch (err) {}
     if (this.saveT) { clearTimeout(this.saveT); this.saveNow(); }
@@ -5606,10 +5652,10 @@ class Component extends DCLogic {
     this.forceUpdate();
     let db = null;
     try { db = window.claude && window.claude.use ? await window.claude.use('db') : null; } catch (e) { db = null; }
-    if (!db) { this.setState({ storeMode: 'local' }); return; }
+    if (!db) { this.setState({ storeMode: 'local' }); this.syncStart(); return; }
     this.db = db;
     const had = await this.pullRemote();
-    if (had === null) { this.db = null; this.setState({ storeMode: 'local' }); return; }
+    if (had === null) { this.db = null; this.setState({ storeMode: 'local' }); this.syncStart(); return; }
     this.setState({ storeMode: 'db' });
     if (!had && local && local.docs) { this.lastDocs = {}; this.saveNow(); }
   }
@@ -5631,6 +5677,118 @@ class Component extends DCLogic {
       return true;
     } catch (e) { return null; }
   }
+  // ---------- GitHub Gist sync (GitHub copy only) ----------
+  syncCfg() { try { return JSON.parse(window.localStorage.getItem('planner.sync') || 'null') || {}; } catch (e) { return {}; } }
+  syncSaveCfg(c) { try { window.localStorage.setItem('planner.sync', JSON.stringify(c)); } catch (e) {} this.setState({ syncTick: (this.state.syncTick || 0) + 1 }); }
+  syncHash(str) { let h = 5381; for (let i = 0; i < str.length; i++) h = ((h * 33) ^ str.charCodeAt(i)) | 0; return str.length + ':' + h; }
+  syncDevice() { const ua = (navigator.userAgent || ''); const ipad = /iPad/.test(ua) || (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1); return ipad ? 'iPad' : (/iPhone/.test(ua) ? 'iPhone' : (/Android/.test(ua) ? 'Android' : 'computer')); }
+  async gh(path, token, opts) {
+    const o = Object.assign({}, opts || {});
+    o.headers = Object.assign({ 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + token }, o.headers || {});
+    if (o.body && typeof o.body !== 'string') { o.body = JSON.stringify(o.body); o.headers['Content-Type'] = 'application/json'; }
+    const r = await fetch('https://api.github.com' + path, o);
+    if (r.status === 401) throw new Error('GitHub did not accept that key. Check that you copied all of it and that it has the gist box ticked.');
+    if (r.status === 404) throw new Error('notfound');
+    if (!r.ok) throw new Error('GitHub said ' + r.status + '. Try again in a minute.');
+    return r.status === 204 ? null : r.json();
+  }
+  syncLocalKeep() { const st = this.state.settings || {}; const keep = {}; ['textSize', 'dense', 'defaultZoom', 'tabIcons'].forEach(k => { if (st[k] !== undefined) keep[k] = st[k]; }); return keep; }
+  syncPayload() { const data = this.snapshot(); return { json: JSON.stringify({ app: 'adhd-planner', v: 1, savedAt: new Date().toISOString(), device: this.syncDevice(), data: data }), hash: this.syncHash(JSON.stringify(data)) }; }
+  async syncReadGist(cfg) {
+    const g = await this.gh('/gists/' + cfg.gistId, cfg.token);
+    const f = g.files && g.files[this.SYNC_FILE];
+    if (!f) return null;
+    let content = f.content;
+    if (f.truncated && f.raw_url) { const r = await fetch(f.raw_url); content = await r.text(); }
+    try { return JSON.parse(content || 'null'); } catch (e) { return null; }
+  }
+  syncApplyRemote(remote) {
+    const keep = this.syncLocalKeep();
+    const patch = this.applyStored(remote.data);
+    patch.settings = Object.assign({}, patch.settings, keep);
+    this.setState(patch);
+    setTimeout(() => { const c = this.syncCfg(); c.lastSyncAt = remote.savedAt; c.lastHash = this.syncHash(JSON.stringify(this.snapshot())); c.dirty = false; c.err = ''; c.from = remote.device || ''; this.syncSaveCfg(c); }, 0);
+  }
+  async syncConnect(token) {
+    token = String(token || '').trim();
+    if (!token) { this.setState({ syncUi: Object.assign({}, this.state.syncUi, { err: 'Paste your key first.' }) }); return; }
+    this.setState({ syncUi: Object.assign({}, this.state.syncUi, { busy: true, err: '' }) });
+    try {
+      const user = await this.gh('/user', token);
+      let found = null;
+      for (let page = 1; page <= 5 && !found; page++) {
+        const list = await this.gh('/gists?per_page=100&page=' + page, token);
+        if (!list || !list.length) break;
+        found = list.find(g => g.files && g.files[this.SYNC_FILE]) || null;
+      }
+      const cfg = { token: token, login: user.login, gistId: found ? found.id : null, lastSyncAt: null, lastHash: null, dirty: false, err: '' };
+      if (found) {
+        const remote = await this.syncReadGist(cfg);
+        if (remote && remote.data) {
+          this.syncSaveCfg(cfg);
+          this.setState({ syncUi: { open: false }, syncAsk: { kind: 'connect', remote: remote } });
+          return;
+        }
+      }
+      const p = this.syncPayload();
+      if (!cfg.gistId) {
+        const g = await this.gh('/gists', token, { method: 'POST', body: { description: 'Desk-to-Day planner sync (private)', public: false, files: { [this.SYNC_FILE]: { content: p.json } } } });
+        cfg.gistId = g.id;
+      } else {
+        await this.gh('/gists/' + cfg.gistId, token, { method: 'PATCH', body: { files: { [this.SYNC_FILE]: { content: p.json } } } });
+      }
+      cfg.lastSyncAt = JSON.parse(p.json).savedAt; cfg.lastHash = p.hash;
+      this.syncSaveCfg(cfg);
+      this.setState({ syncUi: { open: false } });
+      this.setToast('Connected. This planner now syncs through your GitHub.');
+    } catch (e) {
+      this.setState({ syncUi: Object.assign({}, this.state.syncUi, { busy: false, err: e && e.message === 'notfound' ? 'Could not reach that gist.' : ((e && e.message) || 'Could not connect. Check your internet and try again.') }) });
+    }
+  }
+  async syncPull(manual) {
+    const cfg = this.syncCfg();
+    if (!cfg.token || !cfg.gistId || this.syncBusy) return;
+    this.syncBusy = true;
+    try {
+      const remote = await this.syncReadGist(cfg);
+      if (!remote || !remote.data) { if (cfg.dirty || manual) await this.syncPush(true); return; }
+      if (remote.savedAt === cfg.lastSyncAt) { if (cfg.dirty) await this.syncPush(true); else if (manual) { cfg.err = ''; cfg.checkedAt = new Date().toISOString(); this.syncSaveCfg(cfg); } return; }
+      if (cfg.dirty) { this.setState({ syncAsk: { kind: 'conflict', remote: remote } }); return; }
+      this.syncApplyRemote(remote);
+      if (manual) this.setToast('Updated from ' + (remote.device ? 'your ' + remote.device : 'GitHub') + '.');
+    } catch (e) {
+      const c = this.syncCfg(); c.err = (e && e.message) || 'Could not reach GitHub.'; this.syncSaveCfg(c);
+    } finally { this.syncBusy = false; }
+  }
+  async syncPush(skipCheck) {
+    const cfg = this.syncCfg();
+    if (!cfg.token || !cfg.gistId) return;
+    try {
+      if (!skipCheck) {
+        const remote = await this.syncReadGist(cfg);
+        if (remote && remote.savedAt && cfg.lastSyncAt && remote.savedAt !== cfg.lastSyncAt) { this.setState({ syncAsk: { kind: 'conflict', remote: remote } }); return; }
+      }
+      const p = this.syncPayload();
+      await this.gh('/gists/' + cfg.gistId, cfg.token, { method: 'PATCH', body: { files: { [this.SYNC_FILE]: { content: p.json } } } });
+      const c = this.syncCfg(); c.lastSyncAt = JSON.parse(p.json).savedAt; c.lastHash = p.hash; c.dirty = false; c.err = ''; this.syncSaveCfg(c);
+    } catch (e) {
+      const c = this.syncCfg(); c.err = (e && e.message) || 'Could not reach GitHub. Your changes are safe here and will sync later.'; this.syncSaveCfg(c);
+    }
+  }
+  syncAfterSave() {
+    const cfg = this.syncCfg();
+    if (!cfg.token || !cfg.gistId || this.state.syncAsk) return;
+    let h; try { h = this.syncHash(JSON.stringify(this.snapshot())); } catch (e) { return; }
+    if (h === cfg.lastHash) return;
+    if (!cfg.dirty) { cfg.dirty = true; try { window.localStorage.setItem('planner.sync', JSON.stringify(cfg)); } catch (e) {} }
+    clearTimeout(this.syncT);
+    this.syncT = setTimeout(() => this.syncPush(false), 4000);
+  }
+  syncStart() {
+    if (this.syncStarted) return; this.syncStarted = true;
+    this.syncPull(false);
+    this.syncIv = setInterval(() => { if (document.visibilityState === 'visible') this.syncPull(false); }, 5 * 60000);
+  }
   scheduleSave() {
     clearTimeout(this.saveT);
     this.saveT = setTimeout(() => { this.saveT = null; this.saveNow(); }, 500);
@@ -5639,6 +5797,7 @@ class Component extends DCLogic {
     let docs;
     try { docs = this.toDocs(this.snapshot()); } catch (e) { return; }
     try { window.localStorage.setItem('planner.v1', JSON.stringify({ docs: docs })); this.savedAt = new Date(); this.saveFail = false; } catch (e) { this.saveFail = true; }
+    if (!this.db) this.syncAfterSave();
     const prev = this.lastDocs || {};
     this.lastDocs = docs;
     const db = this.db;
@@ -9984,6 +10143,36 @@ class Component extends DCLogic {
     const dataVals = {
       showData: isSettings && s.setSec === 'data',
       dataSaved: this.saveFail ? 'Saving is not working here. Download a backup so nothing is lost.' : (this.savedAt ? 'Last saved at ' + this.savedAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + '.' : 'Nothing changed yet this visit.'),
+      ...(() => {
+        void s.syncTick;
+        const cfg = this.syncCfg(), on = !!(cfg.token && cfg.gistId);
+        const ui = s.syncUi || {};
+        const ago = (iso) => { if (!iso) return 'not yet'; const m = Math.round((Date.now() - Date.parse(iso)) / 60000); if (m < 1) return 'just now'; if (m < 60) return m + ' min ago'; const h = Math.round(m / 60); if (h < 24) return h + (h === 1 ? ' hour ago' : ' hours ago'); return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); };
+        const ask = s.syncAsk;
+        const rWhen = ask && ask.remote && ask.remote.savedAt ? new Date(ask.remote.savedAt).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '';
+        const dev = this.syncDevice();
+        return {
+          syncIsGh: s.storeMode !== 'db', syncOn: on, syncOff: !on,
+          syncLine: on ? (cfg.err ? 'Not synced: ' + cfg.err : (cfg.dirty ? 'Changes waiting to sync…' : (cfg.lastSyncAt ? 'Synced ' + ago(cfg.lastSyncAt) : 'Connected'))) + (cfg.login ? ' · GitHub: ' + cfg.login : '') : 'Keep this planner the same on your iPad and your computer.',
+          syncLineColor: on && cfg.err ? '#9A4A3A' : '#7A7064',
+          syncSetupOpen: !on && !!ui.open, syncSetupClosed: !ui.open,
+          syncOpen: () => this.setState({ syncUi: { open: true } }), syncCloseSetup: () => this.setState({ syncUi: null }),
+          syncTokenUrl: 'https://github.com/settings/tokens/new?scopes=gist&description=Desk-to-Day%20planner%20sync',
+          syncToken: ui.token || '', onSyncToken: (e) => this.setState({ syncUi: Object.assign({}, this.state.syncUi, { token: e.target.value, err: '' }) }),
+          syncBusy: !!ui.busy, syncConnectLabel: ui.busy ? 'Connecting…' : 'Connect',
+          syncConnectGo: () => this.syncConnect((this.state.syncUi || {}).token),
+          syncErr: ui.err || '', hasSyncErr: !!ui.err,
+          syncNow: () => { const c = this.syncCfg(); if (c.dirty) this.syncPush(false); else this.syncPull(true); },
+          syncDiscLabel: s.syncDiscAsk ? 'Tap again to disconnect' : 'Disconnect',
+          syncDisconnect: () => { if (!this.state.syncDiscAsk) { this.setState({ syncDiscAsk: true }); clearTimeout(this.syncDiscT); this.syncDiscT = setTimeout(() => this.setState({ syncDiscAsk: false }), 4000); return; } try { window.localStorage.removeItem('planner.sync'); } catch (e) {} clearTimeout(this.syncT); this.setState({ syncDiscAsk: false, syncTick: (s.syncTick || 0) + 1 }); this.setToast('Disconnected. Your planner stays on this device, and the copy on GitHub stays too.'); },
+          syncAskOn: !!ask, syncDeviceName: dev,
+          syncAskTitle: ask && ask.kind === 'connect' ? 'You already have a synced planner' : 'Your planner changed in two places',
+          syncAskText: ask && ask.kind === 'connect' ? 'GitHub already has a planner from ' + (ask.remote.device ? 'your ' + ask.remote.device : 'another device') + '. Which one do you want to keep?' : 'This ' + dev + ' has changes that are not on GitHub yet, and ' + (ask && ask.remote.device ? 'your ' + ask.remote.device : 'another device') + ' saved newer changes too. Which one do you want to keep?',
+          syncAskRemoteLine: 'Saved ' + rWhen + (ask && ask.remote.device ? ' on your ' + ask.remote.device : '') + '. Replaces what is on this ' + dev + '.',
+          syncUseRemote: () => { const a = this.state.syncAsk; if (!a) return; this.setState({ syncAsk: null }); this.syncApplyRemote(a.remote); this.setToast('Using the planner from GitHub.'); },
+          syncKeepLocal: () => { const a = this.state.syncAsk; if (!a) return; const c = this.syncCfg(); c.lastSyncAt = a.remote.savedAt; c.dirty = true; this.syncSaveCfg(c); this.setState({ syncAsk: null }); setTimeout(() => this.syncPush(true), 0); this.setToast('Keeping this ' + dev + '\'s planner. Uploading it now.'); }
+        };
+      })(),
       dataStatus: s.storeMode === 'db' ? 'Everything you add is saved to your account as you go, so it is there on your iPad and your computer.' : 'Everything you add is saved on this device as you go.',
       dataCounts: [s.tasks.length + (s.tasks.length === 1 ? ' task' : ' tasks'), Object.keys(s.placedByDay).reduce((a, k) => a + (s.placedByDay[k] || []).filter(b => !b.taskId).length, 0) + s.series.length + ' events', s.goals.length + (s.goals.length === 1 ? ' intention' : ' intentions'), s.specials.length + s.allDay.length + ' special days'].join(' · '),
       dataBackup: () => this.downloadBackup(),
