@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 7:44 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 7:47 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -348,7 +348,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button onClick="{{t.toggleDone}}" aria-label="Mark {{t.title}} done" style="width: calc(32px * {{rowK}}); height: calc(32px * {{rowK}}); flex: none; border: 0; border-radius: 16px; background: transparent; color: #3F7A5A; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle></svg>
 </button>
-<button onClick="{{t.openEdit}}" aria-expanded="{{t.editExpanded}}" aria-label="{{t.title}}, {{t.dur}}. Tap to edit" style="flex: 1; min-width: 0; min-height: calc(38px * {{rowK}} * {{rowK}}); border: 0; background: transparent; text-align: left; color: #2B2722; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 4px; gap: 1px">
+<button onClick="{{t.openEdit}}" aria-expanded="{{t.editExpanded}}" aria-label="{{t.title}}, {{t.dur}}. Tap to edit" style="opacity: {{t.fadeOp}}; flex: 1; min-width: 0; min-height: calc(38px * {{rowK}} * {{rowK}}); border: 0; background: transparent; text-align: left; color: #2B2722; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 4px; gap: 1px">
 <span style="display: flex; align-items: center; gap: 4px; max-width: 100%">
 <sc-if value="{{t.hasGoal}}" hint-placeholder-val="{{ false }}">
 <span role="img" aria-label="Goal: {{t.goalTitle}}" title="{{t.goalTitle}}" style="width: 8px; height: 8px; flex: none; border-radius: 4px; background: {{t.goalColor}}"></span>
@@ -368,6 +368,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </button>
 <sc-if value="{{t.hasSched}}" hint-placeholder-val="{{ false }}">
 <span title="{{t.schedFull}}" style="flex: none; max-width: 40%; font-size: calc(12px * {{fsK}}); color: {{t.schedColor}}; display: flex; align-items: center; gap: 3px; white-space: nowrap; overflow: hidden">
+<sc-if value="{{t.fadeOn}}" hint-placeholder-val="{{ false }}"><svg role="img" aria-label="On the calendar" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></sc-if>
 <sc-if value="{{t.schedRoll}}" hint-placeholder-val="{{ false }}">
 <svg role="img" aria-label="Rolled over" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M4 17V13a5 5 0 0 1 5-5h11M16 4l4 4-4 4"></path></svg>
 </sc-if>
@@ -433,11 +434,21 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{t.grpPieces}}" as="gp" hint-placeholder-count="3">
+<sc-if value="{{gp.notCur}}" hint-placeholder-val="{{ true }}">
 <button onClick="{{gp.go}}" aria-current="{{gp.curAria}}" style="display: flex; align-items: center; gap: 8px; min-height: calc(28px * {{rowK}}); border: 0; border-radius: 6px; background: {{gp.bg}}; padding: 0 6px; text-align: left; color: {{gp.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: {{gp.fw}}; text-decoration: {{gp.strike}}">
 <span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gp.label}}</span>
 <span style="flex: none; font-size: calc(11.5px * {{fsK}}); color: #7A7064; font-weight: 600">{{gp.when}}</span>
 <span style="flex: none; min-width: 34px; text-align: right; font-weight: 700">{{gp.dur}}</span>
 </button>
+</sc-if>
+<sc-if value="{{gp.isCur}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 8px; min-height: calc(28px * {{rowK}}); border-radius: 6px; background: #FFFFFF; padding: 0 6px 0 0">
+<label for="{{gp.nameId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Slice name</label>
+<input id="{{gp.nameId}}" value="{{gp.nameVal}}" onChange="{{gp.onName}}" onInput="{{gp.onName}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 26px; border: 0; border-radius: 6px; padding: 0 6px; background: transparent; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">
+<span style="flex: none; font-size: calc(11.5px * {{fsK}}); color: #7A7064; font-weight: 600">{{gp.when}}</span>
+<span style="flex: none; min-width: 34px; text-align: right; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{gp.dur}}</span>
+</div>
+</sc-if>
 </sc-for>
 </div>
 </div>
@@ -3355,11 +3366,21 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{t.grpPieces}}" as="gp" hint-placeholder-count="3">
+<sc-if value="{{gp.notCur}}" hint-placeholder-val="{{ true }}">
 <button onClick="{{gp.go}}" aria-current="{{gp.curAria}}" style="display: flex; align-items: center; gap: 8px; min-height: calc(28px * {{rowK}}); border: 0; border-radius: 6px; background: {{gp.bg}}; padding: 0 6px; text-align: left; color: {{gp.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: {{gp.fw}}; text-decoration: {{gp.strike}}">
 <span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gp.label}}</span>
 <span style="flex: none; font-size: calc(11.5px * {{fsK}}); color: #7A7064; font-weight: 600">{{gp.when}}</span>
 <span style="flex: none; min-width: 34px; text-align: right; font-weight: 700">{{gp.dur}}</span>
 </button>
+</sc-if>
+<sc-if value="{{gp.isCur}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 8px; min-height: calc(28px * {{rowK}}); border-radius: 6px; background: #FFFFFF; padding: 0 6px 0 0">
+<label for="{{gp.nameId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Slice name</label>
+<input id="{{gp.nameId}}" value="{{gp.nameVal}}" onChange="{{gp.onName}}" onInput="{{gp.onName}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 26px; border: 0; border-radius: 6px; padding: 0 6px; background: transparent; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">
+<span style="flex: none; font-size: calc(11.5px * {{fsK}}); color: #7A7064; font-weight: 600">{{gp.when}}</span>
+<span style="flex: none; min-width: 34px; text-align: right; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{gp.dur}}</span>
+</div>
+</sc-if>
 </sc-for>
 </div>
 </div>
@@ -4157,7 +4178,7 @@ class Component extends DCLogic {
     this.DS = 0;
     this.DL = 1440;
     this.DEFAULTS = {
-      dayStart: 360, dayEnd: 1260, weekStart: 0, defaultZoom: 'whole',
+      fadeScheduled: true, dayStart: 360, dayEnd: 1260, weekStart: 0, defaultZoom: 'whole',
       defaultMins: 30, defaultPri: 'B', landing: 'ask', breakAt: 60,
       missCheck: true, goalNudge: false, overbook: true, buffer: 100, cheer: 'normal', cleanupDay: 0, showDoneFor: 'week', rollover: 'tomorrow',
       remindBefore: 10, morningNudge: true, eveningNudge: true, weeklyNudge: true,
@@ -6550,6 +6571,7 @@ class Component extends DCLogic {
     const key = 'row:' + t.id;
     const fl = this.flagInfo(t.flag);
     const onDayPage = s.view === 'day';
+    const fadeOn = onDayPage && !!sc && sc.day === s.day && !t.done && s.settings.fadeScheduled !== false;
     const hasDay = t.dayAssign !== undefined && t.dayAssign !== null;
     const rolled = onDayPage && !sc && hasDay && t.dayAssign < 0 && s.day === 0;
     const bKey = t.bucket === 'week' && this.effWeek(t) === this.weekStartOff(0) + 7 ? 'next' : t.bucket;
@@ -6647,7 +6669,7 @@ class Component extends DCLogic {
       tParts: (() => { const q = s.view === 'desk' ? String(s.deskQ || '').trim() : ''; const ti = t.title || ''; if (!q) return [{ text: ti, bg: 'transparent' }]; const i = ti.toLowerCase().indexOf(q.toLowerCase()); if (i < 0) return [{ text: ti, bg: 'transparent' }]; return [{ text: ti.slice(0, i), bg: 'transparent' }, { text: ti.slice(i, i + q.length), bg: '#FCE9A6' }, { text: ti.slice(i + q.length), bg: 'transparent' }].filter(x => x.text); })(),
       hasSched: rolled || !!sc || (!onDayPage && hasDay),
       schedText: rolled ? this.DSHORT[this.dowFor(t.dayAssign)] : sc
-        ? this.schedLabel(sc).replace(' · ', ' ')
+        ? (fadeOn ? this.fmtTime(sc.start, false) : this.schedLabel(sc).replace(' · ', ' '))
         : (hasDay ? (t.dayAssign < 0 && !t.done ? (s.settings.rollover !== 'week' ? 'Today' : 'This week') : this.DSHORT[this.dowFor(t.dayAssign)] + ' ' + this.dateFor(t.dayAssign).getDate()) : ''),
       schedFull: (rolled || (!sc && hasDay && t.dayAssign < 0 && !t.done)) ? 'Rolled over from ' + this.DAYS[this.dowFor(t.dayAssign)] + ' ' + this.MONTHS[this.dateFor(t.dayAssign).getMonth()] + ' ' + this.dateFor(t.dayAssign).getDate() : (sc ? (schedColor === '#8A3B0A' ? 'Was planned ' : 'On the calendar ') + this.schedLabel(sc) : ''),
       schedRoll: rolled || (!sc && hasDay && t.dayAssign < 0 && !t.done),
@@ -6709,7 +6731,8 @@ class Component extends DCLogic {
         const cur = x.id === t.id, scx = smp[x.id];
         const dOff = scx ? scx.day : (x.dayAssign !== undefined && x.dayAssign !== null ? x.dayAssign : null);
         const when = x.done ? 'Done' : (dOff !== null ? this.DAYS[this.dateFor(dOff).getDay()].slice(0, 3) + ' ' + this.dateFor(dOff).getDate() + (scx ? ' · on calendar' : '') : 'No day yet');
-        return { label: x.title, dur: this.fmtDur(cur ? dv.mins : x.mins), when: when, curAria: cur ? 'true' : 'false',
+        return { label: cur ? (dv.title || x.title) : x.title, dur: this.fmtDur(cur ? dv.mins : x.mins), when: when, curAria: cur ? 'true' : 'false',
+          isCur: cur, notCur: !cur, nameId: 'gpn-' + x.id, nameVal: dv.title || '', onName: (e) => { const v = e.target.value; patchDraft({ title: v }); },
           bg: cur ? '#FFFFFF' : 'transparent', fg: cur ? this.TK.t6E2F43 : '#2B2722', fw: cur ? 700 : 500, strike: x.done ? 'line-through' : 'none',
           go: () => { if (cur) return; thenDo(() => this.setState({ editing: x.id, editDraft: null })); } };
       }); })(),
@@ -6718,7 +6741,7 @@ class Component extends DCLogic {
         this.setToast('Deleted "' + t.title + '".');
       },
       badgeW: piece ? 32 : 36,
-      rowBg: isSel ? '#FCE9A6' : 'transparent',
+      rowBg: isSel ? '#FCE9A6' : (fadeOn ? this.TK.tF6EDEF : 'transparent'), fadeOp: fadeOn ? 0.55 : 1, fadeOn: fadeOn,
       dropShadow: s.dropKey === key ? 'inset 0 3px 0 #F2B705' : 'none',
       badgeBg: p.bg, badgeFg: p.fg, badgeBorder: p.border,
       showPromote: t.bucket === 'desk' && s.view === 'desk',
@@ -9108,6 +9131,7 @@ class Component extends DCLogic {
       look: [G('', [
         seg('Text size', 'textSize', [['xs', 'Smallest'], ['small', 'Small'], ['normal', 'Normal'], ['large', 'Large'], ['xl', 'Larger'], ['xxl', 'Largest']], 'Smaller sizes suit a computer screen. Larger ones help on a small iPad.'),
         tog('Denser lists', 'dense', 'Tighter rows in every list, so more fits on a page. The calendar has its own zoom.'),
+        tog('Fade tasks already on the calendar', 'fadeScheduled', 'On the day page, tasks with a time are softened so the ones still to place stand out.'),
         tog('Icon tabs', 'tabIcons', 'Try it: every tab the same size, with an icon and a short label. Switch back anytime.', true)
       ])],
       calendar: [G('', [
