@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 7:53 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 7:54 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -10574,7 +10574,7 @@ class Component extends DCLogic {
         { name: 'Earlier this week', list: doneWeekAll.filter(t => t.doneDay !== s.day), emptyMsg: 'Nothing else yet this week.' }
       ].map(g => ({ name: g.name, meta: g.list.length ? g.list.length + (g.list.length === 1 ? ' task' : ' tasks') : '', empty: !g.list.length, emptyMsg: g.emptyMsg,
         rows: g.list.map(t => ({ title: t.title, when: t.doneDay === s.day ? '' : this.DSHORT[this.dowFor(t.doneDay)] + ' ' + this.dateFor(t.doneDay).getDate(), undo: () => this.setTaskDone(t.id, false, null) })) })),
-      dayTabs: [['list', s.day === 0 ? 'Today' : this.DSHORT[this.dowFor(s.day)], '', ''], ['done', 'Done', String(doneWeekN), '']].concat(
+      dayTabs: [['list', s.day === 0 ? 'Today' : this.DSHORT[this.dowFor(s.day)], '', ''], ['done', 'Done', doneDayN ? String(doneDayN) : '', '']].concat(
         [['grow', 'Grow', '', this.ICONS.garden], ['school', 'School', dayTabVals.schoolLeft ? String(dayTabVals.schoolLeft) : '', this.ICONS.school], ['meals', 'Meals', dayTabVals.mealsN ? String(dayTabVals.mealsN) : '', this.ICONS.food], ['journal', 'Journal', '', 'M5 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5zM8.5 3v18M11.5 8h3.5M11.5 11.5h2.5']]
           .filter(o => (o[0] !== 'school' || s.settings.schoolOn) && (o[0] !== 'meals' || s.settings.mealsOn) && (o[0] !== 'journal' || s.settings.journalOn))).map((o, oi) => {
         const on = dayTab === o[0], ic = !!o[3];
