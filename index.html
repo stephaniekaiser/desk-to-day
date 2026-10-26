@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:49 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:53 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2977,13 +2977,13 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 <sc-if value="{{a.open}}" hint-placeholder-val="{{ false }}">
 <div style="padding: 8px 12px 12px; border-top: 1px solid {{TK.tF6EDEF}}; display: flex; flex-direction: column; gap: 10px">
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 10px">
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 8px 10px">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.kId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Type</label>
 <select id="{{a.kId}}" value="{{a.kindVal}}" onChange="{{a.onKind}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"><sc-for list="{{a.kindOpts}}" as="ko" hint-placeholder-count="5"><option value="{{ko.v}}">{{ko.l}}</option></sc-for></select></div>
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.dId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Due</label>
 <input id="{{a.dId}}" type="date" value="{{a.dueVal}}" onChange="{{a.onDue}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"></div>
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.hId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{a.timeLabel}}</label>
-<div style="display: flex; align-items: center; gap: 4px"><input id="{{a.hId}}" type="number" min="0" step="0.25" inputmode="decimal" value="{{a.hVal}}" onChange="{{a.onH}}" readOnly="{{a.timeRO}}" placeholder="0" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; width: 64px; text-align: center"><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span></div></div>
+<div style="display: flex; align-items: center; gap: 4px"><input id="{{a.hId}}" type="number" min="0" max="99" inputmode="numeric" value="{{a.hVal}}" onChange="{{a.onH}}" readOnly="{{a.timeRO}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: {{a.timeBg}}; padding: 0 4px; width: 44px; text-align: center"><span style="display: flex; flex-direction: column; flex: none"><button onClick="{{a.hUp}}" aria-label="One hour more" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{a.hDown}}" aria-label="One hour less" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span><label for="{{a.mId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Minutes</label><select id="{{a.mId}}" value="{{a.mVal}}" onChange="{{a.onM}}" disabled="{{a.timeRO}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: {{a.timeBg}}; padding: 0 2px"><option value="0">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">m</span></div></div>
 </div>
 <sc-if value="{{a.showPlan}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
@@ -9493,7 +9493,12 @@ class Component extends DCLogic {
                 onTitle: (e) => { const v = e.target.value; updA(a.id, x => ({ title: v, kind: x.kind === 'other' || !x.title ? this.asGuessKind(v) : x.kind })); },
                 kindVal: a.kind || 'other', kindOpts: kinds.map(k => ({ v: k[0], l: k[1] })), onKind: (e) => { const v = e.target.value; updA(a.id, () => ({ kind: v })); },
                 dueVal: typeof a.due === 'number' ? this.isoFor(a.due) : '', onDue: (e) => { const v = e.target.value; updA(a.id, () => ({ due: v ? this.offFromISO(v) : null })); },
-                hVal: a.mins ? String(Math.round(a.mins / 60 * 100) / 100) : '', onH: (e) => { const h = parseFloat(e.target.value); updA(a.id, () => ({ mins: h > 0 ? Math.max(15, Math.round(h * 60 / 15) * 15) : 0 })); },
+                hVal: String(Math.floor((a.mins || 0) / 60)), mVal: String((a.mins || 0) % 60 - ((a.mins || 0) % 60) % 15), mId: 'asm-' + a.id,
+                timeBg: stepsTimedA ? this.TK.tF6EDEF : '#FFFFFF',
+                onH: (e) => { if (stepsTimedA) return; const h = Math.max(0, Math.min(99, parseInt(e.target.value, 10) || 0)); updA(a.id, x => ({ mins: h * 60 + (x.mins || 0) % 60 })); },
+                onM: (e) => { if (stepsTimedA) return; const m = parseInt(e.target.value, 10) || 0; updA(a.id, x => ({ mins: Math.floor((x.mins || 0) / 60) * 60 + m })); },
+                hUp: () => { if (stepsTimedA) return; updA(a.id, x => ({ mins: Math.min(99 * 60, (x.mins || 0) + 60) })); },
+                hDown: () => { if (stepsTimedA) return; updA(a.id, x => ({ mins: Math.max(0, (x.mins || 0) - 60) })); },
                 timeLabel: stepsTimedA ? 'Time (from steps)' : (a.kind === 'exam' ? 'Study time' : 'Time needed'),
                 links: linkVals('al' + a.id, this.linksOf(a), (fn) => updA(a.id, x => ({ links: fn(this.linksOf(x)), link: '' }))),
                 addLink: () => { const lid = 'lk' + Date.now().toString(36); updA(a.id, x => ({ links: this.linksOf(x).concat([{ id: lid, label: '', url: '' }]), link: '' })); setTimeout(() => { try { const el = document.getElementById('lku-al' + a.id + '-' + lid); if (el) el.focus(); } catch (e) {} }, 60); },
