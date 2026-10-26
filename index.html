@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 7:26 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 7:42 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -586,7 +586,85 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-for>
 
 <sc-if value="{{dtGrow}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<sc-if value="{{hasGrowBuild}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 4px 2px; border-bottom: 1px solid {{TK.tE2B9C4}}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: {{TK.t6E2F43}}">Building · {{growDayWord}}</span></div>
+<sc-for list="{{growBuild}}" as="gb" hint-placeholder-count="2">
+<div style="background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline; gap: 8px">
+<span style="flex: 1; min-width: 0; font-family: {{TK.fHead}}; font-size: calc(18px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gb.name}}</span>
+<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.line}}</span>
+</div>
+<div aria-hidden="true" style="position: relative; height: 8px; border-radius: 4px; background: {{TK.tF6EDEF}}; overflow: hidden"><div style="position: absolute; top: 0; bottom: 0; left: 0; width: {{gb.pctP}}%; background: {{TK.tE2B9C4}}"></div><div style="position: absolute; top: 0; bottom: 0; left: 0; width: {{gb.pctD}}%; background: {{TK.t6E2F43}}"></div></div>
+<sc-if value="{{gb.hasBlocks}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{gb.blocks}}" as="bk" hint-placeholder-count="2">
+<div style="display: flex; align-items: center; gap: 8px; min-height: calc(34px * {{rowK}}); border-bottom: 1px solid {{TK.tF6EDEF}}">
+<sc-if value="{{bk.canDone}}" hint-placeholder-val="{{ true }}"><button role="checkbox" aria-checked="{{bk.done}}" onClick="{{bk.toggle}}" aria-label="Done" style="width: 22px; height: 22px; flex: none; border: 1.5px solid #3F7A5A; border-radius: 11px; background: {{bk.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button></sc-if>
+<span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: #2B2722; text-decoration: {{bk.strike}}">{{bk.label}}</span>
+<sc-if value="{{bk.rep}}" hint-placeholder-val="{{ false }}"><span title="Repeats" aria-label="Repeats" style="flex: none; color: {{TK.tA0526A}}; display: flex"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"></path></svg></span></sc-if>
+<button onClick="{{bk.remove}}" aria-label="Remove this block" title="Remove from this day" style="width: 28px; height: 28px; flex: none; border: 0; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<label for="{{gb.lenId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">Block</label>
+<select id="{{gb.lenId}}" value="{{gb.lenVal}}" onChange="{{gb.onLen}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{gb.lenOpts}}" as="lo" hint-placeholder-count="5"><option value="{{lo.v}}">{{lo.l}}</option></sc-for></select>
+<button onClick="{{gb.plan}}" style="height: 30px; flex: none; padding: 0 12px 0 10px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; gap: 6px; font-size: calc(12.5px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10h16M8 4v4M16 4v4M12 13v4M10 15h4"></path></svg>Pick a time</button>
+</div>
+<sc-if value="{{gb.hasHint}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{gb.hint}}</span></sc-if>
+<sc-if value="{{gb.canLog}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; gap: 6px">
+<button onClick="{{gb.logMinus}}" aria-label="Log {{gb.quickLabel}} less" style="width: 30px; height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(16px * {{fsK}}); font-weight: 700; padding: 0">−</button>
+<button onClick="{{gb.logPlus}}" aria-label="Log {{gb.quickLabel}} more" style="width: 30px; height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(16px * {{fsK}}); font-weight: 700; padding: 0">+</button>
+<span style="font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{gb.logLabel}}</span>
+</div>
+</sc-if>
+<div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid {{TK.tF6EDEF}}; padding-top: 6px">
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{TK.tA0526A}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"></path></svg>
+<span style="flex: 1; min-width: 0; font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{gb.repText}}</span>
+<sc-if value="{{gb.repClosed}}" hint-placeholder-val="{{ true }}"><button onClick="{{gb.repEdit}}" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Set repeat</button></sc-if>
+</div>
+<sc-if value="{{gb.repEditing}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 8px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
+<div role="group" aria-label="Days" style="display: flex; gap: 4px">
+<sc-for list="{{gb.repDays}}" as="rd" hint-placeholder-count="7"><button aria-pressed="{{rd.on}}" onClick="{{rd.toggle}}" aria-label="{{rd.full}}" title="{{rd.full}}" style="width: 32px; height: 32px; flex: none; border: 1px solid {{rd.bd}}; border-radius: 8px; background: {{rd.bg}}; color: {{rd.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; padding: 0">{{rd.label}}</button></sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<label for="{{gb.repTimeId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">At</label>
+<input id="{{gb.repTimeId}}" type="time" value="{{gb.repTime}}" onChange="{{gb.onRepTime}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; padding: 0 6px">
+<label for="{{gb.repLenId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">for</label>
+<select id="{{gb.repLenId}}" value="{{gb.repLen}}" onChange="{{gb.onRepLen}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{gb.lenOpts}}" as="lo2" hint-placeholder-count="5"><option value="{{lo2.v}}">{{lo2.l}}</option></sc-for></select>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<sc-if value="{{gb.repOn}}" hint-placeholder-val="{{ false }}"><button onClick="{{gb.repStop}}" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #9A4A3A">Stop repeating</button></sc-if>
+<span style="flex: 1"></span>
+<button onClick="{{gb.repCancel}}" style="height: 30px; border: 0; background: transparent; padding: 0 8px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #6B6358">Cancel</button>
+<button onClick="{{gb.repSave}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Save repeat</button>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{hasGrowBreak}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column">
+<div style="display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 4px 2px; border-bottom: 1px solid {{TK.tE2B9C4}}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: {{TK.t6E2F43}}">Putting down · {{growDayWord}}</span></div>
+<sc-for list="{{growBreak}}" as="gk" hint-placeholder-count="1">
+<div style="display: flex; align-items: center; gap: 8px; min-height: calc(46px * {{rowK}}); border-bottom: 1px solid #EFE7D6; padding: 0 2px">
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(14px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gk.title}}</span><span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064">{{gk.line}}</span></span>
+<sc-if value="{{gk.canLog}}" hint-placeholder-val="{{ true }}">
+<button onClick="{{gk.minus}}" aria-label="One less" style="width: 30px; height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(16px * {{fsK}}); font-weight: 700; padding: 0">−</button>
+<span style="min-width: 54px; text-align: center; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">{{gk.count}} {{gk.unit}}</span>
+<button onClick="{{gk.plus}}" aria-label="One more" style="width: 30px; height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(16px * {{fsK}}); font-weight: 700; padding: 0">+</button>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
 <sc-if value="{{dtHasMakers}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 4px 2px; border-bottom: 1px solid {{TK.tE2B9C4}}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: {{TK.t6E2F43}}">Week Makers</span></div>
 <sc-for list="{{dtMakers}}" as="wm" hint-placeholder-count="3">
@@ -597,7 +675,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-for>
 </sc-if>
-<sc-if value="{{dtGrowEmpty}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Nothing to grow on this day yet. Add an intention or pick Week Makers in Grow.</p></sc-if>
+<sc-if value="{{dtGrowEmpty}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Nothing to grow on this day yet. Add a Build or Break intention in Grow.</p></sc-if>
 <button onClick="{{dtOpenGrow}}" style="align-self: flex-start; height: 30px; border: 0; background: transparent; padding: 0 2px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">Open Grow</button>
 </div>
 </sc-if>
@@ -5716,6 +5794,29 @@ class Component extends DCLogic {
   }
   instance(id) { return this.dayItems(this.state.day).find(b => b.id === id); }
   placed() { return this.state.placedByDay[String(this.state.day)] || []; }
+  topUpRepeats(habits, map) {
+    const out = Object.assign({}, map || {}); let changed = false; const t0 = this.todayAbs();
+    (habits || []).forEach(h => {
+      const r = h.repeat; if (!r || !r.dows || !r.dows.length) return;
+      for (let d = 0; d <= 27; d++) {
+        if (r.dows.indexOf(this.dowFor(d)) < 0) continue;
+        if (h.repeatSkip && h.repeatSkip[t0 + d]) continue;
+        if (typeof h.repeatFrom === 'number' && t0 + d < h.repeatFrom) continue;
+        const arr = out[String(d)] || [];
+        if (arr.some(b => b.habitId === h.id && b.rep)) continue;
+        out[String(d)] = arr.concat([{ id: 'rp' + h.id + '-' + (t0 + d), title: h.title, mins: r.mins || h.chunk || 30, start: r.start, habitId: h.id, done: false, rep: true }]);
+        changed = true;
+      }
+    });
+    return changed ? out : map;
+  }
+  setHabitRepeat(hid, rp) {
+    const s = this.state, t0 = this.todayAbs();
+    const habits = s.habits.map(h => h.id === hid ? Object.assign({}, h, { repeat: rp, repeatFrom: t0, repeatSkip: {} }, rp && rp.mins ? { chunk: rp.mins } : {}) : h);
+    const map = {};
+    Object.keys(s.placedByDay).forEach(k => { const d = Number(k); map[k] = d >= 0 ? s.placedByDay[k].filter(b => !(b.habitId === hid && b.rep && !b.done)) : s.placedByDay[k]; });
+    this.setState({ habits: habits, placedByDay: rp ? this.topUpRepeats(habits, map) : map, growRep: null, growRepDraft: null });
+  }
   allPlacedWithDay() {
     const m = this.state.placedByDay;
     const out = [];
@@ -6026,6 +6127,8 @@ class Component extends DCLogic {
     this.setToast('Event deleted.');
   }
   unschedule(blockId, extra) {
+    const bx = this.placed().find(x => x.id === blockId);
+    if (bx && bx.rep && bx.habitId) { const key = this.todayAbs() + this.state.day; extra = Object.assign({}, extra || {}, { habits: this.state.habits.map(h => h.id === bx.habitId ? Object.assign({}, h, { repeatSkip: Object.assign({}, h.repeatSkip || {}, { [key]: true }) }) : h) }); }
     this.setPlaced(this.placed().filter(x => x.id !== blockId), Object.assign({ sel: null, dropKey: null, missFor: null }, extra || {}));
   }
 
@@ -6744,6 +6847,10 @@ class Component extends DCLogic {
   }
 
   renderVals() {
+    if (this._repTopDay !== this.todayAbs() && this.state && this.state.habits) {
+      this._repTopDay = this.todayAbs();
+      setTimeout(() => { const m = this.topUpRepeats(this.state.habits, this.state.placedByDay); if (m !== this.state.placedByDay) this.setState({ placedByDay: m }); }, 0);
+    }
     const s = this.state;
     const sel = s.sel;
     const isDay = s.view === 'day';
@@ -8546,9 +8653,9 @@ class Component extends DCLogic {
             num('short', 'Name on your day page', hb ? hb.title : '', (v) => updHabit({ title: v || 'Habit' }), 'text'),
             num('daily', 'Daily goal', g.daily, (v) => { const n = Math.max(1, +v || 1); upd({ daily: n }); updHabit({ goal: n }); }),
             num('min', 'Still counts as showing up', g.minimum, (v) => upd({ minimum: Math.max(0, +v || 0) })),
-            num('unit', 'Measured in', g.unit, (v) => { upd({ unit: v }); updHabit({ unit: v }); }, 'text'),
+            num('unit', 'Measured in', g.unit, (v) => { upd({ unit: v }); const isMin = /^min/i.test(v || '') || !v; updHabit(Object.assign({ unit: v }, isMin ? { perMin: 1 } : (/^steps?$/i.test(v) && hb && (hb.perMin || 1) === 1 ? { perMin: 100 } : {}))); }, 'text'),
             num('quick', 'Quick-add amount', g.quick, (v) => upd({ quick: Math.max(1, +v || 1) }))
-          ]
+          ].concat(hb && !/^min/i.test(g.unit || 'minutes') ? [num('permin', 'About how many ' + (g.unit || 'units') + ' per minute', hb.perMin || 1, (v) => updHabit({ perMin: Math.max(0.1, +v || 1) }))] : [])
         });
       } else if (k === 'break') {
         const b = brkStats(g);
@@ -9903,11 +10010,67 @@ class Component extends DCLogic {
             set: () => { const P = Object.assign({}, this.state.mealPlan || {}); const dd = Object.assign({}, P[String(D)] || {}); dd[sl[0]] = Object.assign({}, dd[sl[0]], { status: on ? 'plan' : o[0] }); P[String(D)] = dd; this.setState({ mealPlan: P }); } }; }) : [] };
       });
       const makers = big3.filter(b => b.filled).map(b => ({ num: b.num, title: b.title, when: b.when, strike: b.when === 'done' ? 'line-through' : 'none' }));
+      const fmtN = (v) => Math.round(v).toLocaleString('en-US');
+      const narrowG = (s.vw || 1194) < 900;
+      const items = this.dayItems(D);
+      const setLog = (g, n) => this.setState({ goals: this.state.goals.map(x => { if (x.id !== g.id) return x; const lg = Object.assign({}, x.logs || {}); lg[D] = Math.max(0, n); return Object.assign({}, x, { logs: lg }); }) });
+      const dowsText = (dw) => { const a = (dw || []).slice().sort(); if (a.length === 7) return 'every day'; if (a.join() === '1,2,3,4,5') return 'weekdays'; if (a.join() === '0,6') return 'weekends'; return a.map(x => this.DSHORT[x]).join(', '); };
+      const growBuild = (s.goals || []).filter(g => g.kind === 'build' && g.status === 'active' && g.habitId).map(g => {
+        const hb = s.habits.find(h => h.id === g.habitId); if (!hb) return null;
+        const per = /^min/i.test(g.unit || 'minutes') ? 1 : (hb.perMin || 1);
+        const unit = g.unit || 'minutes', tgt = g.daily || 1;
+        const blocks = items.filter(b => b.habitId === hb.id).sort((a, b) => a.start - b.start);
+        const planned = blocks.reduce((a, b) => a + b.mins, 0) * per;
+        const logged = g.logs && typeof g.logs[D] === 'number' ? g.logs[D] : 0;
+        const done = blocks.filter(b => b.done).reduce((a, b) => a + b.mins, 0) * per + logged;
+        const showPer = per !== 1;
+        const left = Math.max(0, tgt - planned - logged);
+        const needMin = left > 0 ? Math.ceil(left / per / 5) * 5 : 0;
+        const editing = s.growRep === g.id;
+        const dr = editing ? (s.growRepDraft || {}) : {};
+        const rp = hb.repeat;
+        const pctP = Math.min(100, Math.round((planned + logged) / tgt * 100)), pctD = Math.min(100, Math.round(done / tgt * 100));
+        return {
+          id: g.id, name: hb.title || g.title, title: g.title,
+          line: D > 0 ? fmtN(planned) + ' of ' + fmtN(tgt) + ' ' + unit + ' planned' : fmtN(done) + ' of ' + fmtN(tgt) + ' ' + unit + ' done · ' + fmtN(planned + logged) + ' planned',
+          pctP: pctP, pctD: pctD,
+          hint: needMin ? 'Plan about ' + this.fmtDur(needMin) + ' more to reach ' + fmtN(tgt) + '.' : (planned ? 'Enough planned to reach your goal.' : ''),
+          hasHint: !!needMin || !!planned,
+          blocks: blocks.map(b => ({ label: this.fmtTime(b.start, false) + ' · ' + this.fmtDur(b.mins) + (showPer ? ' ≈ ' + fmtN(b.mins * per) + ' ' + unit : ''), rep: !!b.rep, done: b.done ? 'true' : 'false',
+            boxBg: b.done ? '#3F7A5A' : '#FFFFFF', strike: b.done ? 'line-through' : 'none', canDone: D <= 0,
+            toggle: () => this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { done: !x.done }) : x)),
+            remove: () => this.unschedule(b.id) })),
+          hasBlocks: blocks.length > 0, noBlocks: !blocks.length,
+          lenId: 'grl-' + g.id, lenVal: String(hb.chunk || 30),
+          lenOpts: [15, 20, 30, 45, 60, 90, 120].concat([15, 20, 30, 45, 60, 90, 120].indexOf(hb.chunk) < 0 && hb.chunk ? [hb.chunk] : []).sort((a, b) => a - b).map(m => ({ v: String(m), l: this.fmtDur(m) + (showPer ? ' ≈ ' + fmtN(m * per) : '') })),
+          onLen: (e) => { const v = parseInt(e.target.value, 10) || 30; this.setState({ habits: this.state.habits.map(h => h.id === hb.id ? Object.assign({}, h, { chunk: v }) : h) }); },
+          plan: () => this.setState({ sel: { kind: 'habit', id: hb.id }, editing: null, mobilePage: narrowG ? 'right' : s.mobilePage }),
+          canLog: D <= 0, logLabel: fmtN(logged) + ' ' + unit + ' logged by hand', logMinus: () => setLog(g, logged - (g.quick || 1)), logPlus: () => setLog(g, logged + (g.quick || 1)), quickLabel: fmtN(g.quick || 1),
+          repText: rp && rp.dows && rp.dows.length ? 'Repeats ' + dowsText(rp.dows) + ' at ' + this.fmtTime(rp.start, false) + ' · ' + this.fmtDur(rp.mins || hb.chunk) : 'Does not repeat',
+          repOn: !!(rp && rp.dows && rp.dows.length), repEditing: editing, repClosed: !editing,
+          repEdit: () => this.setState({ growRep: g.id, growRepDraft: { dows: rp && rp.dows ? rp.dows.slice() : [0, 1, 2, 3, 4, 5, 6], time: rp ? this.toHHMM(rp.start) : '07:00', mins: rp && rp.mins ? rp.mins : (hb.chunk || 30) } }),
+          repDays: [1, 2, 3, 4, 5, 6, 0].map(dw => { const on = (dr.dows || []).indexOf(dw) >= 0; return { label: this.DSHORT[dw].charAt(0), full: this.DAYS[dw], on: on ? 'true' : 'false', bg: on ? this.TK.t6E2F43 : '#FFFFFF', fg: on ? '#FFFFFF' : '#4A443B', bd: on ? this.TK.t6E2F43 : this.TK.tE2B9C4,
+            toggle: () => { const cur = (this.state.growRepDraft || {}).dows || []; this.setState({ growRepDraft: Object.assign({}, this.state.growRepDraft, { dows: cur.indexOf(dw) >= 0 ? cur.filter(x => x !== dw) : cur.concat([dw]) }) }); } }; }),
+          repTimeId: 'grt-' + g.id, repTime: dr.time || '07:00', onRepTime: (e) => this.setState({ growRepDraft: Object.assign({}, this.state.growRepDraft, { time: e.target.value }) }),
+          repLenId: 'grm-' + g.id, repLen: String(dr.mins || 30), onRepLen: (e) => this.setState({ growRepDraft: Object.assign({}, this.state.growRepDraft, { mins: parseInt(e.target.value, 10) || 30 }) }),
+          repSave: () => { const d2 = this.state.growRepDraft || {}; if (!(d2.dows || []).length) { this.setError('Pick at least one day.'); return; } const tm = String(d2.time || '07:00').split(':'); this.setHabitRepeat(hb.id, { dows: d2.dows.slice().sort(), start: (+tm[0] || 0) * 60 + (+tm[1] || 0), mins: d2.mins || 30 }); this.setToast(hb.title + ' is on your calendar for the next 4 weeks. It keeps going.'); },
+          repStop: () => { this.setHabitRepeat(hb.id, null); this.setToast('Stopped repeating. Walks already done stay.'); },
+          repCancel: () => this.setState({ growRep: null, growRepDraft: null })
+        };
+      }).filter(Boolean);
+      const growBreak = (s.goals || []).filter(g => g.kind === 'break' && g.status === 'active').map(g => {
+        const n = g.logs && typeof g.logs[D] === 'number' ? g.logs[D] : 0;
+        return { id: g.id, title: g.title, unit: g.unit || 'times', count: String(n), canLog: D <= 0, notLog: D > 0,
+          line: g.mode === 'free' ? 'Aiming for ' + (g.aimFree || 0) + ' free days a week' : 'Limit ' + (g.limit || 0) + ' a week',
+          minus: () => setLog(g, n - 1), plus: () => setLog(g, n + 1) };
+      });
       return Object.assign(out, {
         dtGrow: dayTab === 'grow', dtSchool: dayTab === 'school', dtMeals: dayTab === 'meals', dtJournal: dayTab === 'journal',
         dtShowStats: dayTab === 'list' || dayTab === 'done',
         dtMakers: makers, dtHasMakers: makers.length > 0, dtNoRings: intentRings.length === 0,
-        dtGrowEmpty: intentRings.length === 0 && makers.length === 0,
+        dtGrowEmpty: !growBuild.length && !growBreak.length && makers.length === 0,
+        growBuild: growBuild, hasGrowBuild: growBuild.length > 0, growBreak: growBreak, hasGrowBreak: growBreak.length > 0,
+        growDayWord: D === 0 ? 'today' : D === 1 ? 'tomorrow' : 'on ' + this.DAYS[this.dowFor(D)],
         dtOpenGrow: () => this.setState({ view: 'goals', selGoal: '__glance', sel: null }),
         dtCourses: courses, dtNoSchool: courses.length === 0 && !dues.length,
         dtDue: dues, dtHasDue: dues.length > 0,
