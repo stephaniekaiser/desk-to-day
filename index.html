@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 3:31 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 5:16 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2403,6 +2403,10 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 
 <sc-if value="{{iTabDetails}}" hint-placeholder-val="{{ false }}">
 <section aria-label="Details" style="flex: none; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="gnotes" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Notes</label>
+<textarea id="gnotes" value="{{gDesc}}" onChange="{{gOnDesc}}" onInput="{{gOnDesc}}" rows="5" placeholder="Describe it in your own words: what it looks like, what is included, ideas, anything you want to remember." style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; width: 100%; resize: vertical; border: 1px solid #E6DCC8; border-radius: 10px; padding: 10px 12px; font: inherit; font-size: calc(14px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFDF7"></textarea>
+</div>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px">
 <sc-for list="{{iFields}}" as="fd" hint-placeholder-count="3">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
@@ -8000,6 +8004,8 @@ class Component extends DCLogic {
         gTitle: selG.title, gWhy: selG.why || '',
         gOnTitle: (e) => { const v = e.target.value; updG(selG.id, { title: v }); },
         gOnWhy: (e) => { const v = e.target.value; updG(selG.id, { why: v }); },
+        gDesc: selG.desc || '',
+        gOnDesc: (e) => { const v = e.target.value; updG(selG.id, { desc: v }); },
         gTargetLabel: typeof selG.target === 'number' ? this.DSHORT[this.dowFor(selG.target)] + ', ' + this.MONTHS[this.dateFor(selG.target).getMonth()] + ' ' + this.dateFor(selG.target).getDate() : 'No date',
         gHasTarget: typeof selG.target === 'number',
         gTargetMinus: () => updG(selG.id, { target: Math.max(0, (typeof selG.target === 'number' ? selG.target : 35) - 7) }),
