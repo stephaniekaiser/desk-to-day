@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:07 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:14 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2907,18 +2907,25 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <div style="display: flex; align-items: center; gap: 8px; min-height: calc(52px * {{rowK}}); padding: 4px 8px 4px 4px">
 <button onClick="{{a.toggle}}" aria-expanded="{{a.openA}}" aria-label="Details for {{a.title}}" style="width: 30px; height: 30px; flex: none; border: 0; background: transparent; padding: 0; display: flex; align-items: center; justify-content: center; color: #8A8174"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="transform: {{a.chev}}"><path d="M9 5l7 7-7 7"></path></svg></button>
 <button role="checkbox" aria-checked="{{a.done}}" onClick="{{a.toggleDone}}" aria-label="{{a.title}} done" style="width: 22px; height: 22px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 6px; background: {{a.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button>
+<sc-if value="{{a.closed}}" hint-placeholder-val="{{ true }}">
 <button onClick="{{a.toggle}}" style="flex: 1; min-width: 0; border: 0; background: transparent; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 2px; color: #2B2722">
 <span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; text-decoration: {{a.strike}}">{{a.title}}</span>
 <span style="font-size: calc(12px * {{fsK}}); color: {{a.dueFg}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%">{{a.kind}} · {{a.due}}</span>
 </button>
+</sc-if>
+<sc-if value="{{a.open}}" hint-placeholder-val="{{ false }}">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<label for="{{a.tId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Assignment name</label>
+<input id="{{a.tId}}" value="{{a.titleRaw}}" onChange="{{a.onTitle}}" onInput="{{a.onTitle}}" placeholder="Name it, like Essay 2: Ethics in IT" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; border-radius: 6px 6px 0 0; padding: 0 6px; font: inherit; font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722; background: transparent">
+<span style="padding: 0 6px; font-size: calc(12px * {{fsK}}); color: {{a.dueFg}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{a.kind}} · {{a.due}}</span>
+</div>
+</sc-if>
 <sc-if value="{{a.hasCl}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: calc(11.5px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">{{a.clCount}} steps</span></sc-if>
 <sc-if value="{{a.hasMins}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">{{a.mins}}</span></sc-if>
 <sc-if value="{{a.hasUrl}}" hint-placeholder-val="{{ false }}"><a href="{{a.urlHref}}" target="_blank" rel="noopener" aria-label="Open the link for {{a.title}}" title="Open link" style="width: 30px; height: 30px; flex: none; border-radius: 15px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a></sc-if>
 </div>
 <sc-if value="{{a.open}}" hint-placeholder-val="{{ false }}">
 <div style="padding: 8px 12px 12px; border-top: 1px solid {{TK.tF6EDEF}}; display: flex; flex-direction: column; gap: 10px">
-<div style="display: flex; flex-direction: column; gap: 4px"><label for="{{a.tId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Name</label>
-<input id="{{a.tId}}" value="{{a.titleRaw}}" onChange="{{a.onTitle}}" placeholder="Like Essay 2: Ethics in IT" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"></div>
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 10px">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.kId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Type</label>
 <select id="{{a.kId}}" value="{{a.kindVal}}" onChange="{{a.onKind}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0"><sc-for list="{{a.kindOpts}}" as="ko" hint-placeholder-count="5"><option value="{{ko.v}}">{{ko.l}}</option></sc-for></select></div>
@@ -9363,6 +9370,7 @@ class Component extends DCLogic {
                 toggleDone: () => updA(a.id, x => ({ done: !x.done })),
                 open: open, openA: open ? 'true' : 'false', chev: open ? 'rotate(90deg)' : 'none',
                 toggle: () => this.setState({ asOpen: this.state.asOpen === a.id ? null : a.id, asPreview: null }),
+                closed: !open,
                 tId: 'ast-' + a.id, kId: 'ask-' + a.id, dId: 'asd-' + a.id, hId: 'ash-' + a.id, lId: 'asl-' + a.id, nId: 'asn-' + a.id, cId: 'asc-' + a.id,
                 onTitle: (e) => { const v = e.target.value; updA(a.id, x => ({ title: v, kind: x.kind === 'other' || !x.title ? this.asGuessKind(v) : x.kind })); },
                 kindVal: a.kind || 'other', kindOpts: kinds.map(k => ({ v: k[0], l: k[1] })), onKind: (e) => { const v = e.target.value; updA(a.id, () => ({ kind: v })); },
