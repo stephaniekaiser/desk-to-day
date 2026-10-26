@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 26, 1:55 PM';</script>
+<script>window.__plannerBuild = 'Oct 26, 1:59 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -610,68 +610,76 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-for>
 
 <sc-if value="{{dtGrow}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 12px">
 <sc-if value="{{hasGrowBuild}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; flex-direction: column; gap: 10px">
-<div style="display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 4px 2px; border-bottom: 1px solid {{TK.tE2B9C4}}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: {{TK.t6E2F43}}">Building · {{growDayWord}}</span></div>
+<div style="display: flex; flex-direction: column">
+<div style="display: flex; align-items: center; gap: 8px; min-height: 28px; padding: 2px; border-bottom: 1px solid {{TK.tE2B9C4}}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: {{TK.t6E2F43}}">Building · {{growDayWord}}</span></div>
 <sc-for list="{{growBuild}}" as="gb" hint-placeholder-count="2">
-<div style="background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; align-items: baseline; gap: 8px">
-<span style="flex: 1; min-width: 0; font-family: {{TK.fHead}}; font-size: calc(18px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gb.name}}</span>
-<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.line}}</span>
-</div>
-<div aria-hidden="true" style="position: relative; height: 8px; border-radius: 4px; background: {{TK.tF6EDEF}}; overflow: hidden"><div style="position: absolute; top: 0; bottom: 0; left: 0; width: {{gb.pctP}}%; background: {{TK.tE2B9C4}}"></div><div style="position: absolute; top: 0; bottom: 0; left: 0; width: {{gb.pctD}}%; background: {{TK.t6E2F43}}"></div></div>
+<div style="display: flex; flex-direction: column; border-bottom: 1px solid #EFE7D6">
+<button onClick="{{gb.toggle}}" aria-expanded="{{gb.openA}}" style="display: flex; align-items: center; gap: 10px; min-height: calc(46px * {{rowK}}); border: 0; background: transparent; padding: 4px 2px; text-align: left; color: #2B2722">
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="display: flex; align-items: baseline; gap: 8px"><span style="flex: 1; min-width: 0; font-size: calc(14.5px * {{fsK}}); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gb.name}}</span><span style="flex: none; font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.shortLine}}</span></span>
+<span aria-hidden="true" style="position: relative; height: 5px; border-radius: 3px; background: {{TK.tF6EDEF}}; overflow: hidden; display: block"><span style="position: absolute; top: 0; bottom: 0; left: 0; width: {{gb.pctP}}%; background: {{TK.tE2B9C4}}"></span><span style="position: absolute; top: 0; bottom: 0; left: 0; width: {{gb.pctD}}%; background: {{TK.t6E2F43}}"></span></span>
+</span>
+<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A8174" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transform: {{gb.chev}}"><path d="M6 9l6 6 6-6"></path></svg>
+</button>
+<sc-if value="{{gb.open}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 2px 10px 2px">
+<span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.line}}</span>
+<sc-if value="{{gb.hasHint}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.hint}}</span></sc-if>
 <sc-if value="{{gb.hasBlocks}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{gb.blocks}}" as="bk" hint-placeholder-count="2">
-<div style="display: flex; align-items: center; gap: 8px; min-height: calc(34px * {{rowK}}); border-bottom: 1px solid {{TK.tF6EDEF}}">
-<sc-if value="{{bk.canDone}}" hint-placeholder-val="{{ true }}"><button role="checkbox" aria-checked="{{bk.done}}" onClick="{{bk.toggle}}" aria-label="Done" style="width: 22px; height: 22px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 11px; background: {{bk.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button></sc-if>
-<span style="flex: none; min-width: 58px; font-size: calc(13.5px * {{fsK}}); color: #2B2722; text-decoration: {{bk.strike}}">{{bk.timeTxt}}</span>
+<div style="display: flex; align-items: center; gap: 8px; min-height: calc(32px * {{rowK}})">
+<sc-if value="{{bk.canDone}}" hint-placeholder-val="{{ true }}"><button role="checkbox" aria-checked="{{bk.done}}" onClick="{{bk.toggle}}" aria-label="Done" style="width: 20px; height: 20px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 10px; background: {{bk.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button></sc-if>
+<span style="flex: none; min-width: 58px; font-size: calc(13px * {{fsK}}); color: #2B2722; text-decoration: {{bk.strike}}">{{bk.timeTxt}}</span>
 <label for="{{bk.lenSelId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">How long</label>
-<select id="{{bk.lenSelId}}" value="{{bk.lenVal}}" onChange="{{bk.onLen}}" style="outline-color: {{TK.tA0526A}}; flex: 0 1 auto; min-width: 0; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{bk.lenOpts}}" as="blo" hint-placeholder-count="8"><option value="{{blo.v}}">{{blo.l}}</option></sc-for></select>
+<select id="{{bk.lenSelId}}" value="{{bk.lenVal}}" onChange="{{bk.onLen}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722; flex: 0 1 auto; min-width: 0"><sc-for list="{{bk.lenOpts}}" as="blo" hint-placeholder-count="8"><option value="{{blo.v}}">{{blo.l}}</option></sc-for></select>
+<sc-if value="{{bk.rep}}" hint-placeholder-val="{{ false }}"><span title="Repeats" aria-label="Repeats" style="flex: none; color: {{TK.tA0526A}}; display: flex"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"></path></svg></span></sc-if>
 <span style="flex: 1"></span>
-<sc-if value="{{bk.rep}}" hint-placeholder-val="{{ false }}"><span title="Repeats" aria-label="Repeats" style="flex: none; color: {{TK.tA0526A}}; display: flex"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"></path></svg></span></sc-if>
-<button onClick="{{bk.remove}}" aria-label="Remove this block" title="Remove from this day" style="width: 28px; height: 28px; flex: none; border: 0; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<button onClick="{{bk.remove}}" aria-label="Remove this block" title="Remove from this day" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </div>
 </sc-for>
 </div>
 </sc-if>
-<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
-<label for="{{gb.lenId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">Block</label>
-<select id="{{gb.lenId}}" value="{{gb.lenVal}}" onChange="{{gb.onLen}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{gb.lenOpts}}" as="lo" hint-placeholder-count="5"><option value="{{lo.v}}">{{lo.l}}</option></sc-for></select>
-<button onClick="{{gb.plan}}" style="height: 30px; flex: none; padding: 0 12px 0 10px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; gap: 6px; font-size: calc(12.5px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10h16M8 4v4M16 4v4M12 13v4M10 15h4"></path></svg>Pick a time</button>
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<span style="font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9A8F7C; width: 48px">Plan</span>
+<label for="{{gb.lenId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Block length</label>
+<select id="{{gb.lenId}}" value="{{gb.lenVal}}" onChange="{{gb.onLen}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{gb.lenOpts}}" as="lo" hint-placeholder-count="5"><option value="{{lo.v}}">{{lo.l}}</option></sc-for></select>
+<button onClick="{{gb.plan}}" style="height: 28px; flex: none; border: 0; background: transparent; padding: 0 2px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10h16M8 4v4M16 4v4M12 13v4M10 15h4"></path></svg>Pick a time</button>
 </div>
-<sc-if value="{{gb.hasHint}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{gb.hint}}</span></sc-if>
 <sc-if value="{{gb.canLog}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
-<label for="{{gb.logId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">Log {{gb.unitWord}}</label>
-<input id="{{gb.logId}}" type="number" inputmode="numeric" min="0" value="{{gb.logDraft}}" onChange="{{gb.onLogDraft}}" onInput="{{gb.onLogDraft}}" onKeyDown="{{gb.logKey}}" placeholder="{{gb.logPh}}" style="outline-color: {{TK.tA0526A}}; width: 96px; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722">
-<button onClick="{{gb.logAdd}}" style="height: 30px; flex: none; padding: 0 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Add</button>
-<sc-if value="{{gb.hasLogged}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 2px; white-space: nowrap"><span style="font-size: calc(12px * {{fsK}}); color: #4A443B">{{gb.logLabel}}</span><button onClick="{{gb.logClear}}" style="height: 28px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear</button></span></sc-if>
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<label for="{{gb.logId}}" style="font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9A8F7C; width: 48px">Log</label>
+<input id="{{gb.logId}}" type="number" onFocus="{{selAll}}" inputmode="numeric" min="0" value="{{gb.logDraft}}" onChange="{{gb.onLogDraft}}" onInput="{{gb.onLogDraft}}" onKeyDown="{{gb.logKey}}" placeholder="{{gb.logPh}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722; width: 92px; padding: 0 8px">
+<button onClick="{{gb.logAdd}}" style="height: 28px; flex: none; border: 0; background: transparent; padding: 0 2px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px">Add {{gb.unitWord}}</button>
+<sc-if value="{{gb.hasLogged}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 2px; white-space: nowrap"><span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.logLabel}}</span><button onClick="{{gb.logClear}}" style="height: 26px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear</button></span></sc-if>
 </div>
 </sc-if>
-<div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid {{TK.tF6EDEF}}; padding-top: 6px">
-<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{TK.tA0526A}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"></path></svg>
-<span style="flex: 1; min-width: 0; font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{gb.repText}}</span>
-<sc-if value="{{gb.repClosed}}" hint-placeholder-val="{{ true }}"><button onClick="{{gb.repEdit}}" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Set repeat</button></sc-if>
+<div style="display: flex; align-items: center; gap: 6px">
+<span style="font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9A8F7C; width: 48px">Repeat</span>
+<span style="flex: 1; min-width: 0; font-size: calc(12.5px * {{fsK}}); color: #4A443B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gb.repShort}}</span>
+<sc-if value="{{gb.repClosed}}" hint-placeholder-val="{{ true }}"><button onClick="{{gb.repEdit}}" style="height: 28px; flex: none; border: 0; background: transparent; padding: 0 2px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px">{{gb.repBtn}}</button></sc-if>
 </div>
 <sc-if value="{{gb.repEditing}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 8px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
 <div role="group" aria-label="Days" style="display: flex; gap: 4px">
-<sc-for list="{{gb.repDays}}" as="rd" hint-placeholder-count="7"><button aria-pressed="{{rd.on}}" onClick="{{rd.toggle}}" aria-label="{{rd.full}}" title="{{rd.full}}" style="width: 32px; height: 32px; flex: none; border: 1px solid {{rd.bd}}; border-radius: 8px; background: {{rd.bg}}; color: {{rd.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; padding: 0">{{rd.label}}</button></sc-for>
+<sc-for list="{{gb.repDays}}" as="rd" hint-placeholder-count="7"><button aria-pressed="{{rd.on}}" onClick="{{rd.toggle}}" aria-label="{{rd.full}}" title="{{rd.full}}" style="width: 30px; height: 30px; flex: none; border: 1px solid {{rd.bd}}; border-radius: 7px; background: {{rd.bg}}; color: {{rd.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; padding: 0">{{rd.label}}</button></sc-for>
 </div>
-<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
 <label for="{{gb.repTimeId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">At</label>
-<input id="{{gb.repTimeId}}" type="time" value="{{gb.repTime}}" onChange="{{gb.onRepTime}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; padding: 0 6px">
+<input id="{{gb.repTimeId}}" type="time" value="{{gb.repTime}}" onChange="{{gb.onRepTime}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722; padding: 0 6px">
 <label for="{{gb.repLenId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">for</label>
-<select id="{{gb.repLenId}}" value="{{gb.repLen}}" onChange="{{gb.onRepLen}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{gb.lenOpts}}" as="lo2" hint-placeholder-count="5"><option value="{{lo2.v}}">{{lo2.l}}</option></sc-for></select>
+<select id="{{gb.repLenId}}" value="{{gb.repLen}}" onChange="{{gb.onRepLen}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{gb.lenOpts}}" as="lo2" hint-placeholder-count="5"><option value="{{lo2.v}}">{{lo2.l}}</option></sc-for></select>
 </div>
 <div style="display: flex; align-items: center; gap: 8px">
-<sc-if value="{{gb.repOn}}" hint-placeholder-val="{{ false }}"><button onClick="{{gb.repStop}}" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #9A4A3A">Stop repeating</button></sc-if>
+<sc-if value="{{gb.repOn}}" hint-placeholder-val="{{ false }}"><button onClick="{{gb.repStop}}" style="height: 28px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #9A4A3A">Stop repeating</button></sc-if>
 <span style="flex: 1"></span>
-<button onClick="{{gb.repCancel}}" style="height: 30px; border: 0; background: transparent; padding: 0 8px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #6B6358">Cancel</button>
-<button onClick="{{gb.repSave}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Save repeat</button>
+<button onClick="{{gb.repCancel}}" style="height: 28px; border: 0; background: transparent; padding: 0 8px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #6B6358">Cancel</button>
+<button onClick="{{gb.repSave}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 7px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Save</button>
 </div>
+</div>
+</sc-if>
 </div>
 </sc-if>
 </div>
@@ -680,21 +688,22 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 <sc-if value="{{hasGrowBreak}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column">
-<div style="display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 4px 2px; border-bottom: 1px solid {{TK.tE2B9C4}}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: {{TK.t6E2F43}}">Putting down · {{growDayWord}}</span></div>
+<div style="display: flex; align-items: center; gap: 8px; min-height: 28px; padding: 2px; border-bottom: 1px solid {{TK.tE2B9C4}}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: {{TK.t6E2F43}}">Putting down · {{growDayWord}}</span></div>
 <sc-for list="{{growBreak}}" as="gk" hint-placeholder-count="1">
-<div style="display: flex; align-items: center; gap: 8px; min-height: calc(46px * {{rowK}}); border-bottom: 1px solid #EFE7D6; padding: 0 2px">
+<div style="display: flex; align-items: center; gap: 8px; min-height: calc(42px * {{rowK}}); border-bottom: 1px solid #EFE7D6; padding: 0 2px">
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(14px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gk.title}}</span><span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064">{{gk.line}}</span></span>
 <sc-if value="{{gk.canLog}}" hint-placeholder-val="{{ true }}">
-<button onClick="{{gk.minus}}" aria-label="One less" style="width: 30px; height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(16px * {{fsK}}); font-weight: 700; padding: 0">−</button>
-<span style="min-width: 54px; text-align: center; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">{{gk.count}} {{gk.unit}}</span>
-<button onClick="{{gk.plus}}" aria-label="One more" style="width: 30px; height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(16px * {{fsK}}); font-weight: 700; padding: 0">+</button>
+<button onClick="{{gk.minus}}" aria-label="One less" style="width: 26px; height: 26px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 6px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(14px * {{fsK}}); font-weight: 700; padding: 0; line-height: 1">−</button>
+<span style="min-width: 48px; text-align: center; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">{{gk.count}} {{gk.unit}}</span>
+<button onClick="{{gk.plus}}" aria-label="One more" style="width: 26px; height: 26px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 6px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(14px * {{fsK}}); font-weight: 700; padding: 0; line-height: 1">+</button>
 </sc-if>
 </div>
 </sc-for>
 </div>
 </sc-if>
 <sc-if value="{{dtHasMakers}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 4px 2px; border-bottom: 1px solid {{TK.tE2B9C4}}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: {{TK.t6E2F43}}">Week Makers</span></div>
+<button onClick="{{dtMkToggle}}" aria-expanded="{{dtMkOpenA}}" style="display: flex; align-items: center; gap: 8px; min-height: 28px; padding: 2px; border: 0; border-bottom: 1px solid {{TK.tE2B9C4}}; background: transparent; text-align: left; width: 100%; color: {{TK.t6E2F43}}"><span style="flex: 1; font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em">Week Makers</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{dtMkSummary}}</span><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A8174" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transform: {{dtMkChev}}"><path d="M6 9l6 6 6-6"></path></svg></button>
+<sc-if value="{{dtMkOpen}}" hint-placeholder-val="{{ true }}">
 <sc-for list="{{dtMakers}}" as="wm" hint-placeholder-count="3">
 <div style="display: flex; align-items: center; gap: 10px; min-height: calc(40px * {{rowK}}); border-bottom: 1px solid #EFE7D6; padding: 0 2px">
 <span style="font-family: {{TK.fHead}}; font-size: calc(18px * {{fsK}}); font-weight: 600; color: {{TK.tA0526A}}; width: 14px">{{wm.num}}</span>
@@ -703,8 +712,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-for>
 </sc-if>
+</sc-if>
 <sc-if value="{{dtGrowEmpty}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Nothing to grow on this day yet. Add a Build or Break intention in Grow.</p></sc-if>
-<button onClick="{{dtOpenGrow}}" style="align-self: flex-start; height: 30px; border: 0; background: transparent; padding: 0 2px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">Open Grow</button>
+<button onClick="{{dtOpenGrow}}" style="align-self: flex-start; height: 28px; border: 0; background: transparent; padding: 0 2px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">Open Grow</button>
 </div>
 </sc-if>
 <sc-if value="{{dtSchool}}" hint-placeholder-val="{{ false }}">
@@ -8830,7 +8840,7 @@ class Component extends DCLogic {
       iCloseView: () => this.setState({ iView: null }),
       iStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
       brkRows: brkRows,
-      showIntentRow: intentRings.length > 0 && !s.sel && (!isDay || dayTab === 'grow'),
+      showIntentRow: intentRings.length > 0 && !s.sel && !isDay,
       intentRings: intentRings,
       ringPopOpen: !!ringPop, ringPop: ringPop || { name: '', title: '', line: '', left: '0px', isBuild: false, isBreak: false, quick: [], chunk: '', today: '0', close: () => {}, minus: () => {}, plus: () => {}, open: () => {} },
       iGroups: iGroups, iNewOpen: !!s.iNew, iNewOpenA: s.iNew ? 'true' : 'false',
@@ -10362,6 +10372,11 @@ class Component extends DCLogic {
           lenOpts: [15, 20, 30, 45, 60, 90, 120].concat([15, 20, 30, 45, 60, 90, 120].indexOf(hb.chunk) < 0 && hb.chunk ? [hb.chunk] : []).sort((a, b) => a - b).map(m => ({ v: String(m), l: this.fmtDur(m) + (showPer ? ' ≈ ' + fmtN(m * per) : '') })),
           onLen: (e) => { const v = parseInt(e.target.value, 10) || 30; this.setState({ habits: this.state.habits.map(h => h.id === hb.id ? Object.assign({}, h, { chunk: v }) : h) }); },
           plan: () => this.setState({ sel: { kind: 'habit', id: hb.id }, editing: null, mobilePage: narrowG ? 'right' : s.mobilePage }),
+          open: !!(s.growOpen || {})[g.id], openA: (s.growOpen || {})[g.id] ? 'true' : 'false', chev: (s.growOpen || {})[g.id] ? 'none' : 'rotate(-90deg)',
+          toggle: () => this.setState({ growOpen: Object.assign({}, this.state.growOpen || {}, { [g.id]: !(this.state.growOpen || {})[g.id] }) }),
+          shortLine: (D > 0 ? fmtN(planned + logged) : fmtN(done)) + ' / ' + fmtN(tgt) + ' ' + unit + (D > 0 ? ' planned' : ''),
+          repShort: rp && rp.dows && rp.dows.length ? dowsText(rp.dows) + ' at ' + this.fmtTime(rp.start, false) + ' · ' + this.fmtDur(rp.mins || hb.chunk) : 'Not set',
+          repBtn: rp && rp.dows && rp.dows.length ? 'Change' : 'Set up',
           canLog: D <= 0, logLabel: fmtN(logged) + ' ' + unit + ' logged by hand', logMinus: () => setLog(g, logged - (g.quick || 1)), logPlus: () => setLog(g, logged + (g.quick || 1)), quickLabel: fmtN(g.quick || 1),
           hasLogged: logged > 0, unitWord: unit, logId: 'glg-' + g.id, logPh: /steps?/i.test(unit) ? 'e.g. 2500' : 'amount',
           logDraft: (s.growLogDraft || {})[g.id] || '',
@@ -10390,7 +10405,7 @@ class Component extends DCLogic {
       return Object.assign(out, {
         dtGrow: dayTab === 'grow', dtSchool: dayTab === 'school', dtMeals: dayTab === 'meals', dtJournal: dayTab === 'journal',
         dtShowStats: dayTab === 'list' || dayTab === 'done',
-        dtMakers: makers, dtHasMakers: makers.length > 0, dtNoRings: intentRings.length === 0,
+        dtMakers: makers, dtHasMakers: makers.length > 0, dtMkOpen: !!s.growMkOpen, dtMkOpenA: s.growMkOpen ? 'true' : 'false', dtMkChev: s.growMkOpen ? 'none' : 'rotate(-90deg)', dtMkToggle: () => this.setState({ growMkOpen: !this.state.growMkOpen }), dtMkSummary: makers.filter(m => m.when === 'done').length + ' of ' + makers.length + ' done', dtNoRings: intentRings.length === 0,
         dtGrowEmpty: !growBuild.length && !growBreak.length && makers.length === 0,
         growBuild: growBuild, hasGrowBuild: growBuild.length > 0, growBreak: growBreak, hasGrowBreak: growBreak.length > 0,
         growDayWord: D === 0 ? 'today' : D === 1 ? 'tomorrow' : 'on ' + this.DAYS[this.dowFor(D)],
