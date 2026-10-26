@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:53 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:54 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1132,7 +1132,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 <sc-for list="{{scRows}}" as="r" hint-placeholder-count="3">
 <sc-if value="{{r.doneHead}}" hint-placeholder-val="{{ false }}"><div style="flex: none; margin-top: 10px; padding: 0 4px 2px; font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #9A8F7C">Finished</div></sc-if>
-<button onClick="{{r.select}}" aria-current="{{r.current}}" style="opacity: {{r.op}}; flex: none; display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 10px; border: 1px solid {{r.rowBorder}}; border-radius: 10px; background: {{r.rowBg}}; text-align: left; color: #2B2722">
+<div draggable="true" onDragStart="{{r.dragStart}}" onDragEnd="{{r.dragEnd}}" onDragOver="{{r.over}}" onDrop="{{r.drop}}" style="flex: none; display: flex; align-items: stretch; gap: 2px; border-radius: 10px; box-shadow: {{r.dropShadow}}">
+<span aria-hidden="true" title="Drag to reorder" style="width: 14px; flex: none; align-self: stretch; display: flex; align-items: center; justify-content: center; color: {{TK.tC9849A}}; cursor: grab"><svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg></span>
+<button onClick="{{r.select}}" aria-current="{{r.current}}" style="opacity: {{r.op}}; flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 10px; border: 1px solid {{r.rowBorder}}; border-radius: 10px; background: {{r.rowBg}}; text-align: left; color: #2B2722">
 <span aria-hidden="true" style="width: 34px; height: 34px; flex: none; border-radius: 17px; background: {{r.bg}}; color: {{r.fg}}; display: flex; align-items: center; justify-content: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{r.icon}}"></path></svg></span>
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
 <span style="font-size: calc(15px * {{fsK}}); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.name}}</span>
@@ -1140,6 +1142,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span aria-hidden="true" style="height: 4px; border-radius: 2px; background: #EFE7D6; overflow: hidden"><span style="display: block; height: 100%; width: {{r.pct}}%; background: {{r.fg}}"></span></span>
 </span>
 </button>
+</div>
 </sc-for>
 </div>
 </div>
@@ -9243,7 +9246,12 @@ class Component extends DCLogic {
           lineFg: c.finished ? '#7A7064' : toneFg[st.tone], pct: st.pct, op: c.finished ? 0.65 : 1, doneHead: ci === firstDone,
           rowBg: sel && sel.id === c.id && !isNew ? this.TK.tFBEDEE : 'transparent', rowBorder: sel && sel.id === c.id && !isNew ? this.TK.tE2B9C4 : 'transparent',
           current: sel && sel.id === c.id && !isNew ? 'true' : 'false',
-          select: () => this.setState({ selCourse: c.id, schoolNew: null, schoolDel: false, resOpen: null, courseTab: 'ov', asOpen: null, asPreview: null, mobilePage: (s.vw || 1194) < 900 ? 'right' : s.mobilePage })
+          select: () => this.setState({ selCourse: c.id, schoolNew: null, schoolDel: false, resOpen: null, courseTab: 'ov', asOpen: null, asPreview: null, mobilePage: (s.vw || 1194) < 900 ? 'right' : s.mobilePage }),
+          dropShadow: s.dropKey === 'crs:' + c.id ? 'inset 0 3px 0 ' + this.TK.tC9849A : 'none',
+          dragStart: (e) => { this.crsDrag = c.id; try { e.dataTransfer.setData('text/plain', c.title || ''); e.dataTransfer.effectAllowed = 'move'; } catch (er) {} },
+          dragEnd: () => { this.crsDrag = null; if (this.state.dropKey) this.setState({ dropKey: null }); },
+          over: (e) => { if (!this.crsDrag) return; e.preventDefault(); if (this.state.dropKey !== 'crs:' + c.id) this.setState({ dropKey: 'crs:' + c.id }); },
+          drop: (e) => { const id = this.crsDrag; this.crsDrag = null; if (!id) return; e.preventDefault(); if (id === c.id) { this.setState({ dropKey: null }); return; } const arr = this.state.courses.slice(); const from = arr.findIndex(x => x.id === id), orig = arr.findIndex(x => x.id === c.id); if (from < 0 || orig < 0) return; const mv = arr.splice(from, 1)[0]; const to = arr.findIndex(x => x.id === c.id); arr.splice(from < orig ? to + 1 : to, 0, mv); this.setState({ courses: arr, dropKey: null }); }
         };
       });
       const out = Object.assign(base, {
