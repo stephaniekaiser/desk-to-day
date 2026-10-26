@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:42 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:43 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2883,10 +2883,21 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 </sc-for>
 <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 4px">
-<button onClick="{{rs.addLesson}}" style="height: 30px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 5px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add a lesson</button>
+<button onClick="{{rs.toggleAddL}}" style="height: 30px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 5px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add lessons</button>
 <span style="flex: 1"></span>
 <button onClick="{{rs.remove}}" style="min-height: 28px; border: 0; border-radius: 7px; background: {{rs.removeBg}}; color: {{rs.removeFg}}; padding: 0 8px; font-size: calc(12px * {{fsK}}); font-weight: 600">{{rs.removeLabel}}</button>
 </div>
+<sc-if value="{{rs.addLOpen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px; margin-top: 4px">
+<label for="{{rs.addLId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Add lessons, one per line</label>
+<textarea id="{{rs.addLId}}" rows="4" value="{{rs.addLText}}" onChange="{{rs.onAddL}}" onInput="{{rs.onAddL}}" placeholder="Chapter 1: Intro, 45m&#10;Chapter 2: Networks, 1h&#10;Chapter 3" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; width: 100%; resize: vertical; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 8px 10px; font: inherit; font-size: calc(13.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF"></textarea>
+<div style="display: flex; align-items: center; gap: 8px">
+<span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: #7A7064">{{rs.addLHint}}</span>
+<button onClick="{{rs.toggleAddL}}" style="height: 30px; padding: 0 10px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Cancel</button>
+<button onClick="{{rs.addLessons}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{rs.addLBtn}}</button>
+</div>
+</div>
+</sc-if>
 </div>
 </div>
 </sc-if>
@@ -9647,6 +9658,27 @@ class Component extends DCLogic {
             inPlan: r.skip ? 'false' : 'true', planTrack: r.skip ? '#B9AF9C' : this.TK.t6E2F43, planKnob: r.skip ? 3 : 17,
             togglePlan: () => updR(x => ({ skip: !x.skip })),
             lessons: ls.map((l, li) => lessonVals(l, li)),
+            addLOpen: s.addLFor === r.id, addLId: 'sral-' + r.id, addLText: s.addLFor === r.id ? (s.addLText || '') : '',
+            onAddL: (e) => this.setState({ addLText: e.target.value }),
+            toggleAddL: () => { const on = this.state.addLFor === r.id; this.setState({ addLFor: on ? null : r.id, addLText: '' }); if (!on) setTimeout(() => { try { const el = document.getElementById('sral-' + r.id); if (el) el.focus(); } catch (e) {} }, 60); },
+            addLHint: (() => { const n = String(s.addLFor === r.id ? (s.addLText || '') : '').split(/\r?\n/).filter(x => x.trim()).length; return n ? n + (n === 1 ? ' lesson' : ' lessons') + '. No time given means 1h.' : 'Paste a table of contents. Add a time at the end if you know it.'; })(),
+            addLBtn: (() => { const n = String(s.addLFor === r.id ? (s.addLText || '') : '').split(/\r?\n/).filter(x => x.trim()).length; return n > 1 ? 'Add ' + n + ' lessons' : 'Add'; })(),
+            addLessons: () => {
+              const lines = String(this.state.addLText || '').split(/\r?\n/).map(x => x.replace(/^\s*(?:[-*•]|\d+[.)]\s)\s*/, '').trim()).filter(Boolean);
+              if (!lines.length) return;
+              const start = ls.length;
+              const made = lines.map((ln, li2) => {
+                let title = ln, mins = 60;
+                const m = ln.match(/[\s,\-–(]+(\d+(?:\.\d+)?)\s*(h|hr|hrs|hours?|m|min|mins|minutes?)\)?\s*$/i);
+                if (m) { const v = parseFloat(m[1]); mins = /^h/i.test(m[2]) ? Math.round(v * 60) : Math.round(v); title = ln.slice(0, m.index).replace(/[\s,\-–]+$/, '').trim() || ln; }
+                mins = Math.max(5, Math.min(600, mins || 60));
+                const k3 = start + li2 + 1;
+                return { id: nid(), resId: r.id, title: title, items: [{ id: nid(), title: k3 + '.1', mins: mins, done: false }] };
+              });
+              updC(sel.id, c => ({ lessons: (c.lessons || []).concat(made) }));
+              this.setState({ addLFor: null, addLText: '' });
+              this.setToast(made.length + (made.length === 1 ? ' lesson' : ' lessons') + ' added.');
+            },
             addLesson: () => { const k2 = ls.length + 1, lid = nid(); updC(sel.id, c => ({ lessons: (c.lessons || []).concat([{ id: lid, resId: r.id, title: 'Lesson ' + k2, items: [{ id: nid(), title: k2 + '.1', mins: 60, done: false }] }]), openL: lid })); },
             removeLabel: asking ? (() => { const t2 = this.impactText(this.sessionImpact(sel.id, [].concat(...ls.map(l => l.items.map(it => it.id))))); return 'Tap again: removes its lessons' + (t2 ? ', ' + t2.replace(/^removes /, '') : ''); })() : 'Remove resource',
             removeBg: asking ? '#9A4A3A' : 'transparent', removeFg: asking ? '#FFFFFF' : '#9A4A3A',
