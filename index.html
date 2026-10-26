@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 7:42 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 7:44 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -6820,7 +6820,7 @@ class Component extends DCLogic {
       dragStart: (e) => {
         this.drag = { kind: 'task', id: t.id };
         try { e.dataTransfer.setData('text/plain', t.id); e.dataTransfer.effectAllowed = 'move'; } catch (err) {}
-        if (s.view === 'day') setTimeout(() => this.setState({ sel: { kind: 'task', id: t.id }, menuFor: null }), 0);
+        if (s.view === 'day') setTimeout(() => this.setState({ sel: { kind: 'task', id: t.id, drag: true }, menuFor: null }), 0);
       }
     };
   }
@@ -7121,7 +7121,7 @@ class Component extends DCLogic {
         dragStart: (e) => {
           this.drag = { kind: 'habit', id: h.id };
           try { e.dataTransfer.setData('text/plain', h.id); } catch (err) {}
-          setTimeout(() => this.setState({ sel: { kind: 'habit', id: h.id }, menuFor: null }), 0);
+          setTimeout(() => this.setState({ sel: { kind: 'habit', id: h.id, drag: true }, menuFor: null }), 0);
         }
       };
     });
@@ -7390,7 +7390,7 @@ class Component extends DCLogic {
           if (this.resizing) { e.preventDefault(); return; }
           this.drag = { kind: 'block', id: b.id };
           try { e.dataTransfer.setData('text/plain', b.id); e.dataTransfer.effectAllowed = 'move'; } catch (err) {}
-          setTimeout(() => this.setState({ sel: { kind: 'block', id: b.id }, menuFor: null, missFor: null }), 0);
+          setTimeout(() => this.setState({ sel: { kind: 'block', id: b.id, drag: true }, menuFor: null, missFor: null }), 0);
         }
       };
     });
@@ -10567,7 +10567,7 @@ class Component extends DCLogic {
       stepsDonePct: donePct, stepsPlanPct: planPct,
       stepsNote: stepsDone.toLocaleString('en-US') + ' walked so far' + (need ? ' · plan ≈' + this.fmtDur(needMins) + ' more' : ' · goal planned'),
       wins: winsCount,
-      placing: !!sel && isDay, notPlacing: !sel, placingTitle: placingTitle, placingDur: placingDur,
+      placing: !!sel && isDay && !sel.drag, notPlacing: !sel || !!sel.drag, placingTitle: placingTitle, placingDur: placingDur,
       showResize: showResize,
       resizeMinus: () => this.resizeSel(-15),
       resizePlus: () => this.resizeSel(15),
