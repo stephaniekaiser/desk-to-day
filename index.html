@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 26, 1:49 PM';</script>
+<script>window.__plannerBuild = 'Oct 26, 1:55 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -643,10 +643,11 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 <sc-if value="{{gb.hasHint}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{gb.hint}}</span></sc-if>
 <sc-if value="{{gb.canLog}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; align-items: center; gap: 6px">
-<button onClick="{{gb.logMinus}}" aria-label="Log {{gb.quickLabel}} less" style="width: 30px; height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(16px * {{fsK}}); font-weight: 700; padding: 0">−</button>
-<button onClick="{{gb.logPlus}}" aria-label="Log {{gb.quickLabel}} more" style="width: 30px; height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(16px * {{fsK}}); font-weight: 700; padding: 0">+</button>
-<span style="font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{gb.logLabel}}</span>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<label for="{{gb.logId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">Log {{gb.unitWord}}</label>
+<input id="{{gb.logId}}" type="number" inputmode="numeric" min="0" value="{{gb.logDraft}}" onChange="{{gb.onLogDraft}}" onInput="{{gb.onLogDraft}}" onKeyDown="{{gb.logKey}}" placeholder="{{gb.logPh}}" style="outline-color: {{TK.tA0526A}}; width: 96px; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722">
+<button onClick="{{gb.logAdd}}" style="height: 30px; flex: none; padding: 0 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Add</button>
+<sc-if value="{{gb.hasLogged}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 2px; white-space: nowrap"><span style="font-size: calc(12px * {{fsK}}); color: #4A443B">{{gb.logLabel}}</span><button onClick="{{gb.logClear}}" style="height: 28px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear</button></span></sc-if>
 </div>
 </sc-if>
 <div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid {{TK.tF6EDEF}}; padding-top: 6px">
@@ -10362,6 +10363,12 @@ class Component extends DCLogic {
           onLen: (e) => { const v = parseInt(e.target.value, 10) || 30; this.setState({ habits: this.state.habits.map(h => h.id === hb.id ? Object.assign({}, h, { chunk: v }) : h) }); },
           plan: () => this.setState({ sel: { kind: 'habit', id: hb.id }, editing: null, mobilePage: narrowG ? 'right' : s.mobilePage }),
           canLog: D <= 0, logLabel: fmtN(logged) + ' ' + unit + ' logged by hand', logMinus: () => setLog(g, logged - (g.quick || 1)), logPlus: () => setLog(g, logged + (g.quick || 1)), quickLabel: fmtN(g.quick || 1),
+          hasLogged: logged > 0, unitWord: unit, logId: 'glg-' + g.id, logPh: /steps?/i.test(unit) ? 'e.g. 2500' : 'amount',
+          logDraft: (s.growLogDraft || {})[g.id] || '',
+          onLogDraft: (e) => { const v = e.target.value; this.setState({ growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: v }) }); },
+          logAdd: () => { const v = parseFloat(String(((this.state.growLogDraft || {})[g.id]) || '').replace(/,/g, '')); if (!(v > 0)) return; setLog(g, logged + v); this.setState({ growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: '' }) }); this.setToast('Logged ' + fmtN(v) + ' ' + unit + '.'); },
+          logKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); const v = parseFloat(String(e.target.value || '').replace(/,/g, '')); if (!(v > 0)) return; setLog(g, logged + v); this.setState({ growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: '' }) }); } },
+          logClear: () => setLog(g, 0),
           repText: rp && rp.dows && rp.dows.length ? 'Repeats ' + dowsText(rp.dows) + ' at ' + this.fmtTime(rp.start, false) + ' · ' + this.fmtDur(rp.mins || hb.chunk) : 'Does not repeat',
           repOn: !!(rp && rp.dows && rp.dows.length), repEditing: editing, repClosed: !editing,
           repEdit: () => this.setState({ growRep: g.id, growRepDraft: { dows: rp && rp.dows ? rp.dows.slice() : [0, 1, 2, 3, 4, 5, 6], time: rp ? this.toHHMM(rp.start) : '07:00', mins: rp && rp.mins ? rp.mins : (hb.chunk || 30) } }),
