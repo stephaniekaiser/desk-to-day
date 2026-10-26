@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:18 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:21 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2987,9 +2987,11 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <div style="display: flex; flex-direction: column; gap: 2px">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Steps</span>
 <sc-for list="{{a.cl}}" as="ac" hint-placeholder-count="2">
-<div style="display: flex; align-items: center; gap: 6px; min-height: calc(30px * {{rowK}})">
+<div draggable="true" onDragStart="{{ac.dragStart}}" onDragEnd="{{ac.dragEnd}}" onDragOver="{{ac.over}}" onDrop="{{ac.drop}}" style="display: flex; align-items: center; gap: 6px; min-height: calc(30px * {{rowK}}); border-radius: 6px; box-shadow: {{ac.dropShadow}}">
+<span aria-hidden="true" title="Drag to reorder" style="width: 14px; flex: none; display: flex; align-items: center; justify-content: center; color: {{TK.tC9849A}}; cursor: grab"><svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg></span>
 <button role="checkbox" aria-checked="{{ac.checked}}" onClick="{{ac.toggle}}" aria-label="{{ac.text}}" style="width: 20px; height: 20px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 6px; background: {{ac.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button>
-<span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: {{ac.fg}}; text-decoration: {{ac.strike}}">{{ac.text}}</span>
+<label for="{{ac.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Step</label>
+<input id="{{ac.inputId}}" value="{{ac.text}}" onChange="{{ac.onText}}" onInput="{{ac.onText}}" onKeyDown="{{ac.key}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 28px; box-sizing: border-box; border: 0; border-bottom: 1px solid transparent; border-radius: 6px; padding: 0 6px; background: transparent; font: inherit; font-size: calc(13.5px * {{fsK}}); color: {{ac.fg}}; text-decoration: {{ac.strike}}">
 <button onClick="{{ac.remove}}" aria-label="Remove {{ac.text}}" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #B9AF9C; padding: 0">×</button>
 </div>
 </sc-for>
@@ -9426,7 +9428,14 @@ class Component extends DCLogic {
                 addLink: () => { const lid = 'lk' + Date.now().toString(36); updA(a.id, x => ({ links: this.linksOf(x).concat([{ id: lid, label: '', url: '' }]), link: '' })); setTimeout(() => { try { const el = document.getElementById('lku-al' + a.id + '-' + lid); if (el) el.focus(); } catch (e) {} }, 60); },
                 hasUrl: !!firstUrl(this.linksOf(a)), urlHref: firstUrl(this.linksOf(a)),
                 notes: a.notes || '', onNotes: (e) => { const v = e.target.value; updA(a.id, () => ({ notes: v })); },
-                cl: cl.map(it => ({ text: it.text, checked: it.done ? 'true' : 'false', strike: it.done ? 'line-through' : 'none', fg: it.done ? '#8A8174' : '#2B2722', boxBg: it.done ? this.TK.t6E2F43 : '#FFFFFF',
+                cl: cl.map((it, ii) => ({ text: it.text, inputId: 'acs-' + a.id + '-' + it.id,
+                  onText: (e) => { const v = e.target.value; updA(a.id, x => ({ checklist: (x.checklist || []).map(c2 => c2.id === it.id ? Object.assign({}, c2, { text: v }) : c2) })); },
+                  key: (e) => { if (e.key === 'Enter') { e.preventDefault(); try { e.target.blur(); } catch (er) {} } if (e.key === 'Backspace' && !e.target.value) { e.preventDefault(); updA(a.id, x => ({ checklist: (x.checklist || []).filter(c2 => c2.id !== it.id) })); } },
+                  dropShadow: s.dropKey === 'acs:' + it.id ? 'inset 0 3px 0 ' + this.TK.tC9849A : 'none',
+                  dragStart: (e) => { this.acDrag = { aid: a.id, id: it.id }; try { e.dataTransfer.setData('text/plain', it.text || ''); e.dataTransfer.effectAllowed = 'move'; } catch (er) {} },
+                  dragEnd: () => { this.acDrag = null; if (this.state.dropKey) this.setState({ dropKey: null }); },
+                  over: (e) => { const d = this.acDrag; if (!d || d.aid !== a.id) return; e.preventDefault(); if (this.state.dropKey !== 'acs:' + it.id) this.setState({ dropKey: 'acs:' + it.id }); },
+                  drop: (e) => { const d = this.acDrag; this.acDrag = null; if (!d || d.aid !== a.id) return; e.preventDefault(); this.setState({ dropKey: null }); if (d.id === it.id) return; updA(a.id, x => { const arr = (x.checklist || []).slice(); const from = arr.findIndex(c2 => c2.id === d.id); const orig = arr.findIndex(c2 => c2.id === it.id); if (from < 0) return {}; const mv = arr.splice(from, 1)[0]; const to = arr.findIndex(c2 => c2.id === it.id); arr.splice(to < 0 ? arr.length : (from < orig ? to + 1 : to), 0, mv); return { checklist: arr }; }); }, checked: it.done ? 'true' : 'false', strike: it.done ? 'line-through' : 'none', fg: it.done ? '#8A8174' : '#2B2722', boxBg: it.done ? this.TK.t6E2F43 : '#FFFFFF',
                   toggle: () => updA(a.id, x => ({ checklist: (x.checklist || []).map(c2 => c2.id === it.id ? Object.assign({}, c2, { done: !c2.done }) : c2) })),
                   remove: () => updA(a.id, x => ({ checklist: (x.checklist || []).filter(c2 => c2.id !== it.id) })) })),
                 clCount: cl.length ? cl.filter(x => x.done).length + '/' + cl.length : '', hasCl: cl.length > 0,
