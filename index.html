@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 7:47 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 7:52 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -504,6 +504,17 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </div>
 </sc-if>
+</div>
+<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">When</span>
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<label for="{{t.whenDayId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Day</label>
+<select id="{{t.whenDayId}}" value="{{t.whenDayVal}}" onChange="{{t.onWhenDay}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenDayOpts}}" as="wo" hint-placeholder-count="8"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
+<label for="{{t.whenTimeId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Time</label>
+<input id="{{t.whenTimeId}}" type="time" value="{{t.whenTime}}" onChange="{{t.onWhenTime}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722">
+<sc-if value="{{t.hasTime}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.clearTime}}" title="Take it off the calendar" aria-label="Take it off the calendar" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear time</button></sc-if>
+</div>
+<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064">{{t.whenNote}}</span>
 </div>
 <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Length</span>
@@ -3436,6 +3447,17 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 </div>
 </sc-if>
+</div>
+<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">When</span>
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<label for="{{t.whenDayId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Day</label>
+<select id="{{t.whenDayId}}" value="{{t.whenDayVal}}" onChange="{{t.onWhenDay}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenDayOpts}}" as="wo" hint-placeholder-count="8"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
+<label for="{{t.whenTimeId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Time</label>
+<input id="{{t.whenTimeId}}" type="time" value="{{t.whenTime}}" onChange="{{t.onWhenTime}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722">
+<sc-if value="{{t.hasTime}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.clearTime}}" title="Take it off the calendar" aria-label="Take it off the calendar" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear time</button></sc-if>
+</div>
+<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064">{{t.whenNote}}</span>
 </div>
 <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Length</span>
@@ -6637,7 +6659,7 @@ class Component extends DCLogic {
         return { label: k ? cs.name : 'None', d: this.ICONS[k ? cs.icon : 'none'], color: k ? cs.color : '#8A8174', checked: on ? 'true' : 'false', bg: on ? (k ? cs.tint : '#F3EDE0') : 'transparent', set: () => { patchDraft({ cat: k }); this.setState({ catMenu: null }); } };
       }),
       showList: false,
-      showPlaceCell: !onDayPage && (s.view === 'week' || s.view === 'desk'),
+      showPlaceCell: !onDayPage && s.view === 'desk',
       placeCellLabel: s.view === 'desk' ? 'List' : 'Day',
       whereOpen: s.whereMenu === t.id, whereOpenA: s.whereMenu === t.id ? 'true' : 'false',
       whereToggle: () => this.setState({ whereMenu: this.state.whereMenu === t.id ? null : t.id, catMenu: null }),
@@ -6719,9 +6741,35 @@ class Component extends DCLogic {
         this.setToast('Added as a Week Maker.');
       },
       onMove: (e) => { const v = e.target.value; this.moveTask(t.id, { bucket: v, dayAssign: v === 'week' ? (t.dayAssign === undefined ? null : t.dayAssign) : null }); this.setState({ editing: t.id }); },
-      hasPlace: s.view === 'day' || s.view === 'week',
+      hasPlace: false,
       placeLabel: s.view === 'week' ? 'Pick a day' : (sc ? 'Move on calendar' : 'Put on calendar'),
       place: () => thenDo(() => this.setState({ sel: { kind: 'task', id: t.id }, editing: null, catMenu: null })),
+      whenDayId: 'wd-' + t.id, whenTimeId: 'wt-' + t.id,
+      whenDayVal: (() => { const d = sc ? sc.day : dv.day; return typeof d === 'number' ? String(d) : ''; })(),
+      whenDayOpts: (() => { const cur = sc ? sc.day : dv.day; const o = [{ v: '', l: 'No day yet' }]; const set = {}; for (let d = 0; d <= 27; d++) set[d] = true; if (typeof cur === 'number') set[cur] = true; Object.keys(set).map(Number).sort((a, b) => a - b).forEach(d => o.push({ v: String(d), l: (d === 0 ? 'Today, ' : d === 1 ? 'Tomorrow, ' : '') + this.DSHORT[this.dowFor(d)] + ' ' + this.MONTHS[this.dateFor(d).getMonth()] + ' ' + this.dateFor(d).getDate() })); return o; })(),
+      whenTime: sc ? this.toHHMM(sc.start) : '', hasTime: !!sc,
+      whenNote: sc ? 'On the calendar ' + this.fmtTime(sc.start, false) + '–' + this.fmtTime(sc.start + (t.mins || 30), false) : 'Pick a time to put it on the calendar',
+      onWhenDay: (e) => {
+        const v = e.target.value; const d = v === '' ? null : parseInt(v, 10);
+        if (d === null || !sc) { patchDraft({ day: d }); return; }
+        commitDraft();
+        const st0 = this.state, map = this.removeTaskBlocks(st0.placedByDay, t.id);
+        map[String(d)] = (map[String(d)] || []).concat([{ id: 'p' + st0.nextId, taskId: t.id, mins: t.mins || 30, start: sc.start }]);
+        this.setState({ placedByDay: map, nextId: st0.nextId + 1, editDraft: null, tasks: st0.tasks.map(x => x.id === t.id ? Object.assign({}, x, { dayAssign: d, bucket: 'week', weekOf: this.weekStartOff(d) }) : x) });
+      },
+      onWhenTime: (e) => {
+        const v = e.target.value;
+        commitDraft();
+        const st0 = this.state;
+        if (!v) { this.setState({ placedByDay: this.removeTaskBlocks(st0.placedByDay, t.id), editDraft: null }); return; }
+        const tm = v.split(':'); const start = (+tm[0] || 0) * 60 + (+tm[1] || 0);
+        const t2 = st0.tasks.find(x => x.id === t.id) || t;
+        let d = sc ? sc.day : (typeof t2.dayAssign === 'number' && t2.dayAssign >= 0 ? t2.dayAssign : (onDayPage ? s.day : 0));
+        const map = this.removeTaskBlocks(st0.placedByDay, t.id);
+        map[String(d)] = (map[String(d)] || []).concat([{ id: 'p' + st0.nextId, taskId: t.id, mins: t2.mins || 30, start: Math.max(0, Math.min(start, this.DL - (t2.mins || 30))) }]);
+        this.setState({ placedByDay: map, nextId: st0.nextId + 1, editDraft: null, tasks: st0.tasks.map(x => x.id === t.id ? Object.assign({}, x, { dayAssign: d, bucket: 'week', weekOf: this.weekStartOff(d) }) : x) });
+      },
+      clearTime: () => { commitDraft(); this.setState({ placedByDay: this.removeTaskBlocks(this.state.placedByDay, t.id), editDraft: null }); },
       canSplit: t.mins > 30 && !t.groupId && !sc,
       edHead: t.groupId && s.groups[t.groupId] ? 'Slice details' : 'Task details',
       inGroup: !!(t.groupId && s.groups[t.groupId]), groupName: t.groupId && s.groups[t.groupId] ? s.groups[t.groupId].title : '',
@@ -10591,7 +10639,7 @@ class Component extends DCLogic {
       stepsDonePct: donePct, stepsPlanPct: planPct,
       stepsNote: stepsDone.toLocaleString('en-US') + ' walked so far' + (need ? ' · plan ≈' + this.fmtDur(needMins) + ' more' : ' · goal planned'),
       wins: winsCount,
-      placing: !!sel && isDay && !sel.drag, notPlacing: !sel || !!sel.drag, placingTitle: placingTitle, placingDur: placingDur,
+      placing: !!sel && isDay && !sel.drag && placingTitle.indexOf('Moving') !== 0, notPlacing: !sel || !!sel.drag || placingTitle.indexOf('Moving') === 0, placingTitle: placingTitle, placingDur: placingDur,
       showResize: showResize,
       resizeMinus: () => this.resizeSel(-15),
       resizePlus: () => this.resizeSel(15),
