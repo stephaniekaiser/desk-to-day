@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 8:16 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 8:52 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -7673,7 +7673,7 @@ class Component extends DCLogic {
       totalSub = (sh.locked ? this.fmtDur(sh.locked) + ' done or on the calendar · ' : '') + this.fmtDur(stepTotal) + ' in the steps' + (diff < 0 ? ' · ' + this.fmtDur(-diff) + ' open' : '') + ' · ' + this.fmtDur(totAll) + ' total';
       const SEGC = [this.TK.t6E2F43, this.TK.tC9849A, this.TK.tA0526A, this.TK.tE2B9C4];
       const segList = sh.mode === 'equal' ? pieces.map((pc, i) => ({ flex: pc.mins, bg: SEGC[i % 2], border: '0' }))
-        : [].concat(sh.locked ? [{ flex: sh.locked, bg: this.TK.t6E2F43, border: '0' }] : [], stepTotal ? [{ flex: Math.min(stepTotal, sh.est), bg: this.TK.tC9849A, border: '0' }] : [], diff < 0 ? [{ flex: -diff, bg: 'transparent', border: '1.5px dashed ' + this.TK.tC9849A }] : [], diff > 0 ? [{ flex: diff, bg: '#C4483A', border: '0' }] : []);
+        : [].concat((sh.locked || 0) + Math.min(stepTotal, sh.est) ? [{ flex: (sh.locked || 0) + Math.min(stepTotal, sh.est), bg: diff === 0 ? '#3F7A5A' : this.TK.t6E2F43, border: '0' }] : [], diff < 0 ? [{ flex: -diff, bg: 'transparent', border: '1.5px dashed ' + this.TK.tC9849A }] : [], diff > 0 ? [{ flex: diff, bg: '#C4483A', border: '0' }] : []);
       const durOpts = (cur) => { const o = []; for (let m = 15; m <= 480; m += 15) o.push({ v: String(m), l: this.fmtDur(m) }); if (cur > 480) o.push({ v: String(cur), l: this.fmtDur(cur) }); return o; };
       let preview = '';
       if (sh.mode === 'equal') {
