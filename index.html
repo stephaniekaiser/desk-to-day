@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:30 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 6:42 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2749,7 +2749,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </button>
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
 <label for="{{rs.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Resource title</label>
-<input id="{{rs.inputId}}" value="{{rs.title}}" onChange="{{rs.onTitle}}" placeholder="Book or video course title" style="outline-color: {{TK.tA0526A}}; height: 24px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0; width: 100%; border-radius: 6px">
+<input id="{{rs.inputId}}" value="{{rs.title}}" onChange="{{rs.onTitle}}" placeholder="{{rs.titlePh}}" style="outline-color: {{TK.tA0526A}}; height: 24px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0; width: 100%; border-radius: 6px">
 <span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{rs.meta}}</span>
 </div>
 <sc-if value="{{rs.hasUrl}}" hint-placeholder-val="{{ false }}">
@@ -2759,30 +2759,30 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </sc-if>
 </div>
 <sc-if value="{{rs.open}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 12px 10px; border-top: 1px solid #F1EBDD">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 12px 10px; border-top: 1px solid {{TK.tF6EDEF}}">
 <div style="display: flex; align-items: center; gap: 10px; padding-top: 6px">
+<label for="{{rs.typeId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Type</label>
+<select id="{{rs.typeId}}" value="{{rs.typeVal}}" onChange="{{rs.onType}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><option value="book">Book</option><option value="video">Video</option><option value="article">Article</option><option value="website">Website</option><option value="general">General</option></select>
 <span style="flex: 1; min-width: 0"></span>
 <button role="switch" aria-checked="{{rs.inPlan}}" onClick="{{rs.togglePlan}}" style="flex: none; height: 30px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 6px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #4A443B">In plan<span aria-hidden="true" style="position: relative; width: 34px; height: 20px; border-radius: 10px; background: {{rs.planTrack}}"><span style="position: absolute; top: 3px; left: {{rs.planKnob}}px; width: 14px; height: 14px; border-radius: 7px; background: #FFFFFF"></span></span></button>
 </div>
 <sc-if value="{{rs.detOpen}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-if value="{{rs.showAuthor}}" hint-placeholder-val="{{ true }}">
 <div style="flex: 2; min-width: 140px; display: flex; flex-direction: column; gap: 4px">
-<label for="{{rs.authorId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Author</label>
-<input id="{{rs.authorId}}" value="{{rs.author}}" onChange="{{rs.onAuthor}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
+<label for="{{rs.authorId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{rs.authorLabel}}</label>
+<input id="{{rs.authorId}}" value="{{rs.author}}" onChange="{{rs.onAuthor}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
 </div>
+</sc-if>
+<sc-if value="{{rs.showIsbn}}" hint-placeholder-val="{{ true }}">
 <div style="flex: 1; min-width: 110px; display: flex; flex-direction: column; gap: 4px">
 <label for="{{rs.isbnId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">ISBN</label>
-<input id="{{rs.isbnId}}" value="{{rs.isbn}}" onChange="{{rs.onIsbn}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
+<input id="{{rs.isbnId}}" value="{{rs.isbn}}" onChange="{{rs.onIsbn}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
 </div>
-<div style="flex: 1 1 100%; display: flex; align-items: center; gap: 8px">
-<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Order</span>
-<button onClick="{{rs.up}}" aria-label="Move {{rs.name}} up" title="Move up" style="width: 30px; height: 30px; border: 1px solid #E6DCC8; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; opacity: {{rs.upOp}}"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button>
-<button onClick="{{rs.down}}" aria-label="Move {{rs.name}} down" title="Move down" style="width: 30px; height: 30px; border: 1px solid #E6DCC8; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; opacity: {{rs.downOp}}"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button>
-<span style="font-size: calc(12px * {{fsK}}); color: #8A8174">{{rs.orderNote}}</span>
-</div>
+</sc-if>
 <div style="flex: 1 1 100%; display: flex; flex-direction: column; gap: 4px">
 <label for="{{rs.urlId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Link</label>
-<input id="{{rs.urlId}}" type="url" inputmode="url" value="{{rs.url}}" onChange="{{rs.onUrl}}" placeholder="https://…" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
+<input id="{{rs.urlId}}" type="url" inputmode="url" value="{{rs.url}}" onChange="{{rs.onUrl}}" placeholder="https://…" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
 </div>
 </div>
 </sc-if>
@@ -9612,6 +9612,7 @@ class Component extends DCLogic {
           const updR = (fn) => updC(sel.id, c => ({ resources: c.resources.map(x => x.id === r.id ? Object.assign({}, x, fn(x)) : x) }));
           const allR = sel.resources || [];
           const moveTo = (to) => { if (to < 0 || to >= allR.length || to === ri) return; updC(sel.id, c => { const a = c.resources.slice(); const x = a.splice(ri, 1)[0]; a.splice(to, 0, x); return { resources: a }; }); };
+          const rType = r.type || (r.isbn || r.author ? 'book' : 'general');
           return {
             border: '#EDE5D4',
             dragStart: (e) => { this.drag = { kind: 'res', cid: sel.id, rid: r.id }; try { e.dataTransfer.setData('text/plain', r.id); } catch (err) {} },
@@ -9634,6 +9635,11 @@ class Component extends DCLogic {
             detToggle: () => this.setState({ resDetails: this.state.resDetails === r.id ? null : r.id }),
             detSummary: [r.author, r.isbn ? 'ISBN ' + r.isbn : ''].filter(x => (x || '').trim()).join(' · ') || 'Author, ISBN, link',
             author: r.author || '', isbn: r.isbn || '', url: r.url || '',
+            typeId: 'srt-' + r.id, typeVal: rType,
+            onType: (e) => { const v = e.target.value; updR(() => ({ type: v })); },
+            showAuthor: rType === 'book' || rType === 'video' || rType === 'article', showIsbn: rType === 'book',
+            authorLabel: rType === 'video' ? 'Creator or channel' : 'Author',
+            titlePh: ({ book: 'Book title', video: 'Video or video course title', article: 'Article title', website: 'Website name', general: 'Name it' })[rType] || 'Name it',
             authorId: 'sra-' + r.id, isbnId: 'sri-' + r.id, urlId: 'sru-' + r.id,
             onAuthor: (e) => { const v = e.target.value; updR(() => ({ author: v })); },
             onIsbn: (e) => { const v = e.target.value; updR(() => ({ isbn: v })); },
@@ -9654,7 +9660,7 @@ class Component extends DCLogic {
             }
           };
         }),
-        scAddResource: () => { const rid = 'r' + Date.now().toString(36), lid = nid(); updC(sel.id, c => ({ resources: (c.resources || []).map(x => Object.assign({}, x, { open: false })).concat([{ id: rid, title: '', author: '', isbn: '', url: '', open: true, skip: false }]), lessons: (c.lessons || []).concat([{ id: lid, resId: rid, title: 'Lesson 1', items: [{ id: nid(), title: '1.1', mins: 60, done: false }] }]), openL: lid })); this.setState({ resDetails: rid });  this.setState({ resOpen: rid }); },
+        scAddResource: () => { const rid = 'r' + Date.now().toString(36); updC(sel.id, c => ({ resources: (c.resources || []).map(x => Object.assign({}, x, { open: false })).concat([{ id: rid, title: '', type: 'general', author: '', isbn: '', url: '', open: true, skip: false }]) })); this.setState({ resDetails: rid, resOpen: rid }); setTimeout(() => { try { const el = document.getElementById('scr-' + rid); if (el) { el.focus(); el.scrollIntoView({ block: 'nearest' }); } } catch (e) {} }, 60); },
         scResSummary: (sel.resources || []).length + ((sel.resources || []).length === 1 ? ' resource' : ' resources') + ' · ' + (this.fmtDur(st.total) || '0h') + ' in plan',
         scDelLabel: s.schoolDel ? (() => { const sm2 = this.schedMap(); const open = s.tasks.filter(t => t.courseId === sel.id && !t.done); const cal = open.filter(t => sm2[t.id]).length; return 'Tap again to remove this course' + (open.length ? ' and ' + open.length + (open.length === 1 ? ' planned session' : ' planned sessions') + (cal ? ' (' + cal + ' on your calendar)' : '') : ''); })() : 'Remove course',
         scDelBg: s.schoolDel ? '#9A4A3A' : 'transparent', scDelFg: s.schoolDel ? '#FFFFFF' : '#9A4A3A',
