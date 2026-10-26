@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 6:54 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 7:00 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -9242,7 +9242,7 @@ class Component extends DCLogic {
         weekStudied += st.week;
         return {
           name: c.title || 'New course', icon: this.ICONS[cs.icon] || this.ICONS.school, fg: cs.color, bg: cs.tint,
-          line: c.finished ? 'Finished · ' + st.pct + '% of the plan' : st.status + (typeof c.finish === 'number' && st.left ? ' · ' + this.fmtDur(Math.round(st.perWeek / 15) * 15) + ' a week' : ''),
+          line: c.finished ? 'Finished · ' + st.pct + '% of the plan' : st.status + (typeof c.finish === 'number' ? ' · Finish by ' + this.DSHORT[this.dateFor(c.finish).getDay()] + ', ' + this.MONTHS[this.dateFor(c.finish).getMonth()] + ' ' + this.dateFor(c.finish).getDate() : '') + (typeof c.finish === 'number' && st.left ? ' · ' + this.fmtDur(Math.round(st.perWeek / 15) * 15) + ' a week' : ''),
           lineFg: c.finished ? '#7A7064' : toneFg[st.tone], pct: st.pct, op: c.finished ? 0.65 : 1, doneHead: ci === firstDone,
           rowBg: sel && sel.id === c.id && !isNew ? this.TK.tFBEDEE : 'transparent', rowBorder: sel && sel.id === c.id && !isNew ? this.TK.tE2B9C4 : 'transparent',
           current: sel && sel.id === c.id && !isNew ? 'true' : 'false',
