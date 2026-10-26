@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 8:02 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 8:16 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1060,7 +1060,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="width: 22px; flex: none; text-align: right; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #6B6358">{{st.num}}</span>
 <label for="{{st.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Step {{st.num}} name</label>
 <input id="{{st.inputId}}" value="{{st.title}}" onChange="{{st.onTitle}}" placeholder="{{st.placeholder}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tIn}}px; max-height: 40px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(14px * {{fsK}}); color: #2B2722; background: #FFFFFF">
-<span aria-hidden="true" style="width: 4px; height: 26px; flex: none; border-radius: 2px; background: {{st.color}}"></span>
 <label for="{{st.inputId}}-d" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Step {{st.num}} length</label>
 <select id="{{st.inputId}}-d" value="{{st.minsVal}}" onChange="{{st.onMins}}" style="outline-color: {{TK.tA0526A}}; width: 84px; flex: none; height: 34px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; padding: 0 4px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF"><sc-for list="{{st.opts}}" as="sdo" hint-placeholder-count="8"><option value="{{sdo.v}}">{{sdo.l}}</option></sc-for></select>
 <button onClick="{{st.remove}}" aria-label="Remove step {{st.num}}" style="width: 32px; height: 32px; flex: none; border-radius: 18px; border: 0; background: transparent; color: #7A3208; display: flex; align-items: center; justify-content: center">
@@ -7667,12 +7666,14 @@ class Component extends DCLogic {
       const stepTotal = sh.steps.reduce((a, x) => a + x.mins, 0);
       const diff = stepTotal - sh.est;
       let totalText, totalSub;
-      if (diff === 0) { totalText = 'Adds up to ' + this.fmtDur(sh.est) + (sh.locked ? ' still open' : ''); totalSub = 'Right on target.'; }
-      else if (diff < 0) { totalText = this.fmtDur(-diff) + ' still to place'; totalSub = this.fmtDur(stepTotal) + ' of ' + this.fmtDur(sh.est) + ' is in steps so far.'; }
-      else { totalText = this.fmtDur(diff) + ' over the total'; totalSub = 'The steps add up to ' + this.fmtDur(stepTotal) + '. That is useful to know.'; }
+      const totAll = sh.est + (sh.locked || 0);
+      if (diff === 0) { totalText = 'All ' + this.fmtDur(totAll) + ' is accounted for'; }
+      else if (diff < 0) { totalText = this.fmtDur(-diff) + ' not in a step yet'; }
+      else { totalText = 'The steps are ' + this.fmtDur(diff) + ' more than the total'; }
+      totalSub = (sh.locked ? this.fmtDur(sh.locked) + ' done or on the calendar · ' : '') + this.fmtDur(stepTotal) + ' in the steps' + (diff < 0 ? ' · ' + this.fmtDur(-diff) + ' open' : '') + ' · ' + this.fmtDur(totAll) + ' total';
       const SEGC = [this.TK.t6E2F43, this.TK.tC9849A, this.TK.tA0526A, this.TK.tE2B9C4];
       const segList = sh.mode === 'equal' ? pieces.map((pc, i) => ({ flex: pc.mins, bg: SEGC[i % 2], border: '0' }))
-        : sh.steps.map((st, i) => ({ flex: st.mins, bg: SEGC[i % 4], border: '0' })).concat(diff < 0 ? [{ flex: -diff, bg: 'transparent', border: '1.5px dashed ' + this.TK.tC9849A }] : []);
+        : [].concat(sh.locked ? [{ flex: sh.locked, bg: this.TK.t6E2F43, border: '0' }] : [], stepTotal ? [{ flex: Math.min(stepTotal, sh.est), bg: this.TK.tC9849A, border: '0' }] : [], diff < 0 ? [{ flex: -diff, bg: 'transparent', border: '1.5px dashed ' + this.TK.tC9849A }] : [], diff > 0 ? [{ flex: diff, bg: '#C4483A', border: '0' }] : []);
       const durOpts = (cur) => { const o = []; for (let m = 15; m <= 480; m += 15) o.push({ v: String(m), l: this.fmtDur(m) }); if (cur > 480) o.push({ v: String(cur), l: this.fmtDur(cur) }); return o; };
       let preview = '';
       if (sh.mode === 'equal') {
