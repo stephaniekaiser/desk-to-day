@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 25, 7:52 PM';</script>
+<script>window.__plannerBuild = 'Oct 25, 7:53 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -7416,7 +7416,7 @@ class Component extends DCLogic {
         align: tall && !missed ? 'flex-start' : 'center',
         mt: tall ? 6 : 0,
         pad: tall ? '8px 4px' : (roomy ? '0 4px' : '0 8px'),
-        fs: roomy ? 14 : 12,
+        fs: Math.round((roomy ? 14 : 12) * (({ xs: 0.8, small: 0.9, normal: 1, large: 1.15, xl: 1.3, xxl: 1.45 })[this.state.settings.textSize] || 1)),
         justify: tall ? 'flex-start' : 'center',
         roomy: roomy,
         normal: !b.fixed && !missed, missed: missed, fixed: !!b.fixed,
@@ -7520,7 +7520,7 @@ class Component extends DCLogic {
       const half = m + 30;
       hours.push({
         top: top, labelTop: m === vs ? 0 : top - 8, label: this.fmtTime(m, false),
-        fs: PH < 40 ? 11 : 12,
+        fs: Math.round((PH < 40 ? 11 : 12) * (({ xs: 0.8, small: 0.9, normal: 1, large: 1.15, xl: 1.3, xxl: 1.45 })[this.state.settings.textSize] || 1)),
         halfTop: Math.round(yOf(half)),
         showHalf: half < ve && PH >= 44 && !inSeg(half)
       });
@@ -10089,7 +10089,7 @@ class Component extends DCLogic {
       const dowsText = (dw) => { const a = (dw || []).slice().sort(); if (a.length === 7) return 'every day'; if (a.join() === '1,2,3,4,5') return 'weekdays'; if (a.join() === '0,6') return 'weekends'; return a.map(x => this.DSHORT[x]).join(', '); };
       const growBuild = (s.goals || []).filter(g => g.kind === 'build' && g.status === 'active' && g.habitId).map(g => {
         const hb = s.habits.find(h => h.id === g.habitId); if (!hb) return null;
-        const per = /^min/i.test(g.unit || 'minutes') ? 1 : (hb.perMin || 1);
+        const per = /^min/i.test(g.unit || 'minutes') ? 1 : (/^steps?$/i.test(g.unit || '') && (hb.perMin || 1) <= 1 ? 100 : (hb.perMin || 1));
         const unit = g.unit || 'minutes', tgt = g.daily || 1;
         const blocks = items.filter(b => b.habitId === hb.id).sort((a, b) => a.start - b.start);
         const planned = blocks.reduce((a, b) => a + b.mins, 0) * per;
