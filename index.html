@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 26, 8:03 PM';</script>
+<script>window.__plannerBuild = 'Oct 26, 8:40 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -6087,6 +6087,26 @@ class Component extends DCLogic {
   instance(id) { return this.dayItems(this.state.day).find(b => b.id === id); }
   nv(id, real) { const d = this.state.numDraft; return d && d.id === id ? d.v : real; }
   nb(fn) { return (e) => { if (this.state.numDraft) this.setState({ numDraft: null }); fn(e); }; }
+  shrinkImage(f, maxW, q) {
+    maxW = maxW || 1200; q = q || 0.82;
+    return new Promise((resolve, reject) => {
+      let url = null;
+      try { url = URL.createObjectURL(f); } catch (e) { reject(e); return; }
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const k = Math.min(1, maxW / Math.max(img.naturalWidth || 1, img.naturalHeight || 1));
+          const w = Math.max(1, Math.round(img.naturalWidth * k)), h = Math.max(1, Math.round(img.naturalHeight * k));
+          const c = document.createElement('canvas'); c.width = w; c.height = h;
+          const cx = c.getContext('2d'); cx.fillStyle = '#FFFFFF'; cx.fillRect(0, 0, w, h); cx.drawImage(img, 0, 0, w, h);
+          const out = c.toDataURL('image/jpeg', q);
+          URL.revokeObjectURL(url); resolve(out);
+        } catch (e) { URL.revokeObjectURL(url); reject(e); }
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Could not read that picture.')); };
+      img.src = url;
+    });
+  }
   goalSess(g, d) {
     const hb = g && g.habitId ? (this.state.habits || []).find(h => h.id === g.habitId) : null;
     if (!hb) return 0;
@@ -8968,15 +8988,20 @@ class Component extends DCLogic {
         iOnPhoto: (e) => {
           const f = e.target.files && e.target.files[0];
           if (!f) return;
-          const r = new FileReader();
-          r.onload = () => upd({ photo: r.result });
-          r.readAsDataURL(f);
           try { e.target.value = ''; } catch (err) {}
+          this.shrinkImage(f, 1200, 0.82).then(d => upd({ photo: d })).catch(() => this.setError('That picture could not be added. Try a JPEG or PNG.'));
         },
         iOnFile: (e) => {
           const f = e.target.files && e.target.files[0];
           if (!f) return;
           const isText = /^text\//.test(f.type) || /\.(txt|md|csv|json)$/i.test(f.name);
+          const addRec = (rec) => { const cur = this.state.goals.find(x => x.id === g.id) || g; this.setState({ goals: this.state.goals.map(x => x.id === g.id ? Object.assign({}, x, { files: (cur.files || []).concat([rec]) }) : x) }); };
+          if (/^image\//.test(f.type) && !/svg/.test(f.type)) {
+            try { e.target.value = ''; } catch (err) {}
+            this.shrinkImage(f, 1200, 0.82).then(d => addRec({ name: f.name.replace(/\.[^.]+$/, '') + '.jpg', type: 'image/jpeg', data: d })).catch(() => this.setError('That picture could not be added. Try a JPEG or PNG.'));
+            return;
+          }
+          if (f.size > 1024 * 1024) { try { e.target.value = ''; } catch (err) {} this.setError('That file is ' + (Math.round(f.size / 104857.6) / 10) + ' MB. Files here can be up to 1 MB so your planner stays small. For big files, add a link instead.'); return; }
           const r = new FileReader();
           r.onload = () => {
             const rec = isText ? { name: f.name, type: f.type || 'text/plain', text: String(r.result) } : { name: f.name, type: f.type || '', data: String(r.result) };
