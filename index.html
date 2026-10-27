@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 26, 3:47 PM';</script>
+<script>window.__plannerBuild = 'Oct 26, 7:50 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -626,20 +626,37 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{gb.open}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 2px 10px 2px">
 <span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{gb.sumLine}}</span>
+<sc-if value="{{gb.hasPace}}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: center; gap: 8px; font-size: calc(12px * {{fsK}}); color: #4A443B"><span style="flex: 1; min-width: 0">{{gb.paceTxt}}</span><button onClick="{{gb.paceUse}}" style="flex: none; border: 0; background: transparent; padding: 2px 0; font: inherit; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; text-decoration: underline">Use it</button></div></sc-if>
 <sc-if value="{{gb.hasItems}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column">
 <sc-for list="{{gb.blocks}}" as="bk" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column">
 <div style="display: flex; align-items: center; gap: 8px; min-height: calc(32px * {{rowK}})">
 <sc-if value="{{bk.canDone}}" hint-placeholder-val="{{ true }}"><button role="checkbox" aria-checked="{{bk.done}}" onClick="{{bk.toggle}}" aria-label="Done" style="width: 20px; height: 20px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 10px; background: {{bk.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button></sc-if>
 <span style="flex: none; min-width: 58px; font-size: calc(13px * {{fsK}}); color: {{bk.fg}}; text-decoration: {{bk.strike}}">{{bk.timeTxt}}</span>
-<sc-if value="{{bk.isDone}}" hint-placeholder-val="{{ false }}"><span style="flex: 0 1 auto; min-width: 0; font-size: calc(13px * {{fsK}}); color: #8A8174; text-decoration: line-through">{{bk.lenTxt}}</span></sc-if>
-<sc-if value="{{bk.notDone}}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{bk.isDone}}" hint-placeholder-val="{{ false }}"><button onClick="{{bk.openEdit}}" title="Change what you did" aria-label="{{bk.editAria}}" style="flex: 0 1 auto; min-width: 0; border: 0; background: transparent; padding: 2px 0; font: inherit; font-size: calc(13px * {{fsK}}); color: #6B6358; text-align: left; display: flex; align-items: center; gap: 5px"><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{bk.lenTxt}}</span><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="{{TK.tA0526A}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M4 20h4L19 9l-4-4L4 16v4z"></path></svg></button></sc-if>
+<sc-if value="{{bk.showSel}}" hint-placeholder-val="{{ true }}">
 <label for="{{bk.lenSelId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">How long</label>
 <select id="{{bk.lenSelId}}" value="{{bk.lenVal}}" onChange="{{bk.onLen}}" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 4px; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722; flex: 0 1 auto; min-width: 0"><sc-for list="{{bk.lenOpts}}" as="blo" hint-placeholder-count="8"><option value="{{blo.v}}">{{blo.l}}</option></sc-for></select>
 </sc-if>
 <sc-if value="{{bk.rep}}" hint-placeholder-val="{{ false }}"><span title="Repeats" aria-label="Repeats" style="flex: none; color: {{TK.tA0526A}}; display: flex"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"></path></svg></span></sc-if>
 <span style="flex: 1"></span>
 <button onClick="{{bk.remove}}" aria-label="Remove this block" title="Remove this block" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<sc-if value="{{bk.editing}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; background: {{TK.tF6EDEF}}; border-radius: 9px; padding: 6px 8px; margin: 0 0 6px 28px">
+<label for="ge-m-{{bk.id}}" style="font-size: calc(12px * {{fsK}}); color: #4A443B">Time</label>
+<input id="ge-m-{{bk.id}}" type="number" inputmode="numeric" min="1" onFocus="{{selAll}}" value="{{bk.edMins}}" onInput="{{bk.onEdMins}}" onChange="{{bk.onEdMins}}" onKeyDown="{{bk.edKey}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722; width: 56px">
+<span style="font-size: calc(12px * {{fsK}}); color: #4A443B">min</span>
+<sc-if value="{{bk.hasAmt}}" hint-placeholder-val="{{ false }}">
+<label for="ge-a-{{bk.id}}" style="font-size: calc(12px * {{fsK}}); color: #4A443B; margin-left: 2px">{{bk.amtUnit}}</label>
+<input id="ge-a-{{bk.id}}" type="number" inputmode="numeric" min="0" onFocus="{{selAll}}" value="{{bk.edAmt}}" onInput="{{bk.onEdAmt}}" onChange="{{bk.onEdAmt}}" onKeyDown="{{bk.edKey}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722; width: 80px">
+</sc-if>
+<span style="flex: 1"></span>
+<button onClick="{{bk.edCancel}}" aria-label="Cancel" title="Cancel" style="width: 28px; height: 28px; border: 0; background: transparent; color: #6B6358; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<button onClick="{{bk.edSave}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 7px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{bk.edSaveTxt}}</button>
+</div>
+</sc-if>
 </div>
 </sc-for>
 <sc-if value="{{gb.hasLogged}}" hint-placeholder-val="{{ false }}">
@@ -1679,11 +1696,21 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 <button onClick="{{missDone}}" style="height: 44px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">{{missDoneLabel}}</button>
 <sc-if value="{{missCanLen}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
-<label for="miss-len" style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">I did</label>
-<select id="miss-len" value="{{missLenVal}}" onChange="{{missOnLen}}" style="outline-color: {{TK.tA0526A}}; height: 34px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722"><sc-for list="{{missLenOpts}}" as="ml" hint-placeholder-count="8"><option value="{{ml.v}}">{{ml.l}}</option></sc-for></select>
-<span style="flex: 1; min-width: 60px; font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{missLenNote}}</span>
-<button onClick="{{missLenSave}}" style="height: 34px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13px * {{fsK}}); font-weight: 700">Save</button>
+<div style="display: flex; flex-direction: column; gap: 8px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
+<span style="font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: #2B2722">What did you actually do?</span>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<span style="display: flex; align-items: center; gap: 6px; white-space: nowrap"><label for="miss-min" style="font-size: calc(12.5px * {{fsK}}); color: #4A443B">Time</label>
+<input id="miss-min" type="number" onFocus="{{selAll}}" inputmode="numeric" min="1" value="{{missLenVal}}" onChange="{{missOnLen}}" onInput="{{missOnLen}}" style="outline-color: {{TK.tA0526A}}; height: 34px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; width: 64px">
+<span style="font-size: calc(12.5px * {{fsK}}); color: #4A443B">min</span></span>
+<sc-if value="{{missHasAmt}}" hint-placeholder-val="{{ false }}">
+<span style="display: flex; align-items: center; gap: 6px; white-space: nowrap"><label for="miss-amt" style="font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{missAmtUnit}}</label>
+<input id="miss-amt" type="number" onFocus="{{selAll}}" inputmode="numeric" min="0" value="{{missAmtVal}}" onChange="{{missOnAmt}}" onInput="{{missOnAmt}}" style="outline-color: {{TK.tA0526A}}; height: 34px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; width: 92px"></span>
+</sc-if>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: #7A7064">{{missLenNote}}</span>
+<button onClick="{{missLenSave}}" style="height: 34px; padding: 0 14px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13px * {{fsK}}); font-weight: 700">Save</button>
+</div>
 </div>
 </sc-if>
 <button onClick="{{missNewTime}}" style="height: 44px; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 10px; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(14px * {{fsK}}); font-weight: 700">Find a new time</button>
@@ -6048,6 +6075,19 @@ class Component extends DCLogic {
   instance(id) { return this.dayItems(this.state.day).find(b => b.id === id); }
   nv(id, real) { const d = this.state.numDraft; return d && d.id === id ? d.v : real; }
   nb(fn) { return (e) => { if (this.state.numDraft) this.setState({ numDraft: null }); fn(e); }; }
+  habitPer(hb) {
+    if (!hb) return 1;
+    const g = (this.state.goals || []).find(x => x.habitId === hb.id);
+    const unit = (g && g.unit) || hb.unit || 'minutes';
+    if (/^min/i.test(unit)) return 1;
+    if (/^steps?$/i.test(unit) && (hb.perMin || 1) <= 1) return 100;
+    return hb.perMin || 1;
+  }
+  blockVal(b, hb) {
+    if (b.done && typeof b.amount === 'number') return b.amount;
+    const m = b.done && typeof b.actualMins === 'number' ? b.actualMins : b.mins;
+    return m * this.habitPer(hb);
+  }
   placed() { return this.state.placedByDay[String(this.state.day)] || []; }
   topUpRepeats(habits, map) {
     const out = Object.assign({}, map || {}); let changed = false; const t0 = this.todayAbs();
@@ -7377,8 +7417,8 @@ class Component extends DCLogic {
     const onDayHabit = (h) => (s.goals || []).some(g => g.kind === 'build' && g.habitId === h.id && g.status === 'active' && g.onDay);
     const habitRows = s.habits.filter(onDayHabit).map(h => {
       const blocks = placed.filter(b => b.habitId === h.id);
-      const planVal = blocks.reduce((a, b) => a + b.mins, 0) * h.perMin;
-      const doneVal = blocks.filter(b => b.done).reduce((a, b) => a + b.mins, 0) * h.perMin;
+      const planVal = blocks.reduce((a, b) => a + this.blockVal(b, h), 0);
+      const doneVal = blocks.filter(b => b.done).reduce((a, b) => a + this.blockVal(b, h), 0);
       const isSel = !!(sel && sel.kind === 'habit' && sel.id === h.id);
       const kf = (v) => v >= 1000 ? (Math.round(v / 100) / 10) + 'k' : String(v);
       const C = 2 * Math.PI * 8.5;
@@ -7592,11 +7632,12 @@ class Component extends DCLogic {
         });
       };
       if (s.missFor === b.id && !b.fixed) {
-        const lenNow = s.missLen && s.missLen.id === b.id ? s.missLen.mins : b.mins;
+
         const hbB = b.habitId ? s.habits.find(x => x.id === b.habitId) : null;
         const gB = hbB ? (s.goals || []).find(g => g.habitId === hbB.id) : null;
         const unitB = gB ? (gB.unit || hbB.unit || '') : (hbB ? hbB.unit || '' : '');
-        const perB = hbB && !/^min/i.test(unitB || 'minutes') ? (/^steps?$/i.test(unitB) && (hbB.perMin || 1) <= 1 ? 100 : (hbB.perMin || 1)) : 0;
+        const perB = hbB && !/^min/i.test(unitB || 'minutes') ? this.habitPer(hbB) : 0;
+        const draftL = s.missLen && s.missLen.id === b.id ? s.missLen : { id: b.id, mins: String(typeof b.actualMins === 'number' ? b.actualMins : b.mins), amt: String(typeof b.amount === 'number' ? b.amount : Math.round(b.mins * perB)) };
         miss = {
           top: Math.max(0, Math.min(top + Math.min(h, 40), tlH - 290)),
           title: title0,
@@ -7607,15 +7648,18 @@ class Component extends DCLogic {
           canEdit: !!b.taskId,
           edit: editDetails,
           canLen: !b.seriesId && !String(b.id).startsWith('S:'),
-          lenVal: String(lenNow),
-          lenOpts: (() => { const o = []; for (let m = 5; m <= Math.max(b.mins + 60, 60); m += 5) o.push({ v: String(m), l: this.fmtDur(m) + (perB ? ' ≈ ' + Math.round(m * perB).toLocaleString('en-US') + ' ' + unitB : '') }); if (o.every(x => +x.v !== lenNow)) o.push({ v: String(lenNow), l: this.fmtDur(lenNow) }); return o.sort((x, y) => +x.v - +y.v); })(),
-          lenNote: lenNow === b.mins ? 'Planned ' + this.fmtDur(b.mins) : 'Planned ' + this.fmtDur(b.mins) + ', marks it done',
-          onLen: (e) => this.setState({ missLen: { id: b.id, mins: parseInt(e.target.value, 10) || b.mins } }),
+          lenVal: String(draftL.mins), hasAmt: !!perB, amtVal: String(draftL.amt), amtUnit: unitB ? unitB.charAt(0).toUpperCase() + unitB.slice(1) : '',
+          lenNote: 'Planned ' + this.fmtDur(b.mins) + (perB ? ' ≈ ' + Math.round(b.mins * perB).toLocaleString('en-US') + ' ' + unitB : '') + '. Saving marks it done.',
+          onLen: (e) => this.setState({ missLen: Object.assign({}, draftL, { id: b.id, mins: e.target.value }) }),
+          onAmt: (e) => this.setState({ missLen: Object.assign({}, draftL, { id: b.id, amt: e.target.value }) }),
           lenSave: () => {
-            const m = lenNow;
+            const d0 = this.state.missLen && this.state.missLen.id === b.id ? this.state.missLen : draftL;
+            const m = Math.max(1, Math.round(parseFloat(String(d0.mins).replace(/,/g, '')) || b.mins));
+            const amt = perB ? Math.max(0, Math.round(parseFloat(String(d0.amt).replace(/,/g, '')) || 0)) : null;
+            const patch = { mins: m, actualMins: m, done: true }; if (perB) patch.amount = amt;
             if (b.taskId) { this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { mins: m }) : x), { missFor: null, missLen: null }); const t = this.state.tasks.find(x => x.id === b.taskId); if (t && !t.done) setTimeout(() => this.setTaskDone(t.id, true, this.state.day), 0); }
-            else this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { mins: m, done: true }) : x), { missFor: null, missLen: null });
-            this.setToast('Logged ' + this.fmtDur(m) + (perB ? ' (about ' + Math.round(m * perB).toLocaleString('en-US') + ' ' + unitB + ')' : '') + '. Every bit counts.');
+            else this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, patch) : x), { missFor: null, missLen: null });
+            this.setToast('Logged ' + this.fmtDur(m) + (perB ? ' and ' + amt.toLocaleString('en-US') + ' ' + unitB : '') + '. Nice.');
           },
           done: () => { this.toggleBlockDone(b); this.setState({ missFor: null }); },
           newTime: () => {
@@ -7757,8 +7801,8 @@ class Component extends DCLogic {
     // ----- meters -----
     const walkHabit = s.habits.find(h => h.unit === 'steps');
     const walkBlocks = walkHabit ? placed.filter(b => b.habitId === walkHabit.id) : [];
-    const stepsPlan = walkHabit ? walkBlocks.reduce((a, b) => a + b.mins * walkHabit.perMin, 0) : 0;
-    const stepsDone = walkHabit ? walkBlocks.filter(b => b.done).reduce((a, b) => a + b.mins * walkHabit.perMin, 0) : 0;
+    const stepsPlan = walkHabit ? walkBlocks.reduce((a, b) => a + this.blockVal(b, walkHabit), 0) : 0;
+    const stepsDone = walkHabit ? walkBlocks.filter(b => b.done).reduce((a, b) => a + this.blockVal(b, walkHabit), 0) : 0;
     const goal = walkHabit ? walkHabit.goal : 20000;
     const need = Math.max(0, goal - stepsPlan);
     const needMins = walkHabit ? Math.ceil(need / walkHabit.perMin / 5) * 5 : 0;
@@ -8230,8 +8274,8 @@ class Component extends DCLogic {
       });
       const hb = s.habits.find(h => h.unit === 'steps');
       const hBlocks = hb ? this.dayItems(off).filter(b => b.habitId === hb.id) : [];
-      const hPlanV = hb ? hBlocks.reduce((a, b) => a + b.mins, 0) * hb.perMin : 0;
-      const hDoneV = hb ? hBlocks.filter(b => b.done).reduce((a, b) => a + b.mins, 0) * hb.perMin : 0;
+      const hPlanV = hb ? hBlocks.reduce((a, b) => a + this.blockVal(b, hb), 0) : 0;
+      const hDoneV = hb ? hBlocks.filter(b => b.done).reduce((a, b) => a + this.blockVal(b, hb), 0) : 0;
       const kfmt = (v) => v >= 1000 ? (Math.round(v / 100) / 10) + 'k' : String(v);
       const hDoneP = hb ? Math.min(100, Math.round(hDoneV / hb.goal * 100)) : 0;
       const nowW = off === 0 ? this.nowFor(0) : null;
@@ -8468,8 +8512,8 @@ class Component extends DCLogic {
         const hb = s.habits.find(h => h.id === g.habitId);
         if (hb) {
           const blocks = this.dayItems(0).filter(b => b.habitId === hb.id);
-          const dv = blocks.filter(b => b.done).reduce((a, b) => a + b.mins, 0) * hb.perMin;
-          const pv = blocks.reduce((a, b) => a + b.mins, 0) * hb.perMin;
+          const dv = blocks.filter(b => b.done).reduce((a, b) => a + this.blockVal(b, hb), 0);
+          const pv = blocks.reduce((a, b) => a + this.blockVal(b, hb), 0);
           habitTitle = hb.title;
           habitPct = Math.min(100, Math.round(dv / hb.goal * 100));
           habitText = 'Today: ' + dv.toLocaleString('en-US') + ' of ' + hb.goal.toLocaleString('en-US') + ' ' + hb.unit + ' done, ' + pv.toLocaleString('en-US') + ' planned.';
@@ -8621,7 +8665,7 @@ class Component extends DCLogic {
     const buildVal = (g, d) => {
       let v = g.logs && typeof g.logs[d] === 'number' ? g.logs[d] : 0;
       const hb = g.habitId ? s.habits.find(h => h.id === g.habitId) : null;
-      if (d === 0 && hb) v += this.dayItems(0).filter(b => b.habitId === hb.id && b.done).reduce((a, b) => a + b.mins, 0) * hb.perMin;
+      if (hb) v += this.dayItems(d).filter(b => b.habitId === hb.id && b.done).reduce((a, b) => a + this.blockVal(b, hb), 0);
       return v;
     };
     const buildStats = (g) => {
@@ -8751,7 +8795,7 @@ class Component extends DCLogic {
         const hr = habitRows.find(x => hb && x.title === hb.title) || null;
         const today = buildVal(g, 0);
         const tgt = g.daily || 1;
-        const planV = hb ? placed.filter(b => b.habitId === hb.id).reduce((a, b) => a + b.mins, 0) * hb.perMin + (g.logs && g.logs[0] || 0) : today;
+        const planV = hb ? placed.filter(b => b.habitId === hb.id).reduce((a, b) => a + this.blockVal(b, hb), 0) + (g.logs && g.logs[0] || 0) : today;
         const frac = Math.min(1, today / tgt), pfrac = Math.min(1, planV / tgt);
         const name = hb ? hb.title : g.title;
         const addQ = (q) => { const lg = Object.assign({}, g.logs || {}); lg[0] = (lg[0] || 0) + q; this.setState({ goals: this.state.goals.map(x => x.id === g.id ? Object.assign({}, x, { logs: lg }) : x) }); };
@@ -10374,12 +10418,15 @@ class Component extends DCLogic {
       const dowsText = (dw) => { const a = (dw || []).slice().sort(); if (a.length === 7) return 'every day'; if (a.join() === '1,2,3,4,5') return 'weekdays'; if (a.join() === '0,6') return 'weekends'; return a.map(x => this.DSHORT[x]).join(', '); };
       const growBuild = (s.goals || []).filter(g => g.kind === 'build' && g.status === 'active' && g.habitId).map(g => {
         const hb = s.habits.find(h => h.id === g.habitId); if (!hb) return null;
-        const per = /^min/i.test(g.unit || 'minutes') ? 1 : (/^steps?$/i.test(g.unit || '') && (hb.perMin || 1) <= 1 ? 100 : (hb.perMin || 1));
+        const per = this.habitPer(hb);
+        const paceS = []; for (let dd = D; dd > D - 14; dd--) this.dayItems(dd).forEach(b => { if (b.habitId === hb.id && b.done && typeof b.amount === 'number' && b.actualMins > 0 && b.amount > 0) paceS.push(b); });
+        const paceAvg = paceS.length >= 3 ? Math.round(paceS.reduce((a, b) => a + b.amount, 0) / paceS.reduce((a, b) => a + b.actualMins, 0)) : 0;
+        const hasPace = per !== 1 && paceAvg > 0 && Math.abs(paceAvg - per) / per > 0.1;
         const unit = g.unit || 'minutes', tgt = g.daily || 1;
         const blocks = items.filter(b => b.habitId === hb.id).sort((a, b) => a.start - b.start);
-        const planned = blocks.reduce((a, b) => a + b.mins, 0) * per;
+        const planned = blocks.reduce((a, b) => a + this.blockVal(b, hb), 0);
         const logged = g.logs && typeof g.logs[D] === 'number' ? g.logs[D] : 0;
-        const done = blocks.filter(b => b.done).reduce((a, b) => a + b.mins, 0) * per + logged;
+        const done = blocks.filter(b => b.done).reduce((a, b) => a + this.blockVal(b, hb), 0) + logged;
         const showPer = per !== 1;
         const left = Math.max(0, tgt - planned - logged);
         const needMin = left > 0 ? Math.ceil(left / per / 5) * 5 : 0;
@@ -10394,14 +10441,28 @@ class Component extends DCLogic {
           hint: needMin ? 'Plan about ' + this.fmtDur(needMin) + ' more to reach ' + fmtN(tgt) + '.' : (planned ? 'Enough planned to reach your goal.' : ''),
           hasHint: !!needMin || !!planned,
           blocks: blocks.map(b => ({ label: this.fmtTime(b.start, false) + ' · ' + this.fmtDur(b.mins) + (showPer ? ' ≈ ' + fmtN(b.mins * per) + ' ' + unit : ''), rep: !!b.rep, done: b.done ? 'true' : 'false',
-            timeTxt: this.fmtTime(b.start, false), lenSelId: 'gbl-' + b.id, lenVal: String(b.mins),
-            isDone: !!b.done, notDone: !b.done, fg: b.done ? '#8A8174' : '#2B2722', lenTxt: this.fmtDur(b.mins) + (showPer ? ' ≈ ' + fmtN(b.mins * per) + ' ' + unit : ''),
+            timeTxt: this.fmtTime(b.start, false), lenSelId: 'gbl-' + b.id, lenVal: String(b.mins), id: b.id,
+            isDone: !!b.done, notDone: !b.done, showSel: !b.done && !(s.growEdit && s.growEdit.id === b.id), fg: b.done ? '#8A8174' : '#2B2722',
+            lenTxt: this.fmtDur(typeof b.actualMins === 'number' ? b.actualMins : b.mins) + (showPer ? ' · ' + fmtN(this.blockVal(b, hb)) + ' ' + unit : ''),
+            editAria: 'Change what you did at ' + this.fmtTime(b.start, false),
+            editing: !!(s.growEdit && s.growEdit.id === b.id),
+            hasAmt: showPer, amtUnit: unit.charAt(0).toUpperCase() + unit.slice(1),
+            edMins: s.growEdit && s.growEdit.id === b.id ? String(s.growEdit.mins) : '', edAmt: s.growEdit && s.growEdit.id === b.id ? String(s.growEdit.amt) : '',
+            edSaveTxt: b.done ? 'Save' : 'Done',
+            openEdit: () => this.setState({ growEdit: { id: b.id, mins: String(typeof b.actualMins === 'number' ? b.actualMins : b.mins), amt: String(typeof b.amount === 'number' ? b.amount : Math.round(b.mins * per)) } }),
+            onEdMins: (e) => this.setState({ growEdit: Object.assign({}, this.state.growEdit, { mins: e.target.value }) }),
+            onEdAmt: (e) => this.setState({ growEdit: Object.assign({}, this.state.growEdit, { amt: e.target.value }) }),
+            edCancel: () => this.setState({ growEdit: null }),
+            edSave: () => { const ed = this.state.growEdit || {}; const m = Math.max(1, Math.round(parseFloat(String(ed.mins).replace(/,/g, '')) || b.mins)); const patch = { done: true, actualMins: m, mins: m }; if (showPer) patch.amount = Math.max(0, Math.round(parseFloat(String(ed.amt).replace(/,/g, '')) || 0)); this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, patch) : x), { growEdit: null }); },
+            edKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); e.target.blur(); setTimeout(() => { const btn = e.target.closest('div') && e.target.closest('div').querySelector('button:last-of-type'); if (btn) btn.click(); }, 0); } else if (e.key === 'Escape') this.setState({ growEdit: null }); },
             lenOpts: (() => { const o = []; for (let m = 5; m <= Math.max(b.mins + 60, 120); m += 5) o.push({ v: String(m), l: this.fmtDur(m) + (showPer ? ' ≈ ' + fmtN(m * per) : '') }); if (o.every(x => +x.v !== b.mins)) o.push({ v: String(b.mins), l: this.fmtDur(b.mins) }); return o.sort((x, y) => +x.v - +y.v); })(),
             onLen: (e) => { const v = parseInt(e.target.value, 10) || b.mins; this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { mins: v }) : x)); },
             boxBg: b.done ? this.TK.t6E2F43 : '#FFFFFF', strike: b.done ? 'line-through' : 'none', canDone: D <= 0,
-            toggle: () => this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { done: !x.done }) : x)),
+            toggle: () => { if (b.done) { this.setPlaced(this.placed().map(x => { if (x.id !== b.id) return x; const y = Object.assign({}, x, { done: false }); delete y.amount; delete y.actualMins; return y; }), { growEdit: null }); } else this.setState({ growEdit: { id: b.id, mins: String(b.mins), amt: String(Math.round(b.mins * per)) } }); },
             remove: () => this.unschedule(b.id) })),
           hasBlocks: blocks.length > 0, noBlocks: !blocks.length,
+          hasPace: hasPace, paceTxt: hasPace ? 'Your ' + ((t) => /s$/.test(t) ? t : t + 's')((hb.title || 'session').toLowerCase()) + ' average about ' + fmtN(paceAvg) + ' ' + unit + ' a minute (planner uses ' + fmtN(per) + ').' : '',
+          paceUse: () => { this.setState({ habits: this.state.habits.map(h => h.id === hb.id ? Object.assign({}, h, { perMin: paceAvg }) : h) }); this.setToast('Now planning with ' + fmtN(paceAvg) + ' ' + unit + ' a minute.'); },
           lenId: 'grl-' + g.id, lenVal: String(hb.chunk || 30),
           lenOpts: [15, 20, 30, 45, 60, 90, 120].concat([15, 20, 30, 45, 60, 90, 120].indexOf(hb.chunk) < 0 && hb.chunk ? [hb.chunk] : []).sort((a, b) => a - b).map(m => ({ v: String(m), l: this.fmtDur(m) + (showPer ? ' ≈ ' + fmtN(m * per) : '') })),
           onLen: (e) => { const v = parseInt(e.target.value, 10) || 30; this.setState({ habits: this.state.habits.map(h => h.id === hb.id ? Object.assign({}, h, { chunk: v }) : h) }); },
@@ -11000,7 +11061,8 @@ class Component extends DCLogic {
       missCanEdit: miss ? miss.canEdit : false,
       missEdit: miss ? miss.edit : () => {},
       missNewTime: miss ? miss.newTime : () => {},
-      missCanLen: miss ? miss.canLen : false, missLenVal: miss ? miss.lenVal : '', missLenOpts: miss ? miss.lenOpts : [], missLenNote: miss ? miss.lenNote : '',
+      missCanLen: miss ? miss.canLen : false, missLenVal: miss ? miss.lenVal : '', missLenNote: miss ? miss.lenNote : '',
+      missHasAmt: miss ? miss.hasAmt : false, missAmtVal: miss ? miss.amtVal : '', missAmtUnit: miss ? miss.amtUnit : '', missOnAmt: miss ? miss.onAmt : () => {},
       missOnLen: miss ? miss.onLen : () => {}, missLenSave: miss ? miss.lenSave : () => {},
       missNotToday: miss ? miss.notToday : () => {},
       closeMiss: () => this.setState({ missFor: null }),
