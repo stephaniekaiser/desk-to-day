@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 26, 7:50 PM';</script>
+<script>window.__plannerBuild = 'Oct 26, 8:03 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -662,8 +662,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{gb.hasLogged}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; align-items: center; gap: 8px; min-height: calc(32px * {{rowK}})">
 <span aria-hidden="true" style="width: 20px; flex: none; display: flex; justify-content: center; color: {{TK.t6E2F43}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"></path></svg></span>
-<span style="flex: 1; min-width: 0; font-size: calc(13px * {{fsK}}); color: #2B2722">Logged by hand · {{gb.loggedTxt}}</span>
-<button onClick="{{gb.logClear}}" aria-label="Remove what you logged by hand" title="Remove what you logged by hand" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(13px * {{fsK}}); color: #2B2722">{{gb.handTxt}}</span><sc-if value="{{gb.totLow}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(11.5px * {{fsK}}); color: #6B6358">{{gb.totLowTxt}}</span></sc-if></span>
+<button onClick="{{gb.logClear}}" aria-label="Clear this" title="Clear this" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </div>
 </sc-if>
 </div>
@@ -671,7 +671,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{gb.noPanel}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; align-items: center; gap: 8px; padding-top: 4px">
 <button onClick="{{gb.openPlan}}" style="height: 28px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 10px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>{{gb.planLabel}}</button>
-<sc-if value="{{gb.canLog}}" hint-placeholder-val="{{ true }}"><button onClick="{{gb.openLog}}" style="height: 28px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 10px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Log {{gb.unitWord}}</button></sc-if>
+<sc-if value="{{gb.canLog}}" hint-placeholder-val="{{ true }}"><button onClick="{{gb.openLog}}" style="height: 28px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 10px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; display: inline-flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Log {{gb.unitWord}}</button><button onClick="{{gb.openTot}}" style="height: 28px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 10px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Enter total</button></sc-if>
 </div>
 </sc-if>
 <sc-if value="{{gb.panelPlan}}" hint-placeholder-val="{{ false }}">
@@ -691,6 +691,18 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button onClick="{{gb.logAdd}}" style="height: 28px; flex: none; padding: 0 12px; border: 0; border-radius: 7px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Add</button>
 <span style="flex: 1"></span>
 <button onClick="{{gb.closePanel}}" aria-label="Close" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #6B6358; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-if>
+<sc-if value="{{gb.panelTot}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px; background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 6px 8px; margin-top: 4px">
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<label for="{{gb.totId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">{{gb.totLabel}}</label>
+<input id="{{gb.totId}}" type="number" onFocus="{{selAll}}" inputmode="numeric" min="0" value="{{gb.totDraft}}" onChange="{{gb.onTotDraft}}" onInput="{{gb.onTotDraft}}" onKeyDown="{{gb.totKey}}" placeholder="e.g. 12400" style="outline-color: {{TK.tA0526A}}; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; font: inherit; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #2B2722; width: 104px; padding: 0 8px">
+<button onClick="{{gb.totSave}}" style="height: 28px; flex: none; padding: 0 12px; border: 0; border-radius: 7px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Save</button>
+<span style="flex: 1"></span>
+<button onClick="{{gb.closePanel}}" aria-label="Close" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #6B6358; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<span style="font-size: calc(11.5px * {{fsK}}); color: #6B6358">From your phone or watch. Your done sessions are taken out, and the rest counts as extra.</span>
 </div>
 </sc-if>
 </div>
@@ -5412,7 +5424,7 @@ class Component extends DCLogic {
     const done = s.tasks.filter(t => t.done && inR(t.doneDay));
     const study = done.filter(t => t.courseId).reduce((a, t) => a + (t.mins || 0), 0);
     let logged = 0;
-    (s.goals || []).forEach(g => { if (g.logs && Object.keys(g.logs).some(k => inR(+k))) logged++; });
+    (s.goals || []).forEach(g => { if ((g.logs && Object.keys(g.logs).some(k => inR(+k))) || (g.totals && Object.keys(g.totals).some(k => inR(+k)))) logged++; });
     const out = [];
     if (done.length) out.push(done.length + (done.length === 1 ? ' task done' : ' tasks done'));
     if (study) out.push(this.fmtDur(study) + ' studied');
@@ -5654,7 +5666,7 @@ class Component extends DCLogic {
     if (d.bandView) out.bandView = keys(d.bandView, x => { const i = x.lastIndexOf(':'); const v = +x.slice(i + 1); return i < 0 || isNaN(v) ? x : x.slice(0, i + 1) + (v - k); });
     if (d.series) out.series = d.series.map(x => Object.assign(fix(x, ['anchor', 'until']), { exceptions: keys(x.exceptions) }));
     if (d.commitments) out.commitments = d.commitments.map(c => Object.assign({}, c, { skips: (c.skips || []).map(n), over: keys(c.over) }));
-    if (d.goals) out.goals = d.goals.map(g => { const r = fix(g, ['target', 'startDay']); if (g.logs) r.logs = keys(g.logs); if (g.entries) r.entries = g.entries.map(e => Object.assign({}, e, { d: n(e.d) })); return r; });
+    if (d.goals) out.goals = d.goals.map(g => { const r = fix(g, ['target', 'startDay']); if (g.logs) r.logs = keys(g.logs); if (g.totals) r.totals = keys(g.totals); if (g.entries) r.entries = g.entries.map(e => Object.assign({}, e, { d: n(e.d) })); return r; });
     if (d.notes) out.notes = d.notes.map(x => fix(x, ['day']));
     if (d.allDay) out.allDay = d.allDay.map(a => fix(a, ['start', 'end']));
     if (d.courses) out.courses = d.courses.map(c => { const c2 = fix(c, ['finish', 'planStart']); if (Array.isArray(c2.assignments)) c2.assignments = c2.assignments.map(a => fix(a, ['due'])); return c2; });
@@ -6075,6 +6087,31 @@ class Component extends DCLogic {
   instance(id) { return this.dayItems(this.state.day).find(b => b.id === id); }
   nv(id, real) { const d = this.state.numDraft; return d && d.id === id ? d.v : real; }
   nb(fn) { return (e) => { if (this.state.numDraft) this.setState({ numDraft: null }); fn(e); }; }
+  goalSess(g, d) {
+    const hb = g && g.habitId ? (this.state.habits || []).find(h => h.id === g.habitId) : null;
+    if (!hb) return 0;
+    return this.dayItems(d).filter(b => b.habitId === hb.id && b.done).reduce((a, b) => a + this.blockVal(b, hb), 0);
+  }
+  goalHasTotal(g, d) { return !!(g && g.totals && typeof g.totals[d] === 'number'); }
+  goalHand(g, d) {
+    if (this.goalHasTotal(g, d)) return Math.max(0, g.totals[d] - this.goalSess(g, d));
+    return g && g.logs && typeof g.logs[d] === 'number' ? g.logs[d] : 0;
+  }
+  goalAddHand(g, d, q) {
+    this.setState({ goals: this.state.goals.map(x => {
+      if (x.id !== g.id) return x;
+      if (this.goalHasTotal(x, d)) { const t = Object.assign({}, x.totals); t[d] = Math.max(0, t[d] + q); return Object.assign({}, x, { totals: t }); }
+      const lg = Object.assign({}, x.logs || {}); lg[d] = Math.max(0, (lg[d] || 0) + q); return Object.assign({}, x, { logs: lg });
+    }) });
+  }
+  goalSetTotal(g, d, v) {
+    this.setState({ goals: this.state.goals.map(x => {
+      if (x.id !== g.id) return x;
+      const t = Object.assign({}, x.totals || {}), lg = Object.assign({}, x.logs || {});
+      if (v === null) delete t[d]; else { t[d] = Math.max(0, v); delete lg[d]; }
+      return Object.assign({}, x, { totals: t, logs: lg });
+    }) });
+  }
   habitPer(hb) {
     if (!hb) return 1;
     const g = (this.state.goals || []).find(x => x.habitId === hb.id);
@@ -8663,10 +8700,7 @@ class Component extends DCLogic {
     const kindOf = (g) => g.kind || 'reach';
     const colOf = (g) => ({ swatch: this.TK.tA0526A, a: this.TK.tFBEDEE });
     const buildVal = (g, d) => {
-      let v = g.logs && typeof g.logs[d] === 'number' ? g.logs[d] : 0;
-      const hb = g.habitId ? s.habits.find(h => h.id === g.habitId) : null;
-      if (hb) v += this.dayItems(d).filter(b => b.habitId === hb.id && b.done).reduce((a, b) => a + this.blockVal(b, hb), 0);
-      return v;
+      return this.goalHand(g, d) + this.goalSess(g, d);
     };
     const buildStats = (g) => {
       const tgt = g.daily || 1, mn = Math.max(1, g.minimum || 1);
@@ -8795,10 +8829,10 @@ class Component extends DCLogic {
         const hr = habitRows.find(x => hb && x.title === hb.title) || null;
         const today = buildVal(g, 0);
         const tgt = g.daily || 1;
-        const planV = hb ? placed.filter(b => b.habitId === hb.id).reduce((a, b) => a + this.blockVal(b, hb), 0) + (g.logs && g.logs[0] || 0) : today;
+        const planV = hb ? placed.filter(b => b.habitId === hb.id).reduce((a, b) => a + this.blockVal(b, hb), 0) + this.goalHand(g, 0) : today;
         const frac = Math.min(1, today / tgt), pfrac = Math.min(1, planV / tgt);
         const name = hb ? hb.title : g.title;
-        const addQ = (q) => { const lg = Object.assign({}, g.logs || {}); lg[0] = (lg[0] || 0) + q; this.setState({ goals: this.state.goals.map(x => x.id === g.id ? Object.assign({}, x, { logs: lg }) : x) }); };
+        const addQ = (q) => this.goalAddHand(g, 0, q);
         return {
           ring: { name: name, sub: kShort(today) + ' / ' + kShort(tgt), center: frac >= 1 ? '✓' : '', color: this.TK.tA0526A,
             dash: (Math.max(0.001, frac) * RC).toFixed(1) + ' ' + RC.toFixed(1), planDash: (pfrac * RC).toFixed(1) + ' ' + RC.toFixed(1),
@@ -8996,7 +9030,7 @@ class Component extends DCLogic {
           iBars: b.days.map((x, i) => ({ x: i * 20 + 2, tx: i * 20 + 10, y: Y(x.v), h: Math.max(1, 70 - Y(x.v)), fill: x.v >= b.mn ? col.swatch : '#D9CFBC', op: x.v >= b.tgt ? 1 : (x.v >= b.mn ? 0.5 : 0.8), lbl: this.DSHORT[this.dowFor(x.d)].charAt(0) })),
           iChartAria: 'Bar chart of the last 14 days. ' + b.hit + ' days reached ' + kShort(b.tgt) + '.',
           iTodayText: kShort(b.today) + ' of ' + kShort(b.tgt) + ' ' + (g.unit || '') + (b.today >= b.tgt ? '. You did it!' : (b.today >= b.mn ? '. That already counts.' : '')),
-          iQuick: [g.quick || 1, (g.quick || 1) * 5].map(q => ({ label: '+' + kShort(q), add: () => { const lg = Object.assign({}, g.logs || {}); lg[0] = (lg[0] || 0) + q; upd({ logs: lg }); } })),
+          iQuick: [g.quick || 1, (g.quick || 1) * 5].map(q => ({ label: '+' + kShort(q), add: () => this.goalAddHand(g, 0, q) })),
           iFields: [
             num('short', 'Name on your day page', hb ? hb.title : '', (v) => updHabit({ title: v || 'Habit' }), 'text'),
             num('daily', 'Daily goal', g.daily, (v) => { const n = Math.max(1, +v || 1); upd({ daily: n }); updHabit({ goal: n }); }),
@@ -10425,7 +10459,7 @@ class Component extends DCLogic {
         const unit = g.unit || 'minutes', tgt = g.daily || 1;
         const blocks = items.filter(b => b.habitId === hb.id).sort((a, b) => a.start - b.start);
         const planned = blocks.reduce((a, b) => a + this.blockVal(b, hb), 0);
-        const logged = g.logs && typeof g.logs[D] === 'number' ? g.logs[D] : 0;
+        const logged = this.goalHand(g, D), hasTot = this.goalHasTotal(g, D), sessD = this.goalSess(g, D);
         const done = blocks.filter(b => b.done).reduce((a, b) => a + this.blockVal(b, hb), 0) + logged;
         const showPer = per !== 1;
         const left = Math.max(0, tgt - planned - logged);
@@ -10468,24 +10502,31 @@ class Component extends DCLogic {
           onLen: (e) => { const v = parseInt(e.target.value, 10) || 30; this.setState({ habits: this.state.habits.map(h => h.id === hb.id ? Object.assign({}, h, { chunk: v }) : h) }); },
           plan: () => this.setState({ sel: { kind: 'habit', id: hb.id }, editing: null, growPanel: null, mobilePage: narrowG ? 'right' : s.mobilePage }),
           sumLine: (D > 0 ? fmtN(planned + logged) + ' of ' + fmtN(tgt) + ' ' + unit + ' planned' : fmtN(done) + ' of ' + fmtN(tgt) + ' ' + unit + ' done' + (planned + logged > done ? ' · ' + fmtN(planned + logged) + ' planned' : '')) + (needMin ? ' · plan about ' + this.fmtDur(needMin) + ' more' : ''),
-          hasItems: blocks.length > 0 || logged > 0, loggedTxt: fmtN(logged) + ' ' + unit,
+          hasItems: blocks.length > 0 || logged > 0 || hasTot, loggedTxt: fmtN(logged) + ' ' + unit,
           planLabel: 'Plan ' + (/^[aeiou]/i.test(hb.title || 'a') ? 'an ' : 'a ') + String(hb.title || 'session').toLowerCase(),
-          noPanel: !(s.growPanel && s.growPanel.id === g.id), panelPlan: !!(s.growPanel && s.growPanel.id === g.id && s.growPanel.mode === 'plan'), panelLog: !!(s.growPanel && s.growPanel.id === g.id && s.growPanel.mode === 'log'),
+          noPanel: !(s.growPanel && s.growPanel.id === g.id), panelPlan: !!(s.growPanel && s.growPanel.id === g.id && s.growPanel.mode === 'plan'), panelLog: !!(s.growPanel && s.growPanel.id === g.id && s.growPanel.mode === 'log'), panelTot: !!(s.growPanel && s.growPanel.id === g.id && s.growPanel.mode === 'total'),
           openPlan: () => this.setState({ growPanel: { id: g.id, mode: 'plan' } }),
           openLog: () => { this.setState({ growPanel: { id: g.id, mode: 'log' } }); setTimeout(() => { try { const el = document.getElementById('glg-' + g.id); if (el) el.focus(); } catch (e) {} }, 60); },
           closePanel: () => this.setState({ growPanel: null }),
+          openTot: () => { this.setState({ growPanel: { id: g.id, mode: 'total' }, growTotDraft: Object.assign({}, this.state.growTotDraft || {}, { [g.id]: hasTot ? String(g.totals[D]) : '' }) }); setTimeout(() => { try { const el = document.getElementById('gtt-' + g.id); if (el) { el.focus(); el.select(); } } catch (e) {} }, 60); },
+          totId: 'gtt-' + g.id, totLabel: 'Total ' + unit + (D === 0 ? ' today' : ' that day'), totDraft: (s.growTotDraft || {})[g.id] || '',
+          onTotDraft: (e) => { const v = e.target.value; this.setState({ growTotDraft: Object.assign({}, this.state.growTotDraft || {}, { [g.id]: v }) }); },
+          totSave: () => { const v = parseFloat(String(((this.state.growTotDraft || {})[g.id]) || '').replace(/,/g, '')); if (!(v >= 0) || String(((this.state.growTotDraft || {})[g.id]) || '').trim() === '') return; this.goalSetTotal(g, D, Math.round(v)); this.setState({ growPanel: null }); this.setToast('Total set to ' + fmtN(v) + ' ' + unit + '.'); },
+          totKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); const v = parseFloat(String(e.target.value || '').replace(/,/g, '')); if (!(v >= 0) || String(e.target.value).trim() === '') return; this.goalSetTotal(g, D, Math.round(v)); this.setState({ growPanel: null }); this.setToast('Total set to ' + fmtN(v) + ' ' + unit + '.'); } else if (e.key === 'Escape') this.setState({ growPanel: null }); },
+          handTxt: hasTot ? 'Rest of the day · ' + fmtN(logged) + ' (from your total of ' + fmtN(g.totals[D]) + ')' : 'Logged by hand · ' + fmtN(logged),
+          totLow: hasTot && g.totals[D] < sessD, totLowTxt: hasTot ? 'Your total is lower than your ' + ((t) => /s$/.test(t) ? t : t + 's')((hb.title || 'session').toLowerCase()) + ' (' + fmtN(sessD) + '), so those count.' : '',
           open: !!(s.growOpen || {})[g.id], openA: (s.growOpen || {})[g.id] ? 'true' : 'false', chev: (s.growOpen || {})[g.id] ? 'none' : 'rotate(-90deg)',
           toggle: () => this.setState({ growOpen: Object.assign({}, this.state.growOpen || {}, { [g.id]: !(this.state.growOpen || {})[g.id] }) }),
           shortLine: (D > 0 ? fmtN(planned + logged) : fmtN(done)) + ' / ' + fmtN(tgt) + ' ' + unit + (D > 0 ? ' planned' : ''),
           repShort: rp && rp.dows && rp.dows.length ? dowsText(rp.dows) + ' at ' + this.fmtTime(rp.start, false) + ' · ' + this.fmtDur(rp.mins || hb.chunk) : 'Not set',
           repBtn: rp && rp.dows && rp.dows.length ? 'Change' : 'Set up',
           canLog: D <= 0, logLabel: fmtN(logged) + ' ' + unit + ' logged by hand', logMinus: () => setLog(g, logged - (g.quick || 1)), logPlus: () => setLog(g, logged + (g.quick || 1)), quickLabel: fmtN(g.quick || 1),
-          hasLogged: logged > 0, unitWord: unit, logId: 'glg-' + g.id, logPh: /steps?/i.test(unit) ? 'e.g. 2500' : 'amount',
+          hasLogged: logged > 0 || hasTot, unitWord: unit, logId: 'glg-' + g.id, logPh: /steps?/i.test(unit) ? 'e.g. 2500' : 'amount',
           logDraft: (s.growLogDraft || {})[g.id] || '',
           onLogDraft: (e) => { const v = e.target.value; this.setState({ growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: v }) }); },
-          logAdd: () => { const v = parseFloat(String(((this.state.growLogDraft || {})[g.id]) || '').replace(/,/g, '')); if (!(v > 0)) return; setLog(g, logged + v); this.setState({ growPanel: null, growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: '' }) }); this.setToast('Logged ' + fmtN(v) + ' ' + unit + '.'); },
-          logKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); const v = parseFloat(String(e.target.value || '').replace(/,/g, '')); if (!(v > 0)) return; setLog(g, logged + v); this.setState({ growPanel: null, growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: '' }) }); } },
-          logClear: () => setLog(g, 0),
+          logAdd: () => { const v = parseFloat(String(((this.state.growLogDraft || {})[g.id]) || '').replace(/,/g, '')); if (!(v > 0)) return; this.goalAddHand(g, D, v); this.setState({ growPanel: null, growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: '' }) }); this.setToast('Logged ' + fmtN(v) + ' ' + unit + '.'); },
+          logKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); const v = parseFloat(String(e.target.value || '').replace(/,/g, '')); if (!(v > 0)) return; this.goalAddHand(g, D, v); this.setState({ growPanel: null, growLogDraft: Object.assign({}, this.state.growLogDraft || {}, { [g.id]: '' }) }); } },
+          logClear: () => { if (hasTot) this.goalSetTotal(g, D, null); else setLog(g, 0); },
           repText: rp && rp.dows && rp.dows.length ? 'Repeats ' + dowsText(rp.dows) + ' at ' + this.fmtTime(rp.start, false) + ' · ' + this.fmtDur(rp.mins || hb.chunk) : 'Does not repeat',
           repOn: !!(rp && rp.dows && rp.dows.length), repEditing: editing, repClosed: !editing,
           repEdit: () => this.setState({ growRep: g.id, growRepDraft: { dows: rp && rp.dows ? rp.dows.slice() : [0, 1, 2, 3, 4, 5, 6], time: rp ? this.toHHMM(rp.start) : '07:00', mins: rp && rp.mins ? rp.mins : (hb.chunk || 30) } }),
