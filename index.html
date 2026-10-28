@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 26, 8:40 PM';</script>
+<script>window.__plannerBuild = 'Oct 28, 11:07 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -129,6 +129,16 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
 <div aria-hidden="true" style="flex: none; height: {{leftSpacer}}px"></div>
+<sc-if value="{{dayNavLeft}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
+<button onClick="{{prevDay}}" aria-label="Previous day" style="width: 36px; height: 36px; flex: none; border-radius: 18px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center">
+<span style="font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%">{{dayTitle}}</span>
+<sc-if value="{{notToday}}" hint-placeholder-val="{{ false }}"><button onClick="{{goToday}}" style="height: 20px; border: 0; background: transparent; padding: 0; color: {{TK.tA0526A}}; font-size: calc(12px * {{fsK}}); font-weight: 700">Back to today</button></sc-if>
+</div>
+<button onClick="{{nextDay}}" aria-label="Next day" style="width: 36px; height: 36px; flex: none; border-radius: 18px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</sc-if>
 <div role="tablist" aria-label="What to show for this day" style="display: flex; align-items: flex-end; gap: 14px; border-bottom: 1px solid #E6DCC8; padding: 0 2px">
 <sc-for list="{{dayTabs}}" as="dt" hint-placeholder-count="6">
 <button role="tab" aria-selected="{{dt.sel}}" aria-label="{{dt.aria}}" title="{{dt.label}}" onClick="{{dt.pick}}" style="position: relative; height: 32px; min-width: 32px; margin-left: {{dt.ml}}; padding: 0 4px; margin-bottom: -1px; border: 0; border-bottom: 2px solid {{dt.line}}; background: transparent; color: {{dt.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 5px">
@@ -167,8 +177,10 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{bg.filled}}" hint-placeholder-val="{{ true }}">
 <div onDragOver="{{allowDrop}}" onDrop="{{bg.drop}}" style="display: flex; align-items: center; gap: 8px; height: 40px; background: #FFFFFF; border-radius: 8px; padding: 0 2px 0 10px">
 <span style="font-family: {{TK.fHead}}; font-size: calc(18px * {{fsK}}); font-weight: 600; color: {{b3Accent}}; width: 16px">{{bg.num}}</span>
+<button onClick="{{bg.open}}" aria-label="Edit {{bg.title}}" title="Edit" style="flex: 1; min-width: 0; height: 100%; display: flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 0; font: inherit; text-align: left; cursor: pointer">
 <span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); font-weight: 400; color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-decoration: {{bg.strike}}">{{bg.title}}</span>
 <span style="flex: none; font-size: calc(11px * {{fsK}}); color: #6B6358">{{bg.when}}</span>
+</button>
 <button onClick="{{bg.remove}}" aria-label="Remove {{bg.title}} from Week Makers" style="width: 36px; height: 36px; flex: none; border: 0; border-radius: 18px; background: transparent; color: #6B6358; display: flex; align-items: center; justify-content: center">
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
 </button>
@@ -987,38 +999,35 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </button>
 </div>
 <label for="addtitle" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">What needs doing?</label>
-<input id="addtitle" autoFocus="{{ true }}" value="{{addTitle}}" onChange="{{addOnTitle}}" onKeyDown="{{addKey}}" placeholder="What needs doing?" style="outline-color: {{TK.tA0526A}}; height: 46px; box-sizing: border-box; border: 1.5px solid #D8CDB6; border-radius: 10px; padding: 0 12px; font: inherit; font-size: calc(17px * {{fsK}}); color: #2B2722; background: #FBF7EE">
+<input id="addtitle" autoFocus="{{ true }}" value="{{addTitle}}" onChange="{{addOnTitle}}" onKeyDown="{{addKey}}" placeholder="What needs doing?" style="outline-color: {{TK.tA0526A}}; height: 46px; box-sizing: border-box; border: 1.5px solid {{TK.tE2B9C4}}; border-radius: 10px; padding: 0 12px; font: inherit; font-size: calc(17px * {{fsK}}); color: #2B2722; background: #FBF7EE">
 <span style="font-size: calc(12px * {{fsK}}); color: #6B6358; margin-top: -6px">On iPad you can write in the box with your Pencil.</span>
-<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
-<span style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358; width: 54px">Flag</span>
-<div role="radiogroup" aria-label="Flag" style="display: flex; gap: 2px; background: #EFE7D6; border-radius: 9px; padding: 3px">
-<sc-for list="{{addPriBtns}}" as="ap" hint-placeholder-count="3">
-<button role="radio" aria-checked="{{ap.checked}}" onClick="{{ap.set}}" style="padding: 0 10px; height: 30px; border: 0; border-radius: 7px; background: {{ap.bg}}; color: {{ap.fg}}; font-size: calc(13px * {{fsK}}); font-weight: 700">{{ap.label}}</button>
-</sc-for>
-</div>
-</div>
-<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
-<span style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358; width: 54px">Length</span>
-<label for="add-h" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Hours</label>
-<input id="add-h" type="number" onFocus="{{selAll}}" inputmode="numeric" min="0" max="99" value="{{addH}}" onChange="{{onAddH}}" style="height: 32px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 600; color: #2B2722; text-align: center; outline-color: {{TK.tA0526A}}; width: 50px; padding: 0 4px">
+<div style="display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 10px 12px">
+<label for="add-h" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">Length</label>
+<div style="display: flex; align-items: center; gap: 4px">
+<input id="add-h" type="number" onFocus="{{selAll}}" inputmode="numeric" min="0" max="99" value="{{addH}}" onChange="{{ndIn}}" onInput="{{ndIn}}" onBlur="{{onAddH}}" onKeyDown="{{ndKey}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; width: 44px; padding: 0 4px; text-align: center">
+<span style="display: flex; flex-direction: column; flex: none"><button onClick="{{addHUp}}" aria-label="One hour more" style="width: 26px; height: 16px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{addHDown}}" aria-label="One hour less" style="width: 26px; height: 16px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 0 0 6px 6px; border-top: 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span>
 <span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span>
 <label for="add-m" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Minutes</label>
-<select id="add-m" value="{{addM}}" onChange="{{onAddM}}" style="height: 32px; box-sizing: border-box; border: 1px solid #E2D8C4; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 600; color: #2B2722; text-align: center; outline-color: {{TK.tA0526A}}; padding: 0 4px"><sc-for list="{{addMOpts}}" as="amo" hint-placeholder-count="12"><option value="{{amo.v}}">{{amo.l}}</option></sc-for></select>
-<span style="font-size: calc(13px * {{fsK}}); color: #6B6358; margin-right: 4px">m</span>
-<sc-for list="{{addPresets}}" as="pp" hint-placeholder-count="4">
-<button onClick="{{pp.set}}" style="height: 28px; padding: 0 9px; border-radius: 14px; border: 1.5px solid #D8CDB6; background: {{pp.bg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">{{pp.label}}</button>
-</sc-for>
+<select id="add-m" value="{{addM}}" onChange="{{onAddM}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; padding: 0 2px"><sc-for list="{{addMOpts}}" as="amo" hint-placeholder-count="12"><option value="{{amo.v}}">{{amo.l}}</option></sc-for></select>
+<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">m</span>
+</div>
+<label for="add-flag" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">Flag</label>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0">
+<select id="add-flag" value="{{addFlag}}" onChange="{{onAddFlag}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; padding: 0 6px; flex: 1 1 110px; min-width: 0"><option value="">No flag</option><option value="important">Important</option><option value="urgent">Urgent</option></select>
+<label for="add-cat" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">Category</label>
+<select id="add-cat" value="{{addCat}}" onChange="{{onAddCat}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; padding: 0 6px; flex: 1 1 130px; min-width: 0"><sc-for list="{{addCatOpts}}" as="aco" hint-placeholder-count="6"><option value="{{aco.v}}">{{aco.l}}</option></sc-for></select>
+</div>
 </div>
 <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
 <span style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358; width: 54px">Put it on</span>
-<div role="radiogroup" aria-label="Where it goes" style="display: flex; flex-wrap: wrap; gap: 2px; background: #EFE7D6; border-radius: 9px; padding: 3px">
+<div role="radiogroup" aria-label="Where it goes" style="display: flex; flex-wrap: wrap; gap: 2px; background: {{TK.tF6EDEF}}; border-radius: 9px; padding: 3px">
 <sc-for list="{{addWhereBtns}}" as="aw" hint-placeholder-count="4">
 <button role="radio" aria-checked="{{aw.checked}}" onClick="{{aw.set}}" style="height: 30px; padding: 0 10px; border: 0; border-radius: 7px; background: {{aw.bg}}; color: {{aw.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">{{aw.label}}</button>
 </sc-for>
 </div>
 </div>
 <div style="display: flex; justify-content: flex-end; gap: 8px">
-<button onClick="{{closeAdd}}" style="height: 40px; padding: 0 14px; border-radius: 10px; border: 1.5px solid #D8CDB6; background: transparent; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722">Cancel</button>
+<button onClick="{{closeAdd}}" style="height: 40px; padding: 0 14px; border-radius: 10px; border: 1.5px solid {{TK.tE2B9C4}}; background: transparent; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722">Cancel</button>
 <button onClick="{{submitAdd}}" style="height: 40px; padding: 0 18px; border-radius: 10px; border: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">Add task</button>
 </div>
 </div>
@@ -2037,7 +2046,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{kb.filled}}" hint-placeholder-val="{{ false }}">
 <div onDragOver="{{kb.over}}" onDrop="{{kb.drop}}" style="min-width: 0; min-height: 40px; display: flex; align-items: center; gap: 4px; background: {{kb.bg}}; border-radius: 8px; padding: 4px 2px 4px 8px">
 <span style="flex: none; font-family: {{TK.fHead}}; font-size: calc(16px * {{fsK}}); font-weight: 600; color: {{b3Accent}}">{{kb.num}}</span>
-<span style="flex: 1; min-width: 0; font-size: calc(12.5px * {{fsK}}); line-height: 1.25; color: #2B2722; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-decoration: {{kb.strike}}">{{kb.title}}</span>
+<button onClick="{{kb.open}}" aria-label="Edit {{kb.title}}" title="Edit" style="flex: 1; min-width: 0; border: 0; background: transparent; padding: 0; font: inherit; text-align: left; cursor: pointer"><span style="font-size: calc(12.5px * {{fsK}}); line-height: 1.25; color: #2B2722; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-decoration: {{kb.strike}}">{{kb.title}}</span></button>
 <button onClick="{{kb.remove}}" aria-label="Remove {{kb.title}} from Week Makers" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #8A8174; padding: 0">×</button>
 </div>
 </sc-if>
@@ -7976,7 +7985,7 @@ class Component extends DCLogic {
             const t = live[k];
             const drop = (e) => { e.preventDefault(); e.stopPropagation(); const d = this.drag; this.drag = null; if (d && d.kind === 'task') putIn(k, d.id); else this.setState({ dropKey: null }); };
             const key = 'dkb3:' + k, hot = s.dropKey === key;
-            return t ? { filled: true, empty: false, num: k + 1, title: t.title, strike: t.done ? 'line-through' : 'none', drop: drop, over: (e) => { e.preventDefault(); this.hover(key); }, bg: hot ? '#FCE9A6' : '#FFFFFF', remove: () => this.setBig3(deskWs, k, null) }
+            return t ? { filled: true, empty: false, num: k + 1, title: t.title, strike: t.done ? 'line-through' : 'none', drop: drop, over: (e) => { e.preventDefault(); this.hover(key); }, bg: hot ? '#FCE9A6' : '#FFFFFF', remove: () => this.setBig3(deskWs, k, null), open: () => this.openTaskEdit(t.id) }
               : { filled: false, empty: true, num: k + 1, drop: drop, over: (e) => { e.preventDefault(); this.hover(key); }, bg: hot ? '#FCE9A6' : 'transparent' };
           })
         };
@@ -8408,7 +8417,7 @@ class Component extends DCLogic {
         filled: true, empty: false, num: k + 1, title: t.title, label: t.pri,
         badgeBg: p.bg, badgeFg: p.fg, badgeBorder: p.border,
         strike: t.done ? 'line-through' : 'none', when: when,
-        remove: () => this.setBig3(ws, k, null),
+        remove: () => this.setBig3(ws, k, null), open: () => this.openTaskEdit(t.id),
         drop: drop
       };
     });
@@ -9438,7 +9447,7 @@ class Component extends DCLogic {
       const f = this.state.addForm;
       if (!f || !(f.title || '').trim()) return;
       const n5 = this.state.nextId;
-      const t = { id: 'n' + n5, title: f.title.trim(), pri: f.pri, flag: f.flag || null, mins: f.mins, bucket: f.where === 'day' ? 'week' : f.where };
+      const t = { id: 'n' + n5, title: f.title.trim(), pri: f.pri, flag: f.flag || null, mins: f.mins, bucket: f.where === 'day' ? 'week' : f.where }; if (f.cat) t.cat = f.cat;
       if (f.where === 'day') t.dayAssign = this.state.day;
       this.setState({ tasks: this.state.tasks.concat([t]), nextId: n5 + 1, addForm: null });
       const lbl = ({ desk: 'My Desk', week: 'this week', month: 'this month', day: (this.state.day === 0 ? 'today\'s list' : this.DAYS[this.dowFor(this.state.day)] + '\'s list') })[f.where];
@@ -9453,7 +9462,12 @@ class Component extends DCLogic {
       addMinus: () => patchAdd({ mins: Math.max(0, af.mins - 15) }),
       addH: af ? String(Math.floor((af.mins || 0) / 60)) : '0', addM: af ? String((af.mins || 0) % 60 - ((af.mins || 0) % 60) % 5) : '0',
       addMOpts: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55].map(x => ({ v: String(x), l: String(x).padStart(2, '0') })),
-      onAddH: (e) => { const h = Math.max(0, Math.min(99, parseInt(e.target.value, 10) || 0)); patchAdd({ mins: h * 60 + ((af && af.mins || 0) % 60) }); },
+      onAddH: (e) => { const h = Math.max(0, Math.min(99, parseInt(e.target.value, 10) || 0)); const f0 = this.state.addForm || {}; patchAdd({ mins: h * 60 + ((f0.mins || 0) % 60) }); },
+      addHUp: () => { const f0 = this.state.addForm || {}; patchAdd({ mins: Math.min(99 * 60, (f0.mins || 0) + 60) }); },
+      addHDown: () => { const f0 = this.state.addForm || {}; patchAdd({ mins: Math.max(0, (f0.mins || 0) - 60) }); },
+      addFlag: af && af.flag ? af.flag : '', onAddFlag: (e) => patchAdd({ flag: e.target.value || null }),
+      addCat: af && af.cat ? af.cat : '', onAddCat: (e) => patchAdd({ cat: e.target.value || null }),
+      addCatOpts: [{ v: '', l: 'No category' }].concat(this.CAT_ORDER.map(k => ({ v: k, l: this.CATS[k].name }))),
       onAddM: (e) => { const m = parseInt(e.target.value, 10) || 0; patchAdd({ mins: Math.floor((af && af.mins || 0) / 60) * 60 + m }); },
       addPlus: () => patchAdd({ mins: Math.min(720, af.mins + 15) }),
       addPresets: [15, 30, 60, 120].map(m => ({ label: this.fmtDur(m), bg: af && af.mins === m ? '#FCE9A6' : '#FBF7EE', set: () => patchAdd({ mins: m }) })),
@@ -9464,7 +9478,7 @@ class Component extends DCLogic {
       }),
       addWhereBtns: whereOpts.map(o => {
         const on = !!(af && af.where === o[0]);
-        return { label: o[1], checked: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? '#1F2A33' : '#6B6358', set: () => patchAdd({ where: o[0] }) };
+        return { label: o[1], checked: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? this.TK.t6E2F43 : '#6B6358', set: () => patchAdd({ where: o[0] }) };
       }),
       submitAdd: submitAdd,
       closeAdd: () => this.setState({ addForm: null }),
@@ -10934,7 +10948,7 @@ class Component extends DCLogic {
       weekSelEdit: () => { if (wSel) this.setState({ editing: wSel.id, editDraft: null, sel: null }); },
       weekClearDay: () => { if (wSel) { this.assignDay(wSel.id, null); this.setToast('Back to any day this week.'); } },
       big3: big3,
-      narrow: narrow,
+      narrow: narrow, dayNavLeft: narrow && s.view === 'day',
       rootPad: narrow ? '10px' : '18px',
       rootPadTop: narrow ? '10px' : '18px',
       tIn: s.touch ? 48 : 36, tFs: s.touch ? 17 : 15, tAreaFs: s.touch ? 16 : 13.5, tAddH: s.touch ? 44 : 30,
