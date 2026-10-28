@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 28, 11:07 AM';</script>
+<script>window.__plannerBuild = 'Oct 28, 11:56 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2367,28 +2367,37 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{iTabProgress}}" hint-placeholder-val="{{ true }}">
 <sc-if value="{{iIsBuild}}" hint-placeholder-val="{{ true }}">
 <section aria-label="How it's going" style="flex: none; display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; align-items: baseline; gap: 10px">
-<span style="margin-left: auto; font-size: calc(12px * {{fsK}}); color: #6B6358">Last 14 days</span>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<div role="radiogroup" aria-label="Time frame" style="display: flex; gap: 2px; background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 2px">
+<sc-for list="{{iTrModes}}" as="tm" hint-placeholder-count="4"><button role="radio" aria-checked="{{tm.on}}" onClick="{{tm.set}}" style="height: 26px; padding: 0 9px; border: 0; border-radius: 6px; background: {{tm.bg}}; color: {{tm.fg}}; box-shadow: {{tm.shadow}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">{{tm.label}}</button></sc-for>
 </div>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
-<sc-for list="{{iStats}}" as="st" hint-placeholder-count="3">
-<div style="background: #F6F1E6; border-radius: 8px; padding: 6px 9px; display: flex; flex-direction: column; gap: 0">
-<span style="font-family: {{TK.fHead}}; font-size: calc(17px * {{fsK}}); font-weight: 600; color: #1F2A33; line-height: 1.15">{{st.big}}</span>
-<span style="font-size: calc(10.5px * {{fsK}}); color: #7A7064; line-height: 1.25">{{st.small}}</span>
+<sc-if value="{{iTrStep}}" hint-placeholder-val="{{ false }}"><div style="display: flex; gap: 4px; margin-left: auto">
+<button onClick="{{iTrPrev}}" disabled="{{iTrPrevDis}}" aria-label="Earlier" style="width: 28px; height: 28px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<button onClick="{{iTrNext}}" disabled="{{iTrNextDis}}" aria-label="Later" style="width: 28px; height: 28px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div></sc-if>
 </div>
-</sc-for>
+<sc-if value="{{iTrCustom}}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<label for="itr-from" style="font-size: calc(12px * {{fsK}}); color: #4A443B">From</label>
+<input id="itr-from" type="date" min="{{iTrMin}}" max="{{iTrMax}}" value="{{iTrFrom}}" onChange="{{iTrOnFrom}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+<label for="itr-to" style="font-size: calc(12px * {{fsK}}); color: #4A443B">To</label>
+<input id="itr-to" type="date" min="{{iTrMin}}" max="{{iTrMax}}" value="{{iTrTo}}" onChange="{{iTrOnTo}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+</div></sc-if>
+<span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{iTrRange}} · {{iTrStartTxt}}</span>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{iTrStats}}" as="ts" hint-placeholder-count="4"><div style="background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 6px 9px; display: flex; flex-direction: column"><span style="font-family: {{TK.fHead}}; font-size: calc(17px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; line-height: 1.15">{{ts.big}}</span><span style="font-size: calc(10.5px * {{fsK}}); color: #7A7064; line-height: 1.25">{{ts.small}}</span></div></sc-for>
 </div>
-<svg role="img" aria-label="{{iChartAria}}" viewBox="0 0 280 84" style="width: 100%; height: auto; display: block">
-<line x1="0" x2="280" y1="{{iTgtY}}" y2="{{iTgtY}}" stroke-width="1" stroke-dasharray="4 3" opacity="0.7" style="stroke: {{iColor}}"></line>
-<line x1="0" x2="280" y1="{{iMinY}}" y2="{{iMinY}}" stroke="#B9AF9C" stroke-width="1" stroke-dasharray="2 3"></line>
-<sc-for list="{{iBars}}" as="br" hint-placeholder-count="14">
-<rect x="{{br.x}}" y="{{br.y}}" width="16" height="{{br.h}}" rx="3" opacity="{{br.op}}" style="fill: {{br.fill}}"></rect>
-<text x="{{br.tx}}" y="82" text-anchor="middle" font-size="9" fill="#8A8174">{{br.lbl}}</text>
-</sc-for>
+<svg role="img" aria-label="{{iTrAria}}" viewBox="0 0 280 80" style="width: 100%; height: auto; display: block">
+<line x1="0" x2="280" y1="78" y2="78" stroke="#E6DCC8" stroke-width="1"></line>
+<sc-if value="{{iTrHasMin}}" hint-placeholder-val="{{ false }}"><line x1="0" x2="280" y1="{{iTrMinY}}" y2="{{iTrMinY}}" stroke="#B9AF9C" stroke-width="1" stroke-dasharray="2 3"></line></sc-if>
+<sc-for list="{{iTrBars}}" as="tb" hint-placeholder-count="14"><rect x="{{tb.x}}" y="{{tb.y}}" width="{{tb.w}}" height="{{tb.h}}" rx="2" style="fill: {{tb.fill}}"><title>{{tb.tip}}</title></rect></sc-for>
+<sc-for list="{{iTrChecks}}" as="tc" hint-placeholder-count="4"><path d="{{tc.d}}" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="stroke: {{TK.tA0526A}}"><title>{{tc.tip}}</title></path></sc-for>
+<sc-if value="{{iTrHasLine}}" hint-placeholder-val="{{ false }}"><line x1="0" x2="280" y1="{{iTrLineY}}" y2="{{iTrLineY}}" stroke-width="1.2" stroke-dasharray="4 3" style="stroke: {{iTrLineCol}}"></line></sc-if>
 </svg>
-<div style="display: flex; gap: 14px; font-size: calc(11px * {{fsK}}); color: #7A7064">
-<span style="display: flex; align-items: center; gap: 5px"><span style="width: 14px; border-top: 1.5px dashed {{iColor}}"></span>Goal {{iTgtLabel}}</span>
-<span style="display: flex; align-items: center; gap: 5px"><span style="width: 14px; border-top: 1.5px dashed #B9AF9C"></span>Still counts {{iMinLabel}}</span>
+<div aria-hidden="true" style="position: relative; height: 14px; margin-top: -6px"><sc-for list="{{iTrLabels}}" as="tl" hint-placeholder-count="7"><span style="position: absolute; top: 0; left: {{tl.pct}}%; transform: translateX(-50%); font-size: calc(10px * {{fsK}}); color: #8A8174; white-space: nowrap">{{tl.t}}</span></sc-for></div>
+<div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: calc(11px * {{fsK}}); color: #7A7064">
+<sc-for list="{{iTrLegend}}" as="lg" hint-placeholder-count="3"><span style="display: flex; align-items: center; gap: 5px"><sc-if value="{{lg.notCheck}}" hint-placeholder-val="{{ true }}"><span style="width: 12px; height: {{lg.h}}; border-radius: 2px; background: {{lg.bg}}; border-top: {{lg.bt}}"></span></sc-if>{{lg.label}}</span></sc-for>
+</div>
 </div>
 <div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid #EFE7D6; padding: 8px 2px 0">
 <span style="flex: 1; font-size: calc(13px * {{fsK}}); color: #2B2722"><strong>Today:</strong> {{iTodayText}}</span>
@@ -2401,29 +2410,40 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 
 <sc-if value="{{iIsBreak}}" hint-placeholder-val="{{ false }}">
 <section aria-label="How it's going" style="flex: none; display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; align-items: baseline; gap: 10px">
-<span style="margin-left: auto; font-size: calc(12px * {{fsK}}); color: #6B6358">{{iWeekRange}}</span>
+<div style="display: flex; flex-direction: column; gap: 2px; background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 7px 10px">
+<span style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{iWeekTxt}}</span>
+<span style="font-size: calc(12.5px * {{fsK}}); color: #5E5546">{{iEncourage}}</span>
 </div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<div role="radiogroup" aria-label="Time frame" style="display: flex; gap: 2px; background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 2px">
+<sc-for list="{{iTrModes}}" as="tm" hint-placeholder-count="4"><button role="radio" aria-checked="{{tm.on}}" onClick="{{tm.set}}" style="height: 26px; padding: 0 9px; border: 0; border-radius: 6px; background: {{tm.bg}}; color: {{tm.fg}}; box-shadow: {{tm.shadow}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">{{tm.label}}</button></sc-for>
+</div>
+<sc-if value="{{iTrStep}}" hint-placeholder-val="{{ false }}"><div style="display: flex; gap: 4px; margin-left: auto">
+<button onClick="{{iTrPrev}}" disabled="{{iTrPrevDis}}" aria-label="Earlier" style="width: 28px; height: 28px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<button onClick="{{iTrNext}}" disabled="{{iTrNextDis}}" aria-label="Later" style="width: 28px; height: 28px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div></sc-if>
+</div>
+<sc-if value="{{iTrCustom}}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<label for="itr-from" style="font-size: calc(12px * {{fsK}}); color: #4A443B">From</label>
+<input id="itr-from" type="date" min="{{iTrMin}}" max="{{iTrMax}}" value="{{iTrFrom}}" onChange="{{iTrOnFrom}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+<label for="itr-to" style="font-size: calc(12px * {{fsK}}); color: #4A443B">To</label>
+<input id="itr-to" type="date" min="{{iTrMin}}" max="{{iTrMax}}" value="{{iTrTo}}" onChange="{{iTrOnTo}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+</div></sc-if>
+<span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{iTrRange}} · {{iTrStartTxt}}</span>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
-<sc-for list="{{iStats}}" as="st" hint-placeholder-count="2">
-<div style="background: #F6F1E6; border-radius: 8px; padding: 6px 9px; display: flex; flex-direction: column; gap: 3px">
-<span style="font-family: {{TK.fHead}}; font-size: calc(17px * {{fsK}}); font-weight: 600; color: #1F2A33; line-height: 1.15">{{st.big}}</span>
-<span style="font-size: calc(10.5px * {{fsK}}); color: #7A7064">{{st.small}}</span>
-<span aria-hidden="true" style="height: 5px; border-radius: 3px; background: #EFE7D6; overflow: hidden; display: flex"><span style="width: {{st.pct}}%; background: {{st.barColor}}"></span></span>
+<sc-for list="{{iTrStats}}" as="ts" hint-placeholder-count="4"><div style="background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 6px 9px; display: flex; flex-direction: column"><span style="font-family: {{TK.fHead}}; font-size: calc(17px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; line-height: 1.15">{{ts.big}}</span><span style="font-size: calc(10.5px * {{fsK}}); color: #7A7064; line-height: 1.25">{{ts.small}}</span></div></sc-for>
 </div>
-</sc-for>
-</div>
-<div style="font-size: calc(13px * {{fsK}}); color: #5E5546">{{iEncourage}}</div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Last 14 days</span>
-<div style="display: flex; gap: 4px">
-<sc-for list="{{iDots}}" as="dt" hint-placeholder-count="14">
-<span title="{{dt.tip}}" style="flex: 1; aspect-ratio: 1; max-width: 20px; border-radius: 50%; background: {{dt.bg}}; color: {{dt.fg}}; font-size: calc(10px * {{fsK}}); font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: {{dt.ring}}">{{dt.n}}</span>
-</sc-for>
-</div>
-<div style="display: flex; gap: 14px; font-size: calc(11px * {{fsK}}); color: #7A7064">
-<span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 5px; background: {{iColor}}"></span>Free day</span>
-<span style="display: flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 5px; background: #F1E8DA"></span>Number = {{iUnit}} that day</span>
+<svg role="img" aria-label="{{iTrAria}}" viewBox="0 0 280 80" style="width: 100%; height: auto; display: block">
+<line x1="0" x2="280" y1="78" y2="78" stroke="#E6DCC8" stroke-width="1"></line>
+<sc-if value="{{iTrHasMin}}" hint-placeholder-val="{{ false }}"><line x1="0" x2="280" y1="{{iTrMinY}}" y2="{{iTrMinY}}" stroke="#B9AF9C" stroke-width="1" stroke-dasharray="2 3"></line></sc-if>
+<sc-for list="{{iTrBars}}" as="tb" hint-placeholder-count="14"><rect x="{{tb.x}}" y="{{tb.y}}" width="{{tb.w}}" height="{{tb.h}}" rx="2" style="fill: {{tb.fill}}"><title>{{tb.tip}}</title></rect></sc-for>
+<sc-for list="{{iTrChecks}}" as="tc" hint-placeholder-count="4"><path d="{{tc.d}}" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="stroke: {{TK.tA0526A}}"><title>{{tc.tip}}</title></path></sc-for>
+<sc-if value="{{iTrHasLine}}" hint-placeholder-val="{{ false }}"><line x1="0" x2="280" y1="{{iTrLineY}}" y2="{{iTrLineY}}" stroke-width="1.2" stroke-dasharray="4 3" style="stroke: {{iTrLineCol}}"></line></sc-if>
+</svg>
+<div aria-hidden="true" style="position: relative; height: 14px; margin-top: -6px"><sc-for list="{{iTrLabels}}" as="tl" hint-placeholder-count="7"><span style="position: absolute; top: 0; left: {{tl.pct}}%; transform: translateX(-50%); font-size: calc(10px * {{fsK}}); color: #8A8174; white-space: nowrap">{{tl.t}}</span></sc-for></div>
+<div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: calc(11px * {{fsK}}); color: #7A7064">
+<sc-for list="{{iTrLegend}}" as="lg" hint-placeholder-count="3"><span style="display: flex; align-items: center; gap: 5px"><sc-if value="{{lg.notCheck}}" hint-placeholder-val="{{ true }}"><span style="width: 12px; height: {{lg.h}}; border-radius: 2px; background: {{lg.bg}}; border-top: {{lg.bt}}"></span></sc-if>{{lg.label}}</span></sc-for>
 </div>
 </div>
 <div style="display: flex; align-items: center; gap: 8px; border-top: 1px solid #EFE7D6; padding: 8px 2px 0">
@@ -5699,6 +5719,13 @@ class Component extends DCLogic {
     if (patch.tasks && patch.groups) patch.tasks = patch.tasks.map(t => { const g = t.groupId && patch.groups[t.groupId]; return g && g.title && /^Slice \d+ of \d+$/.test(t.title || '') ? Object.assign({}, t, { title: g.title + ' ' + t.title }) : t; });
     this.foldCourseCats(patch);
     patch.tasks = (patch.tasks || []).map(t => typeof t.added === 'number' ? t : Object.assign({}, t, { added: -1000 }));
+    patch.goals = (patch.goals || []).map(g => {
+      if ((g.kind !== 'build' && g.kind !== 'break') || typeof g.startDay === 'number') return g;
+      let m = 0;
+      Object.keys(g.logs || {}).concat(Object.keys(g.totals || {})).forEach(k => { const v = +k; if (!isNaN(v) && v < m) m = v; });
+      if (g.habitId) Object.keys(patch.placedByDay || {}).forEach(k => { const v = +k; if (!isNaN(v) && v < m && (patch.placedByDay[k] || []).some(b => b.habitId === g.habitId && b.done)) m = v; });
+      return Object.assign({}, g, { startDay: m });
+    });
     return patch;
   }
   docId(k) { const v = String(k).replace(/[^A-Za-z0-9_\-.~:@+]/g, '_').slice(0, 180); return v === '.' || v === '..' || !v ? 'x' + v : v; }
@@ -8823,7 +8850,7 @@ class Component extends DCLogic {
       const n3 = this.state.nextId;
       const cols = this.COLOR_ORDER;
       const onDayN = this.state.goals.filter(x => x.onDay && x.status === 'active' && x.kind !== 'reach').length;
-      const g = { id: 'g' + n3, onDay: k !== 'reach' && onDayN < 4, kind: k, title: k === 'build' ? 'New habit to build' : (k === 'break' ? 'New habit to put down' : 'New place to reach'), why: '', photo: null, links: [], files: [], color: cols[this.state.goals.length % cols.length], status: 'active', logs: {} };
+      const g = { id: 'g' + n3, onDay: k !== 'reach' && onDayN < 4, kind: k, title: k === 'build' ? 'New habit to build' : (k === 'break' ? 'New habit to put down' : 'New place to reach'), why: '', photo: null, links: [], files: [], color: cols[this.state.goals.length % cols.length], status: 'active', logs: {}, startDay: 0 };
       const patch = { nextId: n3 + 1 };
       if (k === 'build') {
         const hid = 'h' + n3;
@@ -8967,7 +8994,7 @@ class Component extends DCLogic {
       iGroups: iGroups, iNewOpen: !!s.iNew, iNewOpenA: s.iNew ? 'true' : 'false',
       iToggleNew: () => this.setState({ iNew: !this.state.iNew }),
       iNewKinds: ['build', 'break', 'reach'].map(k => ({ label: KIND[k].label, hint: KIND[k].hint, icon: KIND[k].icon, add: () => newI(k) })),
-      iRepOn: false, iIsBuild: false, iIsBreak: false, iIsNumber: false, iIsTasks: false, iShowHelpers: false, iShowSteps: false, iShowWins: false, iShowNotes: false, iHelpingEmpty: false, iTabHelping: false, iHasHelpers: false, iHasHelperChips: false, iHelperChips: [], iHasPhoto: false
+      iRepOn: false, iTrModes: [], iTrStep: false, iTrCustom: false, iTrStats: [], iTrBars: [], iTrChecks: [], iTrLabels: [], iTrLegend: [], iTrHasLine: false, iTrHasMin: false, iWeekTxt: '', iIsBuild: false, iIsBreak: false, iIsNumber: false, iIsTasks: false, iShowHelpers: false, iShowSteps: false, iShowWins: false, iShowNotes: false, iHelpingEmpty: false, iTabHelping: false, iHasHelpers: false, iHasHelperChips: false, iHelperChips: [], iHasPhoto: false
     };
     if (selI) {
       const g = selI;
@@ -9047,13 +9074,81 @@ class Component extends DCLogic {
       const sel2 = (id, label, val, opts, fn) => ({ id: 'if-' + id, label: label, isInput: false, isSelect: true, type: '', value: val, set: (e) => fn(e.target.value), opts: opts.map(o => ({ v: o[0], l: o[1] })) });
       const toISO = (d) => { const x = this.dateFor(d); return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); };
       const fromISO = (v) => { const q = v.split('-'); const dt = new Date(+q[0], +q[1] - 1, +q[2]); const base = this.dateFor(0); base.setHours(0, 0, 0, 0); return Math.round((dt - base) / 86400000); };
+      const trend = (isB) => {
+        const st0 = typeof g.startDay === 'number' ? Math.min(0, g.startDay) : 0;
+        const R = Object.assign({ mode: 'start', shift: 0, from: null, to: null }, (s.iRng || {})[g.id] || {});
+        const setR = (p) => this.setState({ iRng: Object.assign({}, this.state.iRng || {}, { [g.id]: Object.assign({}, R, p) }) });
+        let from, to;
+        if (R.mode === '4w' || R.mode === '3m') { const len = R.mode === '4w' ? 28 : 91; to = 0 - R.shift * len; from = to - len + 1; }
+        else if (R.mode === 'custom') { from = typeof R.from === 'number' ? R.from : st0; to = typeof R.to === 'number' ? R.to : 0; if (to > 0) to = 0; if (from > to) { const x = from; from = to; to = x; } }
+        else { from = st0; to = 0; }
+        if (from < st0) from = st0; if (to < st0) to = st0;
+        const val = (d) => isB ? buildVal(g, d) : brkVal(g, d);
+        const days = []; for (let d = from; d <= to; d++) days.push({ d: d, v: val(d) });
+        const N = days.length;
+        const tgt = g.daily || 1, mn = Math.max(1, g.minimum || 1), lim = g.limit || 0, mode = g.mode || 'both';
+        const weekly = N > 42;
+        let pts = [];
+        if (!weekly) pts = days.map(x => ({ v: x.v, d0: x.d, d1: x.d, n: 1 }));
+        else { const m = {}; days.forEach(x => { const w = this.weekStartOff(x.d); if (!m[w]) { m[w] = { v: 0, d0: Math.max(w, from), d1: x.d, n: 0 }; pts.push(m[w]); } m[w].v += x.v; m[w].n++; m[w].d1 = x.d; }); if (isB) pts.forEach(p => { p.v = p.v / p.n; }); }
+        const W = 280, base = 78, top = 6;
+        const line = isB ? tgt : (weekly && mode !== 'free' ? lim : 0);
+        const maxV = Math.max(line * 1.25, ...pts.map(p => p.v), isB ? 1 : 2);
+        const Y = (v) => Math.round(base - v / maxV * (base - top));
+        const slot = W / Math.max(1, pts.length), bw = Math.max(2, Math.min(18, slot * 0.7));
+        const md = (d) => (this.dateFor(d).getMonth() + 1) + '/' + this.dateFor(d).getDate();
+        const every = Math.max(1, Math.ceil(pts.length / (weekly ? 7 : (pts.length <= 14 ? 14 : 8))));
+        const bars = [], checks = [], labels = [];
+        const pLbl = (p) => weekly ? 'Week of ' + md(p.d0) : this.DSHORT[this.dowFor(p.d0)] + ' ' + md(p.d0);
+        pts.forEach((p, i) => {
+          const cx = slot * i + slot / 2;
+          const over = !isB && weekly && mode !== 'free' && p.v > lim;
+          const fill = isB ? (p.v >= tgt ? this.TK.tA0526A : (p.v >= mn ? this.TK.tE2B9C4 : '#D9CFBC')) : (over ? this.TK.t6E2F43 : this.TK.tC9849A);
+          if (p.v > 0) bars.push({ x: (cx - bw / 2).toFixed(1), y: Y(p.v), w: bw.toFixed(1), h: Math.max(1, base - Y(p.v)), fill: fill, tip: pLbl(p) + ': ' + (isB ? kShort(p.v) + ' ' + (g.unit || '') + (weekly ? ' a day' : '') : p.v + ' ' + (g.unit || '')) });
+          if (!isB && p.v === 0) { const y = base - 6, k2 = Math.max(1.5, Math.min(4, slot * 0.35)); checks.push({ d: 'M' + (cx - k2).toFixed(1) + ' ' + y + ' L' + (cx - k2 * 0.3).toFixed(1) + ' ' + (y + k2 * 0.8).toFixed(1) + ' L' + (cx + k2).toFixed(1) + ' ' + (y - k2).toFixed(1), tip: pLbl(p) + ': free' }); }
+          if (i % every === 0) labels.push({ x: cx.toFixed(1), pct: (cx / W * 100).toFixed(2), t: weekly ? md(p.d0) : (pts.length <= 14 ? this.DSHORT[this.dowFor(p.d0)].charAt(0) : md(p.d0)) });
+        });
+        let best = 0, run = 0;
+        const good = (v) => isB ? v >= mn : v === 0;
+        days.forEach(x => { if (good(x.v)) { run++; best = Math.max(best, run); } else if (x.d !== 0) run = 0; });
+        const stats = [];
+        if (isB) {
+          const hit = days.filter(x => x.v >= tgt).length, showed = days.filter(x => x.v >= mn).length, sum = days.reduce((a, x) => a + x.v, 0);
+          stats.push({ big: hit + ' of ' + N, small: 'days at your goal (' + kShort(tgt) + ')' });
+          stats.push({ big: showed + ' of ' + N, small: 'days you showed up (' + kShort(mn) + '+)' });
+          stats.push({ big: kShort(N ? sum / N : 0), small: (g.unit || '') + ' a day on average' });
+          stats.push({ big: best + (best === 1 ? ' day' : ' days'), small: 'best stretch showing up' });
+        } else {
+          const free = days.filter(x => !x.v).length, sum = days.reduce((a, x) => a + x.v, 0);
+          stats.push({ big: free + ' of ' + N, small: 'free days (' + (N ? Math.round(free / N * 100) : 0) + '%)' });
+          stats.push({ big: String(Math.round((N ? sum / N * 7 : 0) * 10) / 10), small: (g.unit || '') + ' a week on average' });
+          if (mode !== 'free') { const wk = {}; days.forEach(x => { const w = this.weekStartOff(x.d); wk[w] = (wk[w] || 0) + x.v; }); const ks = Object.keys(wk); stats.push({ big: ks.filter(k3 => wk[k3] <= lim).length + ' of ' + ks.length, small: 'weeks at or under your limit (' + lim + ')' }); }
+          stats.push({ big: best + (best === 1 ? ' day' : ' days'), small: 'longest free stretch' });
+        }
+        const modeBtns = [['start', 'Since start'], ['4w', '4 weeks'], ['3m', '3 months'], ['custom', 'Custom']].map(o => { const on = R.mode === o[0]; return { label: o[1], on: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? this.TK.t6E2F43 : '#6B6358', shadow: on ? '0 1px 3px rgba(0,0,0,0.12)' : 'none', set: () => setR(o[0] === 'custom' ? { mode: 'custom', from: from, to: to, shift: 0 } : { mode: o[0], shift: 0 }) }; });
+        const canStep = R.mode === '4w' || R.mode === '3m';
+        const legend = isB ? [{ bg: this.TK.tA0526A, bt: 'none', h: '8px', label: 'Reached goal' }, { bg: this.TK.tE2B9C4, bt: 'none', h: '8px', label: 'Showed up' }, { bg: 'transparent', bt: '1.5px dashed ' + this.TK.tA0526A, h: '0', label: 'Goal' + (weekly ? ' (bars = avg a day)' : '') }]
+          : [{ bg: this.TK.tC9849A, bt: 'none', h: '8px', label: (g.unit || 'Amount') + (weekly ? ' that week' : ' that day') }].concat(weekly && mode !== 'free' ? [{ bg: this.TK.t6E2F43, bt: 'none', h: '8px', label: 'Over your limit' }] : []).concat([, { bg: 'transparent', bt: 'none', h: '0', label: '✓ = free ' + (weekly ? 'week' : 'day'), isCheck: true }]).concat(weekly && mode !== 'free' ? [{ bg: 'transparent', bt: '1.5px dashed ' + this.TK.t6E2F43, h: '0', label: 'Weekly limit' }] : []);
+        return {
+          iTrModes: modeBtns, iTrStep: canStep, iTrPrev: () => setR({ shift: R.shift + 1 }), iTrNext: () => setR({ shift: Math.max(0, R.shift - 1) }),
+          iTrNextDis: R.shift === 0, iTrPrevDis: from <= st0,
+          iTrRange: dayName(from) + ' – ' + (to === 0 ? 'today' : dayName(to)) + ' · ' + N + (N === 1 ? ' day' : ' days') + (weekly ? ' · by week' : ''),
+          iTrCustom: R.mode === 'custom', iTrFrom: toISO(from), iTrTo: toISO(to), iTrMin: toISO(st0), iTrMax: toISO(0),
+          iTrOnFrom: (e) => { if (e.target.value) setR({ from: fromISO(e.target.value) }); }, iTrOnTo: (e) => { if (e.target.value) setR({ to: fromISO(e.target.value) }); },
+          iTrStats: stats, iTrBars: bars, iTrChecks: checks, iTrLabels: labels,
+          iTrHasLine: line > 0, iTrLineY: Y(line), iTrLineCol: isB ? this.TK.tA0526A : this.TK.t6E2F43, iTrHasMin: isB && !weekly && mn < tgt, iTrMinY: Y(mn),
+          iTrLegend: legend.map(x => Object.assign({ isCheck: false }, x, { notCheck: !x.isCheck })),
+          iTrAria: 'Chart of ' + (g.unit || 'amounts') + ' from ' + dayName(from) + ' to ' + (to === 0 ? 'today' : dayName(to)) + '. ' + stats.map(x => x.big + ' ' + x.small).join('. '),
+          iTrStartTxt: 'Started ' + dayName(st0) + (st0 === 0 ? ' (today)' : '')
+        };
+      };
       if (k === 'build') {
         const b = buildStats(g);
         const maxV = Math.max(b.tgt * 1.25, ...b.days.map(x => x.v), 1);
         const Y = (v) => Math.round(70 - v / maxV * 66);
         const hb = s.habits.find(h => h.id === g.habitId);
         const updHabit = (p) => { if (hb) this.setState({ habits: this.state.habits.map(h => h.id === hb.id ? Object.assign({}, h, p) : h) }); };
-        Object.assign(iVals, {
+        Object.assign(iVals, trend(true), {
           iIsBuild: true,
           iStats: [
             { big: b.hit + ' / 14', small: 'days at ' + kShort(b.tgt) + ' ' + (g.unit || '') },
@@ -9070,7 +9165,8 @@ class Component extends DCLogic {
             num('daily', 'Daily goal', g.daily, (v) => { const n = Math.max(1, +v || 1); upd({ daily: n }); updHabit({ goal: n }); }),
             num('min', 'Still counts as showing up', g.minimum, (v) => upd({ minimum: Math.max(0, +v || 0) })),
             num('unit', 'Measured in', g.unit, (v) => { upd({ unit: v }); const isMin = /^min/i.test(v || '') || !v; updHabit(Object.assign({ unit: v }, isMin ? { perMin: 1 } : (/^steps?$/i.test(v) && hb && (hb.perMin || 1) === 1 ? { perMin: 100 } : {}))); }, 'text'),
-            num('quick', 'Quick-add amount', g.quick, (v) => upd({ quick: Math.max(1, +v || 1) }))
+            num('quick', 'Quick-add amount', g.quick, (v) => upd({ quick: Math.max(1, +v || 1) })),
+            num('startday', 'Started on', toISO(typeof g.startDay === 'number' ? g.startDay : 0), (v) => { if (v) upd({ startDay: Math.min(0, fromISO(v)) }); }, 'date')
           ].concat(hb && !/^min/i.test(g.unit || 'minutes') ? [num('permin', 'About how many ' + (g.unit || 'units') + ' per minute', hb.perMin || 1, (v) => updHabit({ perMin: Math.max(0.1, +v || 1) }))] : []),
           iRepOn: !!hb,
           ...(() => {
@@ -9102,8 +9198,9 @@ class Component extends DCLogic {
         if (b.mode !== 'free') enc = b.total < b.limit ? (b.limit - b.total) + ' left in your week. You are doing this.' : (b.total === b.limit ? 'Right at your limit. Nice and steady.' : 'Over by ' + (b.total - b.limit) + ' this week. A slip is information, not failure. Tomorrow is a fresh page.');
         else enc = b.free >= b.aim ? 'You already hit your free days this week.' : (b.aim - b.free) + ' more free days to reach your aim.';
         const setToday = (n) => { const lg = Object.assign({}, g.logs || {}); lg[0] = Math.max(0, n); upd({ logs: lg }); };
-        Object.assign(iVals, {
-          iIsBreak: true, iStats: stats, iEncourage: enc,
+        const wkTxt = 'This week: ' + (b.mode !== 'free' ? b.total + ' ' + (g.unit || '') + ' · limit ' + b.limit : '') + (b.mode === 'both' ? ' · ' : '') + (b.mode !== 'limit' ? b.free + ' free ' + (b.free === 1 ? 'day' : 'days') + ' · goal ' + b.aim : '');
+        Object.assign(iVals, trend(false), {
+          iIsBreak: true, iStats: stats, iEncourage: enc, iWeekTxt: wkTxt,
           iWeekRange: dayName(ws0) + ' – ' + dayName(ws0 + 6),
           iDots: b.days.map(x => ({ bg: x.v ? '#F1E8DA' : col.swatch, fg: x.v ? '#6B5A4A' : '#FFFFFF', n: x.v ? String(x.v) : '', ring: x.d === 0 ? '0 0 0 2px #2B2722' : 'none', tip: this.DSHORT[this.dowFor(x.d)] + ' ' + this.dateFor(x.d).getDate() + ': ' + (x.v ? x.v + ' ' + (g.unit || '') : 'free day') })),
           iTodayN: String(b.today), iTodayText: b.today ? b.today + ' ' + (b.today === 1 ? (g.unit || '').replace(/s$/, '') : (g.unit || '')) + ' so far' : 'a free day so far',
@@ -9112,7 +9209,8 @@ class Component extends DCLogic {
             num('unit', 'What you are tracking', g.unit, (v) => upd({ unit: v }), 'text'),
             sel2('mode', 'Track by', g.mode || 'both', [['limit', 'A weekly limit'], ['free', 'Free days'], ['both', 'Both']], (v) => upd({ mode: v })),
             num('limit', 'Weekly limit', g.limit, (v) => upd({ limit: Math.max(0, +v || 0) })),
-            num('aim', 'Free days to aim for', g.aimFree, (v) => upd({ aimFree: Math.max(0, Math.min(7, +v || 0)) }))
+            num('aim', 'Free days to aim for', g.aimFree, (v) => upd({ aimFree: Math.max(0, Math.min(7, +v || 0)) })),
+            num('startday', 'Started on', toISO(typeof g.startDay === 'number' ? g.startDay : 0), (v) => { if (v) upd({ startDay: Math.min(0, fromISO(v)) }); }, 'date')
           ]
         });
       } else if (g.measure === 'number') {
