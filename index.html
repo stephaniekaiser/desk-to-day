@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Oct 28, 11:56 AM';</script>
+<script>window.__plannerBuild = 'Oct 28, 7:17 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -40,8 +40,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="width: 100%; height: 100vh; height: 100dvh; min-height: 560px; box-sizing: border-box; padding: {{rootPad}}; padding-top: calc({{rootPadTop}} + env(safe-area-inset-top, 0px)); padding-bottom: calc({{rootPadTop}} + env(safe-area-inset-bottom, 0px)); background: radial-gradient(ellipse at 50% 0%, #3B4644 0%, #252D2C 70%); font-family: {{TK.fBody}}; color: #2B2722; display: flex; flex-direction: column; gap: 10px">
 <sc-if value="{{showPageToggle}}" hint-placeholder-val="{{ false }}">
 <div role="tablist" aria-label="Which page" style="flex: none; align-self: center; display: flex; gap: 4px; background: {{TK.t6E2F43}}; border-radius: 14px; padding: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); width: 100%; max-width: 520px; box-sizing: border-box">
-<button role="tab" aria-selected="{{mLeftSel}}" onClick="{{mShowLeft}}" style="flex: 1; height: 44px; border: 0; border-radius: 10px; background: {{mLeftBg}}; color: {{mLeftFg}}; font-size: calc(15px * {{fsK}}); font-weight: 700">{{mLeftLabel}}</button>
-<button role="tab" aria-selected="{{mRightSel}}" onClick="{{mShowRight}}" style="flex: 1; height: 44px; border: 0; border-radius: 10px; background: {{mRightBg}}; color: {{mRightFg}}; font-size: calc(15px * {{fsK}}); font-weight: 700">{{mRightLabel}}</button>
+<button role="tab" aria-selected="{{mLeftSel}}" onClick="{{mShowLeft}}" onDragEnter="{{mDragLeft}}" onDragOver="{{mDragLeft}}" style="flex: 1; height: 44px; border: 0; border-radius: 10px; background: {{mLeftBg}}; color: {{mLeftFg}}; font-size: calc(15px * {{fsK}}); font-weight: 700">{{mLeftLabel}}</button>
+<button role="tab" aria-selected="{{mRightSel}}" onClick="{{mShowRight}}" onDragEnter="{{mDragRight}}" onDragOver="{{mDragRight}}" style="flex: 1; height: 44px; border: 0; border-radius: 10px; background: {{mRightBg}}; color: {{mRightFg}}; font-size: calc(15px * {{fsK}}); font-weight: 700">{{mRightLabel}}</button>
 </div>
 </sc-if>
 <div style="flex: 1; min-height: 0; width: 100%; max-width: 1800px; margin: 0 auto; box-sizing: border-box; position: relative; display: flex; background: radial-gradient(ellipse at 25% 15%, #2E6A5C 0%, #1E4C42 45%, #163A32 100%); border-radius: 20px; padding: 14px 0 14px 14px; min-width: 0; box-shadow: 0 18px 40px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06), inset 0 2px 0 rgba(255,255,255,0.08)">
@@ -1011,6 +1011,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <select id="add-m" value="{{addM}}" onChange="{{onAddM}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; padding: 0 2px"><sc-for list="{{addMOpts}}" as="amo" hint-placeholder-count="12"><option value="{{amo.v}}">{{amo.l}}</option></sc-for></select>
 <span style="font-size: calc(13px * {{fsK}}); color: #6B6358">m</span>
 </div>
+<label for="add-pri" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">List</label>
+<select id="add-pri" value="{{addPri}}" onChange="{{onAddPri}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; padding: 0 6px; justify-self: start"><option value="A">Must do</option><option value="B">Should do</option><option value="C">Could do</option></select>
 <label for="add-flag" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #6B6358">Flag</label>
 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0">
 <select id="add-flag" value="{{addFlag}}" onChange="{{onAddFlag}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; padding: 0 6px; flex: 1 1 110px; min-width: 0"><option value="">No flag</option><option value="important">Important</option><option value="urgent">Urgent</option></select>
@@ -4641,9 +4643,17 @@ class Component extends DCLogic {
     if (this.ready && (s.tasks || []).some(t => typeof t.added !== 'number')) {
       this.setState(st => ({ tasks: st.tasks.map(t => typeof t.added === 'number' ? t : Object.assign({}, t, { added: 0 })) }));
     }
-    if (s.vw < 900 && s.view === 'day' && s.sel && !(prevState && prevState.sel) && s.mobilePage === 'left') {
+    if (s.vw < 900 && s.view === 'day' && s.sel && !s.sel.drag && !(prevState && prevState.sel) && s.mobilePage === 'left') {
       this.setState({ mobilePage: 'right' });
     }
+  }
+
+  dragFlip(page) {
+    const s = this.state;
+    if (!this.drag || (s.vw || 1194) >= 900 || s.mobilePage === page) return;
+    if (this._flipT && this._flipTo === page) return;
+    clearTimeout(this._flipT); this._flipTo = page;
+    this._flipT = setTimeout(() => { this._flipT = null; this._flipTo = null; if (this.drag && this.state.mobilePage !== page) this.setState({ mobilePage: page }); }, 350);
   }
 
   // ---------- categories ----------
@@ -5650,6 +5660,7 @@ class Component extends DCLogic {
         return;
       }
       e.preventDefault();
+      try { if (st.x > window.innerWidth - 28) this.dragFlip('right'); else if (st.x < 28) this.dragFlip('left'); } catch (err) {}
       if (st.ghost) { st.ghost.style.left = (st.x - st.dx) + 'px'; st.ghost.style.top = (st.y - st.dy) + 'px'; }
       const el = doc.elementFromPoint(st.x, st.y);
       if (el !== st.over) { if (st.over) fire(st.over, 'dragleave', st.x, st.y); st.over = el; if (el) fire(el, 'dragenter', st.x, st.y); }
@@ -9563,9 +9574,10 @@ class Component extends DCLogic {
       onAddH: (e) => { const h = Math.max(0, Math.min(99, parseInt(e.target.value, 10) || 0)); const f0 = this.state.addForm || {}; patchAdd({ mins: h * 60 + ((f0.mins || 0) % 60) }); },
       addHUp: () => { const f0 = this.state.addForm || {}; patchAdd({ mins: Math.min(99 * 60, (f0.mins || 0) + 60) }); },
       addHDown: () => { const f0 = this.state.addForm || {}; patchAdd({ mins: Math.max(0, (f0.mins || 0) - 60) }); },
+      addPri: af && af.pri ? af.pri : 'B', onAddPri: (e) => patchAdd({ pri: e.target.value }),
       addFlag: af && af.flag ? af.flag : '', onAddFlag: (e) => patchAdd({ flag: e.target.value || null }),
       addCat: af && af.cat ? af.cat : '', onAddCat: (e) => patchAdd({ cat: e.target.value || null }),
-      addCatOpts: [{ v: '', l: 'No category' }].concat(this.CAT_ORDER.map(k => ({ v: k, l: this.CATS[k].name }))),
+      addCatOpts: [{ v: '', l: 'None' }].concat(this.CAT_ORDER.map(k => ({ v: k, l: this.CATS[k].name }))),
       onAddM: (e) => { const m = parseInt(e.target.value, 10) || 0; patchAdd({ mins: Math.floor((af && af.mins || 0) / 60) * 60 + m }); },
       addPlus: () => patchAdd({ mins: Math.min(720, af.mins + 15) }),
       addPresets: [15, 30, 60, 120].map(m => ({ label: this.fmtDur(m), bg: af && af.mins === m ? '#FCE9A6' : '#FBF7EE', set: () => patchAdd({ mins: m }) })),
@@ -11077,12 +11089,14 @@ class Component extends DCLogic {
       mRightLabel: ({ day: 'Calendar', week: 'This week', month: 'Day details', desk: 'This week', settings: 'Options', goals: 'Details', notes: 'Page', school: 'Course', meals: 'Meal list', journal: 'Entry' })[s.view] || 'Calendar',
       mLeftSel: s.mobilePage === 'left' ? 'true' : 'false',
       mRightSel: s.mobilePage === 'right' ? 'true' : 'false',
-      mLeftBg: s.mobilePage === 'left' ? '#FBF7EE' : 'transparent',
-      mRightBg: s.mobilePage === 'right' ? '#FBF7EE' : 'transparent',
+      mLeftBg: s.mobilePage === 'left' ? '#FBF7EE' : (s.sel && s.sel.drag ? this.TK.tA0526A : 'transparent'),
+      mRightBg: s.mobilePage === 'right' ? '#FBF7EE' : (s.sel && s.sel.drag ? this.TK.tA0526A : 'transparent'),
       mLeftFg: s.mobilePage === 'left' ? this.TK.t6E2F43 : 'rgba(255,255,255,0.85)',
       mRightFg: s.mobilePage === 'right' ? this.TK.t6E2F43 : 'rgba(255,255,255,0.85)',
       mShowLeft: () => this.setState({ mobilePage: 'left' }),
       mShowRight: () => this.setState({ mobilePage: 'right' }),
+      mDragLeft: (e) => { if (this.drag) { try { e.preventDefault(); } catch (err) {} this.dragFlip('left'); } },
+      mDragRight: (e) => { if (this.drag) { try { e.preventDefault(); } catch (err) {} this.dragFlip('right'); } },
       weekB3Score: weekB3.length ? weekB3Done + ' of ' + weekB3.length + ' done' : '',
       b3Strip: b3Strip,
       b3Score: dayB3.length ? dayB3Done + '/' + dayB3.length : 'not set',
