@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 12, 11:30 AM';</script>
+<script>window.__plannerBuild = 'Nov 12, 11:39 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3034,6 +3034,9 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <span style="flex: 1 1 140px; min-width: 0; font-size: calc(12.5px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{qp.label}}</span>
 <label for="{{qp.dId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Move to day</label>
 <input id="{{qp.dId}}" type="date" value="{{qp.dateVal}}" onChange="{{qp.onDate}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+<label for="{{qp.tId}}" style="font-size: calc(12px * {{fsK}}); color: #6B6358">at</label>
+<input id="{{qp.tId}}" type="time" step="900" value="{{qp.timeVal}}" onChange="{{qp.onTime}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+<sc-if value="{{qp.hasTime}}" hint-placeholder-val="{{ false }}"><button onClick="{{qp.clearTime}}" title="Take the time off, keep the day" style="height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0 8px; font-size: calc(12px * {{fsK}}); font-weight: 700">Clear time</button></sc-if>
 <button onClick="{{qp.clear}}" aria-label="Take {{qp.label}} off the plan" title="Take off the plan" style="height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0 8px; display: flex; align-items: center; gap: 4px; font-size: calc(12px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>Unplan</button>
 </div>
 </sc-for>
@@ -3092,6 +3095,9 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <span style="flex: 1 1 140px; min-width: 0; font-size: calc(12.5px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{qp.label}}</span>
 <label for="{{qp.dId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Move to day</label>
 <input id="{{qp.dId}}" type="date" value="{{qp.dateVal}}" onChange="{{qp.onDate}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+<label for="{{qp.tId}}" style="font-size: calc(12px * {{fsK}}); color: #6B6358">at</label>
+<input id="{{qp.tId}}" type="time" step="900" value="{{qp.timeVal}}" onChange="{{qp.onTime}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+<sc-if value="{{qp.hasTime}}" hint-placeholder-val="{{ false }}"><button onClick="{{qp.clearTime}}" title="Take the time off, keep the day" style="height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0 8px; font-size: calc(12px * {{fsK}}); font-weight: 700">Clear time</button></sc-if>
 <button onClick="{{qp.clear}}" aria-label="Take {{qp.label}} off the plan" title="Take off the plan" style="height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0 8px; display: flex; align-items: center; gap: 4px; font-size: calc(12px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>Unplan</button>
 </div>
 </sc-for>
@@ -10320,14 +10326,21 @@ class Component extends DCLogic {
           const tm = (() => { if (!q.time) return null; const a = q.time.split(':'); return (+a[0]) * 60 + (+a[1]); })();
           return {
             scQsHasNote: whens.length > 0 || rem === 0,
-            scQsNote: rem === 0 ? (whens.length ? 'All of this is planned. Move it to another day or take it off the plan:' : 'All of this is done.') : (whens.length ? 'Some of this is planned. Move or unplan it here, or add the rest below.' : ''),
+            scQsNote: rem === 0 ? (whens.length ? 'All of this is planned. Change the day or time, or take it off the plan:' : 'All of this is done.') : (whens.length ? 'Some of this is planned. Move or unplan it here, or add the rest below.' : ''),
             ...(() => {
               const cover = s.tasks.filter(t => t.courseId === sel.id && t.parts && !t.done && t.parts.some(pp => q.ids.indexOf(pp.itemId) >= 0));
               const dayOf = (t) => { const sc = sm0[t.id]; return sc ? sc.day : (typeof t.dayAssign === 'number' ? t.dayAssign : this.effWeek(t)); };
               return {
                 scQsHasPlanned: cover.length > 0,
                 scQsPlanned: cover.map(t => ({
-                  label: (t.title || '').replace(/^[^:]*:\s*/, '') + ' · ' + this.fmtDur(t.mins) + (sm0[t.id] ? ' · ' + this.fmtTime(sm0[t.id].start, false) : ''),
+                  label: (t.title || '').replace(/^[^:]*:\s*/, '') + ' · ' + this.fmtDur(t.mins),
+                  tId: 'qst-' + t.id, timeVal: sm0[t.id] ? this.toHHMM(sm0[t.id].start) : '', hasTime: !!sm0[t.id],
+                  onTime: (e) => { const v = e.target.value; const st = this.state; const m = {}; Object.keys(st.placedByDay).forEach(k => { m[k] = (st.placedByDay[k] || []).filter(b => b.taskId !== t.id); });
+                    if (!v) { this.setState({ placedByDay: m }); this.setToast('Time cleared. It stays on that day\'s list.'); return; }
+                    const a = v.split(':'), start = (+a[0]) * 60 + (+a[1]), d = dayOf(t) >= 0 ? Math.round(dayOf(t)) : 0, n = st.nextId;
+                    m[String(d)] = (m[String(d)] || []).concat([{ id: 'p' + n, taskId: t.id, mins: t.mins, start: start }]);
+                    this.setState({ placedByDay: m, nextId: n + 1, tasks: st.tasks.map(x => x.id === t.id ? Object.assign({}, x, { dayAssign: d, weekOf: this.weekStartOff(d), bucket: 'week' }) : x) }); },
+                  clearTime: () => { const st = this.state; const m = {}; Object.keys(st.placedByDay).forEach(k => { m[k] = (st.placedByDay[k] || []).filter(b => b.taskId !== t.id); }); this.setState({ placedByDay: m }); this.setToast('Time cleared. It stays on that day\'s list.'); },
                   dId: 'qsp-' + t.id, dateVal: this.isoFor(dayOf(t)),
                   onDate: (e) => { const v = e.target.value; if (!v) return; const d = Math.max(0, this.offFromISO(v)); const st = this.state; const m = {}; Object.keys(st.placedByDay).forEach(k => { m[k] = (st.placedByDay[k] || []).filter(b => b.taskId !== t.id); }); this.setState({ tasks: st.tasks.map(x => x.id === t.id ? Object.assign({}, x, { dayAssign: d, weekOf: this.weekStartOff(d), bucket: 'week' }) : x), placedByDay: m }); this.setToast('Moved to ' + this.DAYS[this.dowFor(d)] + ', ' + this.MONTHS[this.dateFor(d).getMonth()] + ' ' + this.dateFor(d).getDate() + '.'); },
                   clear: () => { const st = this.state; const t2 = st.tasks.find(x => x.id === t.id); if (!t2) return; const keep = (t2.parts || []).filter(pp => q.ids.indexOf(pp.itemId) < 0); const m = {}; let tasks2;
