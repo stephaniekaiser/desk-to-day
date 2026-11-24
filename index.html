@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 12:40 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 12:43 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2941,18 +2941,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <span style="font-size: calc(12px * {{fsK}}); color: #8A8174">{{scPlanNote}}</span>
 </div>
 </sc-if>
-<section aria-label="Include in plan" style="flex: none; display: flex; flex-direction: column; gap: 6px">
-<div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Include in plan</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174">{{scInclSum}}</span></div>
-<span style="font-size: calc(12px * {{fsK}}); color: #6B6358">Checked materials get study sessions when you tap Plan study time. Unchecked ones stay in Materials for reference.</span>
-<sc-if value="{{scInclNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174">Add study materials in the Materials tab first.</span></sc-if>
-<sc-for list="{{scIncl}}" as="ic" hint-placeholder-count="2">
-<button role="checkbox" aria-checked="{{ic.on}}" onClick="{{ic.toggle}}" style="display: flex; align-items: center; gap: 10px; min-height: calc(38px * {{rowK}}); border: 0; border-bottom: 1px solid {{TK.tF6EDEF}}; background: transparent; padding: 0 2px; text-align: left; font: inherit">
-<span aria-hidden="true" style="width: 20px; height: 20px; flex: none; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{ic.bg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
-<span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ic.name}}</span>
-<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #7A7064">{{ic.meta}}</span>
-</button>
-</sc-for>
-</section>
+<div style="flex: none; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: calc(12.5px * {{fsK}}); color: #6B6358"><span>{{scInclLine}}</span><button onClick="{{scGoMaterials}}" style="border: 0; background: transparent; padding: 0; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; text-decoration: underline">Change in Materials</button></div>
 <section aria-label="Planned sessions" style="flex: none; display: flex; flex-direction: column; gap: 6px">
 <div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Planned sessions</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174">{{scSessSum}}</span></div>
 <sc-if value="{{scSessNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174">Nothing planned yet. Tap Plan study time above.</span></sc-if>
@@ -3011,6 +3000,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <input id="{{rs.inputId}}" value="{{rs.title}}" onChange="{{rs.onTitle}}" placeholder="{{rs.titlePh}}" style="outline-color: {{TK.tA0526A}}; height: 24px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0; width: 100%; border-radius: 6px">
 <span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{rs.meta}}</span>
 </div>
+<button role="checkbox" aria-checked="{{rs.inPlan}}" onClick="{{rs.togglePlan}}" title="Checked: Plan study time gives its lessons study sessions. Unchecked: kept here for reference only." style="flex: none; height: 30px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; white-space: nowrap"><span aria-hidden="true" style="width: 18px; height: 18px; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{rs.planBoxBg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>In plan</button>
 <sc-if value="{{rs.hasUrl}}" hint-placeholder-val="{{ false }}">
 <a href="{{rs.urlHref}}" target="_blank" rel="noopener noreferrer" aria-label="Open {{rs.name}} in a new tab" title="Open" style="width: 30px; height: 30px; flex: none; border-radius: 15px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>
@@ -10140,6 +10130,7 @@ class Component extends DCLogic {
             scTabs: [['ov', 'Plan', ''], ['res', 'Materials', String((sel.resources || []).length)], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : ''], ['co', 'Cohort', String((s.series || []).filter(x => x.courseId === sel.id || x.title === 'Cohort: ' + (sel.title || 'Course')).length || '')]].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
             scTabOv: tabOn('ov'), scTabRes: tabOn('res'), scTabAs: tabOn('as'), scTabCo: tabOn('co'),
             scGoPlan: () => this.setState({ courseTab: 'ov' }),
+            scGoMaterials: () => this.setState({ courseTab: 'res' }),
             scLinksOpen: !!(s.scLinksOpen || {})[sel.id] || s.courseTab === 'links', scLinksOpenA: (s.scLinksOpen || {})[sel.id] ? 'true' : 'false', scLinksChev: (s.scLinksOpen || {})[sel.id] || s.courseTab === 'links' ? 'rotate(90deg)' : 'none',
             scLinksToggle: () => this.setState({ courseTab: this.state.courseTab === 'links' ? 'res' : this.state.courseTab, scLinksOpen: Object.assign({}, this.state.scLinksOpen || {}, { [sel.id]: !((this.state.scLinksOpen || {})[sel.id] || this.state.courseTab === 'links') }) }),
             scLinksSum: (sel.links || []).length ? (sel.links || []).length + ((sel.links || []).length === 1 ? ' link' : ' links') : 'None yet',
@@ -10179,7 +10170,7 @@ class Component extends DCLogic {
               const nOn = res.filter(r => !r.skip).length;
               return {
                 scSessRows: rows, scSessNone: !rows.length, scSessSum: rows.length ? rows.length + (rows.length === 1 ? ' session · ' : ' sessions · ') + this.fmtDur(totM) : '',
-                scIncl: incl, scInclNone: !res.length, scInclSum: res.length ? nOn + ' of ' + res.length + ' included · ' + (this.fmtDur(st.total) || '0h') : ''
+                scInclLine: res.length ? 'Planning from ' + nOn + ' of ' + res.length + (res.length === 1 ? ' material' : ' materials') + ' (' + (this.fmtDur(st.total) || '0h') + ').' : 'No study materials yet.'
               };
             })(),
             ...(() => {
@@ -10421,7 +10412,7 @@ class Component extends DCLogic {
           };
         })(),
         scImportInto: () => this.setState({ schoolNew: { mode: 'import', title: '', book: '', isbn: '', lessons: '', subs: '', hours: '', paste: '', goalId: '', importText: '', importName: '', target: sel.id } }),
-        scPlanNote: sel.planNote || 'Spreads what is left of the checked materials below into study sessions. You choose by week or by day before anything is added.',
+        scPlanNote: sel.planNote || 'Spreads what is left of the materials marked In plan into study sessions. You choose by week or by day before anything is added.',
         scCohort: () => { this.openNewEvent(0); this.setState({ evEdit: Object.assign({}, this.state.evEdit, { title: 'Cohort: ' + (sel.title || 'Course'), cat: this.schoolCatOf(this.state.cats) }) }); },
         scResources: (sel.resources || []).map((r, ri) => {
           const ls = this.resLessons(sel, r, ri === 0);
@@ -10447,7 +10438,7 @@ class Component extends DCLogic {
             orderNote: allR.length > 1 ? 'Study ' + (ri + 1) + ' of ' + allR.length + '. Plans follow this order.' : 'Plans follow this order.',
             title: r.title, name: r.title || 'Untitled study material', inputId: 'scr-' + r.id,
             onTitle: (e) => { const v = e.target.value; updR(() => ({ title: v })); },
-            meta: ls.length + (ls.length === 1 ? ' lesson' : ' lessons') + ' · ' + (this.fmtDur(mins) || '0h') + (r.skip ? ' · not in plan' : ''),
+            meta: ls.length + (ls.length === 1 ? ' lesson' : ' lessons') + ' · ' + (this.fmtDur(mins) || '0h'),
             open: s.resOpen === r.id, openA: s.resOpen === r.id ? 'true' : 'false', chev: s.resOpen === r.id ? 'rotate(90deg)' : 'none',
             toggle: () => this.setState({ resOpen: this.state.resOpen === r.id ? null : r.id }),
             hasUrl: /^\s*(https?:\/\/)?[^\s.]+\.[^\s]+/i.test(u) && !/^\s*javascript:/i.test(u),
@@ -10465,7 +10456,7 @@ class Component extends DCLogic {
             onAuthor: (e) => { const v = e.target.value; updR(() => ({ author: v })); },
             onIsbn: (e) => { const v = e.target.value; updR(() => ({ isbn: v })); },
             onUrl: (e) => { const v = e.target.value; updR(() => ({ url: v })); },
-            inPlan: r.skip ? 'false' : 'true', planTrack: r.skip ? '#B9AF9C' : this.TK.t6E2F43, planKnob: r.skip ? 3 : 17,
+            inPlan: r.skip ? 'false' : 'true', planBoxBg: r.skip ? '#FFFFFF' : this.TK.t6E2F43, planTrack: r.skip ? '#B9AF9C' : this.TK.t6E2F43, planKnob: r.skip ? 3 : 17,
             togglePlan: () => updR(x => ({ skip: !x.skip })),
             lessons: ls.map((l, li) => lessonVals(l, li)),
             addLOpen: s.addLFor === r.id, addLId: 'sral-' + r.id, addLText: s.addLFor === r.id ? (s.addLText || '') : '',
