@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 1:06 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 1:13 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2827,7 +2827,16 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <label for="sc-title" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Course name</label>
 <input id="sc-title" value="{{scTitle}}" onChange="{{scOnTitle}}" placeholder="Course name" style="outline-color: {{TK.tA0526A}}; width: 100%; box-sizing: border-box; border: 0; padding: 0 8px; background: transparent; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(30px * {{fsK}}); line-height: 1.15; color: {{TK.t6E2F43}}; outline-offset: 2px; border-radius: 6px">
 </div>
+<button onClick="{{scToggleFinished}}" aria-label="{{scFinishLabel}}" title="{{scFinishLabel}}" style="width: 34px; height: 34px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 17px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{scFinishIcon}}"></path></svg></button>
+<button onClick="{{scDel}}" aria-label="Remove course" title="Remove course" style="width: 34px; height: 34px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 17px; background: #FFFFFF; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"></path></svg></button>
 </header>
+<sc-if value="{{scDelAsk}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #FBEDEA; border-radius: 10px; padding: 8px 10px">
+<span style="flex: 1 1 200px; min-width: 0; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #9A4A3A">{{scDelAskText}}</span>
+<button onClick="{{scDelCancel}}" style="height: 30px; padding: 0 10px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Keep it</button>
+<button onClick="{{scDel}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: #9A4A3A; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Remove</button>
+</div>
+</sc-if>
 <div role="radiogroup" aria-label="Course color on your calendar" title="Course color on your calendar" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: -4px 0 0 56px">
 <sc-for list="{{scColors}}" as="sw" hint-placeholder-count="10">
 <button role="radio" aria-checked="{{sw.on}}" aria-label="{{sw.name}}" title="{{sw.name}}" onClick="{{sw.set}}" style="width: 18px; height: 18px; border: 0; border-radius: 9px; padding: 0; background: {{sw.sw}}; box-shadow: {{sw.ring}}"></button>
@@ -3278,12 +3287,6 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 </sc-if>
 
-<sc-if value="{{scTabOv}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; align-items: center; gap: 10px; justify-content: flex-end; flex-wrap: wrap; border-top: 1px solid #EFE7D6; padding-top: 10px; margin-top: 4px">
-<button onClick="{{scToggleFinished}}" style="height: 30px; padding: 0 12px; border: 1px solid #D8CDB6; border-radius: 8px; background: transparent; color: #4A443B; font-size: calc(12px * {{fsK}}); font-weight: 600">{{scFinishLabel}}</button>
-<button onClick="{{scDel}}" style=" min-height: 30px; border: 0; border-radius: 8px; background: {{scDelBg}}; color: {{scDelFg}}; padding: 0 10px; font-size: calc(12px * {{fsK}}); font-weight: 600">{{scDelLabel}}</button>
-</div>
-</sc-if>
 </div>
 </sc-if>
 </div>
@@ -10093,7 +10096,9 @@ class Component extends DCLogic {
       return Object.assign(out, {
         scColors: ['lavender', 'teal', 'gold', 'rose', 'blue', 'green', 'orange', 'plum', 'brown', 'slate'].map(k => { const on = (sel.color || 'lavender') === k; const pal = this.CAT_COLORS[k]; return { name: pal.name, sw: pal.color, on: on ? 'true' : 'false', ring: on ? '0 0 0 2px #FFFFFF, 0 0 0 4px ' + pal.color : 'none', set: () => updC(sel.id, () => ({ color: k })) }; }),
         scFinished: !!sel.finished, scNotFinished: !sel.finished,
-        scFinishLabel: sel.finished ? 'Reopen course' : 'Mark finished',
+        scFinishLabel: sel.finished ? 'Reopen course' : 'Mark course finished',
+        scFinishIcon: sel.finished ? 'M3 12a9 9 0 1 0 3-6.7M3 4v5h5' : 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18M8 12.5l3 3 5-6',
+        scDelAsk: !!s.schoolDel, scDelCancel: () => this.setState({ schoolDel: false }),
         scToggleFinished: () => updC(sel.id, c => ({ finished: !c.finished })),
         scTitle: sel.title, scOnTitle: (e) => { const v = e.target.value; this.setState({ courses: this.state.courses.map(c => c.id === sel.id ? Object.assign({}, c, { title: v }) : c) }); },
         scBook: sel.book || '', scIsbn: sel.isbn || '',
@@ -10536,10 +10541,11 @@ class Component extends DCLogic {
         }),
         scAddResource: () => { const rid = 'r' + Date.now().toString(36); updC(sel.id, c => ({ resources: (c.resources || []).map(x => Object.assign({}, x, { open: false })).concat([{ id: rid, title: '', type: 'general', author: '', isbn: '', url: '', open: true, skip: true }]) })); this.setState({ resDetails: rid, resOpen: rid }); setTimeout(() => { try { const el = document.getElementById('scr-' + rid); if (el) { el.focus(); el.scrollIntoView({ block: 'nearest' }); } } catch (e) {} }, 60); },
         scResSummary: (sel.resources || []).length + ((sel.resources || []).length === 1 ? ' study material' : ' study materials') + ' · ' + (this.fmtDur(st.total) || '0h') + ' in plan',
+        scDelAskText: s.schoolDel ? (() => { const sm2 = this.schedMap(); const open = s.tasks.filter(t => t.courseId === sel.id && !t.done); const cal = open.filter(t => sm2[t.id]).length; return 'Remove this course' + (open.length ? ' and its ' + open.length + (open.length === 1 ? ' planned session' : ' planned sessions') + (cal ? ' (' + cal + ' on your calendar)' : '') : '') + '?'; })() : '',
         scDelLabel: s.schoolDel ? (() => { const sm2 = this.schedMap(); const open = s.tasks.filter(t => t.courseId === sel.id && !t.done); const cal = open.filter(t => sm2[t.id]).length; return 'Tap again to remove this course' + (open.length ? ' and ' + open.length + (open.length === 1 ? ' planned session' : ' planned sessions') + (cal ? ' (' + cal + ' on your calendar)' : '') : ''); })() : 'Remove course',
         scDelBg: s.schoolDel ? '#9A4A3A' : 'transparent', scDelFg: s.schoolDel ? '#FFFFFF' : '#9A4A3A',
         scDel: () => {
-          if (!this.state.schoolDel) { this.setState({ schoolDel: true }); clearTimeout(this.scDelT); this.scDelT = setTimeout(() => this.setState({ schoolDel: false }), 5000); return; }
+          if (!this.state.schoolDel) { this.setState({ schoolDel: true }); clearTimeout(this.scDelT); this.scDelT = setTimeout(() => this.setState({ schoolDel: false }), 10000); return; }
           clearTimeout(this.scDelT);
           const st2 = this.state, gone = {};
           st2.tasks.forEach(t => { if (t.courseId === sel.id && !t.done) gone[t.id] = true; });
