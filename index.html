@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 12:46 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 12:51 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3251,12 +3251,19 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 <span style="font-size: calc(12.5px * {{fsK}}); color: {{TK.t6E2F43}}; font-weight: 600">{{cs.summary}}</span>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 3px"><label for="{{cs.yId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Type</label><select id="{{cs.yId}}" value="{{cs.kindVal}}" onChange="{{cs.onKind}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF"><sc-for list="{{cs.kindOpts}}" as="cko" hint-placeholder-count="6"><option value="{{cko.v}}">{{cko.l}}</option></sc-for></select></div>
 <div style="display: flex; flex-direction: column; gap: 3px"><label for="{{cs.fId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">First class</label><input id="{{cs.fId}}" type="date" value="{{cs.firstVal}}" onChange="{{cs.onFirst}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF"></div>
 <div style="display: flex; flex-direction: column; gap: 3px"><label for="{{cs.tId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Time</label><input id="{{cs.tId}}" type="time" step="900" value="{{cs.timeVal}}" onChange="{{cs.onTime}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF"></div>
 <div style="display: flex; flex-direction: column; gap: 3px"><label for="{{cs.lId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Length</label><select id="{{cs.lId}}" value="{{cs.lenVal}}" onChange="{{cs.onLen}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF"><sc-for list="{{cs.lenOpts}}" as="clo" hint-placeholder-count="6"><option value="{{clo.v}}">{{clo.l}}</option></sc-for></select></div>
 <div style="display: flex; flex-direction: column; gap: 3px"><label for="{{cs.rId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Repeats</label><select id="{{cs.rId}}" value="{{cs.ruleVal}}" onChange="{{cs.onRule}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF"><option value="weekly">Every week</option><option value="biweekly">Every 2 weeks</option><option value="once">Just once</option></select></div>
 <sc-if value="{{cs.repeats}}" hint-placeholder-val="{{ true }}"><div style="display: flex; flex-direction: column; gap: 3px"><label for="{{cs.uId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Last class</label><div style="display: flex; align-items: center; gap: 4px"><input id="{{cs.uId}}" type="date" value="{{cs.untilVal}}" onChange="{{cs.onUntil}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1"><sc-if value="{{cs.hasUntil}}" hint-placeholder-val="{{ false }}"><button onClick="{{cs.clearUntil}}" aria-label="No end date" title="No end date" style="width: 26px; height: 26px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 13px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></div></div></sc-if>
 </div>
+<sc-if value="{{cs.repeats}}" hint-placeholder-val="{{ true }}">
+<div role="group" aria-label="Days it meets" style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap">
+<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C; margin-right: 4px">Meets on</span>
+<sc-for list="{{cs.days}}" as="cd" hint-placeholder-count="7"><button aria-pressed="{{cd.on}}" aria-label="{{cd.full}}" title="{{cd.full}}" onClick="{{cd.toggle}}" style="width: 32px; height: 30px; flex: none; box-sizing: border-box; border: 1px solid {{cd.bd}}; border-radius: 8px; background: {{cd.bg}}; color: {{cd.fg}}; padding: 0; font-size: calc(12px * {{fsK}}); font-weight: 700">{{cd.label}}</button></sc-for>
+</div>
+</sc-if>
 <div style="display: flex; align-items: center; gap: 6px">
 <label for="{{cs.kId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Join link</label>
 <input id="{{cs.kId}}" type="url" value="{{cs.link}}" onChange="{{cs.onLink}}" placeholder="Paste the meeting link" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; flex: 1; min-width: 0">
@@ -6079,6 +6086,10 @@ class Component extends DCLogic {
   matchRule(ser, off) {
     if (off < ser.anchor) return false;
     const d = this.dateFor(off), a = this.dateFor(ser.anchor);
+    if (ser.dows && ser.dows.length && (ser.rule === 'weekly' || ser.rule === 'biweekly')) {
+      if (ser.dows.indexOf(d.getDay()) < 0) return false;
+      return ser.rule === 'weekly' || Math.floor((off - (ser.anchor - a.getDay())) / 7) % 2 === 0;
+    }
     switch (ser.rule) {
       case 'daily': return true;
       case 'weekdays': return d.getDay() >= 1 && d.getDay() <= 5;
@@ -10126,7 +10137,7 @@ class Component extends DCLogic {
           const ordered = As.slice().sort((x, y) => (x.done - y.done) || ((typeof x.due === 'number' ? x.due : 9e9) - (typeof y.due === 'number' ? y.due : 9e9)));
           const pv = s.asPreview && s.asPreview.cid === sel.id ? s.asPreview : null;
           return {
-            scTabs: [['ov', 'Plan', ''], ['res', 'Materials', String((sel.resources || []).length)], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : ''], ['co', 'Cohort', String((s.series || []).filter(x => x.courseId === sel.id || x.title === 'Cohort: ' + (sel.title || 'Course')).length || '')]].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
+            scTabs: [['ov', 'Plan', ''], ['res', 'Materials', String((sel.resources || []).length)], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : ''], ['co', 'Classes', String((s.series || []).filter(x => x.courseId === sel.id || x.title === 'Cohort: ' + (sel.title || 'Course')).length || '')]].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
             scTabOv: tabOn('ov'), scTabRes: tabOn('res'), scTabAs: tabOn('as'), scTabCo: tabOn('co'),
             scGoPlan: () => this.setState({ courseTab: 'ov' }),
             scGoMaterials: () => this.setState({ courseTab: 'res' }),
@@ -10176,24 +10187,32 @@ class Component extends DCLogic {
               const cos = (s.series || []).filter(x => x.courseId === sel.id || x.title === 'Cohort: ' + (sel.title || 'Course'));
               const updS = (id, p2) => this.setState({ series: this.state.series.map(x => x.id === id ? Object.assign({}, x, p2) : x) });
               const lens = [30, 45, 60, 75, 90, 120, 150, 180, 240];
+              const KINDS = [['class', 'Class'], ['cohort', 'Cohort'], ['lab', 'Lab'], ['group', 'Study group'], ['office', 'Office hours'], ['other', 'Other']];
+              const kindOf = (x) => x.kind || (/^Cohort: /.test(x.title || '') ? 'cohort' : 'class');
               return {
                 scCoNone: !cos.length,
                 scCoAdd: () => { const n = this.state.nextId; const fin = typeof sel.finish === 'number' && sel.finish > 0 ? sel.finish : null;
-                  this.setState({ nextId: n + 1, series: (this.state.series || []).concat([{ id: 's' + n, title: 'Class: ' + (sel.title || 'Course'), courseId: sel.id, cat: this.schoolCatOf(this.state.cats) || null, start: 18 * 60, mins: 60, rule: 'weekly', anchor: 0, count: null, until: fin, link: '', exceptions: {} }]) }); },
+                  this.setState({ nextId: n + 1, series: (this.state.series || []).concat([{ id: 's' + n, title: 'Class: ' + (sel.title || 'Course'), kind: 'class', courseId: sel.id, cat: this.schoolCatOf(this.state.cats) || null, start: 18 * 60, mins: 60, rule: 'weekly', anchor: 0, count: null, until: fin, link: '', exceptions: {} }]) }); },
                 scCoRows: cos.map(x => {
                   const repeats = x.count !== 1;
                   const asking = s.coDel === x.id;
                   const d0 = this.dateFor(x.anchor);
-                  const summary = (repeats ? (x.rule === 'biweekly' ? 'Every 2 weeks on ' : 'Every ') + this.DAYS[d0.getDay()] + (x.rule === 'biweekly' ? '' : 's') : this.DAYS[d0.getDay()] + ', ' + this.MONTHS[d0.getMonth()] + ' ' + d0.getDate()) + ' at ' + this.fmtTime(x.start, false) + ' · ' + this.fmtDur(x.mins) + (repeats && typeof x.until === 'number' ? ' · until ' + this.MONTHS[this.dateFor(x.until).getMonth()] + ' ' + this.dateFor(x.until).getDate() : '');
+                  const dows = x.dows && x.dows.length ? x.dows.slice().sort() : [d0.getDay()];
+                  const dayNames = dows.length === 1 ? this.DAYS[dows[0]] + (x.rule === 'biweekly' ? '' : 's') : dows.map(k => this.DSHORT[k]).join(', ');
+                  const summary = (repeats ? (x.rule === 'biweekly' ? 'Every 2 weeks on ' : 'Every ') + dayNames : this.DAYS[d0.getDay()] + ', ' + this.MONTHS[d0.getMonth()] + ' ' + d0.getDate()) + ' at ' + this.fmtTime(x.start, false) + ' · ' + this.fmtDur(x.mins) + (repeats && typeof x.until === 'number' ? ' · until ' + this.MONTHS[this.dateFor(x.until).getMonth()] + ' ' + this.dateFor(x.until).getDate() : '');
                   const u = (x.link || '').trim();
                   return {
                     title: x.title || '', summary: summary, nId: 'con-' + x.id, fId: 'cof-' + x.id, tId: 'cot-' + x.id, lId: 'col-' + x.id, rId: 'cor-' + x.id, uId: 'cou-' + x.id, kId: 'cok-' + x.id,
                     onTitle: (e) => updS(x.id, { title: e.target.value }),
+                    yId: 'coy-' + x.id, kindVal: kindOf(x), kindOpts: KINDS.map(k => ({ v: k[0], l: k[1] })),
+                    onKind: (e) => { const v = e.target.value, oldL = (KINDS.find(k => k[0] === kindOf(x)) || KINDS[0])[1], newL = (KINDS.find(k => k[0] === v) || KINDS[0])[1]; const t0 = x.title || ''; const p2 = { kind: v }; if (!t0.trim() || t0.indexOf(oldL + ': ') === 0 || /^(Class|Cohort): /.test(t0)) p2.title = newL + ': ' + (sel.title || 'Course'); updS(x.id, p2); },
+                    days: [1, 2, 3, 4, 5, 6, 0].map(k => { const on = dows.indexOf(k) >= 0; return { label: this.DSHORT[k].slice(0, 2), full: this.DAYS[k], on: on ? 'true' : 'false', bg: on ? this.TK.t6E2F43 : '#FFFFFF', fg: on ? '#FFFFFF' : '#4A443B', bd: on ? this.TK.t6E2F43 : this.TK.tE2B9C4,
+                      toggle: () => { const cur = dows.slice(); const i = cur.indexOf(k); if (i >= 0) { if (cur.length === 1) return; cur.splice(i, 1); } else cur.push(k); updS(x.id, { dows: cur.sort() }); } }; }),
                     firstVal: this.isoFor(x.anchor), onFirst: (e) => { if (e.target.value) updS(x.id, { anchor: this.offFromISO(e.target.value), exceptions: {} }); },
                     timeVal: this.toHHMM(x.start), onTime: (e) => { const v = e.target.value; if (!v) return; const a = v.split(':'); updS(x.id, { start: (+a[0]) * 60 + (+a[1]) }); },
                     lenVal: String(x.mins), lenOpts: (lens.indexOf(x.mins) < 0 ? lens.concat([x.mins]).sort((a, b) => a - b) : lens).map(m => ({ v: String(m), l: this.fmtDur(m) })), onLen: (e) => updS(x.id, { mins: parseInt(e.target.value, 10) || 60 }),
                     ruleVal: repeats ? x.rule : 'once', repeats: repeats,
-                    onRule: (e) => { const v = e.target.value; if (v === 'once') updS(x.id, { rule: 'weekly', count: 1, until: null }); else updS(x.id, { rule: v, count: null }); },
+                    onRule: (e) => { const v = e.target.value; if (v === 'once') updS(x.id, { rule: 'weekly', count: 1, until: null, dows: null }); else updS(x.id, { rule: v, count: null }); },
                     untilVal: typeof x.until === 'number' ? this.isoFor(x.until) : '', hasUntil: typeof x.until === 'number',
                     onUntil: (e) => { const v = e.target.value; updS(x.id, { until: v ? this.offFromISO(v) : null }); }, clearUntil: () => updS(x.id, { until: null }),
                     link: x.link || '', hasLink: !!u && okUrl(u), href: /^https?:\/\//i.test(u) ? u : 'https://' + u, onLink: (e) => updS(x.id, { link: e.target.value }),
