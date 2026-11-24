@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 12:17 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 12:19 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1281,7 +1281,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <header style="display: flex; align-items: flex-start; gap: 10px">
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">School</div>
-<h1 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Study plan</h1>
+<h1 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">My courses</h1>
 <p style="margin: 0; font-size: calc(14px * {{fsK}}); color: #6B6358">{{scWeekLine}}</p>
 </div>
 <button onClick="{{scAdd}}" aria-label="Add a course" title="Add a course" style="width: 44px; height: 44px; flex: none; border: 0; border-radius: 22px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
@@ -2956,7 +2956,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <sc-if value="{{scTabRes}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; align-items: center; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px">
-<span style="flex: none; font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Study materials</span>
+<span style="flex: none; font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Study plan</span>
 <span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: #8A8174; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{scResSummary}}</span>
 </div>
 <sc-for list="{{scResources}}" as="rs" hint-placeholder-count="2">
@@ -4133,8 +4133,11 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <sc-if value="{{appBuildOn}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 6px">
 <span style="font-size: calc(12px * {{fsK}}); color: #8A8174">{{appBuildTxt}}</span>
-<button onClick="{{appReload}}" style="height: 30px; padding: 0 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Check for updates</button>
+<button onClick="{{appCheck}}" disabled="{{appChecking}}" style="height: 30px; padding: 0 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{appCheckLabel}}</button>
 </div>
+<sc-if value="{{appNoteOn}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: {{appNoteBg}}; border-radius: 8px; padding: 7px 10px; margin: 0 0 6px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: {{appNoteFg}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="{{appNoteIcon}}"></path></svg><span style="flex: 1 1 200px; min-width: 0">{{appNoteMsg}}</span><sc-if value="{{appNoteNewer}}" hint-placeholder-val="{{ false }}"><button onClick="{{appReload}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 7px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Update now</button></sc-if></div>
+</sc-if>
 </sc-if>
 <sc-if value="{{syncIsGh}}" hint-placeholder-val="{{ false }}">
 <div style="flex: none; display: flex; flex-direction: column; gap: 10px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 10px 12px; box-sizing: border-box">
@@ -10160,7 +10163,7 @@ class Component extends DCLogic {
           const ordered = As.slice().sort((x, y) => (x.done - y.done) || ((typeof x.due === 'number' ? x.due : 9e9) - (typeof y.due === 'number' ? y.due : 9e9)));
           const pv = s.asPreview && s.asPreview.cid === sel.id ? s.asPreview : null;
           return {
-            scTabs: [['ov', 'Overview', ''], ['res', 'Study materials', String((sel.resources || []).length)], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : ''], ['links', 'Links', (sel.links || []).length ? String((sel.links || []).length) : '']].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
+            scTabs: [['ov', 'Overview', ''], ['res', 'Study plan', String((sel.resources || []).length)], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : ''], ['links', 'Links', (sel.links || []).length ? String((sel.links || []).length) : '']].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
             scTabOv: tabOn('ov'), scTabRes: tabOn('res'), scTabAs: tabOn('as'), scTabLinks: tabOn('links'),
             scLinks: linkVals('c' + sel.id, sel.links || [], (fn) => updC(sel.id, c => ({ links: fn(c.links || []) }))),
             scLinksNone: !(sel.links || []).length,
@@ -11400,7 +11403,27 @@ class Component extends DCLogic {
       rowK: s.settings.dense ? 0.78 : 1,
       appBuildOn: typeof window !== 'undefined' && !!window.__plannerBuild,
       appBuildTxt: typeof window !== 'undefined' && window.__plannerBuild ? 'Planner version: ' + window.__plannerBuild : '',
-      appReload: () => { try { window.location.reload(); } catch (e) {} },
+      appReload: () => { try { this.saveNow(); } catch (e) {} try { window.location.replace(window.location.pathname + '?v=' + Date.now()); } catch (e) { try { window.location.reload(); } catch (e2) {} } },
+      appChecking: !!s.appChecking, appCheckLabel: s.appChecking ? 'Checking…' : 'Check for updates',
+      appNoteOn: !!s.appNote, appNoteMsg: s.appNote ? s.appNote.msg : '', appNoteNewer: !!(s.appNote && s.appNote.newer),
+      appNoteBg: s.appNote && s.appNote.err ? '#FBEDEA' : this.TK.tF6EDEF, appNoteFg: s.appNote && s.appNote.err ? '#9A4A3A' : this.TK.t6E2F43,
+      appNoteIcon: s.appNote && s.appNote.err ? 'M12 8v5M12 16.5v.5M12 3l9.5 17h-19z' : (s.appNote && s.appNote.newer ? 'M12 4v12M6 10l6 6 6-6M5 20h14' : 'M5 12.5l4.5 4.5L19 7.5'),
+      appCheck: async () => {
+        if (this.state.appChecking) return;
+        this.setState({ appChecking: true, appNote: null });
+        let note;
+        try {
+          const r = await fetch(window.location.pathname + '?check=' + Date.now(), { cache: 'no-store' });
+          const t = await r.text();
+          const m = t.match(/__plannerBuild = '([^']*)'/);
+          const cur = window.__plannerBuild || '';
+          if (!m) note = { err: true, msg: 'Could not read the latest version. Try again in a minute.' };
+          else if (m[1] === cur) note = { msg: 'You have the latest version (' + cur + ').' };
+          else note = { newer: true, msg: 'A newer version is ready (' + m[1] + '). Your planner is saved.' };
+        } catch (e) { note = { err: true, msg: 'Could not check. You might be offline.' }; }
+        this.setState({ appChecking: false, appNote: note });
+        clearTimeout(this.appNoteT); if (!note.newer) this.appNoteT = setTimeout(() => this.setState({ appNote: null }), 8000);
+      },
       ndIn: (e) => { const el = e && e.target; if (!el) return; this.setState({ numDraft: { id: el.id, v: el.value } }); },
       ndKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); try { e.target.blur(); } catch (er) {} } },
       selAll: (e) => { try { const el = e.target; setTimeout(() => { try { el.select(); } catch (er) {} }, 0); } catch (er) {} },
