@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 12, 11:39 AM';</script>
+<script>window.__plannerBuild = 'Nov 24, 12:14 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -4143,10 +4143,13 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <span style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Sync between devices</span><span style="font-size: calc(12px * {{fsK}}); color: {{syncLineColor}}">{{syncLine}}</span></span>
 <sc-if value="{{syncOff}}" hint-placeholder-val="{{ true }}"><sc-if value="{{syncSetupClosed}}" hint-placeholder-val="{{ true }}"><button onClick="{{syncOpen}}" style="height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Set up</button></sc-if></sc-if>
 <sc-if value="{{syncOn}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{syncNow}}" style="height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Sync now</button>
+<button onClick="{{syncNow}}" disabled="{{syncNowBusy}}" aria-live="polite" style="height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{syncNowLabel}}</button>
 <button onClick="{{syncDisconnect}}" style="height: 32px; flex: none; padding: 0 6px; border: 0; background: transparent; color: #9A4A3A; font-size: calc(12.5px * {{fsK}}); font-weight: 600">{{syncDiscLabel}}</button>
 </sc-if>
 </div>
+<sc-if value="{{syncNoteOn}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="display: flex; align-items: center; gap: 8px; background: {{syncNoteBg}}; border-radius: 8px; padding: 7px 10px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: {{syncNoteFg}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="{{syncNoteIcon}}"></path></svg><span>{{syncNoteMsg}}</span></div>
+</sc-if>
 <sc-if value="{{syncSetupOpen}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 10px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 10px 12px">
 <span style="font-size: calc(13px * {{fsK}}); color: #2B2722; line-height: 1.45">Your planner is saved to a private file (a gist) in your own GitHub account. Every device you connect reads and writes that file, so they stay the same. Nobody else can see it.</span>
@@ -5901,32 +5904,37 @@ class Component extends DCLogic {
   }
   async syncPull(manual) {
     const cfg = this.syncCfg();
-    if (!cfg.token || !cfg.gistId || this.syncBusy) return;
+    if (!cfg.token || !cfg.gistId) return 'off';
+    if (this.syncBusy) return 'busy';
     this.syncBusy = true;
     try {
       const remote = await this.syncReadGist(cfg);
-      if (!remote || !remote.data) { if (cfg.dirty || manual) await this.syncPush(true); return; }
-      if (remote.savedAt === cfg.lastSyncAt) { if (cfg.dirty) await this.syncPush(true); else if (manual) { cfg.err = ''; cfg.checkedAt = new Date().toISOString(); this.syncSaveCfg(cfg); } return; }
-      if (cfg.dirty) { this.setState({ syncAsk: { kind: 'conflict', remote: remote } }); return; }
+      if (!remote || !remote.data) { if (cfg.dirty || manual) return await this.syncPush(true); return 'same'; }
+      if (remote.savedAt === cfg.lastSyncAt) { if (cfg.dirty) return await this.syncPush(true); if (manual) { cfg.err = ''; cfg.checkedAt = new Date().toISOString(); this.syncSaveCfg(cfg); } return 'same'; }
+      if (cfg.dirty) { this.setState({ syncAsk: { kind: 'conflict', remote: remote } }); return 'conflict'; }
       this.syncApplyRemote(remote);
       if (manual) this.setToast('Updated from ' + (remote.device ? 'your ' + remote.device : 'GitHub') + '.');
+      return 'applied';
     } catch (e) {
       const c = this.syncCfg(); c.err = (e && e.message) || 'Could not reach GitHub.'; this.syncSaveCfg(c);
+      return 'error';
     } finally { this.syncBusy = false; }
   }
   async syncPush(skipCheck) {
     const cfg = this.syncCfg();
-    if (!cfg.token || !cfg.gistId) return;
+    if (!cfg.token || !cfg.gistId) return 'off';
     try {
       if (!skipCheck) {
         const remote = await this.syncReadGist(cfg);
-        if (remote && remote.savedAt && cfg.lastSyncAt && remote.savedAt !== cfg.lastSyncAt) { this.setState({ syncAsk: { kind: 'conflict', remote: remote } }); return; }
+        if (remote && remote.savedAt && cfg.lastSyncAt && remote.savedAt !== cfg.lastSyncAt) { this.setState({ syncAsk: { kind: 'conflict', remote: remote } }); return 'conflict'; }
       }
       const p = this.syncPayload();
       await this.gh('/gists/' + cfg.gistId, cfg.token, { method: 'PATCH', body: { files: { [this.SYNC_FILE]: { content: p.json } } } });
       const c = this.syncCfg(); c.lastSyncAt = JSON.parse(p.json).savedAt; c.lastHash = p.hash; c.dirty = false; c.err = ''; this.syncSaveCfg(c);
+      return 'pushed';
     } catch (e) {
       const c = this.syncCfg(); c.err = (e && e.message) || 'Could not reach GitHub. Your changes are safe here and will sync later.'; this.syncSaveCfg(c);
+      return 'error';
     }
   }
   syncAfterSave() {
@@ -10508,7 +10516,7 @@ class Component extends DCLogic {
         const dev = this.syncDevice();
         return {
           syncIsGh: s.storeMode !== 'db' && typeof window !== 'undefined' && !!window.__plannerBuild, syncOn: on, syncOff: !on,
-          syncLine: on ? (cfg.err ? 'Not synced: ' + cfg.err : (cfg.dirty ? 'Changes waiting to sync…' : (cfg.lastSyncAt ? 'Synced ' + ago(cfg.lastSyncAt) : 'Connected'))) + (cfg.login ? ' · GitHub: ' + cfg.login : '') : 'Keep this planner the same on your iPad and your computer.',
+          syncLine: on ? (cfg.err ? 'Not synced: ' + cfg.err : (cfg.dirty ? 'Changes waiting to sync…' : (cfg.lastSyncAt || cfg.checkedAt ? 'Synced ' + ago([cfg.lastSyncAt, cfg.checkedAt].filter(Boolean).sort().pop()) : 'Connected'))) + (cfg.login ? ' · GitHub: ' + cfg.login : '') : 'Keep this planner the same on your iPad and your computer.',
           syncLineColor: on && cfg.err ? '#9A4A3A' : '#7A7064',
           syncSetupOpen: !on && !!ui.open, syncSetupClosed: !ui.open,
           syncOpen: () => this.setState({ syncUi: { open: true, show: true } }), syncCloseSetup: () => this.setState({ syncUi: null }),
@@ -10520,7 +10528,25 @@ class Component extends DCLogic {
           syncBusy: !!ui.busy, syncConnectLabel: ui.busy ? 'Connecting…' : 'Connect',
           syncConnectGo: () => this.syncConnect((this.state.syncUi || {}).token),
           syncErr: ui.err || '', hasSyncErr: !!ui.err,
-          syncNow: () => { const c = this.syncCfg(); if (c.dirty) this.syncPush(false); else this.syncPull(true); },
+          syncNoteOn: !!s.syncNote, syncNoteMsg: s.syncNote ? s.syncNote.msg : '', syncNoteFg: s.syncNote && !s.syncNote.ok ? '#9A4A3A' : this.TK.t6E2F43, syncNoteBg: s.syncNote && !s.syncNote.ok ? '#FBEDEA' : this.TK.tF6EDEF,
+          syncNoteIcon: s.syncNote && !s.syncNote.ok ? 'M12 8v5M12 16.5v.5M12 3l9.5 17h-19z' : 'M5 12.5l4.5 4.5L19 7.5',
+          syncNowBusy: !!s.syncRunning, syncNowLabel: s.syncRunning ? 'Syncing…' : 'Sync now',
+          syncNow: async () => {
+            if (this.state.syncRunning) return;
+            this.setState({ syncRunning: true });
+            let r = 'error';
+            try { const c = this.syncCfg(); r = c.dirty ? await this.syncPush(false) : await this.syncPull(true); } catch (e) { r = 'error'; }
+            this.setState({ syncRunning: false });
+            const c2 = this.syncCfg();
+            const tm = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+            const note = r === 'pushed' ? { ok: true, msg: 'Synced at ' + tm + '. Your latest changes are saved to GitHub.' }
+              : r === 'same' ? { ok: true, msg: 'Synced at ' + tm + '. Everything already matches. Nothing new from your other devices.' }
+              : r === 'applied' ? { ok: true, msg: 'Synced at ' + tm + '. Brought in the newer changes' + (c2.from ? ' from your ' + c2.from : '') + '.' }
+              : r === 'conflict' ? { ok: true, msg: 'Both devices changed. Pick which planner to keep.' }
+              : r === 'busy' ? { ok: true, msg: 'Already syncing. Try again in a moment.' }
+              : { ok: false, msg: 'Could not sync: ' + (c2.err || 'Could not reach GitHub.') + ' Your changes are safe here.' };
+            this.setState({ syncNote: note }); clearTimeout(this.syncNoteT); this.syncNoteT = setTimeout(() => this.setState({ syncNote: null }), 8000);
+          },
           syncDiscLabel: s.syncDiscAsk ? 'Tap again to disconnect' : 'Disconnect',
           syncDisconnect: () => { if (!this.state.syncDiscAsk) { this.setState({ syncDiscAsk: true }); clearTimeout(this.syncDiscT); this.syncDiscT = setTimeout(() => this.setState({ syncDiscAsk: false }), 4000); return; } try { window.localStorage.removeItem('planner.sync'); } catch (e) {} clearTimeout(this.syncT); this.setState({ syncDiscAsk: false, syncTick: (s.syncTick || 0) + 1 }); this.setToast('Disconnected. Your planner stays on this device, and the copy on GitHub stays too.'); },
           syncAskOn: !!ask, syncDeviceName: dev,
