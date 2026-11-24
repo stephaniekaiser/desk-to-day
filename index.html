@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 12:14 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 12:17 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -10160,7 +10160,7 @@ class Component extends DCLogic {
           const ordered = As.slice().sort((x, y) => (x.done - y.done) || ((typeof x.due === 'number' ? x.due : 9e9) - (typeof y.due === 'number' ? y.due : 9e9)));
           const pv = s.asPreview && s.asPreview.cid === sel.id ? s.asPreview : null;
           return {
-            scTabs: [['ov', 'Overview', ''], ['res', 'Study materials', String((sel.resources || []).length)], ['links', 'Links', (sel.links || []).length ? String((sel.links || []).length) : ''], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : '']].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
+            scTabs: [['ov', 'Overview', ''], ['res', 'Study materials', String((sel.resources || []).length)], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : ''], ['links', 'Links', (sel.links || []).length ? String((sel.links || []).length) : '']].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
             scTabOv: tabOn('ov'), scTabRes: tabOn('res'), scTabAs: tabOn('as'), scTabLinks: tabOn('links'),
             scLinks: linkVals('c' + sel.id, sel.links || [], (fn) => updC(sel.id, c => ({ links: fn(c.links || []) }))),
             scLinksNone: !(sel.links || []).length,
