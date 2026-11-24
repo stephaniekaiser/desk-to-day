@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 1:00 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 1:06 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -305,7 +305,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{isDesk}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px">
 <div role="radiogroup" aria-label="Show" style="display: flex; flex: none; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
-<sc-for list="{{deskShowBtns}}" as="ds" hint-placeholder-count="2">
+<sc-for list="{{deskShowBtns}}" as="ds" hint-placeholder-count="3">
 <button role="radio" aria-checked="{{ds.checked}}" onClick="{{ds.set}}" style="height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: {{ds.bg}}; color: {{ds.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; box-shadow: {{ds.shadow}}; white-space: nowrap">{{ds.label}}</button>
 </sc-for>
 </div>
@@ -7319,7 +7319,9 @@ class Component extends DCLogic {
     const dayOf = (t) => s.day < 0 ? (sm[t.id] ? sm[t.id].day : t.dayAssign) : this.effDay(t, sm);
     const deskQ = isDesk ? String(s.deskQ || '').trim().toLowerCase() : '';
     const qWhy = (t) => { if (!deskQ) return ''; const low = (x) => String(x || '').toLowerCase(); if (low(t.title).indexOf(deskQ) >= 0) return 'title'; const st = (t.checklist || []).find(c2 => low(c2.text).indexOf(deskQ) >= 0); if (st) return 'In a step: ' + st.text; if (low(t.note).indexOf(deskQ) >= 0) return 'In the notes'; if (t.cat && this.CATS[t.cat] && low(this.CATS[t.cat].name).indexOf(deskQ) >= 0) return 'Category: ' + this.CATS[t.cat].name; return ''; };
-    const allMode = isDesk && s.settings.deskShow === 'all';
+    const allMode = isDesk && (s.settings.deskShow === 'all' || s.settings.deskShow === 'planned');
+    const planOnly = isDesk && s.settings.deskShow === 'planned';
+    const allName = planOnly ? 'Planned' : 'All tasks';
     const curWsA = this.weekStartOff(0);
     const rawDay = (t) => sm[t.id] ? sm[t.id].day : (typeof t.dayAssign === 'number' ? t.dayAssign : null);
     const whenKey = (t) => {
@@ -7342,7 +7344,7 @@ class Component extends DCLogic {
       if (t.bucket === 'week') return 'Week of ' + this.weekName(this.effWeek(t)) + (rd !== null ? ' · ' + dl(rd) : '');
       return 'Later';
     };
-    const leftTasks0 = isDay ? s.tasks.filter(t => !t.done && dayOf(t) === s.day) : (isWeek ? s.tasks.filter(t => !t.done && this.effWeek(t) === listWs && !sm[t.id] && this.effDay(t, sm) === null) : (allMode ? s.tasks.filter(t => !t.done) : s.tasks.filter(t => t.bucket === leftBucket && !t.done)));
+    const leftTasks0 = isDay ? s.tasks.filter(t => !t.done && dayOf(t) === s.day) : (isWeek ? s.tasks.filter(t => !t.done && this.effWeek(t) === listWs && !sm[t.id] && this.effDay(t, sm) === null) : (allMode ? s.tasks.filter(t => !t.done && (!planOnly || t.bucket !== 'desk')) : s.tasks.filter(t => t.bucket === leftBucket && !t.done)));
     const leftTasks = deskQ ? leftTasks0.filter(t => qWhy(t)) : leftTasks0;
     let flatGroups = false;
     const buildRows = (list) => {
@@ -7451,7 +7453,7 @@ class Component extends DCLogic {
         this._deskGroupIds = groups.map(g => g.id);
       } else
       sections = [{
-        letter: '', name: isDesk ? (allMode ? 'Everything' : 'On my desk') : 'Still to plan · ' + this.weekName(listWs).replace(/^(This|Next) week$/, (m) => m.toLowerCase()), color: N.ink, line: N.line, metaFg: N.meta,
+        letter: '', name: isDesk ? (allMode ? allName : 'Unplanned') : 'Still to plan · ' + this.weekName(listWs).replace(/^(This|Next) week$/, (m) => m.toLowerCase()), color: N.ink, line: N.line, metaFg: N.meta,
         meta: metaFor(leftTasks) + (leftTasks.length ? ' · drag to reorder' : ''), rows: buildRows(leftTasks), isEmpty: !leftTasks.length, emptyText: isWeek ? 'Every task this week has a day. Nice work.' : 'Drag tasks here',
         headBg: hot ? '#FCE9A6' : 'transparent', zoneBg: hot ? '#FCE9A6' : 'transparent',
         over: (e) => { e.preventDefault(); this.hover(key); },
@@ -7469,7 +7471,7 @@ class Component extends DCLogic {
       (sections || []).forEach(x => (x.rows || []).forEach(r => { const t = byId[r.id]; const w = t ? qWhy(t) : ''; r.hasWhy = !!w && w !== 'title'; r.why = w === 'title' ? '' : w; }));
     }
     if (deskQ) {
-      if (!leftTasks.length) sections = [{ letter: '', name: allMode ? 'Everything' : 'On my desk', color: this.THEME.sec.N.ink, line: this.THEME.sec.N.line, metaFg: this.THEME.sec.N.meta, meta: '', rows: [], isEmpty: true, emptyText: 'Nothing ' + (allMode ? 'anywhere' : 'on your desk') + ' matches "' + String(s.deskQ).trim() + '".', headBg: 'transparent', zoneBg: 'transparent', over: (e) => e.preventDefault(), drop: (e) => this.dropTask(e, { bucket: 'desk' }), notCollapsible: true }];
+      if (!leftTasks.length) sections = [{ letter: '', name: allMode ? allName : 'Unplanned', color: this.THEME.sec.N.ink, line: this.THEME.sec.N.line, metaFg: this.THEME.sec.N.meta, meta: '', rows: [], isEmpty: true, emptyText: 'Nothing ' + (allMode ? 'anywhere' : 'on your desk') + ' matches "' + String(s.deskQ).trim() + '".', headBg: 'transparent', zoneBg: 'transparent', over: (e) => e.preventDefault(), drop: (e) => this.dropTask(e, { bucket: 'desk' }), notCollapsible: true }];
     }
     const deskElsewhere = deskQ ? s.tasks.filter(t => (allMode ? t.done : t.bucket !== 'desk') && qWhy(t)).sort((a2, b2) => (a2.done - b2.done)).slice(0, 10).map(t => {
       const scd = sm[t.id];
@@ -11255,9 +11257,9 @@ class Component extends DCLogic {
       deskQKey: (e) => { if (e.key === 'Escape') this.setState({ deskQ: '' }); },
       deskElse: deskElsewhere, deskHasElse: deskElsewhere.length > 0,
       deskGroupVal: this._deskGby || 'category',
-      onDeskGroup: (e) => { const v = e.target.value; if (this.state.settings.deskShow === 'all') this.setSetting({ deskGroupAll: v || 'when' }); else this.setSetting({ deskGroup: v || 'category' }); },
-      deskShowBtns: [['desk', 'On my desk'], ['all', 'Everything']].map(o => { const on = (s.settings.deskShow === 'all' ? 'all' : 'desk') === o[0]; return { label: o[1], checked: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? this.TK.t6E2F43 : '#6B6358', shadow: on ? '0 1px 2px rgba(0,0,0,0.15)' : 'none', set: () => this.setSetting({ deskShow: o[0] }) }; }),
-      deskWhenOpt: s.settings.deskShow === 'all', deskNoWhen: s.settings.deskShow !== 'all',
+      onDeskGroup: (e) => { const v = e.target.value; if (this.state.settings.deskShow === 'all' || this.state.settings.deskShow === 'planned') this.setSetting({ deskGroupAll: v || 'when' }); else this.setSetting({ deskGroup: v || 'category' }); },
+      deskShowBtns: [['desk', 'Unplanned'], ['planned', 'Planned'], ['all', 'All tasks']].map(o => { const on = (s.settings.deskShow === 'all' || s.settings.deskShow === 'planned' ? s.settings.deskShow : 'desk') === o[0]; return { label: o[1], checked: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? this.TK.t6E2F43 : '#6B6358', shadow: on ? '0 1px 2px rgba(0,0,0,0.15)' : 'none', set: () => this.setSetting({ deskShow: o[0] }) }; }),
+      deskWhenOpt: s.settings.deskShow === 'all' || s.settings.deskShow === 'planned', deskNoWhen: !(s.settings.deskShow === 'all' || s.settings.deskShow === 'planned'),
       deskCanFold: isDesk && (this._deskGby || 'category') !== 'none' && (this._deskGroupIds || []).length > 1,
       deskFoldLabel: (() => { const g = this._deskGby || 'category', c = (s.settings.deskClosed || {})[g] || {}; const ids = this._deskGroupIds || []; return ids.length && ids.every(id => c[id]) ? 'Expand all' : 'Collapse all'; })(),
       deskFoldAll: () => { const g = this._deskGby || 'category', all = Object.assign({}, this.state.settings.deskClosed || {}), c = all[g] || {}, ids = this._deskGroupIds || []; const allClosed = ids.length && ids.every(id => c[id]); const next = {}; if (!allClosed) ids.forEach(id => { next[id] = true; }); all[g] = next; this.setSetting({ deskClosed: all }); },
