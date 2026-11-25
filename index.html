@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 8:43 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 8:51 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1049,7 +1049,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 
 <sc-if value="{{sheetOpen}}" hint-placeholder-val="{{ false }}">
-<div role="dialog" aria-label="Break it up" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 20; box-sizing: border-box; background: #FBF7EE; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 14px">
+<div role="dialog" aria-label="Break it up" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 20; box-sizing: border-box; background: {{pageBg}}; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 14px">
 <header style="display: flex; flex-direction: column; gap: 4px">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">{{sheetKicker}}</div>
 <sc-if value="{{sheetNotGroup}}" hint-placeholder-val="{{ true }}">
@@ -1166,7 +1166,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 
 <sc-if value="{{isNotes}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: #FBF7EE; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: {{pageBg}}; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
 <header style="display: flex; flex-direction: column; gap: 4px">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">Notes</div>
 <h1 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Loose thoughts, kept safe</h1>
@@ -1207,7 +1207,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 
 <sc-if value="{{isGoals}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: #FBF7EE; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: {{pageBg}}; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
 <header style="display: flex; align-items: flex-start; gap: 10px">
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">Intentions</div>
@@ -1289,7 +1289,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 
 <sc-if value="{{isSchool}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: #FBF7EE; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: {{pageBg}}; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
 <header style="display: flex; align-items: flex-start; gap: 10px">
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">School</div>
@@ -1327,7 +1327,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <header style="display: flex; align-items: flex-start; gap: 10px">
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">Journal</div>
-<div style="display: flex; align-items: center; gap: 10px"><sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}"><img src="{{imgWreath}}" alt="" aria-hidden="true" style="width: 58px; height: 58px; flex: none; object-fit: contain; margin: -10px 0 -10px -6px"></sc-if><h1 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">How it went</h1></div>
+<div style="display: flex; align-items: center; gap: 10px"><sc-if value="{{jWreathOn}}" hint-placeholder-val="{{ false }}"><img src="{{imgWreath}}" alt="" aria-hidden="true" style="width: 58px; height: 58px; flex: none; object-fit: contain; margin: -10px 0 -10px -6px"></sc-if><h1 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">How it went</h1></div>
 <p style="margin: 0; font-size: calc(14px * {{fsK}}); color: #6B6358">{{jCount}}</p>
 </div>
 <button onClick="{{jToday}}" aria-label="Write about today" title="Write about today" style="width: 44px; height: 44px; flex: none; border: 0; border-radius: 22px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
@@ -1369,7 +1369,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 
 <sc-if value="{{isMeals}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: #FBF7EE; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: {{pageBg}}; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
 <header style="display: flex; align-items: flex-start; gap: 10px">
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
 <div style="display: flex; align-items: center; gap: 10px; min-height: 22px"><span style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">Meals · {{mlWeekLabel}}</span>
@@ -1418,7 +1418,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 
 <sc-if value="{{isSettings}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: #FBF7EE; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: {{pageBg}}; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
 <header style="display: flex; flex-direction: column; gap: 4px">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">Settings</div>
 <h1 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Make it yours</h1>
@@ -2124,7 +2124,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 
 <sc-if value="{{isNotes}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: #FBF7EE; border-radius: {{rightRadius}}; padding: 18px 24px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: {{pageBg}}; border-radius: {{rightRadius}}; padding: 18px 24px 16px; display: flex; flex-direction: column; gap: 10px">
 <sc-if value="{{nNone}}" hint-placeholder-val="{{ false }}">
 <div style="margin: auto; text-align: center; color: #6B6358; font-size: calc(15px * {{fsK}}); max-width: 320px">Your notebook is empty. Start a new note on the left.</div>
 </sc-if>
@@ -2237,7 +2237,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 
 <sc-if value="{{isGoals}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: #FBF7EE; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: {{pageBg}}; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column">
 <sc-if value="{{gNone}}" hint-placeholder-val="{{ false }}">
 <div style="margin: auto; text-align: center; color: #6B6358; font-size: calc(15px * {{fsK}}); max-width: 320px">Tap + on the left to add an intention. One is plenty to start.</div>
 </sc-if>
@@ -2710,7 +2710,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 
 <sc-if value="{{isSchool}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: #FBF7EE; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: {{pageBg}}; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
 <sc-if value="{{scIsNew}}" hint-placeholder-val="{{ false }}">
 <header style="display: flex; align-items: flex-end; gap: 10px">
 <div style="flex: 1; min-width: 0">
@@ -3312,7 +3312,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </sc-if>
 
 <sc-if value="{{isJournal}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: #FBF7EE; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: {{pageBg}}; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
 <sc-if value="{{jNoSel}}" hint-placeholder-val="{{ true }}">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">On this day</div>
 <sc-if value="{{jHasOtd}}" hint-placeholder-val="{{ false }}">
@@ -3356,7 +3356,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </sc-if>
 
 <sc-if value="{{isMeals}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: #FBF7EE; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: {{pageBg}}; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
 <sc-if value="{{mlHasCell}}" hint-placeholder-val="{{ false }}">
 <button onClick="{{mcDone}}" style="align-self: flex-start; height: 30px; margin: -6px 0 -4px -4px; padding: 0 6px; border: 0; background: transparent; display: flex; align-items: center; gap: 4px; color: {{TK.tA0526A}}; font-size: calc(13px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>Meal list</button>
 <header>
@@ -3490,7 +3490,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </sc-if>
 
 <sc-if value="{{edOn}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 9; box-sizing: border-box; background: #FBF7EE; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 9; box-sizing: border-box; background: {{pageBg}}; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
 <sc-for list="{{edRows}}" as="t" hint-placeholder-count="1">
 <header style="display: flex; align-items: center; gap: 8px">
 <div style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">{{t.edHead}}</div>
@@ -3683,7 +3683,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </sc-if>
 
 <sc-if value="{{isSettings}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: #FBF7EE; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 8; box-sizing: border-box; background: {{pageBg}}; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
 <header style="display: flex; flex-direction: column; gap: 4px">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">Settings</div>
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">{{setCurTitle}}</h2>
@@ -3774,7 +3774,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </sc-if>
 
 <sc-if value="{{showSetup}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: #FBF7EE; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: {{pageBg}}; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
 <header style="display: flex; align-items: flex-end; gap: 12px">
 <div style="flex: 1; min-width: 0">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700; margin-bottom: 6px">Fixed schedule</div>
@@ -3877,7 +3877,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 </sc-if>
 <sc-if value="{{showSpecial}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: #FBF7EE; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: {{pageBg}}; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
 <header>
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700; margin-bottom: 6px">Special days</div>
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Days to remember</h2>
@@ -3984,7 +3984,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 </sc-if>
 <sc-if value="{{showCats}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: #FBF7EE; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: {{pageBg}}; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
 <header>
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700; margin-bottom: 6px">Categories</div>
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">What fills your time</h2>
@@ -4052,7 +4052,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 </sc-if>
 <sc-if value="{{showAddons}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: #FBF7EE; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: {{pageBg}}; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
 <header>
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700; margin-bottom: 6px">Add-ons</div>
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Extra tabs</h2>
@@ -4091,7 +4091,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 </sc-if>
 <sc-if value="{{showThemes}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: #FBF7EE; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: {{pageBg}}; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
 <header>
 <button onClick="{{closeThemes}}" style="height: 28px; border: 0; background: transparent; padding: 0; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; font-size: calc(12px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6358"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>Look and feel</button>
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Pick a mood</h2>
@@ -4159,7 +4159,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 </sc-if>
 <sc-if value="{{showBinder}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: #FBF7EE; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: {{pageBg}}; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
 <header>
 <button onClick="{{closeThemes}}" style="height: 28px; border: 0; background: transparent; padding: 0; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; font-size: calc(12px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6358"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>Look and feel</button>
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">My binder</h2>
@@ -4207,7 +4207,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 </sc-if>
 <sc-if value="{{showData}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: #FBF7EE; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: {{pageBg}}; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
 <header>
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700; margin-bottom: 6px">Your data</div>
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Saved as you go</h2>
@@ -5661,11 +5661,11 @@ class Component extends DCLogic {
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
       },
       rosewreath: {
-        tabPal: ['#B35A76', '#B8665A', '#6E2F43', '#6E8A6A', '#8C4E78'],
+        tabPal: ['#B06F80', '#879A76', '#9C8270', '#B48A5A', '#7E5A6E'],
         name: 'Little Hollow', blurb: 'A little tree, a meadow and woodland friends who visit as the seasons change.', storybook: true, binder: { cover: 'linen', rings: 'brass' }, perks: ['Animated', 'Changes with the seasons', 'Rotating animal friends'], card: 'card.webp', art: 'img',
         quote: 'Every blossom opens in its own time, and so will you.',
         quotes: ['Every blossom opens in its own time, and so will you.', 'Small steps still bloom.', 'Tend to today. Tomorrow will keep.', 'Rest is part of growing.', 'One petal at a time.', 'You are allowed to go slowly.', 'Plant one good thing today.'],
-        fHead: "'Olesia', 'Dancing Script', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7F1', vars: {},
+        fHead: "'Olesia', 'Dancing Script', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7F1', vars: { 'FBEDEE': '#F6EEE9', 'F6EDEF': '#F5EFEA', 'FAEAEE': '#F6EDE8', 'F3E6EA': '#F1E8E3', 'E2B9C4': '#DCC6BF', 'E7B7C2': '#DFC8C1', 'EBC3CD': '#E6D2CB' },
         fontFace: { family: 'Olesia', file: 'olesia.woff2' },
         img: { dir: 'themes/rosewreath/', swags: ['swag-1.webp', 'swag-2.webp', 'swag-3.webp', 'swag-4.webp', 'swag-5.webp', 'swag-6.webp'], wash: 'wash.webp', paper: 'paper.webp', wreaths: ['wreath-1.webp', 'wreath-2.webp', 'wreath-3.webp'], blooms: ['bloom-1.webp', 'bloom-2.webp', 'bloom-3.webp', 'bloom-4.webp', 'bloom-5.webp', 'bloom-6.webp'], garlands: ['bloom-3.webp', 'bloom-4.webp', 'bloom-5.webp', 'bloom-6.webp'], cornerBloom: 'bloom-1.webp', animals: ['animal-bunny.webp', 'animal-hedgehog.webp', 'animal-fawn.webp', 'animal-squirrel.webp', 'animal-chickadee.webp'] },
         // A scene: art pinned to page edges. page L = tasks page, R = calendar page. Sizes are px at a 1180-wide screen and scale with it.
@@ -7597,6 +7597,9 @@ class Component extends DCLogic {
   }
 
   renderVals() {
+    if (!this._COLORS0) this._COLORS0 = this.COLORS;
+    { const td = this.themeDef(this.state.settings.theme), sb = td && td.storybook;
+      this.COLORS = sb ? Object.assign({}, this._COLORS0, { gray: { name: 'Gray', a: '#EFE8E0', b: '#E7DED4', border: '#CFC0B0', labelBg: '#DED2C5', labelFg: '#5A4A3C', swatch: '#9C8270' } }) : this._COLORS0; }
     if (this._repTopDay !== this.todayAbs() && this.state && this.state.habits) {
       this._repTopDay = this.todayAbs();
       setTimeout(() => { const m = this.topUpRepeats(this.state.habits, this.state.placedByDay); if (m !== this.state.placedByDay) this.setState({ placedByDay: m }); }, 0);
@@ -9848,14 +9851,14 @@ class Component extends DCLogic {
             }
             return base;
           })()),
-          imgWreath: on ? u(this.pickByDay(t.img.wreaths, s.day)) : '',
+          imgWreath: on && !t.scene ? u(this.pickByDay(t.img.wreaths, s.day)) : '', jWreathOn: on && !t.scene,
           pageBg: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
           pageBgL: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
           pageBgR: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
           imgAnimal: on && t.img.animals && !t.scene ? u(this.pickByDay(t.img.animals, s.day)) : '',
           ...this.sceneVals(t, s),
           ...this.binderVals(t, s.settings),
-          jBg: wash ? "linear-gradient(rgba(251,247,238,0.82), rgba(251,247,238,0.9)), url('" + wash + "') center / cover no-repeat, #FBF7EE" : '#FBF7EE'
+          jBg: t.scene ? (paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE') : wash ? "linear-gradient(rgba(251,247,238,0.82), rgba(251,247,238,0.9)), url('" + wash + "') center / cover no-repeat, #FBF7EE" : '#FBF7EE'
         };
       })(),
       TK: this.TK,
