@@ -8,7 +8,7 @@
     "Spring blossom set",
     "A squirrel on the branch",
     "New friend: a bee who loops around her flower while a blossom drifts down",
-    "A basket under the branch fills up as you finish things each week: whoever is in the tree drops the season's item in, and on quiet days it drifts down by itself"
+    "A basket under the branch fills with blossoms as you finish things each week"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -225,36 +225,36 @@
           "anchor": "underPerch",
           "x": 120,
           "y": 2,
-          "w": 96,
-          "h": 72,
+          "w": 84,
+          "h": 106,
           "states": [
             {
               "min": 0,
-              "src": "basket-0.webp"
+              "src": "basket-spring-0.webp"
             },
             {
               "min": 1,
-              "src": "basket-1.webp"
+              "src": "basket-spring-1.webp"
             },
             {
               "min": 4,
-              "src": "basket-2.webp"
+              "src": "basket-spring-2.webp"
             },
             {
               "min": 9,
-              "src": "basket-3.webp"
+              "src": "basket-spring-3.webp"
             },
             {
               "min": 16,
-              "src": "basket-4.webp"
+              "src": "basket-spring-4.webp"
             }
           ],
           "dx": -58
         },
         "item": {
           "name": "blossom",
-          "src": "petal.webp",
-          "w": 17,
+          "src": "blossom.webp",
+          "w": 18,
           "h": 17
         },
         "driftY": 118
