@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 8:59 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 9:05 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3697,29 +3697,63 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </header>
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; padding-right: 6px">
 <sc-if value="{{showThemeCards}}" hint-placeholder-val="{{ false }}">
-<section aria-label="Your planner" style="margin: 4px 0 18px; padding: 14px; border-radius: 16px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.06), inset 0 0 0 1px {{TK.tE2B9C4}}; display: flex; flex-direction: column; gap: 12px">
-<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358">Your planner</span>
-<div aria-hidden="true" style="position: relative; height: 128px; border-radius: 12px; background: {{bdDesk}}; display: flex; align-items: center; justify-content: center; overflow: hidden">
-<div style="position: relative; width: 78%; max-width: 360px; height: 100px; border-radius: 9px; background: {{bdCover}}; padding: 6px 0 6px 6px; box-sizing: border-box; display: flex; box-shadow: 0 6px 14px rgba(0,0,0,0.35)">
-<span style="flex: 1; border-radius: 5px 2px 2px 5px; background: {{curTheme.paper}} {{curTheme.prevL}}"></span>
-<span style="width: 12px; flex: none; background: {{bdSpine}}; display: flex; flex-direction: column; justify-content: space-around; align-items: center"><span style="width: 22px; height: 5px; border-radius: 3px; background: {{bdRing}}"></span><span style="width: 22px; height: 5px; border-radius: 3px; background: {{bdRing}}"></span><span style="width: 22px; height: 5px; border-radius: 3px; background: {{bdRing}}"></span><span style="width: 22px; height: 5px; border-radius: 3px; background: {{bdRing}}"></span></span>
-<span style="flex: 1; border-radius: 2px 5px 5px 2px; background: {{curTheme.paper}} {{curTheme.prevR}}; margin-right: 6px"></span>
-</div>
-</div>
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
-<button onClick="{{openThemes}}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 12px; background: #FBF7EE; text-align: left; color: #2B2722">
-<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6358">Pages and theme</span>
+<div style="margin-top: 4px">
+<button onClick="{{lfTheme.toggle}}" aria-expanded="{{lfTheme.openA}}" style="width: 100%; min-height: calc(48px * {{rowK}}); display: flex; align-items: center; gap: 10px; border: 0; border-bottom: 1px solid {{TK.tE2B9C4}}; background: transparent; padding: 6px 2px; text-align: left; color: #2B2722">
+<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transform: {{lfTheme.chev}}; color: #8A8174"><path d="M9 5l7 7-7 7"></path></svg>
+<span style="flex: none; font-size: calc(14.5px * {{fsK}}); font-weight: 700">{{lfTheme.title}}</span>
+<span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{lfTheme.summary}}</span>
+</button>
+<sc-if value="{{lfTheme.open}}" hint-placeholder-val="{{ false }}">
+<div style="margin-bottom: 18px; padding-top: 10px; display: flex; flex-direction: column; gap: 10px">
+<button onClick="{{openThemes}}" style="width: 100%; display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 12px; background: #FFFFFF; text-align: left; color: #2B2722">
+<span aria-hidden="true" style="width: 48px; height: 48px; flex: none; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; background: {{curTheme.paper}} {{curTheme.tileImg}}; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06)">
+<span style="height: 14px; background: {{curTheme.tileBand}}"></span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; font-family: {{curTheme.font}}; font-size: calc(18px * {{fsK}}); font-weight: 600; color: {{curTheme.tileInk}}">Aa</span>
+</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
 <span style="font-size: calc(15px * {{fsK}}); font-weight: 700">{{curTheme.name}}</span>
-<span style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{themeCount}} ›</span>
-</button>
-<button onClick="{{openBinder}}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 12px; background: #FBF7EE; text-align: left; color: #2B2722">
-<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6358">Binder</span>
-<span style="font-size: calc(15px * {{fsK}}); font-weight: 700">{{bdSummary}}</span>
-<span style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{bdSummary2}} ›</span>
+<span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{curTheme.blurb}}</span>
+</span>
+<span style="flex: none; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{themeCount}}</span>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A8174" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M9 5l7 7-7 7"></path></svg>
 </button>
 </div>
-</section>
-<span style="display: block; font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; padding: 0 2px 2px">Reading and layout</span>
+</sc-if>
+<button onClick="{{lfBinder.toggle}}" aria-expanded="{{lfBinder.openA}}" style="width: 100%; min-height: calc(48px * {{rowK}}); display: flex; align-items: center; gap: 10px; border: 0; border-bottom: 1px solid {{TK.tE2B9C4}}; background: transparent; padding: 6px 2px; text-align: left; color: #2B2722">
+<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transform: {{lfBinder.chev}}; color: #8A8174"><path d="M9 5l7 7-7 7"></path></svg>
+<span style="flex: none; font-size: calc(14.5px * {{fsK}}); font-weight: 700">{{lfBinder.title}}</span>
+<span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{lfBinder.summary}}</span>
+</button>
+<sc-if value="{{lfBinder.open}}" hint-placeholder-val="{{ false }}">
+<div style="margin-bottom: 18px; padding-top: 10px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-size: calc(12.5px * {{fsK}}); color: #6B6358">Like a real planner, the binder is yours. It stays the same when you change themes.</span>
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600">Match my theme</span><span style="font-size: calc(12px * {{fsK}}); color: #6B6358">Use the binder your theme suggests. Picking a cover or rings turns this off.</span></span>
+<button role="switch" aria-checked="{{bdMatchA}}" aria-label="Match my theme" onClick="{{bdMatchToggle}}" style="position: relative; width: 44px; height: 26px; flex: none; border: 0; border-radius: 13px; background: {{bdMatchBg}}; padding: 0"><span style="position: absolute; top: 3px; left: {{bdMatchKnob}}px; width: 20px; height: 20px; border-radius: 10px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.3)"></span></button>
+</div>
+<div role="radiogroup" aria-label="Cover" style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358">Cover</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px"><sc-for list="{{bdCovers}}" as="bc" hint-placeholder-count="4">
+<button role="radio" aria-checked="{{bc.checked}}" onClick="{{bc.pick}}" style="display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 5px; border: 0; border-radius: 10px; background: #FFFFFF; box-shadow: {{bc.ring}}; text-align: left; color: #2B2722">
+<span aria-hidden="true" style="height: 34px; border-radius: 6px; background: {{bc.bg}}; position: relative"><span style="position: absolute; top: 3px; right: 3px; bottom: 3px; left: 3px; border: 1px dashed {{bc.stitch}}; border-radius: 4px"></span></span>
+<span style="font-size: calc(12px * {{fsK}}); font-weight: 700; padding: 0 2px">{{bc.name}}</span>
+<span style="display: {{bc.sugD}}; font-size: calc(10.5px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}; padding: 0 2px">Suggested</span>
+</button>
+</sc-for></div>
+</div>
+<div role="radiogroup" aria-label="Rings" style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358">Rings</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px"><sc-for list="{{bdRings}}" as="bc" hint-placeholder-count="4">
+<button role="radio" aria-checked="{{bc.checked}}" onClick="{{bc.pick}}" style="display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 5px; border: 0; border-radius: 10px; background: #FFFFFF; box-shadow: {{bc.ring}}; text-align: left; color: #2B2722">
+<span aria-hidden="true" style="height: 34px; border-radius: 6px; background: #3A3430; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly"><span style="width: 56%; height: 7px; border-radius: 4px; background: {{bc.bg}}"></span><span style="width: 56%; height: 7px; border-radius: 4px; background: {{bc.bg}}"></span></span>
+<span style="font-size: calc(12px * {{fsK}}); font-weight: 700; padding: 0 2px">{{bc.name}}</span>
+<span style="display: {{bc.sugD}}; font-size: calc(10.5px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}; padding: 0 2px">Suggested</span>
+</button>
+</sc-for></div>
+</div>
+</div>
+</sc-if>
+</div>
 </sc-if>
 <sc-for list="{{setRight}}" as="ss" hint-placeholder-count="3">
 <sc-if value="{{ss.hasGroup}}" hint-placeholder-val="{{ false }}">
@@ -5878,8 +5912,8 @@ class Component extends DCLogic {
   sceneCelebrate() {
     const t = this.themeDef(this.state.settings.theme);
     const sn = t && t.scene ? this.sceneNow(t, this.state) : null;
-    if (!sn || !sn.drop || this.state.view === 'settings') return;
-    if (this.state.view !== 'day') {
+    if (!sn || !sn.drop || this.state.view !== 'day') return;
+    if (false) { // Visits on other pages: on hold (rethink later as a friend already there with a tiny motion)
       // Away from the Day page: the catcher peeks up from the corner and catches the item.
       clearTimeout(this._visitT);
       this.setState({ sceneVisit: 0 });
@@ -10057,12 +10091,12 @@ class Component extends DCLogic {
         toggle: () => this.setState({ setGroup: this.state.setGroup === id ? null : id }) };
     };
     const setSections = {
-      look: [G('', [
+      look: [G('Reading and layout', [
         seg('Text size', 'textSize', [['xs', 'Smallest'], ['small', 'Small'], ['normal', 'Normal'], ['large', 'Large'], ['xl', 'Larger'], ['xxl', 'Largest']], 'Smaller sizes suit a computer screen. Larger ones help on a small iPad.'),
         tog('Denser lists', 'dense', 'Tighter rows in every list, so more fits on a page. The calendar has its own zoom.'),
         tog('Fade tasks already on the calendar', 'fadeScheduled', 'On the day page, tasks with a time are softened so the ones still to place stand out.'),
         tog('Icon tabs', 'tabIcons', 'Try it: every tab the same size, with an icon and a short label. Switch back anytime.', true)
-      ])],
+      ], null, 'lookRead')],
       calendar: [G('', [
         timeRow('Day starts', 'dayStart', 0, Math.min(720, st.dayEnd - 60), 'The first time slot on your day page. Set it to 12 AM if you would rather track sleep as a fixed item.'),
         timeRow('Day ends', 'dayEnd', Math.max(720, st.dayStart + 60), 1410, 'The last time slot on your day page (latest is 11:30 PM). Anything planned outside your hours waits in a small strip above or below.'),
@@ -10937,6 +10971,11 @@ class Component extends DCLogic {
       showThemes: isSettings && s.setSec === 'themes', showThemeCards: isSettings && (!s.setSec || s.setSec === 'look' || ['look', 'calendar', 'always', 'tasks', 'categories', 'addons', 'data', 'themes', 'binder', 'myday', 'fixed', 'special', 'helpers', 'reminders'].indexOf(s.setSec) < 0),
       openThemes: () => this.setState({ setSec: 'themes' }), closeThemes: () => this.setState({ setSec: 'look' }),
       showBinder: isSettings && s.setSec === 'binder', openBinder: () => this.setState({ setSec: 'binder' }),
+      ...(() => {
+        const grp = (id, title, summary) => { const open = s.setGroup === id; return { title: title, summary: open ? '' : summary, open: open, openA: open ? 'true' : 'false', chev: open ? 'rotate(90deg)' : 'none', toggle: () => this.setState({ setGroup: this.state.setGroup === id ? null : id }) }; };
+        const P = this.binderParts(), ch = this.binderChoice(this.themeDef(s.settings.theme), s.settings);
+        return { lfTheme: grp('lookTheme', 'Theme', this.themeDef(s.settings.theme).name), lfBinder: grp('lookBinder', 'Binder', P.covers[ch.cover].name + ' · ' + P.rings[ch.rings].name + ' rings') };
+      })(),
       ...(() => {
         const P = this.binderParts(), ch = this.binderChoice(this.themeDef(s.settings.theme), s.settings), ink = this.TK.t6E2F43;
         const setB = (patch) => this.setState({ settings: Object.assign({}, this.state.settings, patch) });
