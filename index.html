@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 6:21 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 6:43 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -48,12 +48,12 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div aria-hidden="true" style="position: absolute; top: 6px; right: 6px; bottom: 6px; left: 6px; border: 1.5px dashed rgba(233,225,207,0.28); border-radius: 15px; pointer-events: none"></div>
 <div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; border-radius: 20px; pointer-events: none; opacity: 0.35; background-image: radial-gradient(rgba(0,0,0,0.25) 1px, transparent 1.4px); background-size: 5px 5px"></div>
 
-<section aria-label="{{leftLabel}}" style="position: relative; width: {{leftW}}; flex: {{leftFlex}}; display: {{leftDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBg}}; border-radius: 10px 3px 3px 10px; box-shadow: inset -18px 0 22px -16px rgba(0,0,0,0.30), -1px 1px 0 #E6DCC8, -2px 2px 0 #D9CDB6, -3px 3px 0 #E6DCC8, -4px 4px 0 #CDBFA4">
+<section aria-label="{{leftLabel}}" style="position: relative; width: {{leftW}}; flex: {{leftFlex}}; display: {{leftDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgL}}; border-radius: 10px 3px 3px 10px; box-shadow: inset -18px 0 22px -16px rgba(0,0,0,0.30), -1px 1px 0 #E6DCC8, -2px 2px 0 #D9CDB6, -3px 3px 0 #E6DCC8, -4px 4px 0 #CDBFA4">
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
-<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 10px 3px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{themeLine}}">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 10px 3px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{bandLine}}; -webkit-mask-image: {{bandMask}}; mask-image: {{bandMask}}">
 <sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: 0.42"></div>
-<img src="{{imgSwagL}}" alt="" style="position: absolute; left: {{imgLLeft}}; bottom: {{imgLBot}}; height: {{imgLH}}; width: auto; max-width: 62%; object-fit: contain; object-position: left bottom; opacity: {{imgLOp}}">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: 0.3"></div>
+<img src="{{imgSwagL}}" alt="" style="position: absolute; left: -10px; top: -16%; height: 122%; width: auto; max-width: 60%; object-fit: contain; object-position: left top">
 </sc-if>
 <svg width="100%" height="100%" viewBox="0 0 600 120" preserveAspectRatio="xMinYMid slice">
 <sc-if value="{{artFlowers}}" hint-placeholder-val="{{ true }}">
@@ -1452,13 +1452,13 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="position: relative; width: 76px; height: 20px; flex: none"><span style="position: absolute; left: 0; top: 4px; width: 10px; height: 10px; border-radius: 5px; background: #5E5546; opacity: 0.55"></span><span style="position: absolute; right: 0; top: 4px; width: 10px; height: 10px; border-radius: 5px; background: #5E5546; opacity: 0.55"></span><span style="position: absolute; left: 4px; right: 4px; top: 1px; height: 16px; border-radius: 8px; background: linear-gradient(180deg, #FFFFFF 0%, #D5DADD 22%, #9AA2A7 48%, #6F777C 60%, #C7CCCF 82%, #F1F3F4 100%); box-shadow: 0 3px 5px rgba(0,0,0,0.45), inset 0 -1px 1px rgba(0,0,0,0.25)"></span></div>
 </div>
 
-<section aria-label="{{rightLabel}}" style="position: relative; flex: 1; display: {{rightDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBg}}; border-radius: {{rightRadius}}; box-shadow: inset 18px 0 22px -16px rgba(0,0,0,0.30), 1px 1px 0 #E6DCC8, 2px 2px 0 #D9CDB6, 3px 3px 0 #E6DCC8, 4px 4px 0 #CDBFA4">
+<section aria-label="{{rightLabel}}" style="position: relative; flex: 1; display: {{rightDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgR}}; border-radius: {{rightRadius}}; box-shadow: inset 18px 0 22px -16px rgba(0,0,0,0.30), 1px 1px 0 #E6DCC8, 2px 2px 0 #D9CDB6, 3px 3px 0 #E6DCC8, 4px 4px 0 #CDBFA4">
 
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
-<div style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 3px 10px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{themeLine}}">
+<div style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 3px 10px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{bandLine}}; -webkit-mask-image: {{bandMask}}; mask-image: {{bandMask}}">
 <sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}">
-<div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: 0.42"></div>
-<img src="{{imgSwagR}}" alt="" aria-hidden="true" style="position: absolute; right: 3%; bottom: 2px; height: 86%; width: auto; max-width: 40%; object-fit: contain; object-position: right bottom">
+<div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: 0.3"></div>
+<img src="{{imgSwagR}}" alt="" aria-hidden="true" style="position: absolute; right: {{imgRRight}}; top: {{imgRTop}}; height: {{imgRH}}; width: auto; max-width: 42%; object-fit: contain; object-position: right top; transform: {{imgRTf}}">
 </sc-if>
 <svg aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" viewBox="0 0 600 120" preserveAspectRatio="xMaxYMid slice">
 <sc-if value="{{artFlowers}}" hint-placeholder-val="{{ true }}">
@@ -1489,7 +1489,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </svg>
 <div style="position: relative; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 0 44% 0 26px">
 <span style="font-size: calc(10px * {{fsK}}); letter-spacing: 0.18em; text-transform: uppercase; color: {{themeAccent}}; font-weight: 700">{{themeName}}</span>
-<span style="font-family: {{TK.fHead}}; font-style: italic; font-weight: 500; font-size: calc(19px * {{fsK}}); line-height: 1.25; color: {{themeInk}}">“{{themeQuote}}”</span>
+<span style="font-family: {{TK.fHead}}; font-style: {{quoteIt}}; font-weight: 500; font-size: calc({{quoteSz}}px * {{fsK}}); line-height: 1.25; color: {{themeInk}}">“{{themeQuote}}”</span>
 </div>
 </div>
 <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; box-sizing: border-box; padding: {{dayPadTop}}px 24px 18px; display: flex; flex-direction: column; gap: 10px">
@@ -5552,7 +5552,7 @@ class Component extends DCLogic {
         quotes: ['Every blossom opens in its own time, and so will you.', 'Small steps still bloom.', 'Tend to today. Tomorrow will keep.', 'Rest is part of growing.', 'One petal at a time.', 'You are allowed to go slowly.', 'Plant one good thing today.'],
         fHead: "'Olesia', 'Dancing Script', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7F1', vars: {},
         fontFace: { family: 'Olesia', file: 'olesia.woff2' },
-        img: { dir: 'themes/rosewreath/', swags: ['swag-1.webp', 'swag-2.webp', 'swag-3.webp', 'swag-4.webp', 'swag-5.webp', 'swag-6.webp'], wash: 'wash.webp', paper: 'paper.webp', wreaths: ['wreath-1.webp', 'wreath-2.webp', 'wreath-3.webp'], sprigs: ['sprig-1.webp', 'sprig-2.webp', 'sprig-3.webp', 'sprig-4.webp'] },
+        img: { dir: 'themes/rosewreath/', swags: ['swag-1.webp', 'swag-2.webp', 'swag-3.webp', 'swag-4.webp', 'swag-5.webp', 'swag-6.webp'], wash: 'wash.webp', paper: 'paper.webp', wreaths: ['wreath-1.webp', 'wreath-2.webp', 'wreath-3.webp'], blooms: ['bloom-1.webp', 'bloom-2.webp', 'bloom-3.webp', 'bloom-4.webp'], sprays: ['spray-1.webp', 'spray-2.webp', 'spray-3.webp', 'spray-4.webp'], cornerL: 'corner-l.webp', cornerR: 'corner-r.webp' },
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
       },
       seaglass: {
@@ -5623,7 +5623,7 @@ class Component extends DCLogic {
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/sprig-1.webp': '/_blob/7ac9d5f3ba8188e10d3befcfd2759da2', 'themes/rosewreath/sprig-2.webp': '/_blob/ba796815af4aaa7cda48c0acb91e942b', 'themes/rosewreath/sprig-3.webp': '/_blob/543cd5cbb6cb9030a25af5429d228e6e', 'themes/rosewreath/sprig-4.webp': '/_blob/4d3ac0927e8f4d9c5ddef581f96e7d35'};
+    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/bloom-1.webp': '/_blob/5149085bd91f60a1873007b1ed58629d', 'themes/rosewreath/bloom-2.webp': '/_blob/f4c165c3a64a85a5c257eeaad36fb95f', 'themes/rosewreath/bloom-3.webp': '/_blob/c149f93000d54a72aa1a5ffaf89cb2b2', 'themes/rosewreath/bloom-4.webp': '/_blob/1a1870f48c424dffaabb1bdf64d80470', 'themes/rosewreath/spray-1.webp': '/_blob/03d1bda3c0d5a58f7adeb5a4e019717c', 'themes/rosewreath/spray-2.webp': '/_blob/83b52f684735e1c13be810236c457e30', 'themes/rosewreath/spray-3.webp': '/_blob/31916d41f592e7cbc710cf33c16c1342', 'themes/rosewreath/spray-4.webp': '/_blob/1a09621e7ae0f8d0b19ee3ffd1421a58', 'themes/rosewreath/corner-l.webp': '/_blob/38ffaf122d2e5d8219314c14573008e8', 'themes/rosewreath/corner-r.webp': '/_blob/d9540f1164e2ef429eb2e022f36a882a', 'themes/rosewreath/sprig-1.webp': '/_blob/7ac9d5f3ba8188e10d3befcfd2759da2', 'themes/rosewreath/sprig-2.webp': '/_blob/ba796815af4aaa7cda48c0acb91e942b', 'themes/rosewreath/sprig-3.webp': '/_blob/543cd5cbb6cb9030a25af5429d228e6e', 'themes/rosewreath/sprig-4.webp': '/_blob/4d3ac0927e8f4d9c5ddef581f96e7d35'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
@@ -9567,12 +9567,20 @@ class Component extends DCLogic {
         const wash = on ? u(t.img.wash) : '', paper = on ? u(t.img.paper) : '';
         return {
           artImg: on && !!u(t.img.swags[0]),
-          imgWash: wash, imgSwagR: on ? u(this.pickByDay(t.img.swags, s.day)) : '',
-          // One main picture a day: on the open book the left banner gets a small line sprig; in portrait (one page) it gets the main picture.
-          ...(((s.vw || 1194) < 900) ? { imgSwagL: on ? u(this.pickByDay(t.img.swags, s.day)) : '', imgLH: '86%', imgLLeft: '3%', imgLBot: '2px', imgLOp: '1' }
-            : { imgSwagL: on ? u(this.pickByDay(t.img.sprigs, s.day)) : '', imgLH: '72%', imgLLeft: '4%', imgLBot: '6px', imgLOp: '0.8' }),
+          imgWash: wash,
+          ...((() => {
+            const nar = (s.vw || 1194) < 900, bloom = on ? u(this.pickByDay(t.img.blooms, s.day)) : '';
+            // Open book: a painted bloom tucked in the left page's corner, a light leaf spray hanging on the right.
+            // Portrait shows one page at a time, so each banner gets the bloom.
+            return nar ? { imgSwagL: bloom, imgSwagR: bloom, imgRRight: '-10px', imgRTop: '-16%', imgRH: '122%', imgRTf: 'none' }
+              : { imgSwagL: bloom, imgSwagR: on ? u(this.pickByDay(t.img.sprays, s.day)) : '', imgRRight: '4%', imgRTop: '-30%', imgRH: '135%', imgRTf: 'rotate(180deg) scaleX(-1)' };
+          })()),
+          bandMask: on ? 'linear-gradient(#000 70%, rgba(0,0,0,0) 100%)' : 'none', bandLine: on ? 'transparent' : this.TK.tE7B7C2,
+          quoteIt: on ? 'normal' : 'italic', quoteSz: on ? 23 : 19,
           imgWreath: on ? u(this.pickByDay(t.img.wreaths, s.day)) : '',
           pageBg: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
+          pageBgL: (on && u(t.img.cornerL) ? "url('" + u(t.img.cornerL) + "') left -14px bottom -10px / auto 280px no-repeat, " : '') + (paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE'),
+          pageBgR: (on && u(t.img.cornerR) ? "url('" + u(t.img.cornerR) + "') right -8px bottom -6px / auto 240px no-repeat, " : '') + (paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE'),
           jBg: wash ? "linear-gradient(rgba(251,247,238,0.82), rgba(251,247,238,0.9)), url('" + wash + "') center / cover no-repeat, #FBF7EE" : '#FBF7EE'
         };
       })(),
