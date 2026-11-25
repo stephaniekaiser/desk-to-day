@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 7:57 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 8:07 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3692,9 +3692,9 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; padding-right: 6px">
 <sc-if value="{{showThemeCards}}" hint-placeholder-val="{{ false }}">
 <button onClick="{{openThemes}}" style="width: 100%; display: flex; align-items: center; gap: 12px; margin: 4px 0 16px; padding: 10px 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 12px; background: #FFFFFF; text-align: left; color: #2B2722">
-<span aria-hidden="true" style="width: 48px; height: 48px; flex: none; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; background: {{curTheme.paper}}; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06)">
-<span style="height: 14px; background: {{curTheme.band}}"></span>
-<span style="flex: 1; display: flex; align-items: center; justify-content: center; font-family: {{curTheme.font}}; font-size: calc(18px * {{fsK}}); font-weight: 600; color: {{curTheme.ink}}">Aa</span>
+<span aria-hidden="true" style="width: 48px; height: 48px; flex: none; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; background: {{curTheme.paper}} {{curTheme.tileImg}}; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06)">
+<span style="height: 14px; background: {{curTheme.tileBand}}"></span>
+<span style="flex: 1; display: flex; align-items: center; justify-content: center; font-family: {{curTheme.font}}; font-size: calc(18px * {{fsK}}); font-weight: 600; color: {{curTheme.tileInk}}">Aa</span>
 </span>
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
 <span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Theme</span>
@@ -4091,8 +4091,34 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Pick a mood</h2>
 </header>
 <p style="margin: 0; font-size: calc(13px * {{fsK}}); color: #6B6358">A theme changes colors, fonts and the picture at the top of your day. Where things are never changes.</p>
-<div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); grid-auto-rows: max-content; gap: 14px; align-content: start; padding: 8px">
-<sc-for list="{{themeCards}}" as="tc" hint-placeholder-count="2">
+<div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 10px">
+<sc-if value="{{hasStory}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: {{TK.fHead}}; font-size: calc(22px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">Storybook themes</span>
+<span style="font-size: calc(12.5px * {{fsK}}); color: #6B6358">A little illustrated world around your pages. Friends visit, seasons change, and something sweet happens when you finish a task.</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 14px">
+<sc-for list="{{storyCards}}" as="tc" hint-placeholder-count="1">
+<button role="radio" aria-checked="{{tc.checked}}" onClick="{{tc.pick}}" aria-label="{{tc.name}} storybook theme" style="display: flex; flex-direction: column; border: 0; border-radius: 14px; background: #FFFFFF; box-shadow: {{tc.ring}}; padding: 0; overflow: hidden; text-align: left; color: #2B2722">
+<span aria-hidden="true" style="display: block; width: 100%; aspect-ratio: 13 / 4; background: {{tc.paper}} url('{{tc.cardImg}}') center / cover no-repeat"></span>
+<span style="display: flex; align-items: flex-start; gap: 8px; padding: 10px 14px 12px">
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: {{tc.accent}}">Storybook</span>
+<span style="font-family: {{tc.font}}; font-size: calc(24px * {{fsK}}); font-weight: 600; line-height: 1.05; color: {{tc.ink}}">{{tc.name}}</span>
+<span style="font-size: calc(12.5px * {{fsK}}); color: #7A7064">{{tc.blurb}}</span>
+<span style="display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px">
+<sc-for list="{{tc.perks}}" as="pk" hint-placeholder-count="3"><span style="display: inline-flex; align-items: center; gap: 5px; font-size: calc(11.5px * {{fsK}}); font-weight: 600; color: {{tc.ink}}"><span style="width: 5px; height: 5px; border-radius: 50%; background: {{tc.accent}}"></span>{{pk.label}}</span></sc-for>
+</span>
+</span>
+<sc-if value="{{tc.inUse}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="width: 26px; height: 26px; flex: none; border-radius: 50%; background: {{tc.ink}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span></sc-if>
+</span>
+</button>
+</sc-for>
+</div>
+<span style="font-family: {{TK.fHead}}; font-size: calc(22px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; margin-top: 8px">Simple themes</span>
+</sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); grid-auto-rows: max-content; gap: 14px; align-content: start">
+<sc-for list="{{simpleCards}}" as="tc" hint-placeholder-count="2">
 <button role="radio" aria-checked="{{tc.checked}}" onClick="{{tc.pick}}" aria-label="{{tc.name}} theme" style="display: flex; flex-direction: column; border: 0; border-radius: 12px; background: #FFFFFF; box-shadow: {{tc.ring}}; padding: 0; overflow: hidden; text-align: left; color: #2B2722">
 <span aria-hidden="true" style="display: block; flex: none; position: relative; overflow: hidden; height: 34px; background: {{tc.band}}; border-bottom: 1.5px dotted {{tc.line}}"><sc-if value="{{tc.hasImg}}" hint-placeholder-val="{{ false }}"><img src="{{tc.img}}" alt="" style="position: absolute; left: 6px; bottom: 0; height: 32px; width: auto"></sc-if></span>
 <span aria-hidden="true" style="display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; background: {{tc.paper}}">
@@ -4114,6 +4140,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </span>
 </button>
 </sc-for>
+</div>
 </div>
 </div>
 </sc-if>
@@ -5573,7 +5600,7 @@ class Component extends DCLogic {
       },
       rosewreath: {
         tabPal: ['#B35A76', '#B8665A', '#6E2F43', '#6E8A6A', '#8C4E78'],
-        name: 'Rose Wreath (test)', blurb: 'Watercolor wreaths and swags in plum, rose and peach', art: 'img',
+        name: 'Little Hollow', blurb: 'A little tree, a meadow and woodland friends who visit as the seasons change.', storybook: true, perks: ['Animated', 'Changes with the seasons', 'Rotating animal friends'], card: 'card.webp', art: 'img',
         quote: 'Every blossom opens in its own time, and so will you.',
         quotes: ['Every blossom opens in its own time, and so will you.', 'Small steps still bloom.', 'Tend to today. Tomorrow will keep.', 'Rest is part of growing.', 'One petal at a time.', 'You are allowed to go slowly.', 'Plant one good thing today.'],
         fHead: "'Olesia', 'Dancing Script', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7F1', vars: {},
@@ -5581,22 +5608,32 @@ class Component extends DCLogic {
         img: { dir: 'themes/rosewreath/', swags: ['swag-1.webp', 'swag-2.webp', 'swag-3.webp', 'swag-4.webp', 'swag-5.webp', 'swag-6.webp'], wash: 'wash.webp', paper: 'paper.webp', wreaths: ['wreath-1.webp', 'wreath-2.webp', 'wreath-3.webp'], blooms: ['bloom-1.webp', 'bloom-2.webp', 'bloom-3.webp', 'bloom-4.webp', 'bloom-5.webp', 'bloom-6.webp'], garlands: ['bloom-3.webp', 'bloom-4.webp', 'bloom-5.webp', 'bloom-6.webp'], cornerBloom: 'bloom-1.webp', animals: ['animal-bunny.webp', 'animal-hedgehog.webp', 'animal-fawn.webp', 'animal-squirrel.webp', 'animal-chickadee.webp'] },
         // A scene: art pinned to page edges. page L = tasks page, R = calendar page. Sizes are px at a 1180-wide screen and scale with it.
         // anchor: tl/tr/bl/br = corner, top = full width strip, left = full height strip. layer 'under' sits behind the page, 'over' sits on top.
+        // A storybook scene = a SET (the tree and ground for a time of year) + a CAST (animals and what they pass between them).
+        // The set is chosen by month; the cast rotates by day. Pieces within one set must match each other (see Theme Art Checklist).
         scene: {
-          under: [
-            { page: 'L', anchor: 'spread', src: 'branch.webp', ar: 4.83, h: 190, y: -26 },
-            { page: 'R', anchor: 'spread', src: 'branch.webp', ar: 4.83, h: 190, y: -26 },
-            { page: 'L', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0 },
-            { page: 'R', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0 }
+          sets: [
+            { id: 'spring-blossom', name: 'Spring blossom', months: [], perch: 0.89, // months: [] = use for any month until other seasons exist
+              under: [
+                { page: 'L', anchor: 'spread', src: 'branch.webp', ar: 4.83, h: 190, y: -26 },
+                { page: 'R', anchor: 'spread', src: 'branch.webp', ar: 4.83, h: 190, y: -26 },
+                { page: 'L', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0 },
+                { page: 'R', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0 }
+              ],
+              extras: [
+                { page: 'R', anchor: 'bl', src: 'snail.webp', w: 34, h: 25, x: 150, y: 4 },
+                { page: 'R', anchor: 'bl', src: 'bee.webp', w: 26, h: 23, x: 250, y: 58 }
+              ] }
           ],
-          over: [
-            // 'at' = how far along the branch it sits (0 = left end, 1 = tip); x/y are used when the branch can't be measured
-            { page: 'R', anchor: 'onStrip', at: 0.89, src: 'squirrel-toss.webp', srcDrop: 'squirrel-toss-empty.webp', w: 126, h: 74, x: 56, y: 24 },
-            { page: 'R', anchor: 'br', src: 'squirrel-catch.webp', w: 139, h: 112, x: 18, y: 4, catcher: true },
-            { page: 'R', anchor: 'bl', src: 'snail.webp', w: 34, h: 25, x: 150, y: 4 },
-            { page: 'R', anchor: 'bl', src: 'bee.webp', w: 26, h: 23, x: 250, y: 58 }
+          casts: [
+            { id: 'squirrels', name: 'Squirrels and an acorn',
+              over: [
+                // onStrip = sits on the branch at the set's perch point, so it stays on the branch at any width (x/y are the fallback)
+                { page: 'R', anchor: 'onStrip', src: 'squirrel-toss.webp', srcDrop: 'squirrel-toss-empty.webp', w: 126, h: 74, x: 56, y: 24 },
+                { page: 'R', anchor: 'br', src: 'squirrel-catch.webp', w: 139, h: 112, x: 18, y: 4, catcher: true }
+              ],
+              // falls when a task is checked off: from the thrower's paw to the catcher's paws (toRight = from the page's right edge)
+              drop: { src: 'acorn.webp', w: 15, h: 17, fromX: 2, y: 76, toRight: 149, toY: 84, x: 165, dx: 31 } }
           ],
-          // what falls when a task is checked off: starts at the thrower's paw, lands in the catcher's paws (toRight = from the page's right edge)
-          drop: { src: 'acorn.webp', w: 15, h: 17, fromX: 2, y: 76, toRight: 149, toY: 84, x: 165, dx: 31 },
           quote: 'bottom', quoteClear: 170, quoteY: 88
         },
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
@@ -5670,10 +5707,11 @@ class Component extends DCLogic {
   sceneVals(t, s) {
     const none = { sceneUnderL: [], sceneUnderR: [], sceneOverL: [], sceneOverR: [], sceneDropOn: false, sceneDrop: {}, quoteBottom: false, quoteTopDisp: 'inline', dayPadBot: 18, quoteBotRight: '160px', quoteBotY: '12px' };
     if (!t || !t.scene || !t.img) return none;
+    const sc0 = this.sceneNow(t, s);
     const vw = s.vw || 1194, nar = vw < 900, geo = nar ? null : s.pageGeo;
     const k = Math.max(0.78, Math.min(1.15, nar ? vw / 820 : vw / 1180));
     const P = (n) => Math.round(n * k), px = (n) => Math.round(n) + 'px', A = 'auto';
-    const sc = t.scene, all = (sc.under || []).concat(sc.over || []);
+    const sc = sc0, all = (sc.under || []).concat(sc.over || []);
     // The top strip keeps its natural shape (it may stretch a little, never a lot). On a wide calendar page it simply ends sooner.
     const strip = all.find(ly => ly.anchor === 'spread');
     let sW = 0, sH = 0;
@@ -5693,7 +5731,7 @@ class Component extends DCLogic {
         Object.assign(b, { l: '0', r: '0', b: y, h: px(P(ly.h)), bg: url + ' ' + (ly.page === 'R' ? shiftR : 0) + 'px 100% / auto 100% repeat-x' });
       } else if (ly.anchor === 'onStrip' && geo && sW) {
         // sits on the strip at a set point along it, so it stays on the branch at any width
-        const w = P(ly.w), left = Math.min(geo.rw - w - P(8), Math.round(sW * ly.at - (geo.lw + geo.gap) - w / 2));
+        const w = P(ly.w), left = Math.min(geo.rw - w - P(8), Math.round(sW * (ly.at || sc.perch || 0.85) - (geo.lw + geo.gap) - w / 2));
         Object.assign(b, { l: px(left), t: y, w: px(w), h: px(P(ly.h)), bg: url + ' left top / contain no-repeat', _left: left, _w: w });
       } else {
         const an = ly.anchor === 'onStrip' ? 'tr' : ly.anchor, xx = ly.anchor === 'onStrip' ? px(P(ly.x || 0)) : x;
@@ -5727,10 +5765,20 @@ class Component extends DCLogic {
       quoteBottom: sc.quote === 'bottom', quoteTopDisp: sc.quote === 'bottom' ? 'none' : 'inline', dayPadBot: sc.quote === 'bottom' ? 120 : 18, quoteBotRight: px(P(sc.quoteClear || 160)), quoteBotY: px(P(sc.quoteY || 12))
     };
   }
+  // Today's scene for a storybook theme: the set for this month and the cast for this day, merged into one list of pieces.
+  sceneNow(t, s) {
+    const sc = t.scene; if (!sc) return null;
+    if (!sc.sets) return sc;
+    const m = this.dateFor(s.day).getMonth() + 1;
+    const set = sc.sets.find(x => (x.months || []).indexOf(m) >= 0) || sc.sets.find(x => !(x.months || []).length) || sc.sets[0];
+    const cast = this.pickByDay(sc.casts || [{}], s.day) || {};
+    return Object.assign({}, sc, { perch: set.perch, under: (set.under || []).concat(cast.under || []), over: (set.extras || []).concat(cast.over || []), drop: cast.drop || null });
+  }
   // Plays the theme's little "something falls" moment after a task is checked off.
   sceneCelebrate() {
     const t = this.themeDef(this.state.settings.theme);
-    if (!t || !t.scene || !t.scene.drop || this.state.view !== 'day') return;
+    const sn = t && t.scene ? this.sceneNow(t, this.state) : null;
+    if (!sn || !sn.drop || this.state.view !== 'day') return;
     clearTimeout(this._sceneT);
     this.setState({ sceneDrop: 0 });
     setTimeout(() => {
@@ -5741,7 +5789,7 @@ class Component extends DCLogic {
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/bee.webp': '/_blob/6f071e99b270820feeefd81ff2eac110', 'themes/rosewreath/snail.webp': '/_blob/0bd67ea5e0150c0239a3b744c9bd7698', 'themes/rosewreath/squirrel-toss-empty.webp': '/_blob/3a7278d2b5528719d1e5e8717b4fb982', 'themes/rosewreath/grass.webp': '/_blob/c86ebb9106f44cef2b3a6a62ca32c941', 'themes/rosewreath/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/rosewreath/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/rosewreath/squirrel-toss.webp': '/_blob/3f3e33ac47e702c148d2981a351480ce', 'themes/rosewreath/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
+    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/card.webp': '/_blob/f8fb9d30a8146251bc0bac5869852ffc', 'themes/rosewreath/bee.webp': '/_blob/6f071e99b270820feeefd81ff2eac110', 'themes/rosewreath/snail.webp': '/_blob/0bd67ea5e0150c0239a3b744c9bd7698', 'themes/rosewreath/squirrel-toss-empty.webp': '/_blob/3a7278d2b5528719d1e5e8717b4fb982', 'themes/rosewreath/grass.webp': '/_blob/c86ebb9106f44cef2b3a6a62ca32c941', 'themes/rosewreath/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/rosewreath/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/rosewreath/squirrel-toss.webp': '/_blob/3f3e33ac47e702c148d2981a351480ce', 'themes/rosewreath/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
@@ -10765,6 +10813,8 @@ class Component extends DCLogic {
         const col = (h) => v[h] || ('#' + h);
         return {
           hasImg: t.art === 'img' && !!this.themeAsset(t, t.img.swags[0]), img: t.art === 'img' ? this.themeAsset(t, t.img.swags[0]) : '',
+          story: !!t.storybook, cardImg: t.card ? this.themeAsset(t, t.card) : '',
+          tileImg: t.storybook && t.card ? "url('" + this.themeAsset(t, t.card) + "') 88% 70% / auto 150% no-repeat" : '', tileBand: t.storybook ? 'transparent' : col('FBEDEE'), tileInk: t.storybook ? 'transparent' : col('6E2F43'), perks: (t.perks || []).map(x => ({ label: x })),
           name: t.name, blurb: t.blurb, font: t.fHead, ink: col('6E2F43'), band: col('FBEDEE'), accent: col('A0526A'), line: col('E2B9C4'), paper: t.paper,
           tabs: [0, 1, 2, 3, 4, 5, 6].map(k => { const d = t.tabPal[k % t.tabPal.length]; return { bg: this.mixColor(d, '#FFFFFF', 0.68), fg: d }; }),
           checked: on ? 'true' : 'false', ring: on ? '0 0 0 2px #FFFFFF, 0 0 0 4px ' + col('6E2F43') : '0 1px 2px rgba(0,0,0,0.08)', inUse: on,
@@ -10773,6 +10823,9 @@ class Component extends DCLogic {
       })
     };
     themeVals2.curTheme = themeVals2.themeCards.find(t => t.inUse) || themeVals2.themeCards[0];
+    themeVals2.storyCards = themeVals2.themeCards.filter(t => t.story);
+    themeVals2.simpleCards = themeVals2.themeCards.filter(t => !t.story);
+    themeVals2.hasStory = themeVals2.storyCards.length > 0;
     themeVals2.themeCount = 'See all ' + themeVals2.themeCards.length;
     const dataVals = {
       showData: isSettings && s.setSec === 'data',
