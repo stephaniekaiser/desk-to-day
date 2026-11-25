@@ -170,18 +170,20 @@
           {
             "page": "L",
             "anchor": "spread",
-            "src": "branch.webp",
-            "ar": 4.83,
-            "h": 190,
-            "y": -26
+            "src": "branch-2.webp",
+            "ar": 4.068,
+            "h": 226,
+            "y": -26,
+            "padH": 190
           },
           {
             "page": "R",
             "anchor": "spread",
-            "src": "branch.webp",
-            "ar": 4.83,
-            "h": 190,
-            "y": -26
+            "src": "branch-2.webp",
+            "ar": 4.068,
+            "h": 226,
+            "y": -26,
+            "padH": 190
           },
           {
             "page": "L",
@@ -255,7 +257,7 @@
           "w": 17,
           "h": 17
         },
-        "driftY": 92
+        "driftY": 118
       }
     ],
     "casts": [
@@ -270,7 +272,7 @@
             "w": 126,
             "h": 74,
             "x": 56,
-            "y": 24,
+            "y": 54,
             "holds": {
               "x": -2,
               "y": 49
