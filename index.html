@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 7:58 PM';</script>
+<script>window.__plannerBuild = 'Nov 25, 6:57 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1458,7 +1458,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 
 <section aria-label="{{rightLabel}}" style="position: relative; flex: 1; display: {{rightDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgR}}; border-radius: {{rightRadius}}; box-shadow: inset 18px 0 22px -16px rgba(0,0,0,0.30), 1px 1px 0 #E6DCC8, 2px 2px 0 #D9CDB6, 3px 3px 0 #E6DCC8, 4px 4px 0 #CDBFA4">
-<sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><sc-for list="{{sceneUnderR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for><sc-for list="{{sceneOverR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none; z-index: 3"></div></sc-for><sc-if value="{{sceneDropOn}}" hint-placeholder-val="{{ false }}"><div class="scene-drop" aria-hidden="true" style="--y0: {{sceneDrop.y0}}; --y1: {{sceneDrop.y1}}; --dx: {{sceneDrop.dx}}; right: {{sceneDrop.r}}; width: {{sceneDrop.w}}; height: {{sceneDrop.h}}; background: {{sceneDrop.bg}}; z-index: 4; pointer-events: none"></div></sc-if><sc-if value="{{quoteBottom}}" hint-placeholder-val="{{ false }}"><div aria-hidden="false" style="position: absolute; left: 34px; right: {{quoteBotRight}}; bottom: 10px; z-index: 3; font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); line-height: 1.15; color: {{themeInk}}; -webkit-text-stroke: 0.35px currentColor; pointer-events: none">“{{themeQuote}}”</div></sc-if></sc-if>
+<sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><sc-for list="{{sceneUnderR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for><sc-for list="{{sceneOverR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none; z-index: 3"></div></sc-for><sc-if value="{{sceneDropOn}}" hint-placeholder-val="{{ false }}"><div class="scene-drop" aria-hidden="true" style="--y0: {{sceneDrop.y0}}; --y1: {{sceneDrop.y1}}; --dx: {{sceneDrop.dx}}; right: {{sceneDrop.r}}; width: {{sceneDrop.w}}; height: {{sceneDrop.h}}; background: {{sceneDrop.bg}}; z-index: 4; pointer-events: none"></div></sc-if><sc-if value="{{quoteBottom}}" hint-placeholder-val="{{ false }}"><div aria-hidden="false" style="position: absolute; left: 34px; right: {{quoteBotRight}}; bottom: {{quoteBotY}}; z-index: 3; font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); line-height: 1.15; color: {{themeInk}}; -webkit-text-stroke: 0.35px currentColor; pointer-events: none">“{{themeQuote}}”</div></sc-if></sc-if>
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}"><img src="{{imgAnimal}}" alt="" aria-hidden="true" style="position: absolute; right: 16px; bottom: 8px; height: 118px; width: auto; max-width: 40%; object-fit: contain; object-position: right bottom; z-index: 3; pointer-events: none"></sc-if></sc-if>
 
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
@@ -5568,15 +5568,17 @@ class Component extends DCLogic {
             { page: 'L', anchor: 'left', src: 'trunk.webp', w: 24, x: 4, y: 70, op: 0.28 },
             { page: 'L', anchor: 'top', src: 'branch.webp', h: 104, y: 0, pos: 'left top' },
             { page: 'R', anchor: 'top', src: 'branch.webp', h: 104, y: 0, pos: 'right top' },
+            { page: 'L', anchor: 'bottom', src: 'grass.webp', h: 62, y: 0, pos: 'left bottom' },
+            { page: 'R', anchor: 'bottom', src: 'grass.webp', h: 62, y: 0, pos: 'right bottom' },
             { page: 'L', anchor: 'tl', src: 'canopy.webp', w: 150, h: 121, x: 0, y: 0, op: 0.7 }
           ],
           over: [
             { page: 'R', anchor: 'tr', src: 'squirrel-toss.webp', h: 80, x: 92, y: 6 },
-            { page: 'R', anchor: 'br', src: 'squirrel-catch.webp', h: 118, x: 14, y: 8, catcher: true }
+            { page: 'R', anchor: 'br', src: 'squirrel-catch.webp', h: 112, x: 18, y: 4, catcher: true }
           ],
           // what falls when a task is checked off: from the thrower's paws (offsets from the top-right) to the catcher (offset from the bottom)
           drop: { src: 'acorn.webp', w: 16, h: 20, x: 118, y: 52, toY: 96, dx: 26 },
-          quote: 'bottom', quoteClear: 170   // quote sits at the bottom of the calendar page, leaving room for the corner character
+          quote: 'bottom', quoteClear: 170, quoteY: 50   // quote sits at the bottom of the calendar page, leaving room for the corner character
         },
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
       },
@@ -5657,6 +5659,7 @@ class Component extends DCLogic {
       const b = { l: A, r: A, t: A, b: A, w: A, h: A, op: String(ly.op == null ? 1 : ly.op), anim: 'none', bg: '' };
       const x = px(ly.x || 0), y = px(ly.y || 0);
       if (ly.anchor === 'top') Object.assign(b, { l: '0', r: '0', t: y, h: px(ly.h), bg: url + ' ' + (ly.pos || 'left top') + ' / auto 100% no-repeat' });
+      else if (ly.anchor === 'bottom') Object.assign(b, { l: '0', r: '0', b: y, h: px(ly.h), bg: url + ' ' + (ly.pos || 'left bottom') + ' / auto 100% no-repeat' });
       else if (ly.anchor === 'left') Object.assign(b, { l: x, t: y, b: '0', w: px(ly.w), bg: url + ' center / 100% 100% no-repeat' });
       else {
         const pos = { tl: 'left top', tr: 'right top', bl: 'left bottom', br: 'right bottom' }[ly.anchor] || 'left top';
@@ -5672,7 +5675,7 @@ class Component extends DCLogic {
     return {
       sceneUnderL: pick(sc.under, 'L'), sceneUnderR: pick(sc.under, 'R'), sceneOverL: pick(sc.over, 'L'), sceneOverR: pick(sc.over, 'R'),
       sceneDropOn: !!(d && s.sceneDrop),
-      quoteBottom: sc.quote === 'bottom', quoteTopDisp: sc.quote === 'bottom' ? 'none' : 'inline', dayPadBot: sc.quote === 'bottom' ? 50 : 18, quoteBotRight: px(sc.quoteClear || 160),
+      quoteBottom: sc.quote === 'bottom', quoteTopDisp: sc.quote === 'bottom' ? 'none' : 'inline', dayPadBot: sc.quote === 'bottom' ? 84 : 18, quoteBotRight: px(sc.quoteClear || 160), quoteBotY: px(sc.quoteY || 12),
       sceneDrop: d ? { bg: "url('" + this.themeAsset(t, d.src) + "') center / contain no-repeat", r: px(d.x), w: px(d.w), h: px(d.h), y0: px(d.y), y1: px(d.toY), dx: px(d.dx || 0) } : {}
     };
   }
@@ -5690,7 +5693,7 @@ class Component extends DCLogic {
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/branch.webp': '/_blob/cbd3c42366b7483e97ca64ef7075bc2a', 'themes/rosewreath/canopy.webp': '/_blob/f72d7f35d0f8c327515bcddcc2928d39', 'themes/rosewreath/trunk.webp': '/_blob/f4645f9b7d9d57102c2abeeee206ffc2', 'themes/rosewreath/acorn.webp': '/_blob/7268c9b33fe4444d24dc5ffbd333ed33', 'themes/rosewreath/squirrel-toss.webp': '/_blob/a0d8a38d5ea98e9d8cef860f1175c6b1', 'themes/rosewreath/squirrel-catch.webp': '/_blob/df54b7758f85bf55e5c10af367f4d3fa', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
+    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/grass.webp': '/_blob/a423b2adef1db75c07c73477a52b7522', 'themes/rosewreath/branch.webp': '/_blob/cbd3c42366b7483e97ca64ef7075bc2a', 'themes/rosewreath/canopy.webp': '/_blob/f72d7f35d0f8c327515bcddcc2928d39', 'themes/rosewreath/trunk.webp': '/_blob/f4645f9b7d9d57102c2abeeee206ffc2', 'themes/rosewreath/acorn.webp': '/_blob/7268c9b33fe4444d24dc5ffbd333ed33', 'themes/rosewreath/squirrel-toss.webp': '/_blob/a0d8a38d5ea98e9d8cef860f1175c6b1', 'themes/rosewreath/squirrel-catch.webp': '/_blob/df54b7758f85bf55e5c10af367f4d3fa', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
