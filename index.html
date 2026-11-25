@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 6:43 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 6:59 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -9573,7 +9573,7 @@ class Component extends DCLogic {
             // Open book: a painted bloom tucked in the left page's corner, a light leaf spray hanging on the right.
             // Portrait shows one page at a time, so each banner gets the bloom.
             return nar ? { imgSwagL: bloom, imgSwagR: bloom, imgRRight: '-10px', imgRTop: '-16%', imgRH: '122%', imgRTf: 'none' }
-              : { imgSwagL: bloom, imgSwagR: on ? u(this.pickByDay(t.img.sprays, s.day)) : '', imgRRight: '4%', imgRTop: '-30%', imgRH: '135%', imgRTf: 'rotate(180deg) scaleX(-1)' };
+              : { imgSwagL: bloom, imgSwagR: '', imgRRight: '4%', imgRTop: '-30%', imgRH: '0', imgRTf: 'none' }; // right banner art: undecided, left empty for now
           })()),
           bandMask: on ? 'linear-gradient(#000 70%, rgba(0,0,0,0) 100%)' : 'none', bandLine: on ? 'transparent' : this.TK.tE7B7C2,
           quoteIt: on ? 'normal' : 'italic', quoteSz: on ? 23 : 19,
