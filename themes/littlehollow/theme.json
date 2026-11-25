@@ -1,12 +1,13 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 1,
+  "version": 2,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
     "Spring blossom set",
-    "Squirrels and an acorn"
+    "Squirrels and an acorn",
+    "New friend: a bee who buzzes around her flower"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -254,10 +255,41 @@
           "toY": 84,
           "x": 165,
           "dx": 31
-        }
+        },
+        "moment": "toss"
+      },
+      {
+        "id": "bee",
+        "name": "A bee and her flower",
+        "moment": "buzz",
+        "over": [
+          {
+            "page": "R",
+            "anchor": "bl",
+            "src": "bee-flower.webp",
+            "w": 36,
+            "h": 102,
+            "x": 150,
+            "y": 4
+          },
+          {
+            "page": "R",
+            "anchor": "bl",
+            "src": "bee-wings-up.webp",
+            "srcFlap": "bee-wings-down.webp",
+            "buzz": true,
+            "w": 34,
+            "h": 33,
+            "x": 166,
+            "y": 86
+          }
+        ],
+        "hide": [
+          "bee.webp"
+        ]
       }
     ],
-    "quote": "bottom",
+    "quote": "underDate",
     "quoteClear": 170,
     "quoteY": 88
   }
