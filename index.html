@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 9:32 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 9:36 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -99,9 +99,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </svg>
 </div>
 </sc-if>
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; box-sizing: border-box; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 10px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; box-sizing: border-box; padding: calc(22px + {{scenePadL}}px) 28px 20px; display: flex; flex-direction: column; gap: 10px">
 <sc-if value="{{showToolbar}}" hint-placeholder-val="{{ true }}">
-<div style="position: absolute; top: 18px; right: 22px; z-index: 12; display: flex; gap: 6px; align-items: center">
+<div style="position: absolute; top: calc(18px - {{scenePadL}}px * 0); right: 22px; z-index: 12; display: flex; gap: 6px; align-items: center">
 <button onClick="{{toggleBell}}" aria-label="{{bellAria}}" aria-expanded="{{bellExpanded}}" title="Reminders" style="position: relative; width: 40px; height: 40px; border-radius: 20px; border: 1.5px solid #D8CDB6; background: #FFFFFF; color: #2B2722; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg>
 <sc-if value="{{hasBellBadge}}" hint-placeholder-val="{{ false }}">
@@ -158,7 +158,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button onClick="{{nextDay}}" aria-label="Next day" style="width: 36px; height: 36px; flex: none; border-radius: 18px; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
 </div>
 </sc-if>
-<div role="tablist" aria-label="What to show for this day" style="display: flex; align-items: flex-end; gap: 14px; border-bottom: 1px solid #E6DCC8; padding: 0 2px">
+<div role="tablist" aria-label="What to show for this day" style="display: flex; align-items: flex-end; gap: 14px; border-bottom: 1px solid #E6DCC8; padding: 0 2px; background: {{tabGlowBg}}; box-shadow: {{tabGlow}}; border-radius: 8px 8px 0 0">
 <sc-for list="{{dayTabs}}" as="dt" hint-placeholder-count="6">
 <button role="tab" aria-selected="{{dt.sel}}" aria-label="{{dt.aria}}" title="{{dt.label}}" onClick="{{dt.pick}}" style="position: relative; height: 32px; min-width: 32px; margin-left: {{dt.ml}}; padding: 0 4px; margin-bottom: -1px; border: 0; border-bottom: 2px solid {{dt.line}}; background: transparent; color: {{dt.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 5px">
 <sc-if value="{{dt.hasIcon}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="{{dt.icon}}"></path></svg></sc-if>
@@ -5777,7 +5777,7 @@ class Component extends DCLogic {
   }
   // Scene layers for a theme, as positioned boxes per page. Everything is pinned to a page edge so it lands right on any screen.
   sceneVals(t, s) {
-    const none = { sceneUnderL: [], sceneUnderR: [], sceneOverL: [], sceneOverR: [], sceneDropOn: false, sceneDrop: {}, quoteBottom: false, quoteUnder: false, quoteTopDisp: 'inline', dayPadBot: 18, quoteBotRight: '160px', quoteBotY: '12px' };
+    const none = { scenePadL: 0, tabGlow: 'none', tabGlowBg: 'transparent', sceneUnderL: [], sceneUnderR: [], sceneOverL: [], sceneOverR: [], sceneDropOn: false, sceneDrop: {}, quoteBottom: false, quoteUnder: false, quoteTopDisp: 'inline', dayPadBot: 18, quoteBotRight: '160px', quoteBotY: '12px' };
     if (!t || !t.scene || !t.img) return none;
     const sc0 = this.sceneNow(t, s);
     const vw = s.vw || 1194, nar = vw < 900, geo = nar ? null : s.pageGeo;
@@ -5835,6 +5835,8 @@ class Component extends DCLogic {
     }
     if (drop.dur) this._dropDur = parseFloat(drop.dur) - 0.05;
     return {
+      scenePadL: this.sceneTopPad(s).l,
+      tabGlowBg: 'rgba(251,248,243,0.78)', tabGlow: '0 -10px 18px 10px rgba(251,248,243,0.78)',
       sceneUnderL: pick(sc.under, 'L'), sceneUnderR: pick(sc.under, 'R'), sceneOverL: pick(sc.over, 'L'), sceneOverR: overR,
       sceneDropOn: !!(d && s.sceneDrop), sceneDrop: drop,
       quoteBottom: sc.quote === 'bottom', quoteUnder: sc.quote === 'underDate', quoteTopDisp: sc.quote === 'bottom' || sc.quote === 'underDate' ? 'none' : 'inline', dayPadBot: sc.quote === 'bottom' ? 120 : (sc.quote === 'underDate' ? 78 : 18), quoteBotRight: px(P(sc.quoteClear || 160)), quoteBotY: px(P(sc.quoteY || 12))
@@ -5878,6 +5880,14 @@ class Component extends DCLogic {
     let cast = this.pickByDay(sc.casts || [{}], s.day) || {};
     try { const f = (sc.casts || []).find(c => c.id === window.__castVar); if (f) cast = f; } catch (err) {}
     return Object.assign({}, sc, { perch: set.perch, under: (set.under || []).concat(cast.under || []), over: (set.extras || []).filter(x => (cast.hide || []).indexOf(x.src) < 0).concat(cast.over || []), drop: cast.drop || null, moment: cast.moment || (cast.drop ? 'toss' : null) });
+  }
+  // How far the top strip hangs down, so the Day page content starts below it (it scales with the screen like the art).
+  sceneTopPad(s) {
+    const t = this.themeDef(s.settings.theme); if (!t || !t.scene) return { r: 0, l: 0 };
+    const sc = this.sceneNow(t, s), strip = ((sc && sc.under) || []).find(ly => ly.anchor === 'spread'); if (!strip) return { r: 0, l: 0 };
+    const vw = s.vw || 1194, nar = vw < 900, k = Math.max(0.78, Math.min(1.15, nar ? vw / 820 : vw / 1180));
+    const brH = Math.round(strip.h * k) + Math.round((strip.y || 0) * k);
+    return { r: Math.max(150, brH - 14), l: nar ? 0 : Math.max(0, brH - 132) };
   }
   // Plays the theme's little "something falls" moment after a task is checked off.
   sceneCelebrate() {
@@ -9852,7 +9862,7 @@ class Component extends DCLogic {
       leftSpacer: 88,
       b3Bg: this.THEME.big3.bg, b3Line: this.THEME.big3.line, b3Ink: this.THEME.big3.ink, b3Muted: this.THEME.big3.muted, b3Accent: this.THEME.big3.accent,
       statBg: this.THEME.stat.bg, statLine: this.THEME.stat.line, statFg: this.THEME.stat.fg, statInk: this.THEME.stat.ink,
-      dayPadTop: this.themeDef(s.settings.theme).scene ? 150 : 126, dayTitleSz: this.themeDef(s.settings.theme).scene ? 40 : 32,
+      dayPadTop: this.sceneTopPad(s).r || 126, dayTitleSz: this.themeDef(s.settings.theme).scene ? 40 : 32,
       themeName: this.themeDef(s.settings.theme).name,
       themeQuote: (() => { const t = this.themeDef(s.settings.theme); return t.quotes ? this.pickByDay(t.quotes, s.day) : t.quote; })(),
       ...(() => {
