@@ -22,7 +22,7 @@ packages.
 | `scene.sets` | The place for a time of year: `months`, `perch`, `under` (strips), `extras` |
 | `scene.casts` | Animal friends that rotate by day: `over` pieces. A piece with `holds: {x,y}` sits in the tree holding the season's item and drops it into the basket on a check-off; with no holder, the item drifts down from the branch. `flutter: true` gives a ground friend a tiny wing flutter as the item lands |
 | `sets[].item` | The season's item that lands in the basket (`src`, `w`, `h`); `driftY` is where it lets go of the branch on quiet days |
-| `sets[].pile` | The weekly basket: `anchor: underPerch` puts it under the branch tip (`dx` nudges it), `states` pick the art by how many things are done this week |
+| `sets[].pile` | The weekly basket: `anchor: underPerch` puts it under the branch tip (`dx` nudges it), `states` pick the art by `pct`: how much of the day's Must do and Should do is finished (1 = the first thing done). It starts fresh each day and never goes down during the day |
 | `scene.quote`, `quoteClear`, `quoteY` | Where the quote sits |
 
 Scene piece anchors: `spread` (top strip across both pages), `spreadBottom` (repeating ground strip),

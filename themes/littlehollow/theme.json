@@ -1,14 +1,14 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 4,
+  "version": 5,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
     "Spring blossom set",
     "A squirrel on the branch",
     "New friend: a bee who loops around her flower while a blossom drifts down",
-    "A basket under the branch fills with blossoms as you finish things each week"
+    "The basket under the branch fills with blossoms as you finish the day's Must do and Should do, and starts fresh each morning"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -229,27 +229,28 @@
           "h": 106,
           "states": [
             {
-              "min": 0,
-              "src": "basket-spring-0.webp"
+              "src": "basket-spring-0.webp",
+              "pct": 0
             },
             {
-              "min": 1,
-              "src": "basket-spring-1.webp"
+              "src": "basket-spring-1.webp",
+              "pct": 1
             },
             {
-              "min": 4,
-              "src": "basket-spring-2.webp"
+              "src": "basket-spring-2.webp",
+              "pct": 34
             },
             {
-              "min": 9,
-              "src": "basket-spring-3.webp"
+              "src": "basket-spring-3.webp",
+              "pct": 67
             },
             {
-              "min": 16,
-              "src": "basket-spring-4.webp"
+              "src": "basket-spring-4.webp",
+              "pct": 100
             }
           ],
-          "dx": -58
+          "dx": -58,
+          "per": "day"
         },
         "item": {
           "name": "blossom",
