@@ -1,13 +1,14 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 2,
+  "version": 3,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
     "Spring blossom set",
     "Squirrels and an acorn",
-    "New friend: a bee who buzzes around her flower"
+    "New friend: a bee who buzzes around her flower",
+    "A basket in the meadow fills up with petals as you finish things each week"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -204,7 +205,7 @@
             "src": "snail.webp",
             "w": 34,
             "h": 25,
-            "x": 270,
+            "x": 300,
             "y": 4
           },
           {
@@ -216,7 +217,38 @@
             "x": 250,
             "y": 58
           }
-        ]
+        ],
+        "pile": {
+          "page": "R",
+          "anchor": "bl",
+          "x": 16,
+          "y": 2,
+          "w": 96,
+          "h": 72,
+          "drop": "petal.webp",
+          "states": [
+            {
+              "min": 0,
+              "src": "basket-0.webp"
+            },
+            {
+              "min": 1,
+              "src": "basket-1.webp"
+            },
+            {
+              "min": 4,
+              "src": "basket-2.webp"
+            },
+            {
+              "min": 9,
+              "src": "basket-3.webp"
+            },
+            {
+              "min": 16,
+              "src": "basket-4.webp"
+            }
+          ]
+        }
       }
     ],
     "casts": [
