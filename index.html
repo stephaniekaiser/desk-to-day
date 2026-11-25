@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 3:35 PM';</script>
+<script>window.__plannerBuild = 'Nov 25, 3:39 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -39,6 +39,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 .scene-drop.fall{animation:sceneFall var(--dur) cubic-bezier(.5,0,.85,.6) var(--dl,0s) forwards,sceneDrift var(--dur) ease-in-out var(--dl,0s) forwards,sceneTip var(--dur) ease-in var(--dl,0s) forwards,sceneFade .14s ease-in var(--fade) forwards}
 @keyframes sceneShake{0%,100%{rotate:0deg}20%{rotate:-4deg}45%{rotate:3deg}70%{rotate:-2deg}}
 .scene-drop.drift{opacity:0;animation:sceneFall var(--dur) cubic-bezier(.3,.1,.6,1) forwards,sceneSway var(--dur) ease-in-out forwards,sceneShow .35s ease-out forwards,sceneFade .14s ease-in var(--fade) forwards}
+@keyframes sceneInA{from{opacity:0}to{opacity:1}}
+@keyframes sceneInB{from{opacity:0}to{opacity:1}}
 @keyframes sceneTip{from{rotate:0deg}to{rotate:50deg}}
 @keyframes sceneShow{to{opacity:1}}
 @keyframes sceneSway{0%{translate:0 0;rotate:0deg}22%{translate:-14px 0;rotate:-24deg}48%{translate:12px 0;rotate:20deg}74%{translate:-8px 0;rotate:-12deg}100%{translate:0 0;rotate:0deg}}
@@ -5808,6 +5810,19 @@ class Component extends DCLogic {
     const k = Math.max(0.78, Math.min(1.15, nar ? vw / 820 : vw / 1180));
     const P = (n) => Math.round(n * k), px = (n) => Math.round(n) + 'px', A = 'auto';
     const sc = sc0, all = (sc.under || []).concat(sc.over || []);
+    // Friends fade in when you arrive on the Day page or flip days. A new animation name restarts the fade;
+    // keeping the same name in the list means check-off moments never replay it.
+    const arrive = s.view + ':' + s.day;
+    if (arrive !== this._sceneArrive) { this._sceneArrive = arrive; this._sceneInN = this._sceneInN ? 0 : 1; }
+    const fadeIn = (this._sceneInN ? 'sceneInA' : 'sceneInB') + ' .55s ease-out both';
+    // Load every piece of this theme's scene art ahead of time, so friends never pop in late.
+    if (!(this._scenePre = this._scenePre || {})[t.id]) {
+      this._scenePre[t.id] = [];
+      const srcs = {}, add = (ly) => { ['src', 'srcDrop', 'srcFlap'].forEach(k => { if (ly && ly[k]) srcs[ly[k]] = 1; }); };
+      (t.scene.sets || []).forEach(st => { (st.under || []).concat(st.extras || []).forEach(add); if (st.item) add(st.item); ((st.pile || {}).states || []).forEach(add); });
+      (t.scene.casts || []).forEach(c => (c.over || []).forEach(add));
+      Object.keys(srcs).forEach(src => { try { const im = new Image(); im.src = this.themeAsset(t, src); this._scenePre[t.id].push(im); } catch (e) {} });
+    }
     // The top strip keeps its natural shape (it may stretch a little, never a lot). On a wide calendar page it simply ends sooner.
     const strip = all.find(ly => ly.anchor === 'spread');
     let sW = 0, sH = 0;
@@ -5846,6 +5861,7 @@ class Component extends DCLogic {
       // a tree friend who shakes (the robin) fluffs up a few times, then lets go of the item
       if (ly.shake && s.sceneDrop) { b.anim = 'sceneShake .6s ease-in-out'; b.origin = 'center bottom'; if (ly.srcFlap) b.flapAnim = 'sceneFlap .15s steps(1) 4'; }
       if (ly.buzz && s.sceneDrop) { b.anim = 'sceneBuzz 2.4s linear'; if (ly.srcFlap) b.flapAnim = 'sceneFlap .09s steps(1) 26'; }
+      if (ly._friend) b.anim = fadeIn + (b.anim && b.anim !== 'none' ? ', ' + b.anim : '');
       return b;
     };
     const pick = (list, pg) => (list || []).filter(ly => ly.page === pg).map(box);
@@ -5880,7 +5896,7 @@ class Component extends DCLogic {
         drop.fade = ((drop._dl || 0) + parseFloat(drop.dur) - 0.12).toFixed(2) + 's';
         Object.assign(drop, { bg: "url('" + this.themeAsset(t, it.src) + "') center / contain no-repeat", w: px(iw), h: px(ih) });
         this._dropDur = parseFloat(drop.dur) + (drop._dl || 0);
-        if (holder && !s.sceneDrop) overR.push({ l: A, r: px(holder.r), t: px(holder.t), b: A, w: px(iw), h: px(ih), op: '1', anim: 'none', bg: drop.bg, flapBg: 'none', flapAnim: 'none' });
+        if (holder && !s.sceneDrop) overR.push({ l: A, r: px(holder.r), t: px(holder.t), b: A, w: px(iw), h: px(ih), op: '1', anim: fadeIn, bg: drop.bg, flapBg: 'none', flapAnim: 'none' });
         // the basket fills the moment the item lands
         const prev = stOf(this._basketBefore != null ? this._basketBefore : n);
         if (s.sceneDrop && prev !== st) {
@@ -5935,7 +5951,7 @@ class Component extends DCLogic {
     const set = sc.sets.find(x => (x.months || []).indexOf(m) >= 0) || sc.sets.find(x => !(x.months || []).length) || sc.sets[0];
     let cast = this.pickByDay(sc.casts || [{}], s.day) || {};
     try { const f = (sc.casts || []).find(c => c.id === window.__castVar); if (f) cast = f; } catch (err) {}
-    return Object.assign({}, sc, { perch: set.perch, under: (set.under || []).concat(cast.under || []), over: (set.extras || []).filter(x => (cast.hide || []).indexOf(x.src) < 0).concat(cast.over || []), pile: set.pile || null, item: set.item || null, driftY: set.driftY, moment: cast.moment || 'drift' });
+    return Object.assign({}, sc, { perch: set.perch, under: (set.under || []).concat(cast.under || []), over: (set.extras || []).filter(x => (cast.hide || []).indexOf(x.src) < 0).concat((cast.over || []).map(x => Object.assign({ _friend: true }, x))), pile: set.pile || null, item: set.item || null, driftY: set.driftY, moment: cast.moment || 'drift' });
   }
   // How far the top strip hangs down, so the Day page content starts below it (it scales with the screen like the art).
   sceneTopPad(s) {
