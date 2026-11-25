@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 2:43 PM';</script>
+<script>window.__plannerBuild = 'Nov 25, 3:32 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -5957,6 +5957,19 @@ class Component extends DCLogic {
     const hi = ((s.settings || {}).basketHi || {})[d] || 0;
     return Math.max(p, hi);
   }
+  // Un-checking takes blossoms back out: the remembered high mark drops to what's really done now.
+  // (Adding tasks never lowers it; only un-checking does.)
+  basketRecount(d) {
+    if (typeof d !== 'number') return;
+    setTimeout(() => {
+      const hi = Object.assign({}, this.state.settings.basketHi || {});
+      if (hi[d] == null) return;
+      const r = this.dayBasketPct(this.state, d, true);
+      // take out one thing's share of what was earned (so tasks added later don't make it drop further)
+      const np = r.done ? Math.max(r.p, Math.round(hi[d] * r.done / (r.done + 1))) : 0;
+      if (np < hi[d]) { if (np > 0) hi[d] = np; else delete hi[d]; this.setSetting({ basketHi: hi }); }
+    }, 30);
+  }
   // The weekly pile: how many things you've finished this week (tasks and habit blocks), for the basket in the meadow.
   weekDoneCount(s) {
     const ws = this.weekStartOff(s.day), we = ws + 6;
@@ -6818,7 +6831,7 @@ class Component extends DCLogic {
     const tasks = s.tasks.map(x => x.id === id ? Object.assign({}, x, { done: done, doneDay: done ? day : null }) : x);
     const stepSync = t.stepId && t.courseId && t.assignmentId ? { courses: (s.courses || []).map(c => c.id !== t.courseId ? c : Object.assign({}, c, { assignments: (c.assignments || []).map(a => a.id !== t.assignmentId ? a : Object.assign({}, a, { checklist: (a.checklist || []).map(it => it.id === t.stepId ? Object.assign({}, it, { done: done }) : it) })) })) } : {};
     this.setState(Object.assign({ tasks: tasks, missFor: null, sel: null }, stepSync));
-    if (done) this.sceneCelebrate();
+    if (done) this.sceneCelebrate(); else this.basketRecount(t.doneDay);
     const b3ws = this.weekStartOff(typeof day === 'number' ? day : 0);
     const b3 = (s.big3ByWeek[b3ws] || []).filter(Boolean);
     if (done && b3.indexOf(id) >= 0) {
@@ -6845,7 +6858,7 @@ class Component extends DCLogic {
       return;
     }
     this.setPlaced(this.placed().map(x => x.id === b.id ? Object.assign({}, x, { done: !x.done }) : x), { missFor: null });
-    if (!b.done) this.sceneCelebrate();
+    if (!b.done) this.sceneCelebrate(); else this.basketRecount(this.state.day);
   }
   // Starts an all-day event from a task. The task is removed only when the event is saved.
   taskToEvent(id) {
