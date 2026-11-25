@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 9:25 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 9:28 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -5901,7 +5901,7 @@ class Component extends DCLogic {
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/littlehollow/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/littlehollow/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/littlehollow/bee-flower.webp': '/_blob/30c5455417b12e2c6b15f973fd881a90', 'themes/littlehollow/bee-wings-up.webp': '/_blob/b273b68a0475bc256a6ebbb2401becfc', 'themes/littlehollow/bee-wings-down.webp': '/_blob/da84d75741e82e9094f145f479539623', 'themes/littlehollow/card.webp': '/_blob/f8fb9d30a8146251bc0bac5869852ffc', 'themes/littlehollow/bee.webp': '/_blob/6f071e99b270820feeefd81ff2eac110', 'themes/littlehollow/snail.webp': '/_blob/0bd67ea5e0150c0239a3b744c9bd7698', 'themes/littlehollow/squirrel-toss-empty.webp': '/_blob/3a7278d2b5528719d1e5e8717b4fb982', 'themes/littlehollow/grass.webp': '/_blob/c86ebb9106f44cef2b3a6a62ca32c941', 'themes/littlehollow/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/littlehollow/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/littlehollow/squirrel-toss.webp': '/_blob/3f3e33ac47e702c148d2981a351480ce', 'themes/littlehollow/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397'};
+    const map = {'themes/littlehollow/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/littlehollow/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/littlehollow/bee-flower.webp': '/_blob/30c5455417b12e2c6b15f973fd881a90', 'themes/littlehollow/bee-wings-up.webp': '/_blob/b273b68a0475bc256a6ebbb2401becfc', 'themes/littlehollow/bee-wings-down.webp': '/_blob/da84d75741e82e9094f145f479539623', 'themes/littlehollow/card.webp': '/_blob/f8fb9d30a8146251bc0bac5869852ffc', 'themes/littlehollow/bee.webp': '/_blob/6f071e99b270820feeefd81ff2eac110', 'themes/littlehollow/snail.webp': '/_blob/0bd67ea5e0150c0239a3b744c9bd7698', 'themes/littlehollow/squirrel-toss-empty.webp': '/_blob/3a7278d2b5528719d1e5e8717b4fb982', 'themes/littlehollow/grass.webp': '/_blob/737124dd1f3448c0f709693450644293', 'themes/littlehollow/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/littlehollow/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/littlehollow/squirrel-toss.webp': '/_blob/3f3e33ac47e702c148d2981a351480ce', 'themes/littlehollow/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
