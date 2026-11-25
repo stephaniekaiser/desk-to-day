@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 8:51 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 8:56 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -5662,7 +5662,10 @@ class Component extends DCLogic {
       },
       rosewreath: {
         tabPal: ['#B06F80', '#879A76', '#9C8270', '#B48A5A', '#7E5A6E'],
-        name: 'Little Hollow', blurb: 'A little tree, a meadow and woodland friends who visit as the seasons change.', storybook: true, binder: { cover: 'linen', rings: 'brass' }, perks: ['Animated', 'Changes with the seasons', 'Rotating animal friends'], card: 'card.webp', art: 'img',
+        name: 'Little Hollow', blurb: 'A little tree, a meadow and woodland friends who visit as the seasons change.', storybook: true, binder: { cover: 'linen', rings: 'brass' },
+        // Color choices in this theme (saved by key, so switching themes just changes how each one looks)
+        swatches: { red: ['Blossom', '#B5707A'], yellow: ['Honey', '#C29A4E'], blue: ['Dusk', '#7A8FA6'], green: ['Sage', '#879A76'], orange: ['Acorn', '#B5835A'], gray: ['Taupe', '#9C8270'] },
+        catSwatches: { blue: ['Dusk', '#6E86A0'], orange: ['Acorn', '#B07A52'], green: ['Sage', '#77906A'], rose: ['Blossom', '#A8667A'], plum: ['Plum', '#6E2F43'], gold: ['Honey', '#A88A44'], teal: ['Moss', '#5E8E88'], lavender: ['Lilac', '#8A779E'], slate: ['Stone', '#7E7A74'], brown: ['Bark', '#8A6A50'] }, perks: ['Animated', 'Changes with the seasons', 'Rotating animal friends'], card: 'card.webp', art: 'img',
         quote: 'Every blossom opens in its own time, and so will you.',
         quotes: ['Every blossom opens in its own time, and so will you.', 'Small steps still bloom.', 'Tend to today. Tomorrow will keep.', 'Rest is part of growing.', 'One petal at a time.', 'You are allowed to go slowly.', 'Plant one good thing today.'],
         fHead: "'Olesia', 'Dancing Script', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7F1', vars: { 'FBEDEE': '#F6EEE9', 'F6EDEF': '#F5EFEA', 'FAEAEE': '#F6EDE8', 'F3E6EA': '#F1E8E3', 'E2B9C4': '#DCC6BF', 'E7B7C2': '#DFC8C1', 'EBC3CD': '#E6D2CB' },
@@ -7597,9 +7600,16 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    if (!this._COLORS0) this._COLORS0 = this.COLORS;
-    { const td = this.themeDef(this.state.settings.theme), sb = td && td.storybook;
-      this.COLORS = sb ? Object.assign({}, this._COLORS0, { gray: { name: 'Gray', a: '#EFE8E0', b: '#E7DED4', border: '#CFC0B0', labelBg: '#DED2C5', labelFg: '#5A4A3C', swatch: '#9C8270' } }) : this._COLORS0; }
+    if (!this._COLORS0) { this._COLORS0 = this.COLORS; this._CAT0 = this.CAT_COLORS; }
+    { const td = this.themeDef(this.state.settings.theme), key = (td && td.swatches) ? this.state.settings.theme : '';
+      if (this._colKey !== key) {
+        this._colKey = key;
+        const M = (c, t) => this.mixColor(c, '#FFFFFF', t), D = (c) => this.mixColor(c, '#2B2722', 0.55);
+        this.COLORS = key ? Object.fromEntries(Object.keys(this._COLORS0).map(k => { const v = td.swatches[k]; if (!v) return [k, this._COLORS0[k]];
+          const c = v[1]; return [k, { name: v[0], a: M(c, 0.86), b: M(c, 0.79), border: M(c, 0.55), labelBg: M(c, 0.66), labelFg: D(c), swatch: c }]; })) : this._COLORS0;
+        this.CAT_COLORS = key && td.catSwatches ? Object.fromEntries(Object.keys(this._CAT0).map(k => { const v = td.catSwatches[k]; if (!v) return [k, this._CAT0[k]];
+          const c = v[1]; return [k, { name: v[0], color: c, tint: M(c, 0.88), edge: M(c, 0.6) }]; })) : this._CAT0;
+      } }
     if (this._repTopDay !== this.todayAbs() && this.state && this.state.habits) {
       this._repTopDay = this.todayAbs();
       setTimeout(() => { const m = this.topUpRepeats(this.state.habits, this.state.placedByDay); if (m !== this.state.placedByDay) this.setState({ placedByDay: m }); }, 0);
