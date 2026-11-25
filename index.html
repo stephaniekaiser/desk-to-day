@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 6:59 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 7:20 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1453,6 +1453,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 
 <section aria-label="{{rightLabel}}" style="position: relative; flex: 1; display: {{rightDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgR}}; border-radius: {{rightRadius}}; box-shadow: inset 18px 0 22px -16px rgba(0,0,0,0.30), 1px 1px 0 #E6DCC8, 2px 2px 0 #D9CDB6, 3px 3px 0 #E6DCC8, 4px 4px 0 #CDBFA4">
+<sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}"><img src="{{imgAnimal}}" alt="" aria-hidden="true" style="position: absolute; right: 16px; bottom: 8px; height: 118px; width: auto; max-width: 40%; object-fit: contain; object-position: right bottom; z-index: 3; pointer-events: none"></sc-if></sc-if>
 
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
 <div style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 3px 10px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{bandLine}}; -webkit-mask-image: {{bandMask}}; mask-image: {{bandMask}}">
@@ -5552,7 +5553,7 @@ class Component extends DCLogic {
         quotes: ['Every blossom opens in its own time, and so will you.', 'Small steps still bloom.', 'Tend to today. Tomorrow will keep.', 'Rest is part of growing.', 'One petal at a time.', 'You are allowed to go slowly.', 'Plant one good thing today.'],
         fHead: "'Olesia', 'Dancing Script', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7F1', vars: {},
         fontFace: { family: 'Olesia', file: 'olesia.woff2' },
-        img: { dir: 'themes/rosewreath/', swags: ['swag-1.webp', 'swag-2.webp', 'swag-3.webp', 'swag-4.webp', 'swag-5.webp', 'swag-6.webp'], wash: 'wash.webp', paper: 'paper.webp', wreaths: ['wreath-1.webp', 'wreath-2.webp', 'wreath-3.webp'], blooms: ['bloom-1.webp', 'bloom-2.webp', 'bloom-3.webp', 'bloom-4.webp'], sprays: ['spray-1.webp', 'spray-2.webp', 'spray-3.webp', 'spray-4.webp'], cornerL: 'corner-l.webp', cornerR: 'corner-r.webp' },
+        img: { dir: 'themes/rosewreath/', swags: ['swag-1.webp', 'swag-2.webp', 'swag-3.webp', 'swag-4.webp', 'swag-5.webp', 'swag-6.webp'], wash: 'wash.webp', paper: 'paper.webp', wreaths: ['wreath-1.webp', 'wreath-2.webp', 'wreath-3.webp'], blooms: ['bloom-1.webp', 'bloom-2.webp', 'bloom-3.webp', 'bloom-4.webp', 'bloom-5.webp', 'bloom-6.webp'], animals: ['animal-bunny.webp', 'animal-hedgehog.webp', 'animal-fawn.webp', 'animal-squirrel.webp', 'animal-chickadee.webp'], cornerL: 'corner-l.webp' },
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
       },
       seaglass: {
@@ -5623,7 +5624,7 @@ class Component extends DCLogic {
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/bloom-1.webp': '/_blob/5149085bd91f60a1873007b1ed58629d', 'themes/rosewreath/bloom-2.webp': '/_blob/f4c165c3a64a85a5c257eeaad36fb95f', 'themes/rosewreath/bloom-3.webp': '/_blob/c149f93000d54a72aa1a5ffaf89cb2b2', 'themes/rosewreath/bloom-4.webp': '/_blob/1a1870f48c424dffaabb1bdf64d80470', 'themes/rosewreath/spray-1.webp': '/_blob/03d1bda3c0d5a58f7adeb5a4e019717c', 'themes/rosewreath/spray-2.webp': '/_blob/83b52f684735e1c13be810236c457e30', 'themes/rosewreath/spray-3.webp': '/_blob/31916d41f592e7cbc710cf33c16c1342', 'themes/rosewreath/spray-4.webp': '/_blob/1a09621e7ae0f8d0b19ee3ffd1421a58', 'themes/rosewreath/corner-l.webp': '/_blob/38ffaf122d2e5d8219314c14573008e8', 'themes/rosewreath/corner-r.webp': '/_blob/d9540f1164e2ef429eb2e022f36a882a', 'themes/rosewreath/sprig-1.webp': '/_blob/7ac9d5f3ba8188e10d3befcfd2759da2', 'themes/rosewreath/sprig-2.webp': '/_blob/ba796815af4aaa7cda48c0acb91e942b', 'themes/rosewreath/sprig-3.webp': '/_blob/543cd5cbb6cb9030a25af5429d228e6e', 'themes/rosewreath/sprig-4.webp': '/_blob/4d3ac0927e8f4d9c5ddef581f96e7d35'};
+    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340', 'themes/rosewreath/corner-l.webp': '/_blob/38ffaf122d2e5d8219314c14573008e8'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
@@ -9580,7 +9581,8 @@ class Component extends DCLogic {
           imgWreath: on ? u(this.pickByDay(t.img.wreaths, s.day)) : '',
           pageBg: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
           pageBgL: (on && u(t.img.cornerL) ? "url('" + u(t.img.cornerL) + "') left -14px bottom -10px / auto 280px no-repeat, " : '') + (paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE'),
-          pageBgR: (on && u(t.img.cornerR) ? "url('" + u(t.img.cornerR) + "') right -8px bottom -6px / auto 240px no-repeat, " : '') + (paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE'),
+          pageBgR: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
+          imgAnimal: on && t.img.animals ? u(this.pickByDay(t.img.animals, s.day)) : '',
           jBg: wash ? "linear-gradient(rgba(251,247,238,0.82), rgba(251,247,238,0.9)), url('" + wash + "') center / cover no-repeat, #FBF7EE" : '#FBF7EE'
         };
       })(),
