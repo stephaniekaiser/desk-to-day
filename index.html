@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 7:25 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 7:31 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -5572,11 +5572,11 @@ class Component extends DCLogic {
             { page: 'L', anchor: 'tl', src: 'canopy.webp', w: 240, h: 227, x: -10, y: -8, op: 0.6 }
           ],
           over: [
-            { page: 'R', anchor: 'tr', src: 'squirrel-toss.webp', h: 84, x: 64, y: 22 },
-            { page: 'R', anchor: 'br', src: 'squirrel-catch.webp', h: 112, x: 18, y: 4, catcher: true }
+            { page: 'R', anchor: 'tr', src: 'squirrel-toss.webp', w: 125, h: 74, x: 56, y: 24 },
+            { page: 'R', anchor: 'br', src: 'squirrel-catch.webp', w: 139, h: 112, x: 18, y: 4, catcher: true }
           ],
           // what falls when a task is checked off: from the thrower's paws (offsets from the top-right) to the catcher (offset from the bottom)
-          drop: { src: 'acorn.webp', w: 16, h: 20, x: 92, y: 70, toY: 96, dx: 4 },
+          drop: { src: 'acorn.webp', w: 15, h: 17, x: 165, y: 76, toY: 84, dx: 31 },
           quote: 'bottom', quoteClear: 170, quoteY: 50   // quote sits at the bottom of the calendar page, leaving room for the corner character
         },
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
@@ -5654,7 +5654,7 @@ class Component extends DCLogic {
     const k = Math.max(0.78, Math.min(1.15, nar ? vw / 820 : vw / 1180));
     const px = (n) => Math.round(n * k) + 'px', A = 'auto';
     const box = (ly) => {
-      const url = "url('" + this.themeAsset(t, ly.src) + "')";
+      const url = "url('" + this.themeAsset(t, (s.sceneDrop && ly.srcDrop) || ly.src) + "')";
       const b = { l: A, r: A, t: A, b: A, w: A, h: A, op: String(ly.op == null ? 1 : ly.op), anim: 'none', bg: '' };
       const x = px(ly.x || 0), y = px(ly.y || 0);
       if (ly.anchor === 'top') Object.assign(b, { l: '0', r: '0', t: y, h: px(ly.h), bg: url + ' ' + (ly.pos || 'left top') + ' / auto 100% no-repeat' });
@@ -5694,7 +5694,7 @@ class Component extends DCLogic {
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/grass.webp': '/_blob/a423b2adef1db75c07c73477a52b7522', 'themes/rosewreath/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/rosewreath/canopy.webp': '/_blob/643e03d20e3148b23bc62e47d2683e21', 'themes/rosewreath/acorn.webp': '/_blob/7268c9b33fe4444d24dc5ffbd333ed33', 'themes/rosewreath/squirrel-toss.webp': '/_blob/a0d8a38d5ea98e9d8cef860f1175c6b1', 'themes/rosewreath/squirrel-catch.webp': '/_blob/df54b7758f85bf55e5c10af367f4d3fa', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
+    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/grass.webp': '/_blob/a423b2adef1db75c07c73477a52b7522', 'themes/rosewreath/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/rosewreath/canopy.webp': '/_blob/643e03d20e3148b23bc62e47d2683e21', 'themes/rosewreath/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/rosewreath/squirrel-toss.webp': '/_blob/e5bf248cb5d0798a4136cb90a942a3f4', 'themes/rosewreath/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
