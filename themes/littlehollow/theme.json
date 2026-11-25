@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 7,
+  "version": 8,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
@@ -9,6 +9,7 @@
     "A squirrel on the branch",
     "New friend: a robin who fluffs and shakes, then lets a blossom fall",
     "New friend: a hedgehog by the basket who sniffs and smiles when a blossom lands",
+    "New friend: a caterpillar on the branch who reaches up and nudges a blossom loose",
     "New friend: a bee who loops around her flower while a blossom drifts down",
     "The basket under the branch fills with blossoms as you finish the day's Must do and Should do, and starts fresh each morning"
   ],
@@ -361,6 +362,38 @@
             ]
           }
         ]
+      },
+      {
+        "id": "caterpillar",
+        "name": "A caterpillar on the branch",
+        "dropDelay": 0.75,
+        "over": [
+          {
+            "page": "R",
+            "anchor": "onStrip",
+            "src": "caterpillar-1.webp",
+            "w": 74,
+            "h": 61,
+            "x": 56,
+            "y": 69,
+            "frames": [
+              {
+                "src": "caterpillar-2.webp",
+                "from": 0.05,
+                "to": 1.0
+              },
+              {
+                "src": "caterpillar-3.webp",
+                "from": 1.0,
+                "to": 2.7
+              }
+            ]
+          }
+        ],
+        "nudge": {
+          "x": 58,
+          "y": 46
+        }
       }
     ],
     "quote": "underDate",
