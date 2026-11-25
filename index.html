@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 8:27 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 8:43 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3691,23 +3691,29 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </header>
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; padding-right: 6px">
 <sc-if value="{{showThemeCards}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{openThemes}}" style="width: 100%; display: flex; align-items: center; gap: 12px; margin: 4px 0 16px; padding: 10px 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 12px; background: #FFFFFF; text-align: left; color: #2B2722">
-<span aria-hidden="true" style="width: 48px; height: 48px; flex: none; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; background: {{curTheme.paper}} {{curTheme.tileImg}}; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06)">
-<span style="height: 14px; background: {{curTheme.tileBand}}"></span>
-<span style="flex: 1; display: flex; align-items: center; justify-content: center; font-family: {{curTheme.font}}; font-size: calc(18px * {{fsK}}); font-weight: 600; color: {{curTheme.tileInk}}">Aa</span>
-</span>
-<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
-<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Theme</span>
+<section aria-label="Your planner" style="margin: 4px 0 18px; padding: 14px; border-radius: 16px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.06), inset 0 0 0 1px {{TK.tE2B9C4}}; display: flex; flex-direction: column; gap: 12px">
+<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358">Your planner</span>
+<div aria-hidden="true" style="position: relative; height: 128px; border-radius: 12px; background: {{bdDesk}}; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<div style="position: relative; width: 78%; max-width: 360px; height: 100px; border-radius: 9px; background: {{bdCover}}; padding: 6px 0 6px 6px; box-sizing: border-box; display: flex; box-shadow: 0 6px 14px rgba(0,0,0,0.35)">
+<span style="flex: 1; border-radius: 5px 2px 2px 5px; background: {{curTheme.paper}} {{curTheme.prevL}}"></span>
+<span style="width: 12px; flex: none; background: {{bdSpine}}; display: flex; flex-direction: column; justify-content: space-around; align-items: center"><span style="width: 22px; height: 5px; border-radius: 3px; background: {{bdRing}}"></span><span style="width: 22px; height: 5px; border-radius: 3px; background: {{bdRing}}"></span><span style="width: 22px; height: 5px; border-radius: 3px; background: {{bdRing}}"></span><span style="width: 22px; height: 5px; border-radius: 3px; background: {{bdRing}}"></span></span>
+<span style="flex: 1; border-radius: 2px 5px 5px 2px; background: {{curTheme.paper}} {{curTheme.prevR}}; margin-right: 6px"></span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
+<button onClick="{{openThemes}}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 12px; background: #FBF7EE; text-align: left; color: #2B2722">
+<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6358">Pages and theme</span>
 <span style="font-size: calc(15px * {{fsK}}); font-weight: 700">{{curTheme.name}}</span>
-<span style="display: flex; gap: 3px; margin-top: 2px">
-<sc-for list="{{curTheme.tabs}}" as="tt" hint-placeholder-count="7">
-<span style="width: 12px; height: 12px; border-radius: 4px; background: {{tt.bg}}; box-shadow: inset 0 -3px 0 {{tt.fg}}"></span>
-</sc-for>
-</span>
-</span>
-<span style="flex: none; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{themeCount}}</span>
-<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A8174" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M9 5l7 7-7 7"></path></svg>
+<span style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{themeCount}} ›</span>
 </button>
+<button onClick="{{openBinder}}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 12px; background: #FBF7EE; text-align: left; color: #2B2722">
+<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6358">Binder</span>
+<span style="font-size: calc(15px * {{fsK}}); font-weight: 700">{{bdSummary}}</span>
+<span style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{bdSummary2}} ›</span>
+</button>
+</div>
+</section>
+<span style="display: block; font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; padding: 0 2px 2px">Reading and layout</span>
 </sc-if>
 <sc-for list="{{setRight}}" as="ss" hint-placeholder-count="3">
 <sc-if value="{{ss.hasGroup}}" hint-placeholder-val="{{ false }}">
@@ -4149,6 +4155,54 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </button>
 </sc-for>
 </div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{showBinder}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 10; box-sizing: border-box; background: #FBF7EE; border-radius: 3px 10px 10px 3px; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 12px">
+<header>
+<button onClick="{{closeThemes}}" style="height: 28px; border: 0; background: transparent; padding: 0; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; font-size: calc(12px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6358"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>Look and feel</button>
+<h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">My binder</h2>
+</header>
+<p style="margin: 0; font-size: calc(13px * {{fsK}}); color: #6B6358">Like a real planner, the binder is yours. It stays the same when you change themes.</p>
+<div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; padding: 4px; display: flex; flex-direction: column; gap: 16px">
+<div aria-hidden="true" style="flex: none; height: 170px; border-radius: 14px; background: {{bdDesk}}; display: flex; align-items: center; justify-content: center">
+<div style="width: 80%; max-width: 420px; height: 130px; border-radius: 11px; background: {{bdCover}}; padding: 8px 0 8px 8px; box-sizing: border-box; display: flex; box-shadow: 0 8px 18px rgba(0,0,0,0.4); position: relative">
+<span style="position: absolute; top: 4px; right: 4px; bottom: 4px; left: 4px; border: 1px dashed {{bdStitch}}; border-radius: 8px"></span>
+<span style="flex: 1; border-radius: 6px 2px 2px 6px; background: {{curTheme.paper}} {{curTheme.prevL}}"></span>
+<span style="width: 16px; flex: none; background: {{bdSpine}}; display: flex; flex-direction: column; justify-content: space-around; align-items: center; z-index: 1"><span style="width: 30px; height: 7px; border-radius: 4px; background: {{bdRing}}; box-shadow: 0 2px 3px rgba(0,0,0,0.35)"></span><span style="width: 30px; height: 7px; border-radius: 4px; background: {{bdRing}}; box-shadow: 0 2px 3px rgba(0,0,0,0.35)"></span><span style="width: 30px; height: 7px; border-radius: 4px; background: {{bdRing}}; box-shadow: 0 2px 3px rgba(0,0,0,0.35)"></span><span style="width: 30px; height: 7px; border-radius: 4px; background: {{bdRing}}; box-shadow: 0 2px 3px rgba(0,0,0,0.35)"></span><span style="width: 30px; height: 7px; border-radius: 4px; background: {{bdRing}}; box-shadow: 0 2px 3px rgba(0,0,0,0.35)"></span></span>
+<span style="flex: 1; border-radius: 2px 6px 6px 2px; background: {{curTheme.paper}} {{curTheme.prevR}}; margin-right: 8px"></span>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 4px 2px; border-bottom: 1px solid {{TK.tE2B9C4}}; padding-bottom: 12px">
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 700">Match my theme</span><span style="font-size: calc(12.5px * {{fsK}}); color: #7A7064">Use the binder your theme suggests. Picking a cover or rings turns this off.</span></span>
+<button role="switch" aria-checked="{{bdMatchA}}" aria-label="Match my theme" onClick="{{bdMatchToggle}}" style="position: relative; width: 44px; height: 26px; flex: none; border: 0; border-radius: 13px; background: {{bdMatchBg}}; padding: 0"><span style="position: absolute; top: 3px; left: {{bdMatchKnob}}px; width: 20px; height: 20px; border-radius: 10px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.3)"></span></button>
+</div>
+<div role="radiogroup" aria-label="Cover" style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358">Cover</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px">
+<sc-for list="{{bdCovers}}" as="bc" hint-placeholder-count="4">
+<button role="radio" aria-checked="{{bc.checked}}" onClick="{{bc.pick}}" style="display: flex; flex-direction: column; align-items: stretch; gap: 6px; padding: 6px; border: 0; border-radius: 12px; background: #FFFFFF; box-shadow: {{bc.ring}}; text-align: left; color: #2B2722">
+<span aria-hidden="true" style="height: 54px; border-radius: 8px; background: {{bc.bg}}; position: relative"><span style="position: absolute; top: 3px; right: 3px; bottom: 3px; left: 3px; border: 1px dashed {{bc.stitch}}; border-radius: 6px"></span></span>
+<span style="font-size: calc(12.5px * {{fsK}}); font-weight: 700; padding: 0 2px">{{bc.name}}</span>
+<span style="display: {{bc.sugD}}; font-size: calc(10.5px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}; padding: 0 2px">Suggested</span>
+</button>
+</sc-for>
+</div>
+</div>
+<div role="radiogroup" aria-label="Rings" style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358">Rings</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px">
+<sc-for list="{{bdRings}}" as="br" hint-placeholder-count="4">
+<button role="radio" aria-checked="{{br.checked}}" onClick="{{br.pick}}" style="display: flex; flex-direction: column; align-items: stretch; gap: 6px; padding: 6px; border: 0; border-radius: 12px; background: #FFFFFF; box-shadow: {{br.ring}}; text-align: left; color: #2B2722">
+<span aria-hidden="true" style="height: 54px; border-radius: 8px; background: #3A3430; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly"><span style="width: 56%; height: 9px; border-radius: 5px; background: {{br.bg}}; box-shadow: 0 2px 3px rgba(0,0,0,0.4)"></span><span style="width: 56%; height: 9px; border-radius: 5px; background: {{br.bg}}; box-shadow: 0 2px 3px rgba(0,0,0,0.4)"></span></span>
+<span style="font-size: calc(12.5px * {{fsK}}); font-weight: 700; padding: 0 2px">{{br.name}}</span>
+<span style="display: {{br.sugD}}; font-size: calc(10.5px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}; padding: 0 2px">Suggested</span>
+</button>
+</sc-for>
+</div>
+</div>
+<p style="margin: 0; font-size: calc(12px * {{fsK}}); color: #8A8174">More to come here: a closed-planner cover, a ribbon bookmark and an elastic band.</p>
 </div>
 </div>
 </sc-if>
@@ -5608,7 +5662,7 @@ class Component extends DCLogic {
       },
       rosewreath: {
         tabPal: ['#B35A76', '#B8665A', '#6E2F43', '#6E8A6A', '#8C4E78'],
-        name: 'Little Hollow', blurb: 'A little tree, a meadow and woodland friends who visit as the seasons change.', storybook: true, perks: ['Animated', 'Changes with the seasons', 'Rotating animal friends'], card: 'card.webp', art: 'img',
+        name: 'Little Hollow', blurb: 'A little tree, a meadow and woodland friends who visit as the seasons change.', storybook: true, binder: { cover: 'linen', rings: 'brass' }, perks: ['Animated', 'Changes with the seasons', 'Rotating animal friends'], card: 'card.webp', art: 'img',
         quote: 'Every blossom opens in its own time, and so will you.',
         quotes: ['Every blossom opens in its own time, and so will you.', 'Small steps still bloom.', 'Tend to today. Tomorrow will keep.', 'Rest is part of growing.', 'One petal at a time.', 'You are allowed to go slowly.', 'Plant one good thing today.'],
         fHead: "'Olesia', 'Dancing Script', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7F1', vars: {},
@@ -5773,19 +5827,34 @@ class Component extends DCLogic {
       quoteBottom: sc.quote === 'bottom', quoteTopDisp: sc.quote === 'bottom' ? 'none' : 'inline', dayPadBot: sc.quote === 'bottom' ? 120 : 18, quoteBotRight: px(P(sc.quoteClear || 160)), quoteBotY: px(P(sc.quoteY || 12))
     };
   }
-  // The notebook itself: desk, cover, stitching, spine and rings. Simple themes keep the green leather binder; a Storybook theme can dress it.
-  binderVals(t) {
+  // The binder is the person's own (like a real planner): cover and rings are a setting. A theme only suggests one ("Match my theme").
+  binderParts() {
     const linen = 'repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(0,0,0,0.05) 0 1px, transparent 1px 3px), ';
-    const B = {
-      leather: { desk: 'radial-gradient(ellipse at 50% 0%, #3B4644 0%, #252D2C 70%)', cover: 'radial-gradient(ellipse at 25% 15%, #2E6A5C 0%, #1E4C42 45%, #163A32 100%)', stitch: 'rgba(233,225,207,0.28)', spine: 'linear-gradient(90deg, #102C26 0%, #1B463C 30%, #22564A 50%, #1B463C 70%, #102C26 100%)', ring: 'linear-gradient(180deg, #FFFFFF 0%, #D5DADD 22%, #9AA2A7 48%, #6F777C 60%, #C7CCCF 82%, #F1F3F4 100%)' },
-      linenBrass: { desk: 'radial-gradient(ellipse at 50% 0%, #4A423B 0%, #2E2925 70%)', cover: linen + 'radial-gradient(ellipse at 25% 15%, #C2AE96 0%, #A8927A 50%, #8E7A63 100%)', stitch: 'rgba(255,250,240,0.55)', spine: 'linear-gradient(90deg, #6E5E4C 0%, #8A7864 30%, #9A8770 50%, #8A7864 70%, #6E5E4C 100%)', ring: 'linear-gradient(180deg, #FFF6DC 0%, #E8CB86 22%, #B99146 48%, #8E6B2E 60%, #D7B771 82%, #FBEFCB 100%)' },
-      sageRose: { desk: 'radial-gradient(ellipse at 50% 0%, #3E4540 0%, #262B27 70%)', cover: linen + 'radial-gradient(ellipse at 25% 15%, #A3B39A 0%, #879B7F 50%, #6D8166 100%)', stitch: 'rgba(255,250,244,0.6)', spine: 'linear-gradient(90deg, #4F5F4A 0%, #66785F 30%, #73866B 50%, #66785F 70%, #4F5F4A 100%)', ring: 'linear-gradient(180deg, #FFF0EB 0%, #EEC3B6 22%, #C99484 48%, #A6705F 60%, #E2B1A2 82%, #FCE6DF 100%)' },
-      kraftWood: { desk: 'radial-gradient(ellipse at 50% 0%, #463A31 0%, #2B231D 70%)', cover: 'repeating-linear-gradient(17deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 7px), repeating-linear-gradient(-31deg, rgba(0,0,0,0.04) 0 1px, transparent 1px 5px), radial-gradient(ellipse at 25% 15%, #CFAE86 0%, #B48F67 50%, #97734F 100%)', stitch: 'rgba(255,248,236,0.6)', spine: 'linear-gradient(90deg, #6B5038 0%, #87664A 30%, #957257 50%, #87664A 70%, #6B5038 100%)', ring: 'linear-gradient(180deg, #F1D9B5 0%, #D2A874 22%, #A97D4F 48%, #835C38 60%, #C79E6B 82%, #EBD0A8 100%)' }
+    return {
+      covers: {
+        leather: { name: 'Green leather', desk: 'radial-gradient(ellipse at 50% 0%, #3B4644 0%, #252D2C 70%)', cover: 'radial-gradient(ellipse at 25% 15%, #2E6A5C 0%, #1E4C42 45%, #163A32 100%)', stitch: 'rgba(233,225,207,0.28)', spine: 'linear-gradient(90deg, #102C26 0%, #1B463C 30%, #22564A 50%, #1B463C 70%, #102C26 100%)' },
+        linen: { name: 'Taupe linen', desk: 'radial-gradient(ellipse at 50% 0%, #4A423B 0%, #2E2925 70%)', cover: linen + 'radial-gradient(ellipse at 25% 15%, #C2AE96 0%, #A8927A 50%, #8E7A63 100%)', stitch: 'rgba(255,250,240,0.55)', spine: 'linear-gradient(90deg, #6E5E4C 0%, #8A7864 30%, #9A8770 50%, #8A7864 70%, #6E5E4C 100%)' },
+        sage: { name: 'Sage cloth', desk: 'radial-gradient(ellipse at 50% 0%, #3E4540 0%, #262B27 70%)', cover: linen + 'radial-gradient(ellipse at 25% 15%, #A3B39A 0%, #879B7F 50%, #6D8166 100%)', stitch: 'rgba(255,250,244,0.6)', spine: 'linear-gradient(90deg, #4F5F4A 0%, #66785F 30%, #73866B 50%, #66785F 70%, #4F5F4A 100%)' },
+        kraft: { name: 'Kraft', desk: 'radial-gradient(ellipse at 50% 0%, #463A31 0%, #2B231D 70%)', cover: 'repeating-linear-gradient(17deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 7px), repeating-linear-gradient(-31deg, rgba(0,0,0,0.04) 0 1px, transparent 1px 5px), radial-gradient(ellipse at 25% 15%, #CFAE86 0%, #B48F67 50%, #97734F 100%)', stitch: 'rgba(255,248,236,0.6)', spine: 'linear-gradient(90deg, #6B5038 0%, #87664A 30%, #957257 50%, #87664A 70%, #6B5038 100%)' }
+      },
+      rings: {
+        silver: { name: 'Silver', ring: 'linear-gradient(180deg, #FFFFFF 0%, #D5DADD 22%, #9AA2A7 48%, #6F777C 60%, #C7CCCF 82%, #F1F3F4 100%)' },
+        brass: { name: 'Brass', ring: 'linear-gradient(180deg, #FFF6DC 0%, #E8CB86 22%, #B99146 48%, #8E6B2E 60%, #D7B771 82%, #FBEFCB 100%)' },
+        rosegold: { name: 'Rose gold', ring: 'linear-gradient(180deg, #FFF0EB 0%, #EEC3B6 22%, #C99484 48%, #A6705F 60%, #E2B1A2 82%, #FCE6DF 100%)' },
+        wood: { name: 'Wood', ring: 'linear-gradient(180deg, #F1D9B5 0%, #D2A874 22%, #A97D4F 48%, #835C38 60%, #C79E6B 82%, #EBD0A8 100%)' }
+      }
     };
-    let id = (t && t.binder) || 'leather';
-    try { if (t && t.storybook && window.__bdVar) id = window.__bdVar; } catch (err) {}
-    const b = B[id] || B.leather;
-    return { bdDesk: b.desk, bdCover: b.cover, bdStitch: b.stitch, bdSpine: b.spine, bdRing: b.ring };
+  }
+  binderChoice(t, st) {
+    const P = this.binderParts(), sug = (t && t.binder) || {}, set = st || {};
+    const match = set.binderCover == null && set.binderRings == null;
+    const cover = (!match && P.covers[set.binderCover]) ? set.binderCover : (P.covers[sug.cover] ? sug.cover : 'leather');
+    const rings = (!match && P.rings[set.binderRings]) ? set.binderRings : (P.rings[sug.rings] ? sug.rings : 'silver');
+    return { match: match, cover: cover, rings: rings, sugCover: P.covers[sug.cover] ? sug.cover : 'leather', sugRings: P.rings[sug.rings] ? sug.rings : 'silver' };
+  }
+  binderVals(t, st) {
+    const P = this.binderParts(), ch = this.binderChoice(t, st), c = P.covers[ch.cover], r = P.rings[ch.rings];
+    return { bdDesk: c.desk, bdCover: c.cover, bdStitch: c.stitch, bdSpine: c.spine, bdRing: r.ring };
   }
   // Today's scene for a storybook theme: the set for this month and the cast for this day, merged into one list of pieces.
   sceneNow(t, s) {
@@ -9785,7 +9854,7 @@ class Component extends DCLogic {
           pageBgR: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
           imgAnimal: on && t.img.animals && !t.scene ? u(this.pickByDay(t.img.animals, s.day)) : '',
           ...this.sceneVals(t, s),
-          ...this.binderVals(t),
+          ...this.binderVals(t, s.settings),
           jBg: wash ? "linear-gradient(rgba(251,247,238,0.82), rgba(251,247,238,0.9)), url('" + wash + "') center / cover no-repeat, #FBF7EE" : '#FBF7EE'
         };
       })(),
@@ -10827,8 +10896,25 @@ class Component extends DCLogic {
       });
     })();
     const themeVals2 = {
-      showThemes: isSettings && s.setSec === 'themes', showThemeCards: isSettings && (!s.setSec || s.setSec === 'look' || ['look', 'calendar', 'always', 'tasks', 'categories', 'addons', 'data', 'themes', 'myday', 'fixed', 'special', 'helpers', 'reminders'].indexOf(s.setSec) < 0),
+      showThemes: isSettings && s.setSec === 'themes', showThemeCards: isSettings && (!s.setSec || s.setSec === 'look' || ['look', 'calendar', 'always', 'tasks', 'categories', 'addons', 'data', 'themes', 'binder', 'myday', 'fixed', 'special', 'helpers', 'reminders'].indexOf(s.setSec) < 0),
       openThemes: () => this.setState({ setSec: 'themes' }), closeThemes: () => this.setState({ setSec: 'look' }),
+      showBinder: isSettings && s.setSec === 'binder', openBinder: () => this.setState({ setSec: 'binder' }),
+      ...(() => {
+        const P = this.binderParts(), ch = this.binderChoice(this.themeDef(s.settings.theme), s.settings), ink = this.TK.t6E2F43;
+        const setB = (patch) => this.setState({ settings: Object.assign({}, this.state.settings, patch) });
+        const pin = () => ({ binderCover: ch.cover, binderRings: ch.rings });
+        return {
+          bdSummary: P.covers[ch.cover].name, bdSummary2: P.rings[ch.rings].name + ' rings' + (ch.match ? ' · matches theme' : ''),
+          bdMatchA: ch.match ? 'true' : 'false', bdMatchBg: ch.match ? ink : '#B9AF9C', bdMatchKnob: ch.match ? 21 : 3,
+          bdMatchToggle: () => setB(ch.match ? pin() : { binderCover: null, binderRings: null }),
+          bdCovers: Object.keys(P.covers).map(k => ({ name: P.covers[k].name, bg: P.covers[k].cover, stitch: P.covers[k].stitch, checked: k === ch.cover ? 'true' : 'false',
+            ring: k === ch.cover ? '0 0 0 2px #FFFFFF, 0 0 0 4px ' + ink : '0 1px 2px rgba(0,0,0,0.08)', sugD: k === ch.sugCover ? 'block' : 'none',
+            pick: () => setB(Object.assign(pin(), { binderCover: k })) })),
+          bdRings: Object.keys(P.rings).map(k => ({ name: P.rings[k].name, bg: P.rings[k].ring, checked: k === ch.rings ? 'true' : 'false',
+            ring: k === ch.rings ? '0 0 0 2px #FFFFFF, 0 0 0 4px ' + ink : '0 1px 2px rgba(0,0,0,0.08)', sugD: k === ch.sugRings ? 'block' : 'none',
+            pick: () => setB(Object.assign(pin(), { binderRings: k })) }))
+        };
+      })(),
       themeCards: this.themeIds().map(id => {
         const showThemesNow = isSettings;
         const t = this.themeDef(id), v = t.vars || {}, on = (s.settings.theme || 'flowery') === id;
@@ -10837,6 +10923,8 @@ class Component extends DCLogic {
         return {
           hasImg: t.art === 'img' && !!this.themeAsset(t, t.img.swags[0]), img: t.art === 'img' ? this.themeAsset(t, t.img.swags[0]) : '',
           story: !!t.storybook, cardImg: t.card ? this.themeAsset(t, t.card) : '',
+          prevL: t.storybook && t.card ? "url('" + this.themeAsset(t, t.card) + "') 0% 0% / auto 112% no-repeat" : 'linear-gradient(' + col('FBEDEE') + ' 0 22%, transparent 22%)',
+          prevR: t.storybook && t.card ? "url('" + this.themeAsset(t, t.card) + "') 100% 100% / auto 112% no-repeat" : 'linear-gradient(' + col('FBEDEE') + ' 0 22%, transparent 22%)',
           tileImg: t.storybook && t.card ? "url('" + this.themeAsset(t, t.card) + "') 88% 70% / auto 150% no-repeat" : '', tileBand: t.storybook ? 'transparent' : col('FBEDEE'), tileInk: t.storybook ? 'transparent' : col('6E2F43'), perks: (t.perks || []).map(x => ({ label: x })),
           name: t.name, blurb: t.blurb, font: t.fHead, ink: col('6E2F43'), band: col('FBEDEE'), accent: col('A0526A'), line: col('E2B9C4'), paper: t.paper,
           tabs: [0, 1, 2, 3, 4, 5, 6].map(k => { const d = t.tabPal[k % t.tabPal.length]; return { bg: this.mixColor(d, '#FFFFFF', 0.68), fg: d }; }),
