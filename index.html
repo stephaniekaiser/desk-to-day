@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 7:31 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 7:40 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -35,7 +35,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 .grab{cursor:ns-resize}
 [draggable="true"]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .grab:hover .grabbar{opacity:1}
-.scene-drop{position:absolute;top:var(--y0);animation:sceneDrop 1.05s cubic-bezier(.45,0,.9,.55) forwards}
+.scene-drop{position:absolute;top:var(--y0);animation:sceneDrop 1.05s cubic-bezier(.45,0,.9,.55) forwards,sceneFade .45s ease-in 2.1s forwards}
+@keyframes sceneFade{to{opacity:0}}
 @keyframes sceneDrop{0%{top:var(--y0);transform:translateX(0) rotate(0deg);opacity:1}10%{transform:translateX(calc(var(--dx) * 0.6)) rotate(60deg)}100%{top:calc(100% - var(--y1));transform:translateX(var(--dx)) rotate(420deg);opacity:1}}
 @keyframes sceneHop{0%{transform:translateY(0)}40%{transform:translateY(-7px)}100%{transform:translateY(0)}}
 @media (prefers-reduced-motion: reduce){.scene-drop{display:none}.scene-ly{animation:none!important}}
@@ -5567,17 +5568,17 @@ class Component extends DCLogic {
           under: [
             { page: 'L', anchor: 'spread', src: 'branch.webp', h: 190, y: -26, pos: 'left top' },
             { page: 'R', anchor: 'spread', src: 'branch.webp', h: 190, y: -26, pos: 'right top' },
-            { page: 'L', anchor: 'bottom', src: 'grass.webp', h: 62, y: 0, pos: 'left bottom' },
-            { page: 'R', anchor: 'bottom', src: 'grass.webp', h: 62, y: 0, pos: 'right bottom' },
+            { page: 'L', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0, pos: 'left bottom' },
+            { page: 'R', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0, pos: 'right bottom' },
             { page: 'L', anchor: 'tl', src: 'canopy.webp', w: 240, h: 227, x: -10, y: -8, op: 0.6 }
           ],
           over: [
-            { page: 'R', anchor: 'tr', src: 'squirrel-toss.webp', w: 125, h: 74, x: 56, y: 24 },
+            { page: 'R', anchor: 'tr', src: 'squirrel-toss.webp', srcDrop: 'squirrel-toss-empty.webp', w: 126, h: 74, x: 56, y: 24 },
             { page: 'R', anchor: 'br', src: 'squirrel-catch.webp', w: 139, h: 112, x: 18, y: 4, catcher: true }
           ],
           // what falls when a task is checked off: from the thrower's paws (offsets from the top-right) to the catcher (offset from the bottom)
           drop: { src: 'acorn.webp', w: 15, h: 17, x: 165, y: 76, toY: 84, dx: 31 },
-          quote: 'bottom', quoteClear: 170, quoteY: 50   // quote sits at the bottom of the calendar page, leaving room for the corner character
+          quote: 'bottom', quoteClear: 170, quoteY: 88   // quote sits at the bottom of the calendar page, leaving room for the corner character
         },
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
       },
@@ -5659,7 +5660,7 @@ class Component extends DCLogic {
       const x = px(ly.x || 0), y = px(ly.y || 0);
       if (ly.anchor === 'top') Object.assign(b, { l: '0', r: '0', t: y, h: px(ly.h), bg: url + ' ' + (ly.pos || 'left top') + ' / auto 100% no-repeat' });
       // spread: one image across both pages; each page shows its half, so it meets behind the rings on any screen
-      else if (ly.anchor === 'spread') Object.assign(b, { l: '0', r: '0', t: y, h: px(ly.h), bg: url + ' ' + (ly.pos || 'left top') + ' / 200% 100% no-repeat' });
+      else if (ly.anchor === 'spread' || ly.anchor === 'spreadBottom') Object.assign(b, { l: '0', r: '0', h: px(ly.h), bg: url + ' ' + (ly.pos || 'left top') + (nar ? ' / auto 100% no-repeat' : ' / 200% 100% no-repeat') }, ly.anchor === 'spread' ? { t: y } : { b: y });
       else if (ly.anchor === 'bottom') Object.assign(b, { l: '0', r: '0', b: y, h: px(ly.h), bg: url + ' ' + (ly.pos || 'left bottom') + ' / auto 100% no-repeat' });
       else if (ly.anchor === 'left') Object.assign(b, { l: x, t: y, b: '0', w: px(ly.w), bg: url + ' center / 100% 100% no-repeat' });
       else {
@@ -5676,7 +5677,7 @@ class Component extends DCLogic {
     return {
       sceneUnderL: pick(sc.under, 'L'), sceneUnderR: pick(sc.under, 'R'), sceneOverL: pick(sc.over, 'L'), sceneOverR: pick(sc.over, 'R'),
       sceneDropOn: !!(d && s.sceneDrop),
-      quoteBottom: sc.quote === 'bottom', quoteTopDisp: sc.quote === 'bottom' ? 'none' : 'inline', dayPadBot: sc.quote === 'bottom' ? 84 : 18, quoteBotRight: px(sc.quoteClear || 160), quoteBotY: px(sc.quoteY || 12),
+      quoteBottom: sc.quote === 'bottom', quoteTopDisp: sc.quote === 'bottom' ? 'none' : 'inline', dayPadBot: sc.quote === 'bottom' ? 120 : 18, quoteBotRight: px(sc.quoteClear || 160), quoteBotY: px(sc.quoteY || 12),
       sceneDrop: d ? { bg: "url('" + this.themeAsset(t, d.src) + "') center / contain no-repeat", r: px(d.x), w: px(d.w), h: px(d.h), y0: px(d.y), y1: px(d.toY), dx: px(d.dx || 0) } : {}
     };
   }
@@ -5688,13 +5689,13 @@ class Component extends DCLogic {
     this.setState({ sceneDrop: 0 });
     setTimeout(() => {
       this.setState({ sceneDrop: Date.now() });
-      this._sceneT = setTimeout(() => this.setState({ sceneDrop: 0 }), 1700);
+      this._sceneT = setTimeout(() => this.setState({ sceneDrop: 0 }), 2600);
     }, 30);
   }
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/grass.webp': '/_blob/a423b2adef1db75c07c73477a52b7522', 'themes/rosewreath/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/rosewreath/canopy.webp': '/_blob/643e03d20e3148b23bc62e47d2683e21', 'themes/rosewreath/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/rosewreath/squirrel-toss.webp': '/_blob/e5bf248cb5d0798a4136cb90a942a3f4', 'themes/rosewreath/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
+    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/squirrel-toss-empty.webp': '/_blob/3a7278d2b5528719d1e5e8717b4fb982', 'themes/rosewreath/grass.webp': '/_blob/e9fde67d05bfe46c5e213e4f70de80f9', 'themes/rosewreath/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/rosewreath/canopy.webp': '/_blob/643e03d20e3148b23bc62e47d2683e21', 'themes/rosewreath/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/rosewreath/squirrel-toss.webp': '/_blob/3f3e33ac47e702c148d2981a351480ce', 'themes/rosewreath/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
@@ -11318,7 +11319,7 @@ class Component extends DCLogic {
       trayCount: trayList.length + (trayList.length === 1 ? ' task' : ' tasks'),
       trayChevron: (isWeek ? s.trayOpenWeek : s.trayOpen) ? 'rotate(180deg)' : 'none',
       toggleTray: () => this.setState(isWeek ? { trayOpenWeek: !s.trayOpenWeek } : { trayOpen: !s.trayOpen }),
-      trayHot: s.dropKey === 'tray' ? '#FCE9A6' : (this.themeDef(s.settings.theme).art === 'img' ? 'rgba(255,255,255,0.6)' : '#F6F1E6'),
+      trayHot: s.dropKey === 'tray' ? '#FCE9A6' : (this.themeDef(s.settings.theme).art === 'img' ? 'rgba(255,253,251,0.92)' : '#F6F1E6'),
       trayBorder: this.themeDef(s.settings.theme).art === 'img' ? '#E4D2CF' : '#E3D9C5',
       trayOver: (e) => { e.preventDefault(); this.hover('tray'); },
       trayDrop: (e) => {
