@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 1:13 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 6:18 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -48,9 +48,13 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div aria-hidden="true" style="position: absolute; top: 6px; right: 6px; bottom: 6px; left: 6px; border: 1.5px dashed rgba(233,225,207,0.28); border-radius: 15px; pointer-events: none"></div>
 <div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; border-radius: 20px; pointer-events: none; opacity: 0.35; background-image: radial-gradient(rgba(0,0,0,0.25) 1px, transparent 1.4px); background-size: 5px 5px"></div>
 
-<section aria-label="{{leftLabel}}" style="position: relative; width: {{leftW}}; flex: {{leftFlex}}; display: {{leftDisp}}; min-width: 0; box-sizing: border-box; background: #FBF7EE; border-radius: 10px 3px 3px 10px; box-shadow: inset -18px 0 22px -16px rgba(0,0,0,0.30), -1px 1px 0 #E6DCC8, -2px 2px 0 #D9CDB6, -3px 3px 0 #E6DCC8, -4px 4px 0 #CDBFA4">
+<section aria-label="{{leftLabel}}" style="position: relative; width: {{leftW}}; flex: {{leftFlex}}; display: {{leftDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBg}}; border-radius: 10px 3px 3px 10px; box-shadow: inset -18px 0 22px -16px rgba(0,0,0,0.30), -1px 1px 0 #E6DCC8, -2px 2px 0 #D9CDB6, -3px 3px 0 #E6DCC8, -4px 4px 0 #CDBFA4">
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
 <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 10px 3px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{themeLine}}">
+<sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: 0.42"></div>
+<img src="{{imgSwagL}}" alt="" style="position: absolute; left: 3%; bottom: 2px; height: 94%; width: auto; max-width: 62%; object-fit: contain; object-position: left bottom">
+</sc-if>
 <svg width="100%" height="100%" viewBox="0 0 600 120" preserveAspectRatio="xMinYMid slice">
 <sc-if value="{{artFlowers}}" hint-placeholder-val="{{ true }}">
 <path d="M-20 100 C 70 76, 140 108, 230 86 S 380 64, 470 82 S 560 76, 640 60" fill="none" stroke="#7A5644" stroke-width="5" stroke-linecap="round"></path>
@@ -1311,11 +1315,11 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 
 <sc-if value="{{isJournal}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: #FBF7EE; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 15; box-sizing: border-box; background: {{jBg}}; border-radius: 10px 3px 3px 10px; padding: 22px 28px 20px; display: flex; flex-direction: column; gap: 12px">
 <header style="display: flex; align-items: flex-start; gap: 10px">
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">Journal</div>
-<h1 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">How it went</h1>
+<div style="display: flex; align-items: center; gap: 10px"><sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}"><img src="{{imgWreath}}" alt="" aria-hidden="true" style="width: 58px; height: 58px; flex: none; object-fit: contain; margin: -10px 0 -10px -6px"></sc-if><h1 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">How it went</h1></div>
 <p style="margin: 0; font-size: calc(14px * {{fsK}}); color: #6B6358">{{jCount}}</p>
 </div>
 <button onClick="{{jToday}}" aria-label="Write about today" title="Write about today" style="width: 44px; height: 44px; flex: none; border: 0; border-radius: 22px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
@@ -1448,10 +1452,14 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="position: relative; width: 76px; height: 20px; flex: none"><span style="position: absolute; left: 0; top: 4px; width: 10px; height: 10px; border-radius: 5px; background: #5E5546; opacity: 0.55"></span><span style="position: absolute; right: 0; top: 4px; width: 10px; height: 10px; border-radius: 5px; background: #5E5546; opacity: 0.55"></span><span style="position: absolute; left: 4px; right: 4px; top: 1px; height: 16px; border-radius: 8px; background: linear-gradient(180deg, #FFFFFF 0%, #D5DADD 22%, #9AA2A7 48%, #6F777C 60%, #C7CCCF 82%, #F1F3F4 100%); box-shadow: 0 3px 5px rgba(0,0,0,0.45), inset 0 -1px 1px rgba(0,0,0,0.25)"></span></div>
 </div>
 
-<section aria-label="{{rightLabel}}" style="position: relative; flex: 1; display: {{rightDisp}}; min-width: 0; box-sizing: border-box; background: #FBF7EE; border-radius: {{rightRadius}}; box-shadow: inset 18px 0 22px -16px rgba(0,0,0,0.30), 1px 1px 0 #E6DCC8, 2px 2px 0 #D9CDB6, 3px 3px 0 #E6DCC8, 4px 4px 0 #CDBFA4">
+<section aria-label="{{rightLabel}}" style="position: relative; flex: 1; display: {{rightDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBg}}; border-radius: {{rightRadius}}; box-shadow: inset 18px 0 22px -16px rgba(0,0,0,0.30), 1px 1px 0 #E6DCC8, 2px 2px 0 #D9CDB6, 3px 3px 0 #E6DCC8, 4px 4px 0 #CDBFA4">
 
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
 <div style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 3px 10px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{themeLine}}">
+<sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: 0.42"></div>
+<img src="{{imgSwagR}}" alt="" aria-hidden="true" style="position: absolute; right: 3%; bottom: 2px; height: 94%; width: auto; max-width: 48%; object-fit: contain; object-position: right bottom">
+</sc-if>
 <svg aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" viewBox="0 0 600 120" preserveAspectRatio="xMaxYMid slice">
 <sc-if value="{{artFlowers}}" hint-placeholder-val="{{ true }}">
 <path d="M640 18 C 570 30, 530 12, 470 30 S 425 52, 405 50" fill="none" stroke="#7A5644" stroke-width="5" stroke-linecap="round"></path>
@@ -4072,10 +4080,10 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Pick a mood</h2>
 </header>
 <p style="margin: 0; font-size: calc(13px * {{fsK}}); color: #6B6358">A theme changes colors, fonts and the picture at the top of your day. Where things are never changes.</p>
-<div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; align-content: start; padding: 8px">
+<div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); grid-auto-rows: max-content; gap: 14px; align-content: start; padding: 8px">
 <sc-for list="{{themeCards}}" as="tc" hint-placeholder-count="2">
 <button role="radio" aria-checked="{{tc.checked}}" onClick="{{tc.pick}}" aria-label="{{tc.name}} theme" style="display: flex; flex-direction: column; border: 0; border-radius: 12px; background: #FFFFFF; box-shadow: {{tc.ring}}; padding: 0; overflow: hidden; text-align: left; color: #2B2722">
-<span aria-hidden="true" style="display: block; height: 30px; background: {{tc.band}}; border-bottom: 1.5px dotted {{tc.line}}"></span>
+<span aria-hidden="true" style="display: block; flex: none; position: relative; overflow: hidden; height: 34px; background: {{tc.band}}; border-bottom: 1.5px dotted {{tc.line}}"><sc-if value="{{tc.hasImg}}" hint-placeholder-val="{{ false }}"><img src="{{tc.img}}" alt="" style="position: absolute; left: 6px; bottom: 0; height: 32px; width: auto"></sc-if></span>
 <span aria-hidden="true" style="display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; background: {{tc.paper}}">
 <span style="font-family: {{tc.font}}; font-size: calc(26px * {{fsK}}); font-weight: 600; line-height: 1; color: {{tc.ink}}">Aa <span style="font-size: calc(15px * {{fsK}}); color: {{tc.accent}}">Today</span></span>
 <span style="display: flex; gap: 4px">
@@ -5537,6 +5545,16 @@ class Component extends DCLogic {
         fHead: "'Dancing Script', 'Newsreader', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7EE', vars: {},
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
       },
+      rosewreath: {
+        tabPal: ['#B35A76', '#B8665A', '#6E2F43', '#6E8A6A', '#8C4E78'],
+        name: 'Rose Wreath (test)', blurb: 'Watercolor wreaths and swags in plum, rose and peach', art: 'img',
+        quote: 'Every blossom opens in its own time, and so will you.',
+        quotes: ['Every blossom opens in its own time, and so will you.', 'Small steps still bloom.', 'Tend to today. Tomorrow will keep.', 'Rest is part of growing.', 'One petal at a time.', 'You are allowed to go slowly.', 'Plant one good thing today.'],
+        fHead: "'Olesia', 'Dancing Script', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7F1', vars: {},
+        fontFace: { family: 'Olesia', file: 'olesia.woff2' },
+        img: { dir: 'themes/rosewreath/', swags: ['swag-1.webp', 'swag-2.webp', 'swag-3.webp', 'swag-4.webp', 'swag-5.webp', 'swag-6.webp'], wash: 'wash.webp', paper: 'paper.webp', wreaths: ['wreath-1.webp', 'wreath-2.webp', 'wreath-3.webp'], sprigs: ['sprig-1.webp', 'sprig-2.webp', 'sprig-3.webp', 'sprig-4.webp'] },
+        tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
+      },
       seaglass: {
         tabPal: ['#2E8C86', '#4E9A74', '#3A6F9E', '#BF7656', '#2A5A6E'],
         name: 'Seaglass', blurb: 'Deep teal and soft aqua on sand, with sea glass', art: 'sea', quote: 'Like the tide, you can always come back. Start where you are.',
@@ -5586,7 +5604,7 @@ class Component extends DCLogic {
     }
     return P;
   }
-  themeIds() { return ['flowery', 'seaglass', 'golden', 'meadow', 'lavender', 'ink'];
+  themeIds() { return ['flowery', 'rosewreath', 'seaglass', 'golden', 'meadow', 'lavender', 'ink'];
   }
   // Blend two colors in OKLab so middle shades stay rich.
   mixColor(a, b, t) {
@@ -5601,6 +5619,30 @@ class Component extends DCLogic {
     const l = Math.pow(L[0] + 0.3963377774 * L[1] + 0.2158037573 * L[2], 3), m = Math.pow(L[0] - 0.1055613458 * L[1] - 0.0638541728 * L[2], 3), s2 = Math.pow(L[0] - 0.0894841775 * L[1] - 1.2914855480 * L[2], 3);
     const r = fromLin(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s2), g = fromLin(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s2), bb = fromLin(-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s2);
     return '#' + [r, g, bb].map(x => x.toString(16).padStart(2, '0')).join('').toUpperCase();
+  }
+  // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
+  themeAsset(t, name) {
+    if (!t || !t.img || !name) return '';
+    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755'};
+    if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
+    return map[t.img.dir + name] || '';
+  }
+  pickByDay(list, off, shift) {
+    if (!list || !list.length) return null;
+    const n = list.length, a = this.todayAbs() + (off || 0) + (shift || 0);
+    return list[((a % n) + n) % n];
+  }
+  ensureThemeFont(t) {
+    try {
+      if (!t || !t.fontFace || typeof document === 'undefined') return;
+      const id = 'tf-' + t.fontFace.family.replace(/\W/g, '');
+      if (document.getElementById(id)) return;
+      const url = this.themeAsset(t, t.fontFace.file);
+      if (!url) return;
+      const st = document.createElement('style'); st.id = id;
+      st.textContent = "@font-face{font-family:'" + t.fontFace.family + "';src:url('" + url + "') format('woff2');font-display:swap}";
+      document.head.appendChild(st);
+    } catch (e) {}
   }
   themeCss() {
     const t = this.themeDef(this.state.settings.theme);
@@ -9517,7 +9559,20 @@ class Component extends DCLogic {
       statBg: this.THEME.stat.bg, statLine: this.THEME.stat.line, statFg: this.THEME.stat.fg, statInk: this.THEME.stat.ink,
       dayPadTop: 126,
       themeName: this.themeDef(s.settings.theme).name,
-      themeQuote: this.themeDef(s.settings.theme).quote,
+      themeQuote: (() => { const t = this.themeDef(s.settings.theme); return t.quotes ? this.pickByDay(t.quotes, s.day) : t.quote; })(),
+      ...(() => {
+        const t = this.themeDef(s.settings.theme), on = t.art === 'img';
+        if (on) this.ensureThemeFont(t);
+        const u = (n) => this.themeAsset(t, n);
+        const wash = on ? u(t.img.wash) : '', paper = on ? u(t.img.paper) : '';
+        return {
+          artImg: on && !!u(t.img.swags[0]),
+          imgWash: wash, imgSwagL: on ? u(this.pickByDay(t.img.swags, s.day)) : '', imgSwagR: on ? u(this.pickByDay(t.img.swags, s.day, 3)) : '',
+          imgWreath: on ? u(this.pickByDay(t.img.wreaths, s.day)) : '',
+          pageBg: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
+          jBg: wash ? "linear-gradient(rgba(251,247,238,0.82), rgba(251,247,238,0.9)), url('" + wash + "') center / cover no-repeat, #FBF7EE" : '#FBF7EE'
+        };
+      })(),
       TK: this.TK,
       artFlowers: this.themeDef(s.settings.theme).art === 'flowers', artSea: this.themeDef(s.settings.theme).art === 'sea',
       artGen: ['sun', 'meadow', 'stars', 'ink'].indexOf(this.themeDef(s.settings.theme).art) >= 0,
@@ -10559,9 +10614,12 @@ class Component extends DCLogic {
       showThemes: isSettings && s.setSec === 'themes', showThemeCards: isSettings && (!s.setSec || s.setSec === 'look' || ['look', 'calendar', 'always', 'tasks', 'categories', 'addons', 'data', 'themes', 'myday', 'fixed', 'special', 'helpers', 'reminders'].indexOf(s.setSec) < 0),
       openThemes: () => this.setState({ setSec: 'themes' }), closeThemes: () => this.setState({ setSec: 'look' }),
       themeCards: this.themeIds().map(id => {
+        const showThemesNow = isSettings;
         const t = this.themeDef(id), v = t.vars || {}, on = (s.settings.theme || 'flowery') === id;
+        if (t.fontFace && showThemesNow) this.ensureThemeFont(t);
         const col = (h) => v[h] || ('#' + h);
         return {
+          hasImg: t.art === 'img' && !!this.themeAsset(t, t.img.swags[0]), img: t.art === 'img' ? this.themeAsset(t, t.img.swags[0]) : '',
           name: t.name, blurb: t.blurb, font: t.fHead, ink: col('6E2F43'), band: col('FBEDEE'), accent: col('A0526A'), line: col('E2B9C4'), paper: t.paper,
           tabs: [0, 1, 2, 3, 4, 5, 6].map(k => { const d = t.tabPal[k % t.tabPal.length]; return { bg: this.mixColor(d, '#FFFFFF', 0.68), fg: d }; }),
           checked: on ? 'true' : 'false', ring: on ? '0 0 0 2px #FFFFFF, 0 0 0 4px ' + col('6E2F43') : '0 1px 2px rgba(0,0,0,0.08)', inUse: on,
