@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 8:56 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 8:58 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -7609,7 +7609,11 @@ class Component extends DCLogic {
           const c = v[1]; return [k, { name: v[0], a: M(c, 0.86), b: M(c, 0.79), border: M(c, 0.55), labelBg: M(c, 0.66), labelFg: D(c), swatch: c }]; })) : this._COLORS0;
         this.CAT_COLORS = key && td.catSwatches ? Object.fromEntries(Object.keys(this._CAT0).map(k => { const v = td.catSwatches[k]; if (!v) return [k, this._CAT0[k]];
           const c = v[1]; return [k, { name: v[0], color: c, tint: M(c, 0.88), edge: M(c, 0.6) }]; })) : this._CAT0;
-      } }
+      }
+      // Paper tones for day cells (Week rows, Month grid): Storybook themes let the watercolor paper show through.
+      this.PP = td && td.storybook
+        ? { past: 'rgba(236,226,218,0.55)', today: 'rgba(255,255,255,0.92)', cell: 'rgba(255,255,255,0.62)', edge: 'rgba(196,176,164,0.35)', todayRing: this.TK.t6E2F43, side: 'rgba(240,230,224,0.6)', sideHot: '#F3E3DE' }
+        : { past: '#F4EFE5', today: '#FFFFFF', cell: '#FFFDF8', edge: '#EFE7D6', todayRing: '#1E3A5F', side: '#F7F1E3', sideHot: '#FFF6C9' }; }
     if (this._repTopDay !== this.todayAbs() && this.state && this.state.habits) {
       this._repTopDay = this.todayAbs();
       setTimeout(() => { const m = this.topUpRepeats(this.state.habits, this.state.placedByDay); if (m !== this.state.placedByDay) this.setState({ placedByDay: m }); }, 0);
@@ -8734,8 +8738,8 @@ class Component extends DCLogic {
         tipLeft: nearEnd ? 'auto' : '0px',
         tipRight: nearEnd ? '0px' : 'auto',
         dow: this.DSHORT[dw], date: dd.getDate(), full: this.DAYS[dw] + ', ' + this.MONTHS[dd.getMonth()] + ' ' + dd.getDate(),
-        bg: off < 0 ? '#F4EFE5' : (off === 0 ? '#FFFFFF' : '#FFFDF8'),
-        ring: off === 0 ? ('0 0 0 1.5px ' + this.TK.t6E2F43) : 'inset 0 0 0 1px #EFE7D6',
+        bg: off < 0 ? this.PP.past : (off === 0 ? this.PP.today : this.PP.cell),
+        ring: off === 0 ? ('0 0 0 1.5px ' + this.TK.t6E2F43) : 'inset 0 0 0 1px ' + this.PP.edge,
         dayFg: off === 0 ? this.TK.t6E2F43 : (off < 0 ? '#A39882' : '#3A342D'),
         eventsText: s.commitments.filter(c => c.counts !== false).map(c => this.cSegs(c, off).filter(g => !g.skipped && g.part !== 'morn').map(g => (c.title || 'Fixed') + ' ' + this.fmtClock(g.st % 1440, true) + '–' + this.fmtClock(g.en % 1440, true))).reduce((a, x) => a.concat(x), [])
           .concat(this.dayItems(off).filter(b => b.fixed || b.taskId).sort((a, b) => a.start - b.start).map(b => this.fmtTime(b.start, false) + ' ' + (b.taskId ? ((taskById[b.taskId] || {}).title || 'Task') : b.title))).join('  ·  '),
@@ -8898,8 +8902,8 @@ class Component extends DCLogic {
           days.push({
             num: dd.getDate(),
             aria: this.DAYS[dw] + ', ' + this.MONTHS[dd.getMonth()] + ' ' + dd.getDate() + '. ' + this.fmtDur(stt.open) + ' open. ' + items.length + ' things planned. Tap to open the day.',
-            bg: off < 0 ? '#F4EFE4' : '#FFFFFF',
-            ring: off === 0 ? '0 0 0 2px #1E3A5F' : 'none',
+            bg: off < 0 ? this.PP.past : this.PP.today,
+            ring: off === 0 ? '0 0 0 2px ' + this.PP.todayRing : 'none',
             op: inMonth ? 1 : 0.45,
             band: bandCol,
             numColor: off === 0 ? '#1E3A5F' : '#1F2A33',
@@ -8917,7 +8921,7 @@ class Component extends DCLogic {
           days: days,
           score: rb3.length ? rDone + '/' + rb3.length : '–',
           starFill: rb3.length && rDone === rb3.length ? '#D9AE1E' : (rb3.length ? '#F5E3A0' : 'none'),
-          bg: rws <= 0 && rws > -7 ? '#FFF6C9' : '#F7F1E3',
+          bg: rws <= 0 && rws > -7 ? this.PP.sideHot : this.PP.side,
           aria: 'Week of ' + this.MONTHS[this.dateFor(rws).getMonth()] + ' ' + this.dateFor(rws).getDate() + (rb3.length ? '. Week Makers: ' + rDone + ' of ' + rb3.length + ' done' : '. No Week Makers set') + '. Tap to open the week.',
           openWeek: () => this.setState({ view: 'week', weekAnchor: rws, sel: null })
         });
