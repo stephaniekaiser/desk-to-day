@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 7:45 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 7:57 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -35,9 +35,11 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 .grab{cursor:ns-resize}
 [draggable="true"]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .grab:hover .grabbar{opacity:1}
-.scene-drop{position:absolute;top:var(--y0);animation:sceneDrop 1.05s cubic-bezier(.45,0,.9,.55) forwards,sceneFade .45s ease-in 2.1s forwards}
+.scene-drop{position:absolute;top:var(--y0);animation:sceneFall var(--dur) cubic-bezier(.45,0,.9,.55) forwards,sceneDrift var(--dur) cubic-bezier(.15,.55,.35,1) forwards,sceneSpin var(--dur) linear forwards,sceneFade .45s ease-in var(--fade) forwards}
+@keyframes sceneFall{from{top:var(--y0)}to{top:calc(100% - var(--y1))}}
+@keyframes sceneDrift{from{translate:0 0}to{translate:var(--dx) 0}}
+@keyframes sceneSpin{from{rotate:0deg}to{rotate:420deg}}
 @keyframes sceneFade{to{opacity:0}}
-@keyframes sceneDrop{0%{top:var(--y0);transform:translateX(0) rotate(0deg);opacity:1}10%{transform:translateX(calc(var(--dx) * 0.6)) rotate(60deg)}100%{top:calc(100% - var(--y1));transform:translateX(var(--dx)) rotate(420deg);opacity:1}}
 @keyframes sceneHop{0%{transform:translateY(0)}40%{transform:translateY(-7px)}100%{transform:translateY(0)}}
 @media (prefers-reduced-motion: reduce){.scene-drop{display:none}.scene-ly{animation:none!important}}
 </style>
@@ -53,7 +55,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div aria-hidden="true" style="position: absolute; top: 6px; right: 6px; bottom: 6px; left: 6px; border: 1.5px dashed rgba(233,225,207,0.28); border-radius: 15px; pointer-events: none"></div>
 <div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; border-radius: 20px; pointer-events: none; opacity: 0.35; background-image: radial-gradient(rgba(0,0,0,0.25) 1px, transparent 1.4px); background-size: 5px 5px"></div>
 
-<section aria-label="{{leftLabel}}" style="position: relative; width: {{leftW}}; flex: {{leftFlex}}; display: {{leftDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgL}}; border-radius: 10px 3px 3px 10px; box-shadow: inset -18px 0 22px -16px rgba(0,0,0,0.30), -1px 1px 0 #E6DCC8, -2px 2px 0 #D9CDB6, -3px 3px 0 #E6DCC8, -4px 4px 0 #CDBFA4">
+<section data-pg="L" aria-label="{{leftLabel}}" style="position: relative; width: {{leftW}}; flex: {{leftFlex}}; display: {{leftDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgL}}; border-radius: 10px 3px 3px 10px; box-shadow: inset -18px 0 22px -16px rgba(0,0,0,0.30), -1px 1px 0 #E6DCC8, -2px 2px 0 #D9CDB6, -3px 3px 0 #E6DCC8, -4px 4px 0 #CDBFA4">
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none"><sc-for list="{{sceneUnderL}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for></div><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 3"><sc-for list="{{sceneOverL}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for></div></sc-if>
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
 <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 10px 3px 0 0; overflow: hidden; background: {{bandBg}}; border-bottom: {{bandBorder}}; -webkit-mask-image: {{bandMask}}; mask-image: {{bandMask}}">
@@ -1458,8 +1460,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="position: relative; width: 76px; height: 20px; flex: none"><span style="position: absolute; left: 0; top: 4px; width: 10px; height: 10px; border-radius: 5px; background: #5E5546; opacity: 0.55"></span><span style="position: absolute; right: 0; top: 4px; width: 10px; height: 10px; border-radius: 5px; background: #5E5546; opacity: 0.55"></span><span style="position: absolute; left: 4px; right: 4px; top: 1px; height: 16px; border-radius: 8px; background: linear-gradient(180deg, #FFFFFF 0%, #D5DADD 22%, #9AA2A7 48%, #6F777C 60%, #C7CCCF 82%, #F1F3F4 100%); box-shadow: 0 3px 5px rgba(0,0,0,0.45), inset 0 -1px 1px rgba(0,0,0,0.25)"></span></div>
 </div>
 
-<section aria-label="{{rightLabel}}" style="position: relative; flex: 1; display: {{rightDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgR}}; border-radius: {{rightRadius}}; box-shadow: inset 18px 0 22px -16px rgba(0,0,0,0.30), 1px 1px 0 #E6DCC8, 2px 2px 0 #D9CDB6, 3px 3px 0 #E6DCC8, 4px 4px 0 #CDBFA4">
-<sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none"><sc-for list="{{sceneUnderR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for></div><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 3"><sc-for list="{{sceneOverR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for></div><sc-if value="{{sceneDropOn}}" hint-placeholder-val="{{ false }}"><div class="scene-drop" aria-hidden="true" style="--y0: {{sceneDrop.y0}}; --y1: {{sceneDrop.y1}}; --dx: {{sceneDrop.dx}}; right: {{sceneDrop.r}}; width: {{sceneDrop.w}}; height: {{sceneDrop.h}}; background: {{sceneDrop.bg}}; z-index: 4; pointer-events: none"></div></sc-if><sc-if value="{{quoteBottom}}" hint-placeholder-val="{{ false }}"><div aria-hidden="false" style="position: absolute; left: 34px; right: {{quoteBotRight}}; bottom: {{quoteBotY}}; z-index: 3; font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); line-height: 1.15; color: {{themeInk}}; -webkit-text-stroke: 0.35px currentColor; pointer-events: none">“{{themeQuote}}”</div></sc-if></sc-if>
+<section data-pg="R" aria-label="{{rightLabel}}" style="position: relative; flex: 1; display: {{rightDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgR}}; border-radius: {{rightRadius}}; box-shadow: inset 18px 0 22px -16px rgba(0,0,0,0.30), 1px 1px 0 #E6DCC8, 2px 2px 0 #D9CDB6, 3px 3px 0 #E6DCC8, 4px 4px 0 #CDBFA4">
+<sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none"><sc-for list="{{sceneUnderR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for></div><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 3"><sc-for list="{{sceneOverR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for></div><sc-if value="{{sceneDropOn}}" hint-placeholder-val="{{ false }}"><div class="scene-drop" aria-hidden="true" style="--y0: {{sceneDrop.y0}}; --y1: {{sceneDrop.y1}}; --dx: {{sceneDrop.dx}}; --dur: {{sceneDrop.dur}}; --fade: {{sceneDrop.fade}}; right: {{sceneDrop.r}}; width: {{sceneDrop.w}}; height: {{sceneDrop.h}}; background: {{sceneDrop.bg}}; z-index: 4; pointer-events: none"></div></sc-if><sc-if value="{{quoteBottom}}" hint-placeholder-val="{{ false }}"><div aria-hidden="false" style="position: absolute; left: 34px; right: {{quoteBotRight}}; bottom: {{quoteBotY}}; z-index: 3; font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); line-height: 1.15; color: {{themeInk}}; -webkit-text-stroke: 0.35px currentColor; pointer-events: none">“{{themeQuote}}”</div></sc-if></sc-if>
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}"><img src="{{imgAnimal}}" alt="" aria-hidden="true" style="position: absolute; right: 16px; bottom: 8px; height: 118px; width: auto; max-width: 40%; object-fit: contain; object-position: right bottom; z-index: 3; pointer-events: none"></sc-if></sc-if>
 
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
@@ -4650,6 +4652,8 @@ class Component extends DCLogic {
     };
     try { window.addEventListener('resize', this.onResize); } catch (err) {}
     this.onResize();
+    try { this.pageRO = new ResizeObserver(() => this.measurePages()); this.pageRO.observe(document.body); } catch (err) {}
+    setTimeout(() => this.measurePages(), 300);
     this.onVis = () => { try { if (document.visibilityState === 'visible' && this.db && !this.saveT) this.pullRemote(); if (document.visibilityState === 'visible' && !this.db && this.syncStarted) this.syncPull(false); if (document.visibilityState === 'hidden' && this.syncT) { clearTimeout(this.syncT); this.syncT = null; this.syncPush(false); } } catch (err) {} };
     try { document.addEventListener('visibilitychange', this.onVis); } catch (err) {}
     this.initStore();
@@ -4662,7 +4666,19 @@ class Component extends DCLogic {
     if (this.saveT) { clearTimeout(this.saveT); this.saveNow(); }
     if (this.touchOff) this.touchOff();
   }
+  // Real widths of the two pages and the gap at the rings, so scene art can line up across them on any screen.
+  measurePages() {
+    try {
+      const L = document.querySelector('section[data-pg="L"]'), R = document.querySelector('section[data-pg="R"]');
+      if (this.pageRO && L && R && this._roL !== L) { this.pageRO.observe(L); this.pageRO.observe(R); this._roL = L; }
+      const a = L && L.offsetParent !== null ? L.getBoundingClientRect() : null, b = R && R.offsetParent !== null ? R.getBoundingClientRect() : null;
+      const g = a && b && a.width > 50 && b.width > 50 ? { lw: Math.round(a.width), rw: Math.round(b.width), gap: Math.max(0, Math.round(b.left - a.right)) } : null;
+      const o = this.state.pageGeo;
+      if (JSON.stringify(g) !== JSON.stringify(o)) this.setState({ pageGeo: g });
+    } catch (err) {}
+  }
   componentDidUpdate(prevProps, prevState) {
+    if (prevState.view !== this.state.view || prevState.vw !== this.state.vw || prevState.settings !== this.state.settings) setTimeout(() => this.measurePages(), 60);
     const s = this.state;
     if (this.ready) {
       const refs = this.DK.map(k => s[k]).concat([s.settings, s.nextId]);
@@ -5567,18 +5583,21 @@ class Component extends DCLogic {
         // anchor: tl/tr/bl/br = corner, top = full width strip, left = full height strip. layer 'under' sits behind the page, 'over' sits on top.
         scene: {
           under: [
-            { page: 'L', anchor: 'spread', src: 'branch.webp', h: 190, y: -26, pos: 'left top' },
-            { page: 'R', anchor: 'spread', src: 'branch.webp', h: 190, y: -26, pos: 'right top' },
-            { page: 'L', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0, pos: 'left bottom' },
-            { page: 'R', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0, pos: 'right bottom' }
+            { page: 'L', anchor: 'spread', src: 'branch.webp', ar: 4.83, h: 190, y: -26 },
+            { page: 'R', anchor: 'spread', src: 'branch.webp', ar: 4.83, h: 190, y: -26 },
+            { page: 'L', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0 },
+            { page: 'R', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0 }
           ],
           over: [
-            { page: 'R', anchor: 'tr', src: 'squirrel-toss.webp', srcDrop: 'squirrel-toss-empty.webp', w: 126, h: 74, x: 56, y: 24 },
-            { page: 'R', anchor: 'br', src: 'squirrel-catch.webp', w: 139, h: 112, x: 18, y: 4, catcher: true }
+            // 'at' = how far along the branch it sits (0 = left end, 1 = tip); x/y are used when the branch can't be measured
+            { page: 'R', anchor: 'onStrip', at: 0.89, src: 'squirrel-toss.webp', srcDrop: 'squirrel-toss-empty.webp', w: 126, h: 74, x: 56, y: 24 },
+            { page: 'R', anchor: 'br', src: 'squirrel-catch.webp', w: 139, h: 112, x: 18, y: 4, catcher: true },
+            { page: 'R', anchor: 'bl', src: 'snail.webp', w: 34, h: 25, x: 150, y: 4 },
+            { page: 'R', anchor: 'bl', src: 'bee.webp', w: 26, h: 23, x: 250, y: 58 }
           ],
-          // what falls when a task is checked off: from the thrower's paws (offsets from the top-right) to the catcher (offset from the bottom)
-          drop: { src: 'acorn.webp', w: 15, h: 17, x: 165, y: 76, toY: 84, dx: 31 },
-          quote: 'bottom', quoteClear: 170, quoteY: 88   // quote sits at the bottom of the calendar page, leaving room for the corner character
+          // what falls when a task is checked off: starts at the thrower's paw, lands in the catcher's paws (toRight = from the page's right edge)
+          drop: { src: 'acorn.webp', w: 15, h: 17, fromX: 2, y: 76, toRight: 149, toY: 84, x: 165, dx: 31 },
+          quote: 'bottom', quoteClear: 170, quoteY: 88
         },
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
       },
@@ -5649,36 +5668,63 @@ class Component extends DCLogic {
   }
   // Scene layers for a theme, as positioned boxes per page. Everything is pinned to a page edge so it lands right on any screen.
   sceneVals(t, s) {
-    const none = { sceneUnderL: [], sceneUnderR: [], sceneOverL: [], sceneOverR: [], sceneDropOn: false, sceneDrop: {}, quoteBottom: false, quoteTopDisp: 'inline', dayPadBot: 18, quoteBotRight: '160px' };
+    const none = { sceneUnderL: [], sceneUnderR: [], sceneOverL: [], sceneOverR: [], sceneDropOn: false, sceneDrop: {}, quoteBottom: false, quoteTopDisp: 'inline', dayPadBot: 18, quoteBotRight: '160px', quoteBotY: '12px' };
     if (!t || !t.scene || !t.img) return none;
-    const vw = s.vw || 1194, nar = vw < 900;
+    const vw = s.vw || 1194, nar = vw < 900, geo = nar ? null : s.pageGeo;
     const k = Math.max(0.78, Math.min(1.15, nar ? vw / 820 : vw / 1180));
-    const px = (n) => Math.round(n * k) + 'px', A = 'auto';
+    const P = (n) => Math.round(n * k), px = (n) => Math.round(n) + 'px', A = 'auto';
+    const sc = t.scene, all = (sc.under || []).concat(sc.over || []);
+    // The top strip keeps its natural shape (it may stretch a little, never a lot). On a wide calendar page it simply ends sooner.
+    const strip = all.find(ly => ly.anchor === 'spread');
+    let sW = 0, sH = 0;
+    if (strip && geo) {
+      sH = P(strip.h); const nat = sH * (strip.ar || 4.8), T = geo.lw + geo.gap + geo.rw;
+      sW = Math.round(Math.max(nat * 0.9, Math.min(nat * 1.2, T)));
+    }
     const box = (ly) => {
-      const url = "url('" + this.themeAsset(t, (s.sceneDrop && ly.srcDrop) || ly.src) + "')";
+      const src = (s.sceneDrop && ly.srcDrop) || ly.src, url = "url('" + this.themeAsset(t, src) + "')";
       const b = { l: A, r: A, t: A, b: A, w: A, h: A, op: String(ly.op == null ? 1 : ly.op), anim: 'none', bg: '' };
-      const x = px(ly.x || 0), y = px(ly.y || 0);
-      if (ly.anchor === 'top') Object.assign(b, { l: '0', r: '0', t: y, h: px(ly.h), bg: url + ' ' + (ly.pos || 'left top') + ' / auto 100% no-repeat' });
-      // spread: one image across both pages; each page shows its half, so it meets behind the rings on any screen
-      else if (ly.anchor === 'spread' || ly.anchor === 'spreadBottom') Object.assign(b, { l: '0', r: '0', h: px(ly.h), bg: url + ' ' + (ly.pos || 'left top') + (nar ? ' / auto 100% no-repeat' : ' / 200% 100% no-repeat') }, ly.anchor === 'spread' ? { t: y } : { b: y });
-      else if (ly.anchor === 'bottom') Object.assign(b, { l: '0', r: '0', b: y, h: px(ly.h), bg: url + ' ' + (ly.pos || 'left bottom') + ' / auto 100% no-repeat' });
-      else if (ly.anchor === 'left') Object.assign(b, { l: x, t: y, b: '0', w: px(ly.w), bg: url + ' center / 100% 100% no-repeat' });
-      else {
-        const pos = { tl: 'left top', tr: 'right top', bl: 'left bottom', br: 'right bottom' }[ly.anchor] || 'left top';
-        if (ly.anchor[1] === 'l') b.l = x; else b.r = x;
-        if (ly.anchor[0] === 't') b.t = y; else b.b = y;
-        Object.assign(b, { w: ly.w ? px(ly.w) : px(ly.h * 1.6), h: px(ly.h || ly.w), bg: url + ' ' + pos + ' / contain no-repeat' });
+      const x = px(P(ly.x || 0)), y = px(P(ly.y || 0)), shiftR = geo ? -(geo.lw + geo.gap) : 0;
+      if (ly.anchor === 'spread') {
+        if (geo) Object.assign(b, { l: '0', r: '0', t: y, h: px(sH), bg: url + ' ' + (ly.page === 'R' ? shiftR : 0) + 'px 0 / ' + sW + 'px ' + sH + 'px no-repeat' });
+        else Object.assign(b, { l: '0', r: '0', t: y, h: px(P(ly.h)), bg: url + ' ' + (ly.page === 'R' ? 'right' : 'left') + ' top / auto 100% no-repeat' });
+      } else if (ly.anchor === 'spreadBottom') {
+        // repeats seamlessly; the calendar page continues where the tasks page left off
+        Object.assign(b, { l: '0', r: '0', b: y, h: px(P(ly.h)), bg: url + ' ' + (ly.page === 'R' ? shiftR : 0) + 'px 100% / auto 100% repeat-x' });
+      } else if (ly.anchor === 'onStrip' && geo && sW) {
+        // sits on the strip at a set point along it, so it stays on the branch at any width
+        const w = P(ly.w), left = Math.min(geo.rw - w - P(8), Math.round(sW * ly.at - (geo.lw + geo.gap) - w / 2));
+        Object.assign(b, { l: px(left), t: y, w: px(w), h: px(P(ly.h)), bg: url + ' left top / contain no-repeat', _left: left, _w: w });
+      } else {
+        const an = ly.anchor === 'onStrip' ? 'tr' : ly.anchor, xx = ly.anchor === 'onStrip' ? px(P(ly.x || 0)) : x;
+        if (an === 'left') Object.assign(b, { l: xx, t: y, b: '0', w: px(P(ly.w)), bg: url + ' center / 100% 100% no-repeat' });
+        else {
+          const pos = { tl: 'left top', tr: 'right top', bl: 'left bottom', br: 'right bottom' }[an] || 'left top';
+          if (an[1] === 'l') b.l = xx; else b.r = xx;
+          if (an[0] === 't') b.t = y; else b.b = y;
+          Object.assign(b, { w: ly.w ? px(P(ly.w)) : px(P(ly.h * 1.6)), h: px(P(ly.h || ly.w)), bg: url + ' ' + pos + ' / contain no-repeat' });
+        }
       }
-      if (ly.catcher && s.sceneDrop) b.anim = 'sceneHop 0.45s ease-out 1s';
+      if (ly.catcher && s.sceneDrop) b.anim = 'sceneHop 0.45s ease-out ' + (this._dropDur || 1) + 's';
       return b;
     };
     const pick = (list, pg) => (list || []).filter(ly => ly.page === pg).map(box);
-    const sc = t.scene, d = sc.drop;
+    const overR = pick(sc.over, 'R'), d = sc.drop;
+    let drop = {};
+    if (d) {
+      const w = P(d.w), rw = geo ? geo.rw : null, thr = overR.find(b => b._left != null);
+      if (thr && rw) {
+        const startL = thr._left + P(d.fromX || 0), endL = rw - P(d.toRight);
+        drop = { r: px(rw - startL - w), dx: px(endL - startL), _dist: Math.abs(endL - startL) };
+      } else drop = { r: px(P(d.x)), dx: px(P(d.dx || 0)) };
+      const dur = Math.min(1.7, 1.05 + (drop._dist || 0) / 900);
+      Object.assign(drop, { dur: dur.toFixed(2) + 's', fade: (dur + 1.05).toFixed(2) + 's', bg: "url('" + this.themeAsset(t, d.src) + "') center / contain no-repeat", w: px(w), h: px(P(d.h)), y0: px(P(d.y)), y1: px(P(d.toY)) });
+    }
+    if (drop.dur) this._dropDur = parseFloat(drop.dur) - 0.05;
     return {
-      sceneUnderL: pick(sc.under, 'L'), sceneUnderR: pick(sc.under, 'R'), sceneOverL: pick(sc.over, 'L'), sceneOverR: pick(sc.over, 'R'),
-      sceneDropOn: !!(d && s.sceneDrop),
-      quoteBottom: sc.quote === 'bottom', quoteTopDisp: sc.quote === 'bottom' ? 'none' : 'inline', dayPadBot: sc.quote === 'bottom' ? 120 : 18, quoteBotRight: px(sc.quoteClear || 160), quoteBotY: px(sc.quoteY || 12),
-      sceneDrop: d ? { bg: "url('" + this.themeAsset(t, d.src) + "') center / contain no-repeat", r: px(d.x), w: px(d.w), h: px(d.h), y0: px(d.y), y1: px(d.toY), dx: px(d.dx || 0) } : {}
+      sceneUnderL: pick(sc.under, 'L'), sceneUnderR: pick(sc.under, 'R'), sceneOverL: pick(sc.over, 'L'), sceneOverR: overR,
+      sceneDropOn: !!(d && s.sceneDrop), sceneDrop: drop,
+      quoteBottom: sc.quote === 'bottom', quoteTopDisp: sc.quote === 'bottom' ? 'none' : 'inline', dayPadBot: sc.quote === 'bottom' ? 120 : 18, quoteBotRight: px(P(sc.quoteClear || 160)), quoteBotY: px(P(sc.quoteY || 12))
     };
   }
   // Plays the theme's little "something falls" moment after a task is checked off.
@@ -5689,13 +5735,13 @@ class Component extends DCLogic {
     this.setState({ sceneDrop: 0 });
     setTimeout(() => {
       this.setState({ sceneDrop: Date.now() });
-      this._sceneT = setTimeout(() => this.setState({ sceneDrop: 0 }), 2600);
+      this._sceneT = setTimeout(() => this.setState({ sceneDrop: 0 }), 3300);
     }, 30);
   }
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/squirrel-toss-empty.webp': '/_blob/3a7278d2b5528719d1e5e8717b4fb982', 'themes/rosewreath/grass.webp': '/_blob/e9fde67d05bfe46c5e213e4f70de80f9', 'themes/rosewreath/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/rosewreath/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/rosewreath/squirrel-toss.webp': '/_blob/3f3e33ac47e702c148d2981a351480ce', 'themes/rosewreath/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
+    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/bee.webp': '/_blob/6f071e99b270820feeefd81ff2eac110', 'themes/rosewreath/snail.webp': '/_blob/0bd67ea5e0150c0239a3b744c9bd7698', 'themes/rosewreath/squirrel-toss-empty.webp': '/_blob/3a7278d2b5528719d1e5e8717b4fb982', 'themes/rosewreath/grass.webp': '/_blob/c86ebb9106f44cef2b3a6a62ca32c941', 'themes/rosewreath/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/rosewreath/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/rosewreath/squirrel-toss.webp': '/_blob/3f3e33ac47e702c148d2981a351480ce', 'themes/rosewreath/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
