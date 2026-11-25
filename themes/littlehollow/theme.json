@@ -1,12 +1,13 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 5,
+  "version": 6,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
     "Spring blossom set",
     "A squirrel on the branch",
+    "New friend: a robin who fluffs and shakes, then lets a blossom fall",
     "New friend: a bee who loops around her flower while a blossom drifts down",
     "The basket under the branch fills with blossoms as you finish the day's Must do and Should do, and starts fresh each morning"
   ],
@@ -309,6 +310,28 @@
         ],
         "hide": [
           "bee.webp"
+        ]
+      },
+      {
+        "id": "robin",
+        "name": "A robin on the branch",
+        "moment": "drop",
+        "over": [
+          {
+            "page": "R",
+            "anchor": "onStrip",
+            "src": "robin-1.webp",
+            "srcFlap": "robin-2.webp",
+            "shake": true,
+            "w": 90,
+            "h": 78,
+            "x": 56,
+            "y": 53,
+            "holds": {
+              "x": 6,
+              "y": 21
+            }
+          }
         ]
       }
     ],
