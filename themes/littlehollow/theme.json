@@ -1,13 +1,14 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 6,
+  "version": 7,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
     "Spring blossom set",
     "A squirrel on the branch",
     "New friend: a robin who fluffs and shakes, then lets a blossom fall",
+    "New friend: a hedgehog by the basket who sniffs and smiles when a blossom lands",
     "New friend: a bee who loops around her flower while a blossom drifts down",
     "The basket under the branch fills with blossoms as you finish the day's Must do and Should do, and starts fresh each morning"
   ],
@@ -331,6 +332,33 @@
               "x": 6,
               "y": 21
             }
+          }
+        ]
+      },
+      {
+        "id": "hedgehog",
+        "name": "A hedgehog by the basket",
+        "over": [
+          {
+            "page": "R",
+            "anchor": "byPile",
+            "src": "hedgehog-1.webp",
+            "w": 66,
+            "h": 48,
+            "x": 6,
+            "y": 3,
+            "frames": [
+              {
+                "src": "hedgehog-2.webp",
+                "from": 1.3,
+                "to": 2.3
+              },
+              {
+                "src": "hedgehog-3.webp",
+                "from": 2.3,
+                "to": 3.4
+              }
+            ]
           }
         ]
       }

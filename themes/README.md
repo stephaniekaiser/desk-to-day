@@ -28,3 +28,5 @@ packages.
 Scene piece anchors: `spread` (top strip across both pages), `spreadBottom` (repeating ground strip),
 `onStrip` (sits on the top strip at the set's `perch`), `tl` / `tr` / `bl` / `br` (page corners). Sizes are px at a
 1180-wide screen. `page` is `L` (tasks page) or `R` (calendar page).
+
+**Ground friends by the basket:** `anchor: byPile` sits a piece on the grass just left of the basket (`x` tucks it in toward the basket). `frames: [{src, from, to}]` crossfades through extra poses after a check-off (seconds from the check-off; a drifting item lands at about 2.2s), then back to the resting pose.
