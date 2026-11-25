@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 6:18 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 6:21 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -53,7 +53,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 10px 3px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{themeLine}}">
 <sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}">
 <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: 0.42"></div>
-<img src="{{imgSwagL}}" alt="" style="position: absolute; left: 3%; bottom: 2px; height: 94%; width: auto; max-width: 62%; object-fit: contain; object-position: left bottom">
+<img src="{{imgSwagL}}" alt="" style="position: absolute; left: {{imgLLeft}}; bottom: {{imgLBot}}; height: {{imgLH}}; width: auto; max-width: 62%; object-fit: contain; object-position: left bottom; opacity: {{imgLOp}}">
 </sc-if>
 <svg width="100%" height="100%" viewBox="0 0 600 120" preserveAspectRatio="xMinYMid slice">
 <sc-if value="{{artFlowers}}" hint-placeholder-val="{{ true }}">
@@ -1458,7 +1458,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 3px 10px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{themeLine}}">
 <sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}">
 <div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: 0.42"></div>
-<img src="{{imgSwagR}}" alt="" aria-hidden="true" style="position: absolute; right: 3%; bottom: 2px; height: 94%; width: auto; max-width: 48%; object-fit: contain; object-position: right bottom">
+<img src="{{imgSwagR}}" alt="" aria-hidden="true" style="position: absolute; right: 3%; bottom: 2px; height: 86%; width: auto; max-width: 40%; object-fit: contain; object-position: right bottom">
 </sc-if>
 <svg aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" viewBox="0 0 600 120" preserveAspectRatio="xMaxYMid slice">
 <sc-if value="{{artFlowers}}" hint-placeholder-val="{{ true }}">
@@ -5623,7 +5623,7 @@ class Component extends DCLogic {
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755'};
+    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/sprig-1.webp': '/_blob/7ac9d5f3ba8188e10d3befcfd2759da2', 'themes/rosewreath/sprig-2.webp': '/_blob/ba796815af4aaa7cda48c0acb91e942b', 'themes/rosewreath/sprig-3.webp': '/_blob/543cd5cbb6cb9030a25af5429d228e6e', 'themes/rosewreath/sprig-4.webp': '/_blob/4d3ac0927e8f4d9c5ddef581f96e7d35'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
@@ -9567,7 +9567,10 @@ class Component extends DCLogic {
         const wash = on ? u(t.img.wash) : '', paper = on ? u(t.img.paper) : '';
         return {
           artImg: on && !!u(t.img.swags[0]),
-          imgWash: wash, imgSwagL: on ? u(this.pickByDay(t.img.swags, s.day)) : '', imgSwagR: on ? u(this.pickByDay(t.img.swags, s.day, 3)) : '',
+          imgWash: wash, imgSwagR: on ? u(this.pickByDay(t.img.swags, s.day)) : '',
+          // One main picture a day: on the open book the left banner gets a small line sprig; in portrait (one page) it gets the main picture.
+          ...(((s.vw || 1194) < 900) ? { imgSwagL: on ? u(this.pickByDay(t.img.swags, s.day)) : '', imgLH: '86%', imgLLeft: '3%', imgLBot: '2px', imgLOp: '1' }
+            : { imgSwagL: on ? u(this.pickByDay(t.img.sprigs, s.day)) : '', imgLH: '72%', imgLLeft: '4%', imgLBot: '6px', imgLOp: '0.8' }),
           imgWreath: on ? u(this.pickByDay(t.img.wreaths, s.day)) : '',
           pageBg: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
           jBg: wash ? "linear-gradient(rgba(251,247,238,0.82), rgba(251,247,238,0.9)), url('" + wash + "') center / cover no-repeat, #FBF7EE" : '#FBF7EE'
