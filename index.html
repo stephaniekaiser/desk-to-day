@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 8:58 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 8:59 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -41,7 +41,11 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 @keyframes sceneSpin{from{rotate:0deg}to{rotate:420deg}}
 @keyframes sceneFade{to{opacity:0}}
 @keyframes sceneHop{0%{transform:translateY(0)}40%{transform:translateY(-7px)}100%{transform:translateY(0)}}
-@media (prefers-reduced-motion: reduce){.scene-drop{display:none}.scene-ly{animation:none!important}}
+.scene-visit{position:absolute;animation:visitPeek 2.6s cubic-bezier(.3,.7,.3,1) forwards}
+@keyframes visitPeek{0%{transform:translateY(110%)}16%{transform:translateY(0)}24%{transform:translateY(-4px)}30%{transform:translateY(0)}82%{transform:translateY(0)}100%{transform:translateY(110%)}}
+.scene-visit-drop{position:absolute;opacity:0;animation:visitDrop .55s cubic-bezier(.45,0,.9,.55) .5s forwards}
+@keyframes visitDrop{0%{opacity:1;transform:translateY(-150px) rotate(-200deg)}100%{opacity:1;transform:translateY(0) rotate(0deg)}}
+@media (prefers-reduced-motion: reduce){.scene-drop{display:none}.scene-ly{animation:none!important}.scene-visit,.scene-visit-drop{display:none}}
 </style>
 </helmet>
 <div style="width: 100%; height: 100vh; height: 100dvh; min-height: 560px; box-sizing: border-box; padding: {{rootPad}}; padding-top: calc({{rootPadTop}} + env(safe-area-inset-top, 0px)); padding-bottom: calc({{rootPadTop}} + env(safe-area-inset-bottom, 0px)); background: {{bdDesk}}; font-family: {{TK.fBody}}; color: #2B2722; display: flex; flex-direction: column; gap: 10px">
@@ -56,6 +60,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; border-radius: 20px; pointer-events: none; opacity: 0.35; background-image: radial-gradient(rgba(0,0,0,0.25) 1px, transparent 1.4px); background-size: 5px 5px"></div>
 
 <section data-pg="L" aria-label="{{leftLabel}}" style="position: relative; width: {{leftW}}; flex: {{leftFlex}}; display: {{leftDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgL}}; border-radius: 10px 3px 3px 10px; box-shadow: inset -18px 0 22px -16px rgba(0,0,0,0.30), -1px 1px 0 #E6DCC8, -2px 2px 0 #D9CDB6, -3px 3px 0 #E6DCC8, -4px 4px 0 #CDBFA4">
+<sc-if value="{{visitOnL}}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 30"><div class="scene-visit" style="right: {{visit.r}}; bottom: 0; width: {{visit.w}}; height: {{visit.h}}; background: {{visit.bg}}"><span class="scene-visit-drop" style="left: {{visit.dl}}; top: {{visit.dt}}; width: {{visit.dw}}; height: {{visit.dh}}; background: {{visit.dbg}}"></span></div></div></sc-if>
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none"><sc-for list="{{sceneUnderL}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for></div><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 3"><sc-for list="{{sceneOverL}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for></div></sc-if>
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
 <div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 10px 3px 0 0; overflow: hidden; background: {{bandBg}}; border-bottom: {{bandBorder}}; -webkit-mask-image: {{bandMask}}; mask-image: {{bandMask}}">
@@ -1461,6 +1466,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 
 <section data-pg="R" aria-label="{{rightLabel}}" style="position: relative; flex: 1; display: {{rightDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgR}}; border-radius: {{rightRadius}}; box-shadow: inset 18px 0 22px -16px rgba(0,0,0,0.30), 1px 1px 0 #E6DCC8, 2px 2px 0 #D9CDB6, 3px 3px 0 #E6DCC8, 4px 4px 0 #CDBFA4">
+<sc-if value="{{visitOnR}}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 30"><div class="scene-visit" style="right: {{visit.r}}; bottom: 0; width: {{visit.w}}; height: {{visit.h}}; background: {{visit.bg}}"><span class="scene-visit-drop" style="left: {{visit.dl}}; top: {{visit.dt}}; width: {{visit.dw}}; height: {{visit.dh}}; background: {{visit.dbg}}"></span></div></div></sc-if>
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none"><sc-for list="{{sceneUnderR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for></div><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 3"><sc-for list="{{sceneOverR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"></div></sc-for></div><sc-if value="{{sceneDropOn}}" hint-placeholder-val="{{ false }}"><div class="scene-drop" aria-hidden="true" style="--y0: {{sceneDrop.y0}}; --y1: {{sceneDrop.y1}}; --dx: {{sceneDrop.dx}}; --dur: {{sceneDrop.dur}}; --fade: {{sceneDrop.fade}}; right: {{sceneDrop.r}}; width: {{sceneDrop.w}}; height: {{sceneDrop.h}}; background: {{sceneDrop.bg}}; z-index: 4; pointer-events: none"></div></sc-if><sc-if value="{{quoteBottom}}" hint-placeholder-val="{{ false }}"><div aria-hidden="false" style="position: absolute; left: 34px; right: {{quoteBotRight}}; bottom: {{quoteBotY}}; z-index: 3; font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); line-height: 1.15; color: {{themeInk}}; -webkit-text-stroke: 0.35px currentColor; pointer-events: none">“{{themeQuote}}”</div></sc-if></sc-if>
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}"><img src="{{imgAnimal}}" alt="" aria-hidden="true" style="position: absolute; right: 16px; bottom: 8px; height: 118px; width: auto; max-width: 40%; object-fit: contain; object-position: right bottom; z-index: 3; pointer-events: none"></sc-if></sc-if>
 
@@ -5872,7 +5878,14 @@ class Component extends DCLogic {
   sceneCelebrate() {
     const t = this.themeDef(this.state.settings.theme);
     const sn = t && t.scene ? this.sceneNow(t, this.state) : null;
-    if (!sn || !sn.drop || this.state.view !== 'day') return;
+    if (!sn || !sn.drop || this.state.view === 'settings') return;
+    if (this.state.view !== 'day') {
+      // Away from the Day page: the catcher peeks up from the corner and catches the item.
+      clearTimeout(this._visitT);
+      this.setState({ sceneVisit: 0 });
+      setTimeout(() => { this.setState({ sceneVisit: Date.now() }); this._visitT = setTimeout(() => this.setState({ sceneVisit: 0 }), 2700); }, 30);
+      return;
+    }
     clearTimeout(this._sceneT);
     this.setState({ sceneDrop: 0 });
     setTimeout(() => {
@@ -9872,6 +9885,14 @@ class Component extends DCLogic {
           imgAnimal: on && t.img.animals && !t.scene ? u(this.pickByDay(t.img.animals, s.day)) : '',
           ...this.sceneVals(t, s),
           ...this.binderVals(t, s.settings),
+          ...((() => {
+            const sn = s.sceneVisit && t.scene ? this.sceneNow(t, s) : null, c = sn && (sn.over || []).find(x => x.catcher), d = sn && sn.drop;
+            if (!c || !d) return { visitOnL: false, visitOnR: false, visit: {} };
+            const left = (s.vw || 1194) < 900 && s.mobilePage === 'left';
+            const boxW = c.w, boxH = c.h, dl = boxW - (d.toRight - c.x), dt = boxH - (d.toY - (c.y || 0));
+            return { visitOnL: left, visitOnR: !left, visit: { r: (c.x || 0) + 'px', w: boxW + 'px', h: boxH + 'px', bg: "url('" + u(c.src) + "') right bottom / contain no-repeat",
+              dl: dl + 'px', dt: dt + 'px', dw: d.w + 'px', dh: d.h + 'px', dbg: "url('" + u(d.src) + "') center / contain no-repeat" } };
+          })()),
           jBg: t.scene ? (paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE') : wash ? "linear-gradient(rgba(251,247,238,0.82), rgba(251,247,238,0.9)), url('" + wash + "') center / cover no-repeat, #FBF7EE" : '#FBF7EE'
         };
       })(),
