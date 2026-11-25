@@ -1,14 +1,14 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 3,
+  "version": 4,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
     "Spring blossom set",
-    "Squirrels and an acorn",
-    "New friend: a bee who buzzes around her flower",
-    "A basket in the meadow fills up with petals as you finish things each week"
+    "A squirrel on the branch",
+    "New friend: a bee who looks after her flower",
+    "A basket under the branch fills up as you finish things each week: whoever is in the tree drops the season's item in, and on quiet days it drifts down by itself"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -220,12 +220,11 @@
         ],
         "pile": {
           "page": "R",
-          "anchor": "bl",
-          "x": 16,
+          "anchor": "underPerch",
+          "x": 120,
           "y": 2,
           "w": 96,
           "h": 72,
-          "drop": "petal.webp",
           "states": [
             {
               "min": 0,
@@ -247,53 +246,42 @@
               "min": 16,
               "src": "basket-4.webp"
             }
-          ]
-        }
+          ],
+          "dx": -58
+        },
+        "item": {
+          "name": "blossom",
+          "src": "petal.webp",
+          "w": 17,
+          "h": 17
+        },
+        "driftY": 92
       }
     ],
     "casts": [
       {
         "id": "squirrels",
-        "name": "Squirrels and an acorn",
+        "name": "A squirrel on the branch",
         "over": [
           {
             "page": "R",
             "anchor": "onStrip",
-            "src": "squirrel-toss.webp",
-            "srcDrop": "squirrel-toss-empty.webp",
+            "src": "squirrel-toss-empty.webp",
             "w": 126,
             "h": 74,
             "x": 56,
-            "y": 24
-          },
-          {
-            "page": "R",
-            "anchor": "br",
-            "src": "squirrel-catch.webp",
-            "w": 139,
-            "h": 112,
-            "x": 18,
-            "y": 4,
-            "catcher": true
+            "y": 24,
+            "holds": {
+              "x": -2,
+              "y": 49
+            }
           }
         ],
-        "drop": {
-          "src": "acorn.webp",
-          "w": 15,
-          "h": 17,
-          "fromX": 2,
-          "y": 76,
-          "toRight": 149,
-          "toY": 84,
-          "x": 165,
-          "dx": 31
-        },
-        "moment": "toss"
+        "moment": "drop"
       },
       {
         "id": "bee",
         "name": "A bee and her flower",
-        "moment": "buzz",
         "over": [
           {
             "page": "R",
@@ -309,11 +297,11 @@
             "anchor": "bl",
             "src": "bee-wings-up.webp",
             "srcFlap": "bee-wings-down.webp",
-            "buzz": true,
             "w": 34,
             "h": 33,
             "x": 166,
-            "y": 86
+            "y": 86,
+            "flutter": true
           }
         ],
         "hide": [

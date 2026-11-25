@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 10:50 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 1:31 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -35,7 +35,13 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 .grab{cursor:ns-resize}
 [draggable="true"]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .grab:hover .grabbar{opacity:1}
-.scene-drop{position:absolute;top:var(--y0);animation:sceneFall var(--dur) cubic-bezier(.45,0,.9,.55) forwards,sceneDrift var(--dur) cubic-bezier(.15,.55,.35,1) forwards,sceneSpin var(--dur) linear forwards,sceneFade .45s ease-in var(--fade) forwards}
+.scene-drop{position:absolute;top:var(--y0)}
+.scene-drop.fall{animation:sceneFall var(--dur) cubic-bezier(.5,0,.85,.6) forwards,sceneDrift var(--dur) ease-in-out forwards,sceneTip var(--dur) ease-in forwards,sceneFade .14s ease-in var(--fade) forwards}
+.scene-drop.drift{opacity:0;animation:sceneFall var(--dur) cubic-bezier(.3,.1,.6,1) forwards,sceneSway var(--dur) ease-in-out forwards,sceneShow .35s ease-out forwards,sceneFade .14s ease-in var(--fade) forwards}
+@keyframes sceneTip{from{rotate:0deg}to{rotate:50deg}}
+@keyframes sceneShow{to{opacity:1}}
+@keyframes sceneSway{0%{translate:0 0;rotate:0deg}22%{translate:-14px 0;rotate:-24deg}48%{translate:12px 0;rotate:20deg}74%{translate:-8px 0;rotate:-12deg}100%{translate:0 0;rotate:0deg}}
+@keyframes pileFill{to{opacity:1}}
 @keyframes sceneFall{from{top:var(--y0)}to{top:calc(100% - var(--y1))}}
 @keyframes sceneDrift{from{translate:0 0}to{translate:var(--dx) 0}}
 @keyframes sceneSpin{from{rotate:0deg}to{rotate:420deg}}
@@ -1473,7 +1479,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 
 <section data-pg="R" aria-label="{{rightLabel}}" style="position: relative; flex: 1; display: {{rightDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgR}}; border-radius: {{rightRadius}}; box-shadow: inset 18px 0 22px -16px rgba(0,0,0,0.30), 1px 1px 0 #E6DCC8, 2px 2px 0 #D9CDB6, 3px 3px 0 #E6DCC8, 4px 4px 0 #CDBFA4">
 <sc-if value="{{visitOnR}}" hint-placeholder-val="{{ false }}"><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 30"><div class="scene-visit" style="right: {{visit.r}}; bottom: 0; width: {{visit.w}}; height: {{visit.h}}; background: {{visit.bg}}"><span class="scene-visit-drop" style="left: {{visit.dl}}; top: {{visit.dt}}; width: {{visit.dw}}; height: {{visit.dh}}; background: {{visit.dbg}}"></span></div></div></sc-if>
-<sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none"><sc-for list="{{sceneUnderR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"><span style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: {{ly.flapBg}}; opacity: 0; animation: {{ly.flapAnim}}"></span><sc-if value="{{ly.pop}}" hint-placeholder-val="{{ false }}"><span class="pile-pop" style="position: absolute; left: 38%; top: 0; width: 24%; height: 28%; background: {{ly.popBg}}"></span></sc-if></div></sc-for></div><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 3"><sc-for list="{{sceneOverR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"><span style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: {{ly.flapBg}}; opacity: 0; animation: {{ly.flapAnim}}"></span><sc-if value="{{ly.pop}}" hint-placeholder-val="{{ false }}"><span class="pile-pop" style="position: absolute; left: 38%; top: 0; width: 24%; height: 28%; background: {{ly.popBg}}"></span></sc-if></div></sc-for></div><sc-if value="{{sceneDropOn}}" hint-placeholder-val="{{ false }}"><div class="scene-drop" aria-hidden="true" style="--y0: {{sceneDrop.y0}}; --y1: {{sceneDrop.y1}}; --dx: {{sceneDrop.dx}}; --dur: {{sceneDrop.dur}}; --fade: {{sceneDrop.fade}}; right: {{sceneDrop.r}}; width: {{sceneDrop.w}}; height: {{sceneDrop.h}}; background: {{sceneDrop.bg}}; z-index: 4; pointer-events: none"></div></sc-if><sc-if value="{{quoteBottom}}" hint-placeholder-val="{{ false }}"><div aria-hidden="false" style="position: absolute; left: 34px; right: {{quoteBotRight}}; bottom: {{quoteBotY}}; z-index: 3; font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); line-height: 1.15; color: {{themeInk}}; -webkit-text-stroke: 0.35px currentColor; pointer-events: none">“{{themeQuote}}”</div></sc-if></sc-if>
+<sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none"><sc-for list="{{sceneUnderR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"><span style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: {{ly.flapBg}}; opacity: 0; animation: {{ly.flapAnim}}"></span><sc-if value="{{ly.pop}}" hint-placeholder-val="{{ false }}"><span class="pile-pop" style="position: absolute; left: 38%; top: 0; width: 24%; height: 28%; background: {{ly.popBg}}"></span></sc-if></div></sc-for></div><div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; border-radius: inherit; pointer-events: none; z-index: 3"><sc-for list="{{sceneOverR}}" as="ly" hint-placeholder-count="0"><div class="scene-ly" aria-hidden="true" style="position: absolute; left: {{ly.l}}; right: {{ly.r}}; top: {{ly.t}}; bottom: {{ly.b}}; width: {{ly.w}}; height: {{ly.h}}; background: {{ly.bg}}; opacity: {{ly.op}}; animation: {{ly.anim}}; pointer-events: none"><span style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: {{ly.flapBg}}; opacity: 0; animation: {{ly.flapAnim}}"></span><sc-if value="{{ly.pop}}" hint-placeholder-val="{{ false }}"><span class="pile-pop" style="position: absolute; left: 38%; top: 0; width: 24%; height: 28%; background: {{ly.popBg}}"></span></sc-if></div></sc-for></div><sc-if value="{{sceneDropOn}}" hint-placeholder-val="{{ false }}"><div class="{{sceneDrop.cls}}" aria-hidden="true" style="--y0: {{sceneDrop.y0}}; --y1: {{sceneDrop.y1}}; --dx: {{sceneDrop.dx}}; --dur: {{sceneDrop.dur}}; --fade: {{sceneDrop.fade}}; right: {{sceneDrop.r}}; width: {{sceneDrop.w}}; height: {{sceneDrop.h}}; background: {{sceneDrop.bg}}; z-index: 4; pointer-events: none"></div></sc-if><sc-if value="{{quoteBottom}}" hint-placeholder-val="{{ false }}"><div aria-hidden="false" style="position: absolute; left: 34px; right: {{quoteBotRight}}; bottom: {{quoteBotY}}; z-index: 3; font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); line-height: 1.15; color: {{themeInk}}; -webkit-text-stroke: 0.35px currentColor; pointer-events: none">“{{themeQuote}}”</div></sc-if></sc-if>
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}"><img src="{{imgAnimal}}" alt="" aria-hidden="true" style="position: absolute; right: 16px; bottom: 8px; height: 118px; width: auto; max-width: 40%; object-fit: contain; object-position: right bottom; z-index: 3; pointer-events: none"></sc-if></sc-if>
 
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
@@ -5714,7 +5720,7 @@ class Component extends DCLogic {
   // Theme accent colors are CSS variables (--tXXXXXX, named after the Flowery color they replace).
   // Theme packages: each is a self-contained theme.json (+ art) — built-in ones are bundled below; later, downloaded ones join the same list.
   themePackages() {
-    if (!this._pkgs) { this._pkgs = {}; const arr = /*THEME-PACKAGES*/[{"format":1,"id":"littlehollow","version":3,"kind":"storybook","updated":"2026-11-25","notes":["Spring blossom set","Squirrels and an acorn","New friend: a bee who buzzes around her flower","A basket in the meadow fills up with petals as you finish things each week"],"name":"Little Hollow","blurb":"A little tree, a meadow and woodland friends who visit as the seasons change.","storybook":true,"perks":["Animated","Changes with the seasons","Rotating animal friends"],"card":"card.webp","art":"img","binder":{"cover":"linen","rings":"brass"},"tabPal":["#B06F80","#879A76","#9C8270","#B48A5A","#7E5A6E"],"tabs":{"day":["#F4D9DE","#A0526A"],"week":["#F6DCCB","#B5683F"],"month":["#DCE6D3","#5E7F55"],"desk":["#F3E6B8","#8F7020"],"goals":["#E4DAEE","#6E5A94"],"school":["#D6E2EC","#4C6F8F"],"journal":["#ECD6E0","#8A4E6B"]},"vars":{"FBEDEE":"#F6EEE9","F6EDEF":"#F5EFEA","FAEAEE":"#F6EDE8","F3E6EA":"#F1E8E3","E2B9C4":"#DCC6BF","E7B7C2":"#DFC8C1","EBC3CD":"#E6D2CB"},"swatches":{"red":["Blossom","#B5707A"],"yellow":["Honey","#C29A4E"],"blue":["Dusk","#7A8FA6"],"green":["Sage","#879A76"],"orange":["Acorn","#B5835A"],"gray":["Taupe","#9C8270"]},"catSwatches":{"blue":["Dusk","#6E86A0"],"orange":["Acorn","#B07A52"],"green":["Sage","#77906A"],"rose":["Blossom","#A8667A"],"plum":["Plum","#6E2F43"],"gold":["Honey","#A88A44"],"teal":["Moss","#5E8E88"],"lavender":["Lilac","#8A779E"],"slate":["Stone","#7E7A74"],"brown":["Bark","#8A6A50"]},"fHead":"'Olesia', 'Dancing Script', Georgia, serif","fBody":"'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif","fontFace":{"family":"Olesia","file":"olesia.woff2"},"paper":"#FBF7F1","quote":"Every blossom opens in its own time, and so will you.","quotes":["Every blossom opens in its own time, and so will you.","Small steps still bloom.","Tend to today. Tomorrow will keep.","Rest is part of growing.","One petal at a time.","You are allowed to go slowly.","Plant one good thing today."],"img":{"dir":"themes/littlehollow/","paper":"paper.webp"},"scene":{"sets":[{"id":"spring-blossom","name":"Spring blossom","months":[],"perch":0.89,"under":[{"page":"L","anchor":"spread","src":"branch.webp","ar":4.83,"h":190,"y":-26},{"page":"R","anchor":"spread","src":"branch.webp","ar":4.83,"h":190,"y":-26},{"page":"L","anchor":"spreadBottom","src":"grass.webp","h":96,"y":0},{"page":"R","anchor":"spreadBottom","src":"grass.webp","h":96,"y":0}],"extras":[{"page":"R","anchor":"bl","src":"snail.webp","w":34,"h":25,"x":300,"y":4},{"page":"R","anchor":"bl","src":"bee.webp","w":26,"h":23,"x":250,"y":58}],"pile":{"page":"R","anchor":"bl","x":16,"y":2,"w":96,"h":72,"drop":"petal.webp","states":[{"min":0,"src":"basket-0.webp"},{"min":1,"src":"basket-1.webp"},{"min":4,"src":"basket-2.webp"},{"min":9,"src":"basket-3.webp"},{"min":16,"src":"basket-4.webp"}]}}],"casts":[{"id":"squirrels","name":"Squirrels and an acorn","over":[{"page":"R","anchor":"onStrip","src":"squirrel-toss.webp","srcDrop":"squirrel-toss-empty.webp","w":126,"h":74,"x":56,"y":24},{"page":"R","anchor":"br","src":"squirrel-catch.webp","w":139,"h":112,"x":18,"y":4,"catcher":true}],"drop":{"src":"acorn.webp","w":15,"h":17,"fromX":2,"y":76,"toRight":149,"toY":84,"x":165,"dx":31},"moment":"toss"},{"id":"bee","name":"A bee and her flower","moment":"buzz","over":[{"page":"R","anchor":"bl","src":"bee-flower.webp","w":36,"h":102,"x":150,"y":4},{"page":"R","anchor":"bl","src":"bee-wings-up.webp","srcFlap":"bee-wings-down.webp","buzz":true,"w":34,"h":33,"x":166,"y":86}],"hide":["bee.webp"]}],"quote":"underDate","quoteClear":170,"quoteY":88}}]/*END-THEME-PACKAGES*/; arr.forEach(p => { this._pkgs[p.id] = p; }); }
+    if (!this._pkgs) { this._pkgs = {}; const arr = /*THEME-PACKAGES*/[{"format":1,"id":"littlehollow","version":4,"kind":"storybook","updated":"2026-11-25","notes":["Spring blossom set","A squirrel on the branch","New friend: a bee who looks after her flower","A basket under the branch fills up as you finish things each week: whoever is in the tree drops the season's item in, and on quiet days it drifts down by itself"],"name":"Little Hollow","blurb":"A little tree, a meadow and woodland friends who visit as the seasons change.","storybook":true,"perks":["Animated","Changes with the seasons","Rotating animal friends"],"card":"card.webp","art":"img","binder":{"cover":"linen","rings":"brass"},"tabPal":["#B06F80","#879A76","#9C8270","#B48A5A","#7E5A6E"],"tabs":{"day":["#F4D9DE","#A0526A"],"week":["#F6DCCB","#B5683F"],"month":["#DCE6D3","#5E7F55"],"desk":["#F3E6B8","#8F7020"],"goals":["#E4DAEE","#6E5A94"],"school":["#D6E2EC","#4C6F8F"],"journal":["#ECD6E0","#8A4E6B"]},"vars":{"FBEDEE":"#F6EEE9","F6EDEF":"#F5EFEA","FAEAEE":"#F6EDE8","F3E6EA":"#F1E8E3","E2B9C4":"#DCC6BF","E7B7C2":"#DFC8C1","EBC3CD":"#E6D2CB"},"swatches":{"red":["Blossom","#B5707A"],"yellow":["Honey","#C29A4E"],"blue":["Dusk","#7A8FA6"],"green":["Sage","#879A76"],"orange":["Acorn","#B5835A"],"gray":["Taupe","#9C8270"]},"catSwatches":{"blue":["Dusk","#6E86A0"],"orange":["Acorn","#B07A52"],"green":["Sage","#77906A"],"rose":["Blossom","#A8667A"],"plum":["Plum","#6E2F43"],"gold":["Honey","#A88A44"],"teal":["Moss","#5E8E88"],"lavender":["Lilac","#8A779E"],"slate":["Stone","#7E7A74"],"brown":["Bark","#8A6A50"]},"fHead":"'Olesia', 'Dancing Script', Georgia, serif","fBody":"'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif","fontFace":{"family":"Olesia","file":"olesia.woff2"},"paper":"#FBF7F1","quote":"Every blossom opens in its own time, and so will you.","quotes":["Every blossom opens in its own time, and so will you.","Small steps still bloom.","Tend to today. Tomorrow will keep.","Rest is part of growing.","One petal at a time.","You are allowed to go slowly.","Plant one good thing today."],"img":{"dir":"themes/littlehollow/","paper":"paper.webp"},"scene":{"sets":[{"id":"spring-blossom","name":"Spring blossom","months":[],"perch":0.89,"under":[{"page":"L","anchor":"spread","src":"branch.webp","ar":4.83,"h":190,"y":-26},{"page":"R","anchor":"spread","src":"branch.webp","ar":4.83,"h":190,"y":-26},{"page":"L","anchor":"spreadBottom","src":"grass.webp","h":96,"y":0},{"page":"R","anchor":"spreadBottom","src":"grass.webp","h":96,"y":0}],"extras":[{"page":"R","anchor":"bl","src":"snail.webp","w":34,"h":25,"x":300,"y":4},{"page":"R","anchor":"bl","src":"bee.webp","w":26,"h":23,"x":250,"y":58}],"pile":{"page":"R","anchor":"underPerch","x":120,"y":2,"w":96,"h":72,"states":[{"min":0,"src":"basket-0.webp"},{"min":1,"src":"basket-1.webp"},{"min":4,"src":"basket-2.webp"},{"min":9,"src":"basket-3.webp"},{"min":16,"src":"basket-4.webp"}],"dx":-58},"item":{"name":"blossom","src":"petal.webp","w":17,"h":17},"driftY":92}],"casts":[{"id":"squirrels","name":"A squirrel on the branch","over":[{"page":"R","anchor":"onStrip","src":"squirrel-toss-empty.webp","w":126,"h":74,"x":56,"y":24,"holds":{"x":-2,"y":49}}],"moment":"drop"},{"id":"bee","name":"A bee and her flower","over":[{"page":"R","anchor":"bl","src":"bee-flower.webp","w":36,"h":102,"x":150,"y":4},{"page":"R","anchor":"bl","src":"bee-wings-up.webp","srcFlap":"bee-wings-down.webp","w":34,"h":33,"x":166,"y":86,"flutter":true}],"hide":["bee.webp"]}],"quote":"underDate","quoteClear":170,"quoteY":88}}]/*END-THEME-PACKAGES*/; arr.forEach(p => { this._pkgs[p.id] = p; }); }
     return this._pkgs;
   }
   themeDef(id) {
@@ -5832,40 +5838,56 @@ class Component extends DCLogic {
           Object.assign(b, { w: ly.w ? px(P(ly.w)) : px(P(ly.h * 1.6)), h: px(P(ly.h || ly.w)), bg: url + ' ' + pos + ' / contain no-repeat' });
         }
       }
-      if (ly.catcher && s.sceneDrop) b.anim = 'sceneHop 0.45s ease-out ' + (this._dropDur || 1) + 's';
-      b.popBg = ly.drop ? "url('" + this.themeAsset(t, ly.drop) + "') center / contain no-repeat" : 'none';
-      if (ly.buzz && s.sceneDrop) b.anim = 'sceneBuzz 2.4s linear';
       b.flapBg = ly.srcFlap ? "url('" + this.themeAsset(t, ly.srcFlap) + "') left top / 100% 100% no-repeat" : 'none';
-      b.flapAnim = ly.srcFlap && s.sceneDrop ? 'sceneFlap .09s steps(1) 26' : 'none';
+      // a friend on the ground only gives a tiny flutter as the item lands (no second thing travelling)
+      b.flapAnim = ly.srcFlap && ly.flutter && s.sceneDrop ? 'sceneFlap .09s steps(1) ' + ((this._dropDur || 1.6) - 0.1).toFixed(2) + 's 10' : 'none';
       return b;
     };
     const pick = (list, pg) => (list || []).filter(ly => ly.page === pg).map(box);
-    const overR = pick(sc.over, 'R'), d = sc.drop;
-    const pl = sc.pile;
+    const overR = pick(sc.over, 'R'), pl = sc.pile, it = sc.item, rw = geo ? geo.rw : null;
+    // One thing per check-off, and it always ends in the basket under the branch tip:
+    // whoever sits in the tree drops the season's item straight in; with nobody up there, it drifts down by itself.
+    let drop = {}, holder = null;
     if (pl && pl.states) {
-      const n = this.weekDoneCount(s);
-      const st = pl.states.filter(x => n >= x.min).pop() || pl.states[0];
-      const bx = box(Object.assign({}, pl, { src: st.src }));
-      bx.pop = false;
-      if (s.sceneDrop) bx.anim = 'pileSettle 0.6s ease-out 1.35s';
+      const bw = P(pl.w), bh = P(pl.h);
+      let bL = null, bR;
+      if (rw && sW && pl.anchor === 'underPerch') {
+        bL = Math.round(sW * (sc.perch || 0.85) - (geo.lw + geo.gap) + P(pl.dx || 0) - bw / 2);
+        bL = Math.max(P(8), Math.min(rw - bw - P(8), bL)); bR = rw - bL - bw;
+      } else bR = P(pl.x || 120);
+      const n = this.weekDoneCount(s), stOf = (m) => pl.states.filter(x => m >= x.min).pop() || pl.states[0];
+      const st = stOf(n), bx = box(Object.assign({}, pl, { anchor: 'br', x: 0, src: st.src }));
+      Object.assign(bx, bL != null ? { l: px(bL), r: A } : { r: px(bR) });
       overR.push(bx);
+      if (it) {
+        const iw = P(it.w || 16), ih = P(it.h || 16), baseR = bR + Math.round(bw / 2 - iw / 2);
+        const hl = (sc.over || []).find(ly => ly.page === 'R' && ly.holds);
+        if (hl) {
+          // the friend holds the item in her paw until the check-off, then lets go
+          const hb = overR.find(b => b._left != null), hx = P(hl.holds.x || 0), hy = P(hl.y || 0) + P(hl.holds.y || 0);
+          const r0 = hb && rw ? rw - (hb._left + hx) - iw : P(hl.x || 0) + P(hl.w) - hx - iw;
+          holder = { r: r0, t: hy };
+          drop = { cls: 'scene-drop fall', r: px(r0), y0: px(hy), dx: px(r0 - baseR), dur: '0.95s' };
+        } else drop = { cls: 'scene-drop drift', r: px(baseR), y0: px(P(sc.driftY || 90)), dx: '0px', dur: '2.3s' };
+        drop.y1 = px(P(pl.y || 0) + Math.round(bh * 0.5));
+        drop.fade = (parseFloat(drop.dur) - 0.12).toFixed(2) + 's';
+        Object.assign(drop, { bg: "url('" + this.themeAsset(t, it.src) + "') center / contain no-repeat", w: px(iw), h: px(ih) });
+        this._dropDur = parseFloat(drop.dur);
+        if (holder && !s.sceneDrop) overR.push({ l: A, r: px(holder.r), t: px(holder.t), b: A, w: px(iw), h: px(ih), op: '1', anim: 'none', bg: drop.bg, flapBg: 'none', flapAnim: 'none' });
+        // the basket fills the moment the item lands
+        const prev = stOf(n - 1);
+        if (s.sceneDrop && prev !== st) {
+          bx.bg = bx.bg.replace(this.themeAsset(t, st.src), this.themeAsset(t, prev.src));
+          bx.flapBg = "url('" + this.themeAsset(t, st.src) + "') right bottom / contain no-repeat";
+          bx.flapAnim = 'pileFill .25s ease-out ' + drop.fade + ' forwards';
+        }
+      }
     }
-    let drop = {};
-    if (d) {
-      const w = P(d.w), rw = geo ? geo.rw : null, thr = overR.find(b => b._left != null);
-      if (thr && rw) {
-        const startL = thr._left + P(d.fromX || 0), endL = rw - P(d.toRight);
-        drop = { r: px(rw - startL - w), dx: px(endL - startL), _dist: Math.abs(endL - startL) };
-      } else drop = { r: px(P(d.x)), dx: px(P(d.dx || 0)) };
-      const dur = Math.min(1.7, 1.05 + (drop._dist || 0) / 900);
-      Object.assign(drop, { dur: dur.toFixed(2) + 's', fade: (dur + 1.05).toFixed(2) + 's', bg: "url('" + this.themeAsset(t, d.src) + "') center / contain no-repeat", w: px(w), h: px(P(d.h)), y0: px(P(d.y)), y1: px(P(d.toY)) });
-    }
-    if (drop.dur) this._dropDur = parseFloat(drop.dur) - 0.05;
     return {
       scenePadL: this.sceneTopPad(s).l,
       tabGlowBg: 'rgba(251,248,243,0.78)', tabGlow: '0 -10px 18px 10px rgba(251,248,243,0.78)',
       sceneUnderL: pick(sc.under, 'L'), sceneUnderR: pick(sc.under, 'R'), sceneOverL: pick(sc.over, 'L'), sceneOverR: overR,
-      sceneDropOn: !!(d && s.sceneDrop), sceneDrop: drop,
+      sceneDropOn: !!(drop.cls && s.sceneDrop), sceneDrop: drop,
       quoteBottom: sc.quote === 'bottom', quoteUnder: sc.quote === 'underDate', quoteTopDisp: sc.quote === 'bottom' || sc.quote === 'underDate' ? 'none' : 'inline', dayPadBot: sc.quote === 'bottom' ? 120 : (() => { const g = (sc.under || []).find(ly => ly.anchor === 'spreadBottom'); return g ? P(g.h) + P(g.y || 0) + 6 : 18; })(), quoteBotRight: px(P(sc.quoteClear || 160)), quoteBotY: px(P(sc.quoteY || 12))
     };
   }
@@ -5906,7 +5928,7 @@ class Component extends DCLogic {
     const set = sc.sets.find(x => (x.months || []).indexOf(m) >= 0) || sc.sets.find(x => !(x.months || []).length) || sc.sets[0];
     let cast = this.pickByDay(sc.casts || [{}], s.day) || {};
     try { const f = (sc.casts || []).find(c => c.id === window.__castVar); if (f) cast = f; } catch (err) {}
-    return Object.assign({}, sc, { perch: set.perch, under: (set.under || []).concat(cast.under || []), over: (set.extras || []).filter(x => (cast.hide || []).indexOf(x.src) < 0).concat(cast.over || []), pile: set.pile || null, drop: cast.drop || null, moment: cast.moment || (cast.drop ? 'toss' : null) });
+    return Object.assign({}, sc, { perch: set.perch, under: (set.under || []).concat(cast.under || []), over: (set.extras || []).filter(x => (cast.hide || []).indexOf(x.src) < 0).concat(cast.over || []), pile: set.pile || null, item: set.item || null, driftY: set.driftY, moment: cast.moment || 'drift' });
   }
   // How far the top strip hangs down, so the Day page content starts below it (it scales with the screen like the art).
   sceneTopPad(s) {
@@ -5927,7 +5949,7 @@ class Component extends DCLogic {
   sceneCelebrate() {
     const t = this.themeDef(this.state.settings.theme);
     const sn = t && t.scene ? this.sceneNow(t, this.state) : null;
-    if (!sn || !(sn.drop || sn.moment) || this.state.view !== 'day') return;
+    if (!sn || !sn.item || !sn.pile || this.state.view !== 'day') return;
     if (false) { // Visits on other pages: on hold (rethink later as a friend already there with a tiny motion)
       // Away from the Day page: the catcher peeks up from the corner and catches the item.
       clearTimeout(this._visitT);
