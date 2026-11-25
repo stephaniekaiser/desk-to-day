@@ -1,0 +1,264 @@
+{
+  "format": 1,
+  "id": "littlehollow",
+  "version": 1,
+  "kind": "storybook",
+  "updated": "2026-11-25",
+  "notes": [
+    "Spring blossom set",
+    "Squirrels and an acorn"
+  ],
+  "name": "Little Hollow",
+  "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
+  "storybook": true,
+  "perks": [
+    "Animated",
+    "Changes with the seasons",
+    "Rotating animal friends"
+  ],
+  "card": "card.webp",
+  "art": "img",
+  "binder": {
+    "cover": "linen",
+    "rings": "brass"
+  },
+  "tabPal": [
+    "#B06F80",
+    "#879A76",
+    "#9C8270",
+    "#B48A5A",
+    "#7E5A6E"
+  ],
+  "tabs": {
+    "day": [
+      "#F4D9DE",
+      "#A0526A"
+    ],
+    "week": [
+      "#F6DCCB",
+      "#B5683F"
+    ],
+    "month": [
+      "#DCE6D3",
+      "#5E7F55"
+    ],
+    "desk": [
+      "#F3E6B8",
+      "#8F7020"
+    ],
+    "goals": [
+      "#E4DAEE",
+      "#6E5A94"
+    ],
+    "school": [
+      "#D6E2EC",
+      "#4C6F8F"
+    ],
+    "journal": [
+      "#ECD6E0",
+      "#8A4E6B"
+    ]
+  },
+  "vars": {
+    "FBEDEE": "#F6EEE9",
+    "F6EDEF": "#F5EFEA",
+    "FAEAEE": "#F6EDE8",
+    "F3E6EA": "#F1E8E3",
+    "E2B9C4": "#DCC6BF",
+    "E7B7C2": "#DFC8C1",
+    "EBC3CD": "#E6D2CB"
+  },
+  "swatches": {
+    "red": [
+      "Blossom",
+      "#B5707A"
+    ],
+    "yellow": [
+      "Honey",
+      "#C29A4E"
+    ],
+    "blue": [
+      "Dusk",
+      "#7A8FA6"
+    ],
+    "green": [
+      "Sage",
+      "#879A76"
+    ],
+    "orange": [
+      "Acorn",
+      "#B5835A"
+    ],
+    "gray": [
+      "Taupe",
+      "#9C8270"
+    ]
+  },
+  "catSwatches": {
+    "blue": [
+      "Dusk",
+      "#6E86A0"
+    ],
+    "orange": [
+      "Acorn",
+      "#B07A52"
+    ],
+    "green": [
+      "Sage",
+      "#77906A"
+    ],
+    "rose": [
+      "Blossom",
+      "#A8667A"
+    ],
+    "plum": [
+      "Plum",
+      "#6E2F43"
+    ],
+    "gold": [
+      "Honey",
+      "#A88A44"
+    ],
+    "teal": [
+      "Moss",
+      "#5E8E88"
+    ],
+    "lavender": [
+      "Lilac",
+      "#8A779E"
+    ],
+    "slate": [
+      "Stone",
+      "#7E7A74"
+    ],
+    "brown": [
+      "Bark",
+      "#8A6A50"
+    ]
+  },
+  "fHead": "'Olesia', 'Dancing Script', Georgia, serif",
+  "fBody": "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif",
+  "fontFace": {
+    "family": "Olesia",
+    "file": "olesia.woff2"
+  },
+  "paper": "#FBF7F1",
+  "quote": "Every blossom opens in its own time, and so will you.",
+  "quotes": [
+    "Every blossom opens in its own time, and so will you.",
+    "Small steps still bloom.",
+    "Tend to today. Tomorrow will keep.",
+    "Rest is part of growing.",
+    "One petal at a time.",
+    "You are allowed to go slowly.",
+    "Plant one good thing today."
+  ],
+  "img": {
+    "dir": "themes/littlehollow/",
+    "paper": "paper.webp"
+  },
+  "scene": {
+    "sets": [
+      {
+        "id": "spring-blossom",
+        "name": "Spring blossom",
+        "months": [],
+        "perch": 0.89,
+        "under": [
+          {
+            "page": "L",
+            "anchor": "spread",
+            "src": "branch.webp",
+            "ar": 4.83,
+            "h": 190,
+            "y": -26
+          },
+          {
+            "page": "R",
+            "anchor": "spread",
+            "src": "branch.webp",
+            "ar": 4.83,
+            "h": 190,
+            "y": -26
+          },
+          {
+            "page": "L",
+            "anchor": "spreadBottom",
+            "src": "grass.webp",
+            "h": 96,
+            "y": 0
+          },
+          {
+            "page": "R",
+            "anchor": "spreadBottom",
+            "src": "grass.webp",
+            "h": 96,
+            "y": 0
+          }
+        ],
+        "extras": [
+          {
+            "page": "R",
+            "anchor": "bl",
+            "src": "snail.webp",
+            "w": 34,
+            "h": 25,
+            "x": 150,
+            "y": 4
+          },
+          {
+            "page": "R",
+            "anchor": "bl",
+            "src": "bee.webp",
+            "w": 26,
+            "h": 23,
+            "x": 250,
+            "y": 58
+          }
+        ]
+      }
+    ],
+    "casts": [
+      {
+        "id": "squirrels",
+        "name": "Squirrels and an acorn",
+        "over": [
+          {
+            "page": "R",
+            "anchor": "onStrip",
+            "src": "squirrel-toss.webp",
+            "srcDrop": "squirrel-toss-empty.webp",
+            "w": 126,
+            "h": 74,
+            "x": 56,
+            "y": 24
+          },
+          {
+            "page": "R",
+            "anchor": "br",
+            "src": "squirrel-catch.webp",
+            "w": 139,
+            "h": 112,
+            "x": 18,
+            "y": 4,
+            "catcher": true
+          }
+        ],
+        "drop": {
+          "src": "acorn.webp",
+          "w": 15,
+          "h": 17,
+          "fromX": 2,
+          "y": 76,
+          "toRight": 149,
+          "toY": 84,
+          "x": 165,
+          "dx": 31
+        }
+      }
+    ],
+    "quote": "bottom",
+    "quoteClear": 170,
+    "quoteY": 88
+  }
+}

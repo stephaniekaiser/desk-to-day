@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 9:10 AM';</script>
+<script>window.__plannerBuild = 'Nov 25, 9:18 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -5692,55 +5692,19 @@ class Component extends DCLogic {
     return this._tk;
   }
   // Theme accent colors are CSS variables (--tXXXXXX, named after the Flowery color they replace).
+  // Theme packages: each is a self-contained theme.json (+ art) — built-in ones are bundled below; later, downloaded ones join the same list.
+  themePackages() {
+    if (!this._pkgs) { this._pkgs = {}; const arr = /*THEME-PACKAGES*/[{"format":1,"id":"littlehollow","version":1,"kind":"storybook","updated":"2026-11-25","notes":["Spring blossom set","Squirrels and an acorn"],"name":"Little Hollow","blurb":"A little tree, a meadow and woodland friends who visit as the seasons change.","storybook":true,"perks":["Animated","Changes with the seasons","Rotating animal friends"],"card":"card.webp","art":"img","binder":{"cover":"linen","rings":"brass"},"tabPal":["#B06F80","#879A76","#9C8270","#B48A5A","#7E5A6E"],"tabs":{"day":["#F4D9DE","#A0526A"],"week":["#F6DCCB","#B5683F"],"month":["#DCE6D3","#5E7F55"],"desk":["#F3E6B8","#8F7020"],"goals":["#E4DAEE","#6E5A94"],"school":["#D6E2EC","#4C6F8F"],"journal":["#ECD6E0","#8A4E6B"]},"vars":{"FBEDEE":"#F6EEE9","F6EDEF":"#F5EFEA","FAEAEE":"#F6EDE8","F3E6EA":"#F1E8E3","E2B9C4":"#DCC6BF","E7B7C2":"#DFC8C1","EBC3CD":"#E6D2CB"},"swatches":{"red":["Blossom","#B5707A"],"yellow":["Honey","#C29A4E"],"blue":["Dusk","#7A8FA6"],"green":["Sage","#879A76"],"orange":["Acorn","#B5835A"],"gray":["Taupe","#9C8270"]},"catSwatches":{"blue":["Dusk","#6E86A0"],"orange":["Acorn","#B07A52"],"green":["Sage","#77906A"],"rose":["Blossom","#A8667A"],"plum":["Plum","#6E2F43"],"gold":["Honey","#A88A44"],"teal":["Moss","#5E8E88"],"lavender":["Lilac","#8A779E"],"slate":["Stone","#7E7A74"],"brown":["Bark","#8A6A50"]},"fHead":"'Olesia', 'Dancing Script', Georgia, serif","fBody":"'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif","fontFace":{"family":"Olesia","file":"olesia.woff2"},"paper":"#FBF7F1","quote":"Every blossom opens in its own time, and so will you.","quotes":["Every blossom opens in its own time, and so will you.","Small steps still bloom.","Tend to today. Tomorrow will keep.","Rest is part of growing.","One petal at a time.","You are allowed to go slowly.","Plant one good thing today."],"img":{"dir":"themes/littlehollow/","paper":"paper.webp"},"scene":{"sets":[{"id":"spring-blossom","name":"Spring blossom","months":[],"perch":0.89,"under":[{"page":"L","anchor":"spread","src":"branch.webp","ar":4.83,"h":190,"y":-26},{"page":"R","anchor":"spread","src":"branch.webp","ar":4.83,"h":190,"y":-26},{"page":"L","anchor":"spreadBottom","src":"grass.webp","h":96,"y":0},{"page":"R","anchor":"spreadBottom","src":"grass.webp","h":96,"y":0}],"extras":[{"page":"R","anchor":"bl","src":"snail.webp","w":34,"h":25,"x":150,"y":4},{"page":"R","anchor":"bl","src":"bee.webp","w":26,"h":23,"x":250,"y":58}]}],"casts":[{"id":"squirrels","name":"Squirrels and an acorn","over":[{"page":"R","anchor":"onStrip","src":"squirrel-toss.webp","srcDrop":"squirrel-toss-empty.webp","w":126,"h":74,"x":56,"y":24},{"page":"R","anchor":"br","src":"squirrel-catch.webp","w":139,"h":112,"x":18,"y":4,"catcher":true}],"drop":{"src":"acorn.webp","w":15,"h":17,"fromX":2,"y":76,"toRight":149,"toY":84,"x":165,"dx":31}}],"quote":"bottom","quoteClear":170,"quoteY":88}}]/*END-THEME-PACKAGES*/; arr.forEach(p => { this._pkgs[p.id] = p; }); }
+    return this._pkgs;
+  }
   themeDef(id) {
+    if (id === 'rosewreath') id = 'littlehollow'; // old id
+    const pk = this.themePackages()[id]; if (pk) return pk;
     const T = {
       flowery: {
         tabPal: ['#B35A76', '#B8665A', '#6E2F43', '#6E8A6A', '#8C4E78'],
         name: 'Flowery', blurb: 'Plum and rose on cream, with flowers', art: 'flowers', quote: 'Every blossom opens in its own time, and so will you.',
         fHead: "'Dancing Script', 'Newsreader', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7EE', vars: {},
-        tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
-      },
-      rosewreath: {
-        tabPal: ['#B06F80', '#879A76', '#9C8270', '#B48A5A', '#7E5A6E'],
-        name: 'Little Hollow', blurb: 'A little tree, a meadow and woodland friends who visit as the seasons change.', storybook: true, binder: { cover: 'linen', rings: 'brass' },
-        // Color choices in this theme (saved by key, so switching themes just changes how each one looks)
-        swatches: { red: ['Blossom', '#B5707A'], yellow: ['Honey', '#C29A4E'], blue: ['Dusk', '#7A8FA6'], green: ['Sage', '#879A76'], orange: ['Acorn', '#B5835A'], gray: ['Taupe', '#9C8270'] },
-        catSwatches: { blue: ['Dusk', '#6E86A0'], orange: ['Acorn', '#B07A52'], green: ['Sage', '#77906A'], rose: ['Blossom', '#A8667A'], plum: ['Plum', '#6E2F43'], gold: ['Honey', '#A88A44'], teal: ['Moss', '#5E8E88'], lavender: ['Lilac', '#8A779E'], slate: ['Stone', '#7E7A74'], brown: ['Bark', '#8A6A50'] }, perks: ['Animated', 'Changes with the seasons', 'Rotating animal friends'], card: 'card.webp', art: 'img',
-        quote: 'Every blossom opens in its own time, and so will you.',
-        quotes: ['Every blossom opens in its own time, and so will you.', 'Small steps still bloom.', 'Tend to today. Tomorrow will keep.', 'Rest is part of growing.', 'One petal at a time.', 'You are allowed to go slowly.', 'Plant one good thing today.'],
-        fHead: "'Olesia', 'Dancing Script', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7F1', vars: { 'FBEDEE': '#F6EEE9', 'F6EDEF': '#F5EFEA', 'FAEAEE': '#F6EDE8', 'F3E6EA': '#F1E8E3', 'E2B9C4': '#DCC6BF', 'E7B7C2': '#DFC8C1', 'EBC3CD': '#E6D2CB' },
-        fontFace: { family: 'Olesia', file: 'olesia.woff2' },
-        img: { dir: 'themes/rosewreath/', swags: ['swag-1.webp', 'swag-2.webp', 'swag-3.webp', 'swag-4.webp', 'swag-5.webp', 'swag-6.webp'], wash: 'wash.webp', paper: 'paper.webp', wreaths: ['wreath-1.webp', 'wreath-2.webp', 'wreath-3.webp'], blooms: ['bloom-1.webp', 'bloom-2.webp', 'bloom-3.webp', 'bloom-4.webp', 'bloom-5.webp', 'bloom-6.webp'], garlands: ['bloom-3.webp', 'bloom-4.webp', 'bloom-5.webp', 'bloom-6.webp'], cornerBloom: 'bloom-1.webp', animals: ['animal-bunny.webp', 'animal-hedgehog.webp', 'animal-fawn.webp', 'animal-squirrel.webp', 'animal-chickadee.webp'] },
-        // A scene: art pinned to page edges. page L = tasks page, R = calendar page. Sizes are px at a 1180-wide screen and scale with it.
-        // anchor: tl/tr/bl/br = corner, top = full width strip, left = full height strip. layer 'under' sits behind the page, 'over' sits on top.
-        // A storybook scene = a SET (the tree and ground for a time of year) + a CAST (animals and what they pass between them).
-        // The set is chosen by month; the cast rotates by day. Pieces within one set must match each other (see Theme Art Checklist).
-        scene: {
-          sets: [
-            { id: 'spring-blossom', name: 'Spring blossom', months: [], perch: 0.89, // months: [] = use for any month until other seasons exist
-              under: [
-                { page: 'L', anchor: 'spread', src: 'branch.webp', ar: 4.83, h: 190, y: -26 },
-                { page: 'R', anchor: 'spread', src: 'branch.webp', ar: 4.83, h: 190, y: -26 },
-                { page: 'L', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0 },
-                { page: 'R', anchor: 'spreadBottom', src: 'grass.webp', h: 96, y: 0 }
-              ],
-              extras: [
-                { page: 'R', anchor: 'bl', src: 'snail.webp', w: 34, h: 25, x: 150, y: 4 },
-                { page: 'R', anchor: 'bl', src: 'bee.webp', w: 26, h: 23, x: 250, y: 58 }
-              ] }
-          ],
-          casts: [
-            { id: 'squirrels', name: 'Squirrels and an acorn',
-              over: [
-                // onStrip = sits on the branch at the set's perch point, so it stays on the branch at any width (x/y are the fallback)
-                { page: 'R', anchor: 'onStrip', src: 'squirrel-toss.webp', srcDrop: 'squirrel-toss-empty.webp', w: 126, h: 74, x: 56, y: 24 },
-                { page: 'R', anchor: 'br', src: 'squirrel-catch.webp', w: 139, h: 112, x: 18, y: 4, catcher: true }
-              ],
-              // falls when a task is checked off: from the thrower's paw to the catcher's paws (toRight = from the page's right edge)
-              drop: { src: 'acorn.webp', w: 15, h: 17, fromX: 2, y: 76, toRight: 149, toY: 84, x: 165, dx: 31 } }
-          ],
-          quote: 'bottom', quoteClear: 170, quoteY: 88
-        },
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
       },
       seaglass: {
@@ -5792,7 +5756,7 @@ class Component extends DCLogic {
     }
     return P;
   }
-  themeIds() { return ['flowery', 'rosewreath', 'seaglass', 'golden', 'meadow', 'lavender', 'ink'];
+  themeIds() { return ['flowery'].concat(Object.keys(this.themePackages()), ['seaglass', 'golden', 'meadow', 'lavender', 'ink']);
   }
   // Blend two colors in OKLab so middle shades stay rich.
   mixColor(a, b, t) {
@@ -5930,7 +5894,7 @@ class Component extends DCLogic {
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/card.webp': '/_blob/f8fb9d30a8146251bc0bac5869852ffc', 'themes/rosewreath/bee.webp': '/_blob/6f071e99b270820feeefd81ff2eac110', 'themes/rosewreath/snail.webp': '/_blob/0bd67ea5e0150c0239a3b744c9bd7698', 'themes/rosewreath/squirrel-toss-empty.webp': '/_blob/3a7278d2b5528719d1e5e8717b4fb982', 'themes/rosewreath/grass.webp': '/_blob/c86ebb9106f44cef2b3a6a62ca32c941', 'themes/rosewreath/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/rosewreath/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/rosewreath/squirrel-toss.webp': '/_blob/3f3e33ac47e702c148d2981a351480ce', 'themes/rosewreath/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
+    const map = {'themes/littlehollow/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/littlehollow/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/littlehollow/card.webp': '/_blob/f8fb9d30a8146251bc0bac5869852ffc', 'themes/littlehollow/bee.webp': '/_blob/6f071e99b270820feeefd81ff2eac110', 'themes/littlehollow/snail.webp': '/_blob/0bd67ea5e0150c0239a3b744c9bd7698', 'themes/littlehollow/squirrel-toss-empty.webp': '/_blob/3a7278d2b5528719d1e5e8717b4fb982', 'themes/littlehollow/grass.webp': '/_blob/c86ebb9106f44cef2b3a6a62ca32c941', 'themes/littlehollow/branch.webp': '/_blob/0569b8731a45d9736bf30a47aefb98fa', 'themes/littlehollow/acorn.webp': '/_blob/fd7694cdc68432a3a113a0800bcc8f44', 'themes/littlehollow/squirrel-toss.webp': '/_blob/3f3e33ac47e702c148d2981a351480ce', 'themes/littlehollow/squirrel-catch.webp': '/_blob/ae5421511bd271a1e52c55dff7b4b397'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
@@ -7647,6 +7611,7 @@ class Component extends DCLogic {
   }
 
   renderVals() {
+    if (this.state.settings && this.state.settings.theme === 'rosewreath') setTimeout(() => this.setState({ settings: Object.assign({}, this.state.settings, { theme: 'littlehollow' }) }), 0);
     if (!this._COLORS0) { this._COLORS0 = this.COLORS; this._CAT0 = this.CAT_COLORS; }
     { const td = this.themeDef(this.state.settings.theme), key = (td && td.swatches) ? this.state.settings.theme : '';
       if (this._colKey !== key) {
@@ -9889,7 +9854,7 @@ class Component extends DCLogic {
         const u = (n) => this.themeAsset(t, n);
         const wash = on ? u(t.img.wash) : '', paper = on ? u(t.img.paper) : '';
         return {
-          artImg: on && !!u(t.img.swags[0]),
+          artImg: on && (!!t.scene || !!u((t.img.swags || [])[0])),
           imgWash: wash,
           ...((() => {
             const nar = (s.vw || 1194) < 900, bloom = on ? u(this.pickByDay(t.img.blooms, s.day)) : '';
@@ -10998,7 +10963,7 @@ class Component extends DCLogic {
         if (t.fontFace && showThemesNow) this.ensureThemeFont(t);
         const col = (h) => v[h] || ('#' + h);
         return {
-          hasImg: t.art === 'img' && !!this.themeAsset(t, t.img.swags[0]), img: t.art === 'img' ? this.themeAsset(t, t.img.swags[0]) : '',
+          hasImg: t.art === 'img' && !!this.themeAsset(t, (t.img.swags || [])[0]), img: t.art === 'img' ? this.themeAsset(t, (t.img.swags || [])[0]) : '',
           story: !!t.storybook, cardImg: t.card ? this.themeAsset(t, t.card) : '',
           prevL: t.storybook && t.card ? "url('" + this.themeAsset(t, t.card) + "') 0% 0% / auto 112% no-repeat" : 'linear-gradient(' + col('FBEDEE') + ' 0 22%, transparent 22%)',
           prevR: t.storybook && t.card ? "url('" + this.themeAsset(t, t.card) + "') 100% 100% / auto 112% no-repeat" : 'linear-gradient(' + col('FBEDEE') + ' 0 22%, transparent 22%)',
