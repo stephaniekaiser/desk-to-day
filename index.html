@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 24, 7:20 PM';</script>
+<script>window.__plannerBuild = 'Nov 24, 7:31 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -50,10 +50,10 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 
 <section aria-label="{{leftLabel}}" style="position: relative; width: {{leftW}}; flex: {{leftFlex}}; display: {{leftDisp}}; min-width: 0; box-sizing: border-box; background: {{pageBgL}}; border-radius: 10px 3px 3px 10px; box-shadow: inset -18px 0 22px -16px rgba(0,0,0,0.30), -1px 1px 0 #E6DCC8, -2px 2px 0 #D9CDB6, -3px 3px 0 #E6DCC8, -4px 4px 0 #CDBFA4">
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
-<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 10px 3px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{bandLine}}; -webkit-mask-image: {{bandMask}}; mask-image: {{bandMask}}">
+<div aria-hidden="true" style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 10px 3px 0 0; overflow: hidden; background: {{bandBg}}; border-bottom: {{bandBorder}}; -webkit-mask-image: {{bandMask}}; mask-image: {{bandMask}}">
 <sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: 0.3"></div>
-<img src="{{imgSwagL}}" alt="" style="position: absolute; left: -10px; top: -16%; height: 122%; width: auto; max-width: 60%; object-fit: contain; object-position: left top">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: {{washOp}}"></div>
+<img src="{{imgSwagL}}" alt="" style="position: absolute; left: {{bloomLeft}}; top: {{bloomTop}}; height: {{bloomH}}; width: auto; max-width: 60%; object-fit: contain; object-position: left top">
 </sc-if>
 <svg width="100%" height="100%" viewBox="0 0 600 120" preserveAspectRatio="xMinYMid slice">
 <sc-if value="{{artFlowers}}" hint-placeholder-val="{{ true }}">
@@ -871,7 +871,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-if>
 <sc-if value="{{showTrayWeek}}" hint-placeholder-val="{{ true }}">
-<div onDragOver="{{trayOver}}" onDrop="{{trayDrop}}" style="flex: none; display: flex; flex-direction: column; margin-bottom: 14px; background: {{trayHot}}; border: 1px solid #E3D9C5; border-radius: 10px; overflow: hidden">
+<div onDragOver="{{trayOver}}" onDrop="{{trayDrop}}" style="flex: none; display: flex; flex-direction: column; margin-bottom: 14px; background: {{trayHot}}; border: 1px solid {{trayBorder}}; border-radius: 10px; overflow: hidden">
 <button onClick="{{toggleTray}}" aria-expanded="{{trayExpanded}}" style="height: 34px; display: flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 0 10px; text-align: left; color: #4A443B">
 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
 <span style="font-size: calc(12px * {{fsK}}); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">{{trayTitle}}</span>
@@ -929,7 +929,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 </div>
 <sc-if value="{{showTrayDay}}" hint-placeholder-val="{{ true }}">
-<div onDragOver="{{trayOver}}" onDrop="{{trayDrop}}" style="flex: none; display: flex; flex-direction: column; background: {{trayHot}}; border: 1px solid #E3D9C5; border-radius: 10px; overflow: hidden">
+<div onDragOver="{{trayOver}}" onDrop="{{trayDrop}}" style="flex: none; display: flex; flex-direction: column; background: {{trayHot}}; border: 1px solid {{trayBorder}}; border-radius: 10px; overflow: hidden">
 <button onClick="{{toggleTray}}" aria-expanded="{{trayExpanded}}" style="height: 34px; display: flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 0 10px; text-align: left; color: #4A443B">
 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
 <span style="font-size: calc(12px * {{fsK}}); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">{{trayTitle}}</span>
@@ -1456,10 +1456,11 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}"><sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}"><img src="{{imgAnimal}}" alt="" aria-hidden="true" style="position: absolute; right: 16px; bottom: 8px; height: 118px; width: auto; max-width: 40%; object-fit: contain; object-position: right bottom; z-index: 3; pointer-events: none"></sc-if></sc-if>
 
 <sc-if value="{{isDay}}" hint-placeholder-val="{{ true }}">
-<div style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 3px 10px 0 0; overflow: hidden; background: {{themeBandBg}}; border-bottom: 1.5px dotted {{bandLine}}; -webkit-mask-image: {{bandMask}}; mask-image: {{bandMask}}">
+<div style="position: absolute; top: 0; left: 0; right: 0; height: {{bandH}}px; border-radius: 3px 10px 0 0; overflow: hidden; background: {{bandBg}}; border-bottom: {{bandBorder}}; -webkit-mask-image: {{bandMask}}; mask-image: {{bandMask}}">
 <sc-if value="{{artImg}}" hint-placeholder-val="{{ false }}">
-<div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: 0.3"></div>
+<div aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: url('{{imgWash}}') center / cover no-repeat; opacity: {{washOp}}"></div>
 <img src="{{imgSwagR}}" alt="" aria-hidden="true" style="position: absolute; right: {{imgRRight}}; top: {{imgRTop}}; height: {{imgRH}}; width: auto; max-width: 42%; object-fit: contain; object-position: right top; transform: {{imgRTf}}">
+<sc-if value="{{hasGarland}}" hint-placeholder-val="{{ false }}"><img src="{{imgGarland}}" alt="" aria-hidden="true" style="position: absolute; left: 50%; top: 4px; height: 74px; width: auto; max-width: 74%; transform: translateX(-50%); object-fit: contain"></sc-if>
 </sc-if>
 <svg aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" viewBox="0 0 600 120" preserveAspectRatio="xMaxYMid slice">
 <sc-if value="{{artFlowers}}" hint-placeholder-val="{{ true }}">
@@ -1488,9 +1489,9 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-for>
 </sc-if>
 </svg>
-<div style="position: relative; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 0 44% 0 26px">
-<span style="font-size: calc(10px * {{fsK}}); letter-spacing: 0.18em; text-transform: uppercase; color: {{themeAccent}}; font-weight: 700">{{themeName}}</span>
-<span style="font-family: {{TK.fHead}}; font-style: {{quoteIt}}; font-weight: 500; font-size: calc({{quoteSz}}px * {{fsK}}); line-height: 1.25; color: {{themeInk}}">“{{themeQuote}}”</span>
+<div style="position: relative; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; justify-content: {{qJustify}}; align-items: {{qAlign}}; text-align: {{qTA}}; gap: 4px; padding: {{qPad}}">
+<span style="display: {{nameDisp}}; font-size: calc(10px * {{fsK}}); letter-spacing: 0.18em; text-transform: uppercase; color: {{themeAccent}}; font-weight: 700">{{themeName}}</span>
+<span style="font-family: {{TK.fHead}}; font-style: {{quoteIt}}; font-weight: 500; font-size: calc({{quoteSz}}px * {{fsK}}); line-height: 1.25; color: {{themeInk}}; -webkit-text-stroke: {{quoteStroke}} currentColor">“{{themeQuote}}”</span>
 </div>
 </div>
 <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; box-sizing: border-box; padding: {{dayPadTop}}px 24px 18px; display: flex; flex-direction: column; gap: 10px">
@@ -5553,7 +5554,7 @@ class Component extends DCLogic {
         quotes: ['Every blossom opens in its own time, and so will you.', 'Small steps still bloom.', 'Tend to today. Tomorrow will keep.', 'Rest is part of growing.', 'One petal at a time.', 'You are allowed to go slowly.', 'Plant one good thing today.'],
         fHead: "'Olesia', 'Dancing Script', Georgia, serif", fBody: "'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif", paper: '#FBF7F1', vars: {},
         fontFace: { family: 'Olesia', file: 'olesia.woff2' },
-        img: { dir: 'themes/rosewreath/', swags: ['swag-1.webp', 'swag-2.webp', 'swag-3.webp', 'swag-4.webp', 'swag-5.webp', 'swag-6.webp'], wash: 'wash.webp', paper: 'paper.webp', wreaths: ['wreath-1.webp', 'wreath-2.webp', 'wreath-3.webp'], blooms: ['bloom-1.webp', 'bloom-2.webp', 'bloom-3.webp', 'bloom-4.webp', 'bloom-5.webp', 'bloom-6.webp'], animals: ['animal-bunny.webp', 'animal-hedgehog.webp', 'animal-fawn.webp', 'animal-squirrel.webp', 'animal-chickadee.webp'], cornerL: 'corner-l.webp' },
+        img: { dir: 'themes/rosewreath/', swags: ['swag-1.webp', 'swag-2.webp', 'swag-3.webp', 'swag-4.webp', 'swag-5.webp', 'swag-6.webp'], wash: 'wash.webp', paper: 'paper.webp', wreaths: ['wreath-1.webp', 'wreath-2.webp', 'wreath-3.webp'], blooms: ['bloom-1.webp', 'bloom-2.webp', 'bloom-3.webp', 'bloom-4.webp', 'bloom-5.webp', 'bloom-6.webp'], garlands: ['bloom-3.webp', 'bloom-4.webp', 'bloom-5.webp', 'bloom-6.webp'], cornerBloom: 'bloom-1.webp', animals: ['animal-bunny.webp', 'animal-hedgehog.webp', 'animal-fawn.webp', 'animal-squirrel.webp', 'animal-chickadee.webp'] },
         tabs: { day: ['#F4D9DE', '#A0526A'], week: ['#F6DCCB', '#B5683F'], month: ['#DCE6D3', '#5E7F55'], desk: ['#F3E6B8', '#8F7020'], goals: ['#E4DAEE', '#6E5A94'], school: ['#D6E2EC', '#4C6F8F'], journal: ['#ECD6E0', '#8A4E6B'] }
       },
       seaglass: {
@@ -5624,7 +5625,7 @@ class Component extends DCLogic {
   // Art for image themes: files next to the GitHub page, or the claude.ai copy's uploaded assets.
   themeAsset(t, name) {
     if (!t || !t.img || !name) return '';
-    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340', 'themes/rosewreath/corner-l.webp': '/_blob/38ffaf122d2e5d8219314c14573008e8'};
+    const map = {'themes/rosewreath/swag-1.webp': '/_blob/d8559bd64715b318f201905093ec4093', 'themes/rosewreath/swag-2.webp': '/_blob/bdabfdb2bab6e38de7d1d69e5472676a', 'themes/rosewreath/swag-3.webp': '/_blob/45e97173e81e95557a9344f0d9127355', 'themes/rosewreath/swag-4.webp': '/_blob/d0b7974fecaec72ea71b98bf2dcc1324', 'themes/rosewreath/swag-5.webp': '/_blob/66ba47fdf417d799a49090dd72c4b330', 'themes/rosewreath/swag-6.webp': '/_blob/d20a77669671bf0611f4a1c3bcbdfe6f', 'themes/rosewreath/wreath-1.webp': '/_blob/98797142be590ef152909177cd57999a', 'themes/rosewreath/wreath-2.webp': '/_blob/263047259e44ec6d30704ad8ce964c6b', 'themes/rosewreath/wreath-3.webp': '/_blob/4572d1dc95537834615c8748256a9009', 'themes/rosewreath/wash.webp': '/_blob/a034d957aa228f4c9e1a44bcc7bd7d39', 'themes/rosewreath/paper.webp': '/_blob/d360c2c28dcce6ffb6783f982edf204d', 'themes/rosewreath/olesia.woff2': '/_blob/de8e491310b592e078c879c16cca8755', 'themes/rosewreath/bloom-1.webp': '/_blob/6ec8d73aacd19d70fb381c7b54b5eccb', 'themes/rosewreath/bloom-2.webp': '/_blob/5681dcdeb5b4868fc863e627e8e026d0', 'themes/rosewreath/bloom-3.webp': '/_blob/f728785d5c2beb6741fe171a9e76cc2a', 'themes/rosewreath/bloom-4.webp': '/_blob/a579b0f399748d26afa5d3a45b4d49f7', 'themes/rosewreath/bloom-5.webp': '/_blob/ded9e92a0bd21598aefc2f0c28b73d20', 'themes/rosewreath/bloom-6.webp': '/_blob/265a5967c4c171a842c155e53485ae23', 'themes/rosewreath/animal-bunny.webp': '/_blob/ab30fecd9a4a91f47d99b7590650494c', 'themes/rosewreath/animal-hedgehog.webp': '/_blob/3ccd2f7a798386c1a27417969241fd53', 'themes/rosewreath/animal-fawn.webp': '/_blob/55f79eff9326ee3e4b0246ee0742b0ae', 'themes/rosewreath/animal-squirrel.webp': '/_blob/3bfdaee63cc310b04935a8194c12c7e1', 'themes/rosewreath/animal-chickadee.webp': '/_blob/13cddddc08448be9ec1a26a981e49340'};
     if (typeof window !== 'undefined' && window.__plannerBuild) return t.img.dir + name;
     return map[t.img.dir + name] || '';
   }
@@ -9576,11 +9577,22 @@ class Component extends DCLogic {
             return nar ? { imgSwagL: bloom, imgSwagR: bloom, imgRRight: '-10px', imgRTop: '-16%', imgRH: '122%', imgRTf: 'none' }
               : { imgSwagL: bloom, imgSwagR: '', imgRRight: '4%', imgRTop: '-30%', imgRH: '0', imgRTf: 'none' }; // right banner art: undecided, left empty for now
           })()),
-          bandMask: on ? 'linear-gradient(#000 70%, rgba(0,0,0,0) 100%)' : 'none', bandLine: on ? 'transparent' : this.TK.tE7B7C2,
-          quoteIt: on ? 'normal' : 'italic', quoteSz: on ? 23 : 19,
+          ...((() => {
+            const v = on ? ((typeof window !== 'undefined' && window.__rwVar) || 'A') : '';
+            const nar = (s.vw || 1194) < 900, base = { bandBg: this.TK.tFBEDEE, bandBorder: '1.5px dotted ' + this.TK.tE7B7C2, bandMask: 'none', washOp: '0.3',
+              bloomLeft: '-10px', bloomTop: '-16%', bloomH: '122%', hasGarland: false, imgGarland: '', qJustify: 'center', qAlign: 'flex-start', qTA: 'left', qPad: '0 44% 0 26px', nameDisp: 'block',
+              quoteIt: on ? 'normal' : 'italic', quoteSz: on ? 23 : 19, quoteStroke: on ? '0.35px' : '0' };
+            if (v === 'A') return Object.assign(base, nar ? { imgRRight: '8px', imgRTop: '6px', imgRH: '88%' } : {}, { bandBg: '#F7ECEA', bandBorder: '1px solid #D8C3C1', washOp: '0', bloomLeft: '6px', bloomTop: '6px', bloomH: '88%', nameDisp: 'none', quoteSz: 25 });
+            if (v === 'B') {
+              const g = u(this.pickByDay(t.img.garlands, s.day));
+              return Object.assign(base, { bandBg: 'transparent', bandBorder: '0', washOp: '0', bloomLeft: '10px', bloomTop: '10px', bloomH: '62%', imgSwagL: nar ? g : u(t.img.cornerBloom),
+                hasGarland: !nar, imgGarland: g, qJustify: nar ? 'center' : 'flex-end', qAlign: 'center', qTA: 'center', qPad: nar ? '0 34% 0 26px' : '0 10% 4px', nameDisp: 'none', quoteSz: 23 });
+            }
+            return base;
+          })()),
           imgWreath: on ? u(this.pickByDay(t.img.wreaths, s.day)) : '',
           pageBg: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
-          pageBgL: (on && u(t.img.cornerL) ? "url('" + u(t.img.cornerL) + "') left -14px bottom -10px / auto 280px no-repeat, " : '') + (paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE'),
+          pageBgL: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
           pageBgR: paper ? "#FBF7EE url('" + paper + "') 0 0 / 512px repeat" : '#FBF7EE',
           imgAnimal: on && t.img.animals ? u(this.pickByDay(t.img.animals, s.day)) : '',
           jBg: wash ? "linear-gradient(rgba(251,247,238,0.82), rgba(251,247,238,0.9)), url('" + wash + "') center / cover no-repeat, #FBF7EE" : '#FBF7EE'
@@ -11233,7 +11245,8 @@ class Component extends DCLogic {
       trayCount: trayList.length + (trayList.length === 1 ? ' task' : ' tasks'),
       trayChevron: (isWeek ? s.trayOpenWeek : s.trayOpen) ? 'rotate(180deg)' : 'none',
       toggleTray: () => this.setState(isWeek ? { trayOpenWeek: !s.trayOpenWeek } : { trayOpen: !s.trayOpen }),
-      trayHot: s.dropKey === 'tray' ? '#FCE9A6' : '#F6F1E6',
+      trayHot: s.dropKey === 'tray' ? '#FCE9A6' : (this.themeDef(s.settings.theme).art === 'img' ? 'rgba(255,255,255,0.6)' : '#F6F1E6'),
+      trayBorder: this.themeDef(s.settings.theme).art === 'img' ? '#E4D2CF' : '#E3D9C5',
       trayOver: (e) => { e.preventDefault(); this.hover('tray'); },
       trayDrop: (e) => {
         e.preventDefault(); e.stopPropagation();
