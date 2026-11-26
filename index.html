@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 8:57 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 8:59 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -671,7 +671,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 </sc-for>
 <sc-if value="{{sec.isEmpty}}" hint-placeholder-val="{{ false }}">
-<div onDragOver="{{sec.over}}" onDrop="{{sec.drop}}" style="height: 48px; margin-top: 6px; border: 1.5px dashed #CFC4AE; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: calc(13px * {{fsK}}); color: #6B6358; background: {{sec.zoneBg}}">{{sec.emptyText}}</div>
+<div onDragOver="{{sec.over}}" onDrop="{{sec.drop}}" onClick="{{sec.emptyTap}}" role="{{sec.emptyRole}}" style="cursor: {{sec.emptyCur}}; height: 48px; margin-top: 6px; border: 1.5px dashed #CFC4AE; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: calc(13px * {{fsK}}); color: #6B6358; background: {{sec.zoneBg}}">{{sec.emptyText}}</div>
 </sc-if>
 </div>
 </sc-for>
@@ -8227,6 +8227,7 @@ class Component extends DCLogic {
           canAdd: true, addOpen: s.secAdd === k, addOpenA: s.secAdd === k ? 'true' : 'false', addId: 'sa-' + k,
           addLabel: 'Add to ' + this.PRI[k].name, addDraft: s.secAdd === k ? (s.secDraft || '') : '',
           toggleAdd: () => this.setState({ secAdd: this.state.secAdd === k ? null : k, secDraft: '' }),
+          emptyTap: () => { if (this.state.secAdd !== k) this.setState({ secAdd: k, secDraft: '' }); else { try { const el = document.getElementById('sa-' + k); if (el) el.focus(); } catch (err) {} } }, emptyCur: 'pointer', emptyRole: 'button',
           onAdd: (e) => this.setState({ secDraft: e.target.value }),
           addKey: (e) => {
             if (e.key === 'Escape') { this.setState({ secAdd: null, secDraft: '' }); return; }
@@ -8306,7 +8307,7 @@ class Component extends DCLogic {
         drop: (e) => this.dropTask(e, isWeek ? { bucket: 'week', weekOf: listWs, dayAssign: null } : { bucket: leftBucket })
       }];
     }
-    (sections || []).forEach(x => { x.notCollapsible = !x.collapsible; });
+    (sections || []).forEach(x => { x.notCollapsible = !x.collapsible; if (!x.emptyTap) { x.emptyTap = () => {}; x.emptyCur = 'default'; x.emptyRole = 'presentation'; } });
     if (allMode) {
       const byIdA = {}; s.tasks.forEach(t => { byIdA[t.id] = t; });
       const noDrop = (e) => { if (e && e.preventDefault) e.preventDefault(); this.drag = null; this.setState({ dropKey: null }); };
