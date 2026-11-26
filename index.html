@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 8:15 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 8:21 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -4350,6 +4350,13 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <button onClick="{{tiPaste}}" style="height: 32px; flex: none; padding: 0 10px; border: 0; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Paste</button>
 <label style="position: relative; height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; display: flex; align-items: center; background: transparent; color: {{TK.t6E2F43}}; cursor: pointer">Choose file<input type="file" accept=".csv,.tsv,.txt,text/csv,text/plain" onChange="{{tiFile}}" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; opacity: 0; width: 100%; cursor: pointer"></label>
 </div>
+<sc-if value="{{seedOn}}" hint-placeholder-val="{{ false }}">
+<div style="flex: none; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: #FFFFFF; border: 1px dashed {{TK.tE2B9C4}}; border-radius: 10px; padding: 8px 12px; min-height: 56px; box-sizing: border-box">
+<span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 14px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3M7.5 14h9"></path></svg></span>
+<span style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Sample data (for testing)</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Replaces everything with made-up tasks, Desk items, School, Journal and Grow, all dated around today. Tap again any time to refresh it.</span></span>
+<button onClick="{{seedGo}}" style="height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; display: flex; align-items: center; background: {{seedBg}}; color: {{seedFg}}">{{seedLabel}}</button>
+</div>
+</sc-if>
 <div style="flex: none; display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 8px 12px; min-height: 56px; box-sizing: border-box">
 <span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 14px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></span>
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Start fresh</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Clears your tasks, events, intentions and special days. Settings stay.</span></span>
@@ -4707,6 +4714,8 @@ class Component extends DCLogic {
     };
     this.SYNC_FILE = 'desk-to-day-planner.json';
     this.DK = ['cats', 'courses', 'journal', 'meals', 'mealPlan', 'mealGroc', 'tasks', 'groups', 'habits', 'placedByDay', 'specials', 'allDay', 'commitments', 'series', 'goals', 'notes', 'big3ByWeek', 'bandView', 'nudgeOff', 'bellOff'];
+    // Keep the built-in demo (days are relative to today) for "Fill with sample data" in the claude.ai copy.
+    try { const dm = {}; this.DK.forEach(k => { if (this.state[k] !== undefined) dm[k] = this.state[k]; }); this._demo = JSON.stringify(dm); } catch (e) { this._demo = '{}'; }
     Object.assign(this.state, this.blankData(), { selNote: null, storeMode: 'local', dataConfirm: false });
     this.ready = false;
     this.lastDocs = {};
@@ -6982,6 +6991,77 @@ class Component extends DCLogic {
     if (ids && ids.length > 1) setTimeout(() => this.setToast(ids.length + ' tasks are back on your list.'), ids.length * 25 + 40);
   }
   // Closing task details: everything is already saved. Tidy the title and offer a quick Undo if anything changed.
+  // Sample data for trying things out (claude.ai copy only). Wipes the planner and builds everything around today,
+  // so overdue things are really overdue and due dates are always coming up. Settings and theme stay.
+  seedSample() {
+    const D = Object.assign(this.blankData(), JSON.parse(this._demo || '{}'));
+    const ws = this.weekStartOff(0), wk = (d) => this.weekStartOff(d);
+    let n = 9000; const id = (p) => p + (n++);
+    const sc = (this.state.cats || []).some(c => c.id === 'school') ? (this.state.cats || []) : (this.state.cats || []).concat([{ id: 'school', name: 'School', color: 'lavender', icon: 'school' }]);
+    const T = (o) => Object.assign({ id: id('sx'), pri: 'B', mins: 30, bucket: 'week', added: 0 }, o, o.dayAssign != null && o.weekOf == null ? { weekOf: wk(o.dayAssign) } : {});
+    const tasks = (D.tasks || []).map(t => t.dayAssign != null && t.weekOf == null ? Object.assign({}, t, { weekOf: wk(t.dayAssign) }) : t).concat([
+      // overdue
+      T({ title: 'Mail the return package', pri: 'A', dayAssign: -2, cat: 'home', flag: 'urgent' }),
+      T({ title: 'Email the landlord about the leak', dayAssign: -8, cat: 'home', flag: 'important' }),
+      T({ title: 'Finish the quarterly report draft', pri: 'A', mins: 90, dayAssign: -3, cat: 'work' }),
+      // finished in the past few days
+      T({ title: 'Grocery run', dayAssign: -1, done: true, doneDay: -1, mins: 45, cat: 'home' }),
+      T({ title: 'Reply to Maya', dayAssign: -2, done: true, doneDay: -2, mins: 15 }),
+      T({ title: 'Laundry', dayAssign: -1, done: true, doneDay: -1, mins: 45, cat: 'home' }),
+      T({ title: 'Team standup notes', pri: 'A', dayAssign: 0, done: true, doneDay: 0, mins: 15, cat: 'work' }),
+      // later weeks and the desk
+      T({ title: 'Book holiday flights', weekOf: ws + 21, cat: 'home' }),
+      T({ title: 'Plan the garden beds', weekOf: ws + 35, mins: 60 }),
+      T({ title: 'Update my resume', bucket: 'desk', mins: 60, cat: 'work' }),
+      T({ title: 'Find a new dentist', bucket: 'desk', mins: 20, cat: 'health' }),
+      // a task split into pieces, one finished
+      T({ id: 'sxg1', title: 'Clean out the closet · Sort clothes', groupId: 'gx1', mins: 45, dayAssign: -1, done: true, doneDay: -1, cat: 'home' }),
+      T({ id: 'sxg2', title: 'Clean out the closet · Donate bags', groupId: 'gx1', mins: 30, dayAssign: 2, cat: 'home' }),
+      T({ id: 'sxg3', title: 'The rest', groupId: 'gx1', mins: 45, cat: 'home' })
+    ]);
+    const groups = Object.assign({}, D.groups, { gx1: { title: 'Clean out the closet', note: '' } });
+    // school: two courses with assignments and work days
+    const cat = 'school';
+    const W = (cid, aid, title, d, mins, o) => T(Object.assign({ title: title, pri: 'B', mins: mins, dayAssign: d, cat: cat, courseId: cid, assignmentId: aid, planned: true }, o || {}));
+    const c1 = 'cox1', c2 = 'cox2';
+    const work = [
+      W(c1, 'ax1', 'Intro to Psychology – PSY 101: Chapter 3 reflection · Outline', -2, 45, { workDesc: 'Outline', done: true, doneDay: -2 }),
+      W(c1, 'ax1', 'Intro to Psychology – PSY 101: Chapter 3 reflection · Write the draft', 0, 60, { workDesc: 'Write the draft' }),
+      W(c1, 'ax2', 'Intro to Psychology – PSY 101: Study for Midterm exam · Review chapters 1–4', 3, 90, { workDesc: 'Review chapters 1–4' }),
+      W(c2, 'ax4', 'Statistics – MATH 120: Problem set 5', -4, 60, { done: false })
+    ];
+    const courses = [
+      { id: c1, title: 'Intro to Psychology – PSY 101', color: 'lavender', finish: 45, sessionMins: 90, resources: [], lessons: [], openL: null, assignments: [
+        { id: 'ax1', title: 'Chapter 3 reflection', kind: 'essay', due: 2, mins: 105, link: '', notes: '500 words, cite two sources.', checklist: [], done: false },
+        { id: 'ax2', title: 'Midterm exam', kind: 'exam', due: 9, mins: 180, link: '', notes: 'Chapters 1–6. Bring a calculator.', checklist: [], done: false },
+        { id: 'ax3', title: 'Discussion post: memory', kind: 'essay', due: -5, mins: 30, link: '', notes: '', checklist: [], done: true }
+      ] },
+      { id: c2, title: 'Statistics – MATH 120', color: 'teal', finish: 60, sessionMins: 60, resources: [], lessons: [], openL: null, assignments: [
+        { id: 'ax4', title: 'Problem set 5', kind: 'other', due: -1, mins: 60, link: '', notes: 'Overdue: turn in late for partial credit.', checklist: [], done: false },
+        { id: 'ax5', title: 'Practice quiz 3', kind: 'test', due: 5, mins: 45, link: '', notes: '', checklist: [], done: false },
+        { id: 'ax6', title: 'Group project proposal', kind: 'project', due: 16, mins: 240, link: '', notes: 'Pick a dataset with the group first.', checklist: [], done: false }
+      ] }
+    ];
+    // put today's draft session on the calendar at 7 PM
+    const placed = JSON.parse(JSON.stringify(D.placedByDay || {}));
+    placed['0'] = (placed['0'] || []).concat([{ id: id('px'), taskId: work[1].id, mins: 60, start: 1140 }]);
+    // a few journal entries
+    const J = (key, mood, text) => ({ id: id('jx'), kind: 'day', key: key, mood: mood, text: text, updated: Date.now() });
+    const journal = [
+      J(-1, 4, 'Got the laundry and groceries done before noon. Felt good to have the afternoon open.'),
+      J(-2, 3, 'Slow start. The walk helped. Replied to Maya finally.'),
+      J(-4, 2, 'Overwhelmed by the report. Broke it into smaller pieces for tomorrow.'),
+      J(-6, 5, 'Great day. Finished Lesson 5 and still had energy for stretching.')
+    ];
+    this.setState(Object.assign(D, {
+      tasks: tasks.concat(work), groups: groups, courses: courses, placedByDay: placed, journal: journal, meals: [], mealPlan: {}, mealGroc: {},
+      cats: sc, nextId: n + 1,
+      settings: Object.assign({}, this.state.settings, { schoolOn: true, journalOn: true }),
+      seedConfirm: false, sel: null, editing: null, editDraft: null, selCourse: null
+    }));
+    this.setState({ toast: { msg: 'Sample data is in. Tap again any time to refresh it to today.', label: '', action: null } });
+    clearTimeout(this.toastTimer); this.toastTimer = setTimeout(() => this.setState({ toast: null }), 4000);
+  }
   closeTaskEdit(id) {
     const s = this.state, o = this._editOrig && this._editOrig.id === id ? this._editOrig : null; this._editOrig = null;
     const t = s.tasks.find(x => x.id === id);
@@ -11457,6 +11537,13 @@ class Component extends DCLogic {
       onPasteText: (e) => this.setState({ pasteBox: { text: e.target.value } }),
       pasteRestore: () => this.restoreFromText(this.state.pasteBox ? this.state.pasteBox.text : ''),
       pasteClose: () => this.setState({ pasteBox: null }),
+      seedOn: typeof window === 'undefined' || !window.__plannerBuild,
+      seedLabel: s.seedConfirm ? 'Tap again to replace everything' : 'Fill with sample data',
+      seedBg: s.seedConfirm ? this.TK.t6E2F43 : 'transparent', seedFg: s.seedConfirm ? '#FFFFFF' : this.TK.t6E2F43,
+      seedGo: () => {
+        if (!this.state.seedConfirm) { this.setState({ seedConfirm: true }); clearTimeout(this.seedT); this.seedT = setTimeout(() => this.setState({ seedConfirm: false }), 5000); return; }
+        clearTimeout(this.seedT); this.seedSample();
+      },
       dataFreshLabel: s.dataConfirm ? 'Tap again to clear' : 'Clear',
       dataFreshBg: s.dataConfirm ? '#9A4A3A' : 'transparent', dataFreshFg: s.dataConfirm ? '#FFFFFF' : '#9A4A3A',
       dataFresh: () => {
