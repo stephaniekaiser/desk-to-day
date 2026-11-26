@@ -380,8 +380,7 @@
         ],
         "moment": "drop",
         "sets": [
-          "spring-blossom",
-          "winter-snow"
+          "autumn-leaves"
         ]
       },
       {
@@ -471,8 +470,7 @@
           "snail.webp"
         ],
         "sets": [
-          "spring-blossom",
-          "winter-snow"
+          "spring-blossom"
         ]
       },
       {
@@ -527,7 +525,7 @@
             "w": 84,
             "h": 57,
             "x": 56,
-            "y": 79,
+            "y": 61,
             "holds": {
               "x": 0,
               "y": 8
