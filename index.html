@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 8:10 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 8:15 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3266,7 +3266,9 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
 <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap"><span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Work on it</span><span style="flex: 1; min-width: 120px; font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{a.workLine}}</span></div>
 <sc-for list="{{a.work}}" as="wk" hint-placeholder-count="1">
-<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; padding: 4px 0; border-bottom: 1px solid rgba(160,140,120,0.18)">
+<label for="{{wk.xId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">What you will do</label>
+<input id="{{wk.xId}}" value="{{wk.descVal}}" onChange="{{wk.onDesc}}" onInput="{{wk.onDesc}}" placeholder="What you will do (outline, draft, study ch. 3…)" style="outline-color: {{TK.tA0526A}}; flex: 1 1 100%; min-width: 0; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}})">
 <label for="{{wk.dId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Work day</label>
 <input id="{{wk.dId}}" type="date" value="{{wk.dateVal}}" onChange="{{wk.onDate}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}})">
 <label for="{{wk.tId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Time (optional, puts it on the calendar)</label>
@@ -3299,33 +3301,6 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 <div style="display: flex; flex-direction: column; gap: 4px"><label for="{{a.nId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Notes</label>
 <textarea id="{{a.nId}}" value="{{a.notes}}" onChange="{{a.onNotes}}" rows="2" placeholder="Topic, word count, requirements" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 6px 9px; font: inherit; font-size: calc(13.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea></div>
-<div style="display: flex; flex-direction: column; gap: 2px">
-<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Steps</span>
-<sc-for list="{{a.cl}}" as="ac" hint-placeholder-count="2">
-<div draggable="true" onDragStart="{{ac.dragStart}}" onDragEnd="{{ac.dragEnd}}" onDragOver="{{ac.over}}" onDrop="{{ac.drop}}" style="display: flex; align-items: center; gap: 6px; min-height: calc(30px * {{rowK}}); border-radius: 6px; box-shadow: {{ac.dropShadow}}">
-<span aria-hidden="true" title="Drag to reorder" style="width: 14px; flex: none; display: flex; align-items: center; justify-content: center; color: {{TK.tC9849A}}; cursor: grab"><svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg></span>
-<button role="checkbox" aria-checked="{{ac.checked}}" onClick="{{ac.toggle}}" aria-label="{{ac.text}}" style="width: 20px; height: 20px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 6px; background: {{ac.boxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button>
-<label for="{{ac.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Step</label>
-<input id="{{ac.inputId}}" value="{{ac.text}}" onChange="{{ac.onText}}" onInput="{{ac.onText}}" onKeyDown="{{ac.key}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 28px; box-sizing: border-box; border: 0; border-bottom: 1px solid transparent; border-radius: 6px; padding: 0 6px; background: transparent; font: inherit; font-size: calc(13.5px * {{fsK}}); color: {{ac.fg}}; text-decoration: {{ac.strike}}">
-<label for="{{ac.minsId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Time for this step</label>
-<select id="{{ac.minsId}}" value="{{ac.minsVal}}" onChange="{{ac.onMins}}" title="Time for this step" style="outline-color: {{TK.tA0526A}}; flex: none; height: 28px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 7px; background: #FFFFFF; padding: 0 2px; font: inherit; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #4A443B"><sc-for list="{{ac.minsOpts}}" as="amo" hint-placeholder-count="6"><option value="{{amo.v}}">{{amo.l}}</option></sc-for></select>
-<sc-if value="{{ac.hasTask}}" hint-placeholder-val="{{ false }}"><button onClick="{{ac.openTask}}" title="Open the task for this step" style="flex: none; height: 28px; padding: 0 6px; border: 0; background: transparent; display: flex; align-items: center; gap: 4px; color: {{TK.t6E2F43}}; font-size: calc(11.5px * {{fsK}}); font-weight: 700; white-space: nowrap"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10h16M8 4v4M16 4v4"></path></svg>{{ac.taskWhen}}</button></sc-if>
-<sc-if value="{{ac.noTask}}" hint-placeholder-val="{{ true }}"><button onClick="{{ac.qs}}" aria-label="Put {{ac.text}} on a week or day" title="Put it on a week or day" style="width: 28px; height: 28px; flex: none; border: 0; border-radius: 14px; background: {{ac.qsBg}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10h16M8 4v4M16 4v4M12 13v4M10 15h4"></path></svg></button></sc-if>
-<button onClick="{{ac.remove}}" aria-label="Remove {{ac.text}}" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; color: #B9AF9C; padding: 0">×</button>
-</div>
-<sc-if value="{{ac.qsOpen}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; align-items: center; gap: 8px; margin: 2px 0 6px 48px">
-<label for="{{ac.qsSelId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Put it in</label>
-<select id="{{ac.qsSelId}}" value="" onChange="{{ac.onQs}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{ac.qsOpts}}" as="aqo" hint-placeholder-count="6"><option value="{{aqo.v}}">{{aqo.l}}</option></sc-for></select>
-</div>
-</sc-if>
-</sc-for>
-<div style="display: flex; align-items: center; gap: 6px">
-<span aria-hidden="true" style="width: 20px; flex: none; text-align: center; color: #B9AF9C">+</span>
-<label for="{{a.cId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Add a step</label>
-<textarea id="{{a.cId}}" rows="1" value="{{a.clDraft}}" onChange="{{a.clOnDraft}}" onInput="{{a.clOnDraft}}" onKeyDown="{{a.clKey}}" placeholder="Outline, draft, cite sources, submit…" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tAddH}}px; box-sizing: border-box; border: 0; border-bottom: 1px dashed {{TK.tE2B9C4}}; border-radius: 6px 6px 0 0; background: transparent; padding: 5px 8px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: calc({{tAddH}}px - 12px); color: #2B2722; resize: none; overflow: hidden"></textarea>
-</div>
-</div>
 <div style="display: flex; justify-content: flex-end"><button onClick="{{a.remove}}" style="height: 28px; border: 0; background: transparent; padding: 0 6px; color: #9A4A3A; font-size: calc(12px * {{fsK}}); font-weight: 600">Remove assignment</button></div>
 </div>
 </sc-if>
@@ -4864,7 +4839,23 @@ class Component extends DCLogic {
       if (JSON.stringify(g) !== JSON.stringify(o)) this.setState({ pageGeo: g });
     } catch (err) {}
   }
+  migrateSteps() {
+    const s = this.state; this._stepsMoving = false; if (!this.ready) return;
+    const has = (s.courses || []).some(c => (c.assignments || []).some(a => (a.checklist || []).length));
+    if (!has) return;
+    const byStep = {}; (s.tasks || []).forEach(t => { if (t.stepId) byStep[t.stepId] = t; });
+    const taskDesc = {};
+    const courses = s.courses.map(c => Object.assign({}, c, { assignments: (c.assignments || []).map(a => {
+      const cl = a.checklist || []; if (!cl.length) return a;
+      const loose = [];
+      cl.forEach(it => { const tk = byStep[it.id]; if (tk) taskDesc[tk.id] = it.text || ''; else if ((it.text || '').trim()) loose.push((it.done ? '✓ ' : '• ') + it.text.trim()); });
+      return Object.assign({}, a, { checklist: [], notes: loose.length ? ((a.notes || '').trim() ? a.notes.trim() + '\n' : '') + 'Steps:\n' + loose.join('\n') : a.notes });
+    }) }));
+    const tasks = s.tasks.map(t => taskDesc[t.id] !== undefined ? Object.assign({}, t, { workDesc: taskDesc[t.id] }) : t);
+    this.setState({ courses: courses, tasks: tasks });
+  }
   componentDidUpdate(prevProps, prevState) {
+    if (this.ready && !this._stepsMoving && this.state.courses !== this._mcRef) { this._mcRef = this.state.courses; if ((this.state.courses || []).some(c => (c.assignments || []).some(a => (a.checklist || []).length))) { this._stepsMoving = true; setTimeout(() => this.migrateSteps(), 0); } }
     // (prevState is not always passed in this runtime, so never read it unguarded: an error here would skip saving below)
     try { const ps = prevState || {}; if (!prevState || ps.view !== this.state.view || ps.vw !== this.state.vw || ps.settings !== this.state.settings) { if (!this._mpT) this._mpT = setTimeout(() => { this._mpT = null; this.measurePages(); }, 60); } } catch (err) {}
     const s = this.state;
@@ -5047,7 +5038,13 @@ class Component extends DCLogic {
     return out;
   }
   // ---------- assignment work days: you pick the days; each is a real task linked to the assignment ----------
-  asWorkTasks(c, a) { return this.asSessions(c, a).filter(t => !t.stepId); }
+  asWorkTasks(c, a) { return this.asSessions(c, a); }
+  asWorkBase(c, a) { return (c.title || 'Course') + ': ' + (a.kind === 'exam' ? 'Study for ' : '') + (a.title || 'Assignment'); }
+  asWorkDesc(tid, cid, aid, v) {
+    const s = this.state, c = (s.courses || []).find(x => x.id === cid), a = c && (c.assignments || []).find(x => x.id === aid); if (!a) return;
+    const base = this.asWorkBase(c, a), d = String(v || '');
+    this.setState({ tasks: s.tasks.map(x => x.id === tid ? Object.assign({}, x, { workDesc: d, title: d.trim() ? base + ' · ' + d.trim() : base }) : x) });
+  }
   asWorkAdd(cid, aid) {
     const s = this.state, c = (s.courses || []).find(x => x.id === cid); if (!c) return;
     const a = (c.assignments || []).find(x => x.id === aid); if (!a) return;
@@ -7006,17 +7003,7 @@ class Component extends DCLogic {
     if (done) this.holdBasket();
     const tasks = s.tasks.map(x => x.id === id ? Object.assign({}, x, { done: done, doneDay: done ? day : null }) : x);
     const stepSync = t.stepId && t.courseId && t.assignmentId ? { courses: (s.courses || []).map(c => c.id !== t.courseId ? c : Object.assign({}, c, { assignments: (c.assignments || []).map(a => a.id !== t.assignmentId ? a : Object.assign({}, a, { checklist: (a.checklist || []).map(it => it.id === t.stepId ? Object.assign({}, it, { done: done }) : it) })) })) } : {};
-    let asgSync = {};
-    if (t.assignmentId && t.courseId && !t.stepId) {
-      const mine = tasks.filter(x => x.courseId === t.courseId && x.assignmentId === t.assignmentId && !x.stepId);
-      const allDone = mine.length > 0 && mine.every(x => x.done);
-      const base = stepSync.courses || s.courses || [];
-      const c0 = base.find(c => c.id === t.courseId), a0 = c0 && (c0.assignments || []).find(a => a.id === t.assignmentId);
-      if (a0 && (done ? allDone && !a0.done : a0.done)) {
-        asgSync = { courses: base.map(c => c.id !== t.courseId ? c : Object.assign({}, c, { assignments: (c.assignments || []).map(a => a.id !== t.assignmentId ? a : Object.assign({}, a, { done: done })) })) };
-        if (done) setTimeout(() => this.setToast('"' + (a0.title || 'Assignment') + '" is done.'), 900);
-      }
-    }
+    const asgSync = {};
     this.setState(Object.assign({ tasks: tasks, missFor: null, sel: null }, stepSync, asgSync));
     if (done) this.sceneCelebrate(); else this.basketRecount(t.doneDay);
     const b3ws = this.weekStartOff(typeof day === 'number' ? day : 0);
@@ -11036,7 +11023,9 @@ class Component extends DCLogic {
                   const opts = [15, 30, 45, 60, 90, 120, 150, 180, 240, 300, 360];
                   return this.asWorkTasks(sel, a).map(t => {
                     const sc = sm5[t.id], day = sc ? sc.day : t.dayAssign;
-                    return { id: t.id, dId: 'awd-' + t.id, tId: 'awt-' + t.id, mId: 'awm-' + t.id,
+                    return { id: t.id, dId: 'awd-' + t.id, tId: 'awt-' + t.id, mId: 'awm-' + t.id, xId: 'awx-' + t.id,
+                      descVal: t.workDesc !== undefined ? t.workDesc : (t.stepId ? String(t.title || '').split(' · ').slice(1).join(' · ') : ''),
+                      onDesc: (e) => this.asWorkDesc(t.id, sel.id, a.id, e.target.value),
                       dateVal: typeof day === 'number' ? this.isoFor(day) : '', timeVal: sc ? String(sc.start) : '',
                       timeOpts: (() => { const o = [{ v: '', l: 'No time' }]; for (let m = 300; m < 1440; m += 15) o.push({ v: String(m), l: this.fmtTime(m, false) }); if (sc && sc.start % 15) o.push({ v: String(sc.start), l: this.fmtTime(sc.start, false) }); return o.sort((x, y) => (x.v === '' ? -1 : y.v === '' ? 1 : +x.v - +y.v)); })(),
                       minsVal: String(t.mins || 30), minsOpts: opts.concat(opts.indexOf(t.mins) < 0 && t.mins ? [t.mins] : []).sort((x, y) => x - y).map(m => ({ v: String(m), l: this.fmtDur(m) })),
@@ -11051,7 +11040,7 @@ class Component extends DCLogic {
                 workAddLabel: this.asWorkTasks(sel, a).length ? '+ Add another day' : '+ Pick a day to work on it',
                 workClear: () => this.asWorkRemove(this.asWorkTasks(sel, a).filter(t => !t.done).map(t => t.id)),
                 workMany: this.asWorkTasks(sel, a).filter(t => !t.done).length > 1,
-                workLine: (() => { const w = this.asWorkTasks(sel, a), pm = w.reduce((q, t) => q + (t.mins || 0), 0); return w.length ? this.fmtDur(pm) + ' planned' + (a.mins ? ' of ' + this.fmtDur(a.mins) : '') + ' · ' + w.filter(t => t.done).length + ' of ' + w.length + ' done' : 'Pick the day (or days) you will work on it. A time puts it on your calendar too.'; })(),
+                workLine: (() => { const w = this.asWorkTasks(sel, a), pm = w.reduce((q, t) => q + (t.mins || 0), 0); return w.length ? this.fmtDur(pm) + ' planned' + (a.mins ? ' of ' + this.fmtDur(a.mins) : '') + ' · ' + w.filter(t => t.done).length + ' of ' + w.length + ' done' : 'Pick the day (or days) you will work on it, and what you will do. A time puts it on your calendar too.'; })(),
                 pvLabel: stepsLeftA.length ? 'Add them to my week' : 'Add these sessions',
                 planBtn: stepsLeftA.length ? 'Plan the steps before the due date' : 'Plan it before the due date',
                 stepsTimed: stepsTimedA, timeRO: stepsTimedA,
