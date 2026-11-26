@@ -22,7 +22,7 @@ packages.
 | `scene.sets` | The place for a time of year: `months`, `perch`, `under` (strips), `extras` |
 | `scene.casts` | Animal friends that rotate by day: `over` pieces. A piece with `holds: {x,y}` sits in the tree holding the season's item and drops it into the basket on a check-off; with no holder, the item drifts down from the branch. `flutter: true` gives a ground friend a tiny wing flutter as the item lands |
 | `sets[].item` | The season's item that lands in the basket (`src`, `w`, `h`); `driftY` is where it lets go of the branch on quiet days |
-| `sets[].pile` | The weekly basket: `anchor: underPerch` puts it under the branch tip (`dx` nudges it), `states` pick the art by `pct`: how much of the day's Must do and Should do is finished (1 = the first thing done). It starts fresh each day and never goes down during the day |
+| `sets[].pile` | The weekly basket: `anchor: underPerch` puts it under the branch tip (`dx` nudges it), `states` pick the art by `pct`: how much of the day's Must do and Should do is finished (1 = the first thing done). It starts fresh each day; whether adding tasks can lower it is the theme's `pileMode` option (below) |
 | `scene.quote`, `quoteClear`, `quoteY` | Where the quote sits |
 
 Scene piece anchors: `spread` (top strip across both pages), `spreadBottom` (repeating ground strip),
@@ -40,3 +40,6 @@ Scene piece anchors: `spread` (top strip across both pages), `spreadBottom` (rep
 **More special-day options:** `rule: "nth:M:D:N"` matches the Nth weekday D (0 = Sunday) of month M (Thanksgiving = `nth:11:4:4`). `pile: {dx}` nudges the basket that day. `anchor: byPileR` stands a piece right of the basket. A piece with `arrive: {walk: [frames], from, dur}` walks in from the right when you arrive on the Day page, then shows its normal pose.
 
 `anchor: pageR` stands a piece on the grass at the page's right edge (`x` = gap from the edge, `tuck` = how much the basket may tuck under it); the basket moves left to make room.
+
+**Theme options:** `options: [{id, kind, label, default, choices: [{v, l, hint}]}]` gives a theme its own small choices. They show in Settings → Look and feel, under the theme picker, only while that theme is in use, and each theme remembers its own picks (`settings.themeOpts[<theme id>][<option id>]`). The planner knows what to do by `kind`:
+- `pileMode`: how the basket fills. `keep` = keeps what you've gathered (adding tasks never takes anything out; unchecking does). `live` = always shows how much of the day's Must do and Should do is done, so adding tasks makes room.
