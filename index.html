@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 8:44 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 8:57 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -793,6 +793,21 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-for>
 </div>
 </sc-if>
+<sc-if value="{{hasGrowTrack}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column">
+<div style="display: flex; align-items: center; gap: 8px; min-height: 28px; padding: 2px; border-bottom: 1px solid {{TK.tE2B9C4}}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: {{TK.t6E2F43}}">Tracking · {{growDayWord}}</span></div>
+<sc-for list="{{growTrack}}" as="gt" hint-placeholder-count="2">
+<button onClick="{{gt.open}}" aria-label="{{gt.aria}}" title="Open to log" style="display: flex; align-items: center; gap: 10px; min-height: calc(46px * {{rowK}}); border: 0; border-bottom: 1px solid #EFE7D6; background: transparent; padding: 4px 2px; text-align: left; color: #2B2722">
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="display: flex; align-items: baseline; gap: 8px"><span style="flex: 1; min-width: 0; font-size: calc(14.5px * {{fsK}}); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{gt.title}}</span><span style="flex: none; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{gt.fg}}">{{gt.total}}</span></span>
+<sc-if value="{{gt.hasGoal}}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position: relative; height: 5px; border-radius: 3px; background: {{TK.tF6EDEF}}; overflow: hidden; display: block"><span style="position: absolute; top: 0; bottom: 0; left: 0; width: {{gt.pct}}%; background: {{gt.bar}}"></span></span></sc-if>
+<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064">{{gt.line}}</span>
+</span>
+<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A8174" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg>
+</button>
+</sc-for>
+</div>
+</sc-if>
 <sc-if value="{{dtHasMakers}}" hint-placeholder-val="{{ true }}">
 <button onClick="{{dtMkToggle}}" aria-expanded="{{dtMkOpenA}}" style="display: flex; align-items: center; gap: 8px; min-height: 28px; padding: 2px; border: 0; border-bottom: 1px solid {{TK.tE2B9C4}}; background: transparent; text-align: left; width: 100%; color: {{TK.t6E2F43}}"><span style="flex: 1; font-size: calc(12px * {{fsK}}); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em">Week Makers</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{dtMkSummary}}</span><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A8174" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none; transform: {{dtMkChev}}"><path d="M6 9l6 6 6-6"></path></svg></button>
 <sc-if value="{{dtMkOpen}}" hint-placeholder-val="{{ true }}">
@@ -805,7 +820,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-for>
 </sc-if>
 </sc-if>
-<sc-if value="{{dtGrowEmpty}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Nothing to grow on this day yet. Add a Build or Break intention in Grow.</p></sc-if>
+<sc-if value="{{dtGrowEmpty}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Nothing to grow on this day yet. Add a Build, Break or Track intention in Grow.</p></sc-if>
 <button onClick="{{dtOpenGrow}}" style="align-self: flex-start; height: 28px; border: 0; background: transparent; padding: 0 2px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">Open Grow</button>
 </div>
 </sc-if>
@@ -2311,7 +2326,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{iGlanceHasHabits}}" hint-placeholder-val="{{ true }}">
 <section aria-label="Habits" style="display: flex; flex-direction: column">
 <div style="display: flex; align-items: center; gap: 8px; border-bottom: 1px solid {{TK.tE2B9C4}}; padding: 0 2px 4px">
-<span style="font-size: calc(12px * {{fsK}}); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: {{TK.t6E2F43}}">Building &amp; Breaking</span>
+<span style="font-size: calc(12px * {{fsK}}); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: {{TK.t6E2F43}}">Habits &amp; Trackers</span>
 <span style="margin-left: auto; font-size: calc(11px * {{fsK}}); color: #8A7A7E">Last 14 days · arrow compares this week to last</span>
 </div>
 <sc-for list="{{iGlanceHabits}}" as="gh" hint-placeholder-count="3">
@@ -2536,6 +2551,76 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </section>
 </sc-if>
 
+<sc-if value="{{iIsTrack}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Log" style="flex: none; display: flex; flex-direction: column; gap: 10px">
+<sc-if value="{{iTkShowStart}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 10px 12px">
+<span style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">What do you want to track?</span>
+<span style="font-size: calc(12px * {{fsK}}); color: #5E5546">Pick a starter to fill in the unit, goal and quick labels. You can change any of it in Details.</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{iTkStarters}}" as="st" hint-placeholder-count="4"><button onClick="{{st.pick}}" style="height: 32px; padding: 0 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 16px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(13px * {{fsK}}); font-weight: 600">{{st.label}}</button></sc-for>
+</div>
+</div>
+</sc-if>
+<div style="display: flex; align-items: center; gap: 6px">
+<button onClick="{{iTkPrev}}" aria-label="Day before" style="width: 30px; height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 15px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<span style="min-width: 0; font-family: {{TK.fHead}}; font-size: calc(16px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; text-align: center; flex: 1">{{iTkDayLbl}}</span>
+<button onClick="{{iTkNext}}" disabled="{{iTkNextDis}}" aria-label="Day after" style="width: 30px; height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 15px; background: #FFFFFF; color: {{TK.t6E2F43}}; opacity: {{iTkNextOp}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
+<sc-if value="{{iTkNotToday}}" hint-placeholder-val="{{ false }}"><button onClick="{{iTkToday}}" style="height: 30px; flex: none; padding: 0 10px; border: 0; border-radius: 15px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700">Today</button></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px; background: #FFFFFF; border: 1px solid #EFE7D6; border-radius: 10px; padding: 10px 12px">
+<div style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: {{TK.fHead}}; font-size: calc(26px * {{fsK}}); font-weight: 700; color: #2B2722">{{iTkTotal}}</span><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">{{iTkGoalTxt}}</span></div>
+<sc-if value="{{iTkHasGoal}}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position: relative; display: block; height: 7px; border-radius: 4px; background: {{TK.tF6EDEF}}; overflow: hidden"><span style="position: absolute; top: 0; bottom: 0; left: 0; width: {{iTkPct}}%; border-radius: 4px; background: {{iTkBarCol}}"></span></span></sc-if>
+<span style="font-size: calc(12.5px * {{fsK}}); color: #5E5546">{{iTkLine}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<sc-if value="{{iTkHasChips}}" hint-placeholder-val="{{ true }}">
+<div role="group" aria-label="Quick labels" style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{iTkChips}}" as="kc" hint-placeholder-count="4"><button onClick="{{kc.tap}}" aria-pressed="{{kc.on}}" title="{{kc.tip}}" style="height: 30px; padding: 0 11px; border: 1px solid {{kc.bd}}; border-radius: 15px; background: {{kc.bg}}; color: {{kc.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 600">{{kc.label}}</button></sc-for>
+</div>
+</sc-if>
+<div style="display: flex; gap: 6px; align-items: center">
+<label for="tk-what" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">What</label>
+<input id="tk-what" value="{{iTkWhat}}" onInput="{{iTkOnWhat}}" onChange="{{iTkOnWhat}}" onKeyDown="{{iTkKey}}" autocomplete="off" placeholder="{{iTkWhatPh}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 36px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(14px * {{fsK}}); background: #FFFFFF">
+<label for="tk-amt" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Amount</label>
+<input id="tk-amt" type="number" inputmode="decimal" min="0" value="{{iTkAmt}}" onInput="{{iTkOnAmt}}" onChange="{{iTkOnAmt}}" onKeyDown="{{iTkKey}}" placeholder="{{iTkUnitPh}}" style="outline-color: {{TK.tA0526A}}; width: 92px; flex: none; height: 36px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); background: #FFFFFF">
+<button onClick="{{iTkAdd}}" style="height: 36px; flex: none; padding: 0 14px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13px * {{fsK}}); font-weight: 700">Add</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{iTkEntries}}" as="te" hint-placeholder-count="3">
+<div style="display: flex; align-items: center; gap: 8px; min-height: calc(36px * {{rowK}}); border-bottom: 1px solid #EFE7D6; padding: 0 2px">
+<sc-if value="{{te.hasTag}}" hint-placeholder-val="{{ true }}"><span style="flex: none; height: 20px; display: inline-flex; align-items: center; padding: 0 8px; border-radius: 10px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; font-size: calc(11px * {{fsK}}); font-weight: 700">{{te.tag}}</span></sc-if>
+<span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{te.what}}</span>
+<span style="flex: none; font-size: calc(13.5px * {{fsK}}); font-weight: 700; color: #2B2722">{{te.amt}}</span>
+<button onClick="{{te.remove}}" aria-label="Remove {{te.aria}}" title="Remove" style="width: 28px; height: 28px; flex: none; border: 0; border-radius: 14px; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-for>
+<sc-if value="{{iTkNoEntries}}" hint-placeholder-val="{{ false }}"><p style="margin: 2px; font-size: calc(13px * {{fsK}}); color: #7A7064">{{iTkEmptyTxt}}</p></sc-if>
+</div>
+<sc-if value="{{iTkHasRecent}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Recent · tap to add again</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{iTkRecent}}" as="rc" hint-placeholder-count="3"><button onClick="{{rc.add}}" style="max-width: 100%; height: 30px; padding: 0 10px; border: 1px dashed {{TK.tC9849A}}; border-radius: 15px; background: #FFFFFF; color: #2B2722; font-size: calc(12.5px * {{fsK}}); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">+ {{rc.label}}</button></sc-for>
+</div>
+</div>
+</sc-if>
+<div style="display: flex; flex-direction: column; gap: 6px; border-top: 1px solid #EFE7D6; padding-top: 10px">
+<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Last 14 days</span>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{iTkStats}}" as="ks" hint-placeholder-count="2"><div style="background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 6px 9px; display: flex; flex-direction: column"><span style="font-family: {{TK.fHead}}; font-size: calc(17px * {{fsK}}); font-weight: 700; color: #2B2722">{{ks.big}}</span><span style="font-size: calc(11.5px * {{fsK}}); color: #6B6358">{{ks.small}}</span></div></sc-for>
+</div>
+<svg role="img" aria-label="{{iTkAria}}" viewBox="0 0 280 80" preserveAspectRatio="none" style="width: 100%; height: 120px; display: block">
+<line x1="0" x2="280" y1="78" y2="78" stroke="#E6DCC8" stroke-width="1"></line>
+<sc-for list="{{iTkBars}}" as="kb" hint-placeholder-count="14"><rect onClick="{{kb.pick}}" x="{{kb.x}}" y="{{kb.y}}" width="{{kb.w}}" height="{{kb.h}}" rx="2" style="fill: {{kb.fill}}; stroke: {{kb.ring}}; stroke-width: 1.5; cursor: pointer"><title>{{kb.tip}}</title></rect></sc-for>
+<sc-if value="{{iTkHasGoal}}" hint-placeholder-val="{{ true }}"><line x1="0" x2="280" y1="{{iTkGoalY}}" y2="{{iTkGoalY}}" stroke-width="1.2" stroke-dasharray="4 3" style="stroke: {{TK.t6E2F43}}"></line></sc-if>
+</svg>
+<div aria-hidden="true" style="position: relative; height: 14px; margin-top: -6px"><sc-for list="{{iTkLabels}}" as="kl" hint-placeholder-count="14"><span style="position: absolute; top: 0; left: {{kl.pct}}%; transform: translateX(-50%); font-size: calc(10px * {{fsK}}); color: #8A8174">{{kl.t}}</span></sc-for></div>
+</div>
+</section>
+</sc-if>
+
 <sc-if value="{{iIsNumber}}" hint-placeholder-val="{{ false }}">
 <section aria-label="Progress" style="flex: none; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; align-items: baseline; gap: 10px">
@@ -2706,6 +2791,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-for>
 </div>
+<sc-if value="{{iIsTrack}}" hint-placeholder-val="{{ false }}"><p style="margin: -6px 2px 0; font-size: calc(12px * {{fsK}}); color: #7A7064">Quick labels: separate them with commas. Add = and a number to log that amount in one tap, like Bottle = 16.</p></sc-if>
 <sc-if value="{{iRepOn}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 8px; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 10px 12px; background: #FFFFFF">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Repeat on my calendar</span>
@@ -6317,7 +6403,7 @@ class Component extends DCLogic {
     if (d.bandView) out.bandView = keys(d.bandView, x => { const i = x.lastIndexOf(':'); const v = +x.slice(i + 1); return i < 0 || isNaN(v) ? x : x.slice(0, i + 1) + (v - k); });
     if (d.series) out.series = d.series.map(x => Object.assign(fix(x, ['anchor', 'until']), { exceptions: keys(x.exceptions) }));
     if (d.commitments) out.commitments = d.commitments.map(c => Object.assign({}, c, { skips: (c.skips || []).map(n), over: keys(c.over) }));
-    if (d.goals) out.goals = d.goals.map(g => { const r = fix(g, ['target', 'startDay']); if (g.logs) r.logs = keys(g.logs); if (g.totals) r.totals = keys(g.totals); if (g.entries) r.entries = g.entries.map(e => Object.assign({}, e, { d: n(e.d) })); return r; });
+    if (d.goals) out.goals = d.goals.map(g => { const r = fix(g, ['target', 'startDay']); if (g.logs) r.logs = keys(g.logs); if (g.totals) r.totals = keys(g.totals); if (g.entries) r.entries = g.entries.map(e => Object.assign({}, e, { d: n(e.d) })); if (g.tlog) r.tlog = g.tlog.map(e => Object.assign({}, e, { d: n(e.d) })); return r; });
     if (d.notes) out.notes = d.notes.map(x => fix(x, ['day']));
     if (d.allDay) out.allDay = d.allDay.map(a => fix(a, ['start', 'end']));
     if (d.courses) out.courses = d.courses.map(c => { const c2 = fix(c, ['finish', 'planStart']); if (Array.isArray(c2.assignments)) c2.assignments = c2.assignments.map(a => fix(a, ['due'])); return c2; });
@@ -7062,6 +7148,16 @@ class Component extends DCLogic {
       J(-4, 2, 'Overwhelmed by the report. Broke it into smaller pieces for tomorrow.'),
       J(-6, 5, 'Great day. Finished Lesson 5 and still had energy for stretching.')
     ];
+    const menu = { Breakfast: [['Oatmeal with berries', 320], ['Greek yogurt and granola', 280], ['Eggs and toast', 390], ['Bagel with cream cheese', 360]], Lunch: [['Turkey sandwich', 520], ['Chicken salad', 450], ['Leftover pasta', 610], ['Burrito bowl', 680]], Dinner: [['Salmon and rice', 640], ['Tacos', 720], ['Veggie stir fry', 540], ['Pizza, 2 slices', 600], ['Spaghetti', 690]], Snack: [['Apple and peanut butter', 210], ['Granola bar', 190], ['Cheese and crackers', 230], ['Chocolate', 150]] };
+    const tlog = (fn) => { const out = []; for (let d = -11; d <= 0; d++) fn(d).forEach(e => out.push(Object.assign({ id: id('tl'), d: d }, e))); return out; };
+    const pick = (arr, d, k) => arr[Math.abs(d * 7 + k * 3) % arr.length];
+    const calLog = tlog((d) => { if (d === -6) return []; const day = []; ['Breakfast', 'Lunch', 'Dinner'].forEach((m, k) => { if (d === 0 && m === 'Dinner') return; const it = pick(menu[m], d, k); day.push({ l: m, w: it[0], v: it[1] }); }); if (d % 2 === 0 || d === -3) { const it = pick(menu.Snack, d, 5); day.push({ l: 'Snack', w: it[0], v: it[1] }); } if (d === -3) day.push({ l: 'Snack', w: 'Birthday cake', v: 450 }); return day; });
+    const waterLog = tlog((d) => { if (d === -8) return []; const n = [3, 4, 2, 5, 3, 4, 2, 3, 5, 4, 3, 2][(d + 11) % 12]; const day = [{ l: 'Big bottle', w: '', v: 32 }]; for (let i = 0; i < n - 2; i++) day.push({ l: 'Glass', w: '', v: 8 }); if (d % 3 === 0) day.push({ l: 'Bottle', w: '', v: 16 }); return d === 0 ? day.slice(0, 2) : day; });
+    const trackers = [
+      { id: 'gtc', kind: 'track', title: 'Calories', why: 'I want to notice what I eat, not judge it.', photo: null, links: [], files: [], color: 'orange', status: 'active', onDay: false, startDay: -11, trkSet: true, unit: 'cal', daily: 1800, aim: 'atMost', labels: [{ l: 'Breakfast' }, { l: 'Lunch' }, { l: 'Dinner' }, { l: 'Snack' }], tlog: calLog },
+      { id: 'gtw', kind: 'track', title: 'Water', why: 'Fewer headaches when I drink enough.', photo: null, links: [], files: [], color: 'blue', status: 'active', onDay: false, startDay: -11, trkSet: true, unit: 'oz', daily: 64, aim: 'atLeast', labels: [{ l: 'Glass', v: 8 }, { l: 'Bottle', v: 16 }, { l: 'Big bottle', v: 32 }], tlog: waterLog }
+    ];
+    D.goals = (D.goals || []).filter(g => g.kind !== 'track').concat(trackers);
     this.setState(Object.assign(D, {
       tasks: tasks.concat(work), groups: groups, courses: courses, placedByDay: placed, journal: journal, meals: [], mealPlan: {}, mealGroc: {},
       cats: sc, nextId: n + 1,
@@ -7078,6 +7174,19 @@ class Component extends DCLogic {
     if (s.editing !== id) { if (tasks !== s.tasks) this.setState({ tasks: tasks }); return; }
     this.setState({ tasks: tasks, editing: null, editDraft: null, catMenu: null, whereMenu: null });
   }
+  trkSum(g, d) { return (g.tlog || []).reduce((a, e) => a + (e.d === d ? (+e.v || 0) : 0), 0); }
+  trkNum(v, money) { const x = +v || 0; if (money) { const c = Math.round(x * 100) / 100; return c % 1 ? c.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : c.toLocaleString('en-US'); } return (Math.round(x * 10) / 10).toLocaleString('en-US'); }
+  trkFmt(g, v) { const u = String(g.unit || '').trim(), t = this.trkNum(v, u === '$'); return u === '$' ? '$' + t : (u ? t + ' ' + u : t); }
+  trkTotalTxt(g, v) { const u = String(g.unit || '').trim(); return g.daily ? (u === '$' ? '$' : '') + this.trkNum(v, u === '$') + ' / ' + this.trkFmt(g, g.daily) : this.trkFmt(g, v); }
+  trkStatus(g, v, logged) {
+    const goal = +g.daily || 0;
+    if (!goal) return { pct: 0, met: logged, over: false, bar: this.TK.tA0526A, line: logged ? 'Logged so far' : 'Nothing logged yet' };
+    const pct = Math.min(100, Math.round(v / goal * 100));
+    if (g.aim === 'atMost') { const over = v > goal; return { pct: pct, met: logged && !over, over: over, bar: over ? this.TK.t6E2F43 : this.TK.tA0526A, line: !logged ? 'Nothing logged yet' : (over ? 'Over by ' + this.trkFmt(g, v - goal) + '. That is okay. Tomorrow is a fresh page.' : this.trkFmt(g, goal - v) + ' left') }; }
+    return { pct: pct, met: v >= goal, over: false, bar: this.TK.tA0526A, line: v >= goal ? 'You reached it!' : (logged ? this.trkFmt(g, goal - v) + ' to go' : 'Nothing logged yet') };
+  }
+  trkParseLabels(str) { return String(str || '').split(',').map(x => x.trim()).filter(Boolean).map(x => { const m = x.match(/^(.*?)\s*=\s*([\d.]+)\s*$/); return m ? { l: m[1].trim() || 'Item', v: +m[2] } : { l: x }; }); }
+  trkLabelsStr(g) { return (g.labels || []).map(x => x.l + (typeof x.v === 'number' ? ' = ' + x.v : '')).join(', '); }
   holdBasket() { const s = this.state; if (s.view === 'day') this._basketHold = { d: s.day, p: this.dayBasketPct(s, s.day) }; }
   setTaskDone(id, done, day, sure) {
     const s = this.state;
@@ -9384,7 +9493,7 @@ class Component extends DCLogic {
       if (st === 'active') {
         const recent = done.some(t => typeof t.doneDay === 'number' && t.doneDay >= -14);
         const planned = open.some(t => stepRank(t) <= 2);
-        st = (g.kind === 'build' || g.kind === 'break' || g.measure === 'number' || g.habitId || recent || planned) ? 'ontrack' : 'attention';
+        st = (g.kind === 'build' || g.kind === 'break' || g.kind === 'track' || g.measure === 'number' || g.habitId || recent || planned) ? 'ontrack' : 'attention';
       }
       let pct = linked.length ? Math.round(done.length / linked.length * 100) : 0;
       let meta = (typeof g.target === 'number' ? 'By ' + this.MONTHS[this.dateFor(g.target).getMonth()] + ' ' + this.dateFor(g.target).getDate() : 'No date') + ' · ' + done.length + ' of ' + linked.length + ' steps done';
@@ -9538,10 +9647,17 @@ class Component extends DCLogic {
     const KIND = {
       build: { label: 'Build', group: 'Building', long: 'Build · a habit to pick up', hint: 'A habit to pick up', icon: 'M12 21V11M12 11c0-4 3-7 8-7 0 5-3 7-8 7zM12 14c0-3-2-6-7-6 0 4 2 6 7 6z' },
       'break': { label: 'Break', group: 'Breaking', long: 'Break · a habit to put down', hint: 'A habit to put down', icon: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM5.6 5.6l12.8 12.8' },
+      track: { label: 'Track', group: 'Tracking', long: 'Track · a daily log that adds up', hint: 'Log amounts that add up each day', icon: 'M6 3h12v18H6zM9 8h6M9 12h6M9 16h3' },
       reach: { label: 'Finish line', group: 'Finish lines', long: 'Finish line · something to reach by a date', hint: 'Something to reach by a date', icon: 'M3 20l6-10 4 6 3-4 5 8z' }
     };
     const kShort = (v) => v >= 1000 ? (Math.round(v / 100) / 10) + 'k' : String(Math.round(v * 10) / 10);
     const kindOf = (g) => g.kind || 'reach';
+    const TRK_ST = {
+      calories: { label: 'Calories', title: 'Calories', unit: 'cal', daily: 1800, aim: 'atMost', labels: [{ l: 'Breakfast' }, { l: 'Lunch' }, { l: 'Dinner' }, { l: 'Snack' }] },
+      water: { label: 'Water', title: 'Water', unit: 'oz', daily: 64, aim: 'atLeast', labels: [{ l: 'Glass', v: 8 }, { l: 'Bottle', v: 16 }, { l: 'Big bottle', v: 32 }] },
+      spending: { label: 'Spending', title: 'Spending', unit: '$', daily: 40, aim: 'atMost', labels: [{ l: 'Groceries' }, { l: 'Gas' }, { l: 'Eating out' }, { l: 'Other' }] },
+      protein: { label: 'Protein', title: 'Protein', unit: 'g', daily: 100, aim: 'atLeast', labels: [{ l: 'Breakfast' }, { l: 'Lunch' }, { l: 'Dinner' }, { l: 'Snack' }] }
+    };
     const colOf = (g) => ({ swatch: this.TK.tA0526A, a: this.TK.tFBEDEE });
     const buildVal = (g, d) => {
       return this.goalHand(g, d) + this.goalSess(g, d);
@@ -9592,6 +9708,7 @@ class Component extends DCLogic {
         if (b.mode !== 'limit') parts.push(b.free + ' free days');
         return parts.join(' · ');
       }
+      if (k === 'track') { const v = this.trkSum(g, 0); return 'Today ' + this.trkTotalTxt(g, v); }
       if (g.measure === 'number') { const n = numStats(g); return kShort(Math.abs(g.start - n.cur)) + ' ' + g.unit + ' down · ' + kShort(n.left) + ' to go'; }
       const gi = goalInfo(g);
       return gi.meta;
@@ -9601,6 +9718,7 @@ class Component extends DCLogic {
       const col = colOf(g).swatch;
       if (k === 'build') { const b = buildStats(g); return b.days.map(x => ({ bg: x.v >= b.tgt ? col : (x.v >= b.mn ? col : '#E8DFCC'), op: x.v >= b.tgt ? 1 : (x.v >= b.mn ? 0.4 : 1) })); }
       if (k === 'break') { const b = brkStats(g); return b.days.map(x => ({ bg: x.v ? '#E8DFCC' : col, op: 1 })); }
+      if (k === 'track') { const out = []; for (let d = -13; d <= 0; d++) { const lg = (g.tlog || []).some(e => e.d === d); const st = this.trkStatus(g, this.trkSum(g, d), lg); out.push({ bg: lg ? col : '#E8DFCC', op: !lg ? 1 : (st.met ? 1 : 0.4) }); } return out; }
       return [];
     };
     const selI = selG;
@@ -9628,7 +9746,7 @@ class Component extends DCLogic {
         select: () => this.setState({ selGoal: g.id, iSetup: false, iLink: false, mobilePage: (s.vw || 1194) < 900 ? 'right' : s.mobilePage })
       };
     };
-    const iGroups = ['build', 'break', 'reach'].map(k => ({
+    const iGroups = ['build', 'break', 'track', 'reach'].map(k => ({
       name: KIND[k].group, icon: KIND[k].icon, hint: KIND[k].hint,
       cards: goals.filter(g => kindOf(g) === k && g.status === 'active').map(iCard)
     })).filter(x => x.cards.length);
@@ -9637,17 +9755,18 @@ class Component extends DCLogic {
     const newI = (k) => {
       const n3 = this.state.nextId;
       const cols = this.COLOR_ORDER;
-      const onDayN = this.state.goals.filter(x => x.onDay && x.status === 'active' && x.kind !== 'reach').length;
-      const g = { id: 'g' + n3, onDay: k !== 'reach' && onDayN < 4, kind: k, title: k === 'build' ? 'New habit to build' : (k === 'break' ? 'New habit to put down' : 'New place to reach'), why: '', photo: null, links: [], files: [], color: cols[this.state.goals.length % cols.length], status: 'active', logs: {}, startDay: 0 };
+      const onDayN = this.state.goals.filter(x => x.onDay && x.status === 'active' && (x.kind === 'build' || x.kind === 'break')).length;
+      const g = { id: 'g' + n3, onDay: (k === 'build' || k === 'break') && onDayN < 4, kind: k, title: k === 'build' ? 'New habit to build' : (k === 'break' ? 'New habit to put down' : (k === 'track' ? 'New tracker' : 'New place to reach')), why: '', photo: null, links: [], files: [], color: cols[this.state.goals.length % cols.length], status: 'active', logs: {}, startDay: 0 };
       const patch = { nextId: n3 + 1 };
       if (k === 'build') {
         const hid = 'h' + n3;
         Object.assign(g, { habitId: hid, daily: 30, minimum: 10, unit: 'minutes', quick: 5 });
         patch.habits = this.state.habits.concat([{ id: hid, title: 'New habit', chunk: 15, perMin: 1, goal: 30, unit: 'minutes', color: '#3F7A5A', tint: '#EAF2EC', cat: null }]);
       } else if (k === 'break') Object.assign(g, { unit: 'times', mode: 'both', limit: 3, aimFree: 4 });
+      else if (k === 'track') Object.assign(g, { unit: '', daily: 0, aim: 'atLeast', labels: [], tlog: [] });
       else Object.assign(g, { measure: 'tasks', target: null });
       patch.goals = this.state.goals.concat([g]);
-      patch.selGoal = g.id; patch.iNew = false; patch.iTab = 'details';
+      patch.selGoal = g.id; patch.iNew = false; patch.iTab = k === 'track' ? 'progress' : 'details';
       this.setState(patch);
     };
     const brkRows = s.view === 'day' && s.day === 0 ? goals.filter(g => kindOf(g) === 'break' && g.status === 'active' && g.onDay).map(g => {
@@ -9703,7 +9822,7 @@ class Component extends DCLogic {
         pop: isOpen ? Object.assign(base, { name: g.title, title: g.title, line: sub + (over ? ' · over your limit, and that is okay' : ''), isBuild: false, isBreak: true, quick: [], chunk: '', today: String(b.today), minus: () => setT(b.today - 1), plus: () => setT(b.today + 1) }) : null
       };
     };
-    const ringList = s.view === 'day' && s.day === 0 ? goals.filter(g => g.onDay && g.status === 'active' && kindOf(g) !== 'reach').slice(0, 4).map(ringFor) : [];
+    const ringList = s.view === 'day' && s.day === 0 ? goals.filter(g => g.onDay && g.status === 'active' && (kindOf(g) === 'build' || kindOf(g) === 'break')).slice(0, 4).map(ringFor) : [];
     const intentRings = ringList.map(r => r.ring);
     const ringPopRaw = ringList.find(r => r.pop);
     const ringPop = ringPopRaw ? ringPopRaw.pop : null;
@@ -9713,7 +9832,11 @@ class Component extends DCLogic {
     const glanceRows = goals.filter(g => g.status === 'active' && kindOf(g) !== 'reach').map(g => {
       const k = kindOf(g);
       let now = 0, prev = 0, text = '', cells = [];
-      if (k === 'build') {
+      if (k === 'track') {
+        let logged = 0, sum = 0, met = 0;
+        for (let d = -13; d <= 0; d++) { const lg = (g.tlog || []).some(e => e.d === d); const v = this.trkSum(g, d); if (lg) { logged++; sum += v; if (this.trkStatus(g, v, lg).met) { met++; if (d > -7) now++; else prev++; } } }
+        text = logged ? 'About ' + this.trkFmt(g, Math.round(sum / logged)) + ' a day' + (g.daily ? ' · ' + met + ' of ' + logged + ' days at goal' : '') : 'Nothing logged in the last 14 days';
+      } else if (k === 'build') {
         const b = buildStats(g);
         now = b.days.slice(7).filter(x => x.v >= b.mn).length; prev = b.days.slice(0, 7).filter(x => x.v >= b.mn).length;
         text = b.showed + ' of 14 days showed up · ' + b.hit + ' at goal';
@@ -9781,8 +9904,8 @@ class Component extends DCLogic {
       ringPopOpen: !!ringPop, ringPop: ringPop || { name: '', title: '', line: '', left: '0px', isBuild: false, isBreak: false, quick: [], chunk: '', today: '0', close: () => {}, minus: () => {}, plus: () => {}, open: () => {} },
       iGroups: iGroups, iNewOpen: !!s.iNew, iNewOpenA: s.iNew ? 'true' : 'false',
       iToggleNew: () => this.setState({ iNew: !this.state.iNew }),
-      iNewKinds: ['build', 'break', 'reach'].map(k => ({ label: KIND[k].label, hint: KIND[k].hint, icon: KIND[k].icon, add: () => newI(k) })),
-      iRepOn: false, iTrModes: [], iTrStep: false, iTrCustom: false, iTrStats: [], iTrBars: [], iTrChecks: [], iTrLabels: [], iTrLegend: [], iTrHasLine: false, iTrHasMin: false, iWeekTxt: '', iIsBuild: false, iIsBreak: false, iIsNumber: false, iIsTasks: false, iShowHelpers: false, iShowSteps: false, iShowWins: false, iShowNotes: false, iHelpingEmpty: false, iTabHelping: false, iHasHelpers: false, iHasHelperChips: false, iHelperChips: [], iHasPhoto: false
+      iNewKinds: ['build', 'break', 'track', 'reach'].map(k => ({ label: KIND[k].label, hint: KIND[k].hint, icon: KIND[k].icon, add: () => newI(k) })),
+      iRepOn: false, iTrModes: [], iTrStep: false, iTrCustom: false, iTrStats: [], iTrBars: [], iTrChecks: [], iTrLabels: [], iTrLegend: [], iTrHasLine: false, iTrHasMin: false, iWeekTxt: '', iIsTrack: false, iTkShowStart: false, iTkStarters: [], iTkChips: [], iTkHasChips: false, iTkEntries: [], iTkRecent: [], iTkHasRecent: false, iTkStats: [], iTkBars: [], iTkLabels: [], iTkHasGoal: false, iTkNoEntries: false, iIsBuild: false, iIsBreak: false, iIsNumber: false, iIsTasks: false, iShowHelpers: false, iShowSteps: false, iShowWins: false, iShowNotes: false, iHelpingEmpty: false, iTabHelping: false, iHasHelpers: false, iHasHelperChips: false, iHelperChips: [], iHasPhoto: false
     };
     if (selI) {
       const g = selI;
@@ -9845,10 +9968,10 @@ class Component extends DCLogic {
         iSetupOpen: !!s.iSetup, iSetupOpenA: s.iSetup ? 'true' : 'false', iSetupChev: s.iSetup ? 'rotate(180deg)' : 'none',
         iToggleSetup: () => this.setState({ iSetup: !this.state.iSetup }),
         iTabProgress: tabNow === 'progress', iTabDetails: tabNow === 'details', iTabHelping: tabNow === 'helping',
-        iCanOnDay: k !== 'reach', iOnDayA: g.onDay ? 'true' : 'false', iOnDayTrack: g.onDay ? '#2F5A3E' : '#B9AF9C', iOnDayKnob: g.onDay ? 23 : 3,
-        iOnDayHelp: (() => { const n = goals.filter(x => x.onDay && x.status === 'active' && x.kind !== 'reach').length; return 'Up to 4 can sit under your day list. ' + n + ' of 4 are showing.'; })(),
+        iCanOnDay: k === 'build' || k === 'break', iOnDayA: g.onDay ? 'true' : 'false', iOnDayTrack: g.onDay ? '#2F5A3E' : '#B9AF9C', iOnDayKnob: g.onDay ? 23 : 3,
+        iOnDayHelp: (() => { const n = goals.filter(x => x.onDay && x.status === 'active' && (x.kind === 'build' || x.kind === 'break')).length; return 'Up to 4 can sit under your day list. ' + n + ' of 4 are showing.'; })(),
         iToggleOnDay: () => {
-          const n = this.state.goals.filter(x => x.onDay && x.status === 'active' && x.kind !== 'reach' && x.id !== g.id).length;
+          const n = this.state.goals.filter(x => x.onDay && x.status === 'active' && (x.kind === 'build' || x.kind === 'break') && x.id !== g.id).length;
           if (!g.onDay && n >= 4) { this.setError('Four are already on your day page. Turn one off first.'); return; }
           upd({ onDay: !g.onDay });
         },
@@ -9998,6 +10121,94 @@ class Component extends DCLogic {
             sel2('mode', 'Track by', g.mode || 'both', [['limit', 'A weekly limit'], ['free', 'Free days'], ['both', 'Both']], (v) => upd({ mode: v })),
             num('limit', 'Weekly limit', g.limit, (v) => upd({ limit: Math.max(0, +v || 0) })),
             num('aim', 'Free days to aim for', g.aimFree, (v) => upd({ aimFree: Math.max(0, Math.min(7, +v || 0)) })),
+            num('startday', 'Started on', toISO(typeof g.startDay === 'number' ? g.startDay : 0), (v) => { if (v) upd({ startDay: Math.min(0, fromISO(v)) }); }, 'date')
+          ]
+        });
+      } else if (k === 'track') {
+        const tD = Math.min(0, (s.trkDay || {})[g.id] || 0);
+        const setDay = (d) => this.setState({ trkDay: Object.assign({}, this.state.trkDay || {}, { [g.id]: Math.min(0, d) }), trkDraft: null });
+        const dr = (s.trkDraft && s.trkDraft.id === g.id) ? s.trkDraft : { id: g.id, what: '', amt: '', tag: null };
+        const liveDr = () => (this.state.trkDraft && this.state.trkDraft.id === g.id) ? this.state.trkDraft : dr;
+        const setDr = (p) => this.setState({ trkDraft: Object.assign({}, liveDr(), p) });
+        const addEnt = (e) => {
+          const n5 = this.state.nextId;
+          this.setState({ nextId: n5 + 1, goals: this.state.goals.map(x => x.id === g.id ? Object.assign({}, x, { trkSet: true, tlog: (x.tlog || []).concat([Object.assign({ id: 'tl' + n5, d: tD }, e)]) }) : x) });
+        };
+        const addNow = () => {
+          const d2 = liveDr();
+          const v = parseFloat(d2.amt);
+          if (!(v >= 0)) { this.setError('Add an amount first.'); return; }
+          addEnt({ v: v, w: String(d2.what || '').trim(), l: d2.tag || '' });
+          this.setState({ trkDraft: { id: g.id, what: '', amt: '', tag: null } });
+        };
+        const unit = String(g.unit || '').trim();
+        const ents = (g.tlog || []).filter(e => e.d === tD);
+        const v0 = this.trkSum(g, tD);
+        const st0 = this.trkStatus(g, v0, ents.length > 0);
+        const dayLbl = tD === 0 ? 'Today' : (tD === -1 ? 'Yesterday' : this.DAYS[this.dowFor(tD)] + ', ' + this.MONTHS[this.dateFor(tD).getMonth()] + ' ' + this.dateFor(tD).getDate());
+        // recent: distinct what + amount, newest first
+        const seen = {}, recent = [];
+        ents.forEach(e => { if (e.w) seen[e.w.toLowerCase() + '|' + e.v] = 1; });
+        (g.tlog || []).slice().sort((a, b) => (b.d - a.d) || (String(b.id) < String(a.id) ? -1 : 1)).forEach(e => {
+          if (!e.w || recent.length >= 6) return;
+          const key = e.w.toLowerCase() + '|' + e.v;
+          if (seen[key]) return; seen[key] = 1;
+          recent.push({ label: e.w + ' · ' + this.trkFmt(g, e.v), add: () => addEnt({ v: e.v, w: e.w, l: liveDr().tag || e.l || '' }) });
+        });
+        // 14-day chart
+        const goal = +g.daily || 0;
+        const days = []; for (let d = -13; d <= 0; d++) { const lg = (g.tlog || []).some(e => e.d === d); const v = this.trkSum(g, d); days.push({ d: d, v: v, lg: lg, st: this.trkStatus(g, v, lg) }); }
+        const maxV = Math.max(goal * 1.2, ...days.map(x => x.v), 1);
+        const Y = (v) => Math.round(78 - v / maxV * 72);
+        const md = (d) => (this.dateFor(d).getMonth() + 1) + '/' + this.dateFor(d).getDate();
+        const logged = days.filter(x => x.lg), sum = logged.reduce((a, x) => a + x.v, 0), met = logged.filter(x => x.st.met).length;
+        const stats = [{ big: logged.length ? this.trkFmt(g, Math.round(sum / logged.length)) : '–', small: 'a day on average (days you logged)' }];
+        if (goal) stats.push({ big: met + ' of ' + logged.length, small: 'logged days ' + (g.aim === 'atMost' ? 'at or under ' : 'reaching ') + this.trkFmt(g, goal) });
+        else stats.push({ big: this.trkFmt(g, sum), small: 'in total' });
+        Object.assign(iVals, {
+          iIsTrack: true,
+          iTkShowStart: !(g.tlog || []).length && !g.trkSet,
+          iTkStarters: Object.keys(TRK_ST).map(key => ({ label: TRK_ST[key].label, pick: () => { const o = TRK_ST[key]; upd({ trkSet: true, title: (!g.title || g.title === 'New tracker') ? o.title : g.title, unit: o.unit, daily: o.daily, aim: o.aim, labels: o.labels.map(x => Object.assign({}, x)) }); } }))
+            .concat([{ label: 'Something else', pick: () => { upd({ trkSet: true }); this.setState({ iTab: 'details' }); } }]),
+          iTkDayLbl: dayLbl, iTkPrev: () => setDay(tD - 1), iTkNext: () => setDay(tD + 1), iTkNextDis: tD >= 0, iTkNextOp: tD >= 0 ? 0.35 : 1,
+          iTkNotToday: tD !== 0, iTkToday: () => setDay(0),
+          iTkTotal: (unit === '$' ? '$' : '') + this.trkNum(v0, unit === '$'), iTkGoalTxt: goal ? '/ ' + this.trkFmt(g, goal) : (unit === '$' ? '' : unit),
+          iTkHasGoal: !!goal, iTkPct: st0.pct, iTkBarCol: st0.bar, iTkLine: st0.line,
+          iTkChips: (g.labels || []).map(lb => {
+            const hasV = typeof lb.v === 'number', on = !hasV && dr.tag === lb.l;
+            return { label: lb.l + (hasV ? ' · ' + this.trkFmt(g, lb.v) : ''), on: on ? 'true' : 'false', tip: hasV ? 'Adds ' + this.trkFmt(g, lb.v) + ' right away' : 'Label your next entry ' + lb.l,
+              bg: on ? this.TK.t6E2F43 : '#FFFFFF', fg: on ? '#FFFFFF' : this.TK.t6E2F43, bd: on ? this.TK.t6E2F43 : this.TK.tE2B9C4,
+              tap: () => { if (hasV) addEnt({ v: lb.v, w: '', l: lb.l }); else setDr({ tag: on ? null : lb.l }); } };
+          }),
+          iTkHasChips: (g.labels || []).length > 0,
+          iTkWhat: dr.what, iTkAmt: dr.amt,
+          iTkOnWhat: (e) => setDr({ what: e.target.value }), iTkOnAmt: (e) => setDr({ amt: e.target.value }),
+          iTkWhatPh: dr.tag ? dr.tag + ': what was it? (optional)' : 'What was it? (optional)', iTkUnitPh: unit || 'Amount',
+          iTkKey: (e) => {
+            if (e.key !== 'Enter') return;
+            e.preventDefault();
+            const t = e.target, cur = Object.assign({}, liveDr());
+            if (t && t.id === 'tk-amt') cur.amt = t.value;
+            if (t && t.id === 'tk-what') cur.what = t.value;
+            this.state.trkDraft = cur;
+            if (t && t.id === 'tk-what' && !String(cur.amt || '').trim()) { this.setState({ trkDraft: cur }); try { const a = document.getElementById('tk-amt'); if (a) a.focus(); } catch (err) {} return; }
+            addNow();
+          },
+          iTkAdd: addNow,
+          iTkEntries: ents.map(e => ({ hasTag: !!e.l, tag: e.l || '', what: e.w || (e.l ? '' : 'Entry'), amt: this.trkFmt(g, e.v), aria: (e.w || e.l || 'entry') + ' ' + this.trkFmt(g, e.v),
+            remove: () => this.setState({ goals: this.state.goals.map(x => x.id === g.id ? Object.assign({}, x, { tlog: (x.tlog || []).filter(y => y.id !== e.id) }) : x) }) })),
+          iTkNoEntries: !ents.length, iTkEmptyTxt: tD === 0 ? 'Nothing logged today yet.' : 'Nothing logged on this day.',
+          iTkRecent: recent, iTkHasRecent: recent.length > 0,
+          iTkStats: stats,
+          iTkBars: days.filter(x => x.v > 0).map(x => { const i = x.d + 13; return { x: (i * 20 + 3).toFixed(1), y: Y(x.v), w: 14, h: Math.max(1, 78 - Y(x.v)), fill: x.st.over ? this.TK.t6E2F43 : (x.st.met || !goal ? this.TK.tA0526A : this.TK.tE2B9C4), ring: x.d === tD ? '#2B2722' : 'none', pick: () => setDay(x.d), tip: md(x.d) + ': ' + this.trkFmt(g, x.v) }; }),
+          iTkGoalY: Y(goal),
+          iTkLabels: days.map(x => ({ pct: (((x.d + 13) * 20 + 10) / 280 * 100).toFixed(2), t: this.DSHORT[this.dowFor(x.d)].charAt(0) })),
+          iTkAria: 'Daily totals for the last 14 days. ' + stats.map(x => x.big + ' ' + x.small).join('. '),
+          iFields: [
+            num('unit', 'Measured in', g.unit, (v) => upd({ unit: v }), 'text'),
+            num('daily', 'Daily goal (0 = none)', g.daily || 0, (v) => upd({ daily: Math.max(0, +v || 0) })),
+            sel2('aim', 'The goal means', g.aim || 'atLeast', [['atLeast', 'Reach at least this'], ['atMost', 'Stay at or under this']], (v) => upd({ aim: v })),
+            num('labels', 'Quick labels', this.trkLabelsStr(g), (v) => upd({ labels: this.trkParseLabels(v), trkSet: true }), 'text'),
             num('startday', 'Started on', toISO(typeof g.startDay === 'number' ? g.startDay : 0), (v) => { if (v) upd({ startDay: Math.min(0, fromISO(v)) }); }, 'date')
           ]
         });
@@ -11706,11 +11917,18 @@ class Component extends DCLogic {
           line: g.mode === 'free' ? 'Aiming for ' + (g.aimFree || 0) + ' free days a week' : 'Limit ' + (g.limit || 0) + ' a week',
           minus: () => setLog(g, n - 1), plus: () => setLog(g, n + 1) };
       });
+      const growTrack = D <= 0 ? (s.goals || []).filter(g => g.kind === 'track' && g.status === 'active').map(g => {
+        const v = this.trkSum(g, D), logged = (g.tlog || []).some(e => e.d === D), st = this.trkStatus(g, v, logged);
+        return { id: g.id, title: g.title || 'Tracker', total: this.trkTotalTxt(g, v), hasGoal: !!g.daily, pct: st.pct, bar: st.bar, fg: st.over ? this.TK.t6E2F43 : '#2B2722', line: st.line,
+          aria: (g.title || 'Tracker') + ', ' + this.trkTotalTxt(g, v) + '. ' + st.line + '. Open to log.',
+          open: () => this.setState({ view: 'goals', selGoal: g.id, iTab: 'progress', iSetup: false, sel: null, trkDraft: null, trkDay: Object.assign({}, this.state.trkDay || {}, { [g.id]: D }), mobilePage: (this.state.vw || 1194) < 900 ? 'right' : this.state.mobilePage }) };
+      }) : [];
       return Object.assign(out, {
+        growTrack: growTrack, hasGrowTrack: growTrack.length > 0,
         dtGrow: dayTab === 'grow', dtSchool: dayTab === 'school', dtMeals: dayTab === 'meals', dtJournal: dayTab === 'journal',
         dtShowStats: dayTab === 'list' || dayTab === 'done',
         dtMakers: makers, dtHasMakers: makers.length > 0, dtMkOpen: !!s.growMkOpen, dtMkOpenA: s.growMkOpen ? 'true' : 'false', dtMkChev: s.growMkOpen ? 'none' : 'rotate(-90deg)', dtMkToggle: () => this.setState({ growMkOpen: !this.state.growMkOpen }), dtMkSummary: makers.filter(m => m.when === 'done').length + ' of ' + makers.length + ' done', dtNoRings: intentRings.length === 0,
-        dtGrowEmpty: !growBuild.length && !growBreak.length && makers.length === 0,
+        dtGrowEmpty: !growBuild.length && !growBreak.length && !growTrack.length && makers.length === 0,
         growBuild: growBuild, hasGrowBuild: growBuild.length > 0, growBreak: growBreak, hasGrowBreak: growBreak.length > 0,
         growDayWord: D === 0 ? 'today' : D === 1 ? 'tomorrow' : 'on ' + this.DAYS[this.dowFor(D)],
         dtOpenGrow: () => this.setState({ view: 'goals', selGoal: '__glance', sel: null }),
