@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 12,
+  "version": 13,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
@@ -15,7 +15,8 @@
     "Winter: a snowy branch with red berries, a snowy meadow, and a basket that fills with pinecones (December to February)",
     "New winter friends: a chickadee who puffs up against the cold, and a bunny in a scarf whose ears perk up",
     "More winter friends: a cardinal who hops, a sleepy bear cub who peeks with one eye, and a fox curled in her tail",
-    "Christmas: fairy lights on Christmas Eve; colorful lights and a snowman friend on Christmas Day"
+    "Christmas: fairy lights on Christmas Eve; colorful lights and a snowman friend on Christmas Day",
+    "Autumn (September to November): a branch with orange and gold leaves, a meadow with mushrooms and a little pumpkin, and a basket that fills with acorns. The squirrel is back"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -268,6 +269,99 @@
         "driftY": 118
       },
       {
+        "id": "autumn-leaves",
+        "name": "Autumn leaves",
+        "months": [
+          9,
+          10,
+          11
+        ],
+        "perch": 0.89,
+        "under": [
+          {
+            "page": "L",
+            "anchor": "spread",
+            "src": "branch-autumn.webp",
+            "ar": 3.229,
+            "h": 285,
+            "y": -26,
+            "padH": 190
+          },
+          {
+            "page": "R",
+            "anchor": "spread",
+            "src": "branch-autumn.webp",
+            "ar": 3.229,
+            "h": 285,
+            "y": -26,
+            "padH": 190
+          },
+          {
+            "page": "L",
+            "anchor": "spreadBottom",
+            "src": "grass-autumn.webp",
+            "h": 90,
+            "y": 0
+          },
+          {
+            "page": "R",
+            "anchor": "spreadBottom",
+            "src": "grass-autumn.webp",
+            "h": 90,
+            "y": 0
+          }
+        ],
+        "extras": [],
+        "pile": {
+          "page": "R",
+          "anchor": "underPerch",
+          "x": 120,
+          "y": 2,
+          "w": 84,
+          "h": 106,
+          "states": [
+            {
+              "src": "basket-autumn-0.webp",
+              "pct": 0
+            },
+            {
+              "src": "basket-autumn-1.webp",
+              "pct": 1
+            },
+            {
+              "src": "basket-autumn-2.webp",
+              "pct": 34
+            },
+            {
+              "src": "basket-autumn-3.webp",
+              "pct": 67
+            },
+            {
+              "src": "basket-autumn-4.webp",
+              "pct": 100
+            }
+          ],
+          "dx": -58,
+          "per": "day"
+        },
+        "item": {
+          "name": "acorn",
+          "src": "acorn-autumn.webp",
+          "w": 15,
+          "h": 17
+        },
+        "driftY": 118,
+        "quotes": [
+          "Gather what you can; let the rest fall.",
+          "Even small acorns grow into something strong.",
+          "Slow down and notice the colors.",
+          "Change can be beautiful too.",
+          "One acorn at a time.",
+          "It's okay to rest and store up your energy.",
+          "Little by little, the basket fills."
+        ]
+      },
+      {
         "id": "winter-snow",
         "name": "Winter snow",
         "months": [
@@ -373,7 +467,7 @@
             "w": 126,
             "h": 74,
             "x": 56,
-            "y": 54,
+            "y": 41,
             "holds": {
               "x": -2,
               "y": 49
