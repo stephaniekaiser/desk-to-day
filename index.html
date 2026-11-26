@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 4:25 PM';</script>
+<script>window.__plannerBuild = 'Nov 25, 4:30 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -341,7 +341,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button role="radio" aria-checked="{{ds.checked}}" onClick="{{ds.set}}" style="height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: {{ds.bg}}; color: {{ds.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; box-shadow: {{ds.shadow}}; white-space: nowrap">{{ds.label}}</button>
 </sc-for>
 </div>
-<label for="desk-group" style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Group by</label>
+<sc-if value="{{deskGroupOn}}" hint-placeholder-val="{{ true }}"><label for="desk-group" style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Group by</label></sc-if>
 <sc-if value="{{deskWhenOpt}}" hint-placeholder-val="{{ false }}"><select id="desk-group" value="{{deskGroupVal}}" onChange="{{onDeskGroup}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><option value="when">When</option><option value="category">Category</option><option value="size">Size</option><option value="age">Age</option><option value="flag">Flag</option><option value="none">None (my order)</option></select></sc-if><sc-if value="{{deskNoWhen}}" hint-placeholder-val="{{ true }}"><select id="desk-group" value="{{deskGroupVal}}" onChange="{{onDeskGroup}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><option value="category">Category</option><option value="size">Size</option><option value="age">Age</option><option value="flag">Flag</option><option value="none">None (my order)</option></select></sc-if>
 <div style="flex: 1 1 160px; min-width: 140px; position: relative; display: flex; align-items: center">
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A8174" stroke-width="2.2" stroke-linecap="round" style="position: absolute; left: 9px; pointer-events: none"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
@@ -355,6 +355,32 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-if>
 <div class="scrollbox" style="flex: {{listFlex}}; min-height: {{listMin}}; overflow-y: auto; padding-right: 4px; margin-top: 8px">
+<sc-if value="{{deskDoneMode}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px; margin-bottom: 20px">
+<sc-for list="{{deskDoneGroups}}" as="dg" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column">
+<div style="display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 4px 2px; border-bottom: 1px solid {{TK.tE2B9C4}}">
+<span aria-hidden="true" style="width: 8px; height: 8px; flex: none; border-radius: 4px; background: {{TK.tE2B9C4}}"></span>
+<span style="font-size: calc(12px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; text-transform: uppercase; letter-spacing: 0.12em">{{dg.name}}</span>
+<span style="margin-left: auto; font-size: calc(12px * {{fsK}}); color: #8A7A7E">{{dg.meta}}</span>
+<button onClick="{{dg.act}}" aria-label="{{dg.actAria}}" style="height: 26px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 13px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">Un-check all</button>
+</div>
+<sc-for list="{{dg.rows}}" as="d" hint-placeholder-count="2">
+<div style="display: flex; align-items: center; gap: 6px; min-height: calc(42px * {{rowK}}); border-bottom: 1px solid #EFE7D6; padding-left: 2px">
+<button onClick="{{d.undo}}" aria-label="Mark {{d.title}} not done" title="Not done after all" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; color: #3F7A5A; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: #6B6358; text-decoration: line-through; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.title}}</span>
+<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #7A7064">{{d.when}}</span>
+</div>
+</sc-for>
+</div>
+</sc-for>
+<sc-if value="{{deskDoneEmpty}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 14px 4px; font-size: calc(13px * {{fsK}}); color: #7A7064">{{deskDoneEmptyMsg}}</div>
+</sc-if>
+</div>
+</sc-if>
 <sc-for list="{{sections}}" as="sec" hint-placeholder-count="3">
 <div style="display: flex; flex-direction: column; margin-bottom: calc(20px * {{rowK}})">
 <div onDragOver="{{sec.over}}" onDrop="{{sec.drop}}" style="display: flex; align-items: center; gap: 8px; min-height: 30px; box-sizing: border-box; padding: 4px 2px; border-bottom: 1px solid {{sec.line}}; background: {{sec.headBg}}; border-radius: 4px 4px 0 0">
@@ -6879,6 +6905,10 @@ class Component extends DCLogic {
   }
 
   // ---------- completion ----------
+  undoneMany(ids) {
+    (ids || []).forEach((id, i) => setTimeout(() => this.setTaskDone(id, false, null, true), i * 25));
+    if (ids && ids.length > 1) setTimeout(() => this.setToast(ids.length + ' tasks are back on your list.'), ids.length * 25 + 40);
+  }
   setTaskDone(id, done, day, sure) {
     const s = this.state;
     const t = s.tasks.find(x => x.id === id);
@@ -7976,7 +8006,25 @@ class Component extends DCLogic {
     if (deskQ) {
       if (!leftTasks.length) sections = [{ letter: '', name: allMode ? allName : 'Unplanned', color: this.THEME.sec.N.ink, line: this.THEME.sec.N.line, metaFg: this.THEME.sec.N.meta, meta: '', rows: [], isEmpty: true, emptyText: 'Nothing ' + (allMode ? 'anywhere' : 'on your desk') + ' matches "' + String(s.deskQ).trim() + '".', headBg: 'transparent', zoneBg: 'transparent', over: (e) => e.preventDefault(), drop: (e) => this.dropTask(e, { bucket: 'desk' }), notCollapsible: true }];
     }
-    const deskElsewhere = deskQ ? s.tasks.filter(t => (allMode ? t.done : t.bucket !== 'desk') && qWhy(t)).sort((a2, b2) => (a2.done - b2.done)).slice(0, 10).map(t => {
+    const doneMode = isDesk && s.settings.deskShow === 'done';
+    let deskDoneGroups = [], deskDoneEmpty = false, deskDoneEmptyMsg = '';
+    if (doneMode) {
+      const N = this.THEME.sec.N, byDay = {};
+      s.tasks.filter(t => t.done && (!deskQ || qWhy(t))).forEach(t => { const k = typeof t.doneDay === 'number' ? t.doneDay : 'x'; (byDay[k] = byDay[k] || []).push(t); });
+      const keys = Object.keys(byDay).filter(k => k !== 'x').map(Number).sort((a, b) => b - a);
+      if (byDay.x) keys.push('x');
+      const dayName = (d) => d === 'x' ? 'Earlier' : d === 0 ? 'Today' : d === -1 ? 'Yesterday' : d === 1 ? 'Tomorrow' : this.DSHORT[this.dowFor(d)] + ' ' + this.MONTHS[this.dateFor(d).getMonth()] + ' ' + this.dateFor(d).getDate();
+      deskDoneGroups = keys.map(k => {
+        const list = byDay[k];
+        return { name: dayName(k), meta: list.length + ' done', act: () => this.undoneMany(list.map(t => t.id)), actAria: 'Un-check all ' + list.length + ' finished on ' + dayName(k),
+          rows: list.map(t => { const w = deskQ ? qWhy(t) : ''; return { title: (t.groupId && s.groups[t.groupId] && String(t.title || '').indexOf(s.groups[t.groupId].title) !== 0 ? s.groups[t.groupId].title + ' · ' : '') + t.title, when: (w && w !== 'title' ? w + ' · ' : '') + this.fmtDur(t.mins || 0), undo: () => this.setTaskDone(t.id, false, null, true) }; }) };
+      });
+      deskDoneEmpty = !keys.length;
+      deskDoneEmptyMsg = deskQ ? 'No finished task matches "' + String(s.deskQ).trim() + '".' : 'Nothing finished yet. Tasks you check off will show up here.';
+      sections = [];
+      this._deskGroupIds = [];
+    }
+    const deskElsewhere = deskQ && !doneMode ? s.tasks.filter(t => (allMode ? t.done : t.bucket !== 'desk') && qWhy(t)).sort((a2, b2) => (a2.done - b2.done)).slice(0, 10).map(t => {
       const scd = sm[t.id];
       const where = t.done ? 'Done' + (typeof t.doneDay === 'number' ? ' ' + this.MONTHS[this.dateFor(t.doneDay).getMonth()] + ' ' + this.dateFor(t.doneDay).getDate() : '')
         : scd ? this.DSHORT[this.dowFor(scd.day)] + ' ' + this.MONTHS[this.dateFor(scd.day).getMonth()] + ' ' + this.dateFor(scd.day).getDate() + ' · ' + this.fmtTime(scd.start, false)
@@ -11842,11 +11890,11 @@ class Component extends DCLogic {
       deskQ: s.deskQ || '', onDeskQ: (e) => this.setState({ deskQ: e.target.value }), deskQOn: !!String(s.deskQ || '').trim(),
       deskQClear: () => this.setState({ deskQ: '' }),
       deskQKey: (e) => { if (e.key === 'Escape') this.setState({ deskQ: '' }); },
-      deskElse: deskElsewhere, deskHasElse: deskElsewhere.length > 0,
+      deskElse: deskElsewhere, deskHasElse: deskElsewhere.length > 0, deskDoneMode: doneMode, deskDoneGroups: deskDoneGroups, deskDoneEmpty: doneMode && deskDoneEmpty, deskDoneEmptyMsg: deskDoneEmptyMsg,
       deskGroupVal: this._deskGby || 'category',
       onDeskGroup: (e) => { const v = e.target.value; if (this.state.settings.deskShow === 'all' || this.state.settings.deskShow === 'planned') this.setSetting({ deskGroupAll: v || 'when' }); else this.setSetting({ deskGroup: v || 'category' }); },
-      deskShowBtns: [['desk', 'Unplanned'], ['planned', 'Planned'], ['all', 'All tasks']].map(o => { const on = (s.settings.deskShow === 'all' || s.settings.deskShow === 'planned' ? s.settings.deskShow : 'desk') === o[0]; return { label: o[1], checked: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? this.TK.t6E2F43 : '#6B6358', shadow: on ? '0 1px 2px rgba(0,0,0,0.15)' : 'none', set: () => this.setSetting({ deskShow: o[0] }) }; }),
-      deskWhenOpt: s.settings.deskShow === 'all' || s.settings.deskShow === 'planned', deskNoWhen: !(s.settings.deskShow === 'all' || s.settings.deskShow === 'planned'),
+      deskShowBtns: [['desk', 'Unplanned'], ['planned', 'Planned'], ['all', 'All'], ['done', 'Done']].map(o => { const on = (['all', 'planned', 'done'].indexOf(s.settings.deskShow) >= 0 ? s.settings.deskShow : 'desk') === o[0]; return { label: o[1], checked: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? this.TK.t6E2F43 : '#6B6358', shadow: on ? '0 1px 2px rgba(0,0,0,0.15)' : 'none', set: () => this.setSetting({ deskShow: o[0] }) }; }),
+      deskWhenOpt: s.settings.deskShow === 'all' || s.settings.deskShow === 'planned', deskNoWhen: !(s.settings.deskShow === 'all' || s.settings.deskShow === 'planned' || s.settings.deskShow === 'done'), deskGroupOn: s.settings.deskShow !== 'done',
       deskCanFold: isDesk && (this._deskGby || 'category') !== 'none' && (this._deskGroupIds || []).length > 1,
       deskFoldLabel: (() => { const g = this._deskGby || 'category', c = (s.settings.deskClosed || {})[g] || {}; const ids = this._deskGroupIds || []; return ids.length && ids.every(id => c[id]) ? 'Expand all' : 'Collapse all'; })(),
       deskFoldAll: () => { const g = this._deskGby || 'category', all = Object.assign({}, this.state.settings.deskClosed || {}), c = all[g] || {}, ids = this._deskGroupIds || []; const allClosed = ids.length && ids.every(id => c[id]); const next = {}; if (!allClosed) ids.forEach(id => { next[id] = true; }); all[g] = next; this.setSetting({ deskClosed: all }); },
