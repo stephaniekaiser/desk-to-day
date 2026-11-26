@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 6:53 PM';</script>
+<script>window.__plannerBuild = 'Nov 26, 7:34 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -65,7 +65,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </helmet>
 <div style="width: 100%; height: 100vh; height: 100dvh; min-height: 560px; box-sizing: border-box; padding: {{rootPad}}; padding-top: calc({{rootPadTop}} + env(safe-area-inset-top, 0px)); padding-bottom: calc({{rootPadTop}} + env(safe-area-inset-bottom, 0px)); background: {{bdDesk}}; font-family: {{TK.fBody}}; color: #2B2722; display: flex; flex-direction: column; gap: 10px">
 <sc-if value="{{showPageToggle}}" hint-placeholder-val="{{ false }}">
-<div role="tablist" aria-label="Which page" style="flex: none; align-self: center; display: flex; gap: 4px; background: {{TK.t6E2F43}}; border-radius: 14px; padding: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); width: 100%; max-width: 520px; box-sizing: border-box">
+<div role="tablist" aria-label="Which page" style="flex: none; align-self: center; display: flex; gap: 4px; background: {{mBarBg}}; border: {{mBarBorder}}; border-radius: 14px; padding: 4px; box-shadow: {{mBarShadow}}; width: 100%; max-width: 520px; box-sizing: border-box">
 <button role="tab" aria-selected="{{mLeftSel}}" onClick="{{mShowLeft}}" onDragEnter="{{mDragLeft}}" onDragOver="{{mDragLeft}}" style="flex: 1; height: 44px; border: 0; border-radius: 10px; background: {{mLeftBg}}; color: {{mLeftFg}}; font-size: calc(15px * {{fsK}}); font-weight: 700">{{mLeftLabel}}</button>
 <button role="tab" aria-selected="{{mRightSel}}" onClick="{{mShowRight}}" onDragEnter="{{mDragRight}}" onDragOver="{{mDragRight}}" style="flex: 1; height: 44px; border: 0; border-radius: 10px; background: {{mRightBg}}; color: {{mRightFg}}; font-size: calc(15px * {{fsK}}); font-weight: 700">{{mRightLabel}}</button>
 </div>
@@ -11937,10 +11937,14 @@ class Component extends DCLogic {
       mRightLabel: ({ day: 'Calendar', week: 'This week', month: 'Day details', desk: 'This week', settings: 'Options', goals: 'Details', notes: 'Page', school: 'Course', meals: 'Meal list', journal: 'Entry' })[s.view] || 'Calendar',
       mLeftSel: s.mobilePage === 'left' ? 'true' : 'false',
       mRightSel: s.mobilePage === 'right' ? 'true' : 'false',
-      mLeftBg: s.mobilePage === 'left' ? '#FBF7EE' : (s.sel && s.sel.drag ? this.TK.tA0526A : 'transparent'),
-      mRightBg: s.mobilePage === 'right' ? '#FBF7EE' : (s.sel && s.sel.drag ? this.TK.tA0526A : 'transparent'),
-      mLeftFg: s.mobilePage === 'left' ? this.TK.t6E2F43 : 'rgba(255,255,255,0.85)',
-      mRightFg: s.mobilePage === 'right' ? this.TK.t6E2F43 : 'rgba(255,255,255,0.85)',
+      // Storybook themes: a paper switch with the theme's own color for the open page
+      ...(() => {
+        const td = this.themeDef(s.settings.theme), sb = td && td.kind === 'storybook', on = sb ? ((td.tabPal || [])[0] || this.TK.t6E2F43) : '#FBF7EE';
+        const bg = (side) => s.mobilePage === side ? on : (s.sel && s.sel.drag ? this.TK.tA0526A : 'transparent');
+        const fg = (side) => s.mobilePage === side ? (sb ? '#FFFFFF' : this.TK.t6E2F43) : (sb ? '#6B5A50' : 'rgba(255,255,255,0.85)');
+        return { mLeftBg: bg('left'), mRightBg: bg('right'), mLeftFg: fg('left'), mRightFg: fg('right'),
+          mBarBg: sb ? (td.pageBg || '#F8F3EA') : this.TK.t6E2F43, mBarBorder: sb ? '1px solid rgba(140,115,90,0.28)' : '0', mBarShadow: sb ? '0 2px 8px rgba(0,0,0,0.18)' : '0 2px 8px rgba(0,0,0,0.25)' };
+      })(),
       mShowLeft: () => this.setState({ mobilePage: 'left' }),
       mShowRight: () => this.setState({ mobilePage: 'right' }),
       mDragLeft: (e) => { if (this.drag) { try { e.preventDefault(); } catch (err) {} this.dragFlip('left'); } },
