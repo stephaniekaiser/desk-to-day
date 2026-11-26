@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 8,
+  "version": 9,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
@@ -11,7 +11,8 @@
     "New friend: a hedgehog by the basket who sniffs and smiles when a blossom lands",
     "New friend: a caterpillar on the branch who reaches up and nudges a blossom loose",
     "New friend: a bee who loops around her flower while a blossom drifts down",
-    "The basket under the branch fills with blossoms as you finish the day's Must do and Should do, and starts fresh each morning"
+    "The basket under the branch fills with blossoms as you finish the day's Must do and Should do, and starts fresh each morning",
+    "Winter: a snowy branch with red berries, a snowy meadow, and a basket that fills with pinecones (December to February)"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -262,6 +263,90 @@
           "h": 17
         },
         "driftY": 118
+      },
+      {
+        "id": "winter-snow",
+        "name": "Winter snow",
+        "months": [
+          12,
+          1,
+          2
+        ],
+        "perch": 0.89,
+        "under": [
+          {
+            "page": "L",
+            "anchor": "spread",
+            "src": "branch-winter.webp",
+            "ar": 4.068,
+            "h": 226,
+            "y": -26,
+            "padH": 190
+          },
+          {
+            "page": "R",
+            "anchor": "spread",
+            "src": "branch-winter.webp",
+            "ar": 4.068,
+            "h": 226,
+            "y": -26,
+            "padH": 190
+          },
+          {
+            "page": "L",
+            "anchor": "spreadBottom",
+            "src": "grass-winter.webp",
+            "h": 104,
+            "y": 0
+          },
+          {
+            "page": "R",
+            "anchor": "spreadBottom",
+            "src": "grass-winter.webp",
+            "h": 104,
+            "y": 0
+          }
+        ],
+        "extras": [],
+        "pile": {
+          "page": "R",
+          "anchor": "underPerch",
+          "x": 120,
+          "y": 2,
+          "w": 84,
+          "h": 106,
+          "states": [
+            {
+              "src": "basket-winter-0.webp",
+              "pct": 0
+            },
+            {
+              "src": "basket-winter-1.webp",
+              "pct": 1
+            },
+            {
+              "src": "basket-winter-2.webp",
+              "pct": 34
+            },
+            {
+              "src": "basket-winter-3.webp",
+              "pct": 67
+            },
+            {
+              "src": "basket-winter-4.webp",
+              "pct": 100
+            }
+          ],
+          "dx": -58,
+          "per": "day"
+        },
+        "item": {
+          "name": "pinecone",
+          "src": "pinecone.webp",
+          "w": 15,
+          "h": 17
+        },
+        "driftY": 118
       }
     ],
     "casts": [
@@ -283,7 +368,11 @@
             }
           }
         ],
-        "moment": "drop"
+        "moment": "drop",
+        "sets": [
+          "spring-blossom",
+          "winter-snow"
+        ]
       },
       {
         "id": "bee",
@@ -312,6 +401,9 @@
         ],
         "hide": [
           "bee.webp"
+        ],
+        "sets": [
+          "spring-blossom"
         ]
       },
       {
@@ -334,6 +426,9 @@
               "y": 21
             }
           }
+        ],
+        "sets": [
+          "spring-blossom"
         ]
       },
       {
@@ -364,6 +459,10 @@
         ],
         "hide": [
           "snail.webp"
+        ],
+        "sets": [
+          "spring-blossom",
+          "winter-snow"
         ]
       },
       {
@@ -396,7 +495,10 @@
         "nudge": {
           "x": 58,
           "y": 46
-        }
+        },
+        "sets": [
+          "spring-blossom"
+        ]
       }
     ],
     "quote": "underDate",
