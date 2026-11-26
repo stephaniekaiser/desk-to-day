@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 9,
+  "version": 10,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
@@ -12,7 +12,8 @@
     "New friend: a caterpillar on the branch who reaches up and nudges a blossom loose",
     "New friend: a bee who loops around her flower while a blossom drifts down",
     "The basket under the branch fills with blossoms as you finish the day's Must do and Should do, and starts fresh each morning",
-    "Winter: a snowy branch with red berries, a snowy meadow, and a basket that fills with pinecones (December to February)"
+    "Winter: a snowy branch with red berries, a snowy meadow, and a basket that fills with pinecones (December to February)",
+    "New winter friends: a chickadee who puffs up against the cold, and a bunny in a scarf whose ears perk up"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -507,6 +508,61 @@
         },
         "sets": [
           "spring-blossom"
+        ]
+      },
+      {
+        "id": "chickadee",
+        "name": "A chickadee on the branch",
+        "moment": "drop",
+        "sets": [
+          "winter-snow"
+        ],
+        "over": [
+          {
+            "page": "R",
+            "anchor": "onStrip",
+            "src": "chickadee-1.webp",
+            "srcFlap": "chickadee-2.webp",
+            "shake": true,
+            "w": 84,
+            "h": 57,
+            "x": 56,
+            "y": 79,
+            "holds": {
+              "x": 0,
+              "y": 8
+            }
+          }
+        ]
+      },
+      {
+        "id": "bunny",
+        "name": "A bunny in a scarf",
+        "sets": [
+          "winter-snow"
+        ],
+        "over": [
+          {
+            "page": "R",
+            "anchor": "byPile",
+            "src": "bunny-1.webp",
+            "w": 64,
+            "h": 73,
+            "x": 6,
+            "y": 3,
+            "frames": [
+              {
+                "src": "bunny-2.webp",
+                "from": 1.3,
+                "to": 2.3
+              },
+              {
+                "src": "bunny-3.webp",
+                "from": 2.3,
+                "to": 3.4
+              }
+            ]
+          }
         ]
       }
     ],
