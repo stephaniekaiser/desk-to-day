@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 13,
+  "version": 14,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
@@ -16,7 +16,8 @@
     "New winter friends: a chickadee who puffs up against the cold, and a bunny in a scarf whose ears perk up",
     "More winter friends: a cardinal who hops, a sleepy bear cub who peeks with one eye, and a fox curled in her tail",
     "Christmas: fairy lights on Christmas Eve; colorful lights and a snowman friend on Christmas Day",
-    "Autumn (September to November): a branch with orange and gold leaves, a meadow with mushrooms and a little pumpkin, and a basket that fills with acorns. The squirrel is back"
+    "Autumn (September to November): a branch with orange and gold leaves, a meadow with mushrooms and a little pumpkin, and a basket that fills with acorns. The squirrel is back",
+    "New autumn friends: a sleepy owlet who blinks awake, and a chipmunk who puffs her cheeks"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -477,6 +478,80 @@
         "moment": "drop",
         "sets": [
           "autumn-leaves"
+        ]
+      },
+      {
+        "id": "owlet",
+        "name": "An owlet on the branch",
+        "moment": "drop",
+        "sets": [
+          "autumn-leaves"
+        ],
+        "dropDelay": 0.5,
+        "over": [
+          {
+            "page": "R",
+            "anchor": "onStrip",
+            "src": "owlet-1.webp",
+            "w": 59,
+            "h": 63,
+            "x": 56,
+            "y": 54,
+            "holds": {
+              "x": 4,
+              "y": 31
+            },
+            "xfade": 0.15,
+            "frames": [
+              {
+                "src": "owlet-2.webp",
+                "from": 0.0,
+                "to": 0.6
+              },
+              {
+                "src": "owlet-3.webp",
+                "from": 0.6,
+                "to": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "chipmunk",
+        "name": "A chipmunk on the branch",
+        "moment": "drop",
+        "sets": [
+          "autumn-leaves"
+        ],
+        "dropDelay": 0.6,
+        "over": [
+          {
+            "page": "R",
+            "anchor": "onStrip",
+            "src": "chipmunk-1.webp",
+            "w": 77,
+            "h": 66,
+            "x": 56,
+            "y": 50,
+            "holds": {
+              "x": 55,
+              "y": 33
+            },
+            "xfade": 0.15,
+            "frames": [
+              {
+                "src": "chipmunk-2.webp",
+                "from": 0.0,
+                "to": 0.7
+              },
+              {
+                "src": "chipmunk-3.webp",
+                "from": 0.7,
+                "to": 1.7
+              }
+            ]
+          }
         ]
       },
       {
