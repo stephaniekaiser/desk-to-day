@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 7:34 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 7:47 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3264,23 +3264,25 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{a.hId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{a.timeLabel}}</label>
 <div style="display: flex; align-items: center; gap: 4px"><input id="{{a.hId}}" type="number" onFocus="{{selAll}}" min="0" max="99" inputmode="numeric" value="{{a.hVal}}" onChange="{{ndIn}}" onInput="{{ndIn}}" onBlur="{{a.onH}}" onKeyDown="{{ndKey}}" readOnly="{{a.timeRO}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: {{a.timeBg}}; padding: 0 4px; width: 44px; text-align: center"><span style="display: flex; flex-direction: column; flex: none"><button onClick="{{a.hUp}}" aria-label="One hour more" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{a.hDown}}" aria-label="One hour less" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span><label for="{{a.mId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Minutes</label><select id="{{a.mId}}" value="{{a.mVal}}" onChange="{{a.onM}}" disabled="{{a.timeRO}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: {{a.timeBg}}; padding: 0 2px"><option value="0">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">m</span></div></div>
 </div>
-<sc-if value="{{a.showPlan}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px">
-<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
-<span style="flex: 1; min-width: 120px; font-size: calc(13px * {{fsK}}); color: #4A443B">{{a.planLine}}</span>
-<sc-if value="{{a.canPlan}}" hint-placeholder-val="{{ false }}"><button onClick="{{a.planIt}}" style="height: 32px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{a.planBtn}}</button></sc-if>
+<div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap"><span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Work on it</span><span style="flex: 1; min-width: 120px; font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{a.workLine}}</span></div>
+<sc-for list="{{a.work}}" as="wk" hint-placeholder-count="1">
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<label for="{{wk.dId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Work day</label>
+<input id="{{wk.dId}}" type="date" value="{{wk.dateVal}}" onChange="{{wk.onDate}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}})">
+<label for="{{wk.tId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Time (optional, puts it on the calendar)</label>
+<input id="{{wk.tId}}" type="time" value="{{wk.timeVal}}" onChange="{{wk.onTime}}" title="Optional: a time puts it on your calendar" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); width: 112px">
+<label for="{{wk.mId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">How long</label>
+<select id="{{wk.mId}}" value="{{wk.minsVal}}" onChange="{{wk.onMins}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}})"><sc-for list="{{wk.minsOpts}}" as="mo" hint-placeholder-count="3"><option value="{{mo.v}}">{{mo.l}}</option></sc-for></select>
+<sc-if value="{{wk.isDone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #3F7A5A">{{wk.doneTxt}}</span></sc-if>
+<button onClick="{{wk.remove}}" aria-label="Remove this work day" title="Remove this work day" style="width: 30px; height: 30px; flex: none; margin-left: auto; border: 0; border-radius: 15px; background: transparent; color: #9A4A3A; padding: 0; font-size: 18px; line-height: 1">×</button>
 </div>
-<sc-if value="{{a.pvOn}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; gap: 2px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 8px; padding: 4px 10px">
-<sc-for list="{{a.pvRows}}" as="pr" hint-placeholder-count="3"><div style="display: flex; align-items: center; gap: 8px; min-height: 26px; font-size: calc(13px * {{fsK}}); color: #2B2722"><span aria-hidden="true" style="width: 6px; height: 6px; flex: none; border-radius: 3px; background: {{TK.tC9849A}}"></span><span style="flex: none; width: 56px; font-weight: 600">{{pr.label}}</span><span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #4A443B">{{pr.name}}</span><span style="font-weight: 700; color: {{TK.t6E2F43}}">{{pr.mins}}</span></div></sc-for>
+</sc-for>
+<div style="display: flex; align-items: center; gap: 10px">
+<button onClick="{{a.workAdd}}" style="height: 30px; border: 0; background: transparent; padding: 0 2px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{a.workAddLabel}}</button>
+<sc-if value="{{a.workMany}}" hint-placeholder-val="{{ false }}"><button onClick="{{a.workClear}}" style="margin-left: auto; height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear all</button></sc-if>
 </div>
-<div style="display: flex; gap: 8px; justify-content: flex-end">
-<button onClick="{{a.pvCancel}}" style="height: 30px; padding: 0 10px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Cancel</button>
-<button onClick="{{a.pvApprove}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{a.pvLabel}}</button>
 </div>
-</sc-if>
-</div>
-</sc-if>
 <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Links</span>
 <sc-for list="{{a.links}}" as="al" hint-placeholder-count="2">
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
@@ -4582,7 +4584,7 @@ class Component extends DCLogic {
     this.DL = 1440;
     this.DEFAULTS = {
       fadeScheduled: true, dayStart: 360, dayEnd: 1260, weekStart: 0, defaultZoom: 'whole',
-      defaultMins: 30, defaultPri: 'B', landing: 'ask', breakAt: 60,
+      defaultMins: 30, defaultPri: 'B', schoolWorkPri: 'B', landing: 'ask', breakAt: 60,
       missCheck: true, goalNudge: false, overbook: true, buffer: 100, cheer: 'normal', cleanupDay: 0, showDoneFor: 'week', rollover: 'tomorrow',
       remindBefore: 10, morningNudge: true, eveningNudge: true, weeklyNudge: true,
       dense: false, clock12: true, textSize: 'normal'
@@ -5043,6 +5045,34 @@ class Component extends DCLogic {
     });
     out.title = titleParts.join(', ');
     return out;
+  }
+  // ---------- assignment work days: you pick the days; each is a real task linked to the assignment ----------
+  asWorkTasks(c, a) { return this.asSessions(c, a).filter(t => !t.stepId); }
+  asWorkAdd(cid, aid) {
+    const s = this.state, c = (s.courses || []).find(x => x.id === cid); if (!c) return;
+    const a = (c.assignments || []).find(x => x.id === aid); if (!a) return;
+    const have = this.asWorkTasks(c, a), planned = have.reduce((q, t) => q + (t.mins || 0), 0);
+    const day = 0, mins = a.mins && a.mins > planned ? a.mins - planned : (a.mins || 60);
+    const verb = a.kind === 'exam' ? 'Study for ' : '';
+    const t = { id: 't' + s.nextId, title: (c.title || 'Course') + ': ' + verb + (a.title || 'Assignment'), pri: s.settings.schoolWorkPri || 'B', mins: mins, bucket: 'week', weekOf: this.weekStartOff(day), dayAssign: day, cat: this.schoolCatOf(s.cats) || null, courseId: c.id, assignmentId: a.id, planned: true };
+    this.setState({ tasks: s.tasks.concat([t]), nextId: s.nextId + 1 });
+  }
+  asWorkSet(tid, p) {
+    const s = this.state, t = s.tasks.find(x => x.id === tid); if (!t) return;
+    const sc = this.schedMap()[tid];
+    const day = p.day != null ? p.day : (sc ? sc.day : t.dayAssign);
+    const start = p.start !== undefined ? p.start : (sc ? sc.start : null);
+    const mins = p.mins || t.mins || 30;
+    const pb = Object.assign({}, s.placedByDay);
+    if (sc) pb[String(sc.day)] = (pb[String(sc.day)] || []).filter(b => b.taskId !== tid);
+    if (typeof start === 'number' && typeof day === 'number') pb[String(day)] = (pb[String(day)] || []).concat([{ id: 'p' + s.nextId, taskId: tid, mins: mins, start: start }]);
+    const tasks = s.tasks.map(x => x.id === tid ? Object.assign({}, x, { dayAssign: day, weekOf: typeof day === 'number' ? this.weekStartOff(day) : x.weekOf, bucket: 'week', mins: mins }) : x);
+    this.setState({ tasks: tasks, placedByDay: pb, nextId: s.nextId + 1 });
+  }
+  asWorkRemove(ids) {
+    const s = this.state, gone = {}; (ids || []).forEach(id => { gone[id] = true; });
+    const pb = {}; Object.keys(s.placedByDay).forEach(k => { pb[k] = (s.placedByDay[k] || []).filter(b => !gone[b.taskId]); });
+    this.setState({ tasks: s.tasks.filter(t => !gone[t.id]), placedByDay: pb });
   }
   asSessions(c, a) { return (this.state.tasks || []).filter(t => t.courseId === c.id && t.assignmentId === a.id); }
   // Spreads the work left on an assignment over the days before it is due. Nothing is saved here.
@@ -6964,7 +6994,18 @@ class Component extends DCLogic {
     if (done) this.holdBasket();
     const tasks = s.tasks.map(x => x.id === id ? Object.assign({}, x, { done: done, doneDay: done ? day : null }) : x);
     const stepSync = t.stepId && t.courseId && t.assignmentId ? { courses: (s.courses || []).map(c => c.id !== t.courseId ? c : Object.assign({}, c, { assignments: (c.assignments || []).map(a => a.id !== t.assignmentId ? a : Object.assign({}, a, { checklist: (a.checklist || []).map(it => it.id === t.stepId ? Object.assign({}, it, { done: done }) : it) })) })) } : {};
-    this.setState(Object.assign({ tasks: tasks, missFor: null, sel: null }, stepSync));
+    let asgSync = {};
+    if (t.assignmentId && t.courseId && !t.stepId) {
+      const mine = tasks.filter(x => x.courseId === t.courseId && x.assignmentId === t.assignmentId && !x.stepId);
+      const allDone = mine.length > 0 && mine.every(x => x.done);
+      const base = stepSync.courses || s.courses || [];
+      const c0 = base.find(c => c.id === t.courseId), a0 = c0 && (c0.assignments || []).find(a => a.id === t.assignmentId);
+      if (a0 && (done ? allDone && !a0.done : a0.done)) {
+        asgSync = { courses: base.map(c => c.id !== t.courseId ? c : Object.assign({}, c, { assignments: (c.assignments || []).map(a => a.id !== t.assignmentId ? a : Object.assign({}, a, { done: done })) })) };
+        if (done) setTimeout(() => this.setToast('"' + (a0.title || 'Assignment') + '" is done.'), 900);
+      }
+    }
+    this.setState(Object.assign({ tasks: tasks, missFor: null, sel: null }, stepSync, asgSync));
     if (done) this.sceneCelebrate(); else this.basketRecount(t.doneDay);
     const b3ws = this.weekStartOff(typeof day === 'number' ? day : 0);
     const b3 = (s.big3ByWeek[b3ws] || []).filter(Boolean);
@@ -10363,6 +10404,7 @@ class Component extends DCLogic {
         seg('Default length', 'defaultMins', [[0, 'No time'], [15, '15m'], [30, '30m'], [60, '1h']], 'For anything you add with quick add.'),
         seg('New tasks land on', 'landing', [['desk', 'My Desk'], ['week', 'Current list'], ['ask', 'Ask me']], 'Ask me = My Desk, with a quick button to move it.'),
         seg('When a task lands on a day', 'defaultPri', [['A', 'Must do'], ['B', 'Should do'], ['C', 'Could do']], 'You can always drag it to another section.'),
+        seg('School work days land in', 'schoolWorkPri', [['A', 'Must do'], ['B', 'Should do'], ['C', 'Could do']], 'Where an assignment shows up on the days you pick to work on it.'),
         seg('Offer "Break it up" over', 'breakAt', [[30, '30m'], [60, '1h'], [90, '1h 30m'], [120, '2h']], 'Tasks longer than this get the button.')
         ], '', 'new'),
         G('When things don\'t get done', [
@@ -10970,7 +11012,27 @@ class Component extends DCLogic {
                 clOnDraft: (e) => { const v = e.target.value; if (/\n/.test(v)) { const lines = v.split(/\r?\n/).map(x => x.replace(/^\s*(?:[-*•]|\d+[.)]|\[[ xX]?\])\s*/, '').trim()).filter(Boolean); let n = this.state.nextId; const items = lines.map(x => ({ id: 'ck' + (n++), text: x, done: false })); updA(a.id, x => ({ checklist: (x.checklist || []).concat(items) })); this.setState({ nextId: n, asCl: '', asClFor: a.id }); return; } this.setState({ asCl: v, asClFor: a.id }); },
                 clKey: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const v = ((e.target && e.target.value) || '').trim(); if (!v) return; const n = this.state.nextId; updA(a.id, x => ({ checklist: (x.checklist || []).concat([{ id: 'ck' + n, text: v, done: false }]) })); this.setState({ nextId: n + 1, asCl: '', asClFor: a.id }); } },
                 planLine: planned ? this.fmtDur(planned) + ' planned' + (doneM ? ' · ' + this.fmtDur(doneM) + ' done' : '') + (a.mins ? ' of ' + this.fmtDur(a.mins) : '') : (a.mins ? 'Not planned yet' : 'Add the time needed to plan it'),
-                showPlan: !!a.mins || !!planned || prop.length > 0 || (stepsLeftA.length > 0 && typeof a.due === 'number'),
+                showPlan: false,
+                work: (() => {
+                  const sm5 = this.schedMap(), hm = (m) => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+                  const opts = [15, 30, 45, 60, 90, 120, 150, 180, 240, 300, 360];
+                  return this.asWorkTasks(sel, a).map(t => {
+                    const sc = sm5[t.id], day = sc ? sc.day : t.dayAssign;
+                    return { id: t.id, dId: 'awd-' + t.id, tId: 'awt-' + t.id, mId: 'awm-' + t.id,
+                      dateVal: typeof day === 'number' ? this.isoFor(day) : '', timeVal: sc ? hm(sc.start) : '',
+                      minsVal: String(t.mins || 30), minsOpts: opts.concat(opts.indexOf(t.mins) < 0 && t.mins ? [t.mins] : []).sort((x, y) => x - y).map(m => ({ v: String(m), l: this.fmtDur(m) })),
+                      isDone: !!t.done, notDone: !t.done, doneTxt: 'Done',
+                      onDate: (e) => { const v = e.target.value; if (v) this.asWorkSet(t.id, { day: this.offFromISO(v) }); },
+                      onTime: (e) => { const v = e.target.value; if (!v) { this.asWorkSet(t.id, { start: null }); return; } const q = v.split(':'); this.asWorkSet(t.id, { start: (+q[0]) * 60 + (+q[1] || 0) }); },
+                      onMins: (e) => { const v = parseInt(e.target.value, 10) || 30; this.asWorkSet(t.id, { mins: v }); },
+                      remove: () => this.asWorkRemove([t.id]) };
+                  });
+                })(),
+                workAdd: () => this.asWorkAdd(sel.id, a.id),
+                workAddLabel: this.asWorkTasks(sel, a).length ? '+ Add another day' : '+ Pick a day to work on it',
+                workClear: () => this.asWorkRemove(this.asWorkTasks(sel, a).filter(t => !t.done).map(t => t.id)),
+                workMany: this.asWorkTasks(sel, a).filter(t => !t.done).length > 1,
+                workLine: (() => { const w = this.asWorkTasks(sel, a), pm = w.reduce((q, t) => q + (t.mins || 0), 0); return w.length ? this.fmtDur(pm) + ' planned' + (a.mins ? ' of ' + this.fmtDur(a.mins) : '') + ' · ' + w.filter(t => t.done).length + ' of ' + w.length + ' done' : 'Pick the day (or days) you will work on it. A time puts it on your calendar too.'; })(),
                 pvLabel: stepsLeftA.length ? 'Add them to my week' : 'Add these sessions',
                 planBtn: stepsLeftA.length ? 'Plan the steps before the due date' : 'Plan it before the due date',
                 stepsTimed: stepsTimedA, timeRO: stepsTimedA,
