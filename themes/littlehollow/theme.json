@@ -951,9 +951,9 @@
             "page": "R",
             "anchor": "byPileR",
             "src": "scarecrow-1.webp",
-            "w": 88,
-            "h": 152,
-            "x": 6,
+            "w": 160,
+            "h": 280,
+            "x": 12,
             "y": 2,
             "frames": [
               {
@@ -1039,7 +1039,7 @@
         ],
         "cast": "halloween",
         "pile": {
-          "dx": -150
+          "dx": -200
         },
         "quotes": [
           "A little magic in every small step."
