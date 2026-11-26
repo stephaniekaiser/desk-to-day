@@ -492,8 +492,8 @@
             "page": "R",
             "anchor": "byPile",
             "src": "raccoon-1.webp",
-            "w": 83,
-            "h": 68,
+            "w": 137,
+            "h": 112,
             "x": 6,
             "y": 3,
             "frames": [
@@ -650,8 +650,8 @@
             "page": "R",
             "anchor": "byPile",
             "src": "hedgehog-1.webp",
-            "w": 66,
-            "h": 48,
+            "w": 80,
+            "h": 58,
             "x": 6,
             "y": 3,
             "frames": [
@@ -746,8 +746,8 @@
             "page": "R",
             "anchor": "byPile",
             "src": "bear-1.webp",
-            "w": 82,
-            "h": 55,
+            "w": 161,
+            "h": 108,
             "x": 6,
             "y": 3,
             "frames": [
@@ -813,8 +813,8 @@
             "page": "R",
             "anchor": "byPile",
             "src": "bunny-1.webp",
-            "w": 64,
-            "h": 73,
+            "w": 112,
+            "h": 128,
             "x": 6,
             "y": 3,
             "frames": [
@@ -843,8 +843,8 @@
             "page": "R",
             "anchor": "byPile",
             "src": "fox-1.webp",
-            "w": 82,
-            "h": 73,
+            "w": 169,
+            "h": 150,
             "x": 6,
             "y": 3,
             "frames": [
@@ -871,8 +871,8 @@
             "page": "R",
             "anchor": "byPileR",
             "src": "snowman-1.webp",
-            "w": 104,
-            "h": 154,
+            "w": 172,
+            "h": 255,
             "x": 8,
             "y": 2,
             "frames": [
@@ -899,8 +899,8 @@
             "page": "R",
             "anchor": "byPileR",
             "src": "turkey-1.webp",
-            "w": 132,
-            "h": 122,
+            "w": 233,
+            "h": 215,
             "x": 10,
             "y": 2,
             "frames": [
@@ -1012,7 +1012,7 @@
           "Merry Christmas. Rest is a gift too."
         ],
         "pile": {
-          "dx": -150
+          "dx": -215
         }
       },
       {
@@ -1024,7 +1024,7 @@
         ],
         "cast": "turkey",
         "pile": {
-          "dx": -150
+          "dx": -260
         },
         "quotes": [
           "Grateful for every small step."
