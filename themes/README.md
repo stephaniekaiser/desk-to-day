@@ -38,3 +38,5 @@ Scene piece anchors: `spread` (top strip across both pages), `spreadBottom` (rep
 **Special days:** `scene.specials: [{id, date: "MM-DD", sets, swap: {"<piece src>": {src, ar, h, padH}}, cast, quotes}]`. On that date (and during those sets) the listed pieces are swapped, the named cast visits instead of the day's friend, and the quotes replace the usual ones. A cast with `sets: []` only ever appears on special days.
 
 **More special-day options:** `rule: "nth:M:D:N"` matches the Nth weekday D (0 = Sunday) of month M (Thanksgiving = `nth:11:4:4`). `pile: {dx}` nudges the basket that day. `anchor: byPileR` stands a piece right of the basket. A piece with `arrive: {walk: [frames], from, dur}` walks in from the right when you arrive on the Day page, then shows its normal pose.
+
+`anchor: pageR` stands a piece on the grass at the page's right edge (`x` = gap from the edge, `tuck` = how much the basket may tuck under it); the basket moves left to make room.

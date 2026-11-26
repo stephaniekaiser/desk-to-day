@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 15,
+  "version": 16,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
@@ -18,7 +18,8 @@
     "Christmas: fairy lights on Christmas Eve; colorful lights and a snowman friend on Christmas Day",
     "Autumn (September to November): a branch with orange and gold leaves, a meadow with mushrooms and a little pumpkin, and a basket that fills with acorns. The squirrel is back",
     "New autumn friends: a sleepy owlet who blinks awake, and a chipmunk who puffs her cheeks",
-    "New autumn friend: a raccoon by the basket. Special days: a turkey on Thanksgiving; on Halloween a black cat walks along the branch and a pumpkin scarecrow tips his hat"
+    "New autumn friend: a raccoon by the basket. Special days: a turkey on Thanksgiving; on Halloween a black cat walks along the branch and a pumpkin scarecrow tips his hat",
+    "Summer (June to August): a leafy branch with berries, a daisy meadow, and a basket that fills with berries. Holiday friends now stand at the right edge of the page"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -269,6 +270,99 @@
           "h": 17
         },
         "driftY": 118
+      },
+      {
+        "id": "summer-meadow",
+        "name": "Summer meadow",
+        "months": [
+          6,
+          7,
+          8
+        ],
+        "perch": 0.89,
+        "under": [
+          {
+            "page": "L",
+            "anchor": "spread",
+            "src": "branch-summer.webp",
+            "ar": 3.229,
+            "h": 285,
+            "y": -26,
+            "padH": 190
+          },
+          {
+            "page": "R",
+            "anchor": "spread",
+            "src": "branch-summer.webp",
+            "ar": 3.229,
+            "h": 285,
+            "y": -26,
+            "padH": 190
+          },
+          {
+            "page": "L",
+            "anchor": "spreadBottom",
+            "src": "grass-summer.webp",
+            "h": 96,
+            "y": 0
+          },
+          {
+            "page": "R",
+            "anchor": "spreadBottom",
+            "src": "grass-summer.webp",
+            "h": 96,
+            "y": 0
+          }
+        ],
+        "extras": [],
+        "pile": {
+          "page": "R",
+          "anchor": "underPerch",
+          "x": 120,
+          "y": 2,
+          "w": 84,
+          "h": 106,
+          "states": [
+            {
+              "src": "basket-summer-0.webp",
+              "pct": 0
+            },
+            {
+              "src": "basket-summer-1.webp",
+              "pct": 1
+            },
+            {
+              "src": "basket-summer-2.webp",
+              "pct": 34
+            },
+            {
+              "src": "basket-summer-3.webp",
+              "pct": 67
+            },
+            {
+              "src": "basket-summer-4.webp",
+              "pct": 100
+            }
+          ],
+          "dx": -58,
+          "per": "day"
+        },
+        "item": {
+          "name": "strawberry",
+          "src": "strawberry.webp",
+          "w": 15,
+          "h": 17
+        },
+        "driftY": 118,
+        "quotes": [
+          "Bloom where you are, at your own pace.",
+          "A sunny little step still counts.",
+          "Let today be light and kind.",
+          "Sweet things grow slowly.",
+          "One berry at a time.",
+          "Rest in the shade when you need to.",
+          "You are growing, even now."
+        ]
       },
       {
         "id": "autumn-leaves",
@@ -869,11 +963,11 @@
         "over": [
           {
             "page": "R",
-            "anchor": "byPileR",
+            "anchor": "pageR",
             "src": "snowman-1.webp",
             "w": 172,
             "h": 255,
-            "x": 8,
+            "x": 6,
             "y": 2,
             "frames": [
               {
@@ -886,7 +980,8 @@
                 "from": 2.3,
                 "to": 3.4
               }
-            ]
+            ],
+            "tuck": 14
           }
         ]
       },
@@ -897,11 +992,11 @@
         "over": [
           {
             "page": "R",
-            "anchor": "byPileR",
+            "anchor": "pageR",
             "src": "turkey-1.webp",
             "w": 233,
             "h": 215,
-            "x": 10,
+            "x": 6,
             "y": 2,
             "frames": [
               {
@@ -914,7 +1009,8 @@
                 "from": 2.3,
                 "to": 3.4
               }
-            ]
+            ],
+            "tuck": 14
           }
         ]
       },
@@ -949,11 +1045,11 @@
           },
           {
             "page": "R",
-            "anchor": "byPileR",
+            "anchor": "pageR",
             "src": "scarecrow-1.webp",
             "w": 160,
             "h": 280,
-            "x": 12,
+            "x": 6,
             "y": 2,
             "frames": [
               {
@@ -966,7 +1062,8 @@
                 "from": 2.3,
                 "to": 3.4
               }
-            ]
+            ],
+            "tuck": 14
           }
         ]
       }
@@ -1010,10 +1107,7 @@
         },
         "quotes": [
           "Merry Christmas. Rest is a gift too."
-        ],
-        "pile": {
-          "dx": -215
-        }
+        ]
       },
       {
         "id": "thanksgiving",
@@ -1023,9 +1117,6 @@
           "autumn-leaves"
         ],
         "cast": "turkey",
-        "pile": {
-          "dx": -260
-        },
         "quotes": [
           "Grateful for every small step."
         ]
@@ -1038,9 +1129,6 @@
           "autumn-leaves"
         ],
         "cast": "halloween",
-        "pile": {
-          "dx": -200
-        },
         "quotes": [
           "A little magic in every small step."
         ]
