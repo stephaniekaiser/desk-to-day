@@ -346,7 +346,16 @@
           "w": 15,
           "h": 17
         },
-        "driftY": 118
+        "driftY": 118,
+        "quotes": [
+          "Rest is part of the season too.",
+          "Even bare branches are getting ready to bloom.",
+          "Slow and cozy still counts.",
+          "Small steps leave footprints in the snow.",
+          "Keep a little warmth for yourself today.",
+          "Quiet days are growing days.",
+          "One pinecone at a time."
+        ]
       }
     ],
     "casts": [
