@@ -1010,19 +1010,11 @@
             "h": 150,
             "x": 10,
             "y": 2,
-            "xfade": 0.15,
-            "frames": [
-              {
-                "src": "butterfly-2.webp",
-                "from": 1.3,
-                "to": 1.7
-              },
-              {
-                "src": "butterfly-3.webp",
-                "from": 1.7,
-                "to": 3.3
-              }
-            ]
+            "srcFlap": "butterfly-3.webp",
+            "flutter": true,
+            "flapSpeed": 0.22,
+            "flapAt": 0.4,
+            "flapCount": 10
           }
         ]
       },
