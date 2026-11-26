@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 9:09 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 9:19 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -487,7 +487,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-if>
 <label for="{{t.editId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
-<input id="{{t.editId}}" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
+<input id="{{t.editId}}" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fBody}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 <sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
 <div style="border: 1px solid {{TK.tEBC3CD}}; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px; display: flex; flex-direction: column; gap: 4px">
 <div style="display: flex; align-items: center; gap: 8px">
@@ -1119,7 +1119,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 <sc-if value="{{sheetIsGroup}}" hint-placeholder-val="{{ false }}">
 <label for="sheet-name" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
-<input id="sheet-name" value="{{sheetTitle}}" onChange="{{onSheetName}}" onInput="{{onSheetName}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(26px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
+<input id="sheet-name" value="{{sheetTitle}}" onChange="{{onSheetName}}" onInput="{{onSheetName}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fBody}}; font-size: calc(26px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 </sc-if>
 <p style="margin: 0; font-size: calc(14px * {{fsK}}); color: #6B6358">{{sheetSub}}</p>
 </header>
@@ -1847,7 +1847,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{evOpen}}" hint-placeholder-val="{{ false }}">
 <div role="dialog" aria-label="{{evHeading}}" style="position: absolute; left: 96px; top: {{evPopTop}}px; width: 330px; box-sizing: border-box; padding: 10px 12px 6px; background: {{popBg}}; border: 1px solid #E6DCC8; border-radius: 12px; box-shadow: 0 10px 26px rgba(60,40,20,0.16); display: flex; flex-direction: column; gap: 10px; z-index: 5">
 <label for="evname" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Event name</label>
-<input id="evname" autoFocus="{{ true }}" value="{{evTitle}}" onChange="{{evOnTitle}}" onKeyDown="{{evKey}}" placeholder="Event name" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
+<input id="evname" autoFocus="{{ true }}" value="{{evTitle}}" onChange="{{evOnTitle}}" onKeyDown="{{evKey}}" placeholder="Event name" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fBody}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <label for="evdate" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{evDateLabel}}</label>
@@ -2233,7 +2233,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span aria-hidden="true" style="position: absolute; left: 40px; top: 0; bottom: 0; width: 2px; background: #EBC4BD"></span>
 </sc-if>
 <label for="ntitle" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Page title</label>
-<input id="ntitle" value="{{nTitle}}" onChange="{{nOnTitle}}" autoFocus="{{nTitleFocus}}" placeholder="Give this page a title" style="outline-color: {{TK.tA0526A}}; flex: none; height: 46px; box-sizing: border-box; border: 0; border-bottom: 2px solid #2B2722; background: transparent; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(32px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; border-radius: 6px">
+<input id="ntitle" value="{{nTitle}}" onChange="{{nOnTitle}}" autoFocus="{{nTitleFocus}}" placeholder="Give this page a title" style="outline-color: {{TK.tA0526A}}; flex: none; height: 46px; box-sizing: border-box; border: 0; border-bottom: 2px solid #2B2722; background: transparent; padding: 0 8px; font-family: {{TK.fBody}}; font-size: calc(32px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; border-radius: 6px">
 <div style="flex: none; font-size: calc(12px * {{fsK}}); color: #6B6358; padding: 4px 2px 8px">{{nMeta}}</div>
 
 <sc-if value="{{nTyped}}" hint-placeholder-val="{{ true }}">
@@ -2371,7 +2371,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; align-items: center; gap: 6px; font-size: calc(11px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: {{iKindColor}}; font-weight: 700">
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{iKindIcon}}"></path></svg>{{iKindLabel}}</div>
 <label for="gtitle" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Intention</label>
-<input id="gtitle" value="{{gTitle}}" onChange="{{gOnTitle}}" style="outline-color: {{TK.tA0526A}}; height: 46px; box-sizing: border-box; border: 0; border-bottom: 1px solid #E6DCC8; background: transparent; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(32px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; border-radius: 6px">
+<input id="gtitle" value="{{gTitle}}" onChange="{{gOnTitle}}" style="outline-color: {{TK.tA0526A}}; height: 46px; box-sizing: border-box; border: 0; border-bottom: 1px solid #E6DCC8; background: transparent; padding: 0 8px; font-family: {{TK.fBody}}; font-size: calc(32px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; border-radius: 6px">
 </div>
 
 <section aria-label="My why" style="flex: none; border: 1px solid {{TK.tEBC3CD}}; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; background: #FFFFFF">
@@ -2381,7 +2381,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </button>
 <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 14px 10px; background: linear-gradient(180deg, rgba(60,22,34,0) 0%, rgba(60,22,34,0.55) 45%, rgba(60,22,34,0.78) 100%); display: flex; flex-direction: column; gap: 2px">
 <label for="gwhy" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: {{TK.tF6C7D1}}">My why</label>
-<textarea id="gwhy" value="{{gWhy}}" onChange="{{gOnWhy}}" rows="2" placeholder="When this gets hard, what do you want to remember?" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 0; padding: 4px 8px; font-family: {{TK.fHead}}; font-style: italic; font-size: calc(18px * {{fsK}}); line-height: 1.3; color: #FFFFFF; background: transparent; resize: none; text-shadow: 0 1px 2px rgba(0,0,0,0.35); border-radius: 6px"></textarea>
+<textarea id="gwhy" value="{{gWhy}}" onChange="{{gOnWhy}}" rows="2" placeholder="When this gets hard, what do you want to remember?" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 0; padding: 4px 8px; font-family: {{TK.fBody}}; font-style: italic; font-size: calc(18px * {{fsK}}); line-height: 1.3; color: #FFFFFF; background: transparent; resize: none; text-shadow: 0 1px 2px rgba(0,0,0,0.35); border-radius: 6px"></textarea>
 </div>
 <div style="position: absolute; top: 8px; left: 8px; display: flex; gap: 6px">
 <label title="Add your own photo" aria-label="Add your own photo" style="position: relative; width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: rgba(255,255,255,0.88); color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.15)">
@@ -2993,7 +2993,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <div style="flex: 1; min-width: 0">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700; margin-bottom: 2px">Course</div>
 <label for="sc-title" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Course name</label>
-<input id="sc-title" value="{{scTitle}}" onChange="{{scOnTitle}}" placeholder="Course name" style="outline-color: {{TK.tA0526A}}; width: 100%; box-sizing: border-box; border: 0; padding: 0 8px; background: transparent; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(30px * {{fsK}}); line-height: 1.15; color: {{TK.t6E2F43}}; outline-offset: 2px; border-radius: 6px">
+<input id="sc-title" value="{{scTitle}}" onChange="{{scOnTitle}}" placeholder="Course name" style="outline-color: {{TK.tA0526A}}; width: 100%; box-sizing: border-box; border: 0; padding: 0 8px; background: transparent; font-family: {{TK.fBody}}; font-weight: 600; font-size: calc(30px * {{fsK}}); line-height: 1.15; color: {{TK.t6E2F43}}; outline-offset: 2px; border-radius: 6px">
 </div>
 <button onClick="{{scToggleFinished}}" aria-label="{{scFinishLabel}}" title="{{scFinishLabel}}" style="width: 34px; height: 34px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 17px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{scFinishIcon}}"></path></svg></button>
 <button onClick="{{scDel}}" aria-label="Remove course" title="Remove course" style="width: 34px; height: 34px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 17px; background: #FFFFFF; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"></path></svg></button>
@@ -3469,7 +3469,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 </sc-if>
 <label for="j-full" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Journal entry</label>
-<textarea id="j-full" value="{{jSelText}}" onChange="{{jSelOnText}}" placeholder="How did it go? What helped, what got in the way? Tap the mic on your keyboard to talk instead." style="outline-color: {{TK.tA0526A}}; flex: 1; min-height: 160px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 12px; padding: 14px 16px; font-family: {{TK.fHead}}; font-size: calc(18px * {{fsK}}); line-height: 1.55; color: #2B2722; background: #FFFFFF; resize: none"></textarea>
+<textarea id="j-full" value="{{jSelText}}" onChange="{{jSelOnText}}" placeholder="How did it go? What helped, what got in the way? Tap the mic on your keyboard to talk instead." style="outline-color: {{TK.tA0526A}}; flex: 1; min-height: 160px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 12px; padding: 14px 16px; font-family: {{TK.fBody}}; font-size: calc(18px * {{fsK}}); line-height: 1.55; color: #2B2722; background: #FFFFFF; resize: none"></textarea>
 <div style="display: flex; align-items: center; gap: 10px">
 <button onClick="{{jSelOpenDay}}" style="height: 32px; border: 0; background: transparent; padding: 0; color: {{TK.tA0526A}}; font-size: calc(13px * {{fsK}}); font-weight: 600">{{jSelOpenLabel}}</button>
 <span style="flex: 1"></span>
@@ -3633,7 +3633,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <label for="{{t.editId}}-r" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
 <div style="display: flex; align-items: center; gap: 8px">
 <button role="checkbox" aria-checked="{{t.doneA}}" onClick="{{t.markDone}}" aria-label="{{t.doneTip}}" title="{{t.doneTip}}" style="width: 28px; height: 28px; flex: none; border: 2px solid #3F7A5A; border-radius: 14px; background: {{t.doneBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button>
-<input id="{{t.editId}}-r" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="flex: 1; min-width: 0; height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fHead}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
+<input id="{{t.editId}}-r" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="flex: 1; min-width: 0; height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fBody}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 </div>
 <sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
 <div style="border: 1px solid {{TK.tEBC3CD}}; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px; display: flex; flex-direction: column; gap: 4px">
