@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 8:25 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 8:44 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -486,7 +486,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-if>
 <sc-if value="{{t.editInline}}" hint-placeholder-val="{{ false }}">
-<div style="margin: 2px 0 10px 32px; padding: 10px 12px 6px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-top: 4px solid {{TK.tE2B9C4}}; border-radius: 12px; box-shadow: 0 6px 18px rgba(60,40,20,0.10); display: flex; flex-direction: column; gap: 10px">
+<div data-taskedit="1" style="margin: 2px 0 10px 32px; padding: 10px 12px 6px; background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-top: 4px solid {{TK.tE2B9C4}}; border-radius: 12px; box-shadow: 0 6px 18px rgba(60,40,20,0.10); display: flex; flex-direction: column; gap: 10px">
 <sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; align-items: center; gap: 6px; margin-bottom: -4px">
 <span style="height: 22px; display: inline-flex; align-items: center; gap: 5px; padding: 0 8px; border-radius: 11px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(10.5px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M11 4a8 8 0 1 0 9 9h-9z"></path><path d="M14 2.5v7.5h7.5A7.5 7.5 0 0 0 14 2.5z" fill="currentColor"></path></svg>Slice</span>
@@ -525,7 +525,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </div>
 </sc-if>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 14px">
 <sc-if value="{{t.showDayPri}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">On today's list</span>
@@ -577,18 +577,17 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-if>
 </div>
-<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<div style="grid-column: span 2; display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">When</span>
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
 <label for="{{t.whenDayId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Day</label>
 <select id="{{t.whenDayId}}" value="{{t.whenDayVal}}" onChange="{{t.onWhenDay}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenDayOpts}}" as="wo" hint-placeholder-count="8"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
 <label for="{{t.whenTimeId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Time</label>
-<input id="{{t.whenTimeId}}" type="time" value="{{t.whenTime}}" onChange="{{t.onWhenTime}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722">
+<select id="{{t.whenTimeId}}" value="{{t.whenTime}}" onChange="{{t.onWhenTime}}" title="A time puts it on the calendar" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenTimeOpts}}" as="wo" hint-placeholder-count="3"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
 <sc-if value="{{t.hasTime}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.clearTime}}" title="Take it off the calendar" aria-label="Take it off the calendar" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear time</button></sc-if>
 </div>
-<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064">{{t.whenNote}}</span>
 </div>
-<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Length</span>
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
 <div style="display: flex; align-items: center; gap: 4px">
@@ -663,9 +662,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg>
 </button>
 <span style="flex: 1"></span>
-<button onClick="{{t.save}}" aria-label="Done (changes are saved as you go)" title="Done" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; margin-left: 2px">
-<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
-</button>
+<button onClick="{{t.save}}" aria-label="Close" title="Close (your changes are kept)" style="width: 32px; height: 32px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 16px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+
 </div>
 </div>
 </sc-if>
@@ -3529,7 +3527,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </sc-if>
 
 <sc-if value="{{edOn}}" hint-placeholder-val="{{ false }}">
-<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 9; box-sizing: border-box; background: {{pageBg}}; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
+<div data-taskedit="1" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 9; box-sizing: border-box; background: {{pageBg}}; border-radius: {{rightRadius}}; padding: 22px 24px 18px 40px; display: flex; flex-direction: column; gap: 10px">
 <sc-for list="{{edRows}}" as="t" hint-placeholder-count="1">
 <header style="display: flex; align-items: center; gap: 8px">
 <div style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">{{t.edHead}}</div>
@@ -3630,18 +3628,17 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 </sc-if>
 </div>
-<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<div style="grid-column: span 2; display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">When</span>
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
 <label for="{{t.whenDayId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Day</label>
 <select id="{{t.whenDayId}}" value="{{t.whenDayVal}}" onChange="{{t.onWhenDay}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenDayOpts}}" as="wo" hint-placeholder-count="8"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
 <label for="{{t.whenTimeId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Time</label>
-<input id="{{t.whenTimeId}}" type="time" value="{{t.whenTime}}" onChange="{{t.onWhenTime}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722">
+<select id="{{t.whenTimeId}}" value="{{t.whenTime}}" onChange="{{t.onWhenTime}}" title="A time puts it on the calendar" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenTimeOpts}}" as="wo" hint-placeholder-count="3"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
 <sc-if value="{{t.hasTime}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.clearTime}}" title="Take it off the calendar" aria-label="Take it off the calendar" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear time</button></sc-if>
 </div>
-<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064">{{t.whenNote}}</span>
 </div>
-<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Length</span>
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
 <div style="display: flex; align-items: center; gap: 4px">
@@ -3658,7 +3655,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 </div>
 <div style="display: flex; flex-direction: column; gap: 4px">
 <label for="{{t.noteId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Notes</label>
-<textarea id="{{t.noteId}}" value="{{t.noteVal}}" onChange="{{t.onNote}}" rows="3" placeholder="Details, links, addresses, confirmation numbers…" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E8DFCC; border-radius: 8px; padding: 6px 9px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFDF8; resize: vertical; min-height: 40px"></textarea>
+<textarea id="{{t.noteId}}" value="{{t.noteVal}}" onChange="{{t.onNote}}" onInput="{{t.onNote}}" rows="2" placeholder="Details, links, addresses, confirmation numbers…" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E8DFCC; border-radius: 8px; padding: 6px 9px; font: inherit; font-size: calc({{tAreaFs}}px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFDF8; resize: vertical; min-height: 40px"></textarea>
 </div>
 <div style="display: flex; flex-direction: column; gap: 2px">
 <div style="display: flex; align-items: baseline; gap: 8px">
@@ -4825,6 +4822,15 @@ class Component extends DCLogic {
       if (vw !== this.state.vw || vh !== this.state.vh || touch !== !!this.state.touch) this.setState({ vw: vw, vh: vh, touch: touch });
     };
     try { window.addEventListener('resize', this.onResize); } catch (err) {}
+    this.onOutsideTap = (e) => {
+      try {
+        const id = this.state.editing; if (!id) return;
+        const tg = e.target; if (!tg || !tg.closest || !tg.isConnected) return;
+        if (tg.closest('[data-taskedit]')) return;
+        const r = this._edSaveFn; if (r && r.id === id) r.fn(); else setTimeout(() => this.closeTaskEdit(id), 0);
+      } catch (err) {}
+    };
+    try { document.addEventListener('click', this.onOutsideTap, true); } catch (err) {}
     this.onResize();
     try { this.pageRO = new ResizeObserver(() => this.measurePages()); this.pageRO.observe(document.body); } catch (err) {}
     setTimeout(() => this.measurePages(), 300);
@@ -7069,12 +7075,8 @@ class Component extends DCLogic {
     const s = this.state, o = this._editOrig && this._editOrig.id === id ? this._editOrig : null; this._editOrig = null;
     const t = s.tasks.find(x => x.id === id);
     const tasks = t && t.title !== String(t.title || '').trim() ? s.tasks.map(x => x.id === id ? Object.assign({}, x, { title: String(x.title).trim() || o && o.task.title || x.title }) : x) : s.tasks;
+    if (s.editing !== id) { if (tasks !== s.tasks) this.setState({ tasks: tasks }); return; }
     this.setState({ tasks: tasks, editing: null, editDraft: null, catMenu: null, whereMenu: null });
-    if (!o || !t) return;
-    const keys = ['title', 'pri', 'flag', 'cat', 'mins', 'note', 'bucket', 'weekOf', 'dayAssign'];
-    if (!keys.some(k => String((o.task[k] === undefined ? null : o.task[k])).trim() !== String((t[k] === undefined ? null : t[k])).trim()) && o.placedByDay === s.placedByDay) return;
-    this.setState({ toast: { msg: 'Changes saved.', label: 'Undo', action: () => { this.setState({ tasks: this.state.tasks.map(x => x.id === id ? o.task : x), placedByDay: o.placedByDay, toast: null }); } } });
-    clearTimeout(this.toastTimer); this.toastTimer = setTimeout(() => this.setState({ toast: null }), 5000);
   }
   holdBasket() { const s = this.state; if (s.view === 'day') this._basketHold = { d: s.day, p: this.dayBasketPct(s, s.day) }; }
   setTaskDone(id, done, day, sure) {
@@ -7797,6 +7799,7 @@ class Component extends DCLogic {
       dTitle: dv.title,
       editKey: (e) => { if (e.key === 'Enter') { const v = e.target.value; patchDraft({ title: v }); setTimeout(() => { commitDraft(); this.setState({ editing: null, catMenu: null, whereMenu: null }); }, 0); } else if (e.key === 'Escape') this.setState({ editing: null, editDraft: null, catMenu: null, whereMenu: null }); },
       save: () => { clearTimeout(this._edCommitT); commitDraft(); setTimeout(() => this.closeTaskEdit(t.id), 0); },
+      _edReg: s.editing === t.id ? (this._edSaveFn = { id: t.id, fn: () => { clearTimeout(this._edCommitT); commitDraft(); setTimeout(() => this.closeTaskEdit(t.id), 0); } }) && null : null,
       cancel: () => { clearTimeout(this._edCommitT); commitDraft(); setTimeout(() => this.closeTaskEdit(t.id), 0); },
       doneA: t.done ? 'true' : 'false', doneLabel: t.done ? 'Done' : 'Mark done', doneTip: t.done ? 'Done. Tap to mark it not done' : 'Mark this task done',
       doneBg: t.done ? '#3F7A5A' : '#FFFFFF', doneFg: t.done ? '#FFFFFF' : '#3F7A5A',
@@ -7841,6 +7844,7 @@ class Component extends DCLogic {
       whenDayVal: (() => { const d = sc ? sc.day : dv.day; return typeof d === 'number' ? String(d) : ''; })(),
       whenDayOpts: (() => { const cur = sc ? sc.day : dv.day; const o = [{ v: '', l: 'No day yet' }]; const set = {}; for (let d = 0; d <= 27; d++) set[d] = true; if (typeof cur === 'number') set[cur] = true; Object.keys(set).map(Number).sort((a, b) => a - b).forEach(d => o.push({ v: String(d), l: (d === 0 ? 'Today, ' : d === 1 ? 'Tomorrow, ' : '') + this.DSHORT[this.dowFor(d)] + ' ' + this.MONTHS[this.dateFor(d).getMonth()] + ' ' + this.dateFor(d).getDate() })); return o; })(),
       whenTime: sc ? this.toHHMM(sc.start) : '', hasTime: !!sc,
+      whenTimeOpts: (() => { const o = [{ v: '', l: 'No time' }]; for (let m = 300; m < 1440; m += 15) o.push({ v: this.toHHMM(m), l: this.fmtTime(m, false) }); if (sc && sc.start % 15) o.push({ v: this.toHHMM(sc.start), l: this.fmtTime(sc.start, false) }); return o.sort((x, y) => x.v === '' ? -1 : y.v === '' ? 1 : (x.v < y.v ? -1 : 1)); })(),
       whenNote: sc ? 'On the calendar ' + this.fmtTime(sc.start, false) + '–' + this.fmtTime(sc.start + (t.mins || 30), false) : 'Pick a time to put it on the calendar',
       onWhenDay: (e) => {
         const v = e.target.value; const d = v === '' ? null : parseInt(v, 10);
@@ -8173,9 +8177,9 @@ class Component extends DCLogic {
         sections = groups.map(g => {
           const key = 'grp:' + g.id, hot = s.dropKey === key, isClosed = !!closed[g.id];
           const rows = isClosed ? [] : buildRows(g.list);
-          if (!isClosed) rows.forEach(r => { if (r.isTask && r.drop) r.drop = withPatch(g.patch, r.drop); });
+          if (!isClosed) rows.forEach(r => { if (r.isTask) r._patch = g.patch; if (r.isTask && r.drop) r.drop = withPatch(g.patch, r.drop); });
           return {
-            letter: '', name: g.name, color: g.color, line: N.line, metaFg: N.meta,
+            letter: '', name: g.name, color: g.color, line: N.line, metaFg: N.meta, _patch: g.patch,
             meta: metaFor(g.list), rows: rows, isEmpty: false, emptyText: '',
             collapsible: true, closedA: isClosed ? 'false' : 'true', chev: isClosed ? 'rotate(-90deg)' : 'none', toggleClosed: () => setClosed(c => { if (c[g.id]) delete c[g.id]; else c[g.id] = true; return c; }),
             headBg: hot ? '#FCE9A6' : 'transparent', zoneBg: 'transparent',
@@ -8197,7 +8201,8 @@ class Component extends DCLogic {
     if (allMode) {
       const byIdA = {}; s.tasks.forEach(t => { byIdA[t.id] = t; });
       const noDrop = (e) => { if (e && e.preventDefault) e.preventDefault(); this.drag = null; this.setState({ dropKey: null }); };
-      (sections || []).forEach(x => { x.drop = noDrop; (x.rows || []).forEach(r => { if (r.drop) r.drop = noDrop; const t = byIdA[r.id]; if (r.isTask && t) { const w = deskQ ? qWhy(t) : ''; r.why = whereAll(t) + (w && w !== 'title' ? ' · ' + w : ''); r.hasWhy = true; } }); });
+      const patchDrop = (patch) => (e) => { if (e && e.preventDefault) { e.preventDefault(); e.stopPropagation(); } const d = this.drag; this.drag = null; if (d && d.kind === 'task') { const id = d.id; this.setState(st => ({ dropKey: null, tasks: st.tasks.map(x => x.id === id ? Object.assign({}, x, patch) : x) })); } else this.setState({ dropKey: null }); };
+      (sections || []).forEach(x => { x.drop = x._patch ? patchDrop(x._patch) : noDrop; (x.rows || []).forEach(r => { if (r.drop) r.drop = r._patch ? patchDrop(r._patch) : noDrop; const t = byIdA[r.id]; if (r.isTask && t) { const w = deskQ ? qWhy(t) : ''; r.why = whereAll(t) + (w && w !== 'title' ? ' · ' + w : ''); r.hasWhy = true; } }); });
     }
     if (deskQ && !allMode) {
       const byId = {}; s.tasks.forEach(t => { byId[t.id] = t; });
