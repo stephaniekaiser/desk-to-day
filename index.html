@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 8:21 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 8:25 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -4151,6 +4151,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <span style="position: absolute; top: 3px; left: {{addonJKnob}}px; width: 20px; height: 20px; border-radius: 10px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.3)"></span>
 </button>
 </div>
+<sc-if value="{{mealsAvail}}" hint-placeholder-val="{{ false }}">
 <div style="flex: none; display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 8px 12px; min-height: 56px; box-sizing: border-box">
 <span aria-hidden="true" style="width: 34px; height: 34px; flex: none; border-radius: 17px; background: {{TK.tF3E6EA}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 0-3 2.5-3 6h3M17 3v18"></path></svg></span>
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
@@ -4161,6 +4162,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <span style="position: absolute; top: 3px; left: {{addonMKnob}}px; width: 20px; height: 20px; border-radius: 10px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.3)"></span>
 </button>
 </div>
+</sc-if>
 </div>
 </sc-if>
 <sc-if value="{{showThemes}}" hint-placeholder-val="{{ false }}">
@@ -4713,6 +4715,7 @@ class Component extends DCLogic {
       nextId: 100
     };
     this.SYNC_FILE = 'desk-to-day-planner.json';
+    this.MEALS_ON = false; // Meals add-on is parked (Parked Ideas). Data is kept; set true to bring it back.
     this.DK = ['cats', 'courses', 'journal', 'meals', 'mealPlan', 'mealGroc', 'tasks', 'groups', 'habits', 'placedByDay', 'specials', 'allDay', 'commitments', 'series', 'goals', 'notes', 'big3ByWeek', 'bandView', 'nudgeOff', 'bellOff'];
     // Keep the built-in demo (days are relative to today) for "Fill with sample data" in the claude.ai copy.
     try { const dm = {}; this.DK.forEach(k => { if (this.state[k] !== undefined) dm[k] = this.state[k]; }); this._demo = JSON.stringify(dm); } catch (e) { this._demo = '{}'; }
@@ -8230,7 +8233,7 @@ class Component extends DCLogic {
       const w = qWhy(t);
       return { title: t.title, where: where + (w && w !== 'title' ? ' · ' + w : ''), strike: t.done ? 'line-through' : 'none', open: () => this.openTaskEdit(t.id) };
     }) : [];
-    const dayTab = isDay ? ((s.dayTab === 'done' || s.dayTab === 'grow' || (s.dayTab === 'school' && s.settings.schoolOn) || (s.dayTab === 'meals' && s.settings.mealsOn) || (s.dayTab === 'journal' && s.settings.journalOn)) ? s.dayTab : 'list') : 'list';
+    const dayTab = isDay ? ((s.dayTab === 'done' || s.dayTab === 'grow' || (s.dayTab === 'school' && s.settings.schoolOn) || (s.dayTab === 'meals' && this.MEALS_ON && s.settings.mealsOn) || (s.dayTab === 'journal' && s.settings.journalOn)) ? s.dayTab : 'list') : 'list';
     if (dayTab !== 'list') sections = [];
     // ----- "This week" tray on the day page -----
     const trayWs = this.weekStartOff(s.day);
@@ -11816,6 +11819,7 @@ class Component extends DCLogic {
       const on = !!s.settings.mealsOn;
       const base = {
         addonMealsOn: on ? 'true' : 'false', addonMTrack: on ? this.TK.t6E2F43 : '#B9AF9C', addonMKnob: on ? 21 : 3,
+        mealsAvail: !!this.MEALS_ON,
         addonMToggle: () => this.setState({ settings: Object.assign({}, this.state.settings, { mealsOn: !this.state.settings.mealsOn }) }),
         isMeals: on && s.view === 'meals'
       };
@@ -12148,7 +12152,7 @@ class Component extends DCLogic {
         rows: g.list.map(t => ({ title: t.title, when: t.doneDay === s.day ? '' : this.DSHORT[this.dowFor(t.doneDay)] + ' ' + this.dateFor(t.doneDay).getDate(), undo: () => this.setTaskDone(t.id, false, null) })) })),
       dayTabs: [['list', s.day === 0 ? 'Today' : this.DSHORT[this.dowFor(s.day)], '', ''], ['done', 'Done', doneDayN ? String(doneDayN) : '', '']].concat(
         [['grow', 'Grow', '', this.ICONS.garden], ['school', 'School', dayTabVals.schoolLeft ? String(dayTabVals.schoolLeft) : '', this.ICONS.school], ['meals', 'Meals', dayTabVals.mealsN ? String(dayTabVals.mealsN) : '', this.ICONS.food], ['journal', 'Journal', '', 'M5 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5zM8.5 3v18M11.5 8h3.5M11.5 11.5h2.5']]
-          .filter(o => (o[0] !== 'school' || s.settings.schoolOn) && (o[0] !== 'meals' || s.settings.mealsOn) && (o[0] !== 'journal' || s.settings.journalOn))).map((o, oi) => {
+          .filter(o => (o[0] !== 'school' || s.settings.schoolOn) && (o[0] !== 'meals' || (this.MEALS_ON && s.settings.mealsOn)) && (o[0] !== 'journal' || s.settings.journalOn))).map((o, oi) => {
         const on = dayTab === o[0], ic = !!o[3];
         return { label: o[1], count: o[2], hasCount: !!o[2], badge: ic && !!o[2], plainCount: !ic, sel: on ? 'true' : 'false', fg: on ? this.THEME.tab.bg : '#8A8174', line: on ? this.TK.tC9849A : 'transparent',
           hasIcon: ic, icon: o[3], showLabel: !ic, aria: o[1] + (o[2] ? ', ' + o[2] : ''), ml: oi === 2 ? 'auto' : '0', pick: () => this.setState({ dayTab: o[0], editing: null }) };
@@ -12369,7 +12373,7 @@ class Component extends DCLogic {
         ['meals', 'Meals', '#E3DCCB', 84, () => this.setState({ view: 'meals', showSetup: false, sel: null, menuFor: null, missFor: null, evEdit: null, sheet: null, editing: null })],
         ['journal', 'Journal', '#E3DCCB', 84, () => this.setState({ view: 'journal', showSetup: false, sel: null, menuFor: null, missFor: null, evEdit: null, sheet: null, editing: null })],
         ['settings', 'Settings', '#C9D2D8', 96, () => this.setState({ view: 'settings', showSetup: false, sel: null, menuFor: null, missFor: null, evEdit: null, sheet: null, editing: null })]
-      ].filter(t => (t[0] !== 'school' || s.settings.schoolOn) && (t[0] !== 'journal' || s.settings.journalOn) && (t[0] !== 'meals' || s.settings.mealsOn)).map((t, ti, arr) => {
+      ].filter(t => (t[0] !== 'school' || s.settings.schoolOn) && (t[0] !== 'journal' || s.settings.journalOn) && (t[0] !== 'meals' || (this.MEALS_ON && s.settings.mealsOn))).map((t, ti, arr) => {
         const on = s.view === t[0];
         const tdef = this.themeDef(s.settings.theme);
         const nTabs = arr.filter(x => x[0] !== 'settings').length;
