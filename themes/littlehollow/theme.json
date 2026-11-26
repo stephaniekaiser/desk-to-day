@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 11,
+  "version": 12,
   "kind": "storybook",
   "updated": "2026-11-25",
   "notes": [
@@ -14,7 +14,8 @@
     "The basket under the branch fills with blossoms as you finish the day's Must do and Should do, and starts fresh each morning",
     "Winter: a snowy branch with red berries, a snowy meadow, and a basket that fills with pinecones (December to February)",
     "New winter friends: a chickadee who puffs up against the cold, and a bunny in a scarf whose ears perk up",
-    "More winter friends: a cardinal who hops, a sleepy bear cub who peeks with one eye, and a fox curled in her tail"
+    "More winter friends: a cardinal who hops, a sleepy bear cub who peeks with one eye, and a fox curled in her tail",
+    "Christmas: fairy lights on Christmas Eve; colorful lights and a snowman friend on Christmas Day"
   ],
   "name": "Little Hollow",
   "blurb": "A little tree, a meadow and woodland friends who visit as the seasons change.",
@@ -660,10 +661,78 @@
             ]
           }
         ]
+      },
+      {
+        "id": "snowman",
+        "name": "A snowman (Christmas Day)",
+        "sets": [],
+        "over": [
+          {
+            "page": "R",
+            "anchor": "byPile",
+            "src": "snowman-1.webp",
+            "w": 60,
+            "h": 89,
+            "x": 4,
+            "y": 3,
+            "frames": [
+              {
+                "src": "snowman-2.webp",
+                "from": 1.3,
+                "to": 2.3
+              },
+              {
+                "src": "snowman-3.webp",
+                "from": 2.3,
+                "to": 3.4
+              }
+            ]
+          }
+        ]
       }
     ],
     "quote": "underDate",
     "quoteClear": 170,
-    "quoteY": 88
+    "quoteY": 88,
+    "specials": [
+      {
+        "id": "christmas-eve",
+        "name": "Christmas Eve",
+        "date": "12-24",
+        "sets": [
+          "winter-snow"
+        ],
+        "swap": {
+          "branch-winter.webp": {
+            "src": "branch-xmas-eve.webp",
+            "ar": 3.229,
+            "h": 285
+          }
+        },
+        "quotes": [
+          "The quietest night is full of little lights."
+        ]
+      },
+      {
+        "id": "christmas",
+        "name": "Christmas Day",
+        "date": "12-25",
+        "sets": [
+          "winter-snow"
+        ],
+        "cast": "snowman",
+        "swap": {
+          "branch-winter.webp": {
+            "src": "branch-xmas-day.webp",
+            "ar": 3.229,
+            "h": 285,
+            "padH": 262
+          }
+        },
+        "quotes": [
+          "Merry Christmas. Rest is a gift too."
+        ]
+      }
+    ]
   }
 }

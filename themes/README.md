@@ -34,3 +34,5 @@ Scene piece anchors: `spread` (top strip across both pages), `spreadBottom` (rep
 **Tree friends who nudge:** a cast with `nudge: {x, y}` (relative to the friend on the branch) makes the item come loose there and drift over into the basket; `dropDelay` (seconds) waits for the friend's move first. `frames` work for tree friends too.
 
 **Seasons:** each set has `months` (an empty list is the fallback for any month without its own set). A cast with `sets: [...]` only visits during those sets.
+
+**Special days:** `scene.specials: [{id, date: "MM-DD", sets, swap: {"<piece src>": {src, ar, h, padH}}, cast, quotes}]`. On that date (and during those sets) the listed pieces are swapped, the named cast visits instead of the day's friend, and the quotes replace the usual ones. A cast with `sets: []` only ever appears on special days.
