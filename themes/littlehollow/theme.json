@@ -669,12 +669,12 @@
         "over": [
           {
             "page": "R",
-            "anchor": "byPile",
+            "anchor": "byPileR",
             "src": "snowman-1.webp",
-            "w": 60,
-            "h": 89,
-            "x": 4,
-            "y": 3,
+            "w": 104,
+            "h": 154,
+            "x": 8,
+            "y": 2,
             "frames": [
               {
                 "src": "snowman-2.webp",
@@ -726,12 +726,15 @@
             "src": "branch-xmas-day.webp",
             "ar": 3.229,
             "h": 285,
-            "padH": 262
+            "padH": 240
           }
         },
         "quotes": [
           "Merry Christmas. Rest is a gift too."
-        ]
+        ],
+        "pile": {
+          "dx": -150
+        }
       }
     ]
   }
