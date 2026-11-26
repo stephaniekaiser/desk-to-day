@@ -933,11 +933,10 @@
             "y": 52,
             "arrive": {
               "walk": [
-                "cat-1.webp",
-                "cat-2.webp"
+                "cat-1.webp"
               ],
-              "from": 150,
-              "dur": 1.9
+              "from": 0,
+              "dur": 2.0
             },
             "xfade": 0.2,
             "frames": [
