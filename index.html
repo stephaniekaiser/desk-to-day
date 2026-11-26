@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 5:59 PM';</script>
+<script>window.__plannerBuild = 'Nov 25, 6:53 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1166,12 +1166,13 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 4px">
 <sc-if value="{{hasLocked2}}" hint-placeholder-val="{{ false }}">
 <sc-for list="{{lockedRows}}" as="lr2" hint-placeholder-count="1">
-<div title="Done or on the calendar, so it stays as it is" style="display: flex; align-items: center; gap: 6px; flex: none; min-height: 34px; padding: 0 2px">
+<div style="display: flex; align-items: center; gap: 6px; flex: none; min-height: 34px; padding: 0 2px">
 <span aria-hidden="true" style="width: 22px; flex: none; display: flex; justify-content: flex-end; color: {{TK.tA0526A}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{lr2.icon}}"></path></svg></span>
 <span style="flex: 1; min-width: 0; padding: 0 10px; font-size: calc(14px * {{fsK}}); color: #7A7064; text-decoration: {{lr2.strike}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{lr2.title}}</span>
 <span style="flex: none; font-size: calc(12px * {{fsK}}); color: #7A7064">{{lr2.status}}</span>
+<button onClick="{{lr2.reopen}}" title="{{lr2.actTip}}" style="height: 26px; flex: none; padding: 0 9px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 13px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12px * {{fsK}}); font-weight: 700; white-space: nowrap">{{lr2.actLabel}}</button>
 <span style="width: 84px; flex: none; text-align: center; font-size: calc(13.5px * {{fsK}}); font-weight: 700; color: #7A7064">{{lr2.dur}}</span>
-<span style="width: 32px; flex: none"></span>
+<button onClick="{{lr2.remove}}" aria-label="Remove {{lr2.title}}" title="Remove this piece" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: {{TK.tA0526A}}; padding: 0; font-size: 18px; line-height: 1">×</button>
 </div>
 </sc-for>
 </sc-if>
@@ -7336,6 +7337,24 @@ class Component extends DCLogic {
     this.setState({ tasks: tasks, groups: groups, sheet: null, nextId: n + 1 });
     this.setToast(sh.groupId ? 'Saved "' + ((sh.title || '').trim() || 'task') + '".' : pieces.length + ' pieces ready. Start with the first one.');
   }
+  // In the task editor: a finished or planned piece can be reopened (back into the steps) or removed.
+  sheetPieceReopen(id) {
+    const s = this.state, sh = s.sheet, t = s.tasks.find(x => x.id === id); if (!sh || !t) return;
+    const sc = this.schedMap()[id], extra = {};
+    if (sc) { const k = String(sc.day), pb = Object.assign({}, s.placedByDay); pb[k] = (pb[k] || []).filter(b => b.id !== sc.id); extra.placedByDay = pb; }
+    const n = (sh.steps || []).length + 1, steps = (sh.steps || []).filter(x => (x.title || '').trim() || x.srcId).concat([{ id: 'e' + Date.now(), srcId: id, title: t.title, mins: t.mins || 30 }]);
+    const tasks = s.tasks.map(x => x.id === id ? Object.assign({}, x, { done: false, doneDay: null }) : x);
+    this.setState(Object.assign({ tasks: tasks, sheet: Object.assign({}, sh, { steps: steps, est: (sh.est || 0) + (t.mins || 0), locked: Math.max(0, (sh.locked || 0) - (t.mins || 0)), lockedN: Math.max(0, (sh.lockedN || 0) - 1) }) }, extra));
+    if (t.done) this.basketRecount(t.doneDay);
+  }
+  sheetPieceRemove(id) {
+    const s = this.state, sh = s.sheet, t = s.tasks.find(x => x.id === id); if (!sh || !t) return;
+    const sc = this.schedMap()[id], extra = {};
+    if (sc) { const k = String(sc.day), pb = Object.assign({}, s.placedByDay); pb[k] = (pb[k] || []).filter(b => b.id !== sc.id); extra.placedByDay = pb; }
+    this.setState(Object.assign({ tasks: s.tasks.filter(x => x.id !== id), sheet: Object.assign({}, sh, { locked: Math.max(0, (sh.locked || 0) - (t.mins || 0)), lockedN: Math.max(0, (sh.lockedN || 0) - 1) }) }, extra));
+    if (t.done) this.basketRecount(t.doneDay);
+    this.setToast('Removed "' + t.title + '".');
+  }
   mergeBack(gid, extra) {
     const s = this.state;
     const g = s.groups[gid];
@@ -7353,12 +7372,17 @@ class Component extends DCLogic {
       if (extra) Object.keys(extra).forEach(k => { if (extra[k] !== undefined) merged[k] = extra[k]; });
       delete groups[gid];
     } else {
-      merged = { id: 'm' + s.nextId, title: 'The rest', mins: sum, pri: open[0].pri, bucket: open[0].bucket, groupId: gid };
+      // finished and planned pieces keep their history as their own tasks; everything else becomes one task again
+      merged = { id: 'm' + s.nextId, title: g.title, mins: sum, pri: open[0].pri, bucket: open[0].bucket, weekOf: open[0].weekOf, cat: open[0].cat || null, flag: open[0].flag || null, note: g.note || '' };
+      if (extra) Object.keys(extra).forEach(k => { if (extra[k] !== undefined) merged[k] = extra[k]; });
+      if (extra && typeof extra.mins === 'number') merged.mins = sum || extra.mins;
+      for (let i = 0; i < rest.length; i++) if (rest[i].groupId === gid) { const x = Object.assign({}, rest[i]); delete x.groupId; if (String(x.title || '').indexOf(g.title) !== 0) x.title = g.title + ' · ' + x.title; rest[i] = x; }
+      delete groups[gid];
     }
     const at = s.tasks.slice(0, first).filter(t => openIds.indexOf(t.id) < 0).length;
     rest.splice(at, 0, merged);
     this.setState({ tasks: rest, groups: groups, nextId: s.nextId + 1 });
-    this.setToast(others.length ? 'Unscheduled pieces merged into one.' : 'Back to one task.');
+    this.setToast(others.length ? 'Back to one task. Finished and planned pieces stay as they are.' : 'Back to one task.');
   }
 
   // ---------- capture ----------
@@ -8694,7 +8718,7 @@ class Component extends DCLogic {
         onSlice: (e) => this.patchSheet({ slice: Math.max(15, parseInt(e.target.value, 10) || 60) }),
         bdAccent: diff === 0 ? okC : (diff < 0 ? warnC : overC),
         bdShowBar: diff !== 0,
-        lockedRows: sh.groupId ? (() => { const sm4 = this.schedMap(); const openIds = this.openPieces(sh.groupId).map(t => t.id); return this.state.tasks.filter(t => t.groupId === sh.groupId && openIds.indexOf(t.id) < 0).map(t => { const sc = sm4[t.id]; return { title: t.title, dur: this.fmtDur(t.mins || 0), status: t.done ? 'Done' : (sc ? (sc.day === 0 ? 'Today' : sc.day === 1 ? 'Tomorrow' : this.DSHORT[this.dowFor(sc.day)] + ' ' + this.dateFor(sc.day).getDate()) + ' ' + this.fmtTime(sc.start, false) : 'Planned'), strike: t.done ? 'line-through' : 'none', icon: t.done ? 'M5 12.5l4.5 4.5L19 7.5' : 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 7v5l3 2' }; }); })() : [],
+        lockedRows: sh.groupId ? (() => { const sm4 = this.schedMap(); const openIds = this.openPieces(sh.groupId).map(t => t.id); return this.state.tasks.filter(t => t.groupId === sh.groupId && openIds.indexOf(t.id) < 0).map(t => { const sc = sm4[t.id]; return { title: t.title, dur: this.fmtDur(t.mins || 0), status: t.done ? 'Done' : (sc ? (sc.day === 0 ? 'Today' : sc.day === 1 ? 'Tomorrow' : this.DSHORT[this.dowFor(sc.day)] + ' ' + this.dateFor(sc.day).getDate()) + ' ' + this.fmtTime(sc.start, false) : 'Planned'), id: t.id, actLabel: t.done ? 'Not done' : 'Unplan', actTip: t.done ? 'Mark this piece not done and put it back in the steps' : 'Take it off the calendar and put it back in the steps', reopen: () => this.sheetPieceReopen(t.id), remove: () => this.sheetPieceRemove(t.id), strike: t.done ? 'line-through' : 'none', icon: t.done ? 'M5 12.5l4.5 4.5L19 7.5' : 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 7v5l3 2' }; }); })() : [],
         hasLocked2: !!sh.groupId && (sh.lockedN || 0) > 0,
         bdIcon: diff === 0 ? 'M5 12.5l4.5 4.5L19 7.5' : (diff < 0 ? 'M12 7v6M12 17h.01' : 'M12 7v6M12 17h.01'),
         stepsTotalSub: totalSub,
@@ -8714,7 +8738,7 @@ class Component extends DCLogic {
         onTotH: this.nb((e) => { const c = this.state.sheet; const tot = c.est + (c.locked || 0); const h = Math.max(0, Math.min(99, parseInt(e.target.value, 10) || 0)); this.patchSheet({ est: Math.max(15, h * 60 + (tot % 60) - (c.locked || 0)) }); }),
         onTotM: (e) => { const c = this.state.sheet; const tot = c.est + (c.locked || 0); const m = parseInt(e.target.value, 10) || 0; this.patchSheet({ est: Math.max(15, Math.floor(tot / 60) * 60 + m - (c.locked || 0)) }); },
         hasLocked: !!sh.locked,
-        lockedNote: sh.locked ? 'Includes ' + this.fmtDur(sh.locked) + ' in ' + sh.lockedN + (sh.lockedN === 1 ? ' piece' : ' pieces') + ' that are done or on the calendar. Those stay as they are.' : '',
+        lockedNote: sh.locked ? 'Includes ' + this.fmtDur(sh.locked) + ' in ' + sh.lockedN + (sh.lockedN === 1 ? ' piece' : ' pieces') + ' that are done or on the calendar. Tap Not done or Unplan to put one back in the steps, or × to remove it.' : '',
         hasStepsFix: sh.mode === 'steps' && diff !== 0,
         stepsFixLabel: diff < 0 ? '+ Add ' + this.fmtDur(-diff) + ' as a step' : 'Set the total to ' + this.fmtDur(stepTotal + (sh.locked || 0)),
         stepsFix: () => { if (diff < 0) this.patchSheet({ steps: sh.steps.concat([{ id: 'n' + Date.now(), title: '', mins: -diff }]) }); else this.patchSheet({ est: stepTotal }); },
