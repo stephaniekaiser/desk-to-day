@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 9:04 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 9:09 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -390,15 +390,8 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="font-size: calc(12px * {{fsK}}); font-weight: 600; color: {{sec.color}}; text-transform: uppercase; letter-spacing: 0.12em">{{sec.name}}</span>
 </sc-if>
 <span style="margin-left: auto; font-size: calc(12px * {{fsK}}); color: {{sec.metaFg}}">{{sec.meta}}</span>
-<sc-if value="{{sec.canAdd}}" hint-placeholder-val="{{ false }}"><button onClick="{{sec.toggleAdd}}" aria-expanded="{{sec.addOpenA}}" aria-label="{{sec.addLabel}}" title="{{sec.addLabel}}" style="width: 28px; height: 28px; flex: none; margin: -4px -2px -4px 0; border: 0; border-radius: 14px; background: transparent; color: {{sec.color}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button></sc-if>
+<sc-if value="{{sec.canAdd}}" hint-placeholder-val="{{ false }}"><button onClick="{{sec.emptyTap}}" aria-label="{{sec.addLabel}}" title="{{sec.addLabel}}" style="height: 26px; flex: none; margin: -3px 0; border: 1px solid {{sec.line}}; border-radius: 13px; background: #FFFFFF; color: {{sec.color}}; padding: 0 10px 0 8px; display: flex; align-items: center; gap: 4px; font-size: calc(12px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add</button></sc-if>
 </div>
-<sc-if value="{{sec.addOpen}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; align-items: center; gap: 6px; padding: 6px 0 4px">
-<label for="{{sec.addId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">{{sec.addLabel}}</label>
-<input id="{{sec.addId}}" autoFocus="{{ true }}" value="{{sec.addDraft}}" onChange="{{sec.onAdd}}" onInput="{{sec.onAdd}}" onKeyDown="{{sec.addKey}}" autocomplete="off" placeholder="New task, then press Enter" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tIn}}px; box-sizing: border-box; border: 1.5px solid {{sec.line}}; border-radius: 9px; padding: 0 10px; font: inherit; font-size: calc({{tFs}}px * {{fsK}}); color: #2B2722; background: #FFFFFF">
-<button onClick="{{sec.addDone}}" style="height: 32px; flex: none; padding: 0 8px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Done</button>
-</div>
-</sc-if>
 <sc-for list="{{sec.rows}}" as="t" hint-placeholder-count="2">
 <sc-if value="{{t.isHeader}}" hint-placeholder-val="{{ false }}">
 <div onDragOver="{{t.over}}" onDrop="{{t.drop}}" style="display: flex; align-items: center; gap: 8px; min-height: calc(54px * {{rowK}}); box-sizing: border-box; padding: 6px 2px 6px 24px; border-bottom: 1px solid #E8DFCC; box-shadow: {{t.dropShadow}}">
@@ -670,6 +663,16 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-if>
 </sc-for>
+<sc-if value="{{sec.addOpen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 6px; padding: 6px 0 4px">
+<label for="{{sec.addId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">{{sec.addLabel}}</label>
+<input id="{{sec.addId}}" autoFocus="{{ true }}" value="{{sec.addDraft}}" onChange="{{sec.onAdd}}" onInput="{{sec.onAdd}}" onKeyDown="{{sec.addKey}}" autocomplete="off" placeholder="New task, then press Enter" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tIn}}px; box-sizing: border-box; border: 1.5px solid {{sec.line}}; border-radius: 9px; padding: 0 10px; font: inherit; font-size: calc({{tFs}}px * {{fsK}}); color: #2B2722; background: #FFFFFF">
+<button onClick="{{sec.addDone}}" style="height: 32px; flex: none; padding: 0 8px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Done</button>
+</div>
+</sc-if>
+<sc-if value="{{sec.showAddLine}}" hint-placeholder-val="{{ false }}">
+<div role="button" tabindex="0" onClick="{{sec.emptyTap}}" onDragOver="{{sec.over}}" onDrop="{{sec.drop}}" aria-label="{{sec.addLabel}}" style="cursor: pointer; min-height: calc(40px * {{rowK}}); margin-top: 6px; box-sizing: border-box; border: 1.5px dashed #D6CCB8; border-radius: 9px; display: flex; align-items: center; gap: 6px; padding: 0 12px; font-size: calc(13.5px * {{fsK}}); color: #8A8174; background: {{sec.zoneBg}}"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg><span>{{sec.addLineTxt}}</span></div>
+</sc-if>
 <sc-if value="{{sec.isEmpty}}" hint-placeholder-val="{{ false }}">
 <div onDragOver="{{sec.over}}" onDrop="{{sec.drop}}" onClick="{{sec.emptyTap}}" role="{{sec.emptyRole}}" style="cursor: {{sec.emptyCur}}; height: 48px; margin-top: 6px; border: 1.5px dashed #CFC4AE; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: calc(13px * {{fsK}}); color: #6B6358; background: {{sec.zoneBg}}">{{sec.emptyText}}</div>
 </sc-if>
@@ -8223,7 +8226,7 @@ class Component extends DCLogic {
         const hot = s.dropKey === key;
         return {
           letter: k, name: this.PRI[k].name + (s.day === 0 ? ' today' : s.day === 1 ? ' tomorrow' : ' on ' + this.DAYS[this.dowFor(s.day)]), color: this.THEME.sec[k].ink, line: this.THEME.sec[k].line, metaFg: this.THEME.sec[k].meta,
-          meta: metaFor(list), rows: buildRows(list), isEmpty: !list.length, emptyText: s.secAdd === k ? 'Type above and press Enter' : 'Drag tasks here, or tap +',
+          meta: metaFor(list), rows: buildRows(list), isEmpty: false, emptyText: '', showAddLine: s.secAdd !== k, addLineTxt: list.length ? 'Add to ' + this.PRI[k].name : 'Add to ' + this.PRI[k].name + ', or drag a task here',
           canAdd: true, addOpen: s.secAdd === k, addOpenA: s.secAdd === k ? 'true' : 'false', addId: 'sa-' + k,
           addLabel: 'Add to ' + this.PRI[k].name, addDraft: s.secAdd === k ? (s.secDraft || '') : '',
           toggleAdd: () => this.setState({ secAdd: this.state.secAdd === k ? null : k, secDraft: '' }),
@@ -8313,7 +8316,7 @@ class Component extends DCLogic {
         drop: (e) => this.dropTask(e, isWeek ? { bucket: 'week', weekOf: listWs, dayAssign: null } : { bucket: leftBucket })
       }];
     }
-    (sections || []).forEach(x => { x.notCollapsible = !x.collapsible; if (!x.addDone) x.addDone = x.toggleAdd || (() => {}); if (!x.emptyTap) { x.emptyTap = () => {}; x.emptyCur = 'default'; x.emptyRole = 'presentation'; } });
+    (sections || []).forEach(x => { x.notCollapsible = !x.collapsible; if (!x.addDone) x.addDone = x.toggleAdd || (() => {}); if (x.showAddLine === undefined) { x.showAddLine = false; x.addLineTxt = ''; } if (!x.emptyTap) { x.emptyTap = () => {}; x.emptyCur = 'default'; x.emptyRole = 'presentation'; } });
     if (allMode) {
       const byIdA = {}; s.tasks.forEach(t => { byIdA[t.id] = t; });
       const noDrop = (e) => { if (e && e.preventDefault) e.preventDefault(); this.drag = null; this.setState({ dropKey: null }); };
