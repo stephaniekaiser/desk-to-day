@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 7:52 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 8:10 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -663,8 +663,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg>
 </button>
 <span style="flex: 1"></span>
-<button onClick="{{t.cancel}}" style="height: 32px; flex: none; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: #6B6358; font-size: calc(13px * {{fsK}}); font-weight: 600">Cancel</button>
-<button onClick="{{t.save}}" aria-label="Save changes" title="Save" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; margin-left: 2px">
+<button onClick="{{t.save}}" aria-label="Done (changes are saved as you go)" title="Done" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; display: flex; align-items: center; justify-content: center; padding: 0; background: {{TK.t6E2F43}}; color: #FFFFFF; margin-left: 2px">
 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
 </button>
 </div>
@@ -4866,7 +4865,8 @@ class Component extends DCLogic {
     } catch (err) {}
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.view !== this.state.view || prevState.vw !== this.state.vw || prevState.settings !== this.state.settings) setTimeout(() => this.measurePages(), 60);
+    // (prevState is not always passed in this runtime, so never read it unguarded: an error here would skip saving below)
+    try { const ps = prevState || {}; if (!prevState || ps.view !== this.state.view || ps.vw !== this.state.vw || ps.settings !== this.state.settings) { if (!this._mpT) this._mpT = setTimeout(() => { this._mpT = null; this.measurePages(); }, 60); } } catch (err) {}
     const s = this.state;
     if (this.ready) {
       const refs = this.DK.map(k => s[k]).concat([s.settings, s.nextId]);
@@ -6984,6 +6984,18 @@ class Component extends DCLogic {
     (ids || []).forEach((id, i) => setTimeout(() => this.setTaskDone(id, false, null, true), i * 25));
     if (ids && ids.length > 1) setTimeout(() => this.setToast(ids.length + ' tasks are back on your list.'), ids.length * 25 + 40);
   }
+  // Closing task details: everything is already saved. Tidy the title and offer a quick Undo if anything changed.
+  closeTaskEdit(id) {
+    const s = this.state, o = this._editOrig && this._editOrig.id === id ? this._editOrig : null; this._editOrig = null;
+    const t = s.tasks.find(x => x.id === id);
+    const tasks = t && t.title !== String(t.title || '').trim() ? s.tasks.map(x => x.id === id ? Object.assign({}, x, { title: String(x.title).trim() || o && o.task.title || x.title }) : x) : s.tasks;
+    this.setState({ tasks: tasks, editing: null, editDraft: null, catMenu: null, whereMenu: null });
+    if (!o || !t) return;
+    const keys = ['title', 'pri', 'flag', 'cat', 'mins', 'note', 'bucket', 'weekOf', 'dayAssign'];
+    if (!keys.some(k => String((o.task[k] === undefined ? null : o.task[k])).trim() !== String((t[k] === undefined ? null : t[k])).trim()) && o.placedByDay === s.placedByDay) return;
+    this.setState({ toast: { msg: 'Changes saved.', label: 'Undo', action: () => { this.setState({ tasks: this.state.tasks.map(x => x.id === id ? o.task : x), placedByDay: o.placedByDay, toast: null }); } } });
+    clearTimeout(this.toastTimer); this.toastTimer = setTimeout(() => this.setState({ toast: null }), 5000);
+  }
   holdBasket() { const s = this.state; if (s.view === 'day') this._basketHold = { d: s.day, p: this.dayBasketPct(s, s.day) }; }
   setTaskDone(id, done, day, sure) {
     const s = this.state;
@@ -7601,12 +7613,16 @@ class Component extends DCLogic {
     const fadeOn = onDayPage && !!sc && sc.day === s.day && !t.done && s.settings.fadeScheduled !== false;
     const hasDay = t.dayAssign !== undefined && t.dayAssign !== null;
     const rolled = onDayPage && !sc && hasDay && t.dayAssign < 0 && s.day === 0;
-    const bKey = t.bucket === 'week' && this.effWeek(t) === this.weekStartOff(0) + 7 ? 'next' : t.bucket;
+    const bKey = t.bucket === 'week' && this.effWeek(t) === this.weekStartOff(0) + 7 ? 'next' : (t.bucket === 'week' && this.effWeek(t) > this.weekStartOff(0) + 7 ? 'w' + this.effWeek(t) : t.bucket);
     const dr = s.editDraft && s.editDraft.id === t.id ? s.editDraft : null;
     const dv = dr || { title: t.title, pri: t.pri, flag: t.flag || null, cat: t.cat || null, mins: t.mins, day: hasDay ? t.dayAssign : null, bucket: bKey, note: t.note || '' };
     const patchDraft = (p) => {
       const cur = this.state.editDraft && this.state.editDraft.id === t.id ? this.state.editDraft : { id: t.id, title: t.title, pri: t.pri, flag: t.flag || null, cat: t.cat || null, mins: t.mins, day: hasDay ? t.dayAssign : null, bucket: bKey, note: t.note || '' };
       this.setState({ editDraft: Object.assign({}, cur, p) });
+      // Changes save as you make them (typing saves after a short pause), so there is no Save button to reach for.
+      clearTimeout(this._edCommitT);
+      const typing = p.title !== undefined || p.note !== undefined;
+      this._edCommitT = setTimeout(() => commitDraft(), typing ? 700 : 0);
     };
     const commitDraft = () => {
       const d = this.state.editDraft;
@@ -7621,9 +7637,11 @@ class Component extends DCLogic {
         const cw = this.weekStartOff(0);
         if (d.bucket === 'next') { extra.bucket = 'week'; extra.weekOf = cw + 7; extra.dayAssign = null; }
         else if (d.bucket === 'week') { extra.bucket = 'week'; extra.weekOf = cw; }
+        else if (/^w-?\d+$/.test(d.bucket)) { extra.bucket = 'week'; extra.weekOf = parseInt(d.bucket.slice(1), 10); extra.dayAssign = null; }
         else { extra.bucket = d.bucket; extra.dayAssign = null; }
       }
       const dropCal = onCal && (dayChanged || (bucketChanged && d.bucket !== 'week'));
+      if (this.state.editing === t.id && (!this._editOrig || this._editOrig.id !== t.id)) this._editOrig = { id: t.id, task: Object.assign({}, t), placedByDay: this.state.placedByDay };
       const cut = t.groupId && !t.done && d.mins < t.mins ? t.mins - d.mins : 0;
       let restTo = null, restAdd = null;
       if (cut > 0) {
@@ -7635,7 +7653,7 @@ class Component extends DCLogic {
       this.setState({
         placedByDay: dropCal ? this.removeTaskBlocks(this.state.placedByDay, t.id) : this.state.placedByDay,
         tasks: this.state.tasks.map(x => {
-          if (x.id === t.id) return Object.assign({}, x, { title: (d.title || '').trim() || x.title, pri: d.pri, flag: d.flag, cat: d.cat, mins: d.mins, note: d.note !== undefined ? d.note : (x.note || '') }, extra);
+          if (x.id === t.id) return Object.assign({}, x, { title: (d.title || '').trim() ? d.title : x.title, pri: d.pri, flag: d.flag, cat: d.cat, mins: d.mins, note: d.note !== undefined ? d.note : (x.note || '') }, extra);
           if (t.groupId && x.groupId === t.groupId && d.pri !== t.pri) return Object.assign({}, x, { pri: d.pri });
           return x;
         }).concat(restAdd ? [restAdd] : []).map(x => restTo && x.id === restTo ? Object.assign({}, x, { mins: x.mins + cut }) : x),
@@ -7665,14 +7683,14 @@ class Component extends DCLogic {
       }),
       showList: false,
       showPlaceCell: !onDayPage && s.view === 'desk',
-      placeCellLabel: s.view === 'desk' ? 'List' : 'Day',
+      placeCellLabel: s.view === 'desk' ? 'Plan for' : 'Day',
       whereOpen: s.whereMenu === t.id, whereOpenA: s.whereMenu === t.id ? 'true' : 'false',
       whereToggle: () => this.setState({ whereMenu: this.state.whereMenu === t.id ? null : t.id, catMenu: null }),
       whereName: s.view === 'desk'
-        ? ({ desk: 'My Desk', week: 'This week', next: 'Next week', month: 'This month' })[dv.bucket] || 'My Desk'
+        ? (/^w-?\d+$/.test(dv.bucket || '') ? 'Week of ' + this.MONTHS[this.dateFor(parseInt(dv.bucket.slice(1), 10)).getMonth()] + ' ' + this.dateFor(parseInt(dv.bucket.slice(1), 10)).getDate() : ({ desk: 'Not planned yet', week: 'This week', next: 'Next week', month: 'This month' })[dv.bucket] || 'Not planned yet')
         : (dv.day === null || dv.day === undefined ? 'Not planned yet' : this.DSHORT[this.dowFor(dv.day)] + ' ' + this.dateFor(dv.day).getDate()),
       whereBtns: s.view === 'desk'
-        ? [['desk', 'My Desk'], ['week', 'This week'], ['next', 'Next week']].map(o => ({ label: o[1], checked: dv.bucket === o[0] ? 'true' : 'false', bg: dv.bucket === o[0] ? '#F3EDE0' : 'transparent', set: () => { patchDraft({ bucket: o[0] }); this.setState({ whereMenu: null }); } }))
+        ? [['desk', 'Not planned yet'], ['week', 'This week'], ['next', 'Next week']].concat([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(k => { const ws = this.weekStartOff(0) + 7 * k, dt = this.dateFor(ws); return ['w' + ws, 'Week of ' + this.MONTHS[dt.getMonth()] + ' ' + dt.getDate()]; })).map(o => ({ label: o[1], checked: dv.bucket === o[0] ? 'true' : 'false', bg: dv.bucket === o[0] ? '#F3EDE0' : 'transparent', set: () => { patchDraft({ bucket: o[0] }); this.setState({ whereMenu: null }); } }))
         : [null].concat([0, 1, 2, 3, 4, 5, 6].map(i => this.weekStartOff(s.weekAnchor || 0) + i)).map(o => ({
             label: o === null ? 'Not planned yet' : this.DAYS[this.dowFor(o)] + ' ' + this.dateFor(o).getDate(),
             checked: dv.day === o ? 'true' : 'false', bg: dv.day === o ? '#F3EDE0' : 'transparent',
@@ -7705,11 +7723,11 @@ class Component extends DCLogic {
       rowH: s.settings.dense ? (piece ? 28 : 30) : (piece ? 42 : 46),
       editExpanded: s.editing === t.id ? 'true' : 'false',
       editId: 'edit-' + t.id, moveId: 'move-' + t.id,
-      openEdit: () => this.setState({ editing: s.editing === t.id ? null : t.id, editDraft: s.editing === t.id ? null : { id: t.id, title: t.title, pri: t.pri, flag: t.flag || null, cat: t.cat || null, mins: t.mins, day: hasDay ? t.dayAssign : null, bucket: bKey }, catMenu: null, sel: null, menuFor: null, missFor: null }),
+      openEdit: () => { if (this.state.editing === t.id) { clearTimeout(this._edCommitT); commitDraft(); setTimeout(() => this.closeTaskEdit(t.id), 0); return; } this._editOrig = { id: t.id, task: Object.assign({}, t), placedByDay: this.state.placedByDay }; this.setState({ editing: t.id, editDraft: null, catMenu: null, sel: null, menuFor: null, missFor: null }); },
       dTitle: dv.title,
       editKey: (e) => { if (e.key === 'Enter') { const v = e.target.value; patchDraft({ title: v }); setTimeout(() => { commitDraft(); this.setState({ editing: null, catMenu: null, whereMenu: null }); }, 0); } else if (e.key === 'Escape') this.setState({ editing: null, editDraft: null, catMenu: null, whereMenu: null }); },
-      save: () => { commitDraft(); this.setState({ editing: null, catMenu: null, whereMenu: null }); },
-      cancel: () => this.setState({ editing: null, editDraft: null, catMenu: null, whereMenu: null }),
+      save: () => { clearTimeout(this._edCommitT); commitDraft(); setTimeout(() => this.closeTaskEdit(t.id), 0); },
+      cancel: () => { clearTimeout(this._edCommitT); commitDraft(); setTimeout(() => this.closeTaskEdit(t.id), 0); },
       doneA: t.done ? 'true' : 'false', doneLabel: t.done ? 'Done' : 'Mark done', doneTip: t.done ? 'Done. Tap to mark it not done' : 'Mark this task done',
       doneBg: t.done ? '#3F7A5A' : '#FFFFFF', doneFg: t.done ? '#FFFFFF' : '#3F7A5A',
       markDone: () => thenDo(() => {
