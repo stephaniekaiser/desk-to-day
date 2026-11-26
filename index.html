@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 26, 8:59 AM';</script>
+<script>window.__plannerBuild = 'Nov 26, 9:04 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -396,7 +396,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; align-items: center; gap: 6px; padding: 6px 0 4px">
 <label for="{{sec.addId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">{{sec.addLabel}}</label>
 <input id="{{sec.addId}}" autoFocus="{{ true }}" value="{{sec.addDraft}}" onChange="{{sec.onAdd}}" onInput="{{sec.onAdd}}" onKeyDown="{{sec.addKey}}" autocomplete="off" placeholder="New task, then press Enter" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: {{tIn}}px; box-sizing: border-box; border: 1.5px solid {{sec.line}}; border-radius: 9px; padding: 0 10px; font: inherit; font-size: calc({{tFs}}px * {{fsK}}); color: #2B2722; background: #FFFFFF">
-<button onClick="{{sec.toggleAdd}}" style="height: 32px; flex: none; padding: 0 8px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Done</button>
+<button onClick="{{sec.addDone}}" style="height: 32px; flex: none; padding: 0 8px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Done</button>
 </div>
 </sc-if>
 <sc-for list="{{sec.rows}}" as="t" hint-placeholder-count="2">
@@ -8229,6 +8229,12 @@ class Component extends DCLogic {
           toggleAdd: () => this.setState({ secAdd: this.state.secAdd === k ? null : k, secDraft: '' }),
           emptyTap: () => { if (this.state.secAdd !== k) this.setState({ secAdd: k, secDraft: '' }); else { try { const el = document.getElementById('sa-' + k); if (el) el.focus(); } catch (err) {} } }, emptyCur: 'pointer', emptyRole: 'button',
           onAdd: (e) => this.setState({ secDraft: e.target.value }),
+          addDone: () => {
+            let v = this.state.secDraft || ''; try { const el = document.getElementById('sa-' + k); if (el && el.value) v = el.value; } catch (err) {}
+            const title = String(v).trim();
+            if (title) { const n5 = this.state.nextId, d0 = this.state.day; this.setState({ tasks: this.state.tasks.concat([{ id: 'n' + n5, title: title, pri: k, flag: null, mins: this.state.settings.defaultMins || 30, bucket: 'week', weekOf: this.weekStartOff(d0), dayAssign: d0 }]), nextId: n5 + 1 }); }
+            this.setState({ secAdd: null, secDraft: '' });
+          },
           addKey: (e) => {
             if (e.key === 'Escape') { this.setState({ secAdd: null, secDraft: '' }); return; }
             if (e.key !== 'Enter') return;
@@ -8307,7 +8313,7 @@ class Component extends DCLogic {
         drop: (e) => this.dropTask(e, isWeek ? { bucket: 'week', weekOf: listWs, dayAssign: null } : { bucket: leftBucket })
       }];
     }
-    (sections || []).forEach(x => { x.notCollapsible = !x.collapsible; if (!x.emptyTap) { x.emptyTap = () => {}; x.emptyCur = 'default'; x.emptyRole = 'presentation'; } });
+    (sections || []).forEach(x => { x.notCollapsible = !x.collapsible; if (!x.addDone) x.addDone = x.toggleAdd || (() => {}); if (!x.emptyTap) { x.emptyTap = () => {}; x.emptyCur = 'default'; x.emptyRole = 'presentation'; } });
     if (allMode) {
       const byIdA = {}; s.tasks.forEach(t => { byIdA[t.id] = t; });
       const noDrop = (e) => { if (e && e.preventDefault) e.preventDefault(); this.drag = null; this.setState({ dropKey: null }); };
