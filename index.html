@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 25, 5:56 PM';</script>
+<script>window.__plannerBuild = 'Nov 25, 5:59 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -6043,7 +6043,8 @@ class Component extends DCLogic {
     const sc = t.scene; if (!sc) return null;
     if (!sc.sets) return sc;
     const m = this.dateFor(s.day).getMonth() + 1;
-    const set = sc.sets.find(x => (x.months || []).indexOf(m) >= 0) || sc.sets.find(x => !(x.months || []).length) || sc.sets[0];
+    let set = sc.sets.find(x => (x.months || []).indexOf(m) >= 0) || sc.sets.find(x => !(x.months || []).length) || sc.sets[0];
+    try { const f = sc.sets.find(x => x.id === window.__setVar); if (f) set = f; } catch (err) {}
     // friends belong to seasons: a cast with "sets" only visits during those sets
     const casts = (sc.casts || []).filter(c => !c.sets || c.sets.indexOf(set.id) >= 0);
     let cast = this.pickByDay(casts.length ? casts : [{}], s.day) || {};
