@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 1:38 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 1:40 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -867,12 +867,12 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="flex: none; font-size: calc(12px * {{fsK}}); font-weight: 600; color: {{dc.tone}}">{{dc.line}}</span>
 </div>
 <sc-for list="{{dc.rows}}" as="sr" hint-placeholder-count="2">
-<div style="display: flex; align-items: center; gap: 6px; min-height: calc(46px * {{rowK}}); border-bottom: 1px solid #E8DFCC">
-<button role="checkbox" aria-checked="{{sr.done}}" onClick="{{sr.toggle}}" aria-label="{{sr.title}}" style="width: 40px; height: 40px; flex: none; border: 0; border-radius: 20px; background: transparent; color: #3F7A5A; display: flex; align-items: center; justify-content: center; padding: 0">
-<sc-if value="{{sr.done}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if>
-<sc-if value="{{sr.notDone}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.5"></circle></svg></sc-if>
+<div style="display: flex; align-items: center; gap: 6px; min-height: calc(38px * {{rowK}}); border-bottom: 1px solid #E8DFCC">
+<button role="checkbox" aria-checked="{{sr.done}}" onClick="{{sr.toggle}}" aria-label="{{sr.title}}" style="width: calc(32px * {{rowK}}); height: calc(32px * {{rowK}}); flex: none; border: 0; border-radius: 16px; background: transparent; color: #3F7A5A; display: flex; align-items: center; justify-content: center; padding: 0">
+<sc-if value="{{sr.done}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="currentColor"></circle><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if>
+<sc-if value="{{sr.notDone}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle></svg></sc-if>
 </button>
-<span style="flex: 1; min-width: 0; font-size: calc(14.5px * {{fsK}}); color: #2B2722; line-height: 1.3; text-decoration: {{sr.strike}}">{{sr.title}}</span>
+<span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: #2B2722; line-height: 1.3; text-decoration: {{sr.strike}}">{{sr.title}}</span>
 <span style="flex: none; font-size: calc(12px * {{fsK}}); color: #6B6358; white-space: nowrap">{{sr.meta}}</span>
 </div>
 </sc-for>
@@ -12376,7 +12376,7 @@ class Component extends DCLogic {
             toggle: () => this.setTaskDone(t.id, !t.done, D) };
         }).sort((a, b) => a.start - b.start);
         rows.forEach(r => { if (r.notDone) out.schoolLeft++; });
-        return { title: c.title || 'Course', line: st.pct + '% done · ' + st.status, tone: st.tone === 'bad' ? '#9A4A3A' : (st.tone === 'good' ? '#3E7A55' : '#7A7064'), rows: rows };
+        return { title: c.title || 'Course', line: st.pct + '% done · ' + st.status, tone: st.tone === 'bad' ? '#B03A2E' : '#7A7064', rows: rows };
       });
       // Assignments due in the next week (from this day)
       const dues = [];
