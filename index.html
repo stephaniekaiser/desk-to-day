@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 2:18 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 2:32 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2406,65 +2406,12 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; align-items: center; gap: 6px; font-size: calc(11px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: {{iKindColor}}; font-weight: 700">
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{iKindIcon}}"></path></svg>{{iKindLabel}}</div>
 <label for="gtitle" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Intention</label>
-<input id="gtitle" value="{{gTitle}}" onChange="{{gOnTitle}}" style="outline-color: {{TK.tA0526A}}; height: 46px; box-sizing: border-box; border: 0; border-bottom: 1px solid #E6DCC8; background: transparent; padding: 0 8px; font-family: {{TK.fBody}}; font-size: calc(32px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; border-radius: 6px">
+<div style="display: flex; align-items: center; gap: 10px; min-width: 0">
+<button onClick="{{iGoWhy}}" aria-label="My why" title="My why" style="width: 44px; height: 44px; flex: none; border: 2px solid #FFFFFF; border-radius: 22px; padding: 0; overflow: hidden; background: {{TK.tFBEDEE}}; box-shadow: 0 1px 4px rgba(0,0,0,0.18); cursor: pointer"><img src="{{iPhoto}}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></button>
+<input id="gtitle" value="{{gTitle}}" onChange="{{gOnTitle}}" style="flex: 1; min-width: 0; outline-color: {{TK.tA0526A}}; height: 46px; box-sizing: border-box; border: 0; border-bottom: 1px solid #E6DCC8; background: transparent; padding: 0 8px; font-family: {{TK.fBody}}; font-size: calc(32px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; border-radius: 6px">
+</div>
 </div>
 
-<section aria-label="My why" style="flex: none; border: 1px solid {{TK.tEBC3CD}}; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; background: #FFFFFF">
-<div style="position: relative; height: 132px; background: {{TK.tFBEDEE}}">
-<button onClick="{{iOpenPhoto}}" aria-label="Open the photo larger" title="Tap to see it larger" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; display: block; cursor: zoom-in">
-<img src="{{iPhoto}}" alt="My why photo" style="width: 100%; height: 100%; object-fit: cover; display: block">
-</button>
-<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 14px 8px; background: linear-gradient(180deg, rgba(60,22,34,0) 0%, rgba(60,22,34,0.55) 45%, rgba(60,22,34,0.78) 100%); display: flex; flex-direction: column; gap: 2px">
-<label for="gwhy" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: {{TK.tF6C7D1}}">My why</label>
-<textarea id="gwhy" value="{{gWhy}}" onChange="{{gOnWhy}}" rows="2" placeholder="When this gets hard, what do you want to remember?" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 0; padding: 4px 8px; font-family: {{TK.fBody}}; font-style: italic; font-size: calc(18px * {{fsK}}); line-height: 1.3; color: #FFFFFF; background: transparent; resize: none; text-shadow: 0 1px 2px rgba(0,0,0,0.35); border-radius: 6px"></textarea>
-</div>
-<div style="position: absolute; top: 8px; left: 8px; display: flex; gap: 6px">
-<label title="Add your own photo" aria-label="Add your own photo" style="position: relative; width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: rgba(255,255,255,0.88); color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.15)">
-<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M8 13l3-3 5 5M14 12l2-2 5 5"></path></svg>
-<input type="file" accept="image/*" onChange="{{iOnPhoto}}" style="outline-color: {{TK.tA0526A}}; position: absolute; width: 1px; height: 1px; opacity: 0">
-</label>
-<label title="Attach a file" aria-label="Attach a file" style="position: relative; width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: rgba(255,255,255,0.88); color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.15)">
-<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12l-8 8a5 5 0 0 1-7-7l9-9a3.5 3.5 0 0 1 5 5l-9 9a2 2 0 0 1-3-3l8-8"></path></svg>
-<input type="file" onChange="{{iOnFile}}" style="outline-color: {{TK.tA0526A}}; position: absolute; width: 1px; height: 1px; opacity: 0">
-</label>
-<button onClick="{{iToggleLink}}" aria-label="Add a link" title="Add a link" style="width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: rgba(255,255,255,0.88); color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.15)">
-<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"></path></svg>
-</button>
-</div>
-<sc-if value="{{iCustomPhoto}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{iRemovePhoto}}" aria-label="Remove photo" title="Remove photo" style="position: absolute; top: 8px; right: 8px; width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: rgba(255,255,255,0.88); color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.15)">
-<svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
-</button>
-</sc-if>
-</div>
-<sc-if value="{{iHasExtrasRow}}" hint-placeholder-val="{{ true }}">
-<div style="padding: 8px 10px; display: flex; flex-direction: column; gap: 6px">
-<sc-if value="{{iHasLinks}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center">
-<sc-for list="{{iLinks}}" as="lk" hint-placeholder-count="1">
-<span style="display: inline-flex; align-items: center; gap: 4px; height: 28px; padding: 0 4px 0 10px; border-radius: 14px; background: {{TK.tFBEDEE}}; font-size: calc(12px * {{fsK}}); color: {{TK.t6E2F43}}">
-<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{lk.icon}}"></path></svg>
-<sc-if value="{{lk.isLink}}" hint-placeholder-val="{{ true }}">
-<a href="{{lk.url}}" target="_blank" rel="noopener" style="color: inherit; font-weight: 600; text-decoration: none; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{lk.label}}</a>
-</sc-if>
-<sc-if value="{{lk.isFile}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{lk.open}}" style="border: 0; background: transparent; padding: 0; color: inherit; font: inherit; font-weight: 600; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer">{{lk.label}}</button>
-</sc-if>
-<button onClick="{{lk.remove}}" aria-label="Remove {{lk.label}}" style="width: 22px; height: 22px; border: 0; border-radius: 11px; background: transparent; color: {{TK.tA0526A}}; display: flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
-</span>
-</sc-for>
-</div>
-</sc-if>
-<sc-if value="{{iLinkOpen}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; gap: 6px">
-<label for="ilink" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Link address</label>
-<input id="ilink" autoFocus="{{ true }}" value="{{iLinkDraft}}" onChange="{{iOnLinkDraft}}" onInput="{{iOnLinkDraft}}" onKeyDown="{{iLinkKey}}" placeholder="Paste a link, then press Enter" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1">
-<button onClick="{{iAddLink}}" style="height: 32px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12px * {{fsK}}); font-weight: 700">Add</button>
-</div>
-</sc-if>
-</div>
-</sc-if>
-</section>
 <sc-if value="{{iViewOpen}}" hint-placeholder-val="{{ false }}">
 <div onClick="{{iCloseView}}" style="position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 200; background: rgba(40,28,26,0.45); display: flex; align-items: center; justify-content: center; padding: 40px; box-sizing: border-box">
 <div role="dialog" aria-label="{{iViewName}}" onClick="{{iStop}}" style="position: relative; max-width: min(720px, 100%); max-height: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; background: {{popBg}}; border-radius: 14px; padding: 12px; box-shadow: 0 18px 50px rgba(0,0,0,0.35)">
@@ -2498,6 +2445,64 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button role="tab" aria-selected="{{it.sel}}" onClick="{{it.pick}}" style="height: 30px; padding: 0 2px; margin-bottom: -1px; border: 0; border-bottom: 2px solid {{it.line}}; background: transparent; color: {{it.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">{{it.label}}</button>
 </sc-for>
 </div>
+<sc-if value="{{iTabWhy}}" hint-placeholder-val="{{ false }}">
+<section aria-label="My why" style="flex: none; border: 1px solid {{TK.tEBC3CD}}; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; background: #FFFFFF">
+<div style="position: relative; background: {{TK.tFBEDEE}}; min-height: 120px">
+<button onClick="{{iOpenPhoto}}" aria-label="Open the photo larger" title="Tap to see it larger" style="width: 100%; border: 0; padding: 0; background: transparent; display: block; cursor: zoom-in">
+<img src="{{iPhoto}}" alt="My why photo" style="width: 100%; height: auto; max-height: 440px; object-fit: contain; display: block; margin: 0 auto">
+</button>
+<div style="position: absolute; top: 8px; left: 8px; display: flex; gap: 6px">
+<label title="Add your own photo" aria-label="Add your own photo" style="position: relative; width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: rgba(255,255,255,0.88); color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.15)">
+<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M8 13l3-3 5 5M14 12l2-2 5 5"></path></svg>
+<input type="file" accept="image/*" onChange="{{iOnPhoto}}" style="outline-color: {{TK.tA0526A}}; position: absolute; width: 1px; height: 1px; opacity: 0">
+</label>
+<label title="Attach a file" aria-label="Attach a file" style="position: relative; width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: rgba(255,255,255,0.88); color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.15)">
+<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12l-8 8a5 5 0 0 1-7-7l9-9a3.5 3.5 0 0 1 5 5l-9 9a2 2 0 0 1-3-3l8-8"></path></svg>
+<input type="file" onChange="{{iOnFile}}" style="outline-color: {{TK.tA0526A}}; position: absolute; width: 1px; height: 1px; opacity: 0">
+</label>
+<button onClick="{{iToggleLink}}" aria-label="Add a link" title="Add a link" style="width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: rgba(255,255,255,0.88); color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.15)">
+<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"></path></svg>
+</button>
+</div>
+<sc-if value="{{iCustomPhoto}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{iRemovePhoto}}" aria-label="Remove photo" title="Remove photo" style="position: absolute; top: 8px; right: 8px; width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: rgba(255,255,255,0.88); color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.15)">
+<svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</sc-if>
+</div>
+<div style="padding: 12px 14px 4px; display: flex; flex-direction: column; gap: 6px">
+<label for="gwhy" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">My why</label>
+<textarea id="gwhy" value="{{gWhy}}" onChange="{{gOnWhy}}" rows="3" placeholder="When this gets hard, what do you want to remember?" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; width: 100%; border: 1px solid #E6DCC8; border-radius: 10px; padding: 10px 12px; font-family: {{TK.fBody}}; font-style: italic; font-size: calc(18px * {{fsK}}); line-height: 1.4; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
+</div>
+<sc-if value="{{iHasExtrasRow}}" hint-placeholder-val="{{ true }}">
+<div style="padding: 8px 10px; display: flex; flex-direction: column; gap: 6px">
+<sc-if value="{{iHasLinks}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center">
+<sc-for list="{{iLinks}}" as="lk" hint-placeholder-count="1">
+<span style="display: inline-flex; align-items: center; gap: 4px; height: 28px; padding: 0 4px 0 10px; border-radius: 14px; background: {{TK.tFBEDEE}}; font-size: calc(12px * {{fsK}}); color: {{TK.t6E2F43}}">
+<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="{{lk.icon}}"></path></svg>
+<sc-if value="{{lk.isLink}}" hint-placeholder-val="{{ true }}">
+<a href="{{lk.url}}" target="_blank" rel="noopener" style="color: inherit; font-weight: 600; text-decoration: none; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{lk.label}}</a>
+</sc-if>
+<sc-if value="{{lk.isFile}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{lk.open}}" style="border: 0; background: transparent; padding: 0; color: inherit; font: inherit; font-weight: 600; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer">{{lk.label}}</button>
+</sc-if>
+<button onClick="{{lk.remove}}" aria-label="Remove {{lk.label}}" style="width: 22px; height: 22px; border: 0; border-radius: 11px; background: transparent; color: {{TK.tA0526A}}; display: flex; align-items: center; justify-content: center; padding: 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</span>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{iLinkOpen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; gap: 6px">
+<label for="ilink" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Link address</label>
+<input id="ilink" autoFocus="{{ true }}" value="{{iLinkDraft}}" onChange="{{iOnLinkDraft}}" onInput="{{iOnLinkDraft}}" onKeyDown="{{iLinkKey}}" placeholder="Paste a link, then press Enter" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1">
+<button onClick="{{iAddLink}}" style="height: 32px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12px * {{fsK}}); font-weight: 700">Add</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+</section>
+</sc-if>
 <sc-if value="{{iTabProgress}}" hint-placeholder-val="{{ true }}">
 <sc-if value="{{iIsBuild}}" hint-placeholder-val="{{ true }}">
 <section aria-label="How it's going" style="flex: none; display: flex; flex-direction: column; gap: 8px">
@@ -2868,6 +2873,24 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-for>
 </div>
+<sc-if value="{{fg.isAbout}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: flex-end; gap: 10px 20px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Status</span>
+<div role="radiogroup" aria-label="Status" style="align-self: flex-start; display: flex; gap: 2px; background: #EFE7D6; border-radius: 9px; padding: 3px">
+<sc-for list="{{gStatusBtns}}" as="sb" hint-placeholder-count="4">
+<button role="radio" aria-checked="{{sb.checked}}" onClick="{{sb.set}}" style="height: 28px; padding: 0 10px; border: 0; border-radius: 7px; background: {{sb.bg}}; color: {{sb.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; box-shadow: {{sb.shadow}}; white-space: nowrap">{{sb.label}}</button>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{iCanOnDay}}" hint-placeholder-val="{{ true }}">
+<button role="checkbox" aria-checked="{{iOnDayA}}" onClick="{{iToggleOnDay}}" style="display: flex; align-items: center; gap: 8px; min-height: 34px; border: 0; background: transparent; padding: 0; text-align: left; font: inherit; cursor: pointer">
+<span aria-hidden="true" style="width: 20px; height: 20px; flex: none; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{iOnDayBox}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<span style="display: flex; flex-direction: column"><span style="font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722">Show on my Day page</span><span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064">{{iOnDayHelp}}</span></span>
+</button>
+</sc-if>
+</div>
+</sc-if>
 </div>
 </sc-for>
 <sc-if value="{{iRepOn}}" hint-placeholder-val="{{ false }}">
@@ -2901,17 +2924,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </div>
 </sc-if>
-<sc-if value="{{iCanOnDay}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; align-items: center; gap: 10px">
-<div style="flex: 1; min-width: 0">
-<div style="font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">Show on my day page</div>
-<div style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{iOnDayHelp}}</div>
-</div>
-<button role="switch" aria-checked="{{iOnDayA}}" aria-label="Show on my day page" onClick="{{iToggleOnDay}}" style="position: relative; width: 48px; height: 28px; flex: none; border: 0; border-radius: 14px; background: {{iOnDayTrack}}; padding: 0">
-<span style="position: absolute; top: 3px; left: {{iOnDayKnob}}px; width: 22px; height: 22px; border-radius: 11px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.3)"></span>
-</button>
-</div>
-</sc-if>
 <sc-if value="{{iNotesAdd}}" hint-placeholder-val="{{ true }}"><button onClick="{{iNotesOpenGo}}" style="align-self: flex-start; height: 30px; border: 0; background: transparent; padding: 0 2px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add notes</button></sc-if>
 <sc-if value="{{iNotesShow}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 4px">
@@ -2919,14 +2931,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <textarea id="gnotes" value="{{gDesc}}" onChange="{{gOnDesc}}" onInput="{{gOnDesc}}" rows="4" placeholder="Describe it in your own words: what it looks like, what is included, ideas, anything you want to remember." style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; width: 100%; resize: vertical; border: 1px solid #E6DCC8; border-radius: 10px; padding: 10px 12px; font: inherit; font-size: calc(14px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFDF7"></textarea>
 </div>
 </sc-if>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Status</span>
-<div role="radiogroup" aria-label="Status" style="align-self: flex-start; display: flex; gap: 2px; background: #EFE7D6; border-radius: 9px; padding: 3px">
-<sc-for list="{{gStatusBtns}}" as="sb" hint-placeholder-count="4">
-<button role="radio" aria-checked="{{sb.checked}}" onClick="{{sb.set}}" style="height: 28px; padding: 0 10px; border: 0; border-radius: 7px; background: {{sb.bg}}; color: {{sb.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; box-shadow: {{sb.shadow}}; white-space: nowrap">{{sb.label}}</button>
-</sc-for>
-</div>
-</div>
 <div style="display: flex; align-items: center; gap: 10px">
 <span style="flex: 1"></span>
 <button onClick="{{gDelAskGo}}" aria-label="Delete this intention" title="Delete" style="width: 34px; height: 34px; border: 0; border-radius: 17px; background: transparent; color: #9A4A3A; display: flex; align-items: center; justify-content: center; padding: 0">
@@ -10397,6 +10401,7 @@ class Component extends DCLogic {
         iAddLink: addLink,
         iSetupOpen: !!s.iSetup, iSetupOpenA: s.iSetup ? 'true' : 'false', iSetupChev: s.iSetup ? 'rotate(180deg)' : 'none',
         iToggleSetup: () => this.setState({ iSetup: !this.state.iSetup }),
+        iTabWhy: tabNow === 'why', iGoWhy: () => this.setState({ iTab: 'why' }),
         iTabProgress: tabNow === 'progress', iTabDetails: tabNow === 'details', iTabHelping: tabNow === 'helping',
         iCanOnDay: k === 'build' || k === 'break', iOnDayA: g.onDay ? 'true' : 'false', iOnDayTrack: g.onDay ? '#2F5A3E' : '#B9AF9C', iOnDayKnob: g.onDay ? 23 : 3,
         iOnDayHelp: (() => { const n = goals.filter(x => x.onDay && x.status === 'active' && (x.kind === 'build' || x.kind === 'break')).length; return 'Up to 4 can sit under your day list. ' + n + ' of 4 are showing.'; })(),
@@ -10405,7 +10410,7 @@ class Component extends DCLogic {
           if (!g.onDay && n >= 4) { this.setError('Four are already on your day page. Turn one off first.'); return; }
           upd({ onDay: !g.onDay });
         },
-        iTabs: (k === 'reach' ? (g.measure === 'number' ? [['progress', 'How it\'s going'], ['helping', 'What\'s helping'], ['log', 'Log'], ['details', 'Details']] : [['progress', 'How it\'s going'], ['helping', 'What\'s helping'], ['details', 'Details']]) : [['progress', 'How it\'s going'], ['log', 'Log'], ['details', 'Details']]).map(o => {
+        iTabs: (k === 'reach' ? (g.measure === 'number' ? [['progress', 'How it\'s going'], ['helping', 'What\'s helping'], ['log', 'Log'], ['details', 'Details'], ['why', 'My why']] : [['progress', 'How it\'s going'], ['helping', 'What\'s helping'], ['details', 'Details'], ['why', 'My why']]) : [['progress', 'How it\'s going'], ['log', 'Log'], ['details', 'Details'], ['why', 'My why']]).map(o => {
           const on = tabNow === o[0];
           return { label: o[1], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ iTab: o[0] }) };
         }),
@@ -10821,20 +10826,23 @@ class Component extends DCLogic {
           by: 'The date you want to reach it.',
           unit: 'The word shown after each amount, like steps, minutes, glasses or calories.'
         };
-        const GRP = { startday: 'When', by: 'When', quick: 'Extras', permin: 'Extras' };
+        const GRP = { short: 'About', startday: 'About', by: 'About' };
         const SUF = { daily: 1, min: 1, quick: 1, goal: 1, limit: 1, start: 1 };
         const u = String(g.unit || '').trim();
         const groups = [], gm = {};
         (iVals.iFields || []).forEach(f => {
-          const id = f.id.replace(/^if-/, ''), gn = GRP[id] || 'Basics';
-          if (!gm[gn]) { gm[gn] = { title: gn, fields: [] }; groups.push(gm[gn]); }
+          const id = f.id.replace(/^if-/, ''), gn = GRP[id] || 'Goal & tracking';
+          if (!gm[gn]) { gm[gn] = { title: gn, isAbout: gn === 'About', fields: [] }; groups.push(gm[gn]); }
           const narrow = f.isInput && f.type === 'number';
-          gm[gn].fields.push(Object.assign({}, f, { tip: TIP[id] || '', hasTip: !!TIP[id], suffix: SUF[id] && u && u !== '$' ? u : '', hasSuffix: !!(SUF[id] && u && u !== '$'), inW: narrow ? '120px' : '100%', tipOpen: s.iTipOpen === f.id, toggleTip: () => this.setState({ iTipOpen: this.state.iTipOpen === f.id ? null : f.id }) }));
+          gm[gn].fields.push(Object.assign({}, f, { tip: TIP[id] || '', hasTip: !!TIP[id], suffix: SUF[id] && u && u !== '$' ? u : '', hasSuffix: false, inW: narrow ? '120px' : '100%', tipOpen: s.iTipOpen === f.id, toggleTip: () => this.setState({ iTipOpen: this.state.iTipOpen === f.id ? null : f.id }) }));
         });
-        const order = ['Basics', 'When', 'Extras'];
+        if (!gm['About']) { gm['About'] = { title: 'About', isAbout: true, fields: [] }; groups.push(gm['About']); }
+        const order = ['About', 'Goal & tracking'];
         groups.sort((a, b) => order.indexOf(a.title) - order.indexOf(b.title));
+        groups.forEach(gr => { const ui = gr.fields.findIndex(f => f.id === 'if-unit'); if (ui > 0) gr.fields.unshift(gr.fields.splice(ui, 1)[0]); });
         iVals.iFieldGroups = groups;
         const hasNotes = !!String(g.desc || '').trim();
+        iVals.iOnDayBox = iVals.iOnDayA === 'true' ? this.TK.t6E2F43 : '#FFFFFF';
         iVals.iNotesShow = hasNotes || s.iNotesFor === g.id; iVals.iNotesAdd = !iVals.iNotesShow;
         iVals.iNotesOpenGo = () => { this.setState({ iNotesFor: g.id }); setTimeout(() => { try { const el = document.getElementById('gnotes'); if (el) el.focus(); } catch (e) {} }, 60); };
       }
