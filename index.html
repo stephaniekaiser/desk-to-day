@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 1:17 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 1:22 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -5392,12 +5392,26 @@ class Component extends DCLogic {
     const w = t.split(/\s+/).filter(Boolean);
     return w.slice(0, 2).join(' ') || 'Course';
   }
+  stripCoursePrefix(c, title) {
+    const t = String(title || '');
+    const cands = [this.coursePrefix(c), (c && c.title || '').trim()].concat((c && c.prevShorts) || []).filter(Boolean).sort((a, b) => b.length - a.length);
+    const hit = cands.find(x => t.indexOf(x + ': ') === 0);
+    return hit ? t.slice(hit.length + 2) : t;
+  }
+  workTitle(c, a, desc) {
+    const base = this.asWorkBase(c, a), d = String(desc || '').trim(), at = String(a.title || '').trim().toLowerCase();
+    if (!d) return base;
+    const dl = d.toLowerCase();
+    if (base.toLowerCase().slice(-dl.length) === dl) return base;
+    if (at && dl.indexOf(at) >= 0) return this.coursePrefix(c) + ': ' + d;
+    return base + ' · ' + d;
+  }
   coursePrefix(c) { const v = c && typeof c.short === 'string' ? c.short.trim() : ''; return v || this.courseShortGuess(c && c.title); }
   asWorkBase(c, a) { return this.coursePrefix(c) + ': ' + (a.kind === 'exam' ? 'Study for ' : '') + (a.title || 'Assignment'); }
   asWorkDesc(tid, cid, aid, v) {
     const s = this.state, c = (s.courses || []).find(x => x.id === cid), a = c && (c.assignments || []).find(x => x.id === aid); if (!a) return;
-    const base = this.asWorkBase(c, a), d = String(v || '');
-    this.setState({ tasks: s.tasks.map(x => x.id === tid ? Object.assign({}, x, { workDesc: d, title: d.trim() ? base + ' · ' + d.trim() : base }) : x) });
+    const d = String(v || '');
+    this.setState({ tasks: s.tasks.map(x => x.id === tid ? Object.assign({}, x, { workDesc: d, title: this.workTitle(c, a, d) }) : x) });
   }
   asWorkAdd(cid, aid) {
     const s = this.state, c = (s.courses || []).find(x => x.id === cid); if (!c) return;
@@ -6723,6 +6737,7 @@ class Component extends DCLogic {
     patch.nextId = Math.max(typeof r.nextId === 'number' ? r.nextId : 100, 100);
     if (!r.catsKnown && !(r.cats && r.cats.length)) patch.cats = this.defaultCats();
     patch.courses = (patch.courses || []).map(c => this.migrateCourse(c));
+    if (patch.tasks) patch.tasks = patch.tasks.map(t => { const ti = String(t.title || ''), k = ti.lastIndexOf(' · '); if (k < 0) return t; const L = ti.slice(0, k), Rt = ti.slice(k + 3).trim(); return Rt && L.toLowerCase().slice(-Rt.length) === Rt.toLowerCase() ? Object.assign({}, t, { title: L }) : t; });
     if (patch.tasks && patch.groups) patch.tasks = patch.tasks.map(t => { const g = t.groupId && patch.groups[t.groupId]; return g && g.title && /^Slice \d+ of \d+$/.test(t.title || '') ? Object.assign({}, t, { title: g.title + ' ' + t.title }) : t; });
     this.foldCourseCats(patch);
     patch.tasks = (patch.tasks || []).map(t => typeof t.added === 'number' ? t : Object.assign({}, t, { added: -1000 }));
@@ -11555,7 +11570,7 @@ class Component extends DCLogic {
                 if (!gm[ws]) { gm[ws] = { label: this.weekLabel(ws), mins: 0, rows: [] }; groups.push(gm[ws]); }
                 gm[ws].mins += t.mins || 0;
                 gm[ws].rows.push({
-                  label: t.assignmentId && asTitle[t.assignmentId] ? 'For ' + asTitle[t.assignmentId] + ((t.workDesc || '').trim() ? ' · ' + t.workDesc.trim() : '') : ((t.title || '').replace(/^[^:]*:\s*/, '') || 'Study time'), len: this.fmtDur(t.mins),
+                  label: t.assignmentId && asTitle[t.assignmentId] ? (((t.workDesc || '').trim() && t.workDesc.toLowerCase().indexOf(asTitle[t.assignmentId].toLowerCase()) >= 0) ? t.workDesc.trim() : 'For ' + asTitle[t.assignmentId] + ((t.workDesc || '').trim() ? ' · ' + t.workDesc.trim() : '')) : (this.stripCoursePrefix(sel, t.title) || 'Study time'), len: this.fmtDur(t.mins),
                   where: d === null ? 'No day yet' : this.DSHORT[this.dowFor(d)] + (sc ? ' ' + this.fmtTime(sc.start, false) : ''),
                   whereFg: d === null ? '#8A8174' : (d < 0 ? '#B03A2E' : '#6B6358'), fg: d !== null && d < 0 ? '#B03A2E' : '#2B2722', strike: 'none',
                   open: () => this.openTaskEdit(t.id),
@@ -11837,7 +11852,7 @@ class Component extends DCLogic {
             const d = dOf(t), ws = this.weekStartOff(d !== null ? d : this.effWeek(t)), sc = sm3[t.id];
             if (!pgm[ws]) { pgm[ws] = { label: this.weekLabel(ws), mins: 0, rows: [] }; pg.push(pgm[ws]); }
             pgm[ws].mins += t.mins || 0;
-            pgm[ws].rows.push({ label: (t.title || '').replace(/^[^:]*:\s*/, '') || 'Study time', len: this.fmtDur(t.mins),
+            pgm[ws].rows.push({ label: this.stripCoursePrefix(sel, t.title) || 'Study time', len: this.fmtDur(t.mins),
               where: d === null ? 'This week' : this.DSHORT[this.dowFor(d)] + ' ' + this.MONTHS[this.dateFor(d).getMonth()] + ' ' + this.dateFor(d).getDate() + (sc ? ' · ' + this.fmtTime(sc.start, false) : ''),
               whereFg: d !== null && d < 0 ? '#B03A2E' : '#6B6358', open: () => this.openTaskEdit(t.id) });
           });
@@ -11923,7 +11938,7 @@ class Component extends DCLogic {
               return {
                 scQsHasPlanned: cover.length > 0,
                 scQsPlanned: cover.map(t => ({
-                  label: (t.title || '').replace(/^[^:]*:\s*/, '') + ' · ' + this.fmtDur(t.mins),
+                  label: this.stripCoursePrefix(sel, t.title) + ' · ' + this.fmtDur(t.mins),
                   tId: 'qst-' + t.id, timeVal: sm0[t.id] ? this.toHHMM(sm0[t.id].start) : '', hasTime: !!sm0[t.id],
                   onTime: (e) => { const v = e.target.value; const st = this.state; const m = {}; Object.keys(st.placedByDay).forEach(k => { m[k] = (st.placedByDay[k] || []).filter(b => b.taskId !== t.id); });
                     if (!v) { this.setState({ placedByDay: m }); this.setToast('Time cleared. It stays on that day\'s list.'); return; }
