@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 12:11 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 12:31 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3046,32 +3046,32 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding-right: 4px">
 <sc-if value="{{scTabOv}}" hint-placeholder-val="{{ true }}">
-<section aria-label="Classes coming up" style="flex: none; display: flex; flex-direction: column; gap: 2px">
-<div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Classes coming up</span><span style="flex: 1"></span><button onClick="{{scGoClasses}}" style="flex: none; border: 0; background: transparent; padding: 0; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{scGoClassesLbl}}</button></div>
+<section aria-label="Classes coming up" style="flex: none; display: flex; flex-direction: column; gap: 2px; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 12px; padding: 10px 14px 8px">
+<div style="display: flex; align-items: baseline; gap: 8px; padding: 0 0 6px"><span style="font-size: calc(16px * {{fsK}}); font-weight: 700; color: #2B2722">Classes coming up</span><span style="flex: 1"></span><button onClick="{{scGoClasses}}" style="flex: none; border: 0; background: transparent; padding: 0; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{scGoClassesLbl}}</button></div>
 <sc-if value="{{scClsNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174; padding: 4px 2px">{{scClsEmpty}}</span></sc-if>
 <sc-for list="{{scClsRows}}" as="cr" hint-placeholder-count="2">
 <div style="display: flex; align-items: center; gap: 10px; min-height: calc(36px * {{rowK}}); border-bottom: 1px solid {{TK.tF6EDEF}}; padding: 0 2px">
 <button onClick="{{cr.open}}" title="Open on the Classes tab" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; align-self: stretch; border: 0; background: transparent; padding: 0; text-align: left; font: inherit">
-<span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{cr.title}}</span>
-<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #7A7064">{{cr.len}}</span>
-<span style="flex: none; min-width: 96px; text-align: right; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #6B6358">{{cr.when}}</span>
+<span style="flex: none; width: calc(118px * {{fsK}}); font-size: calc(12.5px * {{fsK}}); color: #6B6358">{{cr.when}}</span>
+<span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{cr.title}}</span>
+<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #8A8174">{{cr.len}}</span>
 </button>
 <sc-if value="{{cr.hasLink}}" hint-placeholder-val="{{ false }}"><a href="{{cr.href}}" target="_blank" rel="noopener noreferrer" aria-label="Join {{cr.title}}" title="Open the class link" style="flex: none; height: 26px; padding: 0 10px; border-radius: 13px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12px * {{fsK}}); font-weight: 700; display: flex; align-items: center; text-decoration: none">Join</a></sc-if>
 </div>
 </sc-for>
 </section>
-<section aria-label="Assignments due" style="flex: none; display: flex; flex-direction: column; gap: 2px">
-<div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Assignments due</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174">{{scDueSum}}</span></div>
+<section aria-label="Assignments due" style="flex: none; display: flex; flex-direction: column; gap: 2px; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 12px; padding: 10px 14px 8px">
+<div style="display: flex; align-items: baseline; gap: 8px; padding: 0 0 6px"><span style="font-size: calc(16px * {{fsK}}); font-weight: 700; color: #2B2722">Assignments</span><span style="flex: none; font-size: calc(12.5px * {{fsK}}); color: #8A8174">{{scDueSum}}</span><span style="flex: 1"></span></div>
 <sc-if value="{{scDueNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174; padding: 4px 2px">Nothing due. Add assignments on the Assignments tab.</span></sc-if>
 <sc-for list="{{scDueRows}}" as="dr" hint-placeholder-count="2">
 <button onClick="{{dr.open}}" title="Open on the Assignments tab" style="display: flex; align-items: center; gap: 10px; min-height: calc(36px * {{rowK}}); border: 0; border-bottom: 1px solid {{TK.tF6EDEF}}; background: transparent; padding: 0 2px; text-align: left; font: inherit">
-<span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: {{dr.fg}}; text-decoration: {{dr.strike}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{dr.title}}</span>
-<span style="flex: none; font-size: calc(12px * {{fsK}}); font-weight: {{dr.fw}}; color: {{dr.dueFg}}">{{dr.due}}</span>
+<span style="flex: none; width: calc(118px * {{fsK}}); font-size: calc(12.5px * {{fsK}}); font-weight: {{dr.fw}}; color: {{dr.dueFg}}">{{dr.due}}</span>
+<span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: {{dr.fg}}; text-decoration: {{dr.strike}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{dr.title}}</span>
 </button>
 </sc-for>
 </section>
-<section aria-label="Study time" style="flex: none; display: flex; flex-direction: column; gap: 6px">
-<div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Study time</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174">{{scSessSum}}</span><button onClick="{{scAddSessOpen}}" style="flex: none; height: 26px; margin: -4px 0; border: 1px solid {{TK.tE2B9C4}}; border-radius: 13px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0 10px 0 8px; display: flex; align-items: center; gap: 4px; font-size: calc(12px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add study time</button></div>
+<section aria-label="Study time" style="flex: none; display: flex; flex-direction: column; gap: 4px; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 12px; padding: 10px 14px 8px">
+<div style="display: flex; align-items: baseline; gap: 8px; padding: 0 0 6px"><span style="font-size: calc(16px * {{fsK}}); font-weight: 700; color: #2B2722">Study time</span><span style="flex: none; font-size: calc(12.5px * {{fsK}}); color: #8A8174">{{scSessSum}}</span><span style="flex: 1"></span><button onClick="{{scAddSessOpen}}" style="flex: none; height: 26px; margin: -4px 0; border: 1px solid {{TK.tE2B9C4}}; border-radius: 13px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0 10px 0 8px; display: flex; align-items: center; gap: 4px; font-size: calc(12px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add study time</button></div>
 <sc-if value="{{scAddSessOn}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; align-items: flex-end; gap: 8px; flex-wrap: wrap; padding: 8px 10px; margin: 4px 0; border: 1px solid {{TK.tE2B9C4}}; border-radius: 10px; background: #FFFFFF">
 <div style="display: flex; flex-direction: column; gap: 3px"><label for="sc-as-day" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Day</label><input id="sc-as-day" type="date" value="{{scAddSessDay}}" onChange="{{scAddSessOnDay}}" onInput="{{scAddSessOnDay}}" style="height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); background: #FFFFFF"></div>
@@ -3085,13 +3085,13 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <sc-if value="{{scSessNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174">No study time yet. Add some here, or make it from your materials on the Materials tab.</span></sc-if>
 <sc-for list="{{scSessGroups}}" as="sg" hint-placeholder-count="2">
 <div style="display: flex; flex-direction: column">
-<div style="display: flex; align-items: baseline; gap: 8px; padding: 6px 2px 2px"><span style="font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{sg.label}}</span><span style="font-size: calc(11.5px * {{fsK}}); color: #8A8174">{{sg.sum}}</span></div>
+<div style="display: flex; align-items: baseline; gap: 8px; padding: 6px 2px 2px"><span style="font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: #6B6358">{{sg.label}}</span><span style="font-size: calc(11.5px * {{fsK}}); color: #8A8174">{{sg.sum}}</span></div>
 <sc-for list="{{sg.rows}}" as="qp" hint-placeholder-count="3">
 <div style="display: flex; align-items: center; gap: 4px; min-height: calc(36px * {{rowK}}); border-bottom: 1px solid {{TK.tF6EDEF}}">
 <button onClick="{{qp.open}}" title="Open the task" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 0 2px; text-align: left; font: inherit">
-<span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: {{qp.fg}}; text-decoration: {{qp.strike}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{qp.label}}</span>
-<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #7A7064">{{qp.len}}</span>
-<span style="flex: none; min-width: 72px; text-align: right; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{qp.whereFg}}">{{qp.where}}</span>
+<span style="flex: none; width: calc(118px * {{fsK}}); font-size: calc(12.5px * {{fsK}}); color: {{qp.whereFg}}">{{qp.where}}</span>
+<span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: {{qp.fg}}; text-decoration: {{qp.strike}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{qp.label}}</span>
+<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #8A8174">{{qp.len}}</span>
 </button>
 <button onClick="{{qp.clear}}" aria-label="Unplan {{qp.label}}" title="Take off the plan" style="width: 28px; height: 28px; flex: none; border: 0; border-radius: 14px; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </div>
@@ -3102,122 +3102,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </sc-if>
 
 <sc-if value="{{scTabRes}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; align-items: center; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px">
-<span style="flex: none; font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Materials</span>
-<span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: #8A8174; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{scResSummary}}</span>
-</div>
-<sc-for list="{{scResources}}" as="rs" hint-placeholder-count="2">
-<div onDragOver="{{allowDrop}}" onDrop="{{rs.drop}}" style="flex: none; background: #FFFFFF; border: 1px solid {{rs.border}}; border-radius: 10px; display: flex; flex-direction: column">
-<div style="display: flex; align-items: center; gap: 6px; min-height: 50px; padding: 4px 8px 4px 4px">
-<span draggable="true" onDragStart="{{rs.dragStart}}" onDragEnd="{{dragEnd}}" aria-hidden="true" title="Drag to change the order" style="width: 18px; flex: none; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #B9AF9C; cursor: grab">
-<svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg>
-</span>
-<button onClick="{{rs.toggle}}" aria-expanded="{{rs.openA}}" aria-label="Show lessons in {{rs.name}}" style="width: 32px; height: 32px; flex: none; border: 0; background: transparent; padding: 0; display: flex; align-items: center; justify-content: center; color: #8A8174">
-<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transform: {{rs.chev}}"><path d="M9 5l7 7-7 7"></path></svg>
-</button>
-<div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
-<label for="{{rs.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Study material title</label>
-<input id="{{rs.inputId}}" value="{{rs.title}}" onChange="{{rs.onTitle}}" placeholder="{{rs.titlePh}}" style="outline-color: {{TK.tA0526A}}; height: 24px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0; width: 100%; border-radius: 6px">
-<span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{rs.meta}}</span>
-</div>
-<button role="checkbox" aria-checked="{{rs.inPlan}}" onClick="{{rs.togglePlan}}" title="Checked: Make study time uses its lessons. Unchecked: kept here for reference only." style="flex: none; height: 30px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; white-space: nowrap"><span aria-hidden="true" style="width: 18px; height: 18px; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{rs.planBoxBg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Use for study time</button>
-<sc-if value="{{rs.hasUrl}}" hint-placeholder-val="{{ false }}">
-<a href="{{rs.urlHref}}" target="_blank" rel="noopener noreferrer" aria-label="Open {{rs.name}} in a new tab" title="Open" style="width: 30px; height: 30px; flex: none; border-radius: 15px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
-<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>
-</a>
-</sc-if>
-</div>
-<sc-if value="{{rs.open}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 12px 10px; border-top: 1px solid {{TK.tF6EDEF}}">
-<div style="display: flex; align-items: center; gap: 10px; padding-top: 6px">
-<label for="{{rs.typeId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Type</label>
-<select id="{{rs.typeId}}" value="{{rs.typeVal}}" onChange="{{rs.onType}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><option value="book">Book</option><option value="video">Video</option><option value="article">Article</option><option value="website">Website</option><option value="general">General</option></select>
-<span style="flex: 1; min-width: 0"></span>
-</div>
-<sc-if value="{{rs.detOpen}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; gap: 8px; flex-wrap: wrap">
-<sc-if value="{{rs.showAuthor}}" hint-placeholder-val="{{ true }}">
-<div style="flex: 2; min-width: 140px; display: flex; flex-direction: column; gap: 4px">
-<label for="{{rs.authorId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{rs.authorLabel}}</label>
-<input id="{{rs.authorId}}" value="{{rs.author}}" onChange="{{rs.onAuthor}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
-</div>
-</sc-if>
-<sc-if value="{{rs.showIsbn}}" hint-placeholder-val="{{ true }}">
-<div style="flex: 1; min-width: 110px; display: flex; flex-direction: column; gap: 4px">
-<label for="{{rs.isbnId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">ISBN</label>
-<input id="{{rs.isbnId}}" value="{{rs.isbn}}" onChange="{{rs.onIsbn}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
-</div>
-</sc-if>
-<div style="flex: 1 1 100%; display: flex; flex-direction: column; gap: 4px">
-<label for="{{rs.urlId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Link</label>
-<input id="{{rs.urlId}}" type="url" inputmode="url" value="{{rs.url}}" onChange="{{rs.onUrl}}" placeholder="https://…" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
-</div>
-</div>
-</sc-if>
-<div style="display: flex; flex-direction: column">
-<sc-for list="{{rs.lessons}}" as="l" hint-placeholder-count="4">
-<div style="display: flex; flex-direction: column; border-bottom: 1px solid #EFE7D6">
-<div style="display: flex; align-items: center; gap: 6px; min-height: 44px">
-<button role="checkbox" aria-checked="{{l.lDone}}" onClick="{{l.toggleDone}}" aria-label="Done: {{l.title}}" style="width: 22px; height: 22px; flex: none; margin-left: 4px; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 6px; background: {{l.lBoxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></button>
-<label for="{{l.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Lesson name</label>
-<input id="{{l.inputId}}" value="{{l.title}}" onChange="{{l.onTitle}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 30px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(15px * {{fsK}}); font-weight: 600; color: #2B2722; text-decoration: {{l.lStrike}}; border-radius: 6px">
-<button onClick="{{scGoPlan}}" title="Change or unplan on the Plan tab" style="flex: none; border: 0; background: transparent; padding: 0 2px; font-size: calc(12px * {{fsK}}); color: {{l.statusFg}}; white-space: nowrap">{{l.meta}}</button>
-<label for="{{l.hoursId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Hours for this lesson</label>
-<input id="{{l.hoursId}}" type="number" onFocus="{{selAll}}" min="0" step="0.25" inputmode="decimal" value="{{l.hours}}" onChange="{{l.onHours}}" title="Hours for the whole lesson" style="outline-color: {{TK.tA0526A}}; width: 62px; height: 28px; flex: none; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 7px; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; text-align: right">
-<span aria-hidden="true" style="font-size: calc(12px * {{fsK}}); color: #7A7064">h</span>
-<button onClick="{{l.removeLesson}}" aria-label="Remove {{l.title}}" title="{{l.removeLabel}}" style="min-width: 28px; height: 28px; flex: none; border: 0; border-radius: 14px; background: {{l.removeBg}}; color: {{l.removeFg}}; padding: 0 6px; display: flex; align-items: center; justify-content: center; gap: 4px; font-size: calc(11.5px * {{fsK}}); font-weight: 700"><sc-if value="{{l.delAsking}}" hint-placeholder-val="{{ false }}"><span>Tap again</span></sc-if><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
-</div>
-</div>
-</sc-for>
-<div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 4px">
-<button onClick="{{rs.toggleAddL}}" style="height: 30px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 5px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add lessons</button>
-<span style="flex: 1"></span>
-<button onClick="{{rs.remove}}" style="min-height: 28px; border: 0; border-radius: 7px; background: {{rs.removeBg}}; color: {{rs.removeFg}}; padding: 0 8px; font-size: calc(12px * {{fsK}}); font-weight: 600">{{rs.removeLabel}}</button>
-</div>
-<sc-if value="{{rs.addLOpen}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px; margin-top: 4px">
-<div role="tablist" aria-label="How to add lessons" style="align-self: flex-start; display: flex; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
-<button role="tab" aria-selected="{{rs.genSel}}" onClick="{{rs.modeGen}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: {{rs.genBg}}; color: {{rs.genFg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Make a set</button>
-<button role="tab" aria-selected="{{rs.pasteSel}}" onClick="{{rs.modePaste}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: {{rs.pasteBg}}; color: {{rs.pasteFg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Paste a list</button>
-</div>
-<sc-if value="{{rs.isGen}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap">
-<label for="{{rs.genNId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">How many</label>
-<span style="display: flex; align-items: center; gap: 4px"><input id="{{rs.genNId}}" type="number" onFocus="{{selAll}}" inputmode="numeric" min="1" max="200" value="{{rs.genN}}" onChange="{{ndIn}}" onInput="{{ndIn}}" onBlur="{{rs.onGenN}}" onKeyDown="{{ndKey}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; width: 58px; text-align: center"><span style="display: flex; flex-direction: column; flex: none"><button onClick="{{rs.genNUp}}" aria-label="How many up" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{rs.genNDown}}" aria-label="How many down" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span></span>
-<label for="{{rs.genKId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722; margin-left: 6px">Called</label>
-<select id="{{rs.genKId}}" value="{{rs.genKind}}" onChange="{{rs.onGenKind}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; padding: 0 4px"><option value="Lesson">Lesson</option><option value="Chapter">Chapter</option><option value="Section">Section</option><option value="Unit">Unit</option><option value="Module">Module</option><option value="Week">Week</option><option value="Part">Part</option><option value="Video">Video</option></select>
-</div>
-<div style="display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap">
-<label for="{{rs.genHId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">Time each</label>
-<span style="display: flex; align-items: center; gap: 4px"><input id="{{rs.genHId}}" type="number" onFocus="{{selAll}}" inputmode="numeric" min="0" max="12" value="{{rs.genH}}" onChange="{{ndIn}}" onInput="{{ndIn}}" onBlur="{{rs.onGenH}}" onKeyDown="{{ndKey}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; width: 52px; text-align: center"><span style="display: flex; flex-direction: column; flex: none"><button onClick="{{rs.genHUp}}" aria-label="Hours each up" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{rs.genHDown}}" aria-label="Hours each down" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span></span>
-<label for="{{rs.genMId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Minutes each</label>
-<select id="{{rs.genMId}}" value="{{rs.genM}}" onChange="{{rs.onGenM}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; padding: 0 4px"><option value="0">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
-<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">m</span>
-</div>
-<span style="font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{rs.genPreview}}</span>
-</sc-if>
-<sc-if value="{{rs.isPaste}}" hint-placeholder-val="{{ false }}">
-<label for="{{rs.addLId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">One lesson per line</label>
-<textarea id="{{rs.addLId}}" rows="4" value="{{rs.addLText}}" onChange="{{rs.onAddL}}" onInput="{{rs.onAddL}}" placeholder="Chapter 1: Intro, 45m&#10;Chapter 2: Networks, 1h&#10;Chapter 3" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; width: 100%; resize: vertical; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 8px 10px; font: inherit; font-size: calc(13.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF"></textarea>
-</sc-if>
-<div style="display: flex; align-items: center; gap: 8px">
-<span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: #7A7064">{{rs.addLHint}}</span>
-<button onClick="{{rs.toggleAddL}}" style="height: 30px; padding: 0 10px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Cancel</button>
-<button onClick="{{rs.addLGo}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{rs.addLBtn}}</button>
-</div>
-</div>
-</sc-if>
-</div>
-</div>
-</sc-if>
-</div>
-</sc-for>
-<div style="display: flex; gap: 14px; flex-wrap: wrap">
-<button onClick="{{scAddResource}}" style="height: 34px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add study material</button>
-</div>
-</div>
-<section aria-label="Make study time" style="flex: none; display: flex; flex-direction: column; gap: 8px; margin-top: 6px">
+<section aria-label="Make study time" style="flex: none; display: flex; flex-direction: column; gap: 8px; margin-top: 0">
 <sc-if value="{{scPreviewOn}}" hint-placeholder-val="{{ false }}">
 <div style="flex: none; background: #FFFFFF; border: 1.5px solid {{TK.tE2B9C4}}; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
 <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
@@ -3332,6 +3217,126 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 </sc-if>
 </section>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px">
+<span style="flex: none; font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Materials</span>
+<span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: #8A8174; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{scResSummary}}</span>
+</div>
+<sc-for list="{{scResources}}" as="rs" hint-placeholder-count="2">
+<div onDragOver="{{allowDrop}}" onDrop="{{rs.drop}}" style="flex: none; background: #FFFFFF; border: 1px solid {{rs.border}}; border-radius: 10px; display: flex; flex-direction: column">
+<div style="display: flex; align-items: center; gap: 6px; min-height: 50px; padding: 4px 8px 4px 4px">
+<span draggable="true" onDragStart="{{rs.dragStart}}" onDragEnd="{{dragEnd}}" aria-hidden="true" title="Drag to change the order" style="width: 18px; flex: none; align-self: stretch; display: flex; align-items: center; justify-content: center; color: #B9AF9C; cursor: grab">
+<svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg>
+</span>
+<button onClick="{{rs.toggle}}" aria-expanded="{{rs.openA}}" aria-label="Show lessons in {{rs.name}}" style="width: 32px; height: 32px; flex: none; border: 0; background: transparent; padding: 0; display: flex; align-items: center; justify-content: center; color: #8A8174">
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transform: {{rs.chev}}"><path d="M9 5l7 7-7 7"></path></svg>
+</button>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+<label for="{{rs.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Study material title</label>
+<input id="{{rs.inputId}}" value="{{rs.title}}" onChange="{{rs.onTitle}}" placeholder="{{rs.titlePh}}" style="outline-color: {{TK.tA0526A}}; height: 24px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0; width: 100%; border-radius: 6px">
+<span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{rs.meta}}</span>
+</div>
+<button role="checkbox" aria-checked="{{rs.inPlan}}" onClick="{{rs.togglePlan}}" title="Checked: Make study time uses its lessons. Unchecked: kept here for reference only." style="flex: none; height: 30px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; white-space: nowrap"><span aria-hidden="true" style="width: 18px; height: 18px; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{rs.planBoxBg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Use for study time</button>
+<sc-if value="{{rs.hasUrl}}" hint-placeholder-val="{{ false }}">
+<a href="{{rs.urlHref}}" target="_blank" rel="noopener noreferrer" aria-label="Open {{rs.name}} in a new tab" title="Open" style="width: 30px; height: 30px; flex: none; border-radius: 15px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>
+</a>
+</sc-if>
+</div>
+<sc-if value="{{rs.open}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 12px 10px; border-top: 1px solid {{TK.tF6EDEF}}">
+<div style="height: 4px"></div>
+<sc-if value="{{rs.detOpen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<div style="flex: 1 1 100%; display: flex; align-items: center; gap: 8px"><span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Type</span><select aria-label="Type of material" title="Type of material" id="{{rs.typeId}}" value="{{rs.typeVal}}" onChange="{{rs.onType}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><option value="book">Book</option><option value="video">Video</option><option value="article">Article</option><option value="website">Website</option><option value="general">General</option></select></div>
+<sc-if value="{{rs.showAuthor}}" hint-placeholder-val="{{ true }}">
+<div style="flex: 2; min-width: 140px; display: flex; flex-direction: column; gap: 4px">
+<label for="{{rs.authorId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{rs.authorLabel}}</label>
+<input id="{{rs.authorId}}" value="{{rs.author}}" onChange="{{rs.onAuthor}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
+</div>
+</sc-if>
+<sc-if value="{{rs.showIsbn}}" hint-placeholder-val="{{ true }}">
+<div style="flex: 1; min-width: 110px; display: flex; flex-direction: column; gap: 4px">
+<label for="{{rs.isbnId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">ISBN</label>
+<input id="{{rs.isbnId}}" value="{{rs.isbn}}" onChange="{{rs.onIsbn}}" placeholder="Optional" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
+</div>
+</sc-if>
+<div style="flex: 1 1 100%; display: flex; flex-direction: column; gap: 4px">
+<label for="{{rs.urlId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Link</label>
+<input id="{{rs.urlId}}" type="url" inputmode="url" value="{{rs.url}}" onChange="{{rs.onUrl}}" placeholder="https://…" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
+</div>
+</div>
+</sc-if>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{rs.lessons}}" as="l" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; border-bottom: 1px solid #EFE7D6">
+<div style="display: flex; align-items: center; gap: 6px; min-height: 44px">
+<button role="checkbox" aria-checked="{{l.lDone}}" onClick="{{l.toggleDone}}" aria-label="Done: {{l.title}}" style="width: 22px; height: 22px; flex: none; margin-left: 4px; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 6px; background: {{l.lBoxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></button>
+<label for="{{l.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Lesson name</label>
+<input id="{{l.inputId}}" value="{{l.title}}" onChange="{{l.onTitle}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 30px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(15px * {{fsK}}); font-weight: 600; color: #2B2722; text-decoration: {{l.lStrike}}; border-radius: 6px">
+<button onClick="{{scGoPlan}}" title="Change or unplan on the Plan tab" style="flex: none; border: 0; background: transparent; padding: 0 2px; font-size: calc(12px * {{fsK}}); color: {{l.statusFg}}; white-space: nowrap">{{l.meta}}</button>
+<label for="{{l.hoursId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Hours for this lesson</label>
+<input id="{{l.hoursId}}" type="number" onFocus="{{selAll}}" min="0" step="0.25" inputmode="decimal" value="{{l.hours}}" onChange="{{l.onHours}}" title="Hours for the whole lesson" style="outline-color: {{TK.tA0526A}}; width: 62px; height: 28px; flex: none; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 7px; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; text-align: right">
+<span aria-hidden="true" style="font-size: calc(12px * {{fsK}}); color: #7A7064">h</span>
+<button onClick="{{l.removeLesson}}" aria-label="Remove {{l.title}}" title="{{l.removeLabel}}" style="min-width: 28px; height: 28px; flex: none; border: 0; border-radius: 14px; background: {{l.removeBg}}; color: {{l.removeFg}}; padding: 0 6px; display: flex; align-items: center; justify-content: center; gap: 4px; font-size: calc(11.5px * {{fsK}}); font-weight: 700"><sc-if value="{{l.delAsking}}" hint-placeholder-val="{{ false }}"><span>Tap again</span></sc-if><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</div>
+</sc-for>
+<div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 4px">
+<button onClick="{{rs.toggleAddL}}" style="height: 30px; border: 0; background: transparent; padding: 0; display: flex; align-items: center; gap: 5px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add lessons</button>
+<button onClick="{{rs.detToggle}}" aria-expanded="{{rs.detOpenA}}" style="height: 30px; border: 0; background: transparent; padding: 0; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #6B6358">{{rs.detBtn}}</button>
+<span style="flex: 1"></span>
+<sc-if value="{{rs.notAsking}}" hint-placeholder-val="{{ true }}"><button onClick="{{rs.remove}}" style="height: 30px; border: 0; background: transparent; padding: 0 2px; display: flex; align-items: center; gap: 5px; color: #9A4A3A; font-size: calc(12.5px * {{fsK}}); font-weight: 600"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"></path></svg>Remove this material</button></sc-if>
+</div>
+<sc-if value="{{rs.asking}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #FBEFEA; border-radius: 8px; padding: 8px 10px; margin-top: 4px">
+<span style="flex: 1 1 200px; min-width: 0; font-size: calc(13px * {{fsK}}); color: #7A3208">{{rs.askText}}</span>
+<button onClick="{{rs.keep}}" style="height: 30px; padding: 0 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: #2B2722; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Keep it</button>
+<button onClick="{{rs.remove}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: #9A4A3A; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Remove material</button>
+</div>
+</sc-if>
+<sc-if value="{{rs.addLOpen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 6px; background: {{TK.tF6EDEF}}; border-radius: 10px; padding: 8px 10px; margin-top: 4px">
+<div role="tablist" aria-label="How to add lessons" style="align-self: flex-start; display: flex; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
+<button role="tab" aria-selected="{{rs.genSel}}" onClick="{{rs.modeGen}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: {{rs.genBg}}; color: {{rs.genFg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Make a set</button>
+<button role="tab" aria-selected="{{rs.pasteSel}}" onClick="{{rs.modePaste}}" style="height: 28px; padding: 0 12px; border: 0; border-radius: 6px; background: {{rs.pasteBg}}; color: {{rs.pasteFg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Paste a list</button>
+</div>
+<sc-if value="{{rs.isGen}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap">
+<label for="{{rs.genNId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">How many</label>
+<span style="display: flex; align-items: center; gap: 4px"><input id="{{rs.genNId}}" type="number" onFocus="{{selAll}}" inputmode="numeric" min="1" max="200" value="{{rs.genN}}" onChange="{{ndIn}}" onInput="{{ndIn}}" onBlur="{{rs.onGenN}}" onKeyDown="{{ndKey}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; width: 58px; text-align: center"><span style="display: flex; flex-direction: column; flex: none"><button onClick="{{rs.genNUp}}" aria-label="How many up" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{rs.genNDown}}" aria-label="How many down" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span></span>
+<label for="{{rs.genKId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722; margin-left: 6px">Called</label>
+<select id="{{rs.genKId}}" value="{{rs.genKind}}" onChange="{{rs.onGenKind}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; padding: 0 4px"><option value="Lesson">Lesson</option><option value="Chapter">Chapter</option><option value="Section">Section</option><option value="Unit">Unit</option><option value="Module">Module</option><option value="Week">Week</option><option value="Part">Part</option><option value="Video">Video</option></select>
+</div>
+<div style="display: flex; align-items: center; gap: 8px 10px; flex-wrap: wrap">
+<label for="{{rs.genHId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #2B2722">Time each</label>
+<span style="display: flex; align-items: center; gap: 4px"><input id="{{rs.genHId}}" type="number" onFocus="{{selAll}}" inputmode="numeric" min="0" max="12" value="{{rs.genH}}" onChange="{{ndIn}}" onInput="{{ndIn}}" onBlur="{{rs.onGenH}}" onKeyDown="{{ndKey}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; width: 52px; text-align: center"><span style="display: flex; flex-direction: column; flex: none"><button onClick="{{rs.genHUp}}" aria-label="Hours each up" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 6px 6px 0 0"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{rs.genHDown}}" aria-label="Hours each down" style="width: 26px; height: 15px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center; border-top: 0; border-radius: 0 0 6px 6px"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></span><span style="font-size: calc(13px * {{fsK}}); color: #6B6358">h</span></span>
+<label for="{{rs.genMId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Minutes each</label>
+<select id="{{rs.genMId}}" value="{{rs.genM}}" onChange="{{rs.onGenM}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722; background: #FFFFFF; padding: 0 4px"><option value="0">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
+<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">m</span>
+</div>
+<span style="font-size: calc(12.5px * {{fsK}}); color: #4A443B">{{rs.genPreview}}</span>
+</sc-if>
+<sc-if value="{{rs.isPaste}}" hint-placeholder-val="{{ false }}">
+<label for="{{rs.addLId}}" style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">One lesson per line</label>
+<textarea id="{{rs.addLId}}" rows="4" value="{{rs.addLText}}" onChange="{{rs.onAddL}}" onInput="{{rs.onAddL}}" placeholder="Chapter 1: Intro, 45m&#10;Chapter 2: Networks, 1h&#10;Chapter 3" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; width: 100%; resize: vertical; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 8px 10px; font: inherit; font-size: calc(13.5px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF"></textarea>
+</sc-if>
+<div style="display: flex; align-items: center; gap: 8px">
+<span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: #7A7064">{{rs.addLHint}}</span>
+<button onClick="{{rs.toggleAddL}}" style="height: 30px; padding: 0 10px; border: 0; background: transparent; color: #6B6358; font-size: calc(12.5px * {{fsK}}); font-weight: 600">Cancel</button>
+<button onClick="{{rs.addLGo}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{rs.addLBtn}}</button>
+</div>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+<div style="display: flex; gap: 14px; flex-wrap: wrap">
+<button onClick="{{scAddResource}}" style="height: 34px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add study material</button>
+</div>
+</div>
 <div style="flex: none; display: flex; flex-direction: column; gap: 6px">
 <button onClick="{{scNotesToggle}}" aria-expanded="{{scNotesOpenA}}" style="display: flex; align-items: center; gap: 8px; border: 0; border-bottom: 1.5px solid {{TK.tD9A5B4}}; background: transparent; padding: 0 2px 6px; text-align: left; color: #6B6358"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transform: {{scNotesChev}}"><path d="M9 5l7 7-7 7"></path></svg><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Notes</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{scNotesSum}}</span></button>
 <sc-if value="{{scNotesOpen}}" hint-placeholder-val="{{ false }}">
@@ -11522,7 +11527,7 @@ class Component extends DCLogic {
                 gm[ws].rows.push({
                   label: t.assignmentId && asTitle[t.assignmentId] ? 'For ' + asTitle[t.assignmentId] + ((t.workDesc || '').trim() ? ' · ' + t.workDesc.trim() : '') : ((t.title || '').replace(/^[^:]*:\s*/, '') || 'Study time'), len: this.fmtDur(t.mins),
                   where: d === null ? 'No day yet' : this.DSHORT[this.dowFor(d)] + (sc ? ' ' + this.fmtTime(sc.start, false) : ''),
-                  whereFg: d === null ? '#8A8174' : (d < 0 ? '#B03A2E' : this.TK.t6E2F43), fg: d !== null && d < 0 ? '#B03A2E' : '#2B2722', strike: 'none',
+                  whereFg: d === null ? '#8A8174' : (d < 0 ? '#B03A2E' : '#6B6358'), fg: d !== null && d < 0 ? '#B03A2E' : '#2B2722', strike: 'none',
                   open: () => this.openTaskEdit(t.id),
                   clear: () => { const st = this.state; this.setState({ tasks: st.tasks.filter(x => x.id !== t.id), placedByDay: rmBlocks(st, t.id), editing: st.editing === t.id ? null : st.editing }); }
                 });
@@ -11564,10 +11569,10 @@ class Component extends DCLogic {
                     scGoClassesLbl: cos2.length ? 'Class times' : 'Add class times',
                     scDueRows: dueAs.map(a => { const late = typeof a.due === 'number' && a.due < 0; return { title: a.title || 'Untitled assignment', fg: late ? '#B03A2E' : '#2B2722',
                       due: typeof a.due !== 'number' ? 'No due date' : (late ? 'Was due ' + fmtD(a.due) : (a.due === 0 ? 'Today' : a.due === 1 ? 'Tomorrow' : fmtD(a.due))),
-                      dueFg: late ? '#B03A2E' : '#6B6358', fw: late ? 700 : 600, strike: 'none',
+                      dueFg: late ? '#B03A2E' : '#6B6358', fw: late ? 700 : 400, strike: 'none',
                       open: () => this.setState({ courseTab: 'as', asOpen: a.id, asPreview: null }) }; }).concat(doneAs.map(a => ({ title: a.title || 'Untitled assignment', fg: '#9A8F7C', strike: 'line-through',
                       due: typeof a.doneDay === 'number' ? 'Done ' + (a.doneDay === 0 ? 'today' : a.doneDay === -1 ? 'yesterday' : fmtD(a.doneDay)) : 'Done',
-                      dueFg: '#9A8F7C', fw: 600,
+                      dueFg: '#9A8F7C', fw: 400,
                       open: () => this.setState({ courseTab: 'as', asOpen: a.id, asPreview: null }) }))),
                     scDueNone: !dueAs.length && !doneAs.length,
                     scDueSum: dueAs.length ? (nLate ? nLate + ' past due · ' : '') + dueAs.length + ' to do' : '',
@@ -11888,7 +11893,7 @@ class Component extends DCLogic {
           };
         })(),
         scImportInto: () => this.setState({ schoolNew: { mode: 'import', title: '', book: '', isbn: '', lessons: '', subs: '', hours: '', paste: '', goalId: '', importText: '', importName: '', target: sel.id } }),
-        scPlanNote: sel.planNote || 'Only materials checked Use for study time are used. You choose by week or by day before anything is added.',
+        scPlanNote: (sel.planNote && s.tasks.some(t => t.courseId === sel.id && !t.done && t.parts && t.parts.length)) ? sel.planNote : 'Only materials checked Use for study time are used. You see it before anything is added.',
         scCohort: () => { this.openNewEvent(0); this.setState({ evEdit: Object.assign({}, this.state.evEdit, { title: 'Cohort: ' + (sel.title || 'Course'), cat: this.schoolCatOf(this.state.cats) }) }); },
         scResources: (sel.resources || []).map((r, ri) => {
           const ls = this.resLessons(sel, r, ri === 0);
@@ -11914,12 +11919,12 @@ class Component extends DCLogic {
             orderNote: allR.length > 1 ? 'Study ' + (ri + 1) + ' of ' + allR.length + '. Plans follow this order.' : 'Plans follow this order.',
             title: r.title, name: r.title || 'Untitled study material', inputId: 'scr-' + r.id,
             onTitle: (e) => { const v = e.target.value; updR(() => ({ title: v })); },
-            meta: ls.length + (ls.length === 1 ? ' lesson' : ' lessons') + ' · ' + (this.fmtDur(mins) || '0h'),
+            meta: [ls.length + (ls.length === 1 ? ' lesson' : ' lessons') + ' · ' + (this.fmtDur(mins) || '0h'), (r.author || '').trim(), (r.isbn || '').trim() ? 'ISBN ' + r.isbn.trim() : ''].filter(Boolean).join(' · '),
             open: s.resOpen === r.id, openA: s.resOpen === r.id ? 'true' : 'false', chev: s.resOpen === r.id ? 'rotate(90deg)' : 'none',
             toggle: () => this.setState({ resOpen: this.state.resOpen === r.id ? null : r.id }),
             hasUrl: /^\s*(https?:\/\/)?[^\s.]+\.[^\s]+/i.test(u) && !/^\s*javascript:/i.test(u),
             urlHref: /^https?:\/\//i.test(u) ? u : (u ? 'https://' + u : ''),
-            detOpen: true, detOpenA: det ? 'true' : 'false', detChev: det ? 'rotate(90deg)' : 'none',
+            detOpen: det, detBtn: det ? 'Hide details' : '+ Type, author, ISBN, link', detOpenA: det ? 'true' : 'false', detChev: det ? 'rotate(90deg)' : 'none',
             detToggle: () => this.setState({ resDetails: this.state.resDetails === r.id ? null : r.id }),
             detSummary: [r.author, r.isbn ? 'ISBN ' + r.isbn : ''].filter(x => (x || '').trim()).join(' · ') || 'Author, ISBN, link',
             author: r.author || '', isbn: r.isbn || '', url: r.url || '',
@@ -11980,8 +11985,10 @@ class Component extends DCLogic {
             addLesson: () => { const k2 = ls.length + 1, lid = nid(); updC(sel.id, c => ({ lessons: (c.lessons || []).concat([{ id: lid, resId: r.id, title: 'Lesson ' + k2, items: [{ id: nid(), title: k2 + '.1', mins: 60, done: false }] }]), openL: lid })); },
             removeLabel: asking ? (() => { const t2 = this.impactText(this.sessionImpact(sel.id, [].concat(...ls.map(l => l.items.map(it => it.id))))); return 'Tap again: removes its lessons' + (t2 ? ', ' + t2.replace(/^removes /, '') : ''); })() : 'Remove',
             removeBg: asking ? '#9A4A3A' : 'transparent', removeFg: asking ? '#FFFFFF' : '#9A4A3A',
+            asking: asking, notAsking: !asking, keep: () => { clearTimeout(this.resDelT); this.setState({ resDel: null }); },
+            askText: asking ? (() => { const t2 = this.impactText(this.sessionImpact(sel.id, [].concat(...ls.map(l => l.items.map(it => it.id))))); return 'Remove “' + (((r.title || '').trim()) || 'this material') + '”' + (ls.length ? ' and its ' + ls.length + (ls.length === 1 ? ' lesson' : ' lessons') : '') + '?' + (t2 ? ' This also ' + t2 + '.' : ''); })() : '',
             remove: () => {
-              if (this.state.resDel !== r.id) { this.setState({ resDel: r.id }); clearTimeout(this.resDelT); this.resDelT = setTimeout(() => this.setState({ resDel: null }), 5000); return; }
+              if (this.state.resDel !== r.id) { this.setState({ resDel: r.id }); clearTimeout(this.resDelT); this.resDelT = setTimeout(() => this.setState({ resDel: null }), 12000); return; }
               clearTimeout(this.resDelT);
               const gone = {};
               ls.forEach(l => { gone[l.id] = true; });
@@ -11990,7 +11997,7 @@ class Component extends DCLogic {
             }
           };
         }),
-        scAddResource: () => { const rid = 'r' + Date.now().toString(36); updC(sel.id, c => ({ resources: (c.resources || []).map(x => Object.assign({}, x, { open: false })).concat([{ id: rid, title: '', type: 'general', author: '', isbn: '', url: '', open: true, skip: false }]) })); this.setState({ resDetails: rid, resOpen: rid }); setTimeout(() => { try { const el = document.getElementById('scr-' + rid); if (el) { el.focus(); el.scrollIntoView({ block: 'nearest' }); } } catch (e) {} }, 60); },
+        scAddResource: () => { const rid = 'r' + Date.now().toString(36); updC(sel.id, c => ({ resources: (c.resources || []).map(x => Object.assign({}, x, { open: false })).concat([{ id: rid, title: '', type: 'general', author: '', isbn: '', url: '', open: true, skip: false }]) })); this.setState({ resDetails: null, resOpen: rid }); setTimeout(() => { try { const el = document.getElementById('scr-' + rid); if (el) { el.focus(); el.scrollIntoView({ block: 'nearest' }); } } catch (e) {} }, 60); },
         scResSummary: (sel.resources || []).length + ((sel.resources || []).length === 1 ? ' study material' : ' study materials') + ' · ' + (this.fmtDur(st.total) || '0h') + ' for study time',
         scDelAskText: s.schoolDel ? (() => { const sm2 = this.schedMap(); const open = s.tasks.filter(t => t.courseId === sel.id && !t.done); const cal = open.filter(t => sm2[t.id]).length; return 'Remove this course' + (open.length ? ' and its ' + open.length + (open.length === 1 ? ' planned session' : ' planned sessions') + (cal ? ' (' + cal + ' on your calendar)' : '') : '') + '?'; })() : '',
         scDelLabel: s.schoolDel ? (() => { const sm2 = this.schedMap(); const open = s.tasks.filter(t => t.courseId === sel.id && !t.done); const cal = open.filter(t => sm2[t.id]).length; return 'Tap again to remove this course' + (open.length ? ' and ' + open.length + (open.length === 1 ? ' planned session' : ' planned sessions') + (cal ? ' (' + cal + ' on your calendar)' : '') : ''); })() : 'Remove course',
