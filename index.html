@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 7:58 AM';</script>
+<script>window.__plannerBuild = 'Nov 27, 8:01 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -6275,8 +6275,16 @@ class Component extends DCLogic {
   dayBasketPct(s, d, raw) {
     const sm = this.schedMap();
     let abDone = 0, abAll = 0, cDone = 0, cAll = 0;
+    // A task belongs to day d when it is planned there; a finished one also belongs to the day it was finished
+    // if it was rolled over from an earlier day or came from that week's list (not the Desk, not a later day done early).
+    const onDay = (t) => {
+      if (!t.done) return this.effDay(t, sm) === d;
+      const da = t.dayAssign, sc = sm && sm[t.id];
+      if (t.doneDay === d) return sc ? sc.day <= d : (typeof da === 'number' ? da <= d : t.bucket === 'week');
+      return (sc ? sc.day : da) === d && !(typeof t.doneDay === 'number' && t.doneDay > d);
+    };
     (s.tasks || []).forEach(t => {
-      if (this.effDay(t, sm) !== d) return;
+      if (!onDay(t)) return;
       if (t.pri === 'A' || t.pri === 'B') { abAll++; if (t.done) abDone++; }
       else { cAll++; if (t.done) cDone++; }
     });
