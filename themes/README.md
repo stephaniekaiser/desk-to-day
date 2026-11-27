@@ -43,3 +43,5 @@ Scene piece anchors: `spread` (top strip across both pages), `spreadBottom` (rep
 
 **Theme options:** `options: [{id, kind, label, default, choices: [{v, l, hint}]}]` gives a theme its own small choices. They show in Settings → Look and feel, under the theme picker, only while that theme is in use, and each theme remembers its own picks (`settings.themeOpts[<theme id>][<option id>]`). The planner knows what to do by `kind`:
 - `pileMode`: how the basket fills. `live` (Little Hollow's default) = always shows how much of the day is done, so adding tasks makes room. `keep` = keeps what you've gathered (adding tasks never takes anything out; unchecking does).
+
+**Why picture:** `whyPhoto: "why.webp"` sets the default picture behind "My why" on each Grow intention, used whenever the person hasn't added their own photo. It shows as a wide, short strip (about 4:1, around 1200×300), with the bottom third darkened for text, so keep the interest in the top two thirds. Themes without it use the built-in sunset hills.
