@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 11:46 AM';</script>
+<script>window.__plannerBuild = 'Nov 27, 12:11 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -579,6 +579,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <select id="{{t.whenTimeId}}" value="{{t.whenTime}}" onChange="{{t.onWhenTime}}" title="A time puts it on the calendar" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenTimeOpts}}" as="wo" hint-placeholder-count="3"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
 <sc-if value="{{t.hasTime}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.clearTime}}" title="Take it off the calendar" aria-label="Take it off the calendar" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear time</button></sc-if>
 </div>
+<sc-if value="{{t.hasWeekNote}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{t.whenWeekNote}}</span></sc-if>
 </div>
 <sc-if value="{{t.isDoneEd}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{t.doneOnId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Done on</label><input id="{{t.doneOnId}}" type="date" max="{{t.doneOnMax}}" value="{{t.doneOnISO}}" onChange="{{t.onDoneOn}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0"></div></sc-if>
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
@@ -3776,6 +3777,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <select id="{{t.whenTimeId}}" value="{{t.whenTime}}" onChange="{{t.onWhenTime}}" title="A time puts it on the calendar" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenTimeOpts}}" as="wo" hint-placeholder-count="3"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
 <sc-if value="{{t.hasTime}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.clearTime}}" title="Take it off the calendar" aria-label="Take it off the calendar" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear time</button></sc-if>
 </div>
+<sc-if value="{{t.hasWeekNote}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{t.whenWeekNote}}</span></sc-if>
 </div>
 <sc-if value="{{t.isDoneEd}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{t.doneOnId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Done on</label><input id="{{t.doneOnId}}" type="date" max="{{t.doneOnMax}}" value="{{t.doneOnISO}}" onChange="{{t.onDoneOn}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0"></div></sc-if>
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
@@ -4499,6 +4501,11 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <label style="position: relative; height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; display: flex; align-items: center; background: transparent; color: {{TK.t6E2F43}}; cursor: pointer">Choose file<input type="file" accept=".json,application/json" onChange="{{dataRestore}}" style="outline-color: {{TK.tA0526A}}; position: absolute; width: 1px; height: 1px; opacity: 0"></label>
 </div>
 <div style="flex: none; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 8px 12px; min-height: 56px; box-sizing: border-box">
+<span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 14px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"></path></svg></span>
+<span style="flex: 1; min-width: 180px; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">See everything</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">One list of every task and event. Filter it, then remove, mark done or move many at once.</span></span>
+<button onClick="{{eyOpen}}" style="height: 32px; flex: none; padding: 0 12px; border-radius: 8px; border: 1px solid {{TK.tE2B9C4}}; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Open</button>
+</div>
+<div style="flex: none; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 8px 12px; min-height: 56px; box-sizing: border-box">
 <span aria-hidden="true" style="width: 28px; height: 28px; flex: none; border-radius: 14px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM4 10h16M10 4v16"></path></svg></span>
 <span style="flex: 1; min-width: 180px; display: flex; flex-direction: column"><span style="font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">Import stuff</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Add tasks, checklist steps and events at once from a spreadsheet saved as CSV. Start from the template.</span></span>
 <button onClick="{{tiTemplate}}" style="height: 32px; flex: none; padding: 0 10px; border: 0; background: transparent; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Template</button>
@@ -4559,6 +4566,56 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <div style="display: flex; gap: 8px; justify-content: flex-end">
 <button onClick="{{tiPasteClose}}" style="height: 38px; padding: 0 14px; border: 0; background: transparent; color: #6B6358; font-size: calc(14px * {{fsK}}); font-weight: 600">Cancel</button>
 <button onClick="{{tiPasteGo}}" style="height: 38px; padding: 0 16px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(14px * {{fsK}}); font-weight: 700">Check these tasks</button>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{eyOn}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 61; background: rgba(20,30,28,0.4); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 16px">
+<div role="dialog" aria-label="Everything in your planner" style="width: min(860px, 100%); height: 100%; box-sizing: border-box; background: {{popBg}}; border-radius: 16px; padding: 18px 20px 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 18px 40px rgba(0,0,0,0.3)">
+<div style="display: flex; align-items: baseline; gap: 10px">
+<span style="font-family: {{TK.fHead}}; font-size: calc(24px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">Everything</span>
+<span style="font-size: calc(12.5px * {{fsK}}); color: #7A7064">{{eyCountLine}}</span>
+<span style="flex: 1"></span>
+<button onClick="{{eyClose}}" aria-label="Close" style="width: 32px; height: 32px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 16px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+<div role="radiogroup" aria-label="Type" style="display: flex; gap: 4px"><sc-for list="{{eyTypeChips}}" as="c" hint-placeholder-count="3"><button role="radio" aria-checked="{{c.on}}" onClick="{{c.pick}}" style="height: 28px; flex: none; padding: 0 10px; border: 1px solid {{c.bd}}; border-radius: 14px; background: {{c.bg}}; color: {{c.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{c.label}}</button></sc-for></div>
+<span style="width: 1px; height: 20px; background: #E6DCC8"></span>
+<div role="radiogroup" aria-label="Status" style="display: flex; gap: 4px"><sc-for list="{{eyStatusChips}}" as="c" hint-placeholder-count="3"><button role="radio" aria-checked="{{c.on}}" onClick="{{c.pick}}" style="height: 28px; flex: none; padding: 0 10px; border: 1px solid {{c.bd}}; border-radius: 14px; background: {{c.bg}}; color: {{c.fg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{c.label}}</button></sc-for></div>
+<label for="ev-when" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">When</label>
+<select id="ev-when" value="{{eyWhenVal}}" onChange="{{eyOnWhen}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{eyWhenOpts}}" as="wo" hint-placeholder-count="5"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
+<label for="ev-q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</label>
+<input id="ev-q" type="search" value="{{eyQ}}" onInput="{{eyOnQ}}" placeholder="Search names" style="outline-color: {{TK.tA0526A}}; flex: 1 1 140px; min-width: 120px; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722">
+</div>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-height: 34px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding-bottom: 6px">
+<button role="checkbox" aria-checked="{{eyAllOn}}" onClick="{{eyAllToggle}}" style="height: 30px; flex: none; border: 0; background: transparent; padding: 0 4px 0 2px; display: flex; align-items: center; gap: 8px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><span aria-hidden="true" style="width: 20px; height: 20px; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{eyAllBg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>{{eyAllLbl}}</button>
+<span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{eyShownTxt}}</span>
+<span style="flex: 1"></span>
+<sc-if value="{{eyHasSel}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: #2B2722">{{eySelTxt}}</span>
+<button onClick="{{eyClearSel}}" style="height: 30px; flex: none; border: 0; background: transparent; padding: 0 4px; font-size: calc(12.5px * {{fsK}}); font-weight: 600; color: #6B6358">Clear</button>
+<sc-if value="{{eyCanDone}}" hint-placeholder-val="{{ true }}"><button onClick="{{eyDone}}" style="height: 30px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Mark done</button></sc-if>
+<sc-if value="{{eyCanDesk}}" hint-placeholder-val="{{ true }}"><button onClick="{{eyDesk}}" style="height: 30px; flex: none; padding: 0 10px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Move to the Desk</button></sc-if>
+<button onClick="{{eyRemove}}" style="height: 30px; flex: none; padding: 0 10px; border: 1px solid #E3C2BA; border-radius: 8px; background: {{eyRemoveBg}}; color: {{eyRemoveFg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{eyRemoveLbl}}</button>
+</sc-if>
+</div>
+<sc-if value="{{eyHasUndo}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 8px; font-size: calc(12.5px * {{fsK}}); color: #6B6358"><span>Last change: {{eyUndoTxt}}.</span><button onClick="{{eyUndo}}" style="height: 26px; border: 0; background: transparent; padding: 0; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Undo it</button></div>
+</sc-if>
+<div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; padding-right: 4px">
+<sc-if value="{{eyNone}}" hint-placeholder-val="{{ false }}"><span style="padding: 14px 4px; font-size: calc(13.5px * {{fsK}}); color: #7A7064">Nothing matches these filters.</span></sc-if>
+<sc-for list="{{eyRows}}" as="er" hint-placeholder-count="6">
+<div style="flex: none; display: flex; align-items: center; gap: 8px; min-height: calc(46px * {{rowK}}); border-bottom: 1px solid #EFE7D6; background: {{er.rowBg}}; padding: 0 4px 0 2px">
+<button role="checkbox" aria-checked="{{er.on}}" onClick="{{er.toggle}}" aria-label="Select {{er.title}}" style="width: 34px; height: 34px; flex: none; border: 0; background: transparent; padding: 0; display: flex; align-items: center; justify-content: center"><span aria-hidden="true" style="width: 20px; height: 20px; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{er.boxBg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></button>
+<button onClick="{{er.toggle}}" tabindex="-1" aria-hidden="true" style="flex: 1; min-width: 0; align-self: stretch; border: 0; background: transparent; padding: 4px 0; text-align: left; font: inherit; display: flex; flex-direction: column; justify-content: center; gap: 1px">
+<span style="font-size: calc(14px * {{fsK}}); color: {{er.fg}}; text-decoration: {{er.strike}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{er.title}}</span>
+<span style="font-size: calc(12px * {{fsK}}); color: #7A7064; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{er.meta}}</span>
+</button>
+<sc-if value="{{er.canOpen}}" hint-placeholder-val="{{ true }}"><button onClick="{{er.open}}" aria-label="Open {{er.title}}" title="Open" style="height: 28px; flex: none; border: 0; background: transparent; padding: 0 6px; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Open</button></sc-if>
+</div>
+</sc-for>
+<sc-if value="{{eyMore}}" hint-placeholder-val="{{ false }}"><span style="padding: 10px 4px; font-size: calc(12.5px * {{fsK}}); color: #7A7064">{{eyMoreTxt}}</span></sc-if>
 </div>
 </div>
 </div>
@@ -5099,6 +5156,69 @@ class Component extends DCLogic {
     return this._cats;
   }
   get CAT_ORDER() { const x = this.CATS; return this._catOrder; }
+  everyItems(s) {
+    s = s || this.state;
+    const sm = this.schedMap(), out = [];
+    const fd = (d) => { const dt = this.dateFor(d); return this.DSHORT[dt.getDay()] + ' ' + this.MONTHS[dt.getMonth()] + ' ' + dt.getDate() + (dt.getFullYear() !== new Date().getFullYear() ? ', ' + dt.getFullYear() : ''); };
+    const cn = (c) => c && this.CATS[c] ? this.CATS[c].name : '';
+    const SEC = { A: 'Must', B: 'Should', C: 'Could' };
+    (s.tasks || []).forEach(t => {
+      const sc = sm[t.id];
+      const d = sc ? sc.day : (typeof t.dayAssign === 'number' ? t.dayAssign : null);
+      let when, key;
+      if (d !== null) { when = fd(d) + (sc ? ' · ' + this.fmtTime(sc.start, false) : ''); key = d; }
+      else if (t.bucket === 'week') { const w = this.effWeek(t); when = this.weekLabel(w); key = w + 0.5; }
+      else if (t.bucket === 'month') { when = 'This month'; key = 30; }
+      else { when = 'Desk'; key = null; }
+      const ref = t.done && typeof t.doneDay === 'number' ? t.doneDay : (key === null ? null : Math.floor(key));
+      out.push({ key: 't:' + t.id, kind: 'task', id: t.id, title: t.title || 'Untitled task', type: 'Task', when: when, sort: key, ref: ref, noDay: d === null,
+        sec: d !== null || t.bucket === 'week' ? (SEC[t.pri] || '') : '', cat: cn(t.cat), done: !!t.done,
+        status: t.done ? 'Done' + (typeof t.doneDay === 'number' ? ' ' + fd(t.doneDay) : '') : '' });
+    });
+    (s.allDay || []).forEach(a => {
+      const st = typeof a.start === 'number' ? a.start : (typeof a.day === 'number' ? a.day : null), en = typeof a.end === 'number' ? a.end : st;
+      out.push({ key: 'a:' + a.id, kind: 'allDay', id: a.id, title: a.title || 'Untitled event', type: 'All day', when: st === null ? '' : fd(st) + (en !== st ? ' – ' + fd(en) : ''), sort: st, ref: en, noDay: st === null, sec: '', cat: cn(a.cat), done: false, status: '' });
+    });
+    (s.series || []).forEach(x => {
+      const repeats = x.count !== 1;
+      const st = typeof x.anchor === 'number' ? x.anchor : null;
+      const last = repeats ? (typeof x.until === 'number' ? x.until : null) : st;
+      out.push({ key: 's:' + x.id, kind: 'series', id: x.id, title: (x.title || 'Untitled event'), type: repeats ? 'Repeats' : 'Event',
+        when: st === null ? '' : (repeats ? 'From ' + fd(st) + (typeof x.until === 'number' ? ' to ' + fd(x.until) : '') : fd(st)) + (typeof x.start === 'number' ? ' · ' + this.fmtTime(x.start, false) : ''),
+        sort: st, ref: last === null ? 1e6 : last, noDay: st === null, sec: '', cat: cn(x.cat), done: false, status: '' });
+    });
+    Object.keys(s.placedByDay || {}).forEach(k => (s.placedByDay[k] || []).forEach(b => {
+      if (b.taskId || b.habitId) return;
+      const d = Number(k); if (isNaN(d)) return;
+      out.push({ key: 'b:' + k + ':' + b.id, kind: 'block', id: b.id, day: k, title: b.title || 'Untitled event', type: 'Event', when: fd(d) + (typeof b.start === 'number' ? ' · ' + this.fmtTime(b.start, false) : ''), sort: d + (b.start || 0) / 2000, ref: d, noDay: false, sec: '', cat: cn(b.cat), done: !!b.done, status: b.done ? 'Done' : '' });
+    }));
+    return out;
+  }
+  everyApply(keys, act) {
+    const s = this.state, set = {}; keys.forEach(k => { set[k] = true; });
+    const backup = { tasks: s.tasks, allDay: s.allDay, series: s.series, placedByDay: s.placedByDay };
+    const tday = (id) => set['t:' + id];
+    let tasks = s.tasks, allDay = s.allDay || [], series = s.series || [], pb = s.placedByDay;
+    let n = 0;
+    if (act === 'remove') {
+      const m = {};
+      Object.keys(pb).forEach(k => { m[k] = (pb[k] || []).filter(b => !(b.taskId && tday(b.taskId)) && !(!b.taskId && set['b:' + k + ':' + b.id])); });
+      n = keys.length;
+      tasks = tasks.filter(t => !tday(t.id)); allDay = allDay.filter(a => !set['a:' + a.id]); series = series.filter(x => !set['s:' + x.id]); pb = m;
+    } else if (act === 'done') {
+      tasks = tasks.map(t => { if (!tday(t.id) || t.done) return t; n++; return Object.assign({}, t, { done: true, doneDay: 0, doneAt: Date.now() }); });
+    } else if (act === 'desk') {
+      tasks = tasks.map(t => { if (!tday(t.id) || t.done) return t; n++; return Object.assign({}, t, { bucket: 'desk', dayAssign: null }); });
+      const m = {}; Object.keys(pb).forEach(k => { m[k] = (pb[k] || []).filter(b => !(b.taskId && tday(b.taskId) && !(s.tasks.find(t => t.id === b.taskId) || {}).done)); }); pb = m;
+    }
+    if (!n) return;
+    this.setState({ tasks: tasks, allDay: allDay, series: series, placedByDay: pb, everySel: {}, everyAsk: null, everyUndo: { data: backup, label: (act === 'remove' ? 'Removed ' : act === 'done' ? 'Marked done: ' : 'Moved to the Desk: ') + n + (n === 1 ? ' item' : ' items') } });
+    this._oldToast((act === 'remove' ? 'Removed ' : act === 'done' ? 'Marked ' : 'Moved ') + n + (n === 1 ? ' item' : ' items') + (act === 'done' ? ' done.' : act === 'desk' ? ' to the Desk.' : '.'), 'Undo', () => this.everyUndo());
+  }
+  everyUndo() {
+    const u = this.state.everyUndo; if (!u) return;
+    this.setState(Object.assign({}, u.data, { everyUndo: null, everySel: {}, toast: null }));
+  }
   defaultCats() {
     return [{ id: 'work', name: 'Work', color: 'blue', icon: 'work' }, { id: 'home', name: 'Home', color: 'orange', icon: 'home' }, { id: 'health', name: 'Health', color: 'green', icon: 'health' }];
   }
@@ -8105,6 +8225,8 @@ class Component extends DCLogic {
       placeLabel: s.view === 'week' ? 'Pick a day' : (sc ? 'Move on calendar' : 'Put on calendar'),
       place: () => thenDo(() => this.setState({ sel: { kind: 'task', id: t.id }, editing: null, catMenu: null })),
       whenDayId: 'wd-' + t.id, whenTimeId: 'wt-' + t.id,
+      whenWeekNote: (() => { const d = sc ? sc.day : dv.day; if (typeof d !== 'number') return ''; const w = Math.max(this.weekStartOff(d), this.weekStartOff(0)), w0 = this.weekStartOff(0); if (w === w0) return ''; if (w === w0 + 7) return 'On next week\'s list'; const dt = this.dateFor(w); return 'On the list for the week of ' + this.MONTHS[dt.getMonth()] + ' ' + dt.getDate(); })(),
+      hasWeekNote: (() => { const d = sc ? sc.day : dv.day; return typeof d === 'number' && Math.max(this.weekStartOff(d), this.weekStartOff(0)) !== this.weekStartOff(0); })(),
       whenTime: sc ? this.toHHMM(sc.start) : '', hasTime: !!sc,
       whenTimeOpts: (() => { const o = [{ v: '', l: 'No time' }]; for (let m = 300; m < 1440; m += 15) o.push({ v: this.toHHMM(m), l: this.fmtTime(m, false) }); if (sc && sc.start % 15) o.push({ v: this.toHHMM(sc.start), l: this.fmtTime(sc.start, false) }); return o.sort((x, y) => x.v === '' ? -1 : y.v === '' ? 1 : (x.v < y.v ? -1 : 1)); })(),
       whenNote: sc ? 'On the calendar ' + this.fmtTime(sc.start, false) + '–' + this.fmtTime(sc.start + (t.mins || 30), false) : 'Pick a time to put it on the calendar',
@@ -12010,6 +12132,63 @@ class Component extends DCLogic {
       tiOnPaste: (e) => this.setState({ taskPaste: { text: e.target.value } }),
       tiPasteGo: () => { const tx = this.state.taskPaste ? this.state.taskPaste.text : ''; this.setState({ taskImport: this.parseTaskImport(tx), taskPaste: null }); },
       tiPasteClose: () => this.setState({ taskPaste: null }),
+      ...(() => {
+        if (!s.everyOn) return { eyOn: false, eyOpen: () => this.setState({ everyOn: true, everySel: {}, everyAsk: null, everyF: this.state.everyF || { type: 'all', status: 'all', when: 'all', q: '' } }) };
+        const F = s.everyF || { type: 'all', status: 'all', when: 'all', q: '' };
+        const setF = (p) => this.setState({ everyF: Object.assign({}, this.state.everyF || F, p), everyAsk: null });
+        const all = this.everyItems(s);
+        const q = String(F.q || '').trim().toLowerCase();
+        const shown = all.filter(it => {
+          if (F.type === 'task' && it.kind !== 'task') return false;
+          if (F.type === 'event' && it.kind === 'task') return false;
+          if (F.status === 'open' && it.done) return false;
+          if (F.status === 'done' && !it.done) return false;
+          if (F.when === 'past' && !(it.ref !== null && it.ref < 0)) return false;
+          if (F.when === 'up' && !(it.ref !== null && it.ref >= 0)) return false;
+          if (F.when === 'noday' && !it.noDay) return false;
+          if (F.when === 'old' && !(it.ref !== null && it.ref < -90)) return false;
+          if (q && (it.title + ' ' + it.cat + ' ' + it.type).toLowerCase().indexOf(q) < 0) return false;
+          return true;
+        }).sort((a, b) => (a.sort === null ? -1e9 : a.sort) - (b.sort === null ? -1e9 : b.sort) || (a.title < b.title ? -1 : 1));
+        const sel = s.everySel || {};
+        const selKeys = Object.keys(sel).filter(k => sel[k] && all.some(it => it.key === k));
+        const selTasks = selKeys.filter(k => k.indexOf('t:') === 0);
+        const selOpenTasks = selTasks.filter(k => { const t = s.tasks.find(x => 't:' + x.id === k); return t && !t.done; });
+        const allShownSel = shown.length > 0 && shown.every(it => sel[it.key]);
+        const chip = (grp, v, l) => { const on = (F[grp] || 'all') === v; return { label: l, on: on ? 'true' : 'false', bg: on ? this.TK.t6E2F43 : '#FFFFFF', fg: on ? '#FFFFFF' : this.TK.t6E2F43, bd: on ? this.TK.t6E2F43 : this.TK.tE2B9C4, pick: () => setF({ [grp]: v }) }; };
+        const LIM = 400;
+        const ask = s.everyAsk === 'remove';
+        return {
+          eyOn: true, eyOpen: () => {},
+          eyClose: () => this.setState({ everyOn: false, everySel: {}, everyAsk: null }),
+          eyCountLine: all.filter(x => x.kind === 'task').length + ' tasks · ' + all.filter(x => x.kind !== 'task').length + ' events',
+          eyTypeChips: [chip('type', 'all', 'All'), chip('type', 'task', 'Tasks'), chip('type', 'event', 'Events')],
+          eyStatusChips: [chip('status', 'all', 'Any'), chip('status', 'open', 'To do'), chip('status', 'done', 'Done')],
+          eyWhenVal: F.when || 'all',
+          eyWhenOpts: [['all', 'Any time'], ['past', 'In the past'], ['up', 'Today and later'], ['noday', 'No day'], ['old', 'Older than 3 months']].map(o => ({ v: o[0], l: o[1] })),
+          eyOnWhen: (e) => setF({ when: e.target.value }),
+          eyQ: F.q || '', eyOnQ: (e) => setF({ q: e.target.value }),
+          eyRows: shown.slice(0, LIM).map(it => { const on = !!sel[it.key]; return {
+            title: it.title, done: it.done, strike: it.done ? 'line-through' : 'none', fg: it.done ? '#7A7064' : '#2B2722',
+            meta: [it.type, it.when, it.sec, it.cat, it.status].filter(Boolean).join(' · '),
+            on: on ? 'true' : 'false', boxBg: on ? this.TK.t6E2F43 : '#FFFFFF', rowBg: on ? this.TK.tFBEDEE : 'transparent',
+            toggle: () => { const m = Object.assign({}, this.state.everySel || {}); if (m[it.key]) delete m[it.key]; else m[it.key] = true; this.setState({ everySel: m, everyAsk: null }); },
+            open: () => { if (it.kind !== 'task') return; this.setState({ everyOn: false }); this.openTaskEdit(it.id); }, canOpen: it.kind === 'task' } }),
+          eyNone: !shown.length, eyMore: shown.length > LIM, eyMoreTxt: 'Showing the first ' + LIM + ' of ' + shown.length + '. Narrow the filters to see the rest.',
+          eyShownTxt: shown.length + (shown.length === 1 ? ' shown' : ' shown'),
+          eyAllOn: allShownSel ? 'true' : 'false', eyAllBg: allShownSel ? this.TK.t6E2F43 : '#FFFFFF',
+          eyAllLbl: allShownSel ? 'Unselect all shown' : 'Select all shown',
+          eyAllToggle: () => { const m = Object.assign({}, this.state.everySel || {}); if (allShownSel) shown.forEach(it => { delete m[it.key]; }); else shown.forEach(it => { m[it.key] = true; }); this.setState({ everySel: m, everyAsk: null }); },
+          eyHasSel: selKeys.length > 0, eySelTxt: selKeys.length + ' selected',
+          eyClearSel: () => this.setState({ everySel: {}, everyAsk: null }),
+          eyCanDone: selOpenTasks.length > 0, eyCanDesk: selOpenTasks.length > 0,
+          eyDone: () => this.everyApply(selOpenTasks, 'done'),
+          eyDesk: () => this.everyApply(selOpenTasks, 'desk'),
+          eyRemoveLbl: ask ? 'Tap again to remove ' + selKeys.length : 'Remove', eyRemoveBg: ask ? '#9A4A3A' : 'transparent', eyRemoveFg: ask ? '#FFFFFF' : '#9A4A3A',
+          eyRemove: () => { if (this.state.everyAsk !== 'remove') { this.setState({ everyAsk: 'remove' }); clearTimeout(this.everyT); this.everyT = setTimeout(() => this.setState({ everyAsk: null }), 5000); return; } clearTimeout(this.everyT); this.everyApply(selKeys, 'remove'); },
+          eyHasUndo: !!s.everyUndo, eyUndoTxt: s.everyUndo ? s.everyUndo.label : '', eyUndo: () => this.everyUndo()
+        };
+      })(),
       tiOn: !!s.taskImport,
       tiCount: s.taskImport ? (s.taskImport.tasks.length + (s.taskImport.evCount || 0) + (s.taskImport.keepDups ? s.taskImport.dupTasks.length + s.taskImport.dupEvents.length : 0)) : 0,
       tiCanGo: !!(s.taskImport && (s.taskImport.tasks.length || s.taskImport.evCount || (s.taskImport.keepDups && s.taskImport.dupNames.length))),
