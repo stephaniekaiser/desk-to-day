@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 10:54 AM';</script>
+<script>window.__plannerBuild = 'Nov 27, 11:46 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -574,12 +574,13 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">When</span>
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
 <label for="{{t.whenDayId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Day</label>
-<select id="{{t.whenDayId}}" value="{{t.whenDayVal}}" onChange="{{t.onWhenDay}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenDayOpts}}" as="wo" hint-placeholder-count="8"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
+<input id="{{t.whenDayId}}" type="date" value="{{t.whenDayISO}}" onChange="{{t.onWhenDate}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-if value="{{t.whenHasDay}}" hint-placeholder-val="{{ true }}"><button onClick="{{t.whenClear}}" aria-label="No day yet" title="No day yet" style="width: 26px; height: 26px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 13px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if><button onClick="{{t.whenToday}}" aria-pressed="{{t.whenIsToday}}" style="height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: {{t.whenTodayBg}}; color: {{t.whenTodayFg}}; padding: 0 9px; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Today</button><button onClick="{{t.whenTomorrow}}" aria-pressed="{{t.whenIsTmrw}}" style="height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: {{t.whenTmrwBg}}; color: {{t.whenTmrwFg}}; padding: 0 9px; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Tomorrow</button>
 <label for="{{t.whenTimeId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Time</label>
 <select id="{{t.whenTimeId}}" value="{{t.whenTime}}" onChange="{{t.onWhenTime}}" title="A time puts it on the calendar" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenTimeOpts}}" as="wo" hint-placeholder-count="3"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
 <sc-if value="{{t.hasTime}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.clearTime}}" title="Take it off the calendar" aria-label="Take it off the calendar" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear time</button></sc-if>
 </div>
 </div>
+<sc-if value="{{t.isDoneEd}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{t.doneOnId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Done on</label><input id="{{t.doneOnId}}" type="date" max="{{t.doneOnMax}}" value="{{t.doneOnISO}}" onChange="{{t.onDoneOn}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0"></div></sc-if>
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Length</span>
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
@@ -940,8 +941,10 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <button onClick="{{d.undo}}" aria-label="Mark {{d.title}} not done" title="Not done after all" style="width: 34px; height: 34px; flex: none; border: 0; border-radius: 17px; background: transparent; color: #3F7A5A; display: flex; align-items: center; justify-content: center">
 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 </button>
+<button onClick="{{d.open}}" aria-label="{{d.title}}, done. Tap to edit" style="flex: 1; min-width: 0; align-self: stretch; display: flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 0; text-align: left; font: inherit">
 <span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: #6B6358; text-decoration: line-through; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.title}}</span>
 <span style="flex: none; font-size: calc(12px * {{fsK}}); color: #7A7064">{{d.when}}</span>
+</button>
 </div>
 </sc-for>
 <sc-if value="{{dg.empty}}" hint-placeholder-val="{{ false }}">
@@ -1393,6 +1396,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </button>
 </div>
 </sc-for>
+<button onClick="{{scImportLinksBtn}}" style="align-self: flex-start; flex: none; height: 34px; margin-top: 6px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 600; color: {{TK.tA0526A}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V7M7 12l5-5 5 5M5 4h14"></path></svg>Import from a file</button>
 </div>
 </div>
 </sc-if>
@@ -2875,28 +2879,40 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{scIsNew}}" hint-placeholder-val="{{ false }}">
 <header style="display: flex; align-items: flex-end; gap: 10px">
 <div style="flex: 1; min-width: 0">
-<div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700; margin-bottom: 6px">New course</div>
-<h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">What are you studying?</h2>
+<div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700; margin-bottom: 6px">{{scNewKicker}}</div>
+<h2 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">{{scNewHead}}</h2>
 </div>
 <sc-if value="{{scCanCancel}}" hint-placeholder-val="{{ false }}">
 <button onClick="{{scCancelNew}}" style="height: 32px; flex: none; border: 0; background: transparent; color: #6B6358; font-size: calc(13px * {{fsK}}); font-weight: 600">Cancel</button>
 </sc-if>
 </header>
+<sc-if value="{{scShowModes}}" hint-placeholder-val="{{ true }}">
 <div role="radiogroup" aria-label="How to add it" style="align-self: flex-start; display: flex; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
 <sc-for list="{{scModes}}" as="m" hint-placeholder-count="3">
 <button role="radio" aria-checked="{{m.checked}}" onClick="{{m.set}}" style="height: 28px; padding: 0 10px; border: 0; border-radius: 6px; background: {{m.bg}}; color: {{m.fg}}; box-shadow: {{m.shadow}}; font-size: calc(12px * {{fsK}}); font-weight: 700">{{m.label}}</button>
 </sc-for>
 </div>
+</sc-if>
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-right: 4px">
 <sc-if value="{{scImport}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <label for="scn-target" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Import into</label>
-<select id="scn-target" value="{{scTargetVal}}" onChange="{{scOnTarget}}" style="outline-color: {{TK.tA0526A}}; height: 34px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(14px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
-<sc-for list="{{scTargetOpts}}" as="to" hint-placeholder-count="2">
+<select id="scn-target" value="{{scIntoVal}}" onChange="{{scOnInto}}" style="outline-color: {{TK.tA0526A}}; height: 34px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(14px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
+<sc-for list="{{scIntoOpts}}" as="to" hint-placeholder-count="3">
 <option value="{{to.v}}">{{to.l}}</option>
 </sc-for>
 </select>
 </div>
+<sc-if value="{{scShowWhich}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="scn-which" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Which course</label>
+<select id="scn-which" value="{{scWhichVal}}" onChange="{{scOnWhich}}" style="outline-color: {{TK.tA0526A}}; height: 34px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 10px; font: inherit; font-size: calc(14px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0">
+<sc-for list="{{scWhichOpts}}" as="wc" hint-placeholder-count="2">
+<option value="{{wc.v}}">{{wc.l}}</option>
+</sc-for>
+</select>
+</div>
+</sc-if>
 </sc-if>
 <sc-if value="{{scShowCourseFields}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 4px">
@@ -2931,12 +2947,11 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </label>
 <span style="font-size: calc(12px * {{fsK}}); color: #6B6358">{{scImportName}}</span>
 <span style="flex: 1"></span>
-<button onClick="{{scTemplate}}" style="height: 30px; border: 0; background: transparent; padding: 0; color: {{TK.tA0526A}}; font-size: calc(12.5px * {{fsK}}); font-weight: 600; display: flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Download template</button>
+<sc-if value="{{scImpLessons}}" hint-placeholder-val="{{ true }}"><button onClick="{{scTemplate}}" style="height: 30px; border: 0; background: transparent; padding: 0; color: {{TK.tA0526A}}; font-size: calc(12.5px * {{fsK}}); font-weight: 600; display: flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Download template</button></sc-if>
 </div>
-<label for="scn-import" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Or paste rows</label>
-<textarea id="scn-import" value="{{scImportText}}" onChange="{{scOnImportText}}" rows="6" placeholder="Lesson,Part,Hours
-Lesson 1: Getting started,1.1 Welcome,0.5" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font-family: ui-monospace, Menlo, monospace; font-size: calc(12px * {{fsK}}); line-height: 1.5; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
-<span style="font-size: calc(12px * {{fsK}}); color: #8A8174">Optional first rows: Course, Book, Author, ISBN, URL (name, then value). Then the table: Lesson, Part, Hours. Comma or tab separated, up to 500 rows. Rows with the same Lesson in a row form one lesson. Part and Hours can be blank. Typed fields above win over the file.</span>
+<label for="scn-import" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Or paste them here</label>
+<textarea id="scn-import" value="{{scImportText}}" onChange="{{scOnImportText}}" rows="6" placeholder="{{scImportPh}}" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 8px 10px; font-family: ui-monospace, Menlo, monospace; font-size: calc(12px * {{fsK}}); line-height: 1.5; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
+<sc-if value="{{scImpLessons}}" hint-placeholder-val="{{ true }}"><span style="font-size: calc(12px * {{fsK}}); color: #8A8174">Optional first rows: Course, Book, Author, ISBN, URL (name, then value). Then the table: Lesson, Part, Hours. Comma or tab separated, up to 500 rows. Rows with the same Lesson in a row form one lesson. Part and Hours can be blank. Typed fields above win over the file.</span></sc-if><sc-if value="{{scImpLinks}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12px * {{fsK}}); color: #8A8174">One link per line, link first. A name after it is optional; with no name, the site name is used. In a spreadsheet, put the link in column A and the name in column B. Links already in the course are skipped.</span></sc-if>
 <sc-if value="{{scImportPreview.has}}" hint-placeholder-val="{{ false }}">
 <div style="background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px">
 <span style="font-size: calc(14px * {{fsK}}); font-weight: 700; color: #2B2722">{{scImportPreview.summary}}</span>
@@ -3199,17 +3214,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </sc-for>
 <div style="display: flex; gap: 14px; flex-wrap: wrap">
 <button onClick="{{scAddResource}}" style="height: 34px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add study material</button>
-<button onClick="{{scImportInto}}" style="height: 34px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 600; color: {{TK.tA0526A}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V7M7 12l5-5 5 5M5 4h14"></path></svg>Import study material from a file</button>
 </div>
-</div>
-<div style="flex: none; display: flex; flex-direction: column; gap: 6px">
-<button onClick="{{scNotesToggle}}" aria-expanded="{{scNotesOpenA}}" style="display: flex; align-items: center; gap: 8px; border: 0; border-bottom: 1.5px solid {{TK.tD9A5B4}}; background: transparent; padding: 0 2px 6px; text-align: left; color: #6B6358"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transform: {{scNotesChev}}"><path d="M9 5l7 7-7 7"></path></svg><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Notes</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{scNotesSum}}</span></button>
-<sc-if value="{{scNotesOpen}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; gap: 4px">
-<label for="sc-desc" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Notes about this course</label>
-<textarea id="sc-desc" value="{{scDesc}}" onChange="{{scOnDesc}}" rows="4" placeholder="What it covers, how it is graded, your instructor, anything worth remembering" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 10px; padding: 8px 10px; font: inherit; font-size: calc(14px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
-</div>
-</sc-if>
 </div>
 <section aria-label="Make study time" style="flex: none; display: flex; flex-direction: column; gap: 8px; margin-top: 6px">
 <sc-if value="{{scPreviewOn}}" hint-placeholder-val="{{ false }}">
@@ -3326,6 +3331,15 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 </sc-if>
 </section>
+<div style="flex: none; display: flex; flex-direction: column; gap: 6px">
+<button onClick="{{scNotesToggle}}" aria-expanded="{{scNotesOpenA}}" style="display: flex; align-items: center; gap: 8px; border: 0; border-bottom: 1.5px solid {{TK.tD9A5B4}}; background: transparent; padding: 0 2px 6px; text-align: left; color: #6B6358"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transform: {{scNotesChev}}"><path d="M9 5l7 7-7 7"></path></svg><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Notes</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{scNotesSum}}</span></button>
+<sc-if value="{{scNotesOpen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="sc-desc" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Notes about this course</label>
+<textarea id="sc-desc" value="{{scDesc}}" onChange="{{scOnDesc}}" rows="4" placeholder="What it covers, how it is graded, your instructor, anything worth remembering" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 10px; padding: 8px 10px; font: inherit; font-size: calc(14px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
+</div>
+</sc-if>
+</div>
 </sc-if>
 <sc-if value="{{scTabLinks}}" hint-placeholder-val="{{ false }}">
 <div style="flex: none; display: flex; flex-direction: column; gap: 6px">
@@ -3757,12 +3771,13 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">When</span>
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
 <label for="{{t.whenDayId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Day</label>
-<select id="{{t.whenDayId}}" value="{{t.whenDayVal}}" onChange="{{t.onWhenDay}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenDayOpts}}" as="wo" hint-placeholder-count="8"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
+<input id="{{t.whenDayId}}" type="date" value="{{t.whenDayISO}}" onChange="{{t.onWhenDate}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-if value="{{t.whenHasDay}}" hint-placeholder-val="{{ true }}"><button onClick="{{t.whenClear}}" aria-label="No day yet" title="No day yet" style="width: 26px; height: 26px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 13px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if><button onClick="{{t.whenToday}}" aria-pressed="{{t.whenIsToday}}" style="height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: {{t.whenTodayBg}}; color: {{t.whenTodayFg}}; padding: 0 9px; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Today</button><button onClick="{{t.whenTomorrow}}" aria-pressed="{{t.whenIsTmrw}}" style="height: 30px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: {{t.whenTmrwBg}}; color: {{t.whenTmrwFg}}; padding: 0 9px; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Tomorrow</button>
 <label for="{{t.whenTimeId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Time</label>
 <select id="{{t.whenTimeId}}" value="{{t.whenTime}}" onChange="{{t.onWhenTime}}" title="A time puts it on the calendar" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722"><sc-for list="{{t.whenTimeOpts}}" as="wo" hint-placeholder-count="3"><option value="{{wo.v}}">{{wo.l}}</option></sc-for></select>
 <sc-if value="{{t.hasTime}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.clearTime}}" title="Take it off the calendar" aria-label="Take it off the calendar" style="height: 30px; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">Clear time</button></sc-if>
 </div>
 </div>
+<sc-if value="{{t.isDoneEd}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><label for="{{t.doneOnId}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Done on</label><input id="{{t.doneOnId}}" type="date" max="{{t.doneOnMax}}" value="{{t.doneOnISO}}" onChange="{{t.onDoneOn}}" style="outline-color: {{TK.tA0526A}}; height: 30px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0"></div></sc-if>
 <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Length</span>
 <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
@@ -5583,6 +5598,26 @@ class Component extends DCLogic {
     return lessons;
   }
   // Strict import: header Lesson, Part, Hours. Comma or tab separated. Up to 500 rows.
+  parseLinks(text, existing) {
+    const out = { links: [], errors: [], dupes: 0, empty: !String(text || '').trim() };
+    const norm = (u) => String(u || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/+$/, '');
+    const seen = {}; (existing || []).forEach(l => { if (l && l.url) seen[norm(l.url)] = 1; });
+    const urlRe = /(https?:\/\/[^\s,|"'<>]+|www\.[^\s,|"'<>]+|[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,}(?:\/[^\s,|"'<>]*)?)/i;
+    String(text || '').split(/\r?\n/).forEach((raw, i) => {
+      const line = raw.trim(); if (!line) return;
+      if (i === 0 && /^"?(link|url|address)"?\s*[,\t]/i.test(line)) return;
+      const m = line.match(urlRe);
+      if (!m) { if (out.errors.length < 50) out.errors.push('Line ' + (i + 1) + ': no link found in "' + line.slice(0, 40) + '"'); return; }
+      let url = m[1].replace(/[.)\];]+$/, '');
+      let name = (line.slice(0, m.index) + ' ' + line.slice(m.index + m[1].length)).replace(/^[\s"',|\t:–—-]+|[\s"',|\t:–—-]+$/g, '').replace(/^"|"$/g, '').trim();
+      if (!name) name = url.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split(/[\/?#]/)[0];
+      const k = norm(url);
+      if (seen[k]) { out.dupes++; return; }
+      seen[k] = 1;
+      out.links.push({ url: /^https?:\/\//i.test(url) ? url : 'https://' + url, label: name });
+    });
+    return out;
+  }
   parseImport(text) {
     const errors = [];
     const raw = String(text || '').replace(/^\ufeff/, '');
@@ -7299,12 +7334,13 @@ class Component extends DCLogic {
   holdBasket() { const s = this.state; if (s.view === 'day') this._basketHold = { d: s.day, p: this.dayBasketPct(s, s.day) }; }
   setTaskDone(id, done, day, sure) {
     const s = this.state;
+    if (done) day = 0;
     const t = s.tasks.find(x => x.id === id);
     if (!t) return;
     if (done && !sure && (t.checklist || []).some(it => !this.clItemDone(it))) { this.setState({ clConfirm: { id: id, day: typeof day === 'number' ? day : 0 } }); return; }
     if (done && !sure && t.courseId && t.parts && t.parts.length) { this.setState({ partAsk: { id: id, day: typeof day === 'number' ? day : 0 } }); return; }
     if (done) this.holdBasket();
-    const tasks = s.tasks.map(x => x.id === id ? Object.assign({}, x, { done: done, doneDay: done ? day : null }) : x);
+    const tasks = s.tasks.map(x => x.id === id ? Object.assign({}, x, { done: done, doneDay: done ? day : null, doneAt: done ? Date.now() : null }) : x);
     const stepSync = t.stepId && t.courseId && t.assignmentId ? { courses: (s.courses || []).map(c => c.id !== t.courseId ? c : Object.assign({}, c, { assignments: (c.assignments || []).map(a => a.id !== t.assignmentId ? a : Object.assign({}, a, { checklist: (a.checklist || []).map(it => it.id === t.stepId ? Object.assign({}, it, { done: done }) : it) })) })) } : {};
     const asgSync = {};
     this.setState(Object.assign({ tasks: tasks, missFor: null, sel: null }, stepSync, asgSync));
@@ -7922,7 +7958,7 @@ class Component extends DCLogic {
       const bucketChanged = d.bucket && d.bucket !== bKey;
       const onCal = !!this.schedMap()[t.id];
       const extra = {};
-      if (dayChanged) { extra.dayAssign = d.day; if (d.day !== null) { extra.bucket = 'week'; extra.weekOf = this.weekStartOff(d.day); if (oldDay === null) extra.pri = this.state.settings.defaultPri; } }
+      if (dayChanged) { extra.dayAssign = d.day; if (d.day !== null) { extra.bucket = 'week'; extra.weekOf = Math.max(this.weekStartOff(d.day), this.weekStartOff(0)); if (oldDay === null) extra.pri = this.state.settings.defaultPri; if (t.bucket === 'week' && extra.weekOf !== this.effWeek(t)) this.setToast('Moved to ' + this.weekLabel(extra.weekOf).replace(/^This week$/, 'this week').replace(/^Next week$/, 'next week') + '.'); } }
       if (bucketChanged) {
         const cw = this.weekStartOff(0);
         if (d.bucket === 'next') { extra.bucket = 'week'; extra.weekOf = cw + 7; extra.dayAssign = null; }
@@ -7955,6 +7991,15 @@ class Component extends DCLogic {
     const thenDo = (fn) => { commitDraft(); setTimeout(fn, 0); };
     const dfl = this.flagInfo(dv.flag);
     const dcs = this.catStyle(dv.cat);
+    const setWhen = (d) => {
+      if (d === null || !sc) { patchDraft({ day: d }); return; }
+        commitDraft();
+        const st0 = this.state, map = this.removeTaskBlocks(st0.placedByDay, t.id);
+        map[String(d)] = (map[String(d)] || []).concat([{ id: 'p' + st0.nextId, taskId: t.id, mins: t.mins || 30, start: sc.start }]);
+        this.setState({ placedByDay: map, nextId: st0.nextId + 1, editDraft: null, tasks: st0.tasks.map(x => x.id === t.id ? Object.assign({}, x, { dayAssign: d, bucket: 'week', weekOf: Math.max(this.weekStartOff(d), this.weekStartOff(0)) }) : x) });
+        { const nw = Math.max(this.weekStartOff(d), this.weekStartOff(0)); if (nw !== this.effWeek(t)) this.setToast('Moved to ' + this.weekLabel(nw).replace(/^This week$/, 'this week').replace(/^Next week$/, 'next week') + '.'); }
+
+    };
     return {
       isTask: true, isHeader: false,
       hasFlag: !!fl, flagLabel: fl ? fl.label : '', flagBg: fl ? fl.bg : 'transparent', flagFg: fl ? fl.fg : '#2B2722',
@@ -8060,19 +8105,19 @@ class Component extends DCLogic {
       placeLabel: s.view === 'week' ? 'Pick a day' : (sc ? 'Move on calendar' : 'Put on calendar'),
       place: () => thenDo(() => this.setState({ sel: { kind: 'task', id: t.id }, editing: null, catMenu: null })),
       whenDayId: 'wd-' + t.id, whenTimeId: 'wt-' + t.id,
-      whenDayVal: (() => { const d = sc ? sc.day : dv.day; return typeof d === 'number' ? String(d) : ''; })(),
-      whenDayOpts: (() => { const cur = sc ? sc.day : dv.day; const o = [{ v: '', l: 'No day yet' }]; const set = {}; for (let d = 0; d <= 27; d++) set[d] = true; if (typeof cur === 'number') set[cur] = true; Object.keys(set).map(Number).sort((a, b) => a - b).forEach(d => o.push({ v: String(d), l: (d === 0 ? 'Today, ' : d === 1 ? 'Tomorrow, ' : '') + this.DSHORT[this.dowFor(d)] + ' ' + this.MONTHS[this.dateFor(d).getMonth()] + ' ' + this.dateFor(d).getDate() })); return o; })(),
       whenTime: sc ? this.toHHMM(sc.start) : '', hasTime: !!sc,
       whenTimeOpts: (() => { const o = [{ v: '', l: 'No time' }]; for (let m = 300; m < 1440; m += 15) o.push({ v: this.toHHMM(m), l: this.fmtTime(m, false) }); if (sc && sc.start % 15) o.push({ v: this.toHHMM(sc.start), l: this.fmtTime(sc.start, false) }); return o.sort((x, y) => x.v === '' ? -1 : y.v === '' ? 1 : (x.v < y.v ? -1 : 1)); })(),
       whenNote: sc ? 'On the calendar ' + this.fmtTime(sc.start, false) + '–' + this.fmtTime(sc.start + (t.mins || 30), false) : 'Pick a time to put it on the calendar',
-      onWhenDay: (e) => {
-        const v = e.target.value; const d = v === '' ? null : parseInt(v, 10);
-        if (d === null || !sc) { patchDraft({ day: d }); return; }
-        commitDraft();
-        const st0 = this.state, map = this.removeTaskBlocks(st0.placedByDay, t.id);
-        map[String(d)] = (map[String(d)] || []).concat([{ id: 'p' + st0.nextId, taskId: t.id, mins: t.mins || 30, start: sc.start }]);
-        this.setState({ placedByDay: map, nextId: st0.nextId + 1, editDraft: null, tasks: st0.tasks.map(x => x.id === t.id ? Object.assign({}, x, { dayAssign: d, bucket: 'week', weekOf: this.weekStartOff(d) }) : x) });
-      },
+      whenDayISO: typeof (sc ? sc.day : dv.day) === 'number' ? this.isoFor(sc ? sc.day : dv.day) : '',
+      whenHasDay: typeof (sc ? sc.day : dv.day) === 'number',
+      whenIsToday: (sc ? sc.day : dv.day) === 0 ? 'true' : 'false', whenIsTmrw: (sc ? sc.day : dv.day) === 1 ? 'true' : 'false',
+      whenTodayBg: (sc ? sc.day : dv.day) === 0 ? this.TK.t6E2F43 : '#FFFFFF', whenTodayFg: (sc ? sc.day : dv.day) === 0 ? '#FFFFFF' : this.TK.t6E2F43,
+      whenTmrwBg: (sc ? sc.day : dv.day) === 1 ? this.TK.t6E2F43 : '#FFFFFF', whenTmrwFg: (sc ? sc.day : dv.day) === 1 ? '#FFFFFF' : this.TK.t6E2F43,
+      onWhenDate: (e) => { const v = e.target.value; if (v) setWhen(this.offFromISO(v)); },
+      whenToday: () => setWhen(0), whenTomorrow: () => setWhen(1), whenClear: () => setWhen(null),
+      onWhenDay: (e) => { const v = e.target.value; setWhen(v === '' ? null : parseInt(v, 10)); },
+      isDoneEd: !!t.done, doneOnId: 'dn-' + t.id, doneOnISO: typeof t.doneDay === 'number' ? this.isoFor(t.doneDay) : this.isoFor(0), doneOnMax: this.isoFor(0),
+      onDoneOn: (e) => { const v = e.target.value; if (!v) return; const d = Math.min(0, this.offFromISO(v)); this.setState({ tasks: this.state.tasks.map(x => x.id === t.id ? Object.assign({}, x, { doneDay: d }) : x), editing: t.id }); },
       onWhenTime: (e) => {
         const v = e.target.value;
         commitDraft();
@@ -11044,6 +11089,8 @@ class Component extends DCLogic {
       const toneFg = { good: this.TK.t6E2F43, bad: '#9A4A3A', idle: '#7A7064' };
       const nw = s.schoolNew || { mode: 'quick', title: '', book: '', isbn: '', lessons: '', subs: '', hours: '', paste: '', goalId: '', importText: '', importName: '', target: '' };
       const patchNew = (p) => this.setState({ schoolNew: Object.assign({}, this.state.schoolNew || nw, p) });
+      const nwInto = nw.mode !== 'import' ? 'course' : (nw.into || (nw.target ? 'res' : 'course'));
+      const defCid = (s.selCourse && (s.courses || []).some(c => c.id === s.selCourse)) ? s.selCourse : (((s.courses || []).find(c => !c.finished) || (s.courses || [])[0] || {}).id || '');
       const updC = (id, fn) => this.setState({ courses: this.state.courses.map(c => c.id === id ? Object.assign({}, c, fn(c)) : c) });
       const ws0 = this.weekStartOff(0);
       let weekPlanned = 0, weekStudied = 0;
@@ -11076,11 +11123,21 @@ class Component extends DCLogic {
         scCancelNew: () => this.setState({ schoolNew: null }),
         scModes: [['quick', 'Quick setup'], ['import', 'Import'], ['paste', 'Paste a list'], ['copy', 'From a Finish line']].map(m => { const on2 = nw.mode === m[0]; return { label: m[1], checked: on2 ? 'true' : 'false', bg: on2 ? '#FFFFFF' : 'transparent', fg: on2 ? this.TK.t6E2F43 : '#6B6358', shadow: on2 ? '0 1px 2px rgba(0,0,0,0.12)' : 'none', set: () => patchNew({ mode: m[0] }) }; }),
         scQuick: nw.mode === 'quick', scPaste: nw.mode === 'paste', scCopy: nw.mode === 'copy', scImport: nw.mode === 'import',
-        scCreateLabel: nw.mode === 'import' ? (nw.target ? 'Add this study material' : 'Import course') : 'Add course',
-        scShowCourseFields: !(nw.mode === 'import' && nw.target),
-        scTargetVal: nw.target || '',
-        scTargetOpts: [{ v: '', l: 'A new course' }].concat(courses.map(c => ({ v: c.id, l: 'New study material in ' + (c.title || 'course') }))),
-        scOnTarget: (e) => patchNew({ target: e.target.value }),
+        scCreateLabel: nw.mode === 'import' ? (nwInto === 'links' ? 'Add these links' : nwInto === 'res' ? 'Add this study material' : 'Import course') : 'Add course',
+        scShowCourseFields: !(nw.mode === 'import' && nwInto !== 'course'),
+        scIntoVal: nwInto,
+        scIntoOpts: [['course', 'A new course']].concat(courses.length ? [['res', 'Study materials'], ['links', 'Links']] : []).map(o => ({ v: o[0], l: o[1] })),
+        scOnInto: (e) => patchNew({ into: e.target.value, target: nw.target || defCid }),
+        scShowWhich: nw.mode === 'import' && nwInto !== 'course',
+        scWhichVal: nw.target || defCid,
+        scWhichOpts: courses.map(c => ({ v: c.id, l: c.title || 'Course' })),
+        scOnWhich: (e) => patchNew({ target: e.target.value }),
+        scShowModes: !nw.fromImport,
+        scNewKicker: nw.fromImport ? 'Import' : 'New course',
+        scNewHead: nw.fromImport ? 'From a file' : 'What are you studying?',
+        scImpLinks: nwInto === 'links', scImpLessons: nwInto !== 'links',
+        scImportPh: nwInto === 'links' ? 'https://my.school.edu  Student portal\nhttps://example.com/syllabus | Syllabus\nhttps://example.com/videos' : 'Lesson,Part,Hours\nLesson 1: Getting started,1.1 Welcome,0.5',
+        scImportLinksBtn: () => this.setState({ schoolNew: { mode: 'import', fromImport: true, into: 'course', title: '', book: '', isbn: '', lessons: '', subs: '', hours: '', paste: '', goalId: '', importText: '', importName: '', target: defCid }, mobilePage: (s.vw || 1194) < 900 ? 'right' : s.mobilePage }),
         scImportText: nw.importText || '', scImportName: nw.importName || '',
         scOnImportText: (e) => patchNew({ importText: e.target.value, importName: '' }),
         scOnImportFile: (e) => {
@@ -11096,6 +11153,15 @@ class Component extends DCLogic {
         scTemplate: () => this.downloadText('lesson-plan-template.csv', 'Course,My course name\nBook,Book or video course title\nAuthor,Author name\nISBN,\nURL,https://example.com/course\nLesson,Part,Hours\nLesson 1: Getting started,1.1 Welcome,0.5\nLesson 1: Getting started,1.2 First steps,1.5\nLesson 2: Next topic,,3\n', 'text/csv'),
         scImportPreview: (() => {
           if (nw.mode !== 'import') return { has: false };
+          if (nwInto === 'links') {
+            const tc = (s.courses || []).find(c => c.id === (nw.target || defCid));
+            const L = this.parseLinks(nw.importText, tc ? tc.links : []);
+            return { has: !L.empty, ok: !L.errors.length && L.links.length > 0,
+              metaLine: L.dupes ? L.dupes + (L.dupes === 1 ? ' link is' : ' links are') + ' already in this course and will be skipped.' : '',
+              summary: L.links.length ? L.links.length + (L.links.length === 1 ? ' link' : ' links') + ' to add' : 'No new links to add',
+              errors: L.errors.slice(0, 6).map(t => ({ t: t })), hasErrors: L.errors.length > 0, moreErrors: L.errors.length > 6 ? 'and ' + (L.errors.length - 6) + ' more' : '',
+              lessons: L.links.slice(0, 60).map(l => ({ title: l.label, meta: l.url.replace(/^https?:\/\//i, '') })) };
+          }
           const r = this.parseImport(nw.importText);
           const parts = r.lessons.reduce((a, l) => a + l.items.length, 0), mins = r.lessons.reduce((a, l) => a + l.items.reduce((b, it) => b + it.mins, 0), 0);
           return {
@@ -11119,6 +11185,22 @@ class Component extends DCLogic {
           const cur = this.state.schoolNew || nw;
           const extra = { book: (cur.book || '').trim(), isbn: (cur.isbn || '').trim(), url: (cur.url || '').trim(), author: (cur.author || '').trim() };
           if (cur.mode === 'import') {
+            const into2 = cur.into || (cur.target ? 'res' : 'course');
+            if (into2 !== 'course' && !cur.target && !defCid) { this.setError('Pick which course first.'); return; }
+            if (into2 === 'links') {
+              const tid = cur.target || defCid;
+              const tc = this.state.courses.find(c => c.id === tid);
+              const L = this.parseLinks(cur.importText, tc ? tc.links : []);
+              if (L.errors.length) { this.setError('Fix the lines marked below, then add again.'); return; }
+              if (!L.links.length) { this.setError(L.dupes ? 'Those links are already in this course.' : 'Choose a file or paste links first.'); return; }
+              const base = Date.now().toString(36);
+              this.setState({ courses: this.state.courses.map(c => c.id === tid ? Object.assign({}, c, { links: (c.links || []).concat(L.links.map((l, i) => ({ id: 'lk' + base + i, label: l.label, url: l.url }))) }) : c),
+                selCourse: tid, courseTab: 'links', schoolNew: null });
+              this.setToast('Added ' + L.links.length + (L.links.length === 1 ? ' link.' : ' links.'));
+              return;
+            }
+            if (into2 === 'course') cur.target = '';
+            else if (!cur.target) cur.target = defCid;
             const r = this.parseImport(cur.importText);
             if (r.errors.length) { this.setError('Fix the rows marked below, then import again.'); return; }
             if (!r.lessons.length) { this.setError('Choose a file or paste rows first.'); return; }
@@ -12665,7 +12747,7 @@ class Component extends DCLogic {
         { name: s.day === 0 ? 'Today' : this.DAYS[this.dowFor(s.day)], list: doneDayAll, emptyMsg: 'Nothing checked off yet. Pick one small thing.' },
         { name: 'Earlier this week', list: doneWeekAll.filter(t => t.doneDay !== s.day), emptyMsg: 'Nothing else yet this week.' }
       ].map(g => ({ name: g.name, meta: g.list.length ? g.list.length + (g.list.length === 1 ? ' task' : ' tasks') : '', empty: !g.list.length, emptyMsg: g.emptyMsg,
-        rows: g.list.map(t => ({ title: t.title, when: t.doneDay === s.day ? '' : this.DSHORT[this.dowFor(t.doneDay)] + ' ' + this.dateFor(t.doneDay).getDate(), undo: () => this.setTaskDone(t.id, false, null) })) })),
+        rows: g.list.map(t => ({ title: t.title, when: t.doneDay === s.day ? '' : this.DSHORT[this.dowFor(t.doneDay)] + ' ' + this.dateFor(t.doneDay).getDate(), undo: () => this.setTaskDone(t.id, false, null), open: () => this.openTaskEdit(t.id) })) })),
       dayTabs: [['list', s.day === 0 ? 'Today' : this.DSHORT[this.dowFor(s.day)], '', ''], ['done', 'Done', doneDayN ? String(doneDayN) : '', '']].concat(
         [['grow', 'Grow', '', this.ICONS.garden], ['school', 'School', dayTabVals.schoolLeft ? String(dayTabVals.schoolLeft) : '', this.ICONS.school], ['meals', 'Meals', dayTabVals.mealsN ? String(dayTabVals.mealsN) : '', this.ICONS.food], ['journal', 'Journal', '', 'M5 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5zM8.5 3v18M11.5 8h3.5M11.5 11.5h2.5']]
           .filter(o => (o[0] !== 'school' || s.settings.schoolOn) && (o[0] !== 'meals' || (this.MEALS_ON && s.settings.mealsOn)) && (o[0] !== 'journal' || s.settings.journalOn))).map((o, oi) => {
