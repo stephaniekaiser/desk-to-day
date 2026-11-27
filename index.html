@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 1:22 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 1:33 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -486,6 +486,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Changes here only affect this piece of {{t.groupName}}.</span>
 </div>
 </sc-if>
+<sc-if value="{{t.hasFrom}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.goFrom}}" title="Open in School" style="align-self: flex-start; max-width: 100%; border: 0; background: transparent; padding: 0 2px; margin-bottom: 2px; display: flex; align-items: center; gap: 5px; text-align: left; font-size: calc(12px * {{fsK}}); color: #6B6358; min-width: 0"><span style="flex: none">From</span><b style="min-width: 0; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.fromCourse}}<sc-if value="{{t.fromSep}}" hint-placeholder-val="{{ true }}"> › {{t.fromItem}}</sc-if></b><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; color: {{TK.t6E2F43}}"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></button></sc-if>
 <label for="{{t.editId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
 <input id="{{t.editId}}" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fBody}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 <sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
@@ -3440,7 +3441,8 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <label for="{{wk.mId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">How long</label>
 <select id="{{wk.mId}}" value="{{wk.minsVal}}" onChange="{{wk.onMins}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}})"><sc-for list="{{wk.minsOpts}}" as="mo" hint-placeholder-count="3"><option value="{{mo.v}}">{{mo.l}}</option></sc-for></select>
 <sc-if value="{{wk.isDone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12px * {{fsK}}); font-weight: 700; color: #3F7A5A">{{wk.doneTxt}}</span></sc-if>
-<button onClick="{{wk.remove}}" aria-label="Remove this work day" title="Remove this work day" style="width: 30px; height: 30px; flex: none; margin-left: auto; border: 0; border-radius: 15px; background: transparent; color: #9A4A3A; padding: 0; font-size: 18px; line-height: 1">×</button>
+<span style="margin-left: auto; flex: none; display: flex; align-items: center; gap: 2px"><button onClick="{{wk.openTask}}" title="Open this task" style="height: 30px; flex: none; border: 0; background: transparent; padding: 0 6px; display: flex; align-items: center; gap: 4px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Open<svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></button>
+<button onClick="{{wk.remove}}" aria-label="Remove this work day" title="Remove this work day" style="width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: transparent; color: #9A4A3A; padding: 0; font-size: 18px; line-height: 1">×</button></span>
 </div>
 </sc-for>
 <div style="display: flex; align-items: center; gap: 10px">
@@ -3707,6 +3709,7 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Changes here only affect this piece of {{t.groupName}}.</span>
 </div>
 </sc-if>
+<sc-if value="{{t.hasFrom}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.goFrom}}" title="Open in School" style="align-self: flex-start; max-width: 100%; border: 0; background: transparent; padding: 0 2px; margin-bottom: 2px; display: flex; align-items: center; gap: 5px; text-align: left; font-size: calc(12px * {{fsK}}); color: #6B6358; min-width: 0"><span style="flex: none">From</span><b style="min-width: 0; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.fromCourse}}<sc-if value="{{t.fromSep}}" hint-placeholder-val="{{ true }}"> › {{t.fromItem}}</sc-if></b><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; color: {{TK.t6E2F43}}"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></button></sc-if>
 <label for="{{t.editId}}-r" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
 <div style="display: flex; align-items: center; gap: 8px">
 <button role="checkbox" aria-checked="{{t.doneA}}" onClick="{{t.markDone}}" aria-label="{{t.doneTip}}" title="{{t.doneTip}}" style="width: 28px; height: 28px; flex: none; border: 2px solid #3F7A5A; border-radius: 14px; background: {{t.doneBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button>
@@ -5401,10 +5404,7 @@ class Component extends DCLogic {
   workTitle(c, a, desc) {
     const base = this.asWorkBase(c, a), d = String(desc || '').trim(), at = String(a.title || '').trim().toLowerCase();
     if (!d) return base;
-    const dl = d.toLowerCase();
-    if (base.toLowerCase().slice(-dl.length) === dl) return base;
-    if (at && dl.indexOf(at) >= 0) return this.coursePrefix(c) + ': ' + d;
-    return base + ' · ' + d;
+    return this.coursePrefix(c) + ': ' + d;
   }
   coursePrefix(c) { const v = c && typeof c.short === 'string' ? c.short.trim() : ''; return v || this.courseShortGuess(c && c.title); }
   asWorkBase(c, a) { return this.coursePrefix(c) + ': ' + (a.kind === 'exam' ? 'Study for ' : '') + (a.title || 'Assignment'); }
@@ -5446,7 +5446,7 @@ class Component extends DCLogic {
     return (a.checklist || []).filter(it => !this.clItemDone(it) && !has[it.id]);
   }
   asStepTask(c, a, it, day, id) {
-    return { id: id, title: (a.title || 'Assignment') + ' · ' + (it.text || 'Step'), pri: 'B', mins: it.mins || 30, bucket: 'week', weekOf: this.weekStartOff(day), dayAssign: day, cat: this.schoolCatOf(this.state.cats) || null, courseId: c.id, assignmentId: a.id, stepId: it.id, planned: true };
+    return { id: id, title: this.coursePrefix(c) + ': ' + (it.text || 'Step'), workDesc: it.text || '', pri: 'B', mins: it.mins || 30, bucket: 'week', weekOf: this.weekStartOff(day), dayAssign: day, cat: this.schoolCatOf(this.state.cats) || null, courseId: c.id, assignmentId: a.id, stepId: it.id, planned: true };
   }
   asProposal(c, a) {
     const stepsLeft = this.asOpenSteps(c, a);
@@ -6737,6 +6737,10 @@ class Component extends DCLogic {
     patch.nextId = Math.max(typeof r.nextId === 'number' ? r.nextId : 100, 100);
     if (!r.catsKnown && !(r.cats && r.cats.length)) patch.cats = this.defaultCats();
     patch.courses = (patch.courses || []).map(c => this.migrateCourse(c));
+    if (patch.tasks) { const cm = {}; (patch.courses || []).forEach(c => { cm[c.id] = c; });
+      patch.tasks = patch.tasks.map(t => { if (!t.assignmentId || !cm[t.courseId]) return t; const c = cm[t.courseId], a = (c.assignments || []).find(x => x.id === t.assignmentId); if (!a) return t;
+        const d = t.workDesc !== undefined ? t.workDesc : (t.stepId ? String(t.title || '').split(' · ').slice(1).join(' · ') : '');
+        const nt = this.workTitle(c, a, d); return nt !== t.title ? Object.assign({}, t, { title: nt, workDesc: d }) : t; }); }
     if (patch.tasks) patch.tasks = patch.tasks.map(t => { const ti = String(t.title || ''), k = ti.lastIndexOf(' · '); if (k < 0) return t; const L = ti.slice(0, k), Rt = ti.slice(k + 3).trim(); return Rt && L.toLowerCase().slice(-Rt.length) === Rt.toLowerCase() ? Object.assign({}, t, { title: L }) : t; });
     if (patch.tasks && patch.groups) patch.tasks = patch.tasks.map(t => { const g = t.groupId && patch.groups[t.groupId]; return g && g.title && /^Slice \d+ of \d+$/.test(t.title || '') ? Object.assign({}, t, { title: g.title + ' ' + t.title }) : t; });
     this.foldCourseCats(patch);
@@ -8274,6 +8278,14 @@ class Component extends DCLogic {
       hasPlace: false,
       placeLabel: s.view === 'week' ? 'Pick a day' : (sc ? 'Move on calendar' : 'Put on calendar'),
       place: () => thenDo(() => this.setState({ sel: { kind: 'task', id: t.id }, editing: null, catMenu: null })),
+      ...(() => {
+        const c = t.courseId && s.settings.schoolOn ? (s.courses || []).find(x => x.id === t.courseId) : null;
+        if (!c) return { hasFrom: false, fromCourse: '', fromItem: '', fromSep: false, goFrom: () => {} };
+        const a = t.assignmentId ? (c.assignments || []).find(x => x.id === t.assignmentId) : null;
+        const isPlan = !a && t.parts && t.parts.length;
+        return { hasFrom: true, fromCourse: (c.title || 'Course'), fromSep: !!(a || isPlan), fromItem: a ? (a.title || 'Assignment') : (isPlan ? 'Study materials' : ''),
+          goFrom: () => this.setState({ view: 'school', selCourse: c.id, schoolNew: null, editing: null, editDraft: null, courseTab: a ? 'as' : (isPlan ? 'res' : 'ov'), asOpen: a ? a.id : this.state.asOpen, asPreview: null, mobilePage: (this.state.vw || 1194) < 900 ? 'right' : this.state.mobilePage }) };
+      })(),
       whenDayId: 'wd-' + t.id, whenTimeId: 'wt-' + t.id,
       whenWeekNote: (() => { const d = sc ? sc.day : dv.day; if (typeof d !== 'number') return ''; const w = Math.max(this.weekStartOff(d), this.weekStartOff(0)), w0 = this.weekStartOff(0); if (w === w0) return ''; if (w === w0 + 7) return 'On next week\'s list'; const dt = this.dateFor(w); return 'On the list for the week of ' + this.MONTHS[dt.getMonth()] + ' ' + dt.getDate(); })(),
       hasWeekNote: (() => { const d = sc ? sc.day : dv.day; return typeof d === 'number' && Math.max(this.weekStartOff(d), this.weekStartOff(0)) !== this.weekStartOff(0); })(),
@@ -11801,6 +11813,7 @@ class Component extends DCLogic {
                       onDate: (e) => { const v = e.target.value; if (v) this.asWorkSet(t.id, { day: this.offFromISO(v) }); },
                       onTime: (e) => { const v = e.target.value; this.asWorkSet(t.id, { start: v === '' ? null : parseInt(v, 10) }); },
                       onMins: (e) => { const v = parseInt(e.target.value, 10) || 30; this.asWorkSet(t.id, { mins: v }); },
+                      openTask: () => { this.setState({ view: 'desk' }); this.openTaskEdit(t.id); },
                       remove: () => this.asWorkRemove([t.id]) };
                   });
                 })(),
