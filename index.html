@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 2:43 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 2:44 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1302,7 +1302,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
 <div style="font-size: calc(12px * {{fsK}}); letter-spacing: 0.14em; text-transform: uppercase; color: #6B6358; font-weight: 700">Intentions</div>
 <h1 style="margin: 0; font-family: {{TK.fHead}}; font-weight: 600; font-size: calc(32px * {{fsK}}); line-height: 1.1; color: {{TK.t6E2F43}}">Who I'm becoming</h1>
-<p style="margin: 0; font-size: calc(14px * {{fsK}}); color: #6B6358">Habits to build, habits to put down, and the places I'm headed.</p>
+<p style="margin: 0; font-size: calc(14px * {{fsK}}); color: #6B6358">{{iWeekLine}}</p>
 </div>
 <button onClick="{{iToggleNew}}" aria-expanded="{{iNewOpenA}}" aria-label="New intention" title="New intention" style="width: 44px; height: 44px; flex: none; border: 0; border-radius: 22px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
@@ -1320,48 +1320,20 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-if>
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; padding-right: 4px; display: flex; flex-direction: column; gap: 24px">
-<button onClick="{{iOpenGlance}}" aria-pressed="{{iGlancePressed}}" style="flex: none; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 4px 10px; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; background: {{iGlanceSel}}; text-align: left; color: {{TK.t6E2F43}}">
-<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>
-<span style="flex: 1; display: flex; flex-direction: column">
-<span style="font-family: {{TK.fHead}}; font-size: calc(18px * {{fsK}}); font-weight: 600">At a glance</span>
-<span style="font-size: calc(12px * {{fsK}}); color: #8A7A7E">How all of it is going, in one place</span>
-</span>
-<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="stroke: {{TK.tA0526A}}"><path d="M9 5l7 7-7 7"></path></svg>
-</button>
 <sc-for list="{{iGroups}}" as="ig" hint-placeholder-count="3">
 <div style="display: flex; flex-direction: column; gap: 2px">
-<div style="display: flex; align-items: center; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px; margin-bottom: 4px">
-<span aria-hidden="true" style="width: 26px; height: 26px; flex: none; border-radius: 13px; background: {{TK.tFBEDEE}}; display: flex; align-items: center; justify-content: center">
-<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: {{TK.t6E2F43}}"><path d="{{ig.icon}}"></path></svg>
-</span>
-<span style="font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">{{ig.name}}</span>
-<span style="margin-left: auto; font-size: calc(12px * {{fsK}}); color: #8A7A7E">{{ig.hint}}</span>
-</div>
+<div style="display: flex; align-items: baseline; gap: 8px; padding: 0 4px 4px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">{{ig.name}}</span><span style="font-size: calc(11px * {{fsK}}); color: #9A8F7C">{{ig.count}}</span></div>
 <sc-for list="{{ig.cards}}" as="ic" hint-placeholder-count="1">
-<div style="display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #EFE7D6; background: {{ic.bg}}; border-radius: 8px">
-<button onClick="{{ic.select}}" aria-pressed="{{ic.pressed}}" style="flex: 1; min-width: 0; min-height: 44px; display: flex; align-items: center; gap: 10px; border: 0; background: transparent; padding: 4px 8px 4px 36px; text-align: left; color: #2B2722; opacity: {{ic.op}}">
-<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
-<span style="display: flex; align-items: center; gap: 6px; min-width: 0">
-<span style="font-size: calc(14.5px * {{fsK}}); font-weight: {{ic.fw}}; color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ic.title}}</span>
-<sc-if value="{{ic.hasTag}}" hint-placeholder-val="{{ false }}">
-<span style="flex: none; font-size: calc(10px * {{fsK}}); font-weight: 700; border-radius: 8px; padding: 1px 6px; background: #F1EBDD; color: #5E5546">{{ic.tag}}</span>
-</sc-if>
-</span>
+<div draggable="true" onDragStart="{{ic.dragStart}}" onDragEnd="{{ic.dragEnd}}" onDragOver="{{ic.over}}" onDrop="{{ic.drop}}" style="flex: none; display: flex; align-items: stretch; gap: 2px; border-radius: 10px; box-shadow: {{ic.dropShadow}}">
+<span aria-hidden="true" title="Drag to reorder" style="width: 14px; flex: none; align-self: stretch; display: flex; align-items: center; justify-content: center; color: {{TK.tC9849A}}; cursor: grab"><svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg></span>
+<button onClick="{{ic.select}}" aria-current="{{ic.current}}" style="opacity: {{ic.op}}; flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 6px 10px; border: 1px solid {{ic.rowBorder}}; border-radius: 10px; background: {{ic.rowBg}}; text-align: left; color: #2B2722">
+<span aria-hidden="true" style="width: 34px; height: 34px; flex: none; border-radius: 17px; background: {{TK.tFBEDEE}}; color: {{TK.t6E2F43}}; display: flex; align-items: center; justify-content: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{ic.icon}}"></path></svg></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="display: flex; align-items: center; gap: 6px; min-width: 0"><span style="font-size: calc(15px * {{fsK}}); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ic.title}}</span><sc-if value="{{ic.hasTag}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: calc(11px * {{fsK}}); color: #7A7064">· {{ic.tag}}</span></sc-if></span>
 <span style="font-size: calc(12px * {{fsK}}); color: #7A7064; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ic.headline}}</span>
+<sc-if value="{{ic.hasWeek}}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="display: flex; gap: 3px; margin-top: 1px"><sc-for list="{{ic.week}}" as="wd" hint-placeholder-count="7"><span title="{{wd.tip}}" style="flex: 1; height: 7px; box-sizing: border-box; border-radius: 2px; border: {{wd.bd}}; background: {{wd.bg}}; opacity: {{wd.op}}"></span></sc-for></span></sc-if>
+<sc-if value="{{ic.hasBar2}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="height: 4px; border-radius: 2px; background: #EFE7D6; overflow: hidden; margin-top: 2px"><span style="display: block; height: 100%; width: {{ic.barPct}}%; background: {{ic.color}}"></span></span></sc-if>
 </span>
-<sc-if value="{{ic.hasCells}}" hint-placeholder-val="{{ true }}">
-<span aria-hidden="true" style="flex: none; width: 84px; display: flex; gap: 2px">
-<sc-for list="{{ic.cells}}" as="cl" hint-placeholder-count="14">
-<span style="flex: 1; height: 12px; border-radius: 2px; background: {{cl.bg}}; opacity: {{cl.op}}"></span>
-</sc-for>
-</span>
-</sc-if>
-<sc-if value="{{ic.hasBar}}" hint-placeholder-val="{{ false }}">
-<span aria-hidden="true" style="flex: none; width: 84px; height: 6px; border-radius: 3px; background: #EFE7D6; overflow: hidden; display: flex"><span style="width: {{ic.pct}}%; background: {{TK.tA0526A}}"></span></span>
-</sc-if>
-</button>
-<button onClick="{{ic.askRemove}}" aria-label="Delete {{ic.title}}" title="Delete" style="width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: transparent; color: #B39B8F; display: flex; align-items: center; justify-content: center; padding: 0">
-<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg>
 </button>
 </div>
 <sc-if value="{{ic.asking}}" hint-placeholder-val="{{ false }}">
@@ -9949,7 +9921,7 @@ class Component extends DCLogic {
       someday: { label: 'Someday', bg: '#E6EEF5', fg: '#1F3B5C' },
       done: { label: 'Done!', bg: '#FFF6C9', fg: '#5A4708' }
     };
-    const isGlance = s.selGoal === '__glance';
+    const isGlance = false;
     const selG = isGlance ? null : (goals.find(g => g.id === s.selGoal) || goals.find(g => g.status === 'active') || goals[0] || null);
     const cardFor = (g) => {
       const gi = goalInfo(g);
@@ -10134,7 +10106,7 @@ class Component extends DCLogic {
     const dayName = (d) => this.MONTHS[this.dateFor(d).getMonth()] + ' ' + this.dateFor(d).getDate();
     const headlineOf = (g) => {
       const k = kindOf(g);
-      if (k === 'build') { const b = buildStats(g); return b.hit + ' of the last 14 days at ' + kShort(b.tgt) + ' · today ' + kShort(b.today); }
+      if (k === 'build') { const b = buildStats(g); let wk = 0; for (let d = this.weekStartOff(0); d <= 0; d++) if (buildVal(g, d) >= b.mn) wk++; return wk + ' of 7 days this week · today ' + kShort(b.today) + ' of ' + kShort(b.tgt) + (g.unit ? ' ' + g.unit : ''); }
       if (k === 'break') {
         const b = brkStats(g);
         const parts = [];
@@ -10143,7 +10115,7 @@ class Component extends DCLogic {
         return parts.join(' · ');
       }
       if (k === 'track') { const v = this.trkSum(g, 0); return 'Today ' + this.trkTotalTxt(g, v); }
-      if (g.measure === 'number') { const n = numStats(g); return kShort(Math.abs(g.start - n.cur)) + ' ' + g.unit + ' down · ' + kShort(n.left) + ' to go'; }
+      if (g.measure === 'number') { const n = numStats(g); return kShort(Math.abs(n.left)) + ' ' + (g.unit || '') + ' to go' + (typeof g.target === 'number' ? ' · by ' + this.MONTHS[this.dateFor(g.target).getMonth()] + ' ' + this.dateFor(g.target).getDate() : ''); }
       const gi = goalInfo(g);
       return gi.meta;
     };
@@ -10165,6 +10137,16 @@ class Component extends DCLogic {
       const gi = k === 'reach' && !isNum ? goalInfo(g) : null;
       return {
         title: g.title || 'Untitled', headline: headlineOf(g), color: col, icon: KIND[k].icon, fw: on ? 600 : 500,
+        rowBg: on ? this.TK.tFBEDEE : 'transparent', rowBorder: on ? this.TK.tE2B9C4 : 'transparent', current: on ? 'true' : 'false',
+        hasWeek: k === 'build' || k === 'break',
+        week: (k === 'build' || k === 'break') ? (() => { const w0 = this.weekStartOff(0), mn = Math.max(1, g.minimum || 1), out = []; for (let d = w0; d < w0 + 7; d++) { const fut = d > 0; const good = !fut && (k === 'build' ? buildVal(g, d) >= mn : !brkVal(g, d)); const part = !fut && k === 'build' && !good && buildVal(g, d) > 0; out.push({ bg: fut ? 'transparent' : (good ? col : (part ? col : '#E8DFCC')), op: part ? 0.35 : 1, bd: fut ? '1px solid #E8DFCC' : '1px solid transparent', tip: this.DSHORT[this.dowFor(d)] }); } return out; })() : [],
+        barPct: k === 'track' ? (() => { const gl = +g.daily || 0; return gl ? Math.min(100, Math.round(this.trkSum(g, 0) / gl * 100)) : 0; })() : (isNum ? numStats(g).pct : (gi ? gi.pct : 0)),
+        hasBar2: k === 'track' ? !!(+g.daily) : k === 'reach',
+        dragStart: (e) => { this.goalDrag = g.id; try { e.dataTransfer.setData('text/plain', g.title || ''); } catch (er) {} },
+        dragEnd: () => { this.goalDrag = null; if (this.state.dropKey) this.setState({ dropKey: null }); },
+        over: (e) => { if (!this.goalDrag) return; e.preventDefault(); if (this.state.dropKey !== 'gl:' + g.id) this.setState({ dropKey: 'gl:' + g.id }); },
+        drop: (e) => { const id = this.goalDrag; this.goalDrag = null; if (!id) return; e.preventDefault(); if (id === g.id) { this.setState({ dropKey: null }); return; } const arr = this.state.goals.slice(); const from = arr.findIndex(x => x.id === id); const x = arr.splice(from, 1)[0]; const to = arr.findIndex(y => y.id === g.id); arr.splice(from <= to ? to : to + 1, 0, x); this.setState({ goals: arr, dropKey: null }); },
+        dropShadow: s.dropKey === 'gl:' + g.id ? 'inset 0 3px 0 ' + this.TK.tC9849A : 'none',
         asking: s.gDelAsk === g.id, askTxt: 'Remove “' + (g.title || 'Untitled') + '” and all its history? Its tasks stay on your lists.',
         keep: () => { clearTimeout(this.gDelT); this.setState({ gDelAsk: null }); },
         askRemove: () => { clearTimeout(this.gDelT); this.setState({ gDelAsk: g.id }); this.gDelT = setTimeout(() => this.setState({ gDelAsk: null }), 12000); },
@@ -10186,10 +10168,10 @@ class Component extends DCLogic {
     };
     const iGroups = ['build', 'break', 'track', 'reach'].map(k => ({
       name: KIND[k].group, icon: KIND[k].icon, hint: KIND[k].hint,
-      cards: goals.filter(g => kindOf(g) === k && g.status === 'active').map(iCard)
+      cards: goals.filter(g => kindOf(g) === k && g.status === 'active').map(iCard), count: String(goals.filter(g => kindOf(g) === k && g.status === 'active').length)
     })).filter(x => x.cards.length);
     const restI = goals.filter(g => g.status !== 'active');
-    if (restI.length) iGroups.push({ name: 'Someday, paused & done', icon: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 7v5l3 2', hint: '', cards: restI.map(iCard) });
+    if (restI.length) iGroups.push({ name: 'Someday, paused & done', icon: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 7v5l3 2', hint: '', count: String(restI.length), cards: restI.map(iCard) });
     const newI = (k) => {
       const n3 = this.state.nextId;
       const cols = this.COLOR_ORDER;
@@ -10329,6 +10311,7 @@ class Component extends DCLogic {
       iOpenGlance: () => this.setState({ selGoal: '__glance', mobilePage: (s.vw || 1194) < 900 ? 'right' : s.mobilePage }),
       iGlanceWeek: dayName(ws0) + ' – ' + dayName(ws0 + 6),
       iGlanceWins: 'This week so far: ' + winsBits.join(' · '),
+      iWeekLine: goals.length ? 'This week: ' + winsBits.join(' · ') : 'Habits to build, habits to put down, and the places I\'m headed.',
       iGlanceHabits: glanceRows, iGlanceHasHabits: glanceRows.length > 0,
       iGlanceFinish: finishRows, iGlanceHasFinish: finishRows.length > 0,
       iViewOpen: !!iv && s.view === 'goals', iViewName: iv ? iv.name : '', iViewSrc: iv ? (iv.data || '') : '', iViewText: iv ? (iv.text || '') : '',
