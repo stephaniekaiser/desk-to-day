@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 1:48 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 1:51 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -840,7 +840,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-if>
 <sc-if value="{{dtGrowEmpty}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Nothing to grow on this day yet. Add a Build, Break or Track intention in Grow.</p></sc-if>
-<button onClick="{{dtOpenGrow}}" style="align-self: flex-start; height: 28px; border: 0; background: transparent; padding: 0 2px; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">Open Grow</button>
 </div>
 </sc-if>
 <sc-if value="{{dtSchool}}" hint-placeholder-val="{{ false }}">
@@ -890,7 +889,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </sc-for>
 <sc-if value="{{dtNoSchool}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">No study time on this day.</p></sc-if>
-<button onClick="{{dtOpenSchool}}" style="align-self: flex-start; height: 30px; border: 0; background: transparent; padding: 0 2px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">Open School</button>
 </div>
 </sc-if>
 <sc-if value="{{dtMeals}}" hint-placeholder-val="{{ false }}">
@@ -911,7 +909,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-if>
 </div>
 </sc-for>
-<button onClick="{{dtOpenMeals}}" style="align-self: flex-start; height: 30px; border: 0; background: transparent; padding: 0 2px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}; margin-top: 8px">Open Meals</button>
 </div>
 </sc-if>
 <sc-if value="{{dtJournal}}" hint-placeholder-val="{{ false }}">
@@ -928,7 +925,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <textarea id="j-daytab" value="{{jText}}" onChange="{{jOnText}}" rows="9" placeholder="A few words is plenty. Tap the mic on your keyboard to talk instead." style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 10px 12px; font: inherit; font-size: calc(15px * {{fsK}}); line-height: 1.5; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
 <div style="display: flex; align-items: center; gap: 8px">
 <span style="flex: 1; min-width: 0; font-size: calc(12px * {{fsK}}); color: #8A7A7E">{{jFactsLine}}</span>
-<button onClick="{{jGoTab}}" style="flex: none; height: 28px; border: 0; background: transparent; padding: 0; color: {{TK.tA0526A}}; font-size: calc(13px * {{fsK}}); font-weight: 700">Open journal</button>
 </div>
 </div>
 </sc-if>
@@ -1087,7 +1083,6 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <textarea id="j-inline" value="{{jText}}" onChange="{{jOnText}}" rows="3" placeholder="A few words is plenty. Tap the mic on your keyboard to talk instead." style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px solid {{TK.tEBC3CD}}; border-radius: 8px; padding: 8px 10px; font: inherit; font-size: calc(14px * {{fsK}}); line-height: 1.45; color: #2B2722; background: #FFFFFF; resize: vertical"></textarea>
 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 2px">
 <span style="flex: 1; min-width: 0; font-size: calc(11.5px * {{fsK}}); color: #8A7A7E; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{jFactsLine}}</span>
-<button onClick="{{jGoTab}}" style="flex: none; height: 26px; border: 0; background: transparent; padding: 0; color: {{TK.tA0526A}}; font-size: calc(12px * {{fsK}}); font-weight: 600">Open journal</button>
 <button onClick="{{jToggle}}" style="flex: none; height: 28px; padding: 0 12px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12px * {{fsK}}); font-weight: 700">Done</button>
 </div>
 </sc-if>
