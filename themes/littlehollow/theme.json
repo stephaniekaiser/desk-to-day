@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "littlehollow",
-  "version": 20,
+  "version": 21,
   "kind": "storybook",
   "updated": "2026-11-27",
   "notes": [
@@ -1269,17 +1269,17 @@
       "id": "basket",
       "kind": "pileMode",
       "label": "The basket",
-      "default": "keep",
+      "default": "live",
       "choices": [
-        {
-          "v": "keep",
-          "l": "Keeps what you've gathered",
-          "hint": "Adding tasks never takes anything out. Unchecking a task does."
-        },
         {
           "v": "live",
           "l": "Shows how much of the day is done",
-          "hint": "Adding tasks makes room, so the basket always matches what's left."
+          "hint": "Adding tasks makes room, so the basket always matches what's left to do."
+        },
+        {
+          "v": "keep",
+          "l": "Keeps what you've gathered",
+          "hint": "Adding tasks never takes anything out. Unchecking a task still does."
         }
       ]
     }

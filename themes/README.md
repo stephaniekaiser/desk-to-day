@@ -22,7 +22,7 @@ packages.
 | `scene.sets` | The place for a time of year: `months`, `perch`, `under` (strips), `extras` |
 | `scene.casts` | Animal friends that rotate by day: `over` pieces. A piece with `holds: {x,y}` sits in the tree holding the season's item and drops it into the basket on a check-off; with no holder, the item drifts down from the branch. `flutter: true` gives a ground friend a tiny wing flutter as the item lands |
 | `sets[].item` | The season's item that lands in the basket (`src`, `w`, `h`); `driftY` is where it lets go of the branch on quiet days |
-| `sets[].pile` | The weekly basket: `anchor: underPerch` puts it under the branch tip (`dx` nudges it), `states` pick the art by `pct`: how much of the day's Must do and Should do is finished (1 = the first thing done). It starts fresh each day; whether adding tasks can lower it is the theme's `pileMode` option (below) |
+| `sets[].pile` | The daily basket: `anchor: underPerch` puts it under the branch tip (`dx` nudges it), `states` pick the art by `pct`. The day's own Must do + Should do fill it to 67 ("full"); once they're all done, that day's Could dos and habit blocks top it up to 100. A day with no Must/Should uses its Could dos for the whole scale. 1 = the first thing done. Starts fresh each day; whether adding tasks can lower it is the theme's `pileMode` option (below) |
 | `scene.quote`, `quoteClear`, `quoteY` | Where the quote sits |
 
 Scene piece anchors: `spread` (top strip across both pages), `spreadBottom` (repeating ground strip),
@@ -42,4 +42,4 @@ Scene piece anchors: `spread` (top strip across both pages), `spreadBottom` (rep
 `anchor: pageR` stands a piece on the grass at the page's right edge (`x` = gap from the edge, `tuck` = how much the basket may tuck under it); the basket moves left to make room.
 
 **Theme options:** `options: [{id, kind, label, default, choices: [{v, l, hint}]}]` gives a theme its own small choices. They show in Settings → Look and feel, under the theme picker, only while that theme is in use, and each theme remembers its own picks (`settings.themeOpts[<theme id>][<option id>]`). The planner knows what to do by `kind`:
-- `pileMode`: how the basket fills. `keep` = keeps what you've gathered (adding tasks never takes anything out; unchecking does). `live` = always shows how much of the day's Must do and Should do is done, so adding tasks makes room.
+- `pileMode`: how the basket fills. `live` (Little Hollow's default) = always shows how much of the day is done, so adding tasks makes room. `keep` = keeps what you've gathered (adding tasks never takes anything out; unchecking does).
