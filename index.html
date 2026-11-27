@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 8:04 AM';</script>
+<script>window.__plannerBuild = 'Nov 27, 10:50 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3035,9 +3035,11 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <sc-if value="{{scClsNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174; padding: 4px 2px">{{scClsEmpty}}</span></sc-if>
 <sc-for list="{{scClsRows}}" as="cr" hint-placeholder-count="2">
 <div style="display: flex; align-items: center; gap: 10px; min-height: calc(36px * {{rowK}}); border-bottom: 1px solid {{TK.tF6EDEF}}; padding: 0 2px">
+<button onClick="{{cr.open}}" title="Open on the Classes tab" style="flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; align-self: stretch; border: 0; background: transparent; padding: 0; text-align: left; font: inherit">
 <span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{cr.title}}</span>
 <span style="flex: none; font-size: calc(12px * {{fsK}}); color: #7A7064">{{cr.len}}</span>
 <span style="flex: none; min-width: 96px; text-align: right; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #6B6358">{{cr.when}}</span>
+</button>
 <sc-if value="{{cr.hasLink}}" hint-placeholder-val="{{ false }}"><a href="{{cr.href}}" target="_blank" rel="noopener noreferrer" aria-label="Join {{cr.title}}" title="Open the class link" style="flex: none; height: 26px; padding: 0 10px; border-radius: 13px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12px * {{fsK}}); font-weight: 700; display: flex; align-items: center; text-decoration: none">Join</a></sc-if>
 </div>
 </sc-for>
@@ -3047,7 +3049,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <sc-if value="{{scDueNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174; padding: 4px 2px">Nothing due. Add assignments on the Assignments tab.</span></sc-if>
 <sc-for list="{{scDueRows}}" as="dr" hint-placeholder-count="2">
 <button onClick="{{dr.open}}" title="Open on the Assignments tab" style="display: flex; align-items: center; gap: 10px; min-height: calc(36px * {{rowK}}); border: 0; border-bottom: 1px solid {{TK.tF6EDEF}}; background: transparent; padding: 0 2px; text-align: left; font: inherit">
-<span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: {{dr.fg}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{dr.title}}</span>
+<span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: {{dr.fg}}; text-decoration: {{dr.strike}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{dr.title}}</span>
 <span style="flex: none; font-size: calc(12px * {{fsK}}); font-weight: {{dr.fw}}; color: {{dr.dueFg}}">{{dr.due}}</span>
 </button>
 </sc-for>
@@ -3305,13 +3307,29 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </sc-if>
 </div>
 <span style="font-size: calc(12px * {{fsK}}); color: #8A8174">{{scPlanNote}}</span>
+<sc-if value="{{scHasPlanRows}}" hint-placeholder-val="{{ false }}">
+<div aria-label="Your study blocks" style="display: flex; flex-direction: column; border-top: 1px solid {{TK.tF6EDEF}}; padding-top: 4px">
+<sc-for list="{{scPlanGroups}}" as="pgp" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column">
+<div style="display: flex; align-items: baseline; gap: 8px; padding: 6px 2px 2px"><span style="font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{pgp.label}}</span><span style="font-size: calc(11.5px * {{fsK}}); color: #8A8174">{{pgp.sum}}</span></div>
+<sc-for list="{{pgp.rows}}" as="pr" hint-placeholder-count="3">
+<button onClick="{{pr.open}}" title="Open this study block" style="display: flex; align-items: center; gap: 10px; min-height: calc(32px * {{rowK}}); border: 0; border-bottom: 1px solid {{TK.tF6EDEF}}; background: transparent; padding: 0 2px; text-align: left; font: inherit">
+<span style="flex: 1; min-width: 0; font-size: calc(13px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{pr.label}}</span>
+<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #7A7064">{{pr.len}}</span>
+<span style="flex: none; min-width: 92px; text-align: right; font-size: calc(12px * {{fsK}}); font-weight: 600; color: {{pr.whereFg}}">{{pr.where}}</span>
+</button>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</sc-if>
 </div>
 </sc-if>
 </section>
 </sc-if>
 <sc-if value="{{scTabLinks}}" hint-placeholder-val="{{ false }}">
 <div style="flex: none; display: flex; flex-direction: column; gap: 6px">
-<div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Course links</span></div>
+<div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Course links</span><span style="flex: 1"></span><sc-if value="{{scLinksMany}}" hint-placeholder-val="{{ true }}"><button onClick="{{scLinksAZ}}" title="Sort links by name" style="flex: none; border: 0; background: transparent; padding: 0; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Sort A–Z</button></sc-if></div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <sc-if value="{{scLinksNone}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Keep the course home page, portal, syllabus, videos and other handy links here.</p></sc-if>
 <sc-for list="{{scLinks}}" as="cl2" hint-placeholder-count="2">
@@ -3321,6 +3339,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <label for="{{cl2.urlId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Link address</label>
 <input id="{{cl2.urlId}}" type="url" value="{{cl2.url}}" onChange="{{cl2.onUrl}}" placeholder="Paste the link" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 2 1 180px">
 <span style="display: flex; gap: 2px; flex: none">
+<sc-if value="{{scLinksMany}}" hint-placeholder-val="{{ true }}"><button onClick="{{cl2.up}}" aria-label="Move {{cl2.show}} up" title="Move up" style="width: 28px; height: 32px; flex: none; border: 0; background: transparent; color: {{TK.t6E2F43}}; opacity: {{cl2.upOp}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{cl2.down}}" aria-label="Move {{cl2.show}} down" title="Move down" style="width: 28px; height: 32px; flex: none; border: 0; background: transparent; color: {{TK.t6E2F43}}; opacity: {{cl2.downOp}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></sc-if>
 <sc-if value="{{cl2.hasUrl}}" hint-placeholder-val="{{ true }}"><a href="{{cl2.href}}" target="_blank" rel="noopener" aria-label="Open {{cl2.show}}" title="Open link" style="width: 32px; height: 32px; flex: none; border-radius: 16px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a></sc-if>
 <button onClick="{{cl2.remove}}" aria-label="Remove {{cl2.show}}" title="Remove" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </span>
@@ -3418,7 +3437,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <button onClick="{{scCoAdd}}" style="align-self: flex-start; height: 36px; flex: none; padding: 0 14px 0 10px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; gap: 6px; font-size: calc(13.5px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add class times</button>
 <sc-if value="{{scCoNone}}" hint-placeholder-val="{{ false }}"><p style="margin: 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Live classes, cohort meetings or study groups that happen at a set time. They go on your calendar, and study time you make from materials works around them.</p></sc-if>
 <sc-for list="{{scCoRows}}" as="cs" hint-placeholder-count="1">
-<div style="background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
+<div id="{{cs.cardId}}" style="scroll-margin-top: 8px; box-shadow: {{cs.cardRing}}; transition: box-shadow 0.4s, border-color 0.4s; background: #FFFFFF; border: 1px solid {{cs.cardBd}}; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; align-items: center; gap: 8px">
 <label for="{{cs.nId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Session name</label>
 <input id="{{cs.nId}}" value="{{cs.title}}" onChange="{{cs.onTitle}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 30px; border: 0; border-bottom: 1px solid {{TK.tE2B9C4}}; background: transparent; padding: 0 4px; font: inherit; font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722">
@@ -5345,11 +5364,11 @@ class Component extends DCLogic {
     const sm = this.schedMap();
     const drop = {}, oldByWeek = {};
     s.tasks.forEach(t => {
-      if (t.courseId === cid && t.parts && !t.done && !this.isKeptSession(t, sm)) { drop[t.id] = true; oldByWeek[t.weekOf] = (oldByWeek[t.weekOf] || 0) + 1; }
+      if (t.courseId === cid && t.parts && t.parts.length && !t.done && !this.isKeptSession(t, sm)) { drop[t.id] = true; oldByWeek[t.weekOf] = (oldByWeek[t.weekOf] || 0) + 1; }
     });
     const cov = {};
     s.tasks.forEach(t => {
-      if (t.courseId !== cid || !t.parts || drop[t.id]) return;
+      if (t.courseId !== cid || !t.parts || !t.parts.length || drop[t.id]) return;
       t.parts.forEach(p => { cov[p.itemId] = (cov[p.itemId] || 0) + p.mins; });
     });
     const len = c.sessionMins || 90;
@@ -5412,6 +5431,12 @@ class Component extends DCLogic {
     });
     const lastWs = weeks.length ? weeks[weeks.length - 1].ws : ws0;
     return { c: c, hasFinish: hasFinish, weeks: weeks, drop: drop, oldByWeek: oldByWeek, count: sessions.length, mins: sessions.reduce((a, x) => a + x.mins, 0), late: hasFinish && lastWs > wsF, lastWs: lastWs };
+  }
+  goClass(sid) {
+    clearTimeout(this.coFlashT);
+    this.setState({ courseTab: 'co', coFlash: sid });
+    setTimeout(() => { try { const el = document.getElementById('cocard-' + sid); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} }, 60);
+    this.coFlashT = setTimeout(() => this.setState({ coFlash: null }), 2200);
   }
   planCourse(cid) {
     const plan = this.computePlan(cid);
@@ -6490,7 +6515,7 @@ class Component extends DCLogic {
     if (d.goals) out.goals = d.goals.map(g => { const r = fix(g, ['target', 'startDay']); if (g.logs) r.logs = keys(g.logs); if (g.totals) r.totals = keys(g.totals); if (g.entries) r.entries = g.entries.map(e => Object.assign({}, e, { d: n(e.d) })); if (g.tlog) r.tlog = g.tlog.map(e => Object.assign({}, e, { d: n(e.d) })); return r; });
     if (d.notes) out.notes = d.notes.map(x => fix(x, ['day']));
     if (d.allDay) out.allDay = d.allDay.map(a => fix(a, ['start', 'end']));
-    if (d.courses) out.courses = d.courses.map(c => { const c2 = fix(c, ['finish', 'planStart']); if (Array.isArray(c2.assignments)) c2.assignments = c2.assignments.map(a => fix(a, ['due'])); return c2; });
+    if (d.courses) out.courses = d.courses.map(c => { const c2 = fix(c, ['finish', 'planStart']); if (Array.isArray(c2.assignments)) c2.assignments = c2.assignments.map(a => fix(a, ['due', 'doneDay'])); return c2; });
     if (d.journal) out.journal = d.journal.map(j => fix(j, ['key']));
     if (d.mealPlan) out.mealPlan = keys(d.mealPlan);
     if (d.mealGroc) out.mealGroc = keys(d.mealGroc);
@@ -11245,7 +11270,10 @@ class Component extends DCLogic {
             hasUrl: okUrl(l.url), href: hrefOf(l.url),
             onLabel: (e) => { const v = e.target.value; save(arr => arr.map(x => x.id === l.id ? Object.assign({}, x, { label: v }) : x)); },
             onUrl: (e) => { const v = e.target.value; save(arr => arr.map(x => x.id === l.id ? Object.assign({}, x, { url: v }) : x)); },
-            remove: () => save(arr => arr.filter(x => x.id !== l.id))
+            remove: () => save(arr => arr.filter(x => x.id !== l.id)),
+            up: () => save(arr => { const i = arr.findIndex(x => x.id === l.id); if (i <= 0) return arr; const a2 = arr.slice(); a2.splice(i - 1, 0, a2.splice(i, 1)[0]); return a2; }),
+            down: () => save(arr => { const i = arr.findIndex(x => x.id === l.id); if (i < 0 || i >= arr.length - 1) return arr; const a2 = arr.slice(); a2.splice(i + 1, 0, a2.splice(i, 1)[0]); return a2; }),
+            upOp: ls[0] === l ? 0.3 : 1, downOp: ls[ls.length - 1] === l ? 0.3 : 1
           }));
           const updA = (aid, fn) => updC(sel.id, c => ({ assignments: (c.assignments || []).map(a => a.id === aid ? Object.assign({}, a, fn(a)) : a) }));
           const kinds = this.asKinds();
@@ -11302,6 +11330,7 @@ class Component extends DCLogic {
               return {
                 ...(() => {
                   const dueAs = (sel.assignments || []).filter(a => !a.done).slice().sort((x, y) => (typeof x.due === 'number' ? x.due : 9e9) - (typeof y.due === 'number' ? y.due : 9e9));
+                  const doneAs = (sel.assignments || []).filter(a => a.done).slice().sort((x, y) => (typeof y.doneDay === 'number' ? y.doneDay : (typeof y.due === 'number' ? y.due : -9e9)) - (typeof x.doneDay === 'number' ? x.doneDay : (typeof x.due === 'number' ? x.due : -9e9)));
                   const fmtD = (d) => { const dt = this.dateFor(d); return this.DSHORT[dt.getDay()] + ' ' + this.MONTHS[dt.getMonth()] + ' ' + dt.getDate(); };
                   const nLate = dueAs.filter(a => typeof a.due === 'number' && a.due < 0).length;
                   const A = (s.scAddSess && s.scAddSess.cid === sel.id) ? s.scAddSess : null;
@@ -11316,7 +11345,7 @@ class Component extends DCLogic {
                     const o = exc || {}, st0 = typeof o.start === 'number' ? o.start : ser.start, mn = typeof o.mins === 'number' ? o.mins : ser.mins;
                     if (d === 0 && st0 + (mn || 0) < (new Date().getHours() * 60 + new Date().getMinutes())) return;
                     const dt = this.dateFor(d), u = (ser.link || '').trim();
-                    cls.push({ key: d * 2000 + st0, title: (o.title || ser.title || 'Class').replace(/^(Class|Cohort): /, ''), len: mn ? this.fmtDur(mn) : '',
+                    cls.push({ key: d * 2000 + st0, open: () => this.goClass(ser.id), title: (o.title || ser.title || 'Class').replace(/^(Class|Cohort): /, ''), len: mn ? this.fmtDur(mn) : '',
                       when: (d === 0 ? 'Today' : d === 1 ? 'Tomorrow' : this.DSHORT[dt.getDay()] + ' ' + this.MONTHS[dt.getMonth()] + ' ' + dt.getDate()) + (typeof st0 === 'number' ? ' · ' + this.fmtTime(st0, false) : ''),
                       hasLink: !!u, href: /^https?:\/\//i.test(u) ? u : 'https://' + u });
                   });
@@ -11327,9 +11356,12 @@ class Component extends DCLogic {
                     scGoClassesLbl: cos2.length ? 'Class times' : 'Add class times',
                     scDueRows: dueAs.map(a => { const late = typeof a.due === 'number' && a.due < 0; return { title: a.title || 'Untitled assignment', fg: late ? '#B03A2E' : '#2B2722',
                       due: typeof a.due !== 'number' ? 'No due date' : (late ? 'Was due ' + fmtD(a.due) : (a.due === 0 ? 'Today' : a.due === 1 ? 'Tomorrow' : fmtD(a.due))),
-                      dueFg: late ? '#B03A2E' : '#6B6358', fw: late ? 700 : 600,
-                      open: () => this.setState({ courseTab: 'as', asOpen: a.id, asPreview: null }) }; }),
-                    scDueNone: !dueAs.length,
+                      dueFg: late ? '#B03A2E' : '#6B6358', fw: late ? 700 : 600, strike: 'none',
+                      open: () => this.setState({ courseTab: 'as', asOpen: a.id, asPreview: null }) }; }).concat(doneAs.map(a => ({ title: a.title || 'Untitled assignment', fg: '#9A8F7C', strike: 'line-through',
+                      due: typeof a.doneDay === 'number' ? 'Done ' + (a.doneDay === 0 ? 'today' : a.doneDay === -1 ? 'yesterday' : fmtD(a.doneDay)) : 'Done',
+                      dueFg: '#9A8F7C', fw: 600,
+                      open: () => this.setState({ courseTab: 'as', asOpen: a.id, asPreview: null }) }))),
+                    scDueNone: !dueAs.length && !doneAs.length,
                     scDueSum: dueAs.length ? (nLate ? nLate + ' past due · ' : '') + dueAs.length + ' to do' : '',
                     scAddSessOn: !!A,
                     scAddSessOpen: () => this.setState({ scAddSess: A ? null : { cid: sel.id, day: 0, start: '', mins: 60 } }),
@@ -11371,6 +11403,7 @@ class Component extends DCLogic {
                   const summary = (repeats ? (x.rule === 'biweekly' ? 'Every 2 weeks on ' : 'Every ') + dayNames : this.DAYS[d0.getDay()] + ', ' + this.MONTHS[d0.getMonth()] + ' ' + d0.getDate()) + ' at ' + this.fmtTime(x.start, false) + ' · ' + this.fmtDur(x.mins) + (repeats && typeof x.until === 'number' ? ' · until ' + this.MONTHS[this.dateFor(x.until).getMonth()] + ' ' + this.dateFor(x.until).getDate() : '');
                   const u = (x.link || '').trim();
                   return {
+                    cardId: 'cocard-' + x.id, cardBd: s.coFlash === x.id ? this.TK.t6E2F43 : this.TK.tEBC3CD, cardRing: s.coFlash === x.id ? '0 0 0 2px ' + this.TK.tE2B9C4 : 'none',
                     title: x.title || '', summary: summary, nId: 'con-' + x.id, fId: 'cof-' + x.id, tId: 'cot-' + x.id, lId: 'col-' + x.id, rId: 'cor-' + x.id, uId: 'cou-' + x.id, kId: 'cok-' + x.id,
                     onTitle: (e) => updS(x.id, { title: e.target.value }),
                     yId: 'coy-' + x.id, kindVal: kindOf(x), kindOpts: KINDS.map(k => ({ v: k[0], l: k[1] })),
@@ -11392,7 +11425,8 @@ class Component extends DCLogic {
               };
             })(),
             scLinks: linkVals('c' + sel.id, sel.links || [], (fn) => updC(sel.id, c => ({ links: fn(c.links || []) }))),
-            scLinksNone: !(sel.links || []).length,
+            scLinksNone: !(sel.links || []).length, scLinksMany: (sel.links || []).length > 1,
+            scLinksAZ: () => updC(sel.id, c => ({ links: (c.links || []).slice().sort((a, b) => String(a.label || a.url || '').toLowerCase().localeCompare(String(b.label || b.url || '').toLowerCase())) })),
             scAddLink: () => { const lid = 'lk' + Date.now().toString(36); updC(sel.id, c => ({ links: (c.links || []).concat([{ id: lid, label: '', url: '' }]) })); setTimeout(() => { try { const el = document.getElementById('lkn-c' + sel.id + '-' + lid); if (el) el.focus(); } catch (e) {} }, 60); },
             scDesc: sel.desc || '', scOnDesc: (e) => { const v = e.target.value; updC(sel.id, () => ({ desc: v })); },
             scAddAssign: () => { const n = this.state.nextId; updC(sel.id, c => ({ assignments: (c.assignments || []).concat([{ id: 'as' + n, title: '', kind: 'other', due: null, mins: 0, link: '', notes: '', checklist: [], done: false }]) })); this.setState({ nextId: n + 1, courseTab: 'as', asOpen: 'as' + n }); setTimeout(() => { try { const el = document.getElementById('ast-as' + n); if (el) { el.focus(); el.scrollIntoView({ block: 'nearest' }); } } catch (e) {} }, 60); },
@@ -11419,7 +11453,7 @@ class Component extends DCLogic {
                 mins: a.mins ? this.fmtDur(a.mins) : '', hasMins: !!a.mins,
                 done: a.done ? 'true' : 'false', isDone: !!a.done, strike: a.done ? 'line-through' : 'none', op: a.done ? 0.6 : 1,
                 boxBg: a.done ? this.TK.t6E2F43 : '#FFFFFF',
-                toggleDone: () => updA(a.id, x => ({ done: !x.done })),
+                toggleDone: () => updA(a.id, x => ({ done: !x.done, doneDay: !x.done ? 0 : null })),
                 open: open, openA: open ? 'true' : 'false', chev: open ? 'rotate(90deg)' : 'none',
                 toggle: () => this.setState({ asOpen: this.state.asOpen === a.id ? null : a.id, asPreview: null }),
                 closed: !open,
@@ -11522,9 +11556,22 @@ class Component extends DCLogic {
         },
         ...(() => {
           const sm3 = this.schedMap();
-          const open = s.tasks.filter(t => t.courseId === sel.id && !t.done && t.parts);
+          const open = s.tasks.filter(t => t.courseId === sel.id && !t.done && t.parts && t.parts.length);
           const cal = open.filter(t => sm3[t.id]).length, ask = s.wdAsk === sel.id;
+          const dOf = (t) => sm3[t.id] ? sm3[t.id].day : (typeof t.dayAssign === 'number' ? t.dayAssign : null);
+          const key = (t) => { const d = dOf(t); return d !== null ? d * 2000 + (sm3[t.id] ? sm3[t.id].start : 1500) : this.effWeek(t) * 2000 + 1999; };
+          const pg = [], pgm = {};
+          open.slice().sort((a, b) => key(a) - key(b)).forEach(t => {
+            const d = dOf(t), ws = this.weekStartOff(d !== null ? d : this.effWeek(t)), sc = sm3[t.id];
+            if (!pgm[ws]) { pgm[ws] = { label: this.weekLabel(ws), mins: 0, rows: [] }; pg.push(pgm[ws]); }
+            pgm[ws].mins += t.mins || 0;
+            pgm[ws].rows.push({ label: (t.title || '').replace(/^[^:]*:\s*/, '') || 'Study time', len: this.fmtDur(t.mins),
+              where: d === null ? 'This week' : this.DSHORT[this.dowFor(d)] + ' ' + this.MONTHS[this.dateFor(d).getMonth()] + ' ' + this.dateFor(d).getDate() + (sc ? ' · ' + this.fmtTime(sc.start, false) : ''),
+              whereFg: d !== null && d < 0 ? '#B03A2E' : '#6B6358', open: () => this.openTaskEdit(t.id) });
+          });
+          pg.forEach(g => { g.sum = g.rows.length + (g.rows.length === 1 ? ' block · ' : ' blocks · ') + this.fmtDur(g.mins); });
           return {
+            scPlanGroups: pg, scHasPlanRows: pg.length > 0,
             scCanWithdraw: open.length > 0,
             scWdLabel: ask ? 'Tap again: removes ' + open.length + (open.length === 1 ? ' study block' : ' study blocks') + (cal ? ' (' + cal + ' on your calendar)' : '') : 'Withdraw plan',
             scWdBg: ask ? '#9A4A3A' : 'transparent', scWdFg: ask ? '#FFFFFF' : '#9A4A3A',
@@ -11532,7 +11579,7 @@ class Component extends DCLogic {
               if (this.state.wdAsk !== sel.id) { this.setState({ wdAsk: sel.id }); clearTimeout(this.wdT); this.wdT = setTimeout(() => this.setState({ wdAsk: null }), 5000); return; }
               clearTimeout(this.wdT);
               const st3 = this.state, gone = {};
-              st3.tasks.forEach(t => { if (t.courseId === sel.id && !t.done && t.parts) gone[t.id] = true; });
+              st3.tasks.forEach(t => { if (t.courseId === sel.id && !t.done && t.parts && t.parts.length) gone[t.id] = true; });
               const m = {};
               Object.keys(st3.placedByDay).forEach(k => { m[k] = (st3.placedByDay[k] || []).filter(b => !gone[b.taskId]); });
               this.setState({ tasks: st3.tasks.filter(t => !gone[t.id]), placedByDay: m, wdAsk: null, planPreview: null,
