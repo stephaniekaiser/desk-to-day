@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 1:51 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 2:14 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1360,10 +1360,17 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span aria-hidden="true" style="flex: none; width: 84px; height: 6px; border-radius: 3px; background: #EFE7D6; overflow: hidden; display: flex"><span style="width: {{ic.pct}}%; background: {{TK.tA0526A}}"></span></span>
 </sc-if>
 </button>
-<button onClick="{{ic.remove}}" aria-label="Delete {{ic.title}}" title="Delete" style="width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: transparent; color: #B39B8F; display: flex; align-items: center; justify-content: center; padding: 0">
+<button onClick="{{ic.askRemove}}" aria-label="Delete {{ic.title}}" title="Delete" style="width: 30px; height: 30px; flex: none; border: 0; border-radius: 15px; background: transparent; color: #B39B8F; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg>
 </button>
 </div>
+<sc-if value="{{ic.asking}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #FBEFEA; border-radius: 8px; padding: 8px 10px; margin: 4px 0 6px">
+<span style="flex: 1 1 200px; min-width: 0; font-size: calc(13px * {{fsK}}); color: #7A3208">{{ic.askTxt}}</span>
+<button onClick="{{ic.keep}}" style="height: 30px; padding: 0 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: #2B2722; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Keep it</button>
+<button onClick="{{ic.remove}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: #9A4A3A; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Remove</button>
+</div>
+</sc-if>
 </sc-for>
 
 
@@ -2619,12 +2626,18 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 </div>
 <div style="display: flex; flex-direction: column">
-<sc-for list="{{iTkEntries}}" as="te" hint-placeholder-count="3">
-<div style="display: flex; align-items: center; gap: 8px; min-height: calc(36px * {{rowK}}); border-bottom: 1px solid #EFE7D6; padding: 0 2px">
+<sc-for list="{{iTkGroups}}" as="tg" hint-placeholder-count="2">
+<div onDragOver="{{tg.over}}" onDrop="{{tg.drop}}" style="display: flex; flex-direction: column; margin-bottom: 6px">
+<sc-if value="{{tg.hasName}}" hint-placeholder-val="{{ true }}"><div style="display: flex; align-items: baseline; gap: 8px; padding: 6px 2px 4px; border-bottom: 1px solid {{TK.tE2B9C4}}"><span style="flex: 1; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: #4A443B">{{tg.name}}</span><span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{tg.sub}}</span></div></sc-if>
+<sc-for list="{{tg.rows}}" as="te" hint-placeholder-count="2">
+<div onDragOver="{{te.over}}" onDrop="{{te.drop}}" style="display: flex; align-items: center; gap: 8px; min-height: calc(36px * {{rowK}}); border-bottom: 1px solid #EFE7D6; padding: 0 2px">
+<span draggable="true" onDragStart="{{te.dragStart}}" onDragEnd="{{dragEnd}}" aria-hidden="true" title="Drag to reorder, or onto another group" style="width: 16px; height: 28px; flex: none; display: flex; align-items: center; justify-content: center; color: #B9AF9C; cursor: grab"><svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg></span>
 <sc-if value="{{te.hasTag}}" hint-placeholder-val="{{ true }}"><span style="flex: none; height: 20px; display: inline-flex; align-items: center; padding: 0 8px; border-radius: 10px; background: {{TK.tF6EDEF}}; color: {{TK.t6E2F43}}; font-size: calc(11px * {{fsK}}); font-weight: 700">{{te.tag}}</span></sc-if>
 <span style="flex: 1; min-width: 0; font-size: calc(14px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{te.what}}</span>
 <span style="flex: none; font-size: calc(13.5px * {{fsK}}); font-weight: 700; color: #2B2722">{{te.amt}}</span>
 <button onClick="{{te.remove}}" aria-label="Remove {{te.aria}}" title="Remove" style="width: 28px; height: 28px; flex: none; border: 0; border-radius: 14px; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-for>
 </div>
 </sc-for>
 <sc-if value="{{iTkNoEntries}}" hint-placeholder-val="{{ false }}"><p style="margin: 2px; font-size: calc(13px * {{fsK}}); color: #7A7064">{{iTkEmptyTxt}}</p></sc-if>
@@ -2875,10 +2888,17 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </div>
 <div style="display: flex; align-items: center; gap: 10px">
 <span style="flex: 1"></span>
-<button onClick="{{gDelete}}" aria-label="Delete this intention" title="Delete" style="width: 34px; height: 34px; border: 0; border-radius: 17px; background: transparent; color: #9A4A3A; display: flex; align-items: center; justify-content: center; padding: 0">
+<button onClick="{{gDelAskGo}}" aria-label="Delete this intention" title="Delete" style="width: 34px; height: 34px; border: 0; border-radius: 17px; background: transparent; color: #9A4A3A; display: flex; align-items: center; justify-content: center; padding: 0">
 <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg>
 </button>
 </div>
+<sc-if value="{{gDelAsking}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #FBEFEA; border-radius: 8px; padding: 8px 10px; margin: 4px 0 6px">
+<span style="flex: 1 1 200px; min-width: 0; font-size: calc(13px * {{fsK}}); color: #7A3208">{{gDelAskTxt}}</span>
+<button onClick="{{gDelKeep}}" style="height: 30px; padding: 0 12px; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; color: #2B2722; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Keep it</button>
+<button onClick="{{gDelete}}" style="height: 30px; padding: 0 12px; border: 0; border-radius: 8px; background: #9A4A3A; color: #FFFFFF; font-size: calc(12.5px * {{fsK}}); font-weight: 700">Remove</button>
+</div>
+</sc-if>
 </section>
 </sc-if>
 </div>
@@ -6751,6 +6771,7 @@ class Component extends DCLogic {
     patch.nextId = Math.max(typeof r.nextId === 'number' ? r.nextId : 100, 100);
     if (!r.catsKnown && !(r.cats && r.cats.length)) patch.cats = this.defaultCats();
     patch.courses = (patch.courses || []).map(c => this.migrateCourse(c));
+    if (patch.goals) patch.goals = patch.goals.map(g => g && g.kind === 'track' && g.unit === 'cal' ? Object.assign({}, g, { unit: 'calories' }) : g);
     if (patch.tasks) { const cm = {}; (patch.courses || []).forEach(c => { cm[c.id] = c; });
       patch.tasks = patch.tasks.map(t => { if (!t.assignmentId || !cm[t.courseId]) return t; const c = cm[t.courseId], a = (c.assignments || []).find(x => x.id === t.assignmentId); if (!a) return t;
         const d = t.workDesc !== undefined ? t.workDesc : (t.stepId ? String(t.title || '').split(' · ').slice(1).join(' · ') : '');
@@ -7486,7 +7507,7 @@ class Component extends DCLogic {
     const calLog = tlog((d) => { if (d === -6) return []; const day = []; ['Breakfast', 'Lunch', 'Dinner'].forEach((m, k) => { if (d === 0 && m === 'Dinner') return; const it = pick(menu[m], d, k); day.push({ l: m, w: it[0], v: it[1] }); }); if (d % 2 === 0 || d === -3) { const it = pick(menu.Snack, d, 5); day.push({ l: 'Snack', w: it[0], v: it[1] }); } if (d === -3) day.push({ l: 'Snack', w: 'Birthday cake', v: 450 }); return day; });
     const waterLog = tlog((d) => { if (d === -8) return []; const n = [3, 4, 2, 5, 3, 4, 2, 3, 5, 4, 3, 2][(d + 11) % 12]; const day = [{ l: 'Big bottle', w: '', v: 32 }]; for (let i = 0; i < n - 2; i++) day.push({ l: 'Glass', w: '', v: 8 }); if (d % 3 === 0) day.push({ l: 'Bottle', w: '', v: 16 }); return d === 0 ? day.slice(0, 2) : day; });
     const trackers = [
-      { id: 'gtc', kind: 'track', title: 'Calories', why: 'I want to notice what I eat, not judge it.', photo: null, links: [], files: [], color: 'orange', status: 'active', onDay: false, startDay: -11, trkSet: true, unit: 'cal', daily: 1800, aim: 'atMost', labels: [{ l: 'Breakfast' }, { l: 'Lunch' }, { l: 'Dinner' }, { l: 'Snack' }], tlog: calLog },
+      { id: 'gtc', kind: 'track', title: 'Calories', why: 'I want to notice what I eat, not judge it.', photo: null, links: [], files: [], color: 'orange', status: 'active', onDay: false, startDay: -11, trkSet: true, unit: 'calories', daily: 1800, aim: 'atMost', labels: [{ l: 'Breakfast' }, { l: 'Lunch' }, { l: 'Dinner' }, { l: 'Snack' }], tlog: calLog },
       { id: 'gtw', kind: 'track', title: 'Water', why: 'Fewer headaches when I drink enough.', photo: null, links: [], files: [], color: 'blue', status: 'active', onDay: false, startDay: -11, trkSet: true, unit: 'oz', daily: 64, aim: 'atLeast', labels: [{ l: 'Glass', v: 8 }, { l: 'Bottle', v: 16 }, { l: 'Big bottle', v: 32 }], tlog: waterLog }
     ];
     D.goals = (D.goals || []).filter(g => g.kind !== 'track').concat(trackers);
@@ -9989,14 +10010,18 @@ class Component extends DCLogic {
           title: t.title,
           when: typeof t.doneDay === 'number' ? (t.doneDay === 0 ? 'today' : (t.doneDay === -1 ? 'yesterday' : this.DSHORT[this.dowFor(t.doneDay)] + ' ' + this.dateFor(t.doneDay).getDate())) : ''
         })),
+        gDelAsking: s.gDelAsk === (selG && selG.id), gDelAskTxt: selG ? 'Remove “' + (selG.title || 'Untitled') + '” and all its history? Its tasks stay on your lists.' : '',
+        gDelKeep: () => { clearTimeout(this.gDelT); this.setState({ gDelAsk: null }); },
+        gDelAskGo: () => { clearTimeout(this.gDelT); this.setState({ gDelAsk: selG.id }); this.gDelT = setTimeout(() => this.setState({ gDelAsk: null }), 12000); },
         gDelete: () => {
+          clearTimeout(this.gDelT);
           const restG = this.state.goals.filter(g => g.id !== selG.id);
           const dropH = selG.habitId && !restG.some(x => x.habitId === selG.habitId);
           this.setState({
             habits: dropH ? this.state.habits.filter(h => h.id !== selG.habitId) : this.state.habits,
             goals: restG,
             tasks: this.state.tasks.map(t => t.goalId === selG.id ? Object.assign({}, t, { goalId: null }) : t),
-            selGoal: null
+            selGoal: null, gDelAsk: null
           });
           this.setToast('Intention deleted. Its tasks are still on your lists.');
         }
@@ -10013,10 +10038,10 @@ class Component extends DCLogic {
     const kShort = (v) => v >= 1000 ? (Math.round(v / 100) / 10) + 'k' : String(Math.round(v * 10) / 10);
     const kindOf = (g) => g.kind || 'reach';
     const TRK_ST = {
-      calories: { label: 'Calories', title: 'Calories', unit: 'cal', daily: 1800, aim: 'atMost', labels: [{ l: 'Breakfast' }, { l: 'Lunch' }, { l: 'Dinner' }, { l: 'Snack' }] },
+      calories: { label: 'Calories', title: 'Calories', unit: 'calories', daily: 1800, aim: 'atMost', labels: [{ l: 'Breakfast' }, { l: 'Lunch' }, { l: 'Dinner' }, { l: 'Snack' }] },
       water: { label: 'Water', title: 'Water', unit: 'oz', daily: 64, aim: 'atLeast', labels: [{ l: 'Glass', v: 8 }, { l: 'Bottle', v: 16 }, { l: 'Big bottle', v: 32 }] },
       spending: { label: 'Spending', title: 'Spending', unit: '$', daily: 40, aim: 'atMost', labels: [{ l: 'Groceries' }, { l: 'Gas' }, { l: 'Eating out' }, { l: 'Other' }] },
-      protein: { label: 'Protein', title: 'Protein', unit: 'g', daily: 100, aim: 'atLeast', labels: [{ l: 'Breakfast' }, { l: 'Lunch' }, { l: 'Dinner' }, { l: 'Snack' }] }
+      protein: { label: 'Protein', title: 'Protein', unit: 'grams', daily: 100, aim: 'atLeast', labels: [{ l: 'Breakfast' }, { l: 'Lunch' }, { l: 'Dinner' }, { l: 'Snack' }] }
     };
     const colOf = (g) => ({ swatch: this.TK.tA0526A, a: this.TK.tFBEDEE });
     const buildVal = (g, d) => {
@@ -10091,7 +10116,11 @@ class Component extends DCLogic {
       const gi = k === 'reach' && !isNum ? goalInfo(g) : null;
       return {
         title: g.title || 'Untitled', headline: headlineOf(g), color: col, icon: KIND[k].icon, fw: on ? 600 : 500,
+        asking: s.gDelAsk === g.id, askTxt: 'Remove “' + (g.title || 'Untitled') + '” and all its history? Its tasks stay on your lists.',
+        keep: () => { clearTimeout(this.gDelT); this.setState({ gDelAsk: null }); },
+        askRemove: () => { clearTimeout(this.gDelT); this.setState({ gDelAsk: g.id }); this.gDelT = setTimeout(() => this.setState({ gDelAsk: null }), 12000); },
         remove: () => {
+          clearTimeout(this.gDelT); this.setState({ gDelAsk: null });
           const before = this.state.goals, beforeTasks = this.state.tasks, beforeHabits = this.state.habits;
           const rest = before.filter(x => x.id !== g.id);
           const dropHabit = g.habitId && !rest.some(x => x.habitId === g.habitId);
@@ -10528,7 +10557,7 @@ class Component extends DCLogic {
         Object.assign(iVals, {
           iIsTrack: true,
           iTkShowStart: !(g.tlog || []).length && !g.trkSet,
-          iTkStarters: Object.keys(TRK_ST).map(key => ({ label: TRK_ST[key].label, pick: () => { const o = TRK_ST[key]; upd({ trkSet: true, title: (!g.title || g.title === 'New tracker') ? o.title : g.title, unit: o.unit, daily: o.daily, aim: o.aim, labels: o.labels.map(x => Object.assign({}, x)) }); } }))
+          iTkStarters: Object.keys(TRK_ST).map(key => ({ label: TRK_ST[key].label, pick: () => { const o = TRK_ST[key]; upd({ trkSet: true, title: (!g.title || g.title === 'New tracker') ? o.title : g.title, unit: o.unit, daily: o.daily, aim: o.aim, labels: o.labels.map(x => Object.assign({}, x)) }); this.setState({ iTab: 'details' }); } }))
             .concat([{ label: 'Something else', pick: () => { upd({ trkSet: true }); this.setState({ iTab: 'details' }); } }]),
           iTkDayLbl: dayLbl, iTkPrev: () => setDay(tD - 1), iTkNext: () => setDay(tD + 1), iTkNextDis: tD >= 0, iTkNextOp: tD >= 0 ? 0.35 : 1,
           iTkNotToday: tD !== 0, iTkToday: () => setDay(0),
@@ -10555,8 +10584,29 @@ class Component extends DCLogic {
             addNow();
           },
           iTkAdd: addNow,
-          iTkEntries: ents.map(e => ({ hasTag: !!e.l, tag: e.l || '', what: e.w || (e.l ? '' : 'Entry'), amt: this.trkFmt(g, e.v), aria: (e.w || e.l || 'entry') + ' ' + this.trkFmt(g, e.v),
-            remove: () => this.setState({ goals: this.state.goals.map(x => x.id === g.id ? Object.assign({}, x, { tlog: (x.tlog || []).filter(y => y.id !== e.id) }) : x) }) })),
+          ...(() => {
+            const mv = (eid, beforeId, label) => this.setState({ goals: this.state.goals.map(x => { if (x.id !== g.id) return x;
+              const a = (x.tlog || []).slice(); const fi = a.findIndex(y => y.id === eid); if (fi < 0) return x;
+              const it = Object.assign({}, a.splice(fi, 1)[0], label !== undefined ? { l: label } : {});
+              let ti = beforeId ? a.findIndex(y => y.id === beforeId) : -1;
+              if (ti < 0) { ti = a.length; for (let q = a.length - 1; q >= 0; q--) { if (a[q].d === it.d && (a[q].l || '') === (it.l || '')) { ti = q + 1; break; } } }
+              a.splice(ti, 0, it); return Object.assign({}, x, { tlog: a }); }) });
+            const order = (g.labels || []).filter(lb => typeof lb.v !== 'number' || ents.some(e => e.l === lb.l)).map(lb => lb.l);
+            ents.forEach(e => { const L = e.l || ''; if (L && order.indexOf(L) < 0) order.push(L); });
+            const keys = order.concat(ents.some(e => !e.l) ? [''] : []);
+            const groups = keys.map(L => {
+              const list = ents.filter(e => (e.l || '') === L);
+              return { name: L || ((g.labels || []).length ? 'No label' : ''), hasName: !!L || (g.labels || []).length > 0, sub: list.length ? this.trkFmt(g, list.reduce((q, e) => q + (+e.v || 0), 0)) : '', empty: !list.length,
+                over: (e2) => { if (this.drag && this.drag.kind === 'tlog') e2.preventDefault(); },
+                drop: (e2) => { e2.preventDefault(); const d = this.drag; this.drag = null; if (!d || d.kind !== 'tlog' || d.gid !== g.id) return; mv(d.eid, null, L); },
+                rows: list.map(e => ({ hasTag: false, tag: '', what: e.w || (e.l ? e.l : 'Entry'), amt: this.trkFmt(g, e.v), aria: (e.w || e.l || 'entry') + ' ' + this.trkFmt(g, e.v),
+                  dragStart: (ev) => { this.drag = { kind: 'tlog', gid: g.id, eid: e.id }; try { ev.dataTransfer.setData('text/plain', e.id); } catch (er) {} },
+                  over: (e2) => { if (this.drag && this.drag.kind === 'tlog') e2.preventDefault(); },
+                  drop: (e2) => { e2.preventDefault(); e2.stopPropagation(); const d = this.drag; this.drag = null; if (!d || d.kind !== 'tlog' || d.gid !== g.id || d.eid === e.id) return; mv(d.eid, e.id, e.l || ''); },
+                  remove: () => this.setState({ goals: this.state.goals.map(x => x.id === g.id ? Object.assign({}, x, { tlog: (x.tlog || []).filter(y => y.id !== e.id) }) : x) }) })) };
+            }).filter(gr => !gr.empty);
+            return { iTkGroups: groups };
+          })(),
           iTkNoEntries: !ents.length, iTkEmptyTxt: tD === 0 ? 'Nothing logged today yet.' : 'Nothing logged on this day.',
           iTkRecent: recent, iTkHasRecent: recent.length > 0,
           iTkStats: stats,
