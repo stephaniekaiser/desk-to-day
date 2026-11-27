@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 2:47 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 2:55 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -1335,6 +1335,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-if value="{{ic.hasBar2}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="height: 4px; border-radius: 2px; background: #EFE7D6; overflow: hidden; margin-top: 2px"><span style="display: block; height: 100%; width: {{ic.barPct}}%; background: {{ic.color}}"></span></span></sc-if>
 </span>
 </button>
+<button onClick="{{ic.askRemove}}" aria-label="Remove {{ic.title}}" title="Remove" style="width: 30px; flex: none; align-self: center; height: 30px; border: 0; border-radius: 15px; background: transparent; color: #B39B8F; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"></path></svg></button>
 </div>
 <sc-if value="{{ic.asking}}" hint-placeholder-val="{{ false }}">
 <div role="alert" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: #FBEFEA; border-radius: 8px; padding: 8px 10px; margin: 4px 0 6px">
