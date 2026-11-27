@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 2:32 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 2:43 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2857,16 +2857,16 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <sc-for list="{{iFieldGroups}}" as="fg" hint-placeholder-count="2">
 <div style="flex: none; display: flex; flex-direction: column; gap: 10px; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 12px; padding: 10px 14px 12px">
 <span style="font-size: calc(15px * {{fsK}}); font-weight: 700; color: #2B2722">{{fg.title}}</span>
-<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 10px 18px">
 <sc-for list="{{fg.fields}}" as="fd" hint-placeholder-count="3">
-<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
-<div style="display: flex; align-items: center; gap: 4px"><label for="{{fd.id}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">{{fd.label}}</label><sc-if value="{{fd.hasTip}}" hint-placeholder-val="{{ false }}"><button onClick="{{fd.toggleTip}}" aria-label="What is this?" title="{{fd.tip}}" style="width: 18px; height: 18px; flex: none; border: 1px solid #CFC2A8; border-radius: 9px; background: transparent; color: #8A8174; padding: 0; font-size: 11px; font-weight: 700; font-family: Georgia, serif; font-style: italic; line-height: 1; display: flex; align-items: center; justify-content: center">i</button></sc-if></div>
-<sc-if value="{{fd.tipOpen}}" hint-placeholder-val="{{ false }}"><span role="note" style="font-size: calc(12px * {{fsK}}); line-height: 1.4; color: #4A443B; background: {{TK.tF6EDEF}}; border-radius: 7px; padding: 6px 8px">{{fd.tip}}</span></sc-if>
+<div style="display: flex; flex-direction: column; gap: 4px; max-width: 100%; min-width: 0">
+<div style="display: flex; align-items: center; gap: 4px"><label for="{{fd.id}}" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C; white-space: nowrap">{{fd.label}}</label><sc-if value="{{fd.hasTip}}" hint-placeholder-val="{{ false }}"><button onClick="{{fd.toggleTip}}" aria-label="What is this?" title="{{fd.tip}}" style="width: 18px; height: 18px; flex: none; border: 1px solid #CFC2A8; border-radius: 9px; background: transparent; color: #8A8174; padding: 0; font-size: 11px; font-weight: 700; font-family: Georgia, serif; font-style: italic; line-height: 1; display: flex; align-items: center; justify-content: center">i</button></sc-if></div>
+<sc-if value="{{fd.tipOpen}}" hint-placeholder-val="{{ false }}"><span role="note" style="width: max(100%, 220px); box-sizing: border-box; font-size: calc(12px * {{fsK}}); line-height: 1.4; color: #4A443B; background: {{TK.tF6EDEF}}; border-radius: 7px; padding: 6px 8px">{{fd.tip}}</span></sc-if>
 <sc-if value="{{fd.isInput}}" hint-placeholder-val="{{ true }}">
 <span style="display: flex; align-items: center; gap: 6px; min-width: 0"><input id="{{fd.id}}" type="{{fd.type}}" value="{{fd.value}}" onChange="{{fd.set}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; width: {{fd.inW}}; min-width: 0"><sc-if value="{{fd.hasSuffix}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #6B6358; white-space: nowrap">{{fd.suffix}}</span></sc-if></span>
 </sc-if>
 <sc-if value="{{fd.isSelect}}" hint-placeholder-val="{{ false }}">
-<select id="{{fd.id}}" value="{{fd.value}}" onChange="{{fd.set}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; padding: 0 6px">
+<select id="{{fd.id}}" value="{{fd.value}}" onChange="{{fd.set}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; padding: 0 6px; width: {{fd.inW}}">
 <sc-for list="{{fd.opts}}" as="fo" hint-placeholder-count="3"><option value="{{fo.v}}">{{fo.l}}</option></sc-for>
 </select>
 </sc-if>
@@ -2877,17 +2877,21 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <div style="display: flex; align-items: flex-end; gap: 10px 20px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 4px">
 <span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Status</span>
-<div role="radiogroup" aria-label="Status" style="align-self: flex-start; display: flex; gap: 2px; background: #EFE7D6; border-radius: 9px; padding: 3px">
+<div role="radiogroup" aria-label="Status" style="align-self: flex-start; display: flex; gap: 1px; background: #F3EDE0; border-radius: 7px; padding: 2px">
 <sc-for list="{{gStatusBtns}}" as="sb" hint-placeholder-count="4">
-<button role="radio" aria-checked="{{sb.checked}}" onClick="{{sb.set}}" style="height: 28px; padding: 0 10px; border: 0; border-radius: 7px; background: {{sb.bg}}; color: {{sb.fg}}; font-size: calc(12px * {{fsK}}); font-weight: 700; box-shadow: {{sb.shadow}}; white-space: nowrap">{{sb.label}}</button>
+<button role="radio" aria-checked="{{sb.checked}}" onClick="{{sb.set}}" style="height: 24px; padding: 0 8px; border: 0; border-radius: 5px; background: {{sb.bg}}; color: {{sb.fg}}; font-size: calc(11.5px * {{fsK}}); font-weight: 600; box-shadow: {{sb.shadow}}; white-space: nowrap">{{sb.label}}</button>
 </sc-for>
 </div>
 </div>
 <sc-if value="{{iCanOnDay}}" hint-placeholder-val="{{ true }}">
+<span style="display: flex; align-items: center; gap: 6px; min-height: 34px">
 <button role="checkbox" aria-checked="{{iOnDayA}}" onClick="{{iToggleOnDay}}" style="display: flex; align-items: center; gap: 8px; min-height: 34px; border: 0; background: transparent; padding: 0; text-align: left; font: inherit; cursor: pointer">
 <span aria-hidden="true" style="width: 20px; height: 20px; flex: none; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{iOnDayBox}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
-<span style="display: flex; flex-direction: column"><span style="font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722">Show on my Day page</span><span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064">{{iOnDayHelp}}</span></span>
+<span style="font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722">Show on my Day page</span>
 </button>
+<button onClick="{{iOnDayTipToggle}}" aria-label="What is this?" title="{{iOnDayHelp}}" style="width: 18px; height: 18px; flex: none; border: 1px solid #CFC2A8; border-radius: 9px; background: transparent; color: #8A8174; padding: 0; font-size: 11px; font-weight: 700; font-family: Georgia, serif; font-style: italic; line-height: 1; display: flex; align-items: center; justify-content: center; ">i</button>
+</span>
+<sc-if value="{{iOnDayTipOpen}}" hint-placeholder-val="{{ false }}"><span role="note" style="flex: 1 1 100%; font-size: calc(12px * {{fsK}}); line-height: 1.4; color: #4A443B; background: {{TK.tF6EDEF}}; border-radius: 7px; padding: 6px 8px">{{iOnDayHelp}}</span></sc-if>
 </sc-if>
 </div>
 </sc-if>
@@ -10575,13 +10579,13 @@ class Component extends DCLogic {
           iTodayText: kShort(b.today) + ' of ' + kShort(b.tgt) + ' ' + (g.unit || '') + (b.today >= b.tgt ? '. You did it!' : (b.today >= b.mn ? '. That already counts.' : '')),
           iQuick: [g.quick || 1, (g.quick || 1) * 5].map(q => ({ label: '+' + kShort(q), add: () => this.goalAddHand(g, 0, q) })),
           iFields: [
-            num('short', 'Name on your day page', hb ? hb.title : '', (v) => updHabit({ title: v || 'Habit' }), 'text'),
+            num('short', 'Day page name', hb ? hb.title : '', (v) => updHabit({ title: v || 'Habit' }), 'text'),
             num('daily', 'Daily goal', g.daily, (v) => { const n = Math.max(1, +v || 1); upd({ daily: n }); updHabit({ goal: n }); }),
-            num('min', 'Still counts as showing up', g.minimum, (v) => upd({ minimum: Math.max(0, +v || 0) })),
+            num('min', 'Still counts', g.minimum, (v) => upd({ minimum: Math.max(0, +v || 0) })),
             num('unit', 'Measured in', g.unit, (v) => { upd({ unit: v }); const isMin = /^min/i.test(v || '') || !v; updHabit(Object.assign({ unit: v }, isMin ? { perMin: 1 } : (/^steps?$/i.test(v) && hb && (hb.perMin || 1) === 1 ? { perMin: 100 } : {}))); }, 'text'),
-            num('quick', 'Quick-add amount', g.quick, (v) => upd({ quick: Math.max(1, +v || 1) })),
+            num('quick', 'Quick-add', g.quick, (v) => upd({ quick: Math.max(1, +v || 1) })),
             num('startday', 'Start', toISO(typeof g.startDay === 'number' ? g.startDay : 0), (v) => { if (v) upd({ startDay: fromISO(v) }); }, 'date')
-          ].concat(hb && !/^min/i.test(g.unit || 'minutes') ? [num('permin', (g.unit || 'Units') .replace(/^./, c => c.toUpperCase()) + ' per minute', hb.perMin || 1, (v) => updHabit({ perMin: Math.max(0.1, +v || 1) }))] : []),
+          ].concat(hb && !/^min/i.test(g.unit || 'minutes') ? [num('permin', (g.unit || 'Units').replace(/^./, c => c.toUpperCase()) + '/min', hb.perMin || 1, (v) => updHabit({ perMin: Math.max(0.1, +v || 1) }))] : []),
           iRepOn: !!hb,
           ...(() => {
             if (!hb) return {};
@@ -10730,7 +10734,7 @@ class Component extends DCLogic {
           iTkAria: 'Daily totals for the last 14 days. ' + stats.map(x => x.big + ' ' + x.small).join('. '),
           iFields: [
             num('unit', 'Measured in', g.unit, (v) => upd({ unit: v }), 'text'),
-            num('daily', 'Daily goal (0 = none)', g.daily || 0, (v) => upd({ daily: Math.max(0, +v || 0) })),
+            num('daily', 'Daily goal', g.daily || 0, (v) => upd({ daily: Math.max(0, +v || 0) })),
             sel2('aim', 'The goal means', g.aim || 'atLeast', [['atLeast', 'Reach at least this'], ['atMost', 'Stay at or under this']], (v) => upd({ aim: v })),
             num('labels', 'Quick labels', this.trkLabelsStr(g), (v) => upd({ labels: this.trkParseLabels(v), trkSet: true }), 'text'),
             num('startday', 'Start', toISO(typeof g.startDay === 'number' ? g.startDay : 0), (v) => { if (v) upd({ startDay: fromISO(v) }); }, 'date')
@@ -10834,7 +10838,7 @@ class Component extends DCLogic {
           const id = f.id.replace(/^if-/, ''), gn = GRP[id] || 'Goal & tracking';
           if (!gm[gn]) { gm[gn] = { title: gn, isAbout: gn === 'About', fields: [] }; groups.push(gm[gn]); }
           const narrow = f.isInput && f.type === 'number';
-          gm[gn].fields.push(Object.assign({}, f, { tip: TIP[id] || '', hasTip: !!TIP[id], suffix: SUF[id] && u && u !== '$' ? u : '', hasSuffix: false, inW: narrow ? '120px' : '100%', tipOpen: s.iTipOpen === f.id, toggleTip: () => this.setState({ iTipOpen: this.state.iTipOpen === f.id ? null : f.id }) }));
+          gm[gn].fields.push(Object.assign({}, f, { tip: TIP[id] || '', hasTip: !!TIP[id], suffix: SUF[id] && u && u !== '$' ? u : '', hasSuffix: false, inW: (({ short: '170px', unit: '120px', startday: '150px', by: '150px', labels: '280px', aim: f.isSelect ? '190px' : '96px', measure: '170px', mode: '170px' })[id] || (narrow ? '96px' : '150px')), boxW: ({ short: '170px', unit: '120px', startday: '150px', by: '150px', labels: '280px', aim: f.isSelect ? '190px' : '96px', measure: '170px', mode: '170px' })[id] || (narrow ? '96px' : '150px'), tipOpen: s.iTipOpen === f.id, toggleTip: () => this.setState({ iTipOpen: this.state.iTipOpen === f.id ? null : f.id }) }));
         });
         if (!gm['About']) { gm['About'] = { title: 'About', isAbout: true, fields: [] }; groups.push(gm['About']); }
         const order = ['About', 'Goal & tracking'];
@@ -10842,6 +10846,7 @@ class Component extends DCLogic {
         groups.forEach(gr => { const ui = gr.fields.findIndex(f => f.id === 'if-unit'); if (ui > 0) gr.fields.unshift(gr.fields.splice(ui, 1)[0]); });
         iVals.iFieldGroups = groups;
         const hasNotes = !!String(g.desc || '').trim();
+        iVals.iOnDayTipOpen = s.iTipOpen === 'onday'; iVals.iOnDayTipToggle = () => this.setState({ iTipOpen: this.state.iTipOpen === 'onday' ? null : 'onday' });
         iVals.iOnDayBox = iVals.iOnDayA === 'true' ? this.TK.t6E2F43 : '#FFFFFF';
         iVals.iNotesShow = hasNotes || s.iNotesFor === g.id; iVals.iNotesAdd = !iVals.iNotesShow;
         iVals.iNotesOpenGo = () => { this.setState({ iNotesFor: g.id }); setTimeout(() => { try { const el = document.getElementById('gnotes'); if (el) el.focus(); } catch (e) {} }, 60); };
