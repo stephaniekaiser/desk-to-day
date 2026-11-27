@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 2:14 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 2:16 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -2810,6 +2810,41 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </button>
 </sc-for>
 </section>
+</sc-if>
+
+<sc-if value="{{iLgOn}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="flex: none; display: flex; flex-direction: column; gap: 8px; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 12px; padding: 10px 14px">
+<span style="font-size: calc(15px * {{fsK}}); font-weight: 700; color: #2B2722">{{iLgAddTitle}}</span>
+<div style="display: flex; align-items: flex-end; gap: 8px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 3px"><label for="lg-date" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Day</label><input id="lg-date" type="date" max="{{iLgToday}}" value="{{iLgAddDate}}" onChange="{{iLgOnDate}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722"></div>
+<sc-if value="{{iLgHasLabels}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 3px"><label for="lg-label" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Label</label><select id="lg-label" value="{{iLgLabelVal}}" onChange="{{iLgOnLabel}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; padding: 0 6px"><sc-for list="{{iLgLabelOpts}}" as="lo" hint-placeholder-count="3"><option value="{{lo.v}}">{{lo.l}}</option></sc-for></select></div></sc-if>
+<sc-if value="{{iLgIsTrack}}" hint-placeholder-val="{{ false }}"><div style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 3px"><label for="lg-what" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">What (optional)</label><input id="lg-what" value="{{iLgWhat}}" onInput="{{iLgOnWhat}}" onChange="{{iLgOnWhat}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722"></div></sc-if>
+<div style="display: flex; flex-direction: column; gap: 3px"><label for="lg-amt" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Amount</label><span style="display: flex; align-items: center; gap: 6px"><input id="lg-amt" type="number" inputmode="decimal" min="0" value="{{iLgAmt}}" onInput="{{iLgOnAmt}}" onChange="{{iLgOnAmt}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; width: 100px"><span style="font-size: calc(12.5px * {{fsK}}); color: #6B6358">{{iLgUnit}}</span></span></div>
+<button onClick="{{iLgAddBtn}}" style="height: 32px; flex: none; padding: 0 14px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13px * {{fsK}}); font-weight: 700">Add</button>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<span style="font-size: calc(15px * {{fsK}}); font-weight: 700; color: #2B2722">Every entry</span><span style="flex: 1"></span>
+<div role="radiogroup" aria-label="How far back" style="display: flex; gap: 2px; background: #EFE7D6; border-radius: 8px; padding: 2px">
+<sc-for list="{{iLgRanges}}" as="rg" hint-placeholder-count="3"><button role="radio" aria-checked="{{rg.checked}}" onClick="{{rg.set}}" style="height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: {{rg.bg}}; color: {{rg.fg}}; box-shadow: {{rg.shadow}}; font-size: calc(12px * {{fsK}}); font-weight: 700">{{rg.label}}</button></sc-for>
+</div>
+</div>
+<sc-if value="{{iLgNone}}" hint-placeholder-val="{{ false }}"><p style="margin: 0 2px; font-size: calc(13.5px * {{fsK}}); color: #7A7064">{{iLgNoneTxt}}</p></sc-if>
+<sc-for list="{{iLgDays}}" as="ld" hint-placeholder-count="3">
+<section style="flex: none; display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 12px; padding: 8px 14px 4px">
+<div style="display: flex; align-items: baseline; gap: 8px; padding-bottom: 4px"><span style="flex: 1; font-size: calc(13.5px * {{fsK}}); font-weight: 700; color: #2B2722">{{ld.label}}</span><span style="font-size: calc(12.5px * {{fsK}}); color: #6B6358">{{ld.total}}</span></div>
+<sc-for list="{{ld.rows}}" as="lr3" hint-placeholder-count="2">
+<div style="display: flex; align-items: center; gap: 8px; min-height: calc(36px * {{rowK}}); border-top: 1px solid #F1EBDD">
+<span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{lr3.what}}</span>
+<sc-if value="{{lr3.editable}}" hint-placeholder-val="{{ true }}"><span style="display: flex; align-items: center; gap: 4px; flex: none"><span style="font-size: calc(12.5px * {{fsK}}); color: #6B6358">{{lr3.pre}}</span><label for="{{lr3.id}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Amount</label><input id="{{lr3.id}}" type="number" inputmode="decimal" min="0" value="{{lr3.amtVal}}" onChange="{{lr3.onAmt}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; width: 90px; height: 28px; text-align: right"><span style="font-size: calc(12.5px * {{fsK}}); color: #6B6358; min-width: 40px">{{lr3.unit}}</span></span></sc-if>
+<sc-if value="{{lr3.notEdit}}" hint-placeholder-val="{{ false }}"><span style="flex: none; font-size: calc(13px * {{fsK}}); color: #2B2722">{{lr3.amtTxt}}</span></sc-if>
+<button onClick="{{lr3.remove}}" title="{{lr3.removeLbl}}" style="height: 28px; flex: none; border: 0; background: transparent; padding: 0 4px; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #9A4A3A">{{lr3.removeLbl}}</button>
+</div>
+</sc-for>
+</section>
+</sc-for>
+</div>
 </sc-if>
 
 <sc-if value="{{iTabDetails}}" hint-placeholder-val="{{ false }}">
@@ -10301,7 +10336,7 @@ class Component extends DCLogic {
       const k = kindOf(g);
       const col = colOf(g);
       const upd = (patch) => this.setState({ goals: this.state.goals.map(x => x.id === g.id ? Object.assign({}, x, patch) : x) });
-      const tabNow = s.iTab === 'helping' && k !== 'reach' ? 'progress' : (s.iTab || 'progress');
+      const tabNow = (s.iTab === 'helping' && k !== 'reach') || (s.iTab === 'log' && k === 'reach' && g.measure !== 'number') ? 'progress' : (s.iTab || 'progress');
       const custom = g.photo && g.photo !== 'SAMPLE_WALK' ? g.photo : null;
       const photo = custom || this.THEME.whyPhoto;
       const addLink = () => {
@@ -10364,12 +10399,80 @@ class Component extends DCLogic {
           if (!g.onDay && n >= 4) { this.setError('Four are already on your day page. Turn one off first.'); return; }
           upd({ onDay: !g.onDay });
         },
-        iTabs: (k === 'reach' ? [['progress', 'How it\'s going'], ['helping', 'What\'s helping'], ['details', 'Details']] : [['progress', 'How it\'s going'], ['details', 'Details']]).map(o => {
+        iTabs: (k === 'reach' ? (g.measure === 'number' ? [['progress', 'How it\'s going'], ['helping', 'What\'s helping'], ['log', 'Log'], ['details', 'Details']] : [['progress', 'How it\'s going'], ['helping', 'What\'s helping'], ['details', 'Details']]) : [['progress', 'How it\'s going'], ['log', 'Log'], ['details', 'Details']]).map(o => {
           const on = tabNow === o[0];
           return { label: o[1], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ iTab: o[0] }) };
         }),
         iIsTasks: k === 'reach' && g.measure !== 'number'
       });
+      // ----- Log tab: every entry, grouped by day -----
+      Object.assign(iVals, (() => {
+        const on = tabNow === 'log' && (k !== 'reach' || g.measure === 'number');
+        if (!on) return { iLgOn: false };
+        const iso = (d) => { const x = this.dateFor(d); return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); };
+        const fromIso = (v) => this.offFromISO(v);
+        const R0 = s.iLgRange || '4w', lo = R0 === '4w' ? -27 : R0 === '3m' ? -89 : -1e9;
+        const unit = String(g.unit || (k === 'break' ? (g.unit || 'times') : '')).trim();
+        const fmt = (v) => k === 'track' ? this.trkFmt(g, v) : (Math.round(v * 100) / 100).toLocaleString('en-US') + (unit ? ' ' + unit : '');
+        const updG = (fn) => this.setState({ goals: this.state.goals.map(x => x.id === g.id ? Object.assign({}, x, fn(x)) : x) });
+        const dayLbl = (d) => { const dt = this.dateFor(d); return (d === 0 ? 'Today · ' : d === -1 ? 'Yesterday · ' : '') + this.DAYS[dt.getDay()] + ', ' + this.MONTHS[dt.getMonth()] + ' ' + dt.getDate() + (dt.getFullYear() !== new Date().getFullYear() ? ', ' + dt.getFullYear() : ''); };
+        const days = {};
+        const add = (d, row) => { if (d < lo || d > 0) return; (days[d] = days[d] || []).push(row); };
+        const numIn = (val, fn) => ({ editable: true, amtVal: String(val), onAmt: (e) => { const v = parseFloat(String(e.target.value).replace(/,/g, '')); if (v >= 0) fn(v); } });
+        const hb = g.habitId ? (s.habits || []).find(h => h.id === g.habitId) : null;
+        if (k === 'build') {
+          const keys = {}; Object.keys(g.logs || {}).forEach(d => { keys[d] = 1; }); Object.keys(g.totals || {}).forEach(d => { keys[d] = 1; });
+          Object.keys(keys).map(Number).forEach(d => {
+            const hasT = this.goalHasTotal(g, d), v = hasT ? g.totals[d] : (g.logs || {})[d] || 0;
+            if (!v && !hasT) return;
+            add(d, Object.assign({ what: hasT ? 'Day total from phone or watch' : 'Logged by hand', unit: unit, val: v,
+              remove: () => updG(x => { const lg = Object.assign({}, x.logs || {}), tt = Object.assign({}, x.totals || {}); delete lg[d]; delete tt[d]; return { logs: lg, totals: tt }; }), removeLbl: 'Clear' },
+              numIn(v, (n) => updG(x => hasT ? { totals: Object.assign({}, x.totals, { [d]: n }) } : { logs: Object.assign({}, x.logs, { [d]: n }) }))));
+          });
+          if (hb) Object.keys(s.placedByDay || {}).forEach(kk => { const d = Number(kk); (s.placedByDay[kk] || []).forEach(b => {
+            if (b.habitId !== hb.id || !b.done) return;
+            const v = this.blockVal(b, hb);
+            add(d, { what: 'Calendar block' + (typeof b.start === 'number' ? ' at ' + this.fmtTime(b.start, false) : '') + ' · ' + this.fmtDur(typeof b.actualMins === 'number' ? b.actualMins : b.mins), unit: unit, val: v, editable: false, amtTxt: fmt(v),
+              remove: () => this.setState({ placedByDay: Object.assign({}, this.state.placedByDay, { [kk]: (this.state.placedByDay[kk] || []).map(x => x.id === b.id ? Object.assign({}, x, { done: false }) : x) }) }), removeLbl: 'Not done' });
+          }); });
+        } else if (k === 'break') {
+          Object.keys(g.logs || {}).map(Number).forEach(d => { const v = g.logs[d]; if (typeof v !== 'number') return;
+            add(d, Object.assign({ what: 'Count', unit: unit, val: v, removeLbl: 'Clear', remove: () => updG(x => { const lg = Object.assign({}, x.logs || {}); delete lg[d]; return { logs: lg }; }) }, numIn(v, (n) => updG(x => ({ logs: Object.assign({}, x.logs, { [d]: n }) }))))); });
+        } else if (k === 'track') {
+          (g.tlog || []).forEach(e => add(e.d, Object.assign({ what: [e.l, e.w].filter(Boolean).join(' · ') || 'Entry', unit: unit === '$' ? '' : unit, pre: unit === '$' ? '$' : '', val: +e.v || 0, removeLbl: 'Delete',
+            remove: () => updG(x => ({ tlog: (x.tlog || []).filter(y => y.id !== e.id) })) }, numIn(e.v, (n) => updG(x => ({ tlog: (x.tlog || []).map(y => y.id === e.id ? Object.assign({}, y, { v: n }) : y) }))))));
+        } else {
+          (g.entries || []).forEach(e => add(e.d, Object.assign({ what: 'Check-in', unit: unit, val: e.v, removeLbl: 'Delete',
+            remove: () => updG(x => ({ entries: (x.entries || []).filter(y => y.d !== e.d) })) }, numIn(e.v, (n) => updG(x => ({ entries: (x.entries || []).map(y => y.d === e.d ? { d: e.d, v: n } : y) }))))));
+        }
+        const dl = Object.keys(days).map(Number).sort((a, b) => b - a).map(d => {
+          const rows = days[d].map((r, ri) => Object.assign({ editable: false, amtTxt: '', pre: '', id: 'lg-' + g.id + '-' + d + '-' + ri }, r, { notEdit: !r.editable }));
+          const tot = rows.reduce((q, r) => q + (+r.val || 0), 0);
+          return { label: dayLbl(d), total: k === 'reach' ? '' : fmt(tot), rows: rows };
+        });
+        const A = (s.iLgAdd && s.iLgAdd.gid === g.id) ? s.iLgAdd : { gid: g.id, d: 0, amt: '', what: '', l: '' };
+        const setA = (p2) => this.setState({ iLgAdd: Object.assign({}, A, (this.state.iLgAdd && this.state.iLgAdd.gid === g.id) ? this.state.iLgAdd : {}, p2) });
+        return {
+          iLgOn: true,
+          iLgRanges: [['4w', '4 weeks'], ['3m', '3 months'], ['all', 'All']].map(o => { const sel = R0 === o[0]; return { label: o[1], checked: sel ? 'true' : 'false', bg: sel ? '#FFFFFF' : 'transparent', fg: sel ? this.TK.t6E2F43 : '#6B6358', shadow: sel ? '0 1px 2px rgba(0,0,0,0.12)' : 'none', set: () => this.setState({ iLgRange: o[0] }) }; }),
+          iLgDays: dl, iLgNone: !dl.length, iLgNoneTxt: 'Nothing logged ' + (R0 === 'all' ? 'yet.' : 'in this stretch.'),
+          iLgAddDate: iso(Math.min(0, A.d)), iLgOnDate: (e) => { if (e.target.value) setA({ d: Math.min(0, fromIso(e.target.value)) }); }, iLgToday: iso(0),
+          iLgAmt: A.amt, iLgOnAmt: (e) => setA({ amt: e.target.value }), iLgUnit: k === 'track' && unit === '$' ? '$' : unit,
+          iLgIsTrack: k === 'track', iLgWhat: A.what, iLgOnWhat: (e) => setA({ what: e.target.value }),
+          iLgLabelVal: A.l, iLgLabelOpts: [{ v: '', l: 'No label' }].concat((g.labels || []).map(lb => ({ v: lb.l, l: lb.l }))), iLgOnLabel: (e) => setA({ l: e.target.value }), iLgHasLabels: k === 'track' && (g.labels || []).length > 0,
+          iLgAddBtn: () => {
+            const a2 = (this.state.iLgAdd && this.state.iLgAdd.gid === g.id) ? this.state.iLgAdd : A;
+            const v = parseFloat(String(a2.amt).replace(/,/g, '')); if (!(v >= 0) || String(a2.amt).trim() === '') { this.setError('Add an amount first.'); return; }
+            const d = Math.min(0, a2.d || 0);
+            if (k === 'track') { const n5 = this.state.nextId; this.setState({ nextId: n5 + 1, iLgAdd: Object.assign({}, a2, { amt: '', what: '' }) }); updG(x => ({ trkSet: true, tlog: (x.tlog || []).concat([{ id: 'tl' + n5, d: d, v: v, w: String(a2.what || '').trim(), l: a2.l || '' }]) })); return; }
+            if (k === 'reach') updG(x => ({ entries: (x.entries || []).filter(y => y.d !== d).concat([{ d: d, v: v }]) }));
+            else if (k === 'break') updG(x => ({ logs: Object.assign({}, x.logs || {}, { [d]: ((x.logs || {})[d] || 0) + v }) }));
+            else this.goalAddHand(g, d, v);
+            this.setState({ iLgAdd: Object.assign({}, a2, { amt: '' }) });
+          },
+          iLgAddTitle: k === 'reach' ? 'Add a check-in' : k === 'break' ? 'Add to a day' : 'Add an entry'
+        };
+      })());
       const num = (id, label, val, fn, type) => ({ id: 'if-' + id, label: label, isInput: true, isSelect: false, type: type || 'number', value: String(val === null || val === undefined ? '' : val), set: (e) => fn(e.target.value), opts: [] });
       const sel2 = (id, label, val, opts, fn) => ({ id: 'if-' + id, label: label, isInput: false, isSelect: true, type: '', value: val, set: (e) => fn(e.target.value), opts: opts.map(o => ({ v: o[0], l: o[1] })) });
       const toISO = (d) => { const x = this.dateFor(d); return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0'); };
