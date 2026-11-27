@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 10:50 AM';</script>
+<script>window.__plannerBuild = 'Nov 27, 10:54 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3333,13 +3333,13 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <div style="display: flex; flex-direction: column; gap: 8px">
 <sc-if value="{{scLinksNone}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Keep the course home page, portal, syllabus, videos and other handy links here.</p></sc-if>
 <sc-for list="{{scLinks}}" as="cl2" hint-placeholder-count="2">
-<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<div onDragOver="{{allowDrop}}" onDrop="{{cl2.drop}}" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<sc-if value="{{scLinksMany}}" hint-placeholder-val="{{ true }}"><span draggable="true" onDragStart="{{cl2.dragStart}}" onDragEnd="{{dragEnd}}" aria-hidden="true" title="Drag to change the order" style="width: 18px; height: 32px; flex: none; display: flex; align-items: center; justify-content: center; color: #B9AF9C; cursor: grab"><svg width="8" height="14" viewBox="0 0 12 18" fill="currentColor"><circle cx="3" cy="3" r="1.6"></circle><circle cx="9" cy="3" r="1.6"></circle><circle cx="3" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="3" cy="15" r="1.6"></circle><circle cx="9" cy="15" r="1.6"></circle></svg></span></sc-if>
 <label for="{{cl2.nameId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Link name</label>
 <input id="{{cl2.nameId}}" value="{{cl2.label}}" onChange="{{cl2.onLabel}}" placeholder="Name (optional)" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1 1 120px; font-weight: 600">
 <label for="{{cl2.urlId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Link address</label>
 <input id="{{cl2.urlId}}" type="url" value="{{cl2.url}}" onChange="{{cl2.onUrl}}" placeholder="Paste the link" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 2 1 180px">
 <span style="display: flex; gap: 2px; flex: none">
-<sc-if value="{{scLinksMany}}" hint-placeholder-val="{{ true }}"><button onClick="{{cl2.up}}" aria-label="Move {{cl2.show}} up" title="Move up" style="width: 28px; height: 32px; flex: none; border: 0; background: transparent; color: {{TK.t6E2F43}}; opacity: {{cl2.upOp}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></button><button onClick="{{cl2.down}}" aria-label="Move {{cl2.show}} down" title="Move down" style="width: 28px; height: 32px; flex: none; border: 0; background: transparent; color: {{TK.t6E2F43}}; opacity: {{cl2.downOp}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button></sc-if>
 <sc-if value="{{cl2.hasUrl}}" hint-placeholder-val="{{ true }}"><a href="{{cl2.href}}" target="_blank" rel="noopener" aria-label="Open {{cl2.show}}" title="Open link" style="width: 32px; height: 32px; flex: none; border-radius: 16px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a></sc-if>
 <button onClick="{{cl2.remove}}" aria-label="Remove {{cl2.show}}" title="Remove" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </span>
@@ -11271,9 +11271,13 @@ class Component extends DCLogic {
             onLabel: (e) => { const v = e.target.value; save(arr => arr.map(x => x.id === l.id ? Object.assign({}, x, { label: v }) : x)); },
             onUrl: (e) => { const v = e.target.value; save(arr => arr.map(x => x.id === l.id ? Object.assign({}, x, { url: v }) : x)); },
             remove: () => save(arr => arr.filter(x => x.id !== l.id)),
-            up: () => save(arr => { const i = arr.findIndex(x => x.id === l.id); if (i <= 0) return arr; const a2 = arr.slice(); a2.splice(i - 1, 0, a2.splice(i, 1)[0]); return a2; }),
-            down: () => save(arr => { const i = arr.findIndex(x => x.id === l.id); if (i < 0 || i >= arr.length - 1) return arr; const a2 = arr.slice(); a2.splice(i + 1, 0, a2.splice(i, 1)[0]); return a2; }),
-            upOp: ls[0] === l ? 0.3 : 1, downOp: ls[ls.length - 1] === l ? 0.3 : 1
+            dragStart: (e) => { this.drag = { kind: 'link', pre: pre, lid: l.id }; try { e.dataTransfer.setData('text/plain', l.id); } catch (err) {} },
+            drop: (e) => {
+              e.preventDefault();
+              const d = this.drag; this.drag = null;
+              if (!d || d.kind !== 'link' || d.pre !== pre || d.lid === l.id) return;
+              save(arr => { const a = arr.slice(); const from = a.findIndex(x => x.id === d.lid); if (from < 0) return arr; const x = a.splice(from, 1)[0]; const to = a.findIndex(y => y.id === l.id); a.splice(from <= to ? to + 1 : to, 0, x); return a; });
+            }
           }));
           const updA = (aid, fn) => updC(sel.id, c => ({ assignments: (c.assignments || []).map(a => a.id === aid ? Object.assign({}, a, fn(a)) : a) }));
           const kinds = this.asKinds();
