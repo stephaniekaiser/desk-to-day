@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 7:19 AM';</script>
+<script>window.__plannerBuild = 'Nov 27, 7:58 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -871,7 +871,7 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 </sc-for>
 </div>
 </sc-for>
-<sc-if value="{{dtNoSchool}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">No study sessions on this day.</p></sc-if>
+<sc-if value="{{dtNoSchool}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">No study time on this day.</p></sc-if>
 <button onClick="{{dtOpenSchool}}" style="align-self: flex-start; height: 30px; border: 0; background: transparent; padding: 0 2px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">Open School</button>
 </div>
 </sc-if>
@@ -3030,107 +3030,18 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 
 <div class="scrollbox" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding-right: 4px">
 <sc-if value="{{scTabOv}}" hint-placeholder-val="{{ true }}">
-<sc-if value="{{scPreviewOn}}" hint-placeholder-val="{{ false }}">
-<div style="flex: none; background: #FFFFFF; border: 1.5px solid {{TK.tE2B9C4}}; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
-<div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
-<span style="font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">Proposed plan</span>
-<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">{{scPvSummary}}</span>
-</div>
-<sc-if value="{{scPvLate}}" hint-placeholder-val="{{ false }}">
-<div role="alert" style="font-size: calc(12.5px * {{fsK}}); color: #7A3208; background: #FBEFEA; border-radius: 8px; padding: 6px 10px">{{scPvLateText}}</div>
-</sc-if>
-<div style="display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap">
-<div style="display: flex; flex-direction: column; gap: 4px">
-<label for="pv-finish" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Finish by</label>
-<div style="display: flex; align-items: center; gap: 6px; min-width: 0"><input id="pv-finish" type="date" value="{{scFinishVal}}" onChange="{{scOnFinish}}" onInput="{{scOnFinish}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1 1 auto"><sc-if value="{{scHasFinish}}" hint-placeholder-val="{{ false }}"><button onClick="{{scClearFinish}}" aria-label="Clear finish date" title="Clear" style="width: 28px; height: 28px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<label for="pv-sess" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Sessions</label>
-<select id="pv-sess" value="{{scSessVal}}" onChange="{{scOnSess}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF">
-<sc-for list="{{scSessOpts}}" as="so" hint-placeholder-count="6">
-<option value="{{so.v}}">{{so.l}}</option>
-</sc-for>
-</select>
-</div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<label for="pv-cap" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Weekly limit</label>
-<select id="pv-cap" value="{{scCapVal}}" onChange="{{scOnCap}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF">
-<sc-for list="{{scCapOpts}}" as="co" hint-placeholder-count="8">
-<option value="{{co.v}}">{{co.l}}</option>
-</sc-for>
-</select>
-</div>
-</div>
-<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
-<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Plan by</span>
-<div role="radiogroup" aria-label="Plan by" style="display: flex; gap: 2px; background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 2px">
-<sc-for list="{{scPlanBy}}" as="pb" hint-placeholder-count="2">
-<button role="radio" aria-checked="{{pb.checked}}" onClick="{{pb.set}}" style="height: 28px; padding: 0 14px; border: 0; border-radius: 6px; background: {{pb.bg}}; color: {{pb.fg}}; box-shadow: {{pb.shadow}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{pb.label}}</button>
-</sc-for>
-</div>
-<span style="font-size: calc(12px * {{fsK}}); color: #8A8174">{{scPlanByNote}}</span>
-</div>
-<div style="display: flex; flex-direction: column; max-height: 320px; overflow-y: auto; border-top: 1px solid #F1EBDD">
-<sc-for list="{{scPvWeeks}}" as="pw" hint-placeholder-count="4">
-<div style="display: flex; align-items: center; gap: 10px; min-height: calc(44px * {{rowK}}); border-bottom: 1px solid #F3EEE3; padding: 4px 0">
-<span style="width: 108px; flex: none; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">{{pw.label}}</span>
-<span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
-<span style="font-size: calc(13px * {{fsK}}); color: #2B2722">{{pw.count}}</span>
-<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{pw.range}}</span>
-<span style="font-size: calc(11.5px * {{fsK}}); font-weight: 600; color: {{pw.roomFg}}">{{pw.room}}</span>
-<sc-if value="{{pw.hasDays}}" hint-placeholder-val="{{ false }}">
-<span style="display: flex; gap: 3px; margin-top: 3px">
-<sc-for list="{{pw.days}}" as="pd" hint-placeholder-count="7">
-<span title="{{pd.tip}}" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 7px; background: {{pd.bg}}; color: {{pd.fg}}; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1">
-<span style="font-size: calc(9px * {{fsK}}); font-weight: 700">{{pd.letter}}</span>
-<span style="font-size: calc(11px * {{fsK}}); font-weight: 700">{{pd.n}}</span>
-</span>
-</sc-for>
-</span>
-</sc-if>
-</span>
-<span style="flex: none; font-size: calc(11px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">{{pw.change}}</span>
+<section aria-label="Classes coming up" style="flex: none; display: flex; flex-direction: column; gap: 2px">
+<div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Classes coming up</span><span style="flex: 1"></span><button onClick="{{scGoClasses}}" style="flex: none; border: 0; background: transparent; padding: 0; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{scGoClassesLbl}}</button></div>
+<sc-if value="{{scClsNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174; padding: 4px 2px">{{scClsEmpty}}</span></sc-if>
+<sc-for list="{{scClsRows}}" as="cr" hint-placeholder-count="2">
+<div style="display: flex; align-items: center; gap: 10px; min-height: calc(36px * {{rowK}}); border-bottom: 1px solid {{TK.tF6EDEF}}; padding: 0 2px">
+<span style="flex: 1; min-width: 0; font-size: calc(13.5px * {{fsK}}); color: #2B2722; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{cr.title}}</span>
+<span style="flex: none; font-size: calc(12px * {{fsK}}); color: #7A7064">{{cr.len}}</span>
+<span style="flex: none; min-width: 96px; text-align: right; font-size: calc(12px * {{fsK}}); font-weight: 600; color: #6B6358">{{cr.when}}</span>
+<sc-if value="{{cr.hasLink}}" hint-placeholder-val="{{ false }}"><a href="{{cr.href}}" target="_blank" rel="noopener noreferrer" aria-label="Join {{cr.title}}" title="Open the class link" style="flex: none; height: 26px; padding: 0 10px; border-radius: 13px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(12px * {{fsK}}); font-weight: 700; display: flex; align-items: center; text-decoration: none">Join</a></sc-if>
 </div>
 </sc-for>
-</div>
-<div style="display: flex; align-items: center; gap: 8px">
-<span style="flex: 1; font-size: calc(12px * {{fsK}}); color: #8A8174">{{scPvFoot}}</span>
-<button onClick="{{scPvCancel}}" style="height: 34px; padding: 0 10px; border: 0; background: transparent; color: #6B6358; font-size: calc(13px * {{fsK}}); font-weight: 600">Cancel</button>
-<button onClick="{{scPvApprove}}" style="height: 34px; padding: 0 16px; border: 0; border-radius: 9px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13px * {{fsK}}); font-weight: 700; white-space: nowrap">{{scApproveLabel}}</button>
-</div>
-</div>
-</sc-if>
-<sc-if value="{{scPreviewOff}}" hint-placeholder-val="{{ true }}">
-<div style="flex: none; background: {{scCardBg}}; border: {{scCardBd}}; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
-<div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
-<span style="font-size: calc(15px * {{fsK}}); font-weight: 700; color: {{scStatusFg}}">{{scStatus}}</span>
-<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">{{scLeftLine}}</span>
-</div>
-<sc-if value="{{scLate}}" hint-placeholder-val="{{ false }}"><span style="margin-top: -6px; font-size: calc(13px * {{fsK}}); color: #B03A2E">{{scLateLine}}</span></sc-if>
-<div aria-hidden="true" style="height: 6px; border-radius: 3px; background: #EFE7D6; overflow: hidden"><div style="height: 100%; width: {{scPctW}}%; background: {{scFg}}"></div></div>
-<div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: calc(12px * {{fsK}}); color: #6B6358"><span>{{scProgress}}</span><span>{{scStudied}}</span></div>
-<div style="display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; border-top: 1px solid #F1EBDD; padding-top: 10px">
-<div style="display: flex; flex-direction: column; gap: 4px">
-<label for="sc-finish" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Finish by</label>
-<div style="display: flex; align-items: center; gap: 6px; min-width: 0"><input id="sc-finish" type="date" value="{{scFinishVal}}" onChange="{{scOnFinish}}" onInput="{{scOnFinish}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1 1 auto"><sc-if value="{{scHasFinish}}" hint-placeholder-val="{{ false }}"><button onClick="{{scClearFinish}}" aria-label="Clear finish date" title="Clear" style="width: 28px; height: 28px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<label for="sc-sess" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Sessions</label>
-<select id="sc-sess" value="{{scSessVal}}" onChange="{{scOnSess}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF">
-<sc-for list="{{scSessOpts}}" as="so" hint-placeholder-count="6">
-<option value="{{so.v}}">{{so.l}}</option>
-</sc-for>
-</select>
-</div>
-<button onClick="{{scPlan}}" style="height: 32px; padding: 0 14px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13px * {{fsK}}); font-weight: 700">{{scPlanLabel}}</button>
-<sc-if value="{{scCanWithdraw}}" hint-placeholder-val="{{ false }}">
-<button onClick="{{scWithdraw}}" style="min-height: 32px; padding: 0 10px; border: 0; border-radius: 8px; background: {{scWdBg}}; color: {{scWdFg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 600">{{scWdLabel}}</button>
-</sc-if>
-</div>
-<span style="font-size: calc(12px * {{fsK}}); color: #8A8174">{{scPlanNote}}</span>
-</div>
-</sc-if>
-<div style="flex: none; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: calc(12.5px * {{fsK}}); color: #6B6358"><span>{{scInclLine}}</span><button onClick="{{scGoMaterials}}" style="border: 0; background: transparent; padding: 0; font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; text-decoration: underline">Change in Materials</button></div>
+</section>
 <section aria-label="Assignments due" style="flex: none; display: flex; flex-direction: column; gap: 2px">
 <div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Assignments due</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174">{{scDueSum}}</span></div>
 <sc-if value="{{scDueNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174; padding: 4px 2px">Nothing due. Add assignments on the Assignments tab.</span></sc-if>
@@ -3141,8 +3052,8 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </button>
 </sc-for>
 </section>
-<section aria-label="Planned sessions" style="flex: none; display: flex; flex-direction: column; gap: 6px">
-<div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Planned sessions</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174">{{scSessSum}}</span><button onClick="{{scAddSessOpen}}" style="flex: none; height: 26px; margin: -4px 0; border: 1px solid {{TK.tE2B9C4}}; border-radius: 13px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0 10px 0 8px; display: flex; align-items: center; gap: 4px; font-size: calc(12px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add a session</button></div>
+<section aria-label="Study time" style="flex: none; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Study time</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174">{{scSessSum}}</span><button onClick="{{scAddSessOpen}}" style="flex: none; height: 26px; margin: -4px 0; border: 1px solid {{TK.tE2B9C4}}; border-radius: 13px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0 10px 0 8px; display: flex; align-items: center; gap: 4px; font-size: calc(12px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add study time</button></div>
 <sc-if value="{{scAddSessOn}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; align-items: flex-end; gap: 8px; flex-wrap: wrap; padding: 8px 10px; margin: 4px 0; border: 1px solid {{TK.tE2B9C4}}; border-radius: 10px; background: #FFFFFF">
 <div style="display: flex; flex-direction: column; gap: 3px"><label for="sc-as-day" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Day</label><input id="sc-as-day" type="date" value="{{scAddSessDay}}" onChange="{{scAddSessOnDay}}" onInput="{{scAddSessOnDay}}" style="height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); background: #FFFFFF"></div>
@@ -3153,7 +3064,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <button onClick="{{scAddSessSave}}" style="height: 32px; padding: 0 14px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13px * {{fsK}}); font-weight: 700">Add</button>
 </div>
 </sc-if>
-<sc-if value="{{scSessNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174">Nothing planned yet. Tap Plan study time above, or add a session yourself.</span></sc-if>
+<sc-if value="{{scSessNone}}" hint-placeholder-val="{{ false }}"><span style="font-size: calc(12.5px * {{fsK}}); color: #8A8174">No study time yet. Add some here, or make it from your materials on the Materials tab.</span></sc-if>
 <sc-for list="{{scSessGroups}}" as="sg" hint-placeholder-count="2">
 <div style="display: flex; flex-direction: column">
 <div style="display: flex; align-items: baseline; gap: 8px; padding: 6px 2px 2px"><span style="font-size: calc(12.5px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">{{sg.label}}</span><span style="font-size: calc(11.5px * {{fsK}}); color: #8A8174">{{sg.sum}}</span></div>
@@ -3173,27 +3084,6 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </sc-if>
 
 <sc-if value="{{scTabRes}}" hint-placeholder-val="{{ false }}">
-<div style="flex: none; display: flex; flex-direction: column; gap: 6px">
-<button onClick="{{scLinksToggle}}" aria-expanded="{{scLinksOpenA}}" style="display: flex; align-items: center; gap: 8px; border: 0; border-bottom: 1.5px solid {{TK.tD9A5B4}}; background: transparent; padding: 0 2px 6px; text-align: left; color: #6B6358"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transform: {{scLinksChev}}"><path d="M9 5l7 7-7 7"></path></svg><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Course links</span><span style="flex: 1; min-width: 0; text-align: right; font-size: calc(12px * {{fsK}}); color: #8A8174">{{scLinksSum}}</span></button>
-<sc-if value="{{scLinksOpen}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<sc-if value="{{scLinksNone}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Keep the course home page, portal, syllabus, videos and other handy links here.</p></sc-if>
-<sc-for list="{{scLinks}}" as="cl2" hint-placeholder-count="2">
-<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
-<label for="{{cl2.nameId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Link name</label>
-<input id="{{cl2.nameId}}" value="{{cl2.label}}" onChange="{{cl2.onLabel}}" placeholder="Name (optional)" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1 1 120px; font-weight: 600">
-<label for="{{cl2.urlId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Link address</label>
-<input id="{{cl2.urlId}}" type="url" value="{{cl2.url}}" onChange="{{cl2.onUrl}}" placeholder="Paste the link" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 2 1 180px">
-<span style="display: flex; gap: 2px; flex: none">
-<sc-if value="{{cl2.hasUrl}}" hint-placeholder-val="{{ true }}"><a href="{{cl2.href}}" target="_blank" rel="noopener" aria-label="Open {{cl2.show}}" title="Open link" style="width: 32px; height: 32px; flex: none; border-radius: 16px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a></sc-if>
-<button onClick="{{cl2.remove}}" aria-label="Remove {{cl2.show}}" title="Remove" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
-</span>
-</div>
-</sc-for>
-<button onClick="{{scAddLink}}" style="align-self: flex-start; height: 30px; border: 0; background: transparent; padding: 0 2px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add a link</button>
-</div>
-</sc-if>
-</div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; align-items: center; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px">
 <span style="flex: none; font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Materials</span>
@@ -3213,7 +3103,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <input id="{{rs.inputId}}" value="{{rs.title}}" onChange="{{rs.onTitle}}" placeholder="{{rs.titlePh}}" style="outline-color: {{TK.tA0526A}}; height: 24px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(14.5px * {{fsK}}); font-weight: 600; color: #2B2722; min-width: 0; width: 100%; border-radius: 6px">
 <span style="font-size: calc(12px * {{fsK}}); color: #7A7064">{{rs.meta}}</span>
 </div>
-<button role="checkbox" aria-checked="{{rs.inPlan}}" onClick="{{rs.togglePlan}}" title="Checked: Plan study time gives its lessons study sessions. Unchecked: kept here for reference only." style="flex: none; height: 30px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; white-space: nowrap"><span aria-hidden="true" style="width: 18px; height: 18px; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{rs.planBoxBg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>In plan</button>
+<button role="checkbox" aria-checked="{{rs.inPlan}}" onClick="{{rs.togglePlan}}" title="Checked: Make study time uses its lessons. Unchecked: kept here for reference only." style="flex: none; height: 30px; border: 0; background: transparent; padding: 0 4px; display: flex; align-items: center; gap: 6px; font-size: calc(12px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}; white-space: nowrap"><span aria-hidden="true" style="width: 18px; height: 18px; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 5px; background: {{rs.planBoxBg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Use for study time</button>
 <sc-if value="{{rs.hasUrl}}" hint-placeholder-val="{{ false }}">
 <a href="{{rs.urlHref}}" target="_blank" rel="noopener noreferrer" aria-label="Open {{rs.name}} in a new tab" title="Open" style="width: 30px; height: 30px; flex: none; border-radius: 15px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg>
@@ -3251,42 +3141,15 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <sc-for list="{{rs.lessons}}" as="l" hint-placeholder-count="4">
 <div style="display: flex; flex-direction: column; border-bottom: 1px solid #EFE7D6">
 <div style="display: flex; align-items: center; gap: 6px; min-height: 44px">
-<button onClick="{{l.toggle}}" aria-expanded="{{l.openA}}" aria-label="Show parts of {{l.title}}" style="width: 28px; height: 28px; flex: none; border: 0; background: transparent; padding: 0; display: flex; align-items: center; justify-content: center; color: #8A8174">
-<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="transform: {{l.chev}}"><path d="M9 5l7 7-7 7"></path></svg>
-</button>
+<button role="checkbox" aria-checked="{{l.lDone}}" onClick="{{l.toggleDone}}" aria-label="Done: {{l.title}}" style="width: 22px; height: 22px; flex: none; margin-left: 4px; box-sizing: border-box; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 6px; background: {{l.lBoxBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></button>
 <label for="{{l.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Lesson name</label>
-<input id="{{l.inputId}}" value="{{l.title}}" onChange="{{l.onTitle}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 30px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(15px * {{fsK}}); font-weight: 600; color: #2B2722; border-radius: 6px">
+<input id="{{l.inputId}}" value="{{l.title}}" onChange="{{l.onTitle}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 30px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(15px * {{fsK}}); font-weight: 600; color: #2B2722; text-decoration: {{l.lStrike}}; border-radius: 6px">
 <button onClick="{{scGoPlan}}" title="Change or unplan on the Plan tab" style="flex: none; border: 0; background: transparent; padding: 0 2px; font-size: calc(12px * {{fsK}}); color: {{l.statusFg}}; white-space: nowrap">{{l.meta}}</button>
 <label for="{{l.hoursId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Hours for this lesson</label>
 <input id="{{l.hoursId}}" type="number" onFocus="{{selAll}}" min="0" step="0.25" inputmode="decimal" value="{{l.hours}}" onChange="{{l.onHours}}" title="Hours for the whole lesson" style="outline-color: {{TK.tA0526A}}; width: 62px; height: 28px; flex: none; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 7px; padding: 0 6px; font: inherit; font-size: calc(13px * {{fsK}}); color: #2B2722; background: #FFFFFF; text-align: right">
 <span aria-hidden="true" style="font-size: calc(12px * {{fsK}}); color: #7A7064">h</span>
+<button onClick="{{l.removeLesson}}" aria-label="Remove {{l.title}}" title="{{l.removeLabel}}" style="min-width: 28px; height: 28px; flex: none; border: 0; border-radius: 14px; background: {{l.removeBg}}; color: {{l.removeFg}}; padding: 0 6px; display: flex; align-items: center; justify-content: center; gap: 4px; font-size: calc(11.5px * {{fsK}}); font-weight: 700"><sc-if value="{{l.delAsking}}" hint-placeholder-val="{{ false }}"><span>Tap again</span></sc-if><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </div>
-<sc-if value="{{l.open}}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-direction: column; padding: 0 0 8px 28px">
-<sc-for list="{{l.items}}" as="it" hint-placeholder-count="3">
-<div style="display: flex; align-items: center; gap: 6px; min-height: 36px; opacity: {{it.op}}">
-<button role="checkbox" aria-checked="{{it.checked}}" onClick="{{it.toggle}}" aria-label="Done: {{it.title}}" style="width: 22px; height: 22px; flex: none; border: 1.5px solid {{TK.t6E2F43}}; border-radius: 11px; background: {{it.checkBg}}; color: {{it.checkFg}}; padding: 0; display: flex; align-items: center; justify-content: center">
-<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
-</button>
-<label for="{{it.inputId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Part name</label>
-<input id="{{it.inputId}}" value="{{it.title}}" onChange="{{it.onTitle}}" style="outline-color: {{TK.tA0526A}}; flex: 1; min-width: 0; height: 28px; border: 0; padding: 0 8px; background: transparent; font: inherit; font-size: calc(14px * {{fsK}}); color: #2B2722; text-decoration: {{it.strike}}; border-radius: 6px">
-<span style="flex: none; font-size: calc(11px * {{fsK}}); color: {{TK.tA0526A}}">{{it.partial}}</span>
-<button onClick="{{scGoPlan}}" title="Change or unplan on the Plan tab" style="flex: none; border: 0; background: transparent; padding: 0 2px; font-size: calc(11px * {{fsK}}); color: {{TK.tA0526A}}; white-space: nowrap">{{it.when}}</button>
-<label for="{{it.hoursId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Hours</label>
-<input id="{{it.hoursId}}" type="number" onFocus="{{selAll}}" min="0" step="0.25" inputmode="decimal" value="{{it.hours}}" onChange="{{it.onHours}}" style="outline-color: {{TK.tA0526A}}; width: 62px; height: 26px; flex: none; box-sizing: border-box; border: 1px solid #EDE5D4; border-radius: 6px; padding: 0 6px; font: inherit; font-size: calc(12.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; text-align: right">
-<span aria-hidden="true" style="font-size: calc(12px * {{fsK}}); color: #7A7064">h</span>
-<button onClick="{{it.remove}}" aria-label="Remove {{it.title}}" style="width: 26px; height: 26px; flex: none; border: 0; background: transparent; padding: 0; color: #B9AF9C; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
-</div>
-<sc-if value="{{it.delAsk}}" hint-placeholder-val="{{ false }}">
-<span role="alert" style="font-size: calc(11.5px * {{fsK}}); color: #9A4A3A; padding: 0 0 4px 28px">{{it.delText}}</span>
-</sc-if>
-</sc-for>
-<div style="display: flex; gap: 14px">
-<button onClick="{{l.addItem}}" style="height: 30px; border: 0; background: transparent; padding: 0; color: {{TK.t6E2F43}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700; display: flex; align-items: center; gap: 4px"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add a part</button>
-<button onClick="{{l.removeLesson}}" style="min-height: 30px; border: 0; border-radius: 7px; background: {{l.removeBg}}; padding: 0 8px; color: {{l.removeFg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 600">{{l.removeLabel}}</button>
-</div>
-</div>
-</sc-if>
 </div>
 </sc-for>
 <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 4px">
@@ -3346,7 +3209,128 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 </sc-if>
 </div>
+<section aria-label="Make study time" style="flex: none; display: flex; flex-direction: column; gap: 8px; margin-top: 6px">
+<sc-if value="{{scPreviewOn}}" hint-placeholder-val="{{ false }}">
+<div style="flex: none; background: #FFFFFF; border: 1.5px solid {{TK.tE2B9C4}}; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+<span style="font-family: {{TK.fHead}}; font-size: calc(20px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}">Proposed plan</span>
+<span style="font-size: calc(13px * {{fsK}}); color: #6B6358">{{scPvSummary}}</span>
+</div>
+<sc-if value="{{scPvLate}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="font-size: calc(12.5px * {{fsK}}); color: #7A3208; background: #FBEFEA; border-radius: 8px; padding: 6px 10px">{{scPvLateText}}</div>
 </sc-if>
+<div style="display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="pv-finish" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Finish by</label>
+<div style="display: flex; align-items: center; gap: 6px; min-width: 0"><input id="pv-finish" type="date" value="{{scFinishVal}}" onChange="{{scOnFinish}}" onInput="{{scOnFinish}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1 1 auto"><sc-if value="{{scHasFinish}}" hint-placeholder-val="{{ false }}"><button onClick="{{scClearFinish}}" aria-label="Clear finish date" title="Clear" style="width: 28px; height: 28px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="pv-sess" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Block length</label>
+<select id="pv-sess" value="{{scSessVal}}" onChange="{{scOnSess}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF">
+<sc-for list="{{scSessOpts}}" as="so" hint-placeholder-count="6">
+<option value="{{so.v}}">{{so.l}}</option>
+</sc-for>
+</select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="pv-cap" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Weekly limit</label>
+<select id="pv-cap" value="{{scCapVal}}" onChange="{{scOnCap}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF">
+<sc-for list="{{scCapOpts}}" as="co" hint-placeholder-count="8">
+<option value="{{co.v}}">{{co.l}}</option>
+</sc-for>
+</select>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+<span style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Plan by</span>
+<div role="radiogroup" aria-label="Plan by" style="display: flex; gap: 2px; background: {{TK.tF6EDEF}}; border-radius: 8px; padding: 2px">
+<sc-for list="{{scPlanBy}}" as="pb" hint-placeholder-count="2">
+<button role="radio" aria-checked="{{pb.checked}}" onClick="{{pb.set}}" style="height: 28px; padding: 0 14px; border: 0; border-radius: 6px; background: {{pb.bg}}; color: {{pb.fg}}; box-shadow: {{pb.shadow}}; font-size: calc(12.5px * {{fsK}}); font-weight: 700">{{pb.label}}</button>
+</sc-for>
+</div>
+<span style="font-size: calc(12px * {{fsK}}); color: #8A8174">{{scPlanByNote}}</span>
+</div>
+<div style="display: flex; flex-direction: column; max-height: 320px; overflow-y: auto; border-top: 1px solid #F1EBDD">
+<sc-for list="{{scPvWeeks}}" as="pw" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 10px; min-height: calc(44px * {{rowK}}); border-bottom: 1px solid #F3EEE3; padding: 4px 0">
+<span style="width: 108px; flex: none; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">{{pw.label}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+<span style="font-size: calc(13px * {{fsK}}); color: #2B2722">{{pw.count}}</span>
+<span style="font-size: calc(11.5px * {{fsK}}); color: #7A7064; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{pw.range}}</span>
+<span style="font-size: calc(11.5px * {{fsK}}); font-weight: 600; color: {{pw.roomFg}}">{{pw.room}}</span>
+<sc-if value="{{pw.hasDays}}" hint-placeholder-val="{{ false }}">
+<span style="display: flex; gap: 3px; margin-top: 3px">
+<sc-for list="{{pw.days}}" as="pd" hint-placeholder-count="7">
+<span title="{{pd.tip}}" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 7px; background: {{pd.bg}}; color: {{pd.fg}}; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1">
+<span style="font-size: calc(9px * {{fsK}}); font-weight: 700">{{pd.letter}}</span>
+<span style="font-size: calc(11px * {{fsK}}); font-weight: 700">{{pd.n}}</span>
+</span>
+</sc-for>
+</span>
+</sc-if>
+</span>
+<span style="flex: none; font-size: calc(11px * {{fsK}}); font-weight: 700; color: {{TK.tA0526A}}">{{pw.change}}</span>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<span style="flex: 1; font-size: calc(12px * {{fsK}}); color: #8A8174">{{scPvFoot}}</span>
+<button onClick="{{scPvCancel}}" style="height: 34px; padding: 0 10px; border: 0; background: transparent; color: #6B6358; font-size: calc(13px * {{fsK}}); font-weight: 600">Cancel</button>
+<button onClick="{{scPvApprove}}" style="height: 34px; padding: 0 16px; border: 0; border-radius: 9px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13px * {{fsK}}); font-weight: 700; white-space: nowrap">{{scApproveLabel}}</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{scPreviewOff}}" hint-placeholder-val="{{ true }}">
+<div style="flex: none; background: #FFFFFF; border: 1px solid #EDE5D4; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: calc(15px * {{fsK}}); font-weight: 700; color: #2B2722">Make study time from my materials</span>
+<span style="font-size: calc(12.5px * {{fsK}}); color: #6B6358">{{scGenLine}}</span>
+</div>
+<div style="display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="sc-finish" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Finish by</label>
+<div style="display: flex; align-items: center; gap: 6px; min-width: 0"><input id="sc-finish" type="date" value="{{scFinishVal}}" onChange="{{scOnFinish}}" onInput="{{scOnFinish}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1 1 auto"><sc-if value="{{scHasFinish}}" hint-placeholder-val="{{ false }}"><button onClick="{{scClearFinish}}" aria-label="Clear finish date" title="Clear" style="width: 28px; height: 28px; flex: none; border: 1px solid {{TK.tE2B9C4}}; border-radius: 14px; background: #FFFFFF; color: {{TK.t6E2F43}}; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label for="sc-sess" style="font-size: calc(10px * {{fsK}}); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9A8F7C">Block length</label>
+<select id="sc-sess" value="{{scSessVal}}" onChange="{{scOnSess}}" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid #E6DCC8; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13px * {{fsK}}); font-weight: 600; color: #2B2722; background: #FFFFFF">
+<sc-for list="{{scSessOpts}}" as="so" hint-placeholder-count="6">
+<option value="{{so.v}}">{{so.l}}</option>
+</sc-for>
+</select>
+</div>
+<button onClick="{{scPlan}}" style="height: 32px; padding: 0 14px; border: 0; border-radius: 8px; background: {{TK.t6E2F43}}; color: #FFFFFF; font-size: calc(13px * {{fsK}}); font-weight: 700">{{scPlanLabel}}</button>
+<sc-if value="{{scCanWithdraw}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{scWithdraw}}" style="min-height: 32px; padding: 0 10px; border: 0; border-radius: 8px; background: {{scWdBg}}; color: {{scWdFg}}; font-size: calc(12.5px * {{fsK}}); font-weight: 600">{{scWdLabel}}</button>
+</sc-if>
+</div>
+<span style="font-size: calc(12px * {{fsK}}); color: #8A8174">{{scPlanNote}}</span>
+</div>
+</sc-if>
+</section>
+</sc-if>
+<sc-if value="{{scTabLinks}}" hint-placeholder-val="{{ false }}">
+<div style="flex: none; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: baseline; gap: 8px; border-bottom: 1.5px solid {{TK.tD9A5B4}}; padding: 0 2px 6px"><span style="font-size: calc(11px * {{fsK}}); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6358">Course links</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<sc-if value="{{scLinksNone}}" hint-placeholder-val="{{ false }}"><p style="margin: 4px 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Keep the course home page, portal, syllabus, videos and other handy links here.</p></sc-if>
+<sc-for list="{{scLinks}}" as="cl2" hint-placeholder-count="2">
+<div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+<label for="{{cl2.nameId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Link name</label>
+<input id="{{cl2.nameId}}" value="{{cl2.label}}" onChange="{{cl2.onLabel}}" placeholder="Name (optional)" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 1 1 120px; font-weight: 600">
+<label for="{{cl2.urlId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Link address</label>
+<input id="{{cl2.urlId}}" type="url" value="{{cl2.url}}" onChange="{{cl2.onUrl}}" placeholder="Paste the link" style="outline-color: {{TK.tA0526A}}; height: 32px; box-sizing: border-box; border: 1px solid {{TK.tE2B9C4}}; border-radius: 8px; padding: 0 8px; font: inherit; font-size: calc(13.5px * {{fsK}}); color: #2B2722; background: #FFFFFF; min-width: 0; flex: 2 1 180px">
+<span style="display: flex; gap: 2px; flex: none">
+<sc-if value="{{cl2.hasUrl}}" hint-placeholder-val="{{ true }}"><a href="{{cl2.href}}" target="_blank" rel="noopener" aria-label="Open {{cl2.show}}" title="Open link" style="width: 32px; height: 32px; flex: none; border-radius: 16px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; text-decoration: none"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a></sc-if>
+<button onClick="{{cl2.remove}}" aria-label="Remove {{cl2.show}}" title="Remove" style="width: 32px; height: 32px; flex: none; border: 0; border-radius: 16px; background: transparent; color: #9A4A3A; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</span>
+</div>
+</sc-for>
+<button onClick="{{scAddLink}}" style="align-self: flex-start; height: 30px; border: 0; background: transparent; padding: 0 2px; display: flex; align-items: center; gap: 6px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add a link</button>
+</div>
+</div>
+</sc-if>
+
 <sc-if value="{{scTabAs}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <button onClick="{{scAddAssign}}" style="align-self: flex-start; height: 36px; flex: none; padding: 0 14px 0 10px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; gap: 6px; font-size: calc(13.5px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add assignment</button>
@@ -3431,8 +3415,8 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 
 <sc-if value="{{scTabCo}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 10px">
-<button onClick="{{scCoAdd}}" style="align-self: flex-start; height: 36px; flex: none; padding: 0 14px 0 10px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; gap: 6px; font-size: calc(13.5px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add a class session</button>
-<sc-if value="{{scCoNone}}" hint-placeholder-val="{{ false }}"><p style="margin: 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Live classes, cohort meetings or study groups that happen at a set time. They go on your calendar, and Plan study time works around them.</p></sc-if>
+<button onClick="{{scCoAdd}}" style="align-self: flex-start; height: 36px; flex: none; padding: 0 14px 0 10px; border: 0; border-radius: 10px; background: {{TK.t6E2F43}}; color: #FFFFFF; display: flex; align-items: center; gap: 6px; font-size: calc(13.5px * {{fsK}}); font-weight: 700"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add class times</button>
+<sc-if value="{{scCoNone}}" hint-placeholder-val="{{ false }}"><p style="margin: 2px; font-size: calc(13.5px * {{fsK}}); color: #6B6358">Live classes, cohort meetings or study groups that happen at a set time. They go on your calendar, and study time you make from materials works around them.</p></sc-if>
 <sc-for list="{{scCoRows}}" as="cs" hint-placeholder-count="1">
 <div style="background: #FFFFFF; border: 1px solid {{TK.tEBC3CD}}; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
 <div style="display: flex; align-items: center; gap: 8px">
@@ -5437,15 +5421,15 @@ class Component extends DCLogic {
     let n = s.nextId;
     const made = [];
     plan.weeks.forEach(w => w.sessions.forEach(ss => {
-      const titles = [];
-      ss.parts.forEach(p => { if (titles.indexOf(p.title) < 0) titles.push(p.title); });
+      const titles = [], lt = {}; (c.lessons || []).forEach(l => (l.items || []).forEach(it => { lt[it.id] = l.title; }));
+      ss.parts.forEach(p => { const t0 = lt[p.itemId] || p.title; if (titles.indexOf(t0) < 0) titles.push(t0); });
       const label = titles.length > 1 ? titles[0] + ' – ' + titles[titles.length - 1] : titles[0];
       made.push({ id: 't' + n, title: (c.title || 'Course') + ': ' + label, pri: 'B', mins: ss.mins, bucket: 'week', weekOf: w.ws, dayAssign: typeof ss.day === 'number' ? ss.day : undefined, cat: this.schoolCatOf(s.cats) || null, courseId: cid, planned: true, parts: ss.parts.map(p => ({ itemId: p.itemId, mins: p.mins })) });
       n++;
     }));
     this.setState({
       tasks: s.tasks.filter(t => !plan.drop[t.id]).concat(made),
-      courses: s.courses.map(x => x.id === cid ? Object.assign({}, x, { planStart: typeof x.planStart === 'number' && x.planStart <= 0 ? x.planStart : 0, planNote: made.length ? made.length + (made.length === 1 ? ' session' : ' sessions') + ' across ' + plan.weeks.length + (plan.weeks.length === 1 ? ' week' : ' weeks') + (c.suggestDays ? '. Each is on its suggested day\'s list. Drag it onto the calendar on the Day page when you want a time.' : '. They wait in each week\'s list on the Week page. Drag them onto days there.') : 'Nothing left to plan' }) : x),
+      courses: s.courses.map(x => x.id === cid ? Object.assign({}, x, { planStart: typeof x.planStart === 'number' && x.planStart <= 0 ? x.planStart : 0, planNote: made.length ? made.length + (made.length === 1 ? ' study block' : ' study blocks') + ' across ' + plan.weeks.length + (plan.weeks.length === 1 ? ' week' : ' weeks') + (c.suggestDays ? '. Each is on its suggested day\'s list. Drag it onto the calendar on the Day page when you want a time.' : '. They wait in each week\'s list on the Week page. Drag them onto days there.') : 'Nothing left to plan' }) : x),
       planPreview: null,
       nextId: n
     });
@@ -5468,7 +5452,7 @@ class Component extends DCLogic {
     const n = imp.remove.length, k = imp.trim.length;
     if (!n && !k) return '';
     const bits = [];
-    if (n) bits.push('removes ' + n + (n === 1 ? ' planned session' : ' planned sessions') + (imp.onCal ? ' (' + imp.onCal + ' on your calendar)' : ''));
+    if (n) bits.push('removes ' + n + (n === 1 ? ' study block' : ' study blocks') + (imp.onCal ? ' (' + imp.onCal + ' on your calendar)' : ''));
     if (k) bits.push('shortens ' + k);
     return bits.join(' and ');
   }
@@ -11155,6 +11139,10 @@ class Component extends DCLogic {
           const ld = l.items.filter(it => it.done || (cov[it.id] || 0) >= (it.mins || 0)).length;
           return {
             id: l.id, title: l.title, inputId: 'scl-' + l.id, hoursId: 'sclh-' + l.id,
+            lDone: l.items.length && ld === l.items.length ? 'true' : 'false', lBoxBg: l.items.length && ld === l.items.length ? this.TK.t6E2F43 : '#FFFFFF',
+            lStrike: l.items.length && ld === l.items.length ? 'line-through' : 'none',
+            toggleDone: () => { const all = l.items.length && ld === l.items.length; updL(l.id, x => ({ items: x.items.map(it => Object.assign({}, it, { done: !all })) })); },
+            delAsking: s.lessonDel === l.id,
             onTitle: (e) => { const v = e.target.value; updL(l.id, () => ({ title: v })); },
             hours: hrs(lm),
             meta: (() => {
@@ -11197,7 +11185,7 @@ class Component extends DCLogic {
             }),
             addItem: () => updL(l.id, x => ({ items: x.items.concat([{ id: nid(), title: (li + 1) + '.' + (x.items.length + 1), mins: x.items.length ? x.items[x.items.length - 1].mins : 60, done: false }]) })),
             removeLabel: s.lessonDel === l.id ? 'Tap again' + (this.impactText(this.sessionImpact(sel.id, l.items.map(it => it.id))) ? ': also ' + this.impactText(this.sessionImpact(sel.id, l.items.map(it => it.id))) : '') : 'Remove lesson',
-            removeBg: s.lessonDel === l.id ? '#9A4A3A' : 'transparent', removeFg: s.lessonDel === l.id ? '#FFFFFF' : '#9A4A3A',
+            removeBg: s.lessonDel === l.id ? '#9A4A3A' : 'transparent', removeFg: s.lessonDel === l.id ? '#FFFFFF' : '#B9A58F',
             removeLesson: () => {
               if (this.state.lessonDel !== l.id) { this.setState({ lessonDel: l.id }); clearTimeout(this.lessonDelT); this.lessonDelT = setTimeout(() => this.setState({ lessonDel: null }), 5000); return; }
               clearTimeout(this.lessonDelT);
@@ -11236,9 +11224,9 @@ class Component extends DCLogic {
         scLeftLine: st.left ? this.fmtDur(st.left) + ' left' + (typeof sel.finish === 'number' && sel.finish >= 0 ? ' · about ' + this.fmtDur(Math.round(st.perWeek / 15) * 15) + ' a week' : '') : '',
         scStudied: (st.studied ? this.fmtDur(st.studied) + ' studied' : 'Nothing studied yet') + (st.week ? ' · ' + this.fmtDur(st.week) + ' this week' : ''),
         ...(() => {
-          const tab = s.courseTab === 'links' ? 'res' : (s.courseTab || 'ov');
+          const tab = s.courseTab || 'ov';
           const forceOv = s.planPreview === sel.id;
-          const tabOn = (k) => forceOv ? k === 'ov' : tab === k;
+          const tabOn = (k) => forceOv ? k === 'res' : tab === k;
           const As = sel.assignments || [];
           const okUrl = (u) => /^\s*(https?:\/\/)?[^\s.]+\.[^\s]+/i.test(u || '') && !/^\s*javascript:/i.test(u || '');
           const hrefOf = (u) => { u = String(u || '').trim(); return /^https?:\/\//i.test(u) ? u : (u ? 'https://' + u : ''); };
@@ -11264,8 +11252,9 @@ class Component extends DCLogic {
           const ordered = As.slice().sort((x, y) => (x.done - y.done) || ((typeof x.due === 'number' ? x.due : 9e9) - (typeof y.due === 'number' ? y.due : 9e9)));
           const pv = s.asPreview && s.asPreview.cid === sel.id ? s.asPreview : null;
           return {
-            scTabs: [['ov', 'Plan', ''], ['res', 'Materials', String((sel.resources || []).length)], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : ''], ['co', 'Classes', String((s.series || []).filter(x => x.courseId === sel.id || x.title === 'Cohort: ' + (sel.title || 'Course')).length || '')]].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
-            scTabOv: tabOn('ov'), scTabRes: tabOn('res'), scTabAs: tabOn('as'), scTabCo: tabOn('co'),
+            scTabs: [['ov', 'Overview', ''], ['as', 'Assignments', As.filter(a => !a.done).length ? String(As.filter(a => !a.done).length) : ''], ['co', 'Classes', String((s.series || []).filter(x => x.courseId === sel.id || x.title === 'Cohort: ' + (sel.title || 'Course')).length || '')], ['res', 'Materials', String((sel.resources || []).length || '')], ['links', 'Links', String((sel.links || []).length || '')]].map(o => { const on = tabOn(o[0]); return { label: o[1], count: o[2], hasCount: !!o[2], sel: on ? 'true' : 'false', fg: on ? this.TK.t6E2F43 : '#8A8174', line: on ? this.TK.tC9849A : 'transparent', pick: () => this.setState({ courseTab: o[0] }) }; }),
+            scTabOv: tabOn('ov'), scTabRes: tabOn('res'), scTabAs: tabOn('as'), scTabCo: tabOn('co'), scTabLinks: tabOn('links'),
+            scGoClasses: () => this.setState({ courseTab: 'co' }),
             scGoPlan: () => this.setState({ courseTab: 'ov' }),
             scGoMaterials: () => this.setState({ courseTab: 'res' }),
             scLinksOpen: !!(s.scLinksOpen || {})[sel.id] || s.courseTab === 'links', scLinksOpenA: (s.scLinksOpen || {})[sel.id] ? 'true' : 'false', scLinksChev: (s.scLinksOpen || {})[sel.id] || s.courseTab === 'links' ? 'rotate(90deg)' : 'none',
@@ -11277,7 +11266,8 @@ class Component extends DCLogic {
             ...(() => {
               const sm0 = this.schedMap();
               const rmBlocks = (st, tid) => { const m = {}; Object.keys(st.placedByDay).forEach(k => { m[k] = (st.placedByDay[k] || []).filter(b => b.taskId !== tid); }); return m; };
-              const open = s.tasks.filter(t => t.courseId === sel.id && t.parts && !t.done);
+              const open = s.tasks.filter(t => t.courseId === sel.id && !t.done);
+              const asTitle = {}; (sel.assignments || []).forEach(a => { asTitle[a.id] = a.title || 'Assignment'; });
               const dayOf = (t) => { const sc = sm0[t.id]; return sc ? sc.day : (typeof t.dayAssign === 'number' ? t.dayAssign : null); };
               const sortKey = (t) => { const d = dayOf(t); return d !== null ? d * 2000 + (sm0[t.id] ? sm0[t.id].start : 1500) : this.effWeek(t) * 2000 + 1999; };
               const groups = [], gm = {};
@@ -11286,14 +11276,14 @@ class Component extends DCLogic {
                 if (!gm[ws]) { gm[ws] = { label: this.weekLabel(ws), mins: 0, rows: [] }; groups.push(gm[ws]); }
                 gm[ws].mins += t.mins || 0;
                 gm[ws].rows.push({
-                  label: (t.title || '').replace(/^[^:]*:\s*/, '') || 'Study session', len: this.fmtDur(t.mins),
+                  label: t.assignmentId && asTitle[t.assignmentId] ? 'For ' + asTitle[t.assignmentId] + ((t.workDesc || '').trim() ? ' · ' + t.workDesc.trim() : '') : ((t.title || '').replace(/^[^:]*:\s*/, '') || 'Study time'), len: this.fmtDur(t.mins),
                   where: d === null ? 'No day yet' : this.DSHORT[this.dowFor(d)] + (sc ? ' ' + this.fmtTime(sc.start, false) : ''),
                   whereFg: d === null ? '#8A8174' : (d < 0 ? '#B03A2E' : this.TK.t6E2F43), fg: d !== null && d < 0 ? '#B03A2E' : '#2B2722', strike: 'none',
                   open: () => this.openTaskEdit(t.id),
                   clear: () => { const st = this.state; this.setState({ tasks: st.tasks.filter(x => x.id !== t.id), placedByDay: rmBlocks(st, t.id), editing: st.editing === t.id ? null : st.editing }); }
                 });
               });
-              groups.forEach(g => { g.sum = g.rows.length + (g.rows.length === 1 ? ' session · ' : ' sessions · ') + this.fmtDur(g.mins); });
+              groups.forEach(g => { g.sum = g.rows.length + (g.rows.length === 1 ? ' block · ' : ' blocks · ') + this.fmtDur(g.mins); });
               const rows = open;
               const totM = open.reduce((a, t) => a + (t.mins || 0), 0);
               const res = sel.resources || [];
@@ -11310,7 +11300,23 @@ class Component extends DCLogic {
                   const setA = (p) => this.setState({ scAddSess: Object.assign({}, this.state.scAddSess, p) });
                   const times = [{ v: '', l: 'No time' }]; for (let m = 300; m < 1440; m += 15) times.push({ v: String(m), l: this.fmtTime(m, false) });
                   const lens = [15, 30, 45, 60, 90, 120, 150, 180, 240].map(m => ({ v: String(m), l: this.fmtDur(m) }));
+                  const cos2 = (s.series || []).filter(x => x.courseId === sel.id || x.title === 'Cohort: ' + (sel.title || 'Course'));
+                  const cls = [];
+                  for (let d = 0; d < 120 && cls.length < 4; d++) cos2.forEach(ser => {
+                    if (cls.length >= 4 || !this.seriesOn(ser, d)) return;
+                    const exc = (ser.exceptions || {})[d]; if (exc === 'skip') return;
+                    const o = exc || {}, st0 = typeof o.start === 'number' ? o.start : ser.start, mn = typeof o.mins === 'number' ? o.mins : ser.mins;
+                    if (d === 0 && st0 + (mn || 0) < (new Date().getHours() * 60 + new Date().getMinutes())) return;
+                    const dt = this.dateFor(d), u = (ser.link || '').trim();
+                    cls.push({ key: d * 2000 + st0, title: (o.title || ser.title || 'Class').replace(/^(Class|Cohort): /, ''), len: mn ? this.fmtDur(mn) : '',
+                      when: (d === 0 ? 'Today' : d === 1 ? 'Tomorrow' : this.DSHORT[dt.getDay()] + ' ' + this.MONTHS[dt.getMonth()] + ' ' + dt.getDate()) + (typeof st0 === 'number' ? ' · ' + this.fmtTime(st0, false) : ''),
+                      hasLink: !!u, href: /^https?:\/\//i.test(u) ? u : 'https://' + u });
+                  });
+                  cls.sort((x, y) => x.key - y.key);
                   return {
+                    scClsRows: cls, scClsNone: !cls.length,
+                    scClsEmpty: cos2.length ? 'No more classes on the calendar.' : 'No class times yet. Add them on the Classes tab and they will show here and on your calendar.',
+                    scGoClassesLbl: cos2.length ? 'Class times' : 'Add class times',
                     scDueRows: dueAs.map(a => { const late = typeof a.due === 'number' && a.due < 0; return { title: a.title || 'Untitled assignment', fg: late ? '#B03A2E' : '#2B2722',
                       due: typeof a.due !== 'number' ? 'No due date' : (late ? 'Was due ' + fmtD(a.due) : (a.due === 0 ? 'Today' : a.due === 1 ? 'Tomorrow' : fmtD(a.due))),
                       dueFg: late ? '#B03A2E' : '#6B6358', fw: late ? 700 : 600,
@@ -11327,14 +11333,14 @@ class Component extends DCLogic {
                     scAddSessSave: () => {
                       const st = this.state, a2 = st.scAddSess; if (!a2) return;
                       const n = st.nextId, day = a2.day, mins = a2.mins || 60, start = a2.start === '' ? null : parseInt(a2.start, 10);
-                      const t = { id: 't' + n, title: (sel.title || 'Course') + ': Study session', pri: 'B', mins: mins, bucket: 'week', weekOf: this.weekStartOff(day), dayAssign: day, cat: this.schoolCatOf(st.cats) || null, courseId: sel.id, parts: [] };
+                      const t = { id: 't' + n, title: (sel.title || 'Course') + ': Study time', pri: 'B', mins: mins, bucket: 'week', weekOf: this.weekStartOff(day), dayAssign: day, cat: this.schoolCatOf(st.cats) || null, courseId: sel.id, parts: [] };
                       const pb = Object.assign({}, st.placedByDay);
                       if (typeof start === 'number') pb[String(day)] = (pb[String(day)] || []).concat([{ id: 'p' + (n + 1), taskId: t.id, mins: mins, start: start }]);
                       this.setState({ tasks: st.tasks.concat([t]), placedByDay: pb, nextId: n + 2, scAddSess: null });
                     }
                   };
                 })(),
-                scSessGroups: groups, scSessNone: !rows.length, scSessSum: rows.length ? rows.length + (rows.length === 1 ? ' session · ' : ' sessions · ') + this.fmtDur(totM) : '',
+                scSessGroups: groups, scSessNone: !rows.length, scSessSum: rows.length ? rows.length + (rows.length === 1 ? ' block · ' : ' blocks · ') + this.fmtDur(totM) : '',
                 scInclLine: res.length ? 'Planning from ' + nOn + ' of ' + res.length + (res.length === 1 ? ' material' : ' materials') + ' (' + (this.fmtDur(st.total) || '0h') + ').' : 'No study materials yet.'
               };
             })(),
@@ -11475,7 +11481,7 @@ class Component extends DCLogic {
                 workClear: () => this.asWorkRemove(this.asWorkTasks(sel, a).filter(t => !t.done).map(t => t.id)),
                 workMany: this.asWorkTasks(sel, a).filter(t => !t.done).length > 1,
                 workLine: (() => { const w = this.asWorkTasks(sel, a), pm = w.reduce((q, t) => q + (t.mins || 0), 0); return w.length ? this.fmtDur(pm) + ' planned' + (a.mins ? ' of ' + this.fmtDur(a.mins) : '') + ' · ' + w.filter(t => t.done).length + ' of ' + w.length + ' done' : 'Pick the day (or days) you will work on it, and what you will do. A time puts it on your calendar too.'; })(),
-                pvLabel: stepsLeftA.length ? 'Add them to my week' : 'Add these sessions',
+                pvLabel: stepsLeftA.length ? 'Add them to my week' : 'Add this study time',
                 planBtn: stepsLeftA.length ? 'Plan the steps before the due date' : 'Plan it before the due date',
                 stepsTimed: stepsTimedA, timeRO: stepsTimedA,
                 canPlan: stepsLeftA.length ? (!a.done && typeof a.due === 'number' && a.due >= 0) : !(a.checklist || []).length && !a.done && !!a.mins && typeof a.due === 'number' && a.due >= 0 && planned < a.mins,
@@ -11493,15 +11499,26 @@ class Component extends DCLogic {
         scSessVal: String(sel.sessionMins || 90),
         scSessOpts: [30, 45, 60, 90, 120, 180].map(m => ({ v: String(m), l: this.fmtDur(m) })),
         scOnSess: (e) => { const v = parseInt(e.target.value, 10) || 90; updC(sel.id, () => ({ sessionMins: v })); },
-        scPlanLabel: typeof sel.planStart === 'number' ? 'Re-plan study time' : 'Plan study time',
-        scPlan: () => { if (typeof sel.finish !== 'number' || sel.finish < 0) { this.setError('Pick a finish date first.'); return; } this.setState({ planPreview: sel.id }); },
+        scPlanLabel: typeof sel.planStart === 'number' ? 'Make it again' : 'Make study time',
+        scGenLine: !(sel.resources || []).length ? 'Add a book or video course above, with its lessons and how long each takes. Then the planner can spread them into study time for you.'
+          : (!(sel.resources || []).some(r => !r.skip) ? 'Check Use for study time on a material above, so the planner knows which ones to spread out.'
+          : !st.total ? 'Add lessons to your materials, with how long each takes, so the planner knows how much to spread out.'
+          : (!st.left ? 'Everything in your materials is done.' : 'Spreads the ' + this.fmtDur(st.left) + ' of lessons left into study time between now and your finish date. You see it before anything is added.')),
+        scPlan: () => {
+          if (!(sel.resources || []).length) { this.setError('Add a material with lessons first, then make study time from it.'); return; }
+          if (!(sel.resources || []).some(r => !r.skip)) { this.setError('Check Use for study time on a material first.'); return; }
+          if (!st.total) { this.setError('Add lessons with a time first, so there is something to spread out.'); return; }
+          if (!st.left) { this.setError('Everything in your materials is already done.'); return; }
+          if (typeof sel.finish !== 'number' || sel.finish < 0) { this.setError('Pick a finish date first.'); return; }
+          this.setState({ planPreview: sel.id });
+        },
         ...(() => {
           const sm3 = this.schedMap();
           const open = s.tasks.filter(t => t.courseId === sel.id && !t.done && t.parts);
           const cal = open.filter(t => sm3[t.id]).length, ask = s.wdAsk === sel.id;
           return {
             scCanWithdraw: open.length > 0,
-            scWdLabel: ask ? 'Tap again: removes ' + open.length + (open.length === 1 ? ' session' : ' sessions') + (cal ? ' (' + cal + ' on your calendar)' : '') : 'Withdraw plan',
+            scWdLabel: ask ? 'Tap again: removes ' + open.length + (open.length === 1 ? ' study block' : ' study blocks') + (cal ? ' (' + cal + ' on your calendar)' : '') : 'Withdraw plan',
             scWdBg: ask ? '#9A4A3A' : 'transparent', scWdFg: ask ? '#FFFFFF' : '#9A4A3A',
             scWithdraw: () => {
               if (this.state.wdAsk !== sel.id) { this.setState({ wdAsk: sel.id }); clearTimeout(this.wdT); this.wdT = setTimeout(() => this.setState({ wdAsk: null }), 5000); return; }
@@ -11511,7 +11528,7 @@ class Component extends DCLogic {
               const m = {};
               Object.keys(st3.placedByDay).forEach(k => { m[k] = (st3.placedByDay[k] || []).filter(b => !gone[b.taskId]); });
               this.setState({ tasks: st3.tasks.filter(t => !gone[t.id]), placedByDay: m, wdAsk: null, planPreview: null,
-                courses: st3.courses.map(c => c.id === sel.id ? Object.assign({}, c, { planStart: undefined, planNote: 'Plan withdrawn. Finished sessions still count.' }) : c) });
+                courses: st3.courses.map(c => c.id === sel.id ? Object.assign({}, c, { planStart: undefined, planNote: 'Plan withdrawn. Finished study time still counts.' }) : c) });
             }
           };
         })(),
@@ -11522,7 +11539,7 @@ class Component extends DCLogic {
         scCapVal: String(sel.weekCap || 0),
         scCapOpts: [0, 120, 180, 240, 300, 360, 480, 600, 720, 900].map(m => ({ v: String(m), l: m ? this.fmtDur(m) + ' a week' : 'No limit' })),
         scPlanBy: [[false, 'Week'], [true, 'Day']].map(o => { const on = !!sel.suggestDays === o[0]; return { label: o[1], checked: on ? 'true' : 'false', bg: on ? '#FFFFFF' : 'transparent', fg: on ? this.TK.t6E2F43 : '#6B6358', shadow: on ? '0 1px 2px rgba(0,0,0,0.12)' : 'none', set: () => updC(sel.id, () => ({ suggestDays: o[0] })) }; }),
-        scPlanByNote: sel.suggestDays ? 'Picks a day for each session, where you have the most room.' : 'Sessions wait in each week\'s list. You drag them onto days on the Week page.',
+        scPlanByNote: sel.suggestDays ? 'Picks a day for each study block, where you have the most room.' : 'Study blocks wait in each week\'s list. You drag them onto days on the Week page.',
         scApproveLabel: sel.suggestDays ? 'Add to days' : 'Add to weeks',
         scSuggestOn: sel.suggestDays ? 'true' : 'false', scSuggestTrack: sel.suggestDays ? this.TK.t6E2F43 : '#B9AF9C', scSuggestKnob: sel.suggestDays ? 17 : 3,
         scToggleSuggest: () => updC(sel.id, c => ({ suggestDays: !c.suggestDays })),
@@ -11534,7 +11551,7 @@ class Component extends DCLogic {
           const fin = typeof sel.finish === 'number' ? this.dateFor(sel.finish) : null;
           const lastD = this.dateFor(pl.lastWs + 6);
           return {
-            scPvSummary: pl.count ? pl.count + (pl.count === 1 ? ' session' : ' sessions') + ' · ' + this.fmtDur(pl.mins) + ' over ' + pl.weeks.length + (pl.weeks.length === 1 ? ' week' : ' weeks') : 'Nothing left to plan',
+            scPvSummary: pl.count ? pl.count + (pl.count === 1 ? ' study block' : ' study blocks') + ' · ' + this.fmtDur(pl.mins) + ' over ' + pl.weeks.length + (pl.weeks.length === 1 ? ' week' : ' weeks') : 'Nothing left to plan',
             scPvLate: pl.late,
             scPvLateText: 'With this weekly limit you would finish around ' + this.MONTHS[lastD.getMonth()] + ' ' + lastD.getDate() + (fin ? ', after your finish date of ' + this.MONTHS[fin.getMonth()] + ' ' + fin.getDate() : '') + '. Raise the limit or move the date.',
             scPvWeeks: pl.weeks.map(w => {
@@ -11548,7 +11565,7 @@ class Component extends DCLogic {
                 hasDays: !!sel.suggestDays,
                 days: Array.from({ length: 7 }, (_, i) => { const o = w.ws + i, n3 = w.dayCount[o] || 0, past = o < 0; return { letter: this.DSHORT[this.dowFor(o)].charAt(0), num: this.dateFor(o).getDate(), n: n3 ? String(n3) : '', bg: n3 ? this.TK.t6E2F43 : (past ? '#F1ECE3' : '#FBF7EE'), fg: n3 ? '#FFFFFF' : (past ? '#C9C0AE' : '#8A8174'), tip: this.DAYS[this.dowFor(o)] + ' ' + this.dateFor(o).getDate() + (n3 ? ': ' + n3 + (n3 === 1 ? ' session' : ' sessions') : '') }; }),
                 label: this.weekLabel(w.ws),
-                count: n2 + (n2 === 1 ? ' session' : ' sessions') + ' · ' + this.fmtDur(w.mins),
+                count: n2 + (n2 === 1 ? ' study block' : ' study blocks') + ' · ' + this.fmtDur(w.mins),
                 range: ls.length > 1 ? ls[0] + ' – ' + ls[ls.length - 1] : (ls[0] || ''),
                 change: typeof sel.planStart === 'number' && old !== n2 ? (old ? 'was ' + old : 'new') : ''
               };
@@ -11608,7 +11625,7 @@ class Component extends DCLogic {
           };
         })(),
         scImportInto: () => this.setState({ schoolNew: { mode: 'import', title: '', book: '', isbn: '', lessons: '', subs: '', hours: '', paste: '', goalId: '', importText: '', importName: '', target: sel.id } }),
-        scPlanNote: sel.planNote || 'Spreads what is left of the materials marked In plan into study sessions. You choose by week or by day before anything is added.',
+        scPlanNote: sel.planNote || 'Only materials checked Use for study time are used. You choose by week or by day before anything is added.',
         scCohort: () => { this.openNewEvent(0); this.setState({ evEdit: Object.assign({}, this.state.evEdit, { title: 'Cohort: ' + (sel.title || 'Course'), cat: this.schoolCatOf(this.state.cats) }) }); },
         scResources: (sel.resources || []).map((r, ri) => {
           const ls = this.resLessons(sel, r, ri === 0);
@@ -11710,8 +11727,8 @@ class Component extends DCLogic {
             }
           };
         }),
-        scAddResource: () => { const rid = 'r' + Date.now().toString(36); updC(sel.id, c => ({ resources: (c.resources || []).map(x => Object.assign({}, x, { open: false })).concat([{ id: rid, title: '', type: 'general', author: '', isbn: '', url: '', open: true, skip: true }]) })); this.setState({ resDetails: rid, resOpen: rid }); setTimeout(() => { try { const el = document.getElementById('scr-' + rid); if (el) { el.focus(); el.scrollIntoView({ block: 'nearest' }); } } catch (e) {} }, 60); },
-        scResSummary: (sel.resources || []).length + ((sel.resources || []).length === 1 ? ' study material' : ' study materials') + ' · ' + (this.fmtDur(st.total) || '0h') + ' in plan',
+        scAddResource: () => { const rid = 'r' + Date.now().toString(36); updC(sel.id, c => ({ resources: (c.resources || []).map(x => Object.assign({}, x, { open: false })).concat([{ id: rid, title: '', type: 'general', author: '', isbn: '', url: '', open: true, skip: false }]) })); this.setState({ resDetails: rid, resOpen: rid }); setTimeout(() => { try { const el = document.getElementById('scr-' + rid); if (el) { el.focus(); el.scrollIntoView({ block: 'nearest' }); } } catch (e) {} }, 60); },
+        scResSummary: (sel.resources || []).length + ((sel.resources || []).length === 1 ? ' study material' : ' study materials') + ' · ' + (this.fmtDur(st.total) || '0h') + ' for study time',
         scDelAskText: s.schoolDel ? (() => { const sm2 = this.schedMap(); const open = s.tasks.filter(t => t.courseId === sel.id && !t.done); const cal = open.filter(t => sm2[t.id]).length; return 'Remove this course' + (open.length ? ' and its ' + open.length + (open.length === 1 ? ' planned session' : ' planned sessions') + (cal ? ' (' + cal + ' on your calendar)' : '') : '') + '?'; })() : '',
         scDelLabel: s.schoolDel ? (() => { const sm2 = this.schedMap(); const open = s.tasks.filter(t => t.courseId === sel.id && !t.done); const cal = open.filter(t => sm2[t.id]).length; return 'Tap again to remove this course' + (open.length ? ' and ' + open.length + (open.length === 1 ? ' planned session' : ' planned sessions') + (cal ? ' (' + cal + ' on your calendar)' : '') : ''); })() : 'Remove course',
         scDelBg: s.schoolDel ? '#9A4A3A' : 'transparent', scDelFg: s.schoolDel ? '#FFFFFF' : '#9A4A3A',
