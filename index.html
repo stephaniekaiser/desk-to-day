@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 1:33 PM';</script>
+<script>window.__plannerBuild = 'Nov 27, 1:38 PM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -486,7 +486,11 @@ input:focus-visible, textarea:focus-visible, select:focus-visible{outline:2px so
 <span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Changes here only affect this piece of {{t.groupName}}.</span>
 </div>
 </sc-if>
-<sc-if value="{{t.hasFrom}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.goFrom}}" title="Open in School" style="align-self: flex-start; max-width: 100%; border: 0; background: transparent; padding: 0 2px; margin-bottom: 2px; display: flex; align-items: center; gap: 5px; text-align: left; font-size: calc(12px * {{fsK}}); color: #6B6358; min-width: 0"><span style="flex: none">From</span><b style="min-width: 0; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.fromCourse}}<sc-if value="{{t.fromSep}}" hint-placeholder-val="{{ true }}"> › {{t.fromItem}}</sc-if></b><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; color: {{TK.t6E2F43}}"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></button></sc-if>
+<sc-if value="{{t.hasFrom}}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: center; gap: 8px; min-width: 0; margin-bottom: 2px">
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6358" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M2 9l10-5 10 5-10 5z"></path><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"></path></svg>
+<span style="flex: 1; min-width: 0; font-size: calc(13px * {{fsK}}); color: #4A443B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis" title="{{t.fromCourse}}">{{t.fromCourse}}<sc-if value="{{t.fromSep}}" hint-placeholder-val="{{ true }}"> › {{t.fromItem}}</sc-if></span>
+<button onClick="{{t.goFrom}}" style="flex: none; height: 28px; border: 0; background: transparent; padding: 0 2px; display: flex; align-items: center; gap: 5px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Open in School<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></button>
+</div></sc-if>
 <label for="{{t.editId}}" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
 <input id="{{t.editId}}" value="{{t.dTitle}}" onChange="{{t.onTitle}}" onKeyDown="{{t.editKey}}" style="height: {{tIn}}px; box-sizing: border-box; border: 0; border-bottom: 1.5px solid {{TK.tE2B9C4}}; padding: 0 8px; font-family: {{TK.fBody}}; font-size: calc(19px * {{fsK}}); font-weight: 600; color: {{TK.t6E2F43}}; background: transparent; outline-color: {{TK.tA0526A}}; outline-offset: 2px; border-radius: 6px">
 <sc-if value="{{t.inGroup}}" hint-placeholder-val="{{ false }}">
@@ -3709,7 +3713,11 @@ Salsa" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box; border: 1px
 <span style="font-size: calc(12px * {{fsK}}); color: #7A7064">Changes here only affect this piece of {{t.groupName}}.</span>
 </div>
 </sc-if>
-<sc-if value="{{t.hasFrom}}" hint-placeholder-val="{{ false }}"><button onClick="{{t.goFrom}}" title="Open in School" style="align-self: flex-start; max-width: 100%; border: 0; background: transparent; padding: 0 2px; margin-bottom: 2px; display: flex; align-items: center; gap: 5px; text-align: left; font-size: calc(12px * {{fsK}}); color: #6B6358; min-width: 0"><span style="flex: none">From</span><b style="min-width: 0; color: {{TK.t6E2F43}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.fromCourse}}<sc-if value="{{t.fromSep}}" hint-placeholder-val="{{ true }}"> › {{t.fromItem}}</sc-if></b><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex: none; color: {{TK.t6E2F43}}"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></button></sc-if>
+<sc-if value="{{t.hasFrom}}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: center; gap: 8px; min-width: 0; margin-bottom: 2px">
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6358" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M2 9l10-5 10 5-10 5z"></path><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"></path></svg>
+<span style="flex: 1; min-width: 0; font-size: calc(13px * {{fsK}}); color: #4A443B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis" title="{{t.fromCourse}}">{{t.fromCourse}}<sc-if value="{{t.fromSep}}" hint-placeholder-val="{{ true }}"> › {{t.fromItem}}</sc-if></span>
+<button onClick="{{t.goFrom}}" style="flex: none; height: 28px; border: 0; background: transparent; padding: 0 2px; display: flex; align-items: center; gap: 5px; font-size: calc(13px * {{fsK}}); font-weight: 700; color: {{TK.t6E2F43}}">Open in School<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></button>
+</div></sc-if>
 <label for="{{t.editId}}-r" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Task name</label>
 <div style="display: flex; align-items: center; gap: 8px">
 <button role="checkbox" aria-checked="{{t.doneA}}" onClick="{{t.markDone}}" aria-label="{{t.doneTip}}" title="{{t.doneTip}}" style="width: 28px; height: 28px; flex: none; border: 2px solid #3F7A5A; border-radius: 14px; background: {{t.doneBg}}; color: #FFFFFF; padding: 0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></button>
