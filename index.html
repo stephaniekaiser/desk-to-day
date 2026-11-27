@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
 <style>html,body{background:#252D2C;height:100%;margin:0}</style>
-<script>window.__plannerBuild = 'Nov 27, 8:01 AM';</script>
+<script>window.__plannerBuild = 'Nov 27, 8:04 AM';</script>
 <script src="dc-runtime.js"></script>
 </head>
 <body>
@@ -3252,7 +3252,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 </div>
 <div style="display: flex; flex-direction: column; max-height: 320px; overflow-y: auto; border-top: 1px solid #F1EBDD">
 <sc-for list="{{scPvWeeks}}" as="pw" hint-placeholder-count="4">
-<div style="display: flex; align-items: center; gap: 10px; min-height: calc(44px * {{rowK}}); border-bottom: 1px solid #F3EEE3; padding: 4px 0">
+<div style="flex: none; display: flex; align-items: center; gap: 10px; min-height: calc(44px * {{rowK}}); border-bottom: 1px solid #F3EEE3; padding: 6px 0">
 <span style="width: 108px; flex: none; font-size: calc(13px * {{fsK}}); font-weight: 700; color: #2B2722">{{pw.label}}</span>
 <span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
 <span style="font-size: calc(13px * {{fsK}}); color: #2B2722">{{pw.count}}</span>
@@ -3261,7 +3261,7 @@ Lesson 2: Trees 6h" style="outline-color: {{TK.tA0526A}}; box-sizing: border-box
 <sc-if value="{{pw.hasDays}}" hint-placeholder-val="{{ false }}">
 <span style="display: flex; gap: 3px; margin-top: 3px">
 <sc-for list="{{pw.days}}" as="pd" hint-placeholder-count="7">
-<span title="{{pd.tip}}" style="width: 30px; height: 30px; box-sizing: border-box; border-radius: 7px; background: {{pd.bg}}; color: {{pd.fg}}; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1">
+<span title="{{pd.tip}}" style="width: 30px; min-height: 34px; box-sizing: border-box; padding: 3px 0; border-radius: 7px; background: {{pd.bg}}; color: {{pd.fg}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; line-height: 1.05">
 <span style="font-size: calc(9px * {{fsK}}); font-weight: 700">{{pd.letter}}</span>
 <span style="font-size: calc(11px * {{fsK}}); font-weight: 700">{{pd.n}}</span>
 </span>
